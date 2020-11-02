@@ -9,19 +9,17 @@
 import UIKit
 import Foundation
 
-class BaseViewController: UIViewController {
+public class BaseViewController: UIViewController {
  
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUi()
     }
     
-    func setupUi() {
+    public func setupUi() {
      
         view.backgroundColor = .white
     }
-    
-    
 }
 

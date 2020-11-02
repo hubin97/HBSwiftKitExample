@@ -214,12 +214,11 @@
 		B53B3117254FAF9B006D51AE /* HBSwiftKit */ = {
 			isa = PBXGroup;
 			children = (
-				B53B3118254FAF9B006D51AE /* AssetsManager.swift */,
+				B5F686EC2550019000C27F24 /* Global */,
 				B53B3119254FAF9B006D51AE /* UIKit */,
 				B53B312A254FAF9B006D51AE /* Network */,
 				B53B312C254FAF9B006D51AE /* Foundation */,
 				B53B3130254FAF9B006D51AE /* BaseClass */,
-				B53B3133254FAF9B006D51AE /* Macro.swift */,
 			);
 			path = HBSwiftKit;
 			sourceTree = "<group>";
@@ -346,6 +345,15 @@
 				B53B30E9254FAE8F006D51AE /* Info.plist */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		B5F686EC2550019000C27F24 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				B53B3133254FAF9B006D51AE /* Macro.swift */,
+				B53B3118254FAF9B006D51AE /* AssetsManager.swift */,
+			);
+			path = Global;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

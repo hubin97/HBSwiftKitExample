@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class BaseNavigationController: UINavigationController {
+public class BaseNavigationController: UINavigationController {
         
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
@@ -23,7 +23,7 @@ class BaseNavigationController: UINavigationController {
         super.init(coder: aDecoder)
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
@@ -37,7 +37,7 @@ class BaseNavigationController: UINavigationController {
     }
     
     //
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
         .default
     }
 }
@@ -46,7 +46,6 @@ class BaseNavigationController: UINavigationController {
 extension BaseNavigationController {
     
     @objc func backAction() {
-        
         popViewController(animated: true)
     }
 }
@@ -54,7 +53,7 @@ extension BaseNavigationController {
 // MARK: - UINavigationControllerDelegate
 extension BaseNavigationController: UINavigationControllerDelegate {
     
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         
         let rooVc = navigationController.viewControllers[0]
         
@@ -68,7 +67,7 @@ extension BaseNavigationController: UINavigationControllerDelegate {
         }
     }
     
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         
         if responds(to: #selector(getter: interactivePopGestureRecognizer)) {
             interactivePopGestureRecognizer?.isEnabled = true
@@ -82,7 +81,7 @@ extension BaseNavigationController: UINavigationControllerDelegate {
     }
     
     // 自定义非根控制左侧返回按钮
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+    public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         
         if children.count == 1 {
             // 根控制tabBar隐藏其他控制底部

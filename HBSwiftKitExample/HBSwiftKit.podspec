@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.name         = "HBSwiftKit"
-  spec.version      = "0.0.3"
+  spec.version      = "0.0.4"
   spec.summary      = "Swift常用的一些基类和拓展."
   spec.description  = <<-DESC
 ✗ tree -d
@@ -27,7 +27,6 @@ Pod::Spec.new do |spec|
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.license      = { :type => "MIT", :file => "LICENSE" }
 
-
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.author             = { "Hubin_Huang" => "970216474@qq.com" }
   # spec.social_media_url   = "https://twitter.com/Hubin_Huang"
@@ -41,10 +40,18 @@ Pod::Spec.new do |spec|
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.source_files  = "HBSwiftKit", "**/HBSwiftKit/**/*.{h,m,swift}"
-  #spec.exclude_files = "Classes/Exclude"
 
-  # spec.public_header_files = "Classes/**/*.h"
-
+  spec.subspec 'Global' do |dd|
+    dd.source_files  = "**/HBSwiftKit/Global/**/*"
+  end
+  
+  spec.subspec 'Foundation' do |dd|
+    dd.source_files  = "**/HBSwiftKit/Foundation/**/*"
+  end
+  
+  spec.subspec 'BaseClass' do |dd|
+    dd.source_files  = "**/HBSwiftKit/BaseClass/**/*"
+  end
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
