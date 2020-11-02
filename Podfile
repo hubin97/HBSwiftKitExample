@@ -11,7 +11,7 @@ target 'HBSwiftKitExample' do
   # Pods for HBSwiftKitExample
 
   pod 'ObjectMapper'
-  pod 'Kingfisher'
+  #pod 'Kingfisher'
 
   target 'HBSwiftKitExampleTests' do
     inherit! :search_paths

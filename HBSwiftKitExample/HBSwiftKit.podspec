@@ -44,7 +44,7 @@ Pod::Spec.new do |spec|
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  spec.source_files  = "HBSwiftKit", "**/*.{h,m,swift}"
+  spec.source_files  = "HBSwiftKit", "**/HBSwiftKit/**/*.{h,m,swift}"
   #spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
