@@ -2,10 +2,10 @@ Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.name         = "HBSwiftKit"
-  spec.version      = "0.0.2"
+  spec.version      = "0.0.3"
   spec.summary      = "Swift常用的一些基类和拓展."
   spec.description  = <<-DESC
-➜  HBSwiftKit (main) ✗ tree -d
+✗ tree -d
 .
 ├── BaseClass
 ├── Foundation
@@ -22,14 +22,10 @@ Pod::Spec.new do |spec|
 11 directories
                    DESC
   spec.homepage     = "https://github.com/hubin97/HBSwiftKitExample"
-  # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
-  #
   spec.swift_versions = ['5.0']
 
-
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #spec.license      = "MIT (example)"
-  spec.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  spec.license      = { :type => "MIT", :file => "LICENSE" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -81,7 +77,6 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
 
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  # spec.dependency "JSONKit", "~> 1.4"
     spec.dependency "Kingfisher"
     
 end
