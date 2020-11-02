@@ -31,14 +31,13 @@
 		B53B3148254FAF9B006D51AE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B3131254FAF9B006D51AE /* BaseViewController.swift */; };
 		B53B3149254FAF9B006D51AE /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B3132254FAF9B006D51AE /* BaseNavigationController.swift */; };
 		B53B314A254FAF9B006D51AE /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B3133254FAF9B006D51AE /* Macro.swift */; };
-		B53B314B254FAF9B006D51AE /* HBSwiftKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B53B3134254FAF9B006D51AE /* HBSwiftKit.podspec */; };
 		B53B314C254FAF9B006D51AE /* ImageBrowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B3136254FAF9B006D51AE /* ImageBrowerController.swift */; };
 		B53B314D254FAF9B006D51AE /* NumberPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B3137254FAF9B006D51AE /* NumberPickerController.swift */; };
 		B53B314E254FAF9B006D51AE /* CalendarPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B3138254FAF9B006D51AE /* CalendarPickerController.swift */; };
 		B53B314F254FAF9B006D51AE /* BlueToothController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B3139254FAF9B006D51AE /* BlueToothController.swift */; };
 		B53B3150254FAF9B006D51AE /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B313A254FAF9B006D51AE /* DatePickerController.swift */; };
 		B53B3156254FAFBA006D51AE /* images.json in Resources */ = {isa = PBXBuildFile; fileRef = B53B3155254FAFBA006D51AE /* images.json */; };
-		B53B3166254FB3D5006D51AE /* HBSwiftKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B53B3165254FB3D5006D51AE /* HBSwiftKit.podspec */; };
+		B5F686B4254FE61F00C27F24 /* HBSwiftKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B5F686B3254FE61F00C27F24 /* HBSwiftKit.podspec */; };
 		CFD0DCE361FBE1C40125A931 /* Pods_HBSwiftKitExample_HBSwiftKitExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A97A1FA4340AF278A3CD9D /* Pods_HBSwiftKitExample_HBSwiftKitExampleUITests.framework */; };
 		D4A1BEC046F1E6E67A4114C2 /* Pods_HBSwiftKitExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B596139D2D4EA650417539D /* Pods_HBSwiftKitExampleTests.framework */; };
 /* End PBXBuildFile section */
@@ -96,14 +95,13 @@
 		B53B3131254FAF9B006D51AE /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B53B3132254FAF9B006D51AE /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		B53B3133254FAF9B006D51AE /* Macro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
-		B53B3134254FAF9B006D51AE /* HBSwiftKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HBSwiftKit.podspec; sourceTree = "<group>"; };
 		B53B3136254FAF9B006D51AE /* ImageBrowerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowerController.swift; sourceTree = "<group>"; };
 		B53B3137254FAF9B006D51AE /* NumberPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberPickerController.swift; sourceTree = "<group>"; };
 		B53B3138254FAF9B006D51AE /* CalendarPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerController.swift; sourceTree = "<group>"; };
 		B53B3139254FAF9B006D51AE /* BlueToothController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueToothController.swift; sourceTree = "<group>"; };
 		B53B313A254FAF9B006D51AE /* DatePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		B53B3155254FAFBA006D51AE /* images.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = images.json; sourceTree = "<group>"; };
-		B53B3165254FB3D5006D51AE /* HBSwiftKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = file; name = HBSwiftKit.podspec; path = HBSwiftKitExample/HBSwiftKit/HBSwiftKit.podspec; sourceTree = SOURCE_ROOT; };
+		B5F686B3254FE61F00C27F24 /* HBSwiftKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = file; name = HBSwiftKit.podspec; path = HBSwiftKitExample/HBSwiftKit.podspec; sourceTree = SOURCE_ROOT; };
 		C8EC6916641668A0A7EA0ECD /* Pods-HBSwiftKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKitExample.debug.xcconfig"; path = "Target Support Files/Pods-HBSwiftKitExample/Pods-HBSwiftKitExample.debug.xcconfig"; sourceTree = "<group>"; };
 		D0F62E156C551FF921EBC4F3 /* Pods-HBSwiftKitExample-HBSwiftKitExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKitExample-HBSwiftKitExampleUITests.debug.xcconfig"; path = "Target Support Files/Pods-HBSwiftKitExample-HBSwiftKitExampleUITests/Pods-HBSwiftKitExample-HBSwiftKitExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D1A97A1FA4340AF278A3CD9D /* Pods_HBSwiftKitExample_HBSwiftKitExampleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBSwiftKitExample_HBSwiftKitExampleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,7 +220,6 @@
 				B53B312C254FAF9B006D51AE /* Foundation */,
 				B53B3130254FAF9B006D51AE /* BaseClass */,
 				B53B3133254FAF9B006D51AE /* Macro.swift */,
-				B53B3134254FAF9B006D51AE /* HBSwiftKit.podspec */,
 			);
 			path = HBSwiftKit;
 			sourceTree = "<group>";
@@ -345,7 +342,7 @@
 				B53B3155254FAFBA006D51AE /* images.json */,
 				B53B30E1254FAE8C006D51AE /* Main.storyboard */,
 				B53B30E6254FAE8F006D51AE /* LaunchScreen.storyboard */,
-				B53B3165254FB3D5006D51AE /* HBSwiftKit.podspec */,
+				B5F686B3254FE61F00C27F24 /* HBSwiftKit.podspec */,
 				B53B30E9254FAE8F006D51AE /* Info.plist */,
 			);
 			path = Resource;
@@ -460,11 +457,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B53B30E8254FAE8F006D51AE /* LaunchScreen.storyboard in Resources */,
-				B53B314B254FAF9B006D51AE /* HBSwiftKit.podspec in Resources */,
 				B53B3156254FAFBA006D51AE /* images.json in Resources */,
 				B53B30E5254FAE8F006D51AE /* Assets.xcassets in Resources */,
 				B53B30E3254FAE8C006D51AE /* Main.storyboard in Resources */,
-				B53B3166254FB3D5006D51AE /* HBSwiftKit.podspec in Resources */,
+				B5F686B4254FE61F00C27F24 /* HBSwiftKit.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

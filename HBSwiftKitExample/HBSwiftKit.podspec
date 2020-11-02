@@ -5,9 +5,26 @@ Pod::Spec.new do |spec|
   spec.version      = "0.0.1"
   spec.summary      = "Swift常用的一些基类和拓展."
   spec.description  = <<-DESC
+➜  HBSwiftKit (main) ✗ tree -d
+.
+├── BaseClass
+├── Foundation
+├── Network
+└── UIKit
+    ├── AlertView
+    ├── Calendar
+    ├── DatePicker
+    ├── EditTable
+    ├── Extensions
+    ├── ImageBrower
+    └── ThemeMode
+
+11 directories
                    DESC
-  spec.homepage     = "http://EXAMPLE/HBSwiftKit"
+  spec.homepage     = "https://github.com/hubin97/HBSwiftKitExample"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+  #
+  spec.swift_versions = ['5.0']
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -23,12 +40,12 @@ Pod::Spec.new do |spec|
   spec.platform     = :ios, "9.0"
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  spec.source       = { :git => "http://EXAMPLE/HBSwiftKit.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/hubin97/HBSwiftKitExample.git", :tag => "#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  spec.source_files  = "Classes", "Classes/**/*.{h,m}"
-  spec.exclude_files = "Classes/Exclude"
+  spec.source_files  = "HBSwiftKit", "**/*.{h,m,swift}"
+  #spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
 
