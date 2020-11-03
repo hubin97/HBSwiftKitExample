@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.name         = "HBSwiftKit"
-  spec.version      = "0.0.5"
+  spec.version      = "0.0.6"
   spec.summary      = "Swift个人常用组件."
   spec.description  = <<-DESC
                 仅仅一些个人常用组件.学习工作使用.
@@ -28,15 +28,15 @@ Pod::Spec.new do |spec|
   spec.source_files  = "HBSwiftKit", "**/HBSwiftKit/**/*.{h,m,swift}"
 
   spec.subspec 'Global' do |dd|
-    dd.source_files  = "**/HBSwiftKit/Global/**/*"
+    dd.source_files  = "**/HBSwiftKit/Global/**/*.{h,m,swift}"
   end
   
   spec.subspec 'Foundation' do |dd|
-    dd.source_files  = "**/HBSwiftKit/Foundation/**/*"
+    dd.source_files  = "**/HBSwiftKit/Foundation/**/*.{h,m,swift}"
   end
   
   spec.subspec 'BaseClass' do |dd|
-    dd.source_files  = "**/HBSwiftKit/BaseClass/**/*"
+    dd.source_files  = "**/HBSwiftKit/BaseClass/**/*.{h,m,swift}"
   end
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

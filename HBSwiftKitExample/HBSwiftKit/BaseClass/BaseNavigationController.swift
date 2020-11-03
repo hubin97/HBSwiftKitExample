@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-public class BaseNavigationController: UINavigationController {
+open class BaseNavigationController: UINavigationController {
         
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
@@ -19,7 +19,7 @@ public class BaseNavigationController: UINavigationController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
