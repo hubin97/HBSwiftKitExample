@@ -2,24 +2,10 @@ Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.name         = "HBSwiftKit"
-  spec.version      = "0.0.4"
-  spec.summary      = "Swift常用的一些基类和拓展."
+  spec.version      = "0.0.5"
+  spec.summary      = "Swift个人常用组件."
   spec.description  = <<-DESC
-✗ tree -d
-.
-├── BaseClass
-├── Foundation
-├── Network
-└── UIKit
-    ├── AlertView
-    ├── Calendar
-    ├── DatePicker
-    ├── EditTable
-    ├── Extensions
-    ├── ImageBrower
-    └── ThemeMode
-
-11 directories
+                仅仅一些个人常用组件.学习工作使用.
                    DESC
   spec.homepage     = "https://github.com/hubin97/HBSwiftKitExample"
   spec.swift_versions = ['5.0']
