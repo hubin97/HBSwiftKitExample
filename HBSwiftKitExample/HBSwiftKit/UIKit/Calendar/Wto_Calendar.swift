@@ -19,7 +19,7 @@ fileprivate func W_Scale(_ x:CGFloat) -> CGFloat {
 
 
 //MARK: - main class
-class Wto_Calendar: UIView {
+open class Wto_Calendar: UIView {
 
     fileprivate var date = Date() // 默认当天
     fileprivate var isCurrentMonth: Bool = false // 是否当月
@@ -147,7 +147,7 @@ class Wto_Calendar: UIView {
         self.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: W_Scale(330)))
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -234,13 +234,13 @@ extension Wto_Calendar {
 //MARK: - delegate or data source
 extension Wto_Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         let days = Wto_CalendarUtils.daysInCurrMonth(date: date) + Wto_CalendarUtils.firstDayIsWeekInMonth(date: date)
         return days
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //let item = collectionView.getRecycleCell(indexPath, CalendarItem.self)
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(CalendarItem.self), for: indexPath) as! CalendarItem
         
@@ -287,7 +287,7 @@ extension Wto_Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let currentCell = collectionView.cellForItem(at: indexPath) as! CalendarItem
         
         /// 是否已经选中

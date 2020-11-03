@@ -27,7 +27,7 @@ extension Wto_DatePicker {
 }
 
 //MARK: - main class
-class Wto_DatePicker: UIPickerView {
+open class Wto_DatePicker: UIPickerView {
 
     /// 默认 年月日
     var datePickerMode: Wto_DatePicker.Mode = .year_month_day {
@@ -148,7 +148,7 @@ class Wto_DatePicker: UIPickerView {
         initDatePicker()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -196,7 +196,7 @@ extension Wto_DatePicker {
 //MARK: - delegate or data source
 extension Wto_DatePicker: UIPickerViewDataSource, UIPickerViewDelegate {
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         
         switch datePickerMode {
         case .year:
@@ -210,7 +210,7 @@ extension Wto_DatePicker: UIPickerViewDataSource, UIPickerViewDelegate {
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch datePickerMode {
         case .year:
             return years.count
@@ -223,7 +223,7 @@ extension Wto_DatePicker: UIPickerViewDataSource, UIPickerViewDelegate {
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         var str_year = "\(row + minYear)"
         var str_month = "\(row + 1)"
@@ -249,7 +249,7 @@ extension Wto_DatePicker: UIPickerViewDataSource, UIPickerViewDelegate {
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         switch datePickerMode {
         case .year:
@@ -285,7 +285,7 @@ extension Wto_DatePicker: UIPickerViewDataSource, UIPickerViewDelegate {
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+    public func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         
         let width = pickerView.bounds.width
         switch datePickerMode {

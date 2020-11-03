@@ -18,7 +18,7 @@ public extension ThemeView {
 }
 
 //MARK: - main class
-class Wto_ThemeMode {
+open class Wto_ThemeMode {
 
 }
 

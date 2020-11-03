@@ -88,7 +88,7 @@ fileprivate func setLabelLineSpacing(label: UILabel, lineSpacing: CGFloat = 9, _
 
 
 //MARK: - main class
-class Wto_AlertView: UIView {
+public class Wto_AlertView: UIView {
     
     var allActions = [Wto_Action]()
     var tapAction: ((_ index: Int, _ title: String) -> ())?
@@ -246,13 +246,13 @@ class Wto_AlertView: UIView {
         self.tapAction = tapAction
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 //MARK: other classes
-class Wto_Action {
+public class Wto_Action {
     
     var title: String?
     var color: UIColor?

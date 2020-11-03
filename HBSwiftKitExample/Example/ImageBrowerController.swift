@@ -286,10 +286,10 @@ class SnapshotItem: UICollectionViewCell {
         
         self.setRectCorner(radiiSize: 4)
 
-        addSubview(iconView)
+        self.contentView.addSubview(iconView)
         iconView.frame = self.bounds
         
-        addSubview(markIconBtn)
+        self.contentView.addSubview(markIconBtn)
         markIconBtn.frame = self.bounds
         markIconBtn.setImage(UIImage(named: "ib_unselect"), for: .normal)
         markIconBtn.setImage(UIImage(named: "ib_select"), for: .selected)

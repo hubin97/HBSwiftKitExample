@@ -22,7 +22,7 @@ extension Wto_ImageBrower {
 }
 
 //MARK: - main class
-class Wto_ImageBrower: UIView {
+open class Wto_ImageBrower: UIView {
     
     var loadMode: Wto_ImageBrower.Mode = .imageObject
     var imageModels = [Wto_ImageBrowerModel]()
@@ -88,7 +88,7 @@ class Wto_ImageBrower: UIView {
         }
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -141,7 +141,7 @@ extension Wto_ImageBrower {
 //MARK: - delegate or data source
 extension Wto_ImageBrower: UIScrollViewDelegate {
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == self.albumCollect {
             self.currentPage = Int(ceil(scrollView.contentOffset.x / UIScreen.main.bounds.size.width))
             //print("scrollViewDidScroll:\(self.currentPage)")
@@ -151,11 +151,11 @@ extension Wto_ImageBrower: UIScrollViewDelegate {
 
 extension Wto_ImageBrower: UICollectionViewDataSource, UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         imageModels.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let model = imageModels[indexPath.row]
         let itemCell: Wto_ImageBrowerItem = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(Wto_ImageBrowerItem.self), for: indexPath) as! Wto_ImageBrowerItem
@@ -166,7 +166,7 @@ extension Wto_ImageBrower: UICollectionViewDataSource, UICollectionViewDelegate 
 }
 
 //MARK: - other classes
-class Wto_ImageBrowerItem: UICollectionViewCell {
+open class Wto_ImageBrowerItem: UICollectionViewCell {
     
     var model: Wto_ImageBrowerModel? {
         didSet {
@@ -208,14 +208,14 @@ class Wto_ImageBrowerItem: UICollectionViewCell {
         iconView.contentMode = .scaleAspectFit
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension Wto_ImageBrowerItem: UIScrollViewDelegate {
     
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
          guard scrollView == self.subScroll else {
              return nil
          }
@@ -225,7 +225,7 @@ extension Wto_ImageBrowerItem: UIScrollViewDelegate {
 }
 
 ///
-class Wto_ImageBrowerModel {
+public class Wto_ImageBrowerModel {
     
     var mode: Wto_ImageBrower.Mode?
     var image: UIImage?
