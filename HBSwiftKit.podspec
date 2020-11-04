@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.name         = "HBSwiftKit"
-  spec.version      = "0.0.7"
+  spec.version      = "0.0.8"
   spec.summary      = "Swift个人常用组件."
   spec.description  = <<-DESC
                 仅仅一些个人常用组件.学习工作使用.
