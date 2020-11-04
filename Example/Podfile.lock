@@ -1,0 +1,47 @@
+PODS:
+  - HBSwiftKit (0.0.7):
+    - HBSwiftKit/BaseClass (= 0.0.7)
+    - HBSwiftKit/Foundation (= 0.0.7)
+    - HBSwiftKit/Global (= 0.0.7)
+    - HBSwiftKit/Network (= 0.0.7)
+    - HBSwiftKit/UIKit (= 0.0.7)
+    - Kingfisher
+  - HBSwiftKit/BaseClass (0.0.7):
+    - Kingfisher
+  - HBSwiftKit/Foundation (0.0.7):
+    - Kingfisher
+  - HBSwiftKit/Global (0.0.7):
+    - Kingfisher
+  - HBSwiftKit/Network (0.0.7):
+    - HBSwiftKit/Foundation
+    - HBSwiftKit/Global
+    - HBSwiftKit/UIKit
+    - Kingfisher
+  - HBSwiftKit/UIKit (0.0.7):
+    - HBSwiftKit/Foundation
+    - HBSwiftKit/Global
+    - Kingfisher
+  - Kingfisher (4.10.1)
+  - ObjectMapper (4.2.0)
+
+DEPENDENCIES:
+  - HBSwiftKit (from `../`)
+  - ObjectMapper
+
+SPEC REPOS:
+  trunk:
+    - Kingfisher
+    - ObjectMapper
+
+EXTERNAL SOURCES:
+  HBSwiftKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  HBSwiftKit: f3268c1b4580b2ea07d1a8303c7cc322d57d725e
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+
+PODFILE CHECKSUM: 1641395192b261614b19ef6457f50eb5004b0fd9
+
+COCOAPODS: 1.10.0
