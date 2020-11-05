@@ -160,9 +160,9 @@ extension Wto_Calendar {
         let button = UIButton(type: .custom)
         let originY: CGFloat = (self.dateLabel.frame.height - W_Scale(28)) / 2 + 10
         button.frame = CGRect(x: 0, y: originY, width: W_Scale(28), height: W_Scale(28))
-        button.setBackgroundImage(UIImage(named: imageName), for: .normal)
-        button.setBackgroundImage(UIImage(named: imageName), for: .highlighted)
-        button.setBackgroundImage(UIImage(named: disabledImage), for: .disabled)
+        button.setBackgroundImage(UIImage.bundleImage(named: imageName), for: .normal)
+        button.setBackgroundImage(UIImage.bundleImage(named: imageName), for: .highlighted)
+        button.setBackgroundImage(UIImage.bundleImage(named: disabledImage), for: .disabled)
         return button
     }
     

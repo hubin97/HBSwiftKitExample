@@ -32,7 +32,11 @@ class ViewController: BaseViewController {
     override func setupUi() {
         super.setupUi()
         
+        if let navi = self.navigationController as? BaseNavigationController {
+            navi.leftBtnImage = UIImage(named: "navi_back_b")
+        }
         title = "Example List"
+        
         view.addSubview(listView)
         listView.reloadData()
     }

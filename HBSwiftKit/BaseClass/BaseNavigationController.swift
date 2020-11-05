@@ -10,7 +10,9 @@ import UIKit
 import Foundation
 
 open class BaseNavigationController: UINavigationController {
-        
+    
+    /// 导航栏左侧按钮图片
+    public var leftBtnImage = UIImage.bundleImage(named: "navi_back")
     public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
     }
@@ -58,7 +60,7 @@ extension BaseNavigationController: UINavigationControllerDelegate {
         let rooVc = navigationController.viewControllers[0]
         
         if rooVc != viewController {
-            viewController.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "navi_back_b")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backAction))
+            viewController.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBtnImage?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backAction))
             navigationBar.backIndicatorImage = UIImage()
             navigationBar.backIndicatorTransitionMaskImage = UIImage()
             

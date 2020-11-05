@@ -1,23 +1,29 @@
 PODS:
-  - HBSwiftKit (0.0.7):
-    - HBSwiftKit/BaseClass (= 0.0.7)
-    - HBSwiftKit/Foundation (= 0.0.7)
-    - HBSwiftKit/Global (= 0.0.7)
-    - HBSwiftKit/Network (= 0.0.7)
-    - HBSwiftKit/UIKit (= 0.0.7)
+  - HBSwiftKit (0.0.8):
+    - HBSwiftKit/BaseClass (= 0.0.8)
+    - HBSwiftKit/Foundation (= 0.0.8)
+    - HBSwiftKit/Global (= 0.0.8)
+    - HBSwiftKit/Network (= 0.0.8)
+    - HBSwiftKit/Resources (= 0.0.8)
+    - HBSwiftKit/UIKit (= 0.0.8)
     - Kingfisher
-  - HBSwiftKit/BaseClass (0.0.7):
-    - Kingfisher
-  - HBSwiftKit/Foundation (0.0.7):
-    - Kingfisher
-  - HBSwiftKit/Global (0.0.7):
-    - Kingfisher
-  - HBSwiftKit/Network (0.0.7):
+  - HBSwiftKit/BaseClass (0.0.8):
     - HBSwiftKit/Foundation
     - HBSwiftKit/Global
     - HBSwiftKit/UIKit
     - Kingfisher
-  - HBSwiftKit/UIKit (0.0.7):
+  - HBSwiftKit/Foundation (0.0.8):
+    - Kingfisher
+  - HBSwiftKit/Global (0.0.8):
+    - Kingfisher
+  - HBSwiftKit/Network (0.0.8):
+    - HBSwiftKit/Foundation
+    - HBSwiftKit/Global
+    - HBSwiftKit/UIKit
+    - Kingfisher
+  - HBSwiftKit/Resources (0.0.8):
+    - Kingfisher
+  - HBSwiftKit/UIKit (0.0.8):
     - HBSwiftKit/Foundation
     - HBSwiftKit/Global
     - Kingfisher
@@ -38,7 +44,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  HBSwiftKit: f3268c1b4580b2ea07d1a8303c7cc322d57d725e
+  HBSwiftKit: 61cb01d9372cf8860dbe77ab06c579843ba55d78
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
 

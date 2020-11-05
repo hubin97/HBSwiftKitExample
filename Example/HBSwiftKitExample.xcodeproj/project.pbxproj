@@ -212,6 +212,7 @@
 				B53B30D4254FAE8C006D51AE /* Sources */,
 				B53B30D5254FAE8C006D51AE /* Frameworks */,
 				B53B30D6254FAE8C006D51AE /* Resources */,
+				64463697504D3428A659B375 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -249,6 +250,7 @@
 				B53B30F5254FAE8F006D51AE /* Sources */,
 				B53B30F6254FAE8F006D51AE /* Frameworks */,
 				B53B30F7254FAE8F006D51AE /* Resources */,
+				199DF4FF23197C455258622B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -332,6 +334,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		199DF4FF23197C455258622B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKitExample-HBSwiftKitExampleUITests/Pods-HBSwiftKitExample-HBSwiftKitExampleUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKitExample-HBSwiftKitExampleUITests/Pods-HBSwiftKitExample-HBSwiftKitExampleUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKitExample-HBSwiftKitExampleUITests/Pods-HBSwiftKitExample-HBSwiftKitExampleUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1D5D021BFFB0653796511EA5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -352,6 +371,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		64463697504D3428A659B375 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKitExample/Pods-HBSwiftKitExample-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKitExample/Pods-HBSwiftKitExample-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKitExample/Pods-HBSwiftKitExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9550B0C49AC2C7A408A24A30 /* [CP] Check Pods Manifest.lock */ = {

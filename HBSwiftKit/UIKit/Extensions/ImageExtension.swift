@@ -41,4 +41,11 @@ extension ImageExtension {
         )
         return flipImage
     }
+    
+    /// 获取bundle资源
+    static func bundleImage(named: String) -> UIImage? {
+        let bundlePath = "\(Bundle(for: HBSwiftKitManager.self).bundlePath)" + "/HBSwiftKitResources.bundle"
+        let bundle = Bundle(path: bundlePath)
+        return UIImage(named: named, in: bundle, compatibleWith: nil)
+    }
 }

@@ -23,43 +23,51 @@ Pod::Spec.new do |spec|
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.source       = { :git => "https://github.com/hubin97/HBSwiftKitExample.git", :tag => "#{spec.version}" }
 
-
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #spec.source_files  = "HBSwiftKit", "**/HBSwiftKit/**/*.{h,m,swift}"
+  ###
+  spec.source_files  = "HBSwiftKit/**/*.{h,m,swift}"
 
   spec.subspec 'Global' do |dd|
-    dd.source_files  = "**/HBSwiftKit/Global/**/*.{h,m,swift}"
+    dd.source_files  = "HBSwiftKit/Global/*"
   end
   
   spec.subspec 'Foundation' do |dd|
-    dd.source_files  = "**/HBSwiftKit/Foundation/**/*.{h,m,swift}"
+    dd.source_files  = "HBSwiftKit/Foundation/*"
   end
-  
-  spec.subspec 'BaseClass' do |dd|
-    dd.source_files  = "**/HBSwiftKit/BaseClass/**/*.{h,m,swift}"
-  end
-  
+    
   spec.subspec 'UIKit' do |dd|
-    dd.source_files  = "**/HBSwiftKit/UIKit/**/*.{h,m,swift}"
+    dd.source_files  = "HBSwiftKit/UIKit/*"
     dd.dependency 'HBSwiftKit/Global'
     dd.dependency 'HBSwiftKit/Foundation'
   end
-    
-  spec.subspec 'Network' do |dd|
-    dd.source_files  = "**/HBSwiftKit/Network/**/*.{h,m,swift}"
+  
+  spec.subspec 'BaseClass' do |dd|
+    dd.source_files  = "HBSwiftKit/BaseClass/*"
     dd.dependency 'HBSwiftKit/Global'
     dd.dependency 'HBSwiftKit/Foundation'
     dd.dependency 'HBSwiftKit/UIKit'
   end
 
+  spec.subspec 'Network' do |dd|
+    dd.source_files  = "HBSwiftKit/Network/*"
+    dd.dependency 'HBSwiftKit/Global'
+    dd.dependency 'HBSwiftKit/Foundation'
+    dd.dependency 'HBSwiftKit/UIKit'
+  end
+
+  spec.subspec 'Resources' do |dd|
+    dd.source_files  = "HBSwiftKit/Resources/*"
+  end
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   # spec.resource  = "icon.png"
-  # spec.resources = "Resources/*.png"
+  ##spec.resources = ['HBSwiftKit/Resources/*.png']
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
   
+  spec.resource_bundle = { 'HBSwiftKitResources' => 'HBSwiftKit/Resources/*.png' }
+
   #spec.resource_bundles = {
-  #   'HBSwiftKit' => ['HBSwiftKit/Resource/Assets/*.png']
+  #   'HBSwiftKitResources' => ['**/HBSwiftKit/Resources/*']
   #}
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -73,7 +81,6 @@ Pod::Spec.new do |spec|
 
   # spec.library   = "iconv"
   # spec.libraries = "iconv", "xml2"
-
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.requires_arc = true
