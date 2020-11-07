@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   ###
-  spec.source_files  = "HBSwiftKit/**/*.{h,m,swift}"
+  spec.source_files  = "HBSwiftKit/**/*" #"HBSwiftKit/**/*.{h,m,swift}"
 
   spec.subspec 'Global' do |dd|
     dd.source_files  = "HBSwiftKit/Global/*"
@@ -61,10 +61,10 @@ Pod::Spec.new do |spec|
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   # spec.resource  = "icon.png"
-  ##spec.resources = ['HBSwiftKit/Resources/*.png']
+  spec.resources = ['HBSwiftKit/Resources/*.png']
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
   
-  spec.resource_bundle = { 'HBSwiftKitResources' => 'HBSwiftKit/Resources/*.png' }
+  spec.resource_bundle = { 'HBSwiftKitResources' => 'HBSwiftKit/Resources/*' }
 
   #spec.resource_bundles = {
   #   'HBSwiftKitResources' => ['**/HBSwiftKit/Resources/*']

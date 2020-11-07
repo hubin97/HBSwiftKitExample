@@ -44,7 +44,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  HBSwiftKit: 61cb01d9372cf8860dbe77ab06c579843ba55d78
+  HBSwiftKit: 87285eb0ae4855ee7a766dd9ae3db420f6d7e170
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
 
