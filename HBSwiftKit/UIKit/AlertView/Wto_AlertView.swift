@@ -97,9 +97,11 @@ public class Wto_AlertView: UIView {
     var contentView = UIView() //UIToolBar() iOS12有问题; UIVisualEffectView不能做容器
     var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     var titleLabel = UILabel()
+    var messageScroll = UIScrollView()
     var messageLabel = UILabel()
     var actionsView = UIView()
 
+    fileprivate let maxalert_height = UIScreen.main.bounds.height/2
     fileprivate let alert_width = W_Scale(270)  // 同系统宽度
     fileprivate let action_height = W_Scale(44) // 同系统高度
     fileprivate let line_height: CGFloat = 0.5  // 同系统分割线 0.33, 不能小于0.5,否则不显示
@@ -112,6 +114,7 @@ public class Wto_AlertView: UIView {
     fileprivate var m_height: CGFloat = 0  // message 总高度
     fileprivate var a_height: CGFloat = 0  // actions 总高度(底部可交互按钮)
     fileprivate var alert_height: CGFloat = 0 // content 总高度
+    fileprivate var mmin_height: CGFloat = 0  // message 可视高度
 
     override init(frame: CGRect) {
         super.init(frame: UIApplication.shared.keyWindow?.bounds ?? UIScreen.main.bounds)
@@ -130,9 +133,10 @@ public class Wto_AlertView: UIView {
         
         contentView.addSubview(blurEffectView)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(messageLabel)
+        contentView.addSubview(messageScroll)
         contentView.addSubview(actionsView)
-        
+        messageScroll.addSubview(messageLabel)
+
         contentView.backgroundColor = .white
 
         titleLabel.font = UIFont.systemFont(ofSize: W_Scale(16), weight: .medium)
@@ -155,7 +159,7 @@ public class Wto_AlertView: UIView {
         
         if let t_title = title, t_title != "" {
             
-            let rect = NSString(string: t_title).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: UIScreen.main.bounds.width/2), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: titleLabel.font ?? UIFont.systemFont(ofSize: W_Scale(16), weight: .medium)], context: nil)
+            let rect = NSString(string: t_title).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: UIScreen.main.bounds.height/2), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: titleLabel.font ?? UIFont.systemFont(ofSize: W_Scale(16), weight: .medium)], context: nil)
             t_height = rect.size.height
         }
         
@@ -163,8 +167,9 @@ public class Wto_AlertView: UIView {
             
             // 设置行间距
             let attributes = setLabelLineSpacing(label: messageLabel, lineSpacing: msg_LineSpacing)
-            let rect = NSString(string: t_msg).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: UIScreen.main.bounds.width/2), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+            let rect = NSString(string: t_msg).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: UIScreen.main.bounds.height/2), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
             m_height = rect.size.height
+            mmin_height = m_height
         }
 
         if let a_count = actions?.count, a_count > 0 {
@@ -179,14 +184,20 @@ public class Wto_AlertView: UIView {
         }
          
         alert_height = (t_height + kpadding) + (m_height + s_kpadding) + (a_height + kpadding)
-
+        if alert_height > UIScreen.main.bounds.height/2 {
+            mmin_height = UIScreen.main.bounds.height/2 - ((t_height + kpadding) + (a_height + kpadding) + s_kpadding)
+            alert_height = UIScreen.main.bounds.height/2
+        }
+        
         titleLabel.frame = CGRect(x: kpadding, y: kpadding, width: alert_width - 2 * kpadding, height: t_height)
-        messageLabel.frame = CGRect(x: kpadding, y: kpadding + t_height + s_kpadding, width: alert_width - 2 * kpadding, height: m_height)
-        actionsView.frame = CGRect(x: 0, y: messageLabel.frame.origin.y + m_height + kpadding, width: alert_width, height: a_height)
+        messageScroll.frame = CGRect(x: kpadding, y: kpadding + t_height + s_kpadding, width: alert_width - 2 * kpadding, height: mmin_height)
+        messageLabel.frame = CGRect(x: 0, y: 0, width: messageScroll.frame.width, height: m_height)
+        actionsView.frame = CGRect(x: 0, y: messageScroll.frame.maxY + kpadding, width: alert_width, height: a_height)
         contentView.frame = CGRect(x: 0, y: 0, width: alert_width, height: alert_height)
         contentView.center = self.center
         blurEffectView.frame = contentView.bounds
-
+        messageScroll.contentSize = CGSize(width: 0, height: m_height)
+        
         titleLabel.text = title
         //messageLabel.text = message
         messageLabel.attributedText = NSAttributedString(string: message ?? "", attributes: setLabelLineSpacing(label: messageLabel, lineSpacing: msg_LineSpacing))
