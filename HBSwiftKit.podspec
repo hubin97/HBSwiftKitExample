@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.name         = "HBSwiftKit"
-  spec.version      = "0.0.8"
+  spec.version      = "0.0.9"
   spec.summary      = "Swift个人常用组件."
   spec.description  = <<-DESC
                 仅仅一些个人常用组件.学习工作使用.
@@ -36,7 +36,7 @@ Pod::Spec.new do |spec|
   end
     
   spec.subspec 'UIKit' do |dd|
-    dd.source_files  = "HBSwiftKit/UIKit/*"
+    dd.source_files  = "HBSwiftKit/UIKit/**/*"
     dd.dependency 'HBSwiftKit/Global'
     dd.dependency 'HBSwiftKit/Foundation'
   end
@@ -45,23 +45,23 @@ Pod::Spec.new do |spec|
     dd.source_files  = "HBSwiftKit/BaseClass/*"
     dd.dependency 'HBSwiftKit/Global'
     dd.dependency 'HBSwiftKit/Foundation'
-    dd.dependency 'HBSwiftKit/UIKit'
+    dd.dependency "HBSwiftKit/UIKit"
   end
 
   spec.subspec 'Network' do |dd|
     dd.source_files  = "HBSwiftKit/Network/*"
     dd.dependency 'HBSwiftKit/Global'
     dd.dependency 'HBSwiftKit/Foundation'
-    dd.dependency 'HBSwiftKit/UIKit'
+    dd.dependency "HBSwiftKit/UIKit"
   end
 
-  spec.subspec 'Resources' do |dd|
-    dd.source_files  = "HBSwiftKit/Resources/*"
-  end
+#  spec.subspec 'Resources' do |dd|
+#    dd.source_files  = "HBSwiftKit/Resources/*"
+#  end
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   # spec.resource  = "icon.png"
-  spec.resources = ['HBSwiftKit/Resources/*.png']
+#  spec.resources = ['HBSwiftKit/Resources/*.png']
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
   
   spec.resource_bundle = { 'HBSwiftKitResources' => 'HBSwiftKit/Resources/*' }

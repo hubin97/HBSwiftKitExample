@@ -44,7 +44,7 @@ extension BlueToothManager {
     
     func disconnect() {
         guard let peripherals = allPeripherals else { return }
-        peripherals.filter({ $0.state == .connected }).map({ centralManager.cancelPeripheralConnection($0) })
+        _ = peripherals.filter({ $0.state == .connected }).map({ centralManager.cancelPeripheralConnection($0) })
     }
 }
 
@@ -73,7 +73,7 @@ extension BlueToothManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("外设\(peripheral.name)连接成功")
+        print("外设\(peripheral.name ?? "")连接成功")
         centralManager.stopScan()
         // 把已连接外设置顶🔝
         allPeripherals = allPeripherals?.filter({ $0 != peripheral })
@@ -86,11 +86,11 @@ extension BlueToothManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        print("外设\(peripheral.name)断开连接")
+        print("外设\(peripheral.name ?? "")断开连接")
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        print("外设\(peripheral.name)连接失败")
+        print("外设\(peripheral.name ?? "")连接失败")
     }
     
     //MARK: - CBPeripheralDelegate
@@ -99,10 +99,10 @@ extension BlueToothManager: CBCentralManagerDelegate, CBPeripheralDelegate {
             print("扫描到外设服务出错:\(err.localizedDescription)")
             return
         }
-        print("扫描到外设服务:\(peripheral.name),\(peripheral.services)")
+        print("扫描到外设服务:\(peripheral.name ?? ""),\(peripheral.services ?? [CBService]())")
         if let matchUUID = matchUUID {
             // => 扫描外设服务匹配协调头后会进入方法：didDiscoverDescriptorsFor service继续扫描特征
-            peripheral.services?.filter({ $0.uuid.isEqual(CBUUID(string: matchUUID)) }).map({ peripheral.discoverCharacteristics(nil, for: $0) })
+            _ = peripheral.services?.filter({ $0.uuid.isEqual(CBUUID(string: matchUUID)) }).map({ peripheral.discoverCharacteristics(nil, for: $0) })
         }
     }
     
@@ -112,24 +112,24 @@ extension BlueToothManager: CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
         // => 设置通知，数据通知会进入：didUpdateValueForCharacteristic方法
-        service.characteristics?.map({ peripheral.setNotifyValue(true, for: $0) })
+        _ = service.characteristics?.map({ peripheral.setNotifyValue(true, for: $0) })
         // => 读取Characteristic的值
-        service.characteristics?.map({ peripheral.readValue(for: $0) })
+        _ = service.characteristics?.map({ peripheral.readValue(for: $0) })
         // => 获取Characteristic的值，读到数据会进入方法：didUpdateValueFor characteristic
-        service.characteristics?.map({ peripheral.discoverDescriptors(for: $0) })
+        _ = service.characteristics?.map({ peripheral.discoverDescriptors(for: $0) })
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if let matchUUID2 = matchUUID2, let data = characteristic.value, characteristic.uuid.isEqual(CBUUID(string: matchUUID2)) {
-            let string = String.init(data: data, encoding: .utf8)
-            print("外设特征: \(characteristic)")
+            let string = String.init(data: data, encoding: .utf8) ?? ""
+            print("外设特征: \(string)")
         }
     }
     
     /// 搜索到Characteristic的Descriptors
     func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: Error?) {
         print("didDiscoverDescriptorsFor characteristic uuid: \(characteristic.uuid)")
-        characteristic.descriptors?.map({ print("descriptors uuid: \($0.uuid)") })
+        _ = characteristic.descriptors?.map({ print("descriptors uuid: \($0.uuid)") })
     }
 }
 
