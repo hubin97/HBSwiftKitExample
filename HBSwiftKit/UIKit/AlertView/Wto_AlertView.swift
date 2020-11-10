@@ -62,7 +62,6 @@ fileprivate func W_Scale(_ x:CGFloat) -> CGFloat {
 
 /// 颜色重绘成图片
 fileprivate func imageWithColor(_ color: UIColor) -> UIImage? {
-    
     let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
     UIGraphicsBeginImageContext(rect.size)
     let context = UIGraphicsGetCurrentContext()
@@ -78,7 +77,6 @@ fileprivate func imageWithColor(_ color: UIColor) -> UIImage? {
 
 /// 正确设置标签行间距 默认 9
 fileprivate func setLabelLineSpacing(label: UILabel, lineSpacing: CGFloat = 9, _ alignment: NSTextAlignment = .center) -> [NSAttributedString.Key : Any]? {
-    
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineSpacing = lineSpacing - (label.font.lineHeight - label.font.pointSize)
     paragraphStyle.alignment = alignment
@@ -101,14 +99,14 @@ public class Wto_AlertView: UIView {
     var messageLabel = UILabel()
     var actionsView = UIView()
 
-    fileprivate let maxalert_height = UIScreen.main.bounds.height/2
+    fileprivate let max_alert_height = UIScreen.main.bounds.height/2
     fileprivate let alert_width = W_Scale(270)  // 同系统宽度
     fileprivate let action_height = W_Scale(44) // 同系统高度
     fileprivate let line_height: CGFloat = 0.5  // 同系统分割线 0.33, 不能小于0.5,否则不显示
     fileprivate let msg_LineSpacing: CGFloat = 7.5  // 消息行间距
 
     fileprivate let kpadding = W_Scale(15)
-    fileprivate let s_kpadding = W_Scale(5)
+    fileprivate let s_kpadding = W_Scale(5) // 标题与内容间距
 
     fileprivate var t_height: CGFloat = 0  // title 总高度
     fileprivate var m_height: CGFloat = 0  // message 总高度
@@ -153,40 +151,36 @@ public class Wto_AlertView: UIView {
     }
     
     func setup(title: String?, message: String?, actions: [String]?) {
-        
         assert(!((title == nil || title == "") && (message == nil || message == "")), "标题和正文不能同时为空")
         assert(!(actions?.count ?? 0 > 5), "交互按钮不能超过5个")
         
         if let t_title = title, t_title != "" {
-            
-            let rect = NSString(string: t_title).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: UIScreen.main.bounds.height/2), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: titleLabel.font ?? UIFont.systemFont(ofSize: W_Scale(16), weight: .medium)], context: nil)
+            let rect = NSString(string: t_title).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: titleLabel.font ?? UIFont.systemFont(ofSize: W_Scale(16), weight: .medium)], context: nil)
             t_height = rect.size.height
         }
         
         if let t_msg = message, t_msg != "" {
-            
             // 设置行间距
             let attributes = setLabelLineSpacing(label: messageLabel, lineSpacing: msg_LineSpacing)
-            let rect = NSString(string: t_msg).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: UIScreen.main.bounds.height/2), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+            let rect = NSString(string: t_msg).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
             m_height = rect.size.height
             mmin_height = m_height
         }
 
         if let a_count = actions?.count, a_count > 0 {
-            
             allActions.removeAll()
             for title in actions ?? [] {
-                
                 //allActions.append(Wto_Action.init(title, nil, nil))
                 allActions.append(Wto_Action.init(title, nil, (() -> ())?.init(nilLiteral: ())))
             }
             a_height = a_count <= 2 ? action_height: action_height * CGFloat(a_count)
         }
-         
+        
         alert_height = (t_height + kpadding) + (m_height + s_kpadding) + (a_height + kpadding)
-        if alert_height > UIScreen.main.bounds.height/2 {
-            mmin_height = UIScreen.main.bounds.height/2 - ((t_height + kpadding) + (a_height + kpadding) + s_kpadding)
-            alert_height = UIScreen.main.bounds.height/2
+        // 限制高度
+        if alert_height > max_alert_height {
+            mmin_height = max_alert_height - ((t_height + kpadding) + (a_height + kpadding) + s_kpadding)
+            alert_height = max_alert_height
         }
         
         titleLabel.frame = CGRect(x: kpadding, y: kpadding, width: alert_width - 2 * kpadding, height: t_height)
@@ -208,7 +202,6 @@ public class Wto_AlertView: UIView {
     }
     
     func actionSetup() {
-        
         // 清空底部视图
         _ = actionsView.subviews.map({ $0.removeFromSuperview() })
         
@@ -217,7 +210,6 @@ public class Wto_AlertView: UIView {
         
         var h_line_maxY: CGFloat = 0
         for index in 0..<a_count {
-            
             // 横线 排除2个按钮时 到第二个的情况
             if !(a_count == 2 && index == 1) {
                 let h_line = UIView.init(frame: CGRect(x: 0, y: action_height * CGFloat(index), width: alert_width, height: line_height))
@@ -290,10 +282,8 @@ extension Wto_AlertView {
     
     public func show() {
         DispatchQueue.main.async {
-            
             let keyWindow = UIApplication.shared.keyWindow
             keyWindow?.addSubview(self)
-            
             self.scaleAnimate()
         }
     }
@@ -304,11 +294,7 @@ extension Wto_AlertView {
     
     /// 给actions内特定下标按钮设置背景色
     public func setActionTextColor(_ index: Int, _ color: UIColor) {
-        
-        guard allActions.count > 0 else {
-            return
-        }
-        
+        guard allActions.count > 0 else { return }
         for i in 0..<allActions.count {
             if index == i {
                 let tmp_btn = self.contentView.viewWithTag(1000 + i) as? UIButton
@@ -320,16 +306,14 @@ extension Wto_AlertView {
     
     /// 添加按钮事件闭包
     public func addAction(_ title: String, _ color: UIColor = .systemBlue, tapAction: (() -> ())? ) {
-        
         allActions.append(Wto_Action.init(title, color, tapAction))
-        
         a_height = allActions.count <= 2 ? action_height: action_height * CGFloat(allActions.count)
         alert_height = (t_height + kpadding) + (m_height + s_kpadding) + (a_height + kpadding)
                 
         contentView.frame = CGRect(x: 0, y: 0, width: alert_width, height: alert_height)
         contentView.center = self.center
         blurEffectView.frame = contentView.bounds
-        actionsView.frame = CGRect(x: 0, y: messageLabel.frame.origin.y + m_height + kpadding, width: alert_width, height: a_height)
+        actionsView.frame = CGRect(x: 0, y: messageScroll.frame.maxY + kpadding, width: alert_width, height: a_height)
 
         actionSetup()        
     }
@@ -354,19 +338,15 @@ extension Wto_AlertView {
 
     @objc func btnTapAction(_ sender: UIButton) {
         //print("tapAction--\(sender.titleLabel?.text ?? "")")
-        
         self.allActions[sender.tag - 1000].tapAction?()
-        
         self.tapAction?(sender.tag - 1000, (sender.titleLabel?.text ?? ""))
         hide()
     }
     
     @objc func maskTapAction(_ tap: UITapGestureRecognizer) {
-        
         let tap_point = tap.location(in: self)
         let isincontent = self.contentView.frame.contains(tap_point)
         //print("isoutside_content\(isincontent ? "yes": "no")")
-
         // 无操作键可点击蒙层移除, 点不在contentView上
         if allActions.count == 0 && isincontent == false {
             hide()
