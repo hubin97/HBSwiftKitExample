@@ -1,27 +1,14 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+use_frameworks!
 
-target 'HBSwiftKitExample' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  #use_frameworks!
-  use_frameworks! :linkage => :static
-
-  inhibit_all_warnings!
-
-  # Pods for HBSwiftKitExample
-
+target 'HBSwiftKit_Example' do
   pod 'HBSwiftKit', :path => '../'
-  
-  pod 'ObjectMapper'
-  #pod 'Kingfisher'
 
-  target 'HBSwiftKitExampleTests' do
+  target 'HBSwiftKit_Tests' do
     inherit! :search_paths
-    # Pods for testing
-  end
 
-  target 'HBSwiftKitExampleUITests' do
-    # Pods for testing
+    pod 'Quick', '~> 1.2.0'
+    pod 'Nimble', '~> 7.0'
+    pod 'FBSnapshotTestCase' , '~> 2.1.4'
+    pod 'Nimble-Snapshots' , '~> 6.3.0'
   end
-
 end

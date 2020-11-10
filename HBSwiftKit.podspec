@@ -1,91 +1,79 @@
-Pod::Spec.new do |spec|
+#
+# Be sure to run `pod lib lint HBSwiftKit.podspec' to ensure this is a
+# valid spec before submitting.
+#
+# Any lines starting with a # are optional, but their use is encouraged
+# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
+#
 
+Pod::Spec.new do |s|
+  
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  spec.name         = "HBSwiftKit"
-  spec.version      = "0.0.9"
-  spec.summary      = "Swift个人常用组件."
-  spec.description  = <<-DESC
-                仅仅一些个人常用组件.学习工作使用.
-                   DESC
-  spec.homepage     = "https://github.com/hubin97/HBSwiftKitExample"
-  spec.swift_versions = ['5.0']
-
+  s.name             = 'HBSwiftKit'
+  s.version          = '0.0.9'
+  s.summary          = '个人常用组件.'
+  s.description      = <<-DESC
+                    仅仅一些个人常用组件.学习工作使用.
+                       DESC
+  s.homepage         = 'https://github.com/hubin97/HBSwiftKitExample'
+  s.swift_versions = ['5.0']
+  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  spec.license      = { :type => "MIT", :file => "LICENSE" }
-
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  spec.author             = { "Hubin_Huang" => "970216474@qq.com" }
-  # spec.social_media_url   = "https://twitter.com/Hubin_Huang"
-
+  s.author           = { 'Hubin_Huang' => '970216474@qq.com' }
+  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  spec.platform     = :ios, "9.0"
-
+  s.ios.deployment_target = '9.0'
+  
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  spec.source       = { :git => "https://github.com/hubin97/HBSwiftKitExample.git", :tag => "#{spec.version}" }
-
+  s.source           = { :git => 'https://github.com/hubin97/HBSwiftKitExample.git', :tag => s.version.to_s }
+  
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  ###
-  spec.source_files  = "HBSwiftKit/**/*" #"HBSwiftKit/**/*.{h,m,swift}"
+  s.source_files  = 'HBSwiftKit/**/*.{h,m,swift}'
+  s.subspec 'Global' do |dd|
+    dd.source_files  = 'HBSwiftKit/Global/*.{h,m,swift}'
+  end
 
-  spec.subspec 'Global' do |dd|
-    dd.source_files  = "HBSwiftKit/Global/*"
+  s.subspec 'Extension' do |dd|
+    dd.source_files  = 'HBSwiftKit/Extension/*.{h,m,swift}'
+    dd.dependency 'HBSwiftKit/Global'
+  end
+
+  s.subspec 'BaseClass' do |dd|
+    dd.source_files  = 'HBSwiftKit/BaseClass/*.{h,m,swift}'
+    dd.dependency 'HBSwiftKit/Global'
+    dd.dependency 'HBSwiftKit/Extension'
+  end
+
+  s.subspec 'UIKit' do |dd|
+    dd.source_files  = 'HBSwiftKit/UIKit/**/*'
+    dd.dependency 'HBSwiftKit/Global'
+    dd.dependency 'HBSwiftKit/Extension'
+    dd.dependency 'HBSwiftKit/BaseClass'
+  end
+
+  s.subspec 'Network' do |dd|
+    dd.source_files  = 'HBSwiftKit/Network/*'
+    dd.dependency 'HBSwiftKit/Global'
+    dd.dependency 'HBSwiftKit/Extension'
+    dd.dependency 'HBSwiftKit/UIKit'
   end
   
-  spec.subspec 'Foundation' do |dd|
-    dd.source_files  = "HBSwiftKit/Foundation/*"
-  end
-    
-  spec.subspec 'UIKit' do |dd|
-    dd.source_files  = "HBSwiftKit/UIKit/**/*"
-    dd.dependency 'HBSwiftKit/Global'
-    dd.dependency 'HBSwiftKit/Foundation'
-  end
-  
-  spec.subspec 'BaseClass' do |dd|
-    dd.source_files  = "HBSwiftKit/BaseClass/*"
-    dd.dependency 'HBSwiftKit/Global'
-    dd.dependency 'HBSwiftKit/Foundation'
-    dd.dependency "HBSwiftKit/UIKit"
-  end
-
-  spec.subspec 'Network' do |dd|
-    dd.source_files  = "HBSwiftKit/Network/*"
-    dd.dependency 'HBSwiftKit/Global'
-    dd.dependency 'HBSwiftKit/Foundation'
-    dd.dependency "HBSwiftKit/UIKit"
-  end
-
-#  spec.subspec 'Resources' do |dd|
-#    dd.source_files  = "HBSwiftKit/Resources/*"
+#  s.subspec 'Assets' do |dd|
+#    dd.source_files  = "HBSwiftKit/Assets/*"
 #  end
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  # spec.resource  = "icon.png"
-#  spec.resources = ['HBSwiftKit/Resources/*.png']
-  # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
-  
-  spec.resource_bundle = { 'HBSwiftKitResources' => 'HBSwiftKit/Resources/*' }
-
-  #spec.resource_bundles = {
-  #   'HBSwiftKitResources' => ['**/HBSwiftKit/Resources/*']
-  #}
-
-  # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Link your library with frameworks, or libraries. Libraries do not include
-  #  the lib prefix of their name.
-  #
-
-  # spec.framework  = "SomeFramework"
-  # spec.frameworks = "SomeFramework", "AnotherFramework"
-
-  # spec.library   = "iconv"
-  # spec.libraries = "iconv", "xml2"
+  s.resource_bundles = {
+      'HBSwiftKit' => ['HBSwiftKit/Assets/*.png']
+  }
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  spec.requires_arc = true
+  s.requires_arc = true
+  s.dependency 'Kingfisher'
 
-  # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-    spec.dependency "Kingfisher"
-    
 end
