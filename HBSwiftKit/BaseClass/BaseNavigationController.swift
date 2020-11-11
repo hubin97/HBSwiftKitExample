@@ -11,8 +11,15 @@ import Foundation
 
 open class BaseNavigationController: UINavigationController {
     
-    /// 导航栏左侧按钮图片
-    public var leftBtnImage = UIImage.bundleImage(named: "navi_back")
+    /// 导航栏返回按钮图片🔙 默认黑色
+    public var leftBtnImage = UIImage.bundleImage(named: "navi_back_b")
+    /// 夜间模式, 注意夜间白色图,白天相反
+    public var darkMode = false {
+        didSet {
+            leftBtnImage = UIImage.bundleImage(named: darkMode ? "navi_back_w": "navi_back_b")
+        }
+    }
+    
     public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
     }
@@ -56,25 +63,20 @@ extension BaseNavigationController {
 extension BaseNavigationController: UINavigationControllerDelegate {
     
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        
         let rooVc = navigationController.viewControllers[0]
-        
         if rooVc != viewController {
             viewController.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBtnImage?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backAction))
             navigationBar.backIndicatorImage = UIImage()
             navigationBar.backIndicatorTransitionMaskImage = UIImage()
-            
             // 设置系统自带的右滑手势返回
             interactivePopGestureRecognizer?.delegate = nil
         }
     }
     
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        
         if responds(to: #selector(getter: interactivePopGestureRecognizer)) {
             interactivePopGestureRecognizer?.isEnabled = true
         }
-        
         //if rootViewController, set delegate nil /
         if children.count == 1 {
             interactivePopGestureRecognizer?.isEnabled = false
@@ -84,7 +86,6 @@ extension BaseNavigationController: UINavigationControllerDelegate {
     
     // 自定义非根控制左侧返回按钮
     public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        
         if children.count == 1 {
             // 根控制tabBar隐藏其他控制底部
             viewController.hidesBottomBarWhenPushed = true;

@@ -117,10 +117,10 @@
 		607FACD21AFB9204008FA782 /* Example for HBSwiftKit */ = {
 			isa = PBXGroup;
 			children = (
+				B5A3EDFD255BDC9E004EF9D4 /* ExampleList */,
+				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				B5BAC827255A7818005A5179 /* Example */,
-				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				B5BAC834255A7875005A5179 /* images.json */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -175,7 +175,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B5BAC827255A7818005A5179 /* Example */ = {
+		B5A3EDFD255BDC9E004EF9D4 /* ExampleList */ = {
 			isa = PBXGroup;
 			children = (
 				B5BAC828255A7818005A5179 /* ImageBrowerController.swift */,
@@ -184,7 +184,7 @@
 				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
 				B5BAC82C255A7818005A5179 /* DatePickerController.swift */,
 			);
-			path = Example;
+			name = ExampleList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

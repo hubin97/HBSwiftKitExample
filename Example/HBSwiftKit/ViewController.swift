@@ -32,9 +32,14 @@ class ViewController: BaseViewController {
     override func setupUi() {
         super.setupUi()
         
-        if let navi = self.navigationController as? BaseNavigationController {
-            navi.leftBtnImage = UIImage(named: "navi_back_b")
-        }
+        /// 修改导航栏样式
+//        if let navi = self.navigationController as? BaseNavigationController {
+//            //navi.leftBtnImage = UIImage(named: "navi_back_b")
+//            navi.navigationBar.barTintColor = .blue
+//            navi.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20)]
+//            navi.darkMode = true
+//        }
+        
         title = "Example List"
         
         view.addSubview(listView)
