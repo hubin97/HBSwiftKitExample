@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name             = 'HBSwiftKit'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = '个人常用组件.'
   s.description      = <<-DESC
                     仅仅一些个人常用组件.学习工作使用.
@@ -33,34 +33,35 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/hubin97/HBSwiftKitExample.git', :tag => s.version.to_s }
   
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.source_files  = 'HBSwiftKit/**/*.{h,m,swift}'
-  s.subspec 'Global' do |dd|
-    dd.source_files  = 'HBSwiftKit/Global/*'
+  #s.source_files  = 'HBSwiftKit/**/*.{h,m,swift}'
+  s.subspec 'Global' do |ss|
+      ss.source_files  = 'HBSwiftKit/Global/'
+      ss.framework  = "Foundation", "UIKit"
   end
-
-  s.subspec 'Extension' do |dd|
-    dd.source_files  = 'HBSwiftKit/Extension/*'
-    dd.dependency 'HBSwiftKit/Global'
+  
+  s.subspec 'Extension' do |ss|
+      ss.source_files  = 'HBSwiftKit/Extension/'
+      ss.dependency 'HBSwiftKit/Global'
   end
-
-  s.subspec 'BaseClass' do |dd|
-    dd.source_files  = 'HBSwiftKit/BaseClass/*'
-    dd.dependency 'HBSwiftKit/Global'
-    dd.dependency 'HBSwiftKit/Extension'
+  
+  s.subspec 'BaseClass' do |ss|
+      ss.source_files  = 'HBSwiftKit/BaseClass/'
+      ss.dependency 'HBSwiftKit/Global'
+      ss.dependency 'HBSwiftKit/Extension'
   end
-
-  s.subspec 'UIKit' do |dd|
-    dd.source_files  = 'HBSwiftKit/UIKit/**/*'
-    dd.dependency 'HBSwiftKit/Global'
-    dd.dependency 'HBSwiftKit/Extension'
-    dd.dependency 'HBSwiftKit/BaseClass'
+  
+  s.subspec 'UIKit' do |ss|
+      ss.source_files  = 'HBSwiftKit/UIKit/AlertView/', 'HBSwiftKit/UIKit/Calendar/', 'HBSwiftKit/UIKit/DatePicker/', 'HBSwiftKit/UIKit/ImageBrower/', 'HBSwiftKit/UIKit/EditTable/', 'HBSwiftKit/UIKit/ThemeMode/'
+      ss.dependency 'HBSwiftKit/Global'
+      ss.dependency 'HBSwiftKit/Extension'
+      ss.dependency 'HBSwiftKit/BaseClass'
   end
-
-  s.subspec 'Network' do |dd|
-    dd.source_files  = 'HBSwiftKit/Network/*'
-    dd.dependency 'HBSwiftKit/Global'
-    dd.dependency 'HBSwiftKit/Extension'
-    dd.dependency 'HBSwiftKit/UIKit'
+  
+  s.subspec 'Network' do |ss|
+      ss.source_files  = 'HBSwiftKit/Network/'
+      ss.dependency 'HBSwiftKit/Global'
+      ss.dependency 'HBSwiftKit/Extension'
+      ss.dependency 'HBSwiftKit/UIKit'
   end
   
 #  s.subspec 'Assets' do |dd|
