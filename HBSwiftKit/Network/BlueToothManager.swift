@@ -21,7 +21,7 @@ class BlueToothManager: NSObject {
     public var matchUUID2: String?
 
     /// 管理单例
-    static public let manager = BlueToothManager()
+    static public let bleManager = BlueToothManager()
     /// 系统蓝牙设备管理对象，可以把他理解为主设备，通过他，可以去扫描和链接外设
     //var centralManager: CBCentralManager?
     lazy var centralManager: CBCentralManager = {
@@ -38,7 +38,7 @@ class BlueToothManager: NSObject {
 //MARK: - private mothods
 extension BlueToothManager {
     
-    func scan() {
+    func scan() {        
         centralManager.scanForPeripherals(withServices: nil, options: nil)
     }
     

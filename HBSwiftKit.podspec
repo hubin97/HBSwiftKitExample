@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name             = 'HBSwiftKit'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = '个人常用组件.'
   s.description      = <<-DESC
                     仅仅一些个人常用组件.学习工作使用.
@@ -51,7 +51,8 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'UIKit' do |ss|
-      ss.source_files  = 'HBSwiftKit/UIKit/AlertView/', 'HBSwiftKit/UIKit/Calendar/', 'HBSwiftKit/UIKit/DatePicker/', 'HBSwiftKit/UIKit/ImageBrower/', 'HBSwiftKit/UIKit/EditTable/', 'HBSwiftKit/UIKit/ThemeMode/'
+      ss.source_files  = 'HBSwiftKit/UIKit/AlertView/', 'HBSwiftKit/UIKit/Calendar/', 'HBSwiftKit/UIKit/DatePicker/',
+                         'HBSwiftKit/UIKit/ImageBrower/', 'HBSwiftKit/UIKit/EditTable/', 'HBSwiftKit/UIKit/ThemeMode/'
       ss.dependency 'HBSwiftKit/Global'
       ss.dependency 'HBSwiftKit/Extension'
       ss.dependency 'HBSwiftKit/BaseClass'
