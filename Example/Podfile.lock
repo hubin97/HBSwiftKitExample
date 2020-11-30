@@ -4,28 +4,28 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
-  - HBSwiftKit (0.1.0):
-    - HBSwiftKit/BaseClass (= 0.1.0)
-    - HBSwiftKit/Extension (= 0.1.0)
-    - HBSwiftKit/Global (= 0.1.0)
-    - HBSwiftKit/Network (= 0.1.0)
-    - HBSwiftKit/UIKit (= 0.1.0)
+  - HBSwiftKit (0.1.3):
+    - HBSwiftKit/BaseClass (= 0.1.3)
+    - HBSwiftKit/Extension (= 0.1.3)
+    - HBSwiftKit/Global (= 0.1.3)
+    - HBSwiftKit/Network (= 0.1.3)
+    - HBSwiftKit/UIKit (= 0.1.3)
     - Kingfisher
-  - HBSwiftKit/BaseClass (0.1.0):
+  - HBSwiftKit/BaseClass (0.1.3):
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
     - Kingfisher
-  - HBSwiftKit/Extension (0.1.0):
+  - HBSwiftKit/Extension (0.1.3):
     - HBSwiftKit/Global
     - Kingfisher
-  - HBSwiftKit/Global (0.1.0):
+  - HBSwiftKit/Global (0.1.3):
     - Kingfisher
-  - HBSwiftKit/Network (0.1.0):
+  - HBSwiftKit/Network (0.1.3):
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
     - HBSwiftKit/UIKit
     - Kingfisher
-  - HBSwiftKit/UIKit (0.1.0):
+  - HBSwiftKit/UIKit (0.1.3):
     - HBSwiftKit/BaseClass
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
@@ -60,7 +60,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  HBSwiftKit: 5a77685225775d5707f4ddcffaa1c645f9ef9944
+  HBSwiftKit: 8dde71f3afe41efb7c7e636d11d12a311a55e074
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
   Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
