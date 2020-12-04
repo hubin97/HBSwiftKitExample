@@ -20,6 +20,7 @@
 		B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82B255A7818005A5179 /* BlueToothController.swift */; };
 		B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82C255A7818005A5179 /* DatePickerController.swift */; };
 		B5BAC835255A7875005A5179 /* images.json in Resources */ = {isa = PBXBuildFile; fileRef = B5BAC834255A7875005A5179 /* images.json */; };
+		B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4F26257A365E007F1238 /* WebPreviewController.swift */; };
 		F9BE6B3665E38C3F81D0AC85 /* Pods_HBSwiftKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 777A10901F771A6922BA30F9 /* Pods_HBSwiftKit_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		B5BAC82C255A7818005A5179 /* DatePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		B5BAC834255A7875005A5179 /* images.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = images.json; sourceTree = "<group>"; };
 		B5BAC85B255A7C0C005A5179 /* HBSwiftKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HBSwiftKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		B5FB4F26257A365E007F1238 /* WebPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPreviewController.swift; sourceTree = "<group>"; };
 		CA78FCF42199CA49DD9F7856 /* HBSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HBSwiftKit.podspec; path = ../HBSwiftKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E2964227EA3A41F6AFF29697 /* Pods-HBSwiftKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E6A361DDE4C4FDA2CBD6CE11 /* Pods_HBSwiftKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBSwiftKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +180,7 @@
 				B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */,
 				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
 				B5BAC82C255A7818005A5179 /* DatePickerController.swift */,
+				B5FB4F26257A365E007F1238 /* WebPreviewController.swift */,
 			);
 			path = ExampleList;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
+				B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
@@ -565,7 +569,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "HBSwiftKit/HBSwiftKit_Example-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "HBSwiftKit/Global/HBSwiftKit_Example-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -585,7 +589,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "HBSwiftKit/HBSwiftKit_Example-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "HBSwiftKit/Global/HBSwiftKit_Example-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};

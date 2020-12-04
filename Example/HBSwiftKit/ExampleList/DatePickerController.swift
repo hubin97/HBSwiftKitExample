@@ -17,6 +17,7 @@ class DatePickerController: BaseViewController {
         let datePicker = Wto_DatePicker.init(frame: CGRect(x: 0, y: 50, width: kScreenWidth, height: 250))
         datePicker.datePickerMode = .year_week
         //datePicker.isSelectDecs = true
+        datePicker.showiOS14SelectedBgColor = false
         return datePicker
     }()
         
