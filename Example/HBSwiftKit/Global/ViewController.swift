@@ -15,7 +15,8 @@ class ViewController: BaseViewController {
                      DemoRowModel(title: "日历选择器", dclass: CalendarPickerController()),
                      DemoRowModel(title: "日期选择器", dclass: DatePickerController()),
                      DemoRowModel(title: "数字选择器", dclass: NumberPickerController()),
-                     DemoRowModel(title: "蓝牙测试页", dclass: BlueToothController())
+                     DemoRowModel(title: "蓝牙测试页", dclass: BlueToothController()),
+                     DemoRowModel(title: "网页预览页", dclass: WebPreviewController())
                      ]
         return datas
     }()
@@ -23,6 +24,7 @@ class ViewController: BaseViewController {
     lazy var listView: UITableView = {
         let listView = UITableView.init(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - kNavBarAndSafeHeight - kBottomSafeHeight), style: .plain)
         listView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
+        listView.tableFooterView = UIView.init(frame: CGRect.zero)
         listView.dataSource = self
         listView.delegate = self
         listView.rowHeight = 50
