@@ -16,7 +16,8 @@ class ViewController: BaseViewController {
                      DemoRowModel(title: "日期选择器", dclass: DatePickerController()),
                      DemoRowModel(title: "数字选择器", dclass: NumberPickerController()),
                      DemoRowModel(title: "蓝牙测试页", dclass: BlueToothController()),
-                     DemoRowModel(title: "网页预览页", dclass: WebPreviewController())
+                     DemoRowModel(title: "网页预览页", dclass: WebPreviewController()),
+                     DemoRowModel(title: "标题轮播页", dclass: HBTitleScrollAdViewController())
                      ]
         return datas
     }()

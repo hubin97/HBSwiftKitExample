@@ -60,7 +60,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  HBSwiftKit: 8dde71f3afe41efb7c7e636d11d12a311a55e074
+  HBSwiftKit: 851355664f7bf2e0aa1af67caa821fdad016376a
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
   Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
