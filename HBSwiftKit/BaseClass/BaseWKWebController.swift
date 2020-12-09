@@ -35,7 +35,7 @@ open class BaseWKWebController: BaseViewController {
     
     /// 容器
     public lazy var wkWebView: WKWebView = {
-        let wkWebView = WKWebView.init(frame: self.view.bounds, configuration: self.wkConfig)
+        let wkWebView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - kNavBarAndSafeHeight), configuration: self.wkConfig)
         wkWebView.uiDelegate = self
         wkWebView.navigationDelegate = self
         return wkWebView

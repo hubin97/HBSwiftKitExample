@@ -47,6 +47,18 @@ class ViewController: BaseViewController {
         
         view.addSubview(listView)
         listView.reloadData()
+        
+//        var car = "Benz"
+//        let closure = { [car] in
+//          print("I drive \(car)")
+//        }
+//        car = "Tesla"
+//        closure()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
 }
 
