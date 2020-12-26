@@ -18,7 +18,7 @@ extension DateExtension {
 
     // 跟随用户所选日历变动
     static let calendar = Calendar.autoupdatingCurrent
-    
+
     var year: Int {
         DateExtension.calendar.component(.year, from: self)
     }
@@ -29,6 +29,18 @@ extension DateExtension {
 
     var day: Int {
         DateExtension.calendar.component(.day, from: self)
+    }
+    
+    /// date to string
+    /// - Parameters:
+    ///   - identifier: 时区
+    ///   - dateFormat: 格式
+    /// - Returns: String
+    func toString(identifier: String = "zh_CN", dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.init(identifier: identifier)
+        formatter.dateFormat = dateFormat
+        return formatter.string(from: self)
     }
 }
 

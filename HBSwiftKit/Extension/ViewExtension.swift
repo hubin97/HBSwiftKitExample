@@ -70,9 +70,8 @@ extension ViewExtension {
     //MARK: 视图截取
     // 区别系统视图截取 "let view = item.snapshotView(afterScreenUpdates: true)"
     public func interceptView() -> UIImage? {
-        
-        let scale:CGFloat = UIScreen.main.scale   // 设置屏幕倍率可以保证截图的质量
-        
+        // 设置屏幕倍率可以保证截图的质量
+        let scale:CGFloat = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(self.frame.size, true, scale)
         //self.layer.render(in: UIGraphicsGetCurrentContext()!)
         self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
@@ -81,20 +80,25 @@ extension ViewExtension {
         return image
     }
     
+    // 将当前视图转为UIImage
+    @available(iOS 10.0, *)
+    func asImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
+    
     /// 截图视图中的一部分
     public func interceptRangeView(atFrame: CGRect?) -> UIImage? {
-        
         guard let rect = atFrame else { return nil }
-
         let inputImage = interceptView()
         
         let scale = UIScreen.main.scale   // 设置屏幕倍率可以保证截图的质量
         let real_rect = CGRect(x: rect.origin.x * scale, y: rect.origin.y * scale, width: rect.size.width * scale, height: rect.size.height * scale)
-        
         guard let cutImageRef: CGImage = inputImage?.cgImage?.cropping(to: real_rect) else {
             return nil
         }
-
         return UIImage(cgImage: cutImageRef)
     }
 
