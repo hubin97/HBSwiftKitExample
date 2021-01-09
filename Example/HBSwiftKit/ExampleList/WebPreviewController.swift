@@ -14,7 +14,8 @@ class WebPreviewController: BaseWKWebController {
 
     override func setupUi() {
         super.setupUi()
-        self.urlString = "https://space.bilibili.com/325538782"
+        //self.urlString = "https://space.bilibili.com/325538782"
+        self.localPath = "help_cn.html"
     }
 }
 

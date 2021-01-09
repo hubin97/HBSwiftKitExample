@@ -17,8 +17,11 @@ import WebKit
 //MARK: - main class
 open class BaseWKWebController: BaseViewController {
 
-    /// 指定地址
-    public var urlString: String?
+    /// 指定远端地址
+    public var remoteUrl: String?
+    /// 指定本地地址
+    public var localPath: String?
+
     /// 特定配置
     public lazy var wkConfig: WKWebViewConfiguration = {
         let config = WKWebViewConfiguration.init()
@@ -49,8 +52,18 @@ open class BaseWKWebController: BaseViewController {
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // loadHTMLString
-        wkWebView.load(URLRequest(url: URL(string: self.urlString ?? "")!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 20.0))
+        // 远端
+        if let remoteUrl = remoteUrl {
+            wkWebView.load(URLRequest(url: URL(string: remoteUrl)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 20.0))
+        }
+        
+        // 本地
+        if let localPath = localPath {
+            let mainpath = URL.init(fileURLWithPath: Bundle.main.bundlePath)
+            guard let htmlpath = Bundle.main.path(forResource: localPath, ofType: nil) else { return }
+            guard let html = try? String.init(contentsOfFile: htmlpath, encoding: .utf8) else { return }
+            wkWebView.loadHTMLString(html, baseURL: mainpath)
+        }
     }
 }
 

@@ -15,6 +15,8 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */ = {isa = PBXBuildFile; fileRef = B567FCE42596F39F006AFA69 /* README_SWIFT.md */; };
+		B575D5F925A9900C0068EB19 /* help_es.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F725A9900C0068EB19 /* help_es.html */; };
+		B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F825A9900C0068EB19 /* help_cn.html */; };
 		B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC828255A7818005A5179 /* ImageBrowerController.swift */; };
 		B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC829255A7818005A5179 /* NumberPickerController.swift */; };
 		B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */; };
@@ -53,6 +55,8 @@
 		777A10901F771A6922BA30F9 /* Pods_HBSwiftKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBSwiftKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A8871220770A8D795C87930 /* Pods-HBSwiftKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Tests/Pods-HBSwiftKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B567FCE42596F39F006AFA69 /* README_SWIFT.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README_SWIFT.md; path = ../README_SWIFT.md; sourceTree = "<group>"; };
+		B575D5F725A9900C0068EB19 /* help_es.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_es.html; sourceTree = "<group>"; };
+		B575D5F825A9900C0068EB19 /* help_cn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_cn.html; sourceTree = "<group>"; };
 		B5BAC828255A7818005A5179 /* ImageBrowerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowerController.swift; sourceTree = "<group>"; };
 		B5BAC829255A7818005A5179 /* NumberPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberPickerController.swift; sourceTree = "<group>"; };
 		B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerController.swift; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 		B5E1D8E62562831C0093AC4C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				B575D5F825A9900C0068EB19 /* help_cn.html */,
+				B575D5F725A9900C0068EB19 /* help_es.html */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				B5BAC834255A7875005A5179 /* images.json */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -306,8 +312,10 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				B5BAC835255A7875005A5179 /* images.json in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
 				B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

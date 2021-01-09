@@ -92,7 +92,7 @@ public class Wto_AlertView: UIView {
     var tapAction: ((_ index: Int, _ title: String) -> ())?
     
     var maskingView = UIView()
-    var contentView = UIView() //UIToolbar() iOS12图层有问题造成点击不了按钮; UIVisualEffectView不能做容器
+    var contentView = UIView() //UIToolbar() iOS11+图层有问题造成点击不了按钮; UIVisualEffectView不能做容器
     var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     var titleLabel = UILabel()
     var messageScroll = UIScrollView()
@@ -117,15 +117,15 @@ public class Wto_AlertView: UIView {
     override init(frame: CGRect) {
         super.init(frame: UIApplication.shared.keyWindow?.bounds ?? UIScreen.main.bounds)
         //FIXME:适配不同系统版本高斯模糊
-        if #available(iOS 12, *) {
+        blurEffectView.effect = UIBlurEffect(style: .light)
+        if #available(iOS 10, *) {
             blurEffectView.effect = UIBlurEffect(style: .prominent)
             if #available(iOS 13, *) {
                 blurEffectView.effect = UIBlurEffect(style: .systemMaterialLight)
             }
-            contentView.addSubview(blurEffectView)
-        } else {
-            contentView = UIToolbar()
         }
+        contentView.addSubview(blurEffectView)
+
         addSubview(maskingView)
         maskingView.frame = UIApplication.shared.keyWindow?.bounds ?? UIScreen.main.bounds
         maskingView.backgroundColor = UIColor.init(white: 0, alpha: 0.2) // 同系统蒙层
