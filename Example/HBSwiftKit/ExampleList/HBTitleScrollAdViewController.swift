@@ -22,7 +22,7 @@ class HBTitleScrollAdViewController: BaseViewController {
         titleView?.updataIndexLabelUI(withNum: 1)
         titleView?.isNeedBottomLine = true
         titleView?.isShowOutstanding = true
-        titleView?.hb_titleBtnBlock = { [weak self] (index, title) in
+        titleView?.hb_titleBtnBlock = { (index, title) in
             print("index:\(index), title:\(title ?? "")")
         }
         

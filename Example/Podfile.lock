@@ -1,74 +1,50 @@
 PODS:
-  - FBSnapshotTestCase (2.1.4):
-    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
-  - FBSnapshotTestCase/Core (2.1.4)
-  - FBSnapshotTestCase/SwiftSupport (2.1.4):
-    - FBSnapshotTestCase/Core
-  - HBSwiftKit (0.1.5):
-    - HBSwiftKit/Base (= 0.1.5)
-    - HBSwiftKit/Extension (= 0.1.5)
-    - HBSwiftKit/Global (= 0.1.5)
-    - HBSwiftKit/Network (= 0.1.5)
-    - HBSwiftKit/Tools (= 0.1.5)
-    - HBSwiftKit/UIKit (= 0.1.5)
+  - HBSwiftKit (0.1.6):
+    - HBSwiftKit/Base (= 0.1.6)
+    - HBSwiftKit/Extension (= 0.1.6)
+    - HBSwiftKit/Global (= 0.1.6)
+    - HBSwiftKit/Network (= 0.1.6)
+    - HBSwiftKit/Tools (= 0.1.6)
+    - HBSwiftKit/UIKit (= 0.1.6)
     - Kingfisher
-  - HBSwiftKit/Base (0.1.5):
+  - HBSwiftKit/Base (0.1.6):
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
     - Kingfisher
-  - HBSwiftKit/Extension (0.1.5):
+  - HBSwiftKit/Extension (0.1.6):
     - HBSwiftKit/Global
     - Kingfisher
-  - HBSwiftKit/Global (0.1.5):
+  - HBSwiftKit/Global (0.1.6):
     - Kingfisher
-  - HBSwiftKit/Network (0.1.5):
+  - HBSwiftKit/Network (0.1.6):
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
     - HBSwiftKit/UIKit
     - Kingfisher
-  - HBSwiftKit/Tools (0.1.5):
+  - HBSwiftKit/Tools (0.1.6):
     - Kingfisher
-  - HBSwiftKit/UIKit (0.1.5):
+  - HBSwiftKit/UIKit (0.1.6):
     - HBSwiftKit/Base
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
     - Kingfisher
   - Kingfisher (4.10.1)
-  - Nimble (7.3.4)
-  - Nimble-Snapshots (6.3.0):
-    - Nimble-Snapshots/Core (= 6.3.0)
-  - Nimble-Snapshots/Core (6.3.0):
-    - FBSnapshotTestCase (~> 2.0)
-    - Nimble (~> 7.0)
-  - Quick (1.2.0)
 
 DEPENDENCIES:
-  - FBSnapshotTestCase (~> 2.1.4)
   - HBSwiftKit (from `../`)
-  - Nimble (~> 7.0)
-  - Nimble-Snapshots (~> 6.3.0)
-  - Quick (~> 1.2.0)
 
 SPEC REPOS:
   trunk:
-    - FBSnapshotTestCase
     - Kingfisher
-    - Nimble
-    - Nimble-Snapshots
-    - Quick
 
 EXTERNAL SOURCES:
   HBSwiftKit:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  HBSwiftKit: 6f2b598dd2784fa2e9decba3104a3abfb4cbb986
+  HBSwiftKit: 12ab894c43e83665d956d6387389e2a57e4a1443
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
-  Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
-  Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
-  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
 
-PODFILE CHECKSUM: 399115de37ed495b3b0faad511f8e592b30837a8
+PODFILE CHECKSUM: 35c2a280f52bfc771c7db903a561843fd04fd569
 
 COCOAPODS: 1.10.0
