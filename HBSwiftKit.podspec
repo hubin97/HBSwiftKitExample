@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name             = 'HBSwiftKit'
-  s.version          = '0.1.5'
+  s.version          = '0.1.6'
   s.summary          = '个人常用组件.'
   s.description      = <<-DESC
                     仅仅一些个人常用组件.学习工作使用.
@@ -44,8 +44,8 @@ Pod::Spec.new do |s|
       ss.dependency 'HBSwiftKit/Global'
   end
   
-  s.subspec 'BaseClass' do |ss|
-      ss.source_files  = 'HBSwiftKit/BaseClass/'
+  s.subspec 'Base' do |ss|
+      ss.source_files  = 'HBSwiftKit/Base/'
       ss.dependency 'HBSwiftKit/Global'
       ss.dependency 'HBSwiftKit/Extension'
   end
@@ -55,7 +55,7 @@ Pod::Spec.new do |s|
                          'HBSwiftKit/UIKit/ImageBrower/', 'HBSwiftKit/UIKit/EditTable/', 'HBSwiftKit/UIKit/ThemeMode/'
       ss.dependency 'HBSwiftKit/Global'
       ss.dependency 'HBSwiftKit/Extension'
-      ss.dependency 'HBSwiftKit/BaseClass'
+      ss.dependency 'HBSwiftKit/Base'
   end
   
   s.subspec 'Network' do |ss|
@@ -63,6 +63,10 @@ Pod::Spec.new do |s|
       ss.dependency 'HBSwiftKit/Global'
       ss.dependency 'HBSwiftKit/Extension'
       ss.dependency 'HBSwiftKit/UIKit'
+  end
+  
+  s.subspec 'Tools' do |ss|
+      ss.source_files  = 'HBSwiftKit/Tools/'
   end
   
 #  s.subspec 'Assets' do |dd|

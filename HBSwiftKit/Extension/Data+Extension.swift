@@ -1,5 +1,5 @@
 //
-//  DataExtension.swift
+//  Data+Extension.swift
 //  test
 //
 //  Created by hubin.h@wingto.cn on 2020/8/11.
@@ -7,7 +7,9 @@
 
 import Foundation
 
-extension Data {
+public typealias Data_Extension = Data
+
+extension Data_Extension {
     
     func toDic() -> Dictionary<String, Any>? {
         

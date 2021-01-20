@@ -7,6 +7,8 @@
 
 import UIKit
 
+// https://github.com/Tliens/SpeedySwift
+
 //MARK: - main class
 class ViewController: BaseViewController {
 
@@ -35,14 +37,6 @@ class ViewController: BaseViewController {
     override func setupUi() {
         super.setupUi()
         
-        /// 修改导航栏样式
-//        if let navi = self.navigationController as? BaseNavigationController {
-//            //navi.leftBtnImage = UIImage(named: "navi_back_b")
-//            navi.navigationBar.barTintColor = .blue
-//            navi.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20)]
-//            navi.darkMode = true
-//        }
-        
         title = "Example List"
         
         view.addSubview(listView)
@@ -53,7 +47,7 @@ class ViewController: BaseViewController {
 //          print("I drive \(car)")
 //        }
 //        car = "Tesla"
-//        closure()
+//        closure()        
     }
     
     override func viewWillAppear(_ animated: Bool) {

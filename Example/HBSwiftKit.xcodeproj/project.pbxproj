@@ -64,6 +64,7 @@
 		B5BAC82C255A7818005A5179 /* DatePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		B5BAC834255A7875005A5179 /* images.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = images.json; sourceTree = "<group>"; };
 		B5BAC85B255A7C0C005A5179 /* HBSwiftKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HBSwiftKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		B5EA0E1125B67C38004783C1 /* AppSandBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSandBox.swift; sourceTree = "<group>"; };
 		B5FB4F26257A365E007F1238 /* WebPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPreviewController.swift; sourceTree = "<group>"; };
 		B5FB4FBC257DC20A007F1238 /* HBTitleScrollAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBTitleScrollAdViewController.swift; sourceTree = "<group>"; };
 		CA78FCF42199CA49DD9F7856 /* HBSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HBSwiftKit.podspec; path = ../HBSwiftKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -127,6 +128,7 @@
 		607FACD21AFB9204008FA782 /* Example for HBSwiftKit */ = {
 			isa = PBXGroup;
 			children = (
+				B5EA0E0825B67AD6004783C1 /* Vendors */,
 				B5E1D8E3256282C80093AC4C /* ExampleList */,
 				B5E1D8E62562831C0093AC4C /* Resource */,
 				B5E1D8E7256283400093AC4C /* Global */,
@@ -216,6 +218,22 @@
 				B5BAC85B255A7C0C005A5179 /* HBSwiftKit_Example-Bridging-Header.h */,
 			);
 			path = Global;
+			sourceTree = "<group>";
+		};
+		B5EA0E0825B67AD6004783C1 /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				B5EA0E1025B67C38004783C1 /* SandBox */,
+			);
+			path = Vendors;
+			sourceTree = "<group>";
+		};
+		B5EA0E1025B67C38004783C1 /* SandBox */ = {
+			isa = PBXGroup;
+			children = (
+				B5EA0E1125B67C38004783C1 /* AppSandBox.swift */,
+			);
+			path = SandBox;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

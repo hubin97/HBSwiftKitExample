@@ -1,5 +1,5 @@
 //
-//  DateExtension.swift
+//  Date+Extension.swift
 //  HBSwiftKitDemo
 //
 //  Created by hubin.h@wingto.cn on 2020/9/11.
@@ -8,10 +8,10 @@
 import Foundation
 
 //MARK: - global var and methods
-public typealias DateExtension = Date
+public typealias Date_Extension = Date
 
 //MARK: - main class
-extension DateExtension {
+extension Date_Extension {
     
     //static let components: Set<Calendar.Component> = Calendar.Component.year, Calendar.Component.month, Calendar.Component.day
     //(Calendar.Component.year | Calendar.Component.month | Calendar.Component.day | Calendar.Component.weekOfMonth |  Calendar.Component.hour | Calendar.Component.minute | Calendar.Component.second | Calendar.Component.weekday)
@@ -20,15 +20,15 @@ extension DateExtension {
     static let calendar = Calendar.autoupdatingCurrent
 
     var year: Int {
-        DateExtension.calendar.component(.year, from: self)
+        Date_Extension.calendar.component(.year, from: self)
     }
     
     var month: Int {
-        DateExtension.calendar.component(.month, from: self)
+        Date_Extension.calendar.component(.month, from: self)
     }
 
     var day: Int {
-        DateExtension.calendar.component(.day, from: self)
+        Date_Extension.calendar.component(.day, from: self)
     }
     
     /// date to string
@@ -45,17 +45,17 @@ extension DateExtension {
 }
 
 //MARK: - private mothods
-extension DateExtension {
+extension Date_Extension {
     
 }
 
 //MARK: - call backs
-extension DateExtension {
+extension Date_Extension {
     
 }
 
 //MARK: - delegate or data source
-extension DateExtension {
+extension Date_Extension {
     
 }
 

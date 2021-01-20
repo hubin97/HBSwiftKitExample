@@ -12,6 +12,14 @@ import Foundation
 open class BaseNavigationController: UINavigationController {
     
     /// 导航栏返回按钮图片🔙 默认黑色
+    /** 修改导航栏样式
+     if let navi = self.navigationController as? BaseNavigationController {
+         //navi.leftBtnImage = UIImage(named: "navi_back_b")
+         navi.navigationBar.barTintColor = .blue
+         navi.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20)]
+         navi.darkMode = true
+     }
+     */
     public var leftBtnImage = UIImage.bundleImage(named: "navi_back_b")
     /// 夜间模式, 注意夜间白色图,白天相反
     public var darkMode = false {
