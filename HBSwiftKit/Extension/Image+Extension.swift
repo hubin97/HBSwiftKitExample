@@ -15,6 +15,7 @@ public typealias Image_Extension = UIImage
 extension Image_Extension {
 
     /// 水平翻转（即左右镜像）
+    /// - Returns: 新Image对象
     public func horizontalFlip() -> UIImage {
      
         //翻转图片的方向
@@ -28,6 +29,7 @@ extension Image_Extension {
     }
     
     /// 垂直翻转
+    /// - Returns: 新Image对象
     public func verticalFlip() -> UIImage {
         
         //翻转图片的方向
@@ -43,6 +45,9 @@ extension Image_Extension {
     }
     
     /// 根据颜色生成图片
+    /// - Parameters:
+    ///   - color: 颜色
+    ///   - size: 尺寸
     public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0)) {
         UIGraphicsBeginImageContextWithOptions(size, true, UIScreen.main.scale)
         defer {

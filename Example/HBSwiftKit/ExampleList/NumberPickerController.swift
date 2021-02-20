@@ -12,11 +12,16 @@ import Foundation
 let blurPadding: CGFloat = 50
 let pickerDataSize = 1_000
 
+fileprivate let Scale_Width = UIScreen.main.bounds.width / 375
+fileprivate func W_Scale(_ x:CGFloat) -> CGFloat {
+    return Scale_Width * x
+}
+
 //MARK: - main class
 class NumberPickerController: BaseViewController {
 
     lazy var numberPicker: NumberPicker = {
-        let numberPicker = NumberPicker.init(frame: CGRect(x: 50, y: 50, width: 120, height: 75 + blurPadding), minValue: 16, maxValue: 30)
+        let numberPicker = NumberPicker.init(frame: CGRect(x: 20, y: 50, width: W_Scale(145), height: 75 + blurPadding), minValue: 16, maxValue: 30)
         return numberPicker
     }()
     
@@ -55,11 +60,6 @@ class NumberPickerController: BaseViewController {
     lazy var hNumPickerView: HorizonNumPickerView = {
         let frame = CGRect(x: 0, y: 300, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/2.43)
         let pickerView = HorizonNumPickerView.init(frame: frame)
-        
-        let iOS14SelectViews = pickerView.numPicker.subviews.filter({ $0.subviews.count == 0 })
-        if iOS14SelectViews.count > 0 {
-            _ = iOS14SelectViews.map({ $0.backgroundColor = .clear })
-        }
         return pickerView
     }()
     
@@ -205,6 +205,21 @@ extension NumberPicker {
         self.selectRow(self.selectedRow(inComponent: 0) + offset0, inComponent: 0, animated: true)
         self.selectRow(self.selectedRow(inComponent: 1) + offset1, inComponent: 1, animated: true)
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        hideHighlightBgColor()
+    }
+    
+    /// 适配iOS14的选中灰色背景, 排除分割线; show()
+    func hideHighlightBgColor() {
+        if #available(iOS 14.0, *) {
+            let selectViews = self.subviews.filter({ $0.subviews.count == 0 })
+            if selectViews.count > 0 {
+                _ = selectViews.filter({ $0.bounds.size.height > 1 }).map({ $0.backgroundColor = .clear })
+            }
+        }
+    }
 }
 
 //MARK: data source /delegate
@@ -242,10 +257,12 @@ extension NumberPicker: UIPickerViewDataSource, UIPickerViewDelegate {
         frame.size.height -= blurPadding
         label.frame = frame
         
-        label.font = UIFont.systemFont(ofSize: 98, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 95, weight: .medium)
         label.text = "\(pickerData[row % pickerData.count])"
+        //let w = label.estimatedWidth(maxHeight: 75)
+        //print("label.w:\(w)")
+        
         label.textAlignment = component == 0 ? .right : .left
-        label.sizeToFit()
         return label
     }
 }
@@ -321,6 +338,21 @@ class HorizonNumPickerView: UIView {
         bgImgView.image = UIImage(named: isOn ? "fh_bg_n": "fh_bg_d")
         flagUpImgView.image = UIImage(named: isOn ? "fh_up_n": "fh_up_d")
         flagScrolImgView.image = UIImage(named: isOn ? "fh_scrol_n": "fh_scrol_d")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        hideHighlightBgColor()
+    }
+    
+    /// 适配iOS14的选中灰色背景, 排除分割线; show()
+    func hideHighlightBgColor() {
+        if #available(iOS 14.0, *) {
+            let selectViews = numPicker.subviews.filter({ $0.subviews.count == 0 })
+            if selectViews.count > 0 {
+                _ = selectViews.filter({ $0.bounds.size.height > 1 }).map({ $0.backgroundColor = .clear })
+            }
+        }
     }
 }
 

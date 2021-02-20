@@ -23,7 +23,8 @@ extension String_Extension {
      let str2 = string2.halfwidthToFullwidth()
      print("str1:\(str1)\nstr2:\(str2)")
      */
-    /// Fullwidth to Halfwidth
+    /// 全角转半角
+    /// - Returns: 半角字符串
     public func fullwidthToHalfwidth() -> String {
         let srcStr = self.replacingOccurrences(of: "。", with: ".")
         let cfstr = NSMutableString(string: srcStr) as CFMutableString
@@ -32,7 +33,8 @@ extension String_Extension {
         return cfstr as String
     }
     
-    /// Halfwidth to Fullwidth  
+    /// 半角转全角
+    /// - Returns: 全角字符串
     public func halfwidthToFullwidth() -> String {
         let srcStr = self.replacingOccurrences(of: ".", with: "。")
         let cfstr = NSMutableString(string: srcStr) as CFMutableString

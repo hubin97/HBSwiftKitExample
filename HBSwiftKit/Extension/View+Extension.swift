@@ -33,6 +33,9 @@ extension View_Extension {
     
     //MARK: 指定矩形圆角
     /// 指定矩形某个/多个角为圆角, 默认全圆角
+    /// - Parameters:
+    ///   - rectCorner: 圆角位置
+    ///   - radiiSize: 弧度
     public func setRectCorner(rectCorner: UIRectCorner = .allCorners, radiiSize: CGFloat) {
         
         // 部分圆角设定 UIRectCorner(rawValue: UIRectCorner.bottomLeft.rawValue | UIRectCorner.bottomRight.rawValue)
@@ -44,12 +47,54 @@ extension View_Extension {
         self.layer.mask = masklayer
     }
     
+    //MARK: 指定视图圆角边框属性
+    /// 设置视图的圆角边框属性
+    /// - Parameters:
+    ///   - borderColor: 边框颜色
+    ///   - borderWidth: 边框宽
+    ///   - raddi: 弧度
+    ///   - corners: 圆角位置
+    ///   - isDotted: 是否虚线边框
+    ///   - lineDashPattern: 虚线间隔
+    public func setRoundCorners(borderColor: UIColor = .black,
+                                borderWidth: CGFloat = 1.0,
+                                raddi: CGFloat = 4.0,
+                                corners: UIRectCorner = .allCorners,
+                                isDotted: Bool = false,
+                                lineDashPattern: [NSNumber] = [NSNumber(value: 4), NSNumber(value: 2)]) {
+        
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: raddi, height: raddi))
+        // 圆角
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = bounds
+        maskLayer.path = path.cgPath
+        layer.mask = maskLayer
+        
+        // 边框
+        let borderLayer = CAShapeLayer()
+        borderLayer.frame = bounds
+        borderLayer.path = path.cgPath
+        borderLayer.lineWidth = borderWidth
+        borderLayer.fillColor = UIColor.clear.cgColor
+        borderLayer.strokeColor = borderColor.cgColor
+        if isDotted {
+            borderLayer.lineDashPattern = lineDashPattern
+        }
+        layer.addSublayer(borderLayer)
+    }
+
+
     //MARK: 指定矩形渐变色
     /// 指定矩形渐变色 颜色数组及方向
     public enum GradientDirection {
         case lefttoright
         case toptobottom
     }
+    
+    /// 设置视图颜色渐变
+    /// - Parameters:
+    ///   - colors: 颜色数组
+    ///   - direction: 渐变方向
     public func setGradientColor(colors: [UIColor], direction: GradientDirection){
         for item in self.layer.sublayers ?? []  where item is CAGradientLayer {
             item.removeFromSuperlayer()

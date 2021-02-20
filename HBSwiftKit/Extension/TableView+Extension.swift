@@ -16,15 +16,15 @@ extension TableView_Extension {
     /// 根据cell子视图获取IndexPath?
     /// - Parameter subView: 子视图
     /// - Returns: IndexPath?
-    func indexPath(by subView: UIView) -> IndexPath? {
+    func indexPath(subView: UIView) -> IndexPath? {
         return self.indexPathForRow(at: subView.convert(CGPoint.zero, to: self))
     }
     
     /// 根据cell子视图获取当前UITableViewCell?
     /// - Parameter subView: 子视图
     /// - Returns: UITableViewCell?
-    func cell(by subView: UIView) -> UITableViewCell? {
-        guard let indexPath = self.indexPath(by: subView) else { return nil }
+    func cell(subView: UIView) -> UITableViewCell? {
+        guard let indexPath = self.indexPath(subView: subView) else { return nil }
         return self.cellForRow(at: indexPath)
     }
 }
