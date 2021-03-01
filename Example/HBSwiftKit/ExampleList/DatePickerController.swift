@@ -14,7 +14,7 @@ import Foundation
 class DatePickerController: BaseViewController {
 
     lazy var datePicker: Wto_DatePicker = {
-        let datePicker = Wto_DatePicker.init(frame: CGRect(x: 15, y: 50, width: kScreenWidth - 30, height: 250))
+        let datePicker = Wto_DatePicker.init(frame: CGRect(x: 15, y: kScreenHeight - kBottomSafeHeight - 250 - kNavBarAndSafeHeight, width: kScreenWidth - 30, height: 250))
         datePicker.datePickerMode = .year_week
         //datePicker.isSelectDecs = true
         datePicker.showiOS14SelectedBgColor = false
@@ -25,7 +25,8 @@ class DatePickerController: BaseViewController {
         super.setupUi()
 
         self.title = "日期选择器"
-        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .done, target: self, action: #selector(doneDateAction))
+
         view.addSubview(datePicker)
         datePicker.center = view.center
 
@@ -44,7 +45,10 @@ class DatePickerController: BaseViewController {
         let h = textlabel.estimatedHeight(maxWidth: kScreenWidth - 30)
         print("h:\(h)")
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .done, target: self, action: #selector(doneDateAction))
+        /// 渐变色
+        let colorView = UIView.init(frame: CGRect(x: 50, y: 100, width: 100, height: 100))
+        view.addSubview(colorView)
+        colorView.setGradientColor(colors: [.red, .yellow, .blue], locations: [NSNumber(value: 0), NSNumber(value: 0.7), NSNumber(value: 0.97)], direction: .LeftTop_to_RightBottom)
     }
 }
 

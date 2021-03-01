@@ -9,6 +9,14 @@ import UIKit
 import CoreImage
 import Foundation
 
+/** 相关资料备忘
+ iOS核心动画高级技巧
+ https://zsisme.gitbooks.io/ios-/content/chapter5/3d-transform.html
+
+ Core Animation总结笔记
+ https://juejin.cn/post/6920908515758309383#heading-17
+ */
+
 //MARK: - global var and methods
 public typealias View_Extension = UIView
 
@@ -87,27 +95,42 @@ extension View_Extension {
     //MARK: 指定矩形渐变色
     /// 指定矩形渐变色 颜色数组及方向
     public enum GradientDirection {
-        case lefttoright
-        case toptobottom
+        case Left_to_Right
+        case Top_to_Bottom
+        case LeftTop_to_RightBottom
+        case LeftBottom_to_RightTop
     }
     
     /// 设置视图颜色渐变
     /// - Parameters:
     ///   - colors: 颜色数组
+    ///   - locations: 调整渐变空间, 注意locations和colors个数一致
     ///   - direction: 渐变方向
-    public func setGradientColor(colors: [UIColor], direction: GradientDirection){
+    public func setGradientColor(colors: [UIColor], locations: [NSNumber]? = nil, direction: GradientDirection) {
         for item in self.layer.sublayers ?? []  where item is CAGradientLayer {
             item.removeFromSuperlayer()
         }
         let gradient = CAGradientLayer.init()
         gradient.frame = self.bounds
         gradient.colors = colors.map({ $0.cgColor })
-        gradient.startPoint = CGPoint(x: 0, y: 0)
-        
-        if direction == .lefttoright {
+        gradient.locations = locations
+        switch direction {
+        case .Left_to_Right:
+            gradient.startPoint = CGPoint(x: 0, y: 0)
             gradient.endPoint = CGPoint(x: 1, y: 0)
-        } else if direction == .toptobottom {
+            break
+        case .Top_to_Bottom:
+            gradient.startPoint = CGPoint(x: 0, y: 0)
             gradient.endPoint = CGPoint(x: 0, y: 1)
+            break
+        case .LeftTop_to_RightBottom:
+            gradient.startPoint = CGPoint(x: 0, y: 0)
+            gradient.endPoint = CGPoint(x: 1, y: 1)
+            break
+        case .LeftBottom_to_RightTop:
+            gradient.startPoint = CGPoint(x: 0, y: 1)
+            gradient.endPoint = CGPoint(x: 1, y: 0)
+            break
         }
         self.layer.insertSublayer(gradient, at: 0)
     }

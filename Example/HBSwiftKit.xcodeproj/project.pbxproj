@@ -22,6 +22,16 @@
 		B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82B255A7818005A5179 /* BlueToothController.swift */; };
 		B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82C255A7818005A5179 /* DatePickerController.swift */; };
 		B5BAC835255A7875005A5179 /* images.json in Resources */ = {isa = PBXBuildFile; fileRef = B5BAC834255A7875005A5179 /* images.json */; };
+		B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5C625ECCE7700C88C1C /* SliderRuler.swift */; };
+		B5C6C5EA25ECD38800C88C1C /* Wto_ImageBrower.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5DE25ECD1BD00C88C1C /* Wto_ImageBrower.swift */; };
+		B5C6C5ED25ECD38E00C88C1C /* HBScrollAdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5D725ECD19A00C88C1C /* HBScrollAdModel.m */; };
+		B5C6C5F025ECD39100C88C1C /* HBScrollAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5D925ECD19A00C88C1C /* HBScrollAdView.m */; };
+		B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5E025ECD1C400C88C1C /* Wto_ThemeMode.swift */; };
+		B5C6C5F625ECD39C00C88C1C /* HBTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5DC25ECD1B000C88C1C /* HBTitleView.m */; };
+		B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5CE25ECD08900C88C1C /* EditTableView.swift */; };
+		B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */; };
+		B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CC7A4525E88F1400D263B4 /* AdvancedFilter.swift */; };
+		B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */ = {isa = PBXBuildFile; fileRef = B5CC7A4925E8989300D263B4 /* advfilterdata.json */; };
 		B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4F26257A365E007F1238 /* WebPreviewController.swift */; };
 		B5FB4FBD257DC20A007F1238 /* HBTitleScrollAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4FBC257DC20A007F1238 /* HBTitleScrollAdViewController.swift */; };
 		F9BE6B3665E38C3F81D0AC85 /* Pods_HBSwiftKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 777A10901F771A6922BA30F9 /* Pods_HBSwiftKit_Tests.framework */; };
@@ -63,6 +73,19 @@
 		B5BAC82C255A7818005A5179 /* DatePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		B5BAC834255A7875005A5179 /* images.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = images.json; sourceTree = "<group>"; };
 		B5BAC85B255A7C0C005A5179 /* HBSwiftKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HBSwiftKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		B5C6C5C625ECCE7700C88C1C /* SliderRuler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderRuler.swift; sourceTree = "<group>"; };
+		B5C6C5CE25ECD08900C88C1C /* EditTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableView.swift; sourceTree = "<group>"; };
+		B5C6C5D625ECD19A00C88C1C /* HBScrollAdModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBScrollAdModel.h; sourceTree = "<group>"; };
+		B5C6C5D725ECD19A00C88C1C /* HBScrollAdModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HBScrollAdModel.m; sourceTree = "<group>"; };
+		B5C6C5D825ECD19A00C88C1C /* HBScrollAdView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBScrollAdView.h; sourceTree = "<group>"; };
+		B5C6C5D925ECD19A00C88C1C /* HBScrollAdView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HBScrollAdView.m; sourceTree = "<group>"; };
+		B5C6C5DB25ECD1B000C88C1C /* HBTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBTitleView.h; sourceTree = "<group>"; };
+		B5C6C5DC25ECD1B000C88C1C /* HBTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HBTitleView.m; sourceTree = "<group>"; };
+		B5C6C5DE25ECD1BD00C88C1C /* Wto_ImageBrower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wto_ImageBrower.swift; sourceTree = "<group>"; };
+		B5C6C5E025ECD1C400C88C1C /* Wto_ThemeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wto_ThemeMode.swift; sourceTree = "<group>"; };
+		B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTestController.swift; sourceTree = "<group>"; };
+		B5CC7A4525E88F1400D263B4 /* AdvancedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedFilter.swift; sourceTree = "<group>"; };
+		B5CC7A4925E8989300D263B4 /* advfilterdata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = advfilterdata.json; sourceTree = "<group>"; };
 		B5EA0E1125B67C38004783C1 /* AppSandBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSandBox.swift; sourceTree = "<group>"; };
 		B5FB4F26257A365E007F1238 /* WebPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPreviewController.swift; sourceTree = "<group>"; };
 		B5FB4FBC257DC20A007F1238 /* HBTitleScrollAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBTitleScrollAdViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +205,66 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B5C6C5C225ECCA0E00C88C1C /* 高级筛选器 */ = {
+			isa = PBXGroup;
+			children = (
+				B5CC7A4525E88F1400D263B4 /* AdvancedFilter.swift */,
+			);
+			path = "高级筛选器";
+			sourceTree = "<group>";
+		};
+		B5C6C5C325ECCADF00C88C1C /* 简易刻度尺 */ = {
+			isa = PBXGroup;
+			children = (
+				B5C6C5C625ECCE7700C88C1C /* SliderRuler.swift */,
+			);
+			path = "简易刻度尺";
+			sourceTree = "<group>";
+		};
+		B5C6C5CF25ECD08900C88C1C /* 列表左滑改 */ = {
+			isa = PBXGroup;
+			children = (
+				B5C6C5CE25ECD08900C88C1C /* EditTableView.swift */,
+			);
+			path = "列表左滑改";
+			sourceTree = "<group>";
+		};
+		B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */ = {
+			isa = PBXGroup;
+			children = (
+				B5C6C5D625ECD19A00C88C1C /* HBScrollAdModel.h */,
+				B5C6C5D725ECD19A00C88C1C /* HBScrollAdModel.m */,
+				B5C6C5D825ECD19A00C88C1C /* HBScrollAdView.h */,
+				B5C6C5D925ECD19A00C88C1C /* HBScrollAdView.m */,
+			);
+			path = "简易轮播页";
+			sourceTree = "<group>";
+		};
+		B5C6C5DD25ECD1B000C88C1C /* 标题切换器 */ = {
+			isa = PBXGroup;
+			children = (
+				B5C6C5DB25ECD1B000C88C1C /* HBTitleView.h */,
+				B5C6C5DC25ECD1B000C88C1C /* HBTitleView.m */,
+			);
+			path = "标题切换器";
+			sourceTree = "<group>";
+		};
+		B5C6C5DF25ECD1BD00C88C1C /* 照片浏览器 */ = {
+			isa = PBXGroup;
+			children = (
+				B5C6C5DE25ECD1BD00C88C1C /* Wto_ImageBrower.swift */,
+			);
+			path = "照片浏览器";
+			sourceTree = "<group>";
+		};
+		B5C6C5E125ECD1C400C88C1C /* 主题适配器 */ = {
+			isa = PBXGroup;
+			children = (
+				B5C6C5E025ECD1C400C88C1C /* Wto_ThemeMode.swift */,
+			);
+			path = "主题适配器";
+			sourceTree = "<group>";
+		};
 		B5E1D8E3256282C80093AC4C /* ExampleList */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +275,14 @@
 				B5BAC82C255A7818005A5179 /* DatePickerController.swift */,
 				B5FB4F26257A365E007F1238 /* WebPreviewController.swift */,
 				B5FB4FBC257DC20A007F1238 /* HBTitleScrollAdViewController.swift */,
+				B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */,
+				B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */,
+				B5C6C5E125ECD1C400C88C1C /* 主题适配器 */,
+				B5C6C5DF25ECD1BD00C88C1C /* 照片浏览器 */,
+				B5C6C5DD25ECD1B000C88C1C /* 标题切换器 */,
+				B5C6C5C325ECCADF00C88C1C /* 简易刻度尺 */,
+				B5C6C5C225ECCA0E00C88C1C /* 高级筛选器 */,
+				B5C6C5CF25ECD08900C88C1C /* 列表左滑改 */,
 			);
 			path = ExampleList;
 			sourceTree = "<group>";
@@ -203,6 +294,7 @@
 				B575D5F725A9900C0068EB19 /* help_es.html */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				B5BAC834255A7875005A5179 /* images.json */,
+				B5CC7A4925E8989300D263B4 /* advfilterdata.json */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 			);
@@ -328,6 +420,7 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				B5BAC835255A7875005A5179 /* images.json in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */,
 				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
 				B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -416,15 +509,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5C6C5EA25ECD38800C88C1C /* Wto_ImageBrower.swift in Sources */,
+				B5C6C5F025ECD39100C88C1C /* HBScrollAdView.m in Sources */,
 				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
 				B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
+				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
+				B5C6C5ED25ECD38E00C88C1C /* HBScrollAdModel.m in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
 				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
 				B5FB4FBD257DC20A007F1238 /* HBTitleScrollAdViewController.swift in Sources */,
+				B5C6C5F625ECD39C00C88C1C /* HBTitleView.m in Sources */,
 				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,
 				B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */,
+				B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */,
 				B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */,
+				B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

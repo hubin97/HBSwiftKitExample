@@ -1,12 +1,13 @@
 platform :ios, '9.0'
 
 use_frameworks! :linkage => :dynamic
-supports_swift_versions '>= 4.0' #, '< 4.0'
+supports_swift_versions '>= 5.0' #, '< 4.0'
 #warn_for_unused_master_specs_repo 'false'
 
 target 'HBSwiftKit_Example' do
   pod 'HBSwiftKit', :path => '../'
-
+  
+  pod 'Kingfisher'
   target 'HBSwiftKit_Tests' do
     inherit! :search_paths
 

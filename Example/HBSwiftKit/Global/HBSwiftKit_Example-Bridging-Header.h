@@ -3,3 +3,7 @@
 //
 
 #import <HBSwiftKit/HBSwiftKit-Swift.h>
+#import "HBTitleView.h"
+#import "HBScrollAdView.h"
+#import "HBScrollAdModel.h"
+

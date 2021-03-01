@@ -30,7 +30,7 @@ class BlueToothController: BaseViewController {
         self.title = "蓝牙测试页"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "搜索", style: .plain, target: self, action: #selector(scanAction))
         
-        view.addSubview(listView)
+        view.addSubview(listView)        
     }
     
     override func viewWillAppear(_ animated: Bool) {
