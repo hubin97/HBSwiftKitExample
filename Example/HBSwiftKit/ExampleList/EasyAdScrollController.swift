@@ -1,5 +1,5 @@
 //
-//  HBTitleScrollAdViewController.swift
+//  EasyAdScrollController.swift
 //  HBSwiftKit_Example
 //
 //  Created by hubin.h@wingto.cn on 2020/12/7.
@@ -10,7 +10,7 @@ import Foundation
 //MARK: - global var and methods
 
 //MARK: - main class
-class HBTitleScrollAdViewController: BaseViewController {
+class EasyAdScrollController: BaseViewController {
 
     override func setupUi() {
         super.setupUi()
@@ -26,44 +26,20 @@ class HBTitleScrollAdViewController: BaseViewController {
             print("index:\(index), title:\(title ?? "")")
         }
         
+        /// test 
         let scrolldts = ["1.哈哈哈哈哈哈哈哈哈", "2.哦哦哦哦哦哦哦哦哦", "3.啦啦啦啦啦啦"]
         var i = 20;
-        var items = [HBScrollAdModel]()
+        var items = [EasyAdScrollModel]()
         
         while (i >= 0) {
             for item in scrolldts {
                 i -= 1
-                let model = HBScrollAdModel()
-                model.title = item
-                model.iconName = "ib_share"
+                let model = EasyAdScrollModel.init(iconName: "ib_share", flagName: nil, title: item)
                 items.append(model)
             }
         }
-        let adView = HBScrollAdView.init(frame: CGRect(x: 50, y: 200, width: 300, height: 44))
+        let adView = EasyAdScrollTool.init(frame: CGRect(x: 50, y: 200, width: 300, height: 44), style: .Page, datas: items)
+        adView.setRoundCorners(borderColor: .systemBlue, borderWidth: 1, isDotted: true, lineDashPattern: [2, 4])
         view.addSubview(adView)
-
-        adView.layer.borderWidth = 1
-        adView.layer.borderColor = UIColor.gray.cgColor
-        adView.items = items
-        adView.animationType = .leftRight
-        adView.autoScroll = true
-        adView.autoScrollTimeInterval = 4.0
     }
 }
-
-//MARK: - private mothods
-extension HBTitleScrollAdViewController {
-    
-}
-
-//MARK: - call backs
-extension HBTitleScrollAdViewController {
-    
-}
-
-//MARK: - delegate or data source
-extension HBTitleScrollAdViewController {
-    
-}
-
-//MARK: - other classes

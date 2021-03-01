@@ -58,6 +58,8 @@ class NetworkExtension {
             self.clManager?.requestAlwaysAuthorization()
         }
         
+        self.wifiInfo = nil
+        self.ssid = nil
         if let cfas: NSArray = CNCopySupportedInterfaces() {
             for ifname in cfas {
                 if let data = CNCopyCurrentNetworkInfo(ifname as! CFString) {

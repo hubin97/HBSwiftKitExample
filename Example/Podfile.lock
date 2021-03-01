@@ -6,32 +6,26 @@ PODS:
     - HBSwiftKit/Network (= 0.1.7)
     - HBSwiftKit/Tools (= 0.1.7)
     - HBSwiftKit/UIKit (= 0.1.7)
-    - Kingfisher
   - HBSwiftKit/Base (0.1.7):
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
-    - Kingfisher
   - HBSwiftKit/Extension (0.1.7):
     - HBSwiftKit/Global
-    - Kingfisher
-  - HBSwiftKit/Global (0.1.7):
-    - Kingfisher
+  - HBSwiftKit/Global (0.1.7)
   - HBSwiftKit/Network (0.1.7):
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
     - HBSwiftKit/UIKit
-    - Kingfisher
-  - HBSwiftKit/Tools (0.1.7):
-    - Kingfisher
+  - HBSwiftKit/Tools (0.1.7)
   - HBSwiftKit/UIKit (0.1.7):
     - HBSwiftKit/Base
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
-    - Kingfisher
   - Kingfisher (4.10.1)
 
 DEPENDENCIES:
   - HBSwiftKit (from `../`)
+  - Kingfisher
 
 SPEC REPOS:
   trunk:
@@ -42,9 +36,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  HBSwiftKit: a8d5a5bfc82b0e4569bc2e1cc2664d5756562eea
+  HBSwiftKit: a8f292dbcc56b702d54f03a2dbf631eb52f6d4f8
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
 
-PODFILE CHECKSUM: 35c2a280f52bfc771c7db903a561843fd04fd569
+PODFILE CHECKSUM: cabe541484d869b3a00ae259fe482cddd6e6cd31
 
 COCOAPODS: 1.10.0

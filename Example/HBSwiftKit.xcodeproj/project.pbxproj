@@ -13,6 +13,7 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */; };
 		B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */ = {isa = PBXBuildFile; fileRef = B567FCE42596F39F006AFA69 /* README_SWIFT.md */; };
 		B575D5F925A9900C0068EB19 /* help_es.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F725A9900C0068EB19 /* help_es.html */; };
 		B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F825A9900C0068EB19 /* help_cn.html */; };
@@ -24,16 +25,15 @@
 		B5BAC835255A7875005A5179 /* images.json in Resources */ = {isa = PBXBuildFile; fileRef = B5BAC834255A7875005A5179 /* images.json */; };
 		B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5C625ECCE7700C88C1C /* SliderRuler.swift */; };
 		B5C6C5EA25ECD38800C88C1C /* Wto_ImageBrower.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5DE25ECD1BD00C88C1C /* Wto_ImageBrower.swift */; };
-		B5C6C5ED25ECD38E00C88C1C /* HBScrollAdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5D725ECD19A00C88C1C /* HBScrollAdModel.m */; };
-		B5C6C5F025ECD39100C88C1C /* HBScrollAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5D925ECD19A00C88C1C /* HBScrollAdView.m */; };
 		B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5E025ECD1C400C88C1C /* Wto_ThemeMode.swift */; };
 		B5C6C5F625ECD39C00C88C1C /* HBTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5DC25ECD1B000C88C1C /* HBTitleView.m */; };
 		B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5CE25ECD08900C88C1C /* EditTableView.swift */; };
+		B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5FC25ECD4F100C88C1C /* EasyAdScrollTool.swift */; };
 		B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */; };
 		B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CC7A4525E88F1400D263B4 /* AdvancedFilter.swift */; };
 		B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */ = {isa = PBXBuildFile; fileRef = B5CC7A4925E8989300D263B4 /* advfilterdata.json */; };
 		B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4F26257A365E007F1238 /* WebPreviewController.swift */; };
-		B5FB4FBD257DC20A007F1238 /* HBTitleScrollAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4FBC257DC20A007F1238 /* HBTitleScrollAdViewController.swift */; };
+		B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */; };
 		F9BE6B3665E38C3F81D0AC85 /* Pods_HBSwiftKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 777A10901F771A6922BA30F9 /* Pods_HBSwiftKit_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +63,7 @@
 		60A90EE9A7E1640E361223EE /* Pods-HBSwiftKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Example.release.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		777A10901F771A6922BA30F9 /* Pods_HBSwiftKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBSwiftKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A8871220770A8D795C87930 /* Pods-HBSwiftKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Tests/Pods-HBSwiftKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wto_Calendar.swift; sourceTree = "<group>"; };
 		B567FCE42596F39F006AFA69 /* README_SWIFT.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README_SWIFT.md; path = ../README_SWIFT.md; sourceTree = "<group>"; };
 		B575D5F725A9900C0068EB19 /* help_es.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_es.html; sourceTree = "<group>"; };
 		B575D5F825A9900C0068EB19 /* help_cn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_cn.html; sourceTree = "<group>"; };
@@ -75,20 +76,17 @@
 		B5BAC85B255A7C0C005A5179 /* HBSwiftKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HBSwiftKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5C6C5C625ECCE7700C88C1C /* SliderRuler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderRuler.swift; sourceTree = "<group>"; };
 		B5C6C5CE25ECD08900C88C1C /* EditTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableView.swift; sourceTree = "<group>"; };
-		B5C6C5D625ECD19A00C88C1C /* HBScrollAdModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBScrollAdModel.h; sourceTree = "<group>"; };
-		B5C6C5D725ECD19A00C88C1C /* HBScrollAdModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HBScrollAdModel.m; sourceTree = "<group>"; };
-		B5C6C5D825ECD19A00C88C1C /* HBScrollAdView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBScrollAdView.h; sourceTree = "<group>"; };
-		B5C6C5D925ECD19A00C88C1C /* HBScrollAdView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HBScrollAdView.m; sourceTree = "<group>"; };
 		B5C6C5DB25ECD1B000C88C1C /* HBTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBTitleView.h; sourceTree = "<group>"; };
 		B5C6C5DC25ECD1B000C88C1C /* HBTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HBTitleView.m; sourceTree = "<group>"; };
 		B5C6C5DE25ECD1BD00C88C1C /* Wto_ImageBrower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wto_ImageBrower.swift; sourceTree = "<group>"; };
 		B5C6C5E025ECD1C400C88C1C /* Wto_ThemeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wto_ThemeMode.swift; sourceTree = "<group>"; };
+		B5C6C5FC25ECD4F100C88C1C /* EasyAdScrollTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAdScrollTool.swift; sourceTree = "<group>"; };
 		B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTestController.swift; sourceTree = "<group>"; };
 		B5CC7A4525E88F1400D263B4 /* AdvancedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedFilter.swift; sourceTree = "<group>"; };
 		B5CC7A4925E8989300D263B4 /* advfilterdata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = advfilterdata.json; sourceTree = "<group>"; };
 		B5EA0E1125B67C38004783C1 /* AppSandBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSandBox.swift; sourceTree = "<group>"; };
 		B5FB4F26257A365E007F1238 /* WebPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPreviewController.swift; sourceTree = "<group>"; };
-		B5FB4FBC257DC20A007F1238 /* HBTitleScrollAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBTitleScrollAdViewController.swift; sourceTree = "<group>"; };
+		B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAdScrollController.swift; sourceTree = "<group>"; };
 		CA78FCF42199CA49DD9F7856 /* HBSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HBSwiftKit.podspec; path = ../HBSwiftKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E2964227EA3A41F6AFF29697 /* Pods-HBSwiftKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E6A361DDE4C4FDA2CBD6CE11 /* Pods_HBSwiftKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBSwiftKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +203,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B5389B2725EE1BB900ED67F9 /* 日历选择器 */ = {
+			isa = PBXGroup;
+			children = (
+				B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */,
+			);
+			path = "日历选择器";
+			sourceTree = "<group>";
+		};
 		B5C6C5C225ECCA0E00C88C1C /* 高级筛选器 */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,10 +238,7 @@
 		B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */ = {
 			isa = PBXGroup;
 			children = (
-				B5C6C5D625ECD19A00C88C1C /* HBScrollAdModel.h */,
-				B5C6C5D725ECD19A00C88C1C /* HBScrollAdModel.m */,
-				B5C6C5D825ECD19A00C88C1C /* HBScrollAdView.h */,
-				B5C6C5D925ECD19A00C88C1C /* HBScrollAdView.m */,
+				B5C6C5FC25ECD4F100C88C1C /* EasyAdScrollTool.swift */,
 			);
 			path = "简易轮播页";
 			sourceTree = "<group>";
@@ -274,11 +277,12 @@
 				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
 				B5BAC82C255A7818005A5179 /* DatePickerController.swift */,
 				B5FB4F26257A365E007F1238 /* WebPreviewController.swift */,
-				B5FB4FBC257DC20A007F1238 /* HBTitleScrollAdViewController.swift */,
+				B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */,
 				B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */,
 				B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */,
 				B5C6C5E125ECD1C400C88C1C /* 主题适配器 */,
 				B5C6C5DF25ECD1BD00C88C1C /* 照片浏览器 */,
+				B5389B2725EE1BB900ED67F9 /* 日历选择器 */,
 				B5C6C5DD25ECD1B000C88C1C /* 标题切换器 */,
 				B5C6C5C325ECCADF00C88C1C /* 简易刻度尺 */,
 				B5C6C5C225ECCA0E00C88C1C /* 高级筛选器 */,
@@ -510,17 +514,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5C6C5EA25ECD38800C88C1C /* Wto_ImageBrower.swift in Sources */,
-				B5C6C5F025ECD39100C88C1C /* HBScrollAdView.m in Sources */,
 				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
 				B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
 				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
-				B5C6C5ED25ECD38E00C88C1C /* HBScrollAdModel.m in Sources */,
+				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
 				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
-				B5FB4FBD257DC20A007F1238 /* HBTitleScrollAdViewController.swift in Sources */,
+				B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */,
 				B5C6C5F625ECD39C00C88C1C /* HBTitleView.m in Sources */,
 				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,
 				B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */,
