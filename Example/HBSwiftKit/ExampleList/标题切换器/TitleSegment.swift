@@ -21,50 +21,50 @@ protocol TitleSegmentDelegate: class {
 class TitleSegment: UIView {
 
     /// 切换样式
-    enum ShowStyle {
+    public enum ShowStyle {
         case line   // 底部划线滑动
         case color  // 更换文字颜色
         case all    // 包含上述样式
     }
     
     /// 回调选中下标及标题
-    var callBackTapTitleBlock: ((_ title: String?, _ index: Int) -> ())?
-    weak var delegate: TitleSegmentDelegate?
+    public var callBackTapTitleBlock: ((_ title: String?, _ index: Int) -> ())?
+    public weak var delegate: TitleSegmentDelegate?
     /// 数据源
     fileprivate var titles = [String]()
     
     ///** 风格样式 默认 Line */
-    var style: ShowStyle = .line
+    fileprivate var style: ShowStyle = .line
     ///** 是否突出显示 (fontsize大小改变) 默认NO */
     var isShowOutstanding: Bool = false
     ///** 下划线长度, 默认按钮的1/2 */
-    var indexLineWidth: CGFloat = 0
+    fileprivate var indexLineWidth: CGFloat = 0
     /// 下划线高度
-    var indexLineHeight: CGFloat = 1.5
+    fileprivate var indexLineHeight: CGFloat = 1.5
     ///** 正常文字颜色 默认 gray */
-    var normalColor: UIColor = .systemGray
+    fileprivate var normalColor: UIColor = .systemGray
     ///** 选中文字颜色 默认 blue */
-    var selectColor: UIColor = .systemBlue
+    fileprivate var selectColor: UIColor = .systemBlue
     ///** 中间分隔线颜色 默认gray */
-    var separateLineColor: UIColor = .gray
+    public var separateLineColor: UIColor = .gray
     ///** 中间分隔线高度 默认1/3 */
-    var separateLineHeight: CGFloat?
+    public var separateLineHeight: CGFloat?
     ///** 底部分隔线颜色 默认gray */
-    var bottomLineColor: UIColor = .groupTableViewBackground
+    public var bottomLineColor: UIColor = .groupTableViewBackground
     ///** 视图背景颜色 默认white */
-    var titleViewColor: UIColor = .white {
+    public var titleViewColor: UIColor = .white {
         didSet {
             self.backgroundColor = titleViewColor
         }
     }
     ///** 下划线颜色 默认blue */
-    var indexLineColor: UIColor = .systemBlue {
+    public var indexLineColor: UIColor = .systemBlue {
         didSet {
             indexView.backgroundColor = indexLineColor
         }
     }
     ///** 是否需要分割线 默认NO */
-    var isNeedSeparateLine: Bool = false {
+    public var isNeedSeparateLine: Bool = false {
         didSet {
             if isNeedSeparateLine {
                 for view in self.subviews {
@@ -82,7 +82,7 @@ class TitleSegment: UIView {
         }
     }
     ///** 是否底部划线 默认NO */
-    var isNeedBottomLine: Bool = false {
+    public var isNeedBottomLine: Bool = false {
         didSet {
             if isNeedBottomLine {
                 let bottomLine = UIView.init(frame: CGRect(x: 0, y: self.bounds.size.height - 1, width: self.bounds.size.width, height: 1))
@@ -95,18 +95,32 @@ class TitleSegment: UIView {
     //var isNeedBorderLine: Bool = false
 
     /// 下标label
-    lazy var indexView: UIView = {
+    fileprivate lazy var indexView: UIView = {
         let indexView = UIView.init(frame: CGRect(x: 0, y: self.bounds.size.height - indexLineHeight, width: indexLineWidth, height: indexLineHeight))
         indexView.backgroundColor = indexLineColor
         return indexView
     }()
     
-    convenience init(frame: CGRect, showStyle: TitleSegment.ShowStyle, titles: [String], indexLineWidth: CGFloat? = nil, isShowOutstanding: Bool = false) {
+    
+    /// 便捷初始化
+    /// - Parameters:
+    ///   - frame: 位置
+    ///   - showStyle: 风格, 默认划线
+    ///   - titles: 标题数组
+    ///   - indexLineWidth: 下划线宽, 默认按钮的1/2
+    ///   - indexLineHeight: 下划线高, 默认1.5
+    ///   - normalColor: 标题常态颜色
+    ///   - selectColor: 标题选中颜色
+    ///   - isShowOutstanding: 是否改变选中字号大小
+    convenience init(frame: CGRect, showStyle: TitleSegment.ShowStyle, titles: [String], indexLineWidth: CGFloat? = nil, indexLineHeight: CGFloat? = nil, normalColor: UIColor = .systemGray, selectColor: UIColor = .systemBlue, isShowOutstanding: Bool = false) {
         self.init(frame: frame)
         self.style = showStyle
         self.titles = titles
         self.indexLineWidth = indexLineWidth ?? self.bounds.width/CGFloat(titles.count)/2
+        self.indexLineHeight = indexLineHeight ?? 1.5
         self.isShowOutstanding = isShowOutstanding
+        self.normalColor = normalColor
+        self.selectColor = selectColor
         
         let count = titles.count
         let btnWidth = (count > 1) ? (self.bounds.size.width - CGFloat(count - 1) * kpadding)/CGFloat(count): self.bounds.size.width
@@ -181,7 +195,7 @@ extension TitleSegment {
     }
     
     /// 指定默认选中的下标
-    func setTargetIndex(with index: Int) {
+    public func setTargetIndex(with index: Int) {
         guard index < 0 || index > titles.count - 1 else { return }
         guard let defaultTapBtn = self.viewWithTag(1000 + index) as? UIButton else { return }
         if style == .line {
