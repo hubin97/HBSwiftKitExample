@@ -3,4 +3,3 @@
 //
 
 #import <HBSwiftKit/HBSwiftKit-Swift.h>
-#import "HBTitleView.h"

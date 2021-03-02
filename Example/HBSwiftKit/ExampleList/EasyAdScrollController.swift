@@ -17,16 +17,15 @@ class EasyAdScrollController: BaseViewController {
 
         self.title = "标题轮播页"
         
-        let titleView = HBTitleView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44), andTitles: ["AAA", "BBB", "CCC", "DDD", "EEE"], show: HBTITLESTYLE_All)
-        view.addSubview(titleView!)
-        titleView?.updataIndexLabelUI(withNum: 1)
-        titleView?.isNeedBottomLine = true
-        titleView?.isShowOutstanding = true
-        titleView?.hb_titleBtnBlock = { (index, title) in
+        let titleSegment = TitleSegment.init(frame: CGRect(x: 0, y: 50, width: self.view.frame.width, height: 44), showStyle: .all, titles: ["AAA", "BBB", "CCC", "DDD", "EEE"], isShowOutstanding: true)
+        view.addSubview(titleSegment)
+        titleSegment.setRoundCorners(borderColor: .brown, borderWidth: 1, isDotted: true, lineDashPattern: [4, 1])
+        titleSegment.setTargetIndex(with: 3)
+        titleSegment.isNeedSeparateLine = true
+        titleSegment.callBackTapTitleBlock = { [weak self] (title, index) in
             print("index:\(index), title:\(title ?? "")")
         }
         
-        /// test 
         let scrolldts = ["1.哈哈哈哈哈哈哈哈哈", "2.哦哦哦哦哦哦哦哦哦", "3.啦啦啦啦啦啦"]
         var i = 20;
         var items = [EasyAdScrollModel]()
