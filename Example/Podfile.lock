@@ -22,14 +22,20 @@ PODS:
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
   - Kingfisher (4.10.1)
+  - R.swift (5.3.1):
+    - R.swift.Library (~> 5.3.0)
+  - R.swift.Library (5.3.0)
 
 DEPENDENCIES:
   - HBSwiftKit (from `../`)
   - Kingfisher
+  - R.swift (~> 5.3.1)
 
 SPEC REPOS:
   trunk:
     - Kingfisher
+    - R.swift
+    - R.swift.Library
 
 EXTERNAL SOURCES:
   HBSwiftKit:
@@ -38,7 +44,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   HBSwiftKit: a8f292dbcc56b702d54f03a2dbf631eb52f6d4f8
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  R.swift: 56ec7e3aef34b9eee47a659e42462db2c1cc5ac3
+  R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
 
-PODFILE CHECKSUM: cabe541484d869b3a00ae259fe482cddd6e6cd31
+PODFILE CHECKSUM: f6a30f7848f0f21173046e5c57842520c86e78d4
 
 COCOAPODS: 1.10.0

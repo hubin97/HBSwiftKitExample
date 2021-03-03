@@ -6,6 +6,8 @@
 //  Copyright © 2020 Wingto. All rights reserved.
 
 import Foundation
+import UIKit
+import QuartzCore
 
 //MARK: - global var and methods
 
@@ -42,28 +44,85 @@ class UIKitTestController: BaseViewController {
         return []
     }()
     
-    var rulerView: SliderRuler!
-    var isExpand = false
+    //var rulerView: SliderRuler!
+    //var isExpand = false
+    let ball = UIImageView()
     
     override func setupUi() {
         super.setupUi()
         
-        self.title = "UIKit测试页"
+        self.title = "UIKit Test"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction))
                 
-        rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 150, width: 50, height: 400), direction: .vertical, rulerLineSpacing: 15)
-        view.addSubview(rulerView)
-        rulerView.setRoundCorners()
+        // 刻度尺
+//        rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 150, width: 50, height: 400), direction: .vertical, rulerLineSpacing: 15)
+//        view.addSubview(rulerView)
+//        rulerView.setRoundCorners()
+//
+//        let rulerView2 = SliderRuler.init(frame: CGRect(x: 20, y: 0, width: kScreenWidth - 40, height: 50), direction: .horizontal, rulerLineSpacing: 15)
+//        view.addSubview(rulerView2)
+//        rulerView2.setRoundCorners()
         
-        let rulerView2 = SliderRuler.init(frame: CGRect(x: 20, y: 0, width: kScreenWidth - 40, height: 50), direction: .horizontal, rulerLineSpacing: 15)
-        view.addSubview(rulerView2)
-        rulerView2.setRoundCorners()
+        
+        view.addSubview(ball)
+        ball.frame = CGRect(x: 40, y: 200, width: 100, height: 100)
+        ball.backgroundColor = .brown
+        ball.setRectCorner(radiiSize: 50)
+        
+        var str = "ABCDEFG"
+//        let tmp = str[2, 5]
+//        print("tmp:\(tmp)")
+//        let tmp2 = str[2, 7]
+//        print("tmp2:\(tmp2)")
+//
+//        str[2, 4] = "cdef"
+//        print("str:\(str)")
+//        str[2, 7] = "cdefghijk"
+//        print("str:\(str)")
+
+        let tmp = str[0]
+        print("tmp:\(tmp)")
+        // Prints tmp:A
+
+        let tmp2 = str[5]
+        print("tmp2:\(tmp2)")
+        // Prints tmp2:F
+
+        str[5] = "*"
+        print("str:\(str)")
+        // Prints str:ABCDE*G
+        
+        str[1] = "###"
+        print("str:\(str)")
+        // Prints str:A###CDE*G
+
     }
 }
 
 //MARK: - private mothods
 extension UIKitTestController {
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        let orignPoint = ball.center
+        let animateKeyframes = CAKeyframeAnimation(keyPath: "position")
+        animateKeyframes.duration = 2
+        animateKeyframes.values = [NSValue(cgPoint: CGPoint(x: orignPoint.x, y: orignPoint.y - 40)),
+                                   NSValue(cgPoint: orignPoint),
+                                   NSValue(cgPoint: CGPoint(x: orignPoint.x, y: orignPoint.y - 20)),
+                                   NSValue(cgPoint: orignPoint),
+                                   NSValue(cgPoint: CGPoint(x: orignPoint.x, y: orignPoint.y - 10)),
+                                   NSValue(cgPoint: orignPoint),
+                                   NSValue(cgPoint: CGPoint(x: orignPoint.x, y: orignPoint.y - 5)),
+                                   NSValue(cgPoint: orignPoint)]
+//        animateKeyframes.keyTimes = [0.0, 0.7, 0.9, 1.0]
+//        animateKeyframes.keyTimes = [0.0, 0.2, 0.5, 1.0]
+        animateKeyframes.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
+                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
+                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
+                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)]
+        self.ball.layer.add(animateKeyframes, forKey: nil)
+    }
 }
 
 //MARK: - call backs
@@ -71,18 +130,18 @@ extension UIKitTestController {
     
     @objc func filterAction() {
         
-        let rulerValue = rulerView.rulerValue
-        rulerView.removeFromSuperview()
-        print("rulerView.rulerValue:\(rulerView.rulerValue)")
-        isExpand = !isExpand
-        if isExpand {
-            rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 50, width: 50, height: 400), direction: .vertical, rulerLineSpacing: 15)
-        } else {
-            rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 50, width: 50, height: 200), direction: .vertical, rulerLineSpacing: 7)
-        }
-        view.addSubview(rulerView)
-        rulerView.setRulerValue(rulerValue: rulerValue, animated: true)
-        rulerView.setRoundCorners()
+//        let rulerValue = rulerView.rulerValue
+//        rulerView.removeFromSuperview()
+//        print("rulerView.rulerValue:\(rulerView.rulerValue)")
+//        isExpand = !isExpand
+//        if isExpand {
+//            rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 50, width: 50, height: 400), direction: .vertical, rulerLineSpacing: 15)
+//        } else {
+//            rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 50, width: 50, height: 200), direction: .vertical, rulerLineSpacing: 7)
+//        }
+//        view.addSubview(rulerView)
+//        rulerView.setRulerValue(rulerValue: rulerValue, animated: true)
+//        rulerView.setRoundCorners()
 
         // filterModels
 //        let filterView = AdvancedFilter.init()

@@ -27,6 +27,19 @@ extension TableView_Extension {
         guard let indexPath = self.indexPath(subView: subView) else { return nil }
         return self.cellForRow(at: indexPath)
     }
+    
+    /// 便捷注册cell
+    /// - Parameter type: cell类
+    func register<T: UITableViewCell>(_ type: T.Type) {
+        self.register(type.classForCoder(), forCellReuseIdentifier: NSStringFromClass(type.classForCoder()))
+    }
+    
+    /// 获取复用cell
+    /// - Parameter type: cell类
+    /// - Returns: 复用cell
+    func getReusableCell<T: UITableViewCell>( _ type: T.Type) -> T {
+        return self.dequeueReusableCell(withIdentifier: NSStringFromClass(type.classForCoder())) as! T
+    }
 }
 
 //MARK: - call backs
@@ -40,3 +53,19 @@ extension TableView_Extension {
 }
 
 //MARK: - other classes
+//MARK: - UICollectionView复用注入
+extension UICollectionView {
+    
+    /// 便捷注册cell
+    /// - Parameter type: cell类
+    func register<T: UICollectionViewCell>(_ type: T.Type) {
+        self.register(type.classForCoder(), forCellWithReuseIdentifier: NSStringFromClass(type.classForCoder()))
+    }
+    
+    /// 获取复用cell
+    /// - Parameter type: cell类
+    /// - Returns: 复用cell
+    func getReusableCell<T: UICollectionViewCell>(_ indexPath: IndexPath, _ type: T.Type) -> T {
+        return self.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(type.classForCoder()), for: indexPath) as! T
+    }
+}

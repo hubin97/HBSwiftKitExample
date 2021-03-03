@@ -60,3 +60,93 @@ extension String_Extension {
         return date
     }
 }
+
+extension String_Extension {
+    
+    //MARK: - 扩展下标取值方法
+    ///    var str = "ABCDEFG"
+    ///    let tmp = str[2, 5]
+    ///    print("tmp:\(tmp)")
+    ///    // Prints "tmp:CDEFG"
+    ///
+    ///    let tmp2 = str[2, 7]
+    ///    print("tmp2:\(tmp2)")
+    ///    // Prints "tmp2:subscript out of bounds !!!"
+    ///
+    ///    str[2, 4] = "cdef"
+    ///    print("str:\(str)")
+    ///    // Prints  "str:ABcdefG"
+    ///
+    ///    str[2, 7] = "cdefghijk"
+    ///    print("str:\(str)")
+    ///    // Prints "str:ABcdefghijk"
+    public subscript(start: Int, length: Int) -> String {
+        get {
+            guard start >= 0 && start + length <= self.count else {
+                return "subscript out of bounds !!!"
+            }
+            var subStr = ""
+            for (idx, item) in self.enumerated() {
+                if idx >= start && idx <= start + length {
+                    subStr += "\(item)"
+                }
+            }
+            return subStr
+        }
+        set {
+            var s = ""
+            var e = ""
+            for (idx, item) in self.enumerated() {
+                if(idx < start) {
+                    s += "\(item)"
+                } else if(idx >= start + length) {
+                    e += "\(item)"
+                }
+            }
+            self = s + newValue + e
+        }
+    }
+    
+    ///    var str = "ABCDEFG"
+    ///    let tmp = str[0]
+    ///    print("tmp:\(tmp)")
+    ///    // Prints tmp:A
+    ///
+    ///    let tmp2 = str[5]
+    ///    print("tmp2:\(tmp2)")
+    ///    // Prints tmp2:F
+    ///
+    ///    str[5] = "*"
+    ///    print("str:\(str)")
+    ///    // Prints str:ABCDE*G
+    ///
+    ///    str[1] = "###"
+    ///    print("str:\(str)")
+    ///    // Prints str:A###CDE*G
+    public subscript(index: Int) -> String {
+        get {
+            guard index <= self.count else {
+                return "subscript out of bounds !!!"
+            }
+            var tmp = ""
+            for (idx, item) in self.enumerated() {
+                if idx == index {
+                    tmp = "\(item)"
+                    break
+                }
+            }
+            return tmp
+        }
+        set {
+            var tmp = ""
+            for (idx, item) in self.enumerated() {
+                if idx == index {
+                    tmp += newValue
+                }else{
+                    tmp += "\(item)"
+                }
+            }
+            self = tmp
+        }
+    }
+}

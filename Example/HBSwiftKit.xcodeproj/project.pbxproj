@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,9 +12,10 @@
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
-		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */; };
 		B5389B3C25EE1F1500ED67F9 /* TitleSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5389B3B25EE1F1500ED67F9 /* TitleSegment.swift */; };
+		B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5389B7825EF8FB400ED67F9 /* R.generated.swift */; };
+		B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */; };
 		B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */ = {isa = PBXBuildFile; fileRef = B567FCE42596F39F006AFA69 /* README_SWIFT.md */; };
 		B575D5F925A9900C0068EB19 /* help_es.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F725A9900C0068EB19 /* help_es.html */; };
 		B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F825A9900C0068EB19 /* help_cn.html */; };
@@ -56,7 +57,6 @@
 		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* HBSwiftKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HBSwiftKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
@@ -65,6 +65,8 @@
 		9A8871220770A8D795C87930 /* Pods-HBSwiftKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Tests/Pods-HBSwiftKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wto_Calendar.swift; sourceTree = "<group>"; };
 		B5389B3B25EE1F1500ED67F9 /* TitleSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSegment.swift; sourceTree = "<group>"; };
+		B5389B7825EF8FB400ED67F9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B567FCE42596F39F006AFA69 /* README_SWIFT.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README_SWIFT.md; path = ../README_SWIFT.md; sourceTree = "<group>"; };
 		B575D5F725A9900C0068EB19 /* help_es.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_es.html; sourceTree = "<group>"; };
 		B575D5F825A9900C0068EB19 /* help_cn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_cn.html; sourceTree = "<group>"; };
@@ -149,7 +151,7 @@
 			children = (
 				B5EA0E0825B67AD6004783C1 /* Vendors */,
 				B5E1D8E3256282C80093AC4C /* ExampleList */,
-				B5E1D8E62562831C0093AC4C /* Resource */,
+				B5E1D8E62562831C0093AC4C /* Resources */,
 				B5E1D8E7256283400093AC4C /* Global */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
@@ -274,9 +276,9 @@
 				B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */,
 				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
 				B5BAC82C255A7818005A5179 /* DatePickerController.swift */,
-				B5FB4F26257A365E007F1238 /* WebPreviewController.swift */,
 				B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */,
 				B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */,
+				B5FB4F26257A365E007F1238 /* WebPreviewController.swift */,
 				B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */,
 				B5C6C5E125ECD1C400C88C1C /* 主题适配器 */,
 				B5C6C5DF25ECD1BD00C88C1C /* 照片浏览器 */,
@@ -289,18 +291,19 @@
 			path = ExampleList;
 			sourceTree = "<group>";
 		};
-		B5E1D8E62562831C0093AC4C /* Resource */ = {
+		B5E1D8E62562831C0093AC4C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B5389B7825EF8FB400ED67F9 /* R.generated.swift */,
 				B575D5F825A9900C0068EB19 /* help_cn.html */,
 				B575D5F725A9900C0068EB19 /* help_es.html */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				B5BAC834255A7875005A5179 /* images.json */,
 				B5CC7A4925E8989300D263B4 /* advfilterdata.json */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
-				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */,
 			);
-			path = Resource;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		B5E1D8E7256283400093AC4C /* Global */ = {
@@ -336,6 +339,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "HBSwiftKit_Example" */;
 			buildPhases = (
+				B5389B6325EF8B9C00ED67F9 /* ShellScript */,
 				1C76D0BD4C3D0529B7EB92FB /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
@@ -396,10 +400,9 @@
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "HBSwiftKit" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -420,8 +423,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */,
 				B5BAC835255A7875005A5179 /* images.json in Resources */,
-				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */,
 				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
 				B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */,
@@ -484,6 +487,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B5389B6325EF8B9C00ED67F9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/HBSwiftKit/Resources/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$SRCROOT/Pods/R.swift/rswift\" generate \"$SRCROOT/HBSwiftKit/Resources/R.generated.swift\"\n";
+		};
 		E901585359DB7594431EB07B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -493,11 +516,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/HBSwiftKit/HBSwiftKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBSwiftKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -517,6 +542,7 @@
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
 				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
+				B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */,
 				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
@@ -556,14 +582,6 @@
 				607FACDA1AFB9204008FA782 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		607FACDE1AFB9204008FA782 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				607FACDF1AFB9204008FA782 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -663,7 +681,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -679,7 +698,10 @@
 				DEVELOPMENT_TEAM = YTPNCWF278;
 				INFOPLIST_FILE = HBSwiftKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -702,7 +724,10 @@
 				DEVELOPMENT_TEAM = YTPNCWF278;
 				INFOPLIST_FILE = HBSwiftKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -727,7 +752,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -746,7 +775,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;

@@ -18,6 +18,7 @@ fileprivate let flagLineLength = 45
 
 protocol SliderRulerDelegate: class {
     func sliderRulerValueUpdate(sliderRuler: SliderRuler, value: Float)
+    func sliderRulerDidEndScroll(sliderRuler: SliderRuler, value: Float)
 }
 //MARK: - main class
 class SliderRuler: UIView {
@@ -225,6 +226,7 @@ extension SliderRuler: UIScrollViewDelegate {
                 scrollView.setContentOffset(CGPoint(x: 0, y: Int(offsetValue) * rulerLineSpacing), animated: true)
             }
         }
+        rulerDelegate?.sliderRulerDidEndScroll(sliderRuler: self, value: self.rulerValue)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -238,6 +240,7 @@ extension SliderRuler: UIScrollViewDelegate {
             offsetValue = offsetValue > CGFloat(maxValue - minValue) ? CGFloat(maxValue - minValue): offsetValue
             scrollView.setContentOffset(CGPoint(x: 0, y: Int(offsetValue) * rulerLineSpacing), animated: true)
         }
+        rulerDelegate?.sliderRulerDidEndScroll(sliderRuler: self, value: self.rulerValue)
     }
 }
 

@@ -17,7 +17,9 @@ import Foundation
    (3)Input Files: $TEMP_DIR/rswift-lastrun
    (4)Output Files: $SRCROOT/Resources/R.generated.swift
  2.注意(1)中Resources即为自动生成的R.generated.swift的路径,导入时无需勾选 copy items if needed
- 3.注意版本兼容性, Assets.xcassets加入Color set仅支持 >= iOS11
+ 3.注意(1)生成文件的路径和 (4)Output Files 的需要保持一致
+ 4.注意#import <Rswift/Rswift-Swift.h>, 输出路径下引用R.generated.swift, 以便查找问题
+ 5.注意版本兼容性, Assets.xcassets加入Color set仅支持 >= iOS11
  */
 
 public enum Assets {
