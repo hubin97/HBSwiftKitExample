@@ -11,45 +11,48 @@ public typealias Data_Extension = Data
 
 extension Data_Extension {
     
-    func toDic() -> Dictionary<String, Any>? {
-        
+    /// Data To Dictionary
+    /// - Returns: Dictionary?
+    public func toDict() -> Dictionary<String, Any>? {
         do {
             let json = try JSONSerialization.jsonObject(with: self, options: .mutableContainers)
             let dic = json as! Dictionary<String, Any>
             return dic
-            
         } catch _ {
             return nil
         }
     }
     
-    
-    func toArray() -> [Any]? {
+    /// Data To Array
+    /// - Returns: Array?
+    public func toArray() -> [Any]? {
         do {
             let json = try JSONSerialization.jsonObject(with: self, options: .mutableContainers)
             let array = json as! [Any]
             return array
-            
         } catch _ {
             return nil
         }
     }
     
-    func toString() -> String? {
-      
+    /// Data To String
+    /// - Returns: String?
+    public func toString() -> String? {
         return String(data: self, encoding: String.Encoding.utf8)
     }
     
-    func toDataString() -> String? {
-         return String(format: "%@", self as CVarArg)
-    }
-    
-    func tojson() -> AnyObject? {
+    /// Data To jsonObject
+    /// - Returns: AnyObject?
+    public func toJson() -> AnyObject? {
         do {
             return try JSONSerialization.jsonObject(with: self , options: .allowFragments) as AnyObject
         } catch {
             print("tojsonErro: \(error)")
         }
         return nil
+    }
+    
+    func toDataString() -> String? {
+         return String(format: "%@", self as CVarArg)
     }
 }

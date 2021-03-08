@@ -19,23 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navi = BaseNavigationController.init(rootViewController: ViewController())
         let navi2 = BaseNavigationController.init(rootViewController: UIKitTestController())
         let navi3 = BaseNavigationController.init(rootViewController: WebPreviewController())
-        navi.tabBarItem = UITabBarItem.init(title: "Example List", image: R.image.tabBar.home_n(), selectedImage: R.image.tabBar.home_h())
-        navi2.tabBarItem = UITabBarItem.init(title: "UIKit Test", image: R.image.tabBar.like_n(), selectedImage: R.image.tabBar.like_h())
-        navi3.tabBarItem = UITabBarItem.init(title: "Web Preview", image: R.image.tabBar.web_n(), selectedImage: R.image.tabBar.web_h())
-        let tabBarVc = UITabBarController.init()
-        tabBarVc.viewControllers = [navi, navi2, navi3]
-        //tabBarVc.bas = [barItems, barItems2, barItems3]
-        tabBarVc.delegate = self
-        tabBarVc.tabBar.isTranslucent = false
-        tabBarVc.tabBar.barTintColor = .white
+        let tabBarVc = BaseTabBarController()
+        tabBarVc.addChildVcs(naviVcs: [navi, navi2, navi3], titles: ["Example List", "UIKit Test", "Web Preview"], normalImages: [R.image.tabBar.home_n(), R.image.tabBar.like_n(), R.image.tabBar.web_n()], selectedImages: [R.image.tabBar.home_h(), R.image.tabBar.like_h(), R.image.tabBar.web_h()])
+        //tabBarVc.tabBar.barTintColor = .orange
         self.window?.rootViewController = tabBarVc
         return true
-    }
-}
-
-extension AppDelegate: UITabBarControllerDelegate {
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        print("viewController:\(viewController.title ?? ""), tag:")
     }
 }

@@ -22,7 +22,7 @@ class EasyAdScrollController: BaseViewController {
         titleSegment.setRoundCorners(borderColor: .brown, borderWidth: 1, isDotted: true, lineDashPattern: [4, 1])
         titleSegment.setTargetIndex(with: 3)
         titleSegment.isNeedSeparateLine = true
-        titleSegment.callBackTapTitleBlock = { [weak self] (title, index) in
+        titleSegment.callBackTapTitleBlock = { (title, index) in
             print("index:\(index), title:\(title ?? "")")
         }
         

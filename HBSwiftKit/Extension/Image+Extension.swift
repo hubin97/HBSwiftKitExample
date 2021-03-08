@@ -17,7 +17,6 @@ extension Image_Extension {
     /// 水平翻转（即左右镜像）
     /// - Returns: 新Image对象
     public func horizontalFlip() -> UIImage {
-     
         //翻转图片的方向
         let flipImageOrientation = (self.imageOrientation.rawValue + 4) % 8
         //翻转图片
@@ -31,11 +30,9 @@ extension Image_Extension {
     /// 垂直翻转
     /// - Returns: 新Image对象
     public func verticalFlip() -> UIImage {
-        
         //翻转图片的方向
         var flipImageOrientation = (self.imageOrientation.rawValue + 4) % 8
         flipImageOrientation += flipImageOrientation%2==0 ? 1 : -1
-        
         //翻转图片
         let flipImage =  UIImage(cgImage:self.cgImage!,
                                  scale:self.scale,

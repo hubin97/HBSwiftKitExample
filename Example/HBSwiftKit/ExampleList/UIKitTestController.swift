@@ -95,7 +95,6 @@ class UIKitTestController: BaseViewController {
         str[1] = "###"
         print("str:\(str)")
         // Prints str:A###CDE*G
-
     }
 }
 
@@ -107,17 +106,22 @@ extension UIKitTestController {
         let orignPoint = ball.center
         let animateKeyframes = CAKeyframeAnimation(keyPath: "position")
         animateKeyframes.duration = 2
-        animateKeyframes.values = [NSValue(cgPoint: CGPoint(x: orignPoint.x, y: orignPoint.y - 40)),
+        animateKeyframes.values = [NSValue(cgPoint: orignPoint),
+                                   NSValue(cgPoint: CGPoint(x: orignPoint.x, y: orignPoint.y - 60)),
+                                   NSValue(cgPoint: orignPoint),
+                                   NSValue(cgPoint: CGPoint(x: orignPoint.x, y: orignPoint.y - 40)),
                                    NSValue(cgPoint: orignPoint),
                                    NSValue(cgPoint: CGPoint(x: orignPoint.x, y: orignPoint.y - 20)),
                                    NSValue(cgPoint: orignPoint),
                                    NSValue(cgPoint: CGPoint(x: orignPoint.x, y: orignPoint.y - 10)),
-                                   NSValue(cgPoint: orignPoint),
-                                   NSValue(cgPoint: CGPoint(x: orignPoint.x, y: orignPoint.y - 5)),
                                    NSValue(cgPoint: orignPoint)]
-//        animateKeyframes.keyTimes = [0.0, 0.7, 0.9, 1.0]
-//        animateKeyframes.keyTimes = [0.0, 0.2, 0.5, 1.0]
+        animateKeyframes.keyTimes = [0, 0.2, 0.38, 0.52, 0.66, 0.76, 0.86, 0.93, 1]
         animateKeyframes.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
+                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
+                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
+                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
+                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
+                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
                                             CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
                                             CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
                                             CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)]

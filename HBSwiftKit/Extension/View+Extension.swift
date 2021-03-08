@@ -150,7 +150,7 @@ extension View_Extension {
     
     // 将当前视图转为UIImage
     @available(iOS 10.0, *)
-    func asImage() -> UIImage {
+    public func asImage() -> UIImage {
         let renderer = UIGraphicsImageRenderer(bounds: bounds)
         return renderer.image { rendererContext in
             layer.render(in: rendererContext.cgContext)

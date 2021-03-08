@@ -33,6 +33,7 @@
 		B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */; };
 		B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CC7A4525E88F1400D263B4 /* AdvancedFilter.swift */; };
 		B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */ = {isa = PBXBuildFile; fileRef = B5CC7A4925E8989300D263B4 /* advfilterdata.json */; };
+		B5DCC71425F3266D007E3237 /* areacode.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5DCC71325F3266D007E3237 /* areacode.plist */; };
 		B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4F26257A365E007F1238 /* WebPreviewController.swift */; };
 		B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */; };
 		F9BE6B3665E38C3F81D0AC85 /* Pods_HBSwiftKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 777A10901F771A6922BA30F9 /* Pods_HBSwiftKit_Tests.framework */; };
@@ -85,6 +86,8 @@
 		B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTestController.swift; sourceTree = "<group>"; };
 		B5CC7A4525E88F1400D263B4 /* AdvancedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedFilter.swift; sourceTree = "<group>"; };
 		B5CC7A4925E8989300D263B4 /* advfilterdata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = advfilterdata.json; sourceTree = "<group>"; };
+		B5DCC71325F3266D007E3237 /* areacode.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = areacode.plist; sourceTree = "<group>"; };
+		B5DCC71725F3274D007E3237 /* areacode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = areacode.json; sourceTree = "<group>"; };
 		B5EA0E1125B67C38004783C1 /* AppSandBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSandBox.swift; sourceTree = "<group>"; };
 		B5FB4F26257A365E007F1238 /* WebPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPreviewController.swift; sourceTree = "<group>"; };
 		B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAdScrollController.swift; sourceTree = "<group>"; };
@@ -300,6 +303,8 @@
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				B5BAC834255A7875005A5179 /* images.json */,
 				B5CC7A4925E8989300D263B4 /* advfilterdata.json */,
+				B5DCC71325F3266D007E3237 /* areacode.plist */,
+				B5DCC71725F3274D007E3237 /* areacode.json */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */,
 			);
@@ -339,8 +344,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "HBSwiftKit_Example" */;
 			buildPhases = (
-				B5389B6325EF8B9C00ED67F9 /* ShellScript */,
 				1C76D0BD4C3D0529B7EB92FB /* [CP] Check Pods Manifest.lock */,
+				B5389B6325EF8B9C00ED67F9 /* ShellScript */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
@@ -425,6 +430,7 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */,
 				B5BAC835255A7875005A5179 /* images.json in Resources */,
+				B5DCC71425F3266D007E3237 /* areacode.plist in Resources */,
 				B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */,
 				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
 				B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */,
@@ -501,7 +507,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/HBSwiftKit/Resources/R.generated.swift,
+				"$SRCROOT/HBSwiftKit/Resources/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

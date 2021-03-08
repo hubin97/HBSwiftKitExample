@@ -114,12 +114,14 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.file` struct is generated, and contains static references to 5 files.
+  /// This `R.file` struct is generated, and contains static references to 6 files.
   struct file {
     /// Resource file `README_SWIFT.md`.
     static let readme_SWIFTMd = Rswift.FileResource(bundle: R.hostingBundle, name: "README_SWIFT", pathExtension: "md")
     /// Resource file `advfilterdata.json`.
     static let advfilterdataJson = Rswift.FileResource(bundle: R.hostingBundle, name: "advfilterdata", pathExtension: "json")
+    /// Resource file `areacode.plist`.
+    static let areacodePlist = Rswift.FileResource(bundle: R.hostingBundle, name: "areacode", pathExtension: "plist")
     /// Resource file `help_cn.html`.
     static let help_cnHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "help_cn", pathExtension: "html")
     /// Resource file `help_es.html`.
@@ -136,6 +138,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "advfilterdata", withExtension: "json")`
     static func advfilterdataJson(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.advfilterdataJson
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "areacode", withExtension: "plist")`
+    static func areacodePlist(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.areacodePlist
       return fileResource.bundle.url(forResource: fileResource)
     }
 
