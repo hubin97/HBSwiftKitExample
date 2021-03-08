@@ -1,5 +1,5 @@
 //
-//  Color+Extension.swift
+//  Extension+Color.swift
 //  HBSwiftKit
 //
 //  Created by Hubin_Huang on 2021/3/8.
@@ -8,12 +8,12 @@
 import Foundation
 
 //MARK: - global var and methods
-public typealias Color_Extension = UIColor
+public typealias Extension_Color = UIColor
 
 //MARK: - main class
 
 //MARK: - private mothods
-extension Color_Extension {
+extension Extension_Color {
         
     /// 整型(16进制)初始化
     /// - Parameters:
@@ -47,12 +47,12 @@ extension Color_Extension {
 }
 
 //MARK: - call backs
-extension Color_Extension {
+extension Extension_Color {
     
 }
 
 //MARK: - delegate or data source
-extension Color_Extension {
+extension Extension_Color {
     
 }
 

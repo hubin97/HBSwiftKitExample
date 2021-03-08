@@ -1,5 +1,5 @@
 //
-//  TableView+Extension.swift
+//  Extension+TableView.swift
 //  HBSwiftKit
 //
 //  Created by Hubin_Huang on 2021/1/20.
@@ -8,10 +8,10 @@
 import Foundation
 
 //MARK: - global var and methods
-public typealias TableView_Extension = UITableView
+public typealias Extension_TableView = UITableView
 
 //MARK: - main class
-extension TableView_Extension {
+extension Extension_TableView {
 
     /// 根据cell子视图获取IndexPath?
     /// - Parameter subView: 子视图
@@ -43,12 +43,12 @@ extension TableView_Extension {
 }
 
 //MARK: - call backs
-extension TableView_Extension {
+extension Extension_TableView {
     
 }
 
 //MARK: - delegate or data source
-extension TableView_Extension {
+extension Extension_TableView {
     
 }
 

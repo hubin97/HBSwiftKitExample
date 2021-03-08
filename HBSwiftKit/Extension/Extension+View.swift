@@ -1,5 +1,5 @@
 //
-//  View+Extension.swift
+//  Extension+View.swift
 //  HBSwiftKitDemo
 //
 //  Created by hubin.h@wingto.cn on 2020/8/13.
@@ -18,10 +18,10 @@ import Foundation
  */
 
 //MARK: - global var and methods
-public typealias View_Extension = UIView
+public typealias Extension_View = UIView
 
 //MARK: - main class
-extension View_Extension {
+extension Extension_View {
     
     //MARK: 获取当前视图的层级最近控制器
     public func nextVc(view:UIView) -> UIViewController? {
@@ -245,7 +245,7 @@ extension View_Extension {
 
 // MARK: - view + BlurView
 // 待验证
-extension View_Extension {
+extension Extension_View {
     
     private struct BlurAssociatedKeys {
         static var descriptiveName = "AssociatedKeys.DescriptiveName.blurView"

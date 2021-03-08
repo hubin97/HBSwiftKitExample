@@ -1,5 +1,5 @@
 //
-//  Label+Extension.swift
+//  Extension+Label.swift
 //  HBSwiftKit
 //
 //  Created by Hubin_Huang on 2021/1/20.
@@ -8,10 +8,10 @@
 import Foundation
 
 //MARK: - global var and methods
-public typealias Label_Extension = UILabel
+public typealias Extension_Label = UILabel
 
 //MARK: - main class
-extension Label_Extension {
+extension Extension_Label {
 
     /// 标签快捷初始化
     /// - Parameters:

@@ -1,5 +1,5 @@
 //
-//  String+Extension.swift
+//  Extension+String.swift
 //  HBSwiftKit
 //
 //  Created by hubin.h@wingto.cn on 2020/12/26.
@@ -9,11 +9,11 @@ import Foundation
 import CoreFoundation
 
 //MARK: - global var and methods
-public typealias String_Extension = String
-//public typealias NSString_Extension = NSString
+public typealias Extension_String = String
+//public typealias NSExtension_String = NSString
 
 //MARK: - main class
-extension String_Extension {
+extension Extension_String {
     
     //MARK: - 全半角转换
     /** 测试代码段
@@ -61,7 +61,7 @@ extension String_Extension {
     }
 }
 
-extension String_Extension {
+extension Extension_String {
     
     //MARK: - 扩展下标取值方法
     ///    var str = "ABCDEFG"

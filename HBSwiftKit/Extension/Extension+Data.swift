@@ -1,5 +1,5 @@
 //
-//  Data+Extension.swift
+//  Extension+Data.swift
 //  test
 //
 //  Created by hubin.h@wingto.cn on 2020/8/11.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-public typealias Data_Extension = Data
+public typealias Extension_Data = Data
 
-extension Data_Extension {
+extension Extension_Data {
     
     /// Data To Dictionary
     /// - Returns: Dictionary?

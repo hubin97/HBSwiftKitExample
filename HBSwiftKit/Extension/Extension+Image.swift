@@ -1,5 +1,5 @@
 //
-//  Image+Extension.swift
+//  Extension+Image.swift
 //  HBSwiftKitDemo
 //
 //  Created by hubin.h@wingto.cn on 2020/8/30.
@@ -9,10 +9,10 @@ import UIKit
 import Foundation
 
 //MARK: - global var and methods
-public typealias Image_Extension = UIImage
+public typealias Extension_Image = UIImage
 
 //MARK: - main class
-extension Image_Extension {
+extension Extension_Image {
 
     /// 水平翻转（即左右镜像）
     /// - Returns: 新Image对象
@@ -121,7 +121,7 @@ extension Image_Extension {
 
 //MARK: - private mothods
 class AssetsClass { }
-extension Image_Extension {
+extension Extension_Image {
     
     /// 获取bundle资源
     public static func bundleImage(named: String) -> UIImage? {
