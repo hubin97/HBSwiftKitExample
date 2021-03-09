@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name             = 'HBSwiftKit'
-  s.version          = '0.1.9'
+  s.version          = '0.2.0'
   s.summary          = 'some common components.'
   s.description      = <<-DESC
                     仅仅一些个人常用组件.学习工作使用.
@@ -80,6 +80,7 @@ Pod::Spec.new do |s|
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.requires_arc = true
-  #s.dependency 'Kingfisher'
+  # test --
+  s.static_framework = true
 
 end
