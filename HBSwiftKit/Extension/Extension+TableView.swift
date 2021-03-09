@@ -20,6 +20,15 @@ extension Extension_TableView {
         return self.indexPathForRow(at: subView.convert(CGPoint.zero, to: self))
     }
     
+    ///  清空所有选中行状态.
+    /// - Parameter animated: defalut true
+    public func clearSelectedRowsAnimated(_ animated: Bool = true) {
+        let indexs = self.indexPathsForSelectedRows
+        indexs?.forEach({ (path) in
+            self.deselectRow(at: path, animated: animated)
+        })
+    }
+    
     /// 根据cell子视图获取当前UITableViewCell?
     /// - Parameter subView: 子视图
     /// - Returns: UITableViewCell?

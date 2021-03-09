@@ -21,22 +21,145 @@ import Foundation
 public typealias Extension_View = UIView
 
 //MARK: - main class
+//MARK: 快捷属性操作
+extension Extension_View {
+    
+    ///< Shortcut for frame.origin.x.
+    public var left: CGFloat {
+        get {
+            return self.frame.origin.x
+        }
+        set {
+            var frame = self.frame
+            frame.origin.x = newValue
+            self.frame = frame
+        }
+    }
+    
+    ///< Shortcut for frame.origin.y
+    public var top: CGFloat {
+        get {
+            return self.frame.origin.y
+        }
+        set {
+            var frame = self.frame
+            frame.origin.y = newValue
+            self.frame = frame
+        }
+    }
+    
+    ///< Shortcut for frame.origin.x + frame.size.width
+    public var right: CGFloat {
+        get {
+            return self.frame.origin.x + self.frame.size.width
+        }
+        set {
+            var frame = self.frame
+            frame.origin.x = newValue - frame.size.width
+            self.frame = frame
+        }
+    }
+    
+    ///< Shortcut for frame.origin.y + frame.size.height
+    public var bottom: CGFloat {
+        get {
+            return self.frame.origin.y + self.frame.size.height
+        }
+        set {
+            var frame = self.frame
+            frame.origin.y = newValue - frame.size.height;
+            self.frame = frame
+        }
+    }
+    
+    ///< Shortcut for frame.size.width.
+    public var width: CGFloat {
+        get {
+            return self.frame.size.width
+        }
+        set {
+            var frame = self.frame
+            frame.size.width = newValue
+            self.frame = frame
+        }
+    }
+    
+    ///< Shortcut for frame.size.height.
+    public var height: CGFloat {
+        get {
+            return self.frame.size.height
+        }
+        set {
+            var frame = self.frame
+            frame.size.height = newValue
+            self.frame = frame
+        }
+    }
+    
+    ///< Shortcut for center.x
+    public var centerX: CGFloat {
+        get {
+            return self.center.x
+        }
+        set {
+            self.center = CGPoint(x: newValue, y: self.center.y)
+        }
+    }
+    
+    ///< Shortcut for center.y
+    public var centerY: CGFloat {
+        get {
+            return self.center.y
+        }
+        set {
+            self.center = CGPoint(x: self.center.x, y: newValue)
+        }
+    }
+    
+    ///< Shortcut for frame.origin.
+    public var origin: CGPoint {
+        get {
+            return self.frame.origin
+        }
+        set {
+            var frame = self.frame
+            frame.origin = newValue
+            self.frame = frame
+        }
+    }
+    
+    ///< Shortcut for frame.size.
+    public var size: CGSize {
+        get {
+            return self.frame.size
+        }
+        set {
+            var frame = self.frame
+            frame.size = newValue
+            self.frame = frame
+        }
+    }
+}
+
 extension Extension_View {
     
     //MARK: 获取当前视图的层级最近控制器
-    public func nextVc(view:UIView) -> UIViewController? {
-        
+    /// - Returns: 父级控制器
+    public func viewController() -> UIViewController? {
         var nextResponder: UIResponder? = self
         repeat {
             nextResponder = nextResponder?.next
-            
             if let viewController = nextResponder as? UIViewController {
                 return viewController
             }
-            
         } while nextResponder != nil
-        
         return nil
+    }
+    
+    //MARK: 移除所有子视图
+    /// 移除所有子视图
+    public func removeAllSubviews() {
+        _ = self.subviews.map({ $0.removeFromSuperview() })
     }
     
     //MARK: 指定矩形圆角
@@ -45,7 +168,6 @@ extension Extension_View {
     ///   - rectCorner: 圆角位置
     ///   - radiiSize: 弧度
     public func setRectCorner(rectCorner: UIRectCorner = .allCorners, radiiSize: CGFloat) {
-        
         // 部分圆角设定 UIRectCorner(rawValue: UIRectCorner.bottomLeft.rawValue | UIRectCorner.bottomRight.rawValue)
         let path: UIBezierPath = UIBezierPath.init(roundedRect: self.bounds, byRoundingCorners: rectCorner, cornerRadii: CGSize(width: radiiSize, height: radiiSize))
         let masklayer: CAShapeLayer = CAShapeLayer()
@@ -91,7 +213,46 @@ extension Extension_View {
         layer.addSublayer(borderLayer)
     }
 
+    //MARK: 指定阴影
+    /// 设置视图的阴影效果
+    /// 注意: 必须先给视图添加背景色, 否则阴影无效
+    /// - Parameters:
+    ///   - color: 阴影颜色
+    ///   - offset: 阴影范围
+    ///   - radius: 阴影圆角
+    public func setLayerShadow(color: UIColor, offset: CGSize, radius: CGFloat) {
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOffset = offset
+        self.layer.shadowRadius = radius
+        self.layer.shadowOpacity = 1
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+    }
 
+    //MARK: 指定圆角+阴影
+    /// 设置视图的圆角+阴影效果
+    /// 注意: 必须先给视图添加背景色, 否则阴影无效
+    /// - Parameters:
+    ///   - color: 阴影颜色
+    ///   - offset: 阴影范围
+    ///   - radius: 阴影圆角大小
+    public func setLayerCornerShadow(color: UIColor, offset: CGSize, radius: CGFloat) {
+        self.layer.cornerRadius = radius
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOffset = offset
+        self.layer.shadowOpacity = 1
+        self.layer.shadowRadius = radius
+        self.layer.masksToBounds = false
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+
+        let shadowView = UIView.init(frame: self.frame)
+        self.superview?.addSubview(shadowView)
+        self.superview?.sendSubviewToBack(shadowView)
+        shadowView.layer.cornerRadius = radius
+        shadowView.layer.masksToBounds = true
+    }
+    
     //MARK: 指定矩形渐变色
     /// 指定矩形渐变色 颜色数组及方向
     public enum GradientDirection {

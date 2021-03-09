@@ -13,6 +13,25 @@ public typealias Extension_Image = UIImage
 
 //MARK: - main class
 extension Extension_Image {
+    
+    /// 颜色重绘成图片
+    /// - Parameters:
+    ///   - color: 颜色
+    ///   - size: 尺寸
+    /// - Returns: 图片
+    public func imageWithColor(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+}
+
+extension Extension_Image {
 
     /// 水平翻转（即左右镜像）
     /// - Returns: 新Image对象

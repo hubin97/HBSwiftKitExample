@@ -95,6 +95,14 @@ class UIKitTestController: BaseViewController {
         str[1] = "###"
         print("str:\(str)")
         // Prints str:A###CDE*G
+        _ = QPath.filePaths("")
+        QPath.removeFile("")
+        
+        let testView = UIView.init(frame: CGRect(x: 200, y: 200, width: 100, height: 100))
+        view.addSubview(testView)
+        testView.backgroundColor = .white
+        //testView.setLayerShadow(color: .red, offset: CGSize(width: 3, height: 5), radius: 10)
+        testView.setLayerCornerShadow(color: .red, offset: CGSize(width: 3, height: 5), radius: 10)
     }
 }
 

@@ -36,6 +36,10 @@ public class QuickPaths {
     /// - Parameter path: 目标文件夹路径
     /// - Returns: 文件路径数组
     public static func filePaths(_ path: String) -> [String]? {
+        guard path.isEmpty == false else {
+            print("目标文件夹路径为空!!!")
+            return nil
+        }
         var filePaths = [String]()
         do {
             let filenames = try FileManager.default.contentsOfDirectory(atPath: path)
@@ -76,6 +80,10 @@ public class QuickPaths {
     /// 文件删除操作
     /// - Parameter model: 图片模型
     public static func removeFile(_ path: String) {
+        guard path.isEmpty == false else {
+            print("目标文件路径为空!!!")
+            return
+        }
         do {
             try FileManager.default.removeItem(atPath: path)
         } catch {
