@@ -98,11 +98,13 @@ class UIKitTestController: BaseViewController {
         _ = QPath.filePaths("")
         QPath.removeFile("")
         
-        let testView = UIView.init(frame: CGRect(x: 200, y: 200, width: 100, height: 100))
+        let testView = UIImageView.init(frame: CGRect(x: 200, y: 200, width: 100, height: 100))
         view.addSubview(testView)
         testView.backgroundColor = .white
         //testView.setLayerShadow(color: .red, offset: CGSize(width: 3, height: 5), radius: 10)
-        testView.setLayerCornerShadow(color: .red, offset: CGSize(width: 3, height: 5), radius: 10)
+        //testView.setLayerCornerShadow(color: .red, offset: CGSize(width: 3, height: 5), radius: 10)
+        //let img = generateQRCode(text: "setLayerCornerShadow", width: 100)
+        testView.image = CodeScanner.makeQRCode(text: "哈哈哈--", width: 100, fillImage: R.image.tabBar.home_h(), color: .orange)
     }
 }
 

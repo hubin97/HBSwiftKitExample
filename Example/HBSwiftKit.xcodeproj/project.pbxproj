@@ -350,7 +350,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				094DE57F969A1402C93947DB /* [CP] Embed Pods Frameworks */,
-				17CE28ACABDA885A794C68AC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -457,35 +456,19 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/HBSwiftKit/HBSwiftKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBSwiftKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		17CE28ACABDA885A794C68AC /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example-resources.sh",
-				"${PODS_ROOT}/../../HBSwiftKit/HBSwiftKit.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HBSwiftKit.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1C76D0BD4C3D0529B7EB92FB /* [CP] Check Pods Manifest.lock */ = {

@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.requires_arc = true
-  # test --
-  s.static_framework = true
+  # test -- ??? 
+  #s.static_framework = true
 
 end
