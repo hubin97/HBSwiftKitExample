@@ -8,6 +8,9 @@
 import Foundation
 
 //MARK: - global var and methods
+/// FileManager.default
+public let fileManager = FileManager.default
+
 /// Home目录  ./
 public let homePath = NSHomeDirectory()
 
@@ -59,24 +62,60 @@ public class QuickPaths {
     }
     
     /// 创建一个文件夹全路径
-    /// - Parameter suffix: 传入一个指定的后缀
-    func createFile(suffix: String?) -> String {
-        var configPath = documentPath ?? ""
-        if let suffixPath = suffix {
-            configPath = "\(configPath)/\(suffixPath)"
+    /// - Parameters:
+    ///   - basePath: 存放路径
+    ///   - dicName: 文件夹名称
+    /// - Returns: 全路径
+    public static func createDirectory(basePath: String, dicName: String?) -> String {
+        let fileBaseUrl = URL.init(fileURLWithPath: basePath)
+        var dicPath = fileBaseUrl
+        if let dicName = dicName {
+            dicPath = fileBaseUrl.appendingPathComponent(dicName)
         }
         let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: configPath) == false {
+        if fileManager.fileExists(atPath: dicPath.path) == false {
             do {
-                try fileManager.createDirectory(atPath: configPath, withIntermediateDirectories: true, attributes: nil)
+                try fileManager.createDirectory(atPath: dicPath.path, withIntermediateDirectories: true, attributes: nil)
             } catch {
                 print("文件夹路径创建失败!")
             }
-            
         }
-        return configPath
+        return dicPath.path
     }
-
+    
+    /// 创建空文件
+    /// - Parameters:
+    ///   - filePath: 文件路径
+    ///   - contents: 默认写入空字符串
+    public static func createFile(filePath: String, contents: Any = "") {
+        let exist = FileManager.default.fileExists(atPath: filePath)
+        if !exist {
+            //let data = Data(base64Encoded:"aGVsbG8gd29ybGQ=" ,options:.ignoreUnknownCharacters)
+            var appendedData = Data()
+            if let contents = contents as? String {
+                appendedData = contents.data(using: String.Encoding.utf8, allowLossyConversion: true)!
+            } else if let contents = contents as? UIImage {
+                appendedData = contents.pngData()!
+            } else if let contents = contents as? Data {
+                appendedData = contents
+            }
+            let createSuccess = FileManager.default.createFile(atPath: filePath, contents: appendedData, attributes:nil)
+            print("文件创建结果: \(createSuccess)")
+        }
+    }
+    
+    /// 文件内末尾写入
+    /// - Parameters:
+    ///   - filePath: 文件路径
+    ///   - contents: 写入内容
+    public static func writingToFile(filePath:String, contents: String) {
+        guard let appendedData = contents.data(using: String.Encoding.utf8, allowLossyConversion: true) else { return }
+        if let writeHandler = try? FileHandle(forWritingTo: URL.init(fileURLWithPath: filePath)) {
+            writeHandler.seekToEndOfFile()
+            writeHandler.write(appendedData)
+        }
+    }
+    
     /// 文件删除操作
     /// - Parameter model: 图片模型
     public static func removeFile(_ path: String) {

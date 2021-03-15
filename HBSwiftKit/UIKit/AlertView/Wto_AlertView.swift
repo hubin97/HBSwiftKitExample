@@ -95,6 +95,7 @@ public class Wto_AlertView: UIView {
     var contentView = UIView() //UIToolbar() iOS11+图层有问题造成点击不了按钮; UIVisualEffectView不能做容器
     var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     var titleLabel = UILabel()
+    var iconView = UIImageView()
     var messageScroll = UIScrollView()
     var messageLabel = UILabel()
     var actionsView = UIView()
@@ -109,6 +110,8 @@ public class Wto_AlertView: UIView {
     fileprivate let s_kpadding = W_Scale(5) // 标题与内容间距
 
     fileprivate var t_height: CGFloat = 0  // title 总高度
+    fileprivate var i_width:  CGFloat = 0  // icon 总宽度
+    fileprivate var i_height: CGFloat = 0  // icon 总高度
     fileprivate var m_height: CGFloat = 0  // message 总高度
     fileprivate var a_height: CGFloat = 0  // actions 总高度(底部可交互按钮)
     fileprivate var alert_height: CGFloat = 0 // content 总高度
@@ -138,6 +141,7 @@ public class Wto_AlertView: UIView {
         contentView.layer.cornerRadius = 15.0
         
         contentView.addSubview(titleLabel)
+        contentView.addSubview(iconView)
         contentView.addSubview(messageScroll)
         contentView.addSubview(actionsView)
         messageScroll.addSubview(messageLabel)
@@ -147,6 +151,8 @@ public class Wto_AlertView: UIView {
         titleLabel.textColor = .black
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byCharWrapping
+        
+        iconView.contentMode = .scaleAspectFit
         
         messageLabel.font = UIFont.systemFont(ofSize: W_Scale(14))
         messageLabel.textAlignment = .center
@@ -243,14 +249,117 @@ public class Wto_AlertView: UIView {
         }
     }
     
+    /// 常规便捷初始化1
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - message: 消息体
     public convenience init(title: String?, message: String?) {
         self.init(frame: CGRect.zero)
         setup(title: title, message: message, actions: nil)
     }
     
+    /// 常规便捷初始化2
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - message: 消息体
+    ///   - actions: 按钮标题数组
+    ///   - tapAction: 回调按钮点击事件
+    /// - Returns: 闭包
     public convenience init(title: String?, message: String?, actions: [String]?, tapAction: ((_ index: Int, _ title: String) -> ())? ) {
         self.init(frame: CGRect.zero)
         setup(title: title, message: message, actions: actions)
+        self.tapAction = tapAction
+    }
+    
+    //MARK: 带图标说明布局
+    func setup(title: String?, icon: String?, iconSize: CGSize?, message: String?, actions: [String]?) {
+        assert(!((title == nil || title == "") && (message == nil || message == "")), "标题和正文不能同时为空")
+        assert(!(actions?.count ?? 0 > 5), "交互按钮不能超过5个")
+        
+        if let t_title = title, t_title.isEmpty == false {
+            let rect = NSString(string: t_title).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: titleLabel.font ?? UIFont.systemFont(ofSize: W_Scale(16), weight: .medium)], context: nil)
+            t_height = rect.size.height
+        }
+        
+        // h >= 25 && h <= 85
+        if let t_icon = icon, let img = UIImage(named: t_icon) {
+            iconView.image = img
+            let imgH = img.size.height
+            let imgW = img.size.width
+            i_height = min(max(imgH, 25), 85)
+            i_width = i_height * imgW/imgH
+            if let t_size = iconSize {
+                i_width = t_size.width
+                i_height = t_size.height
+            }
+        }
+        
+        if let t_msg = message, t_msg.isEmpty == false {
+            // 设置行间距
+            let attributes = setLabelLineSpacing(label: messageLabel, lineSpacing: msg_LineSpacing)
+            let rect = NSString(string: t_msg).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+            m_height = rect.size.height
+            mmin_height = m_height
+        }
+        
+        if let a_count = actions?.count, a_count > 0 {
+            allActions.removeAll()
+            for title in actions ?? [] {
+                //allActions.append(Wto_Action.init(title, nil, nil))
+                allActions.append(Wto_Action.init(title, nil, (() -> ())?.init(nilLiteral: ())))
+            }
+            a_height = a_count <= 2 ? action_height: action_height * CGFloat(a_count)
+        }
+        
+        alert_height = (t_height + kpadding) + (m_height + s_kpadding) + (i_height + s_kpadding) + (a_height + kpadding)
+        // 限制高度
+        if alert_height > max_alert_height {
+            mmin_height = max_alert_height - ((t_height + kpadding) + (i_height + s_kpadding) + (a_height + kpadding) + s_kpadding)
+            alert_height = max_alert_height
+        }
+        
+        titleLabel.frame = CGRect(x: kpadding, y: kpadding, width: alert_width - 2 * kpadding, height: t_height)
+        iconView.frame = CGRect(x: (alert_width - i_width)/2, y: kpadding + t_height + s_kpadding, width: i_width, height: i_height)
+        messageScroll.frame = CGRect(x: kpadding, y: kpadding + t_height + i_height + 2 * s_kpadding, width: alert_width - 2 * kpadding, height: mmin_height)
+        messageLabel.frame = CGRect(x: 0, y: 0, width: messageScroll.frame.width, height: m_height)
+        actionsView.frame = CGRect(x: 0, y: messageScroll.frame.maxY + kpadding, width: alert_width, height: a_height)
+        contentView.frame = CGRect(x: 0, y: 0, width: alert_width, height: alert_height)
+        contentView.center = self.center
+        blurEffectView.frame = contentView.bounds
+        messageScroll.contentSize = CGSize(width: 0, height: m_height)
+        
+        titleLabel.text = title
+        //messageLabel.text = message
+        messageLabel.attributedText = NSAttributedString(string: message ?? "", attributes: setLabelLineSpacing(label: messageLabel, lineSpacing: msg_LineSpacing))
+        
+        if let a_count = actions?.count, a_count > 0 {
+            actionSetup()
+        }
+    }
+
+    /// 带图标展示便捷初始化1
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - icon: 展示图标
+    ///   - iconSize: 预设图标尺寸
+    ///   - message: 消息体
+    public convenience init(title: String?, icon: String?, iconSize: CGSize? = nil, message: String?) {
+        self.init(frame: CGRect.zero)
+        setup(title: title, icon: icon, iconSize: iconSize, message: message, actions: nil)
+    }
+    
+    /// 带图标展示便捷初始化2
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - icon: 展示图标
+    ///   - iconSize: 预设图标尺寸
+    ///   - message: 消息体
+    ///   - actions: 按钮标题数组
+    ///   - tapAction: 回调按钮点击事件
+    /// - Returns: 闭包
+    public convenience init(title: String?, icon: String?, iconSize: CGSize? = nil, message: String?, actions: [String]?, tapAction: ((_ index: Int, _ title: String) -> ())?) {
+        self.init(frame: CGRect.zero)
+        setup(title: title, icon: icon, iconSize: iconSize, message: message, actions: actions)
         self.tapAction = tapAction
     }
     
@@ -314,7 +423,9 @@ extension Wto_AlertView {
         allActions.append(Wto_Action.init(title, color, tapAction))
         a_height = allActions.count <= 2 ? action_height: action_height * CGFloat(allActions.count)
         alert_height = (t_height + kpadding) + (m_height + s_kpadding) + (a_height + kpadding)
-                
+        if i_height > 0 {
+            alert_height += (i_height + s_kpadding)
+        }
         contentView.frame = CGRect(x: 0, y: 0, width: alert_width, height: alert_height)
         contentView.center = self.center
         blurEffectView.frame = contentView.bounds

@@ -95,8 +95,37 @@ class UIKitTestController: BaseViewController {
         str[1] = "###"
         print("str:\(str)")
         // Prints str:A###CDE*G
-        _ = QPath.filePaths("")
+        _ = QPath.filePaths(documentPath ?? "")
         QPath.removeFile("")
+//        QPath.createFile(name: "111.txt", fileBaseUrl: URL.init(fileURLWithPath: documentPath ?? ""))
+//        QPath.createFile(name: "222.txt", fileBaseUrl: URL.init(fileURLWithPath: documentPath ?? ""))
+        QPath.writingToFile(filePath: "\(documentPath ?? "")/222.txt", contents: "啦啦啦啦")
+        QPath.writingToFile(filePath: "\(documentPath ?? "")/222.txt", contents: "\n哦哦哦哦")
+        let dicPath = QPath.createDirectory(basePath: "\(documentPath ?? "")", dicName: "Img")
+        QPath.createFile(filePath: "\(dicPath)/string", contents: "string")
+        QPath.createFile(filePath: "\(dicPath)/img", contents: R.image.tabBar.home_h()!)
+        if let img = R.image.tabBar.home_h(), let imgdata = UIImagePNGRepresentation(img) {
+            QPath.createFile(filePath: "\(dicPath)/data", contents: imgdata)
+        }
+
+        /**
+         ➜  Documents tree
+            .
+            ├── 111.txt
+            ├── 222.txt
+            └── Img
+                ├── data
+                ├── img
+                └── string
+
+            1 directory, 5 files
+         */
+        
+        /**
+         (lldb) po String(data: FileManager.default.contents(atPath: "\(documentPath ?? "")/222.txt")!, encoding: String.Encoding.utf8)
+         ▿ Optional<String>
+           - some : "啦啦啦啦\n哦哦哦哦"
+         */
         
         let testView = UIImageView.init(frame: CGRect(x: 200, y: 200, width: 100, height: 100))
         view.addSubview(testView)
@@ -105,6 +134,7 @@ class UIKitTestController: BaseViewController {
         //testView.setLayerCornerShadow(color: .red, offset: CGSize(width: 3, height: 5), radius: 10)
         //let img = generateQRCode(text: "setLayerCornerShadow", width: 100)
         testView.image = CodeScanner.makeQRCode(text: "哈哈哈--", width: 100, fillImage: R.image.tabBar.home_h(), color: .orange)
+        
     }
 }
 
@@ -113,6 +143,28 @@ extension UIKitTestController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+//        let alert = Wto_AlertView.init(title: "New Device!", icon: "test", message: "AUKEY T7S", actions: ["Cancel", "Continue"]) { (index, title) in
+//            print("index:\(index), title:\(title)")
+//        }
+//        let alert = Wto_AlertView.init(title: "New Device!", icon: "test", iconSize: CGSize(width: 40, height: 85), message: "AUKEY T7S", actions: ["Cancel", "Continue"]) { (index, title) in
+//            print("index:\(index), title:\(title)")
+//        }
+//        alert.show()
+//        let alert = Wto_AlertView.init(title: "New Device!", icon: "test", iconSize: CGSize(width: 40, height: 85), message: "AUKEY T7S")
+//        alert.addAction("Cancel", .lightGray, tapAction: nil)
+//        alert.addAction("Continue") {
+//            print("Continue")
+//        }
+//        alert.show()
+//        let alert = Wto_AlertView.init(title: "New Device!", message: "AUKEY T7S")
+//        alert.addAction("Cancel", .lightGray, tapAction: nil)
+//        alert.addAction("Continue") {
+//            print("Continue")
+//        }
+//        alert.show()
+    }
+    
+    func bouncesAni() {
         let orignPoint = ball.center
         let animateKeyframes = CAKeyframeAnimation(keyPath: "position")
         animateKeyframes.duration = 2
