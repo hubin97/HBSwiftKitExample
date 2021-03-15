@@ -150,18 +150,27 @@ extension UIKitTestController {
 //            print("index:\(index), title:\(title)")
 //        }
 //        alert.show()
-//        let alert = Wto_AlertView.init(title: "New Device!", icon: "test", iconSize: CGSize(width: 40, height: 85), message: "AUKEY T7S")
+//        let alert = Wto_AlertView.init(title: "New Device!", icon: R.image.tabBar.home_h.name, iconSize: CGSize(width: 40, height: 40), message: "AUKEY T7S")
 //        alert.addAction("Cancel", .lightGray, tapAction: nil)
 //        alert.addAction("Continue") {
 //            print("Continue")
 //        }
 //        alert.show()
-//        let alert = Wto_AlertView.init(title: "New Device!", message: "AUKEY T7S")
+        //(title: "“Aukey Life” Wants To Use “Facebook.com” To Log In", message: "This will allow the App to share your information with the website", alertWidth: 250)
+        
+//        let alert = AlertView.init(Aukey_title: "“Aukey Life” Wants To Use “Facebook.com” To Log In", message: "This will allow the App to share your information with the website")
 //        alert.addAction("Cancel", .lightGray, tapAction: nil)
 //        alert.addAction("Continue") {
 //            print("Continue")
 //        }
 //        alert.show()
+        
+        let alert = Wto_AlertView.init(Aukey_title: "New Device!", icon: R.image.tabBar.home_h.name, message: "AUKEY T7S")
+        alert.addAction("Cancel", .lightGray, tapAction: nil)
+        alert.addAction("Continue") {
+            print("Continue")
+        }
+        alert.show()
     }
     
     func bouncesAni() {
@@ -188,6 +197,36 @@ extension UIKitTestController {
                                             CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
                                             CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)]
         self.ball.layer.add(animateKeyframes, forKey: nil)
+    }
+}
+
+public typealias AlertView = Wto_AlertView
+extension AlertView {
+    
+    /** 默认间距变更
+     // 标题与alert边框大间距
+     fileprivate var kpadding = W_Scale(30)
+     /// 标题与内容小间距
+     fileprivate var s_kpadding = W_Scale(20)
+     /// 左边距
+     fileprivate var l_kpadding = W_Scale(15)
+     */
+    public convenience init(Aukey_title title: String?, message: String?, alertWidth: CGFloat = 250, kpadding: CGFloat = 30, s_kpadding: CGFloat = 20, l_kpadding: CGFloat = 15) {
+        self.init(frame: CGRect.zero)
+        self.alert_width = alertWidth
+        self.kpadding = kpadding
+        self.s_kpadding = s_kpadding
+        self.l_kpadding = l_kpadding
+        setup(title: title, message: message, actions: nil)
+    }
+    
+    public convenience init(Aukey_title title: String?, icon: String?, iconSize: CGSize? = nil, message: String?, alertWidth: CGFloat = 250, kpadding: CGFloat = 30, s_kpadding: CGFloat = 20, l_kpadding: CGFloat = 15) {
+        self.init(frame: CGRect.zero)
+        self.alert_width = alertWidth
+        self.kpadding = kpadding
+        self.s_kpadding = s_kpadding
+        self.l_kpadding = l_kpadding
+        setup(title: title, icon: icon, iconSize: iconSize, message: message, actions: nil)
     }
 }
 
