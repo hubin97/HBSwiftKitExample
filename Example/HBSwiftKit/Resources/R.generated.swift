@@ -168,7 +168,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 12 images.
+  /// This `R.image` struct is generated, and contains static references to 11 images.
   struct image {
     /// Image `ib_back`.
     static let ib_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "ib_back")
@@ -192,8 +192,6 @@ struct R: Rswift.Validatable {
     static let next_month_enabled = Rswift.ImageResource(bundle: R.hostingBundle, name: "next_month_enabled")
     /// Image `next_month_normal`.
     static let next_month_normal = Rswift.ImageResource(bundle: R.hostingBundle, name: "next_month_normal")
-    /// Image `test`.
-    static let test = Rswift.ImageResource(bundle: R.hostingBundle, name: "test")
 
     #if os(iOS) || os(tvOS)
     /// `UIImage(named: "ib_back", bundle: ..., traitCollection: ...)`
@@ -269,13 +267,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "next_month_normal", bundle: ..., traitCollection: ...)`
     static func next_month_normal(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.next_month_normal, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "test", bundle: ..., traitCollection: ...)`
-    static func test(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.test, compatibleWith: traitCollection)
     }
     #endif
 

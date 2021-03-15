@@ -49,6 +49,37 @@
          print("addAction- 保存")
      }
      alert.show()
+ 
+     // 5 扩展间距变更
+ public typealias AlertView = Wto_AlertView
+ extension AlertView {
+     
+     /** 默认间距变更
+      // 标题与alert边框大间距
+      fileprivate var kpadding = W_Scale(30)
+      /// 标题与内容小间距
+      fileprivate var s_kpadding = W_Scale(20)
+      /// 左边距
+      fileprivate var l_kpadding = W_Scale(15)
+      */
+     public convenience init(Aukey_title title: String?, message: String?, alertWidth: CGFloat = 250, kpadding: CGFloat = 30, s_kpadding: CGFloat = 20, l_kpadding: CGFloat = 15) {
+         self.init(frame: CGRect.zero)
+         self.alert_width = alertWidth
+         self.kpadding = kpadding
+         self.s_kpadding = s_kpadding
+         self.l_kpadding = l_kpadding
+         setup(title: title, message: message, actions: nil)
+     }
+     
+     public convenience init(Aukey_title title: String?, icon: String?, iconSize: CGSize? = nil, message: String?, alertWidth: CGFloat = 250, kpadding: CGFloat = 30, s_kpadding: CGFloat = 20, l_kpadding: CGFloat = 15) {
+         self.init(frame: CGRect.zero)
+         self.alert_width = alertWidth
+         self.kpadding = kpadding
+         self.s_kpadding = s_kpadding
+         self.l_kpadding = l_kpadding
+         setup(title: title, icon: icon, iconSize: iconSize, message: message, actions: nil)
+     }
+ }
  */
 import UIKit
 import Foundation
@@ -101,13 +132,20 @@ public class Wto_AlertView: UIView {
     var actionsView = UIView()
 
     fileprivate let max_alert_height = UIScreen.main.bounds.height/2
-    fileprivate let alert_width = W_Scale(270)  // 同系统宽度
-    fileprivate let action_height = W_Scale(44) // 同系统高度
-    fileprivate let line_height: CGFloat = 0.5  // 同系统分割线 0.33, 不能小于0.5,否则不显示
-    fileprivate let msg_LineSpacing: CGFloat = 7.5  // 消息行间距
-
-    fileprivate let kpadding = W_Scale(15)
-    fileprivate let s_kpadding = W_Scale(5) // 标题与内容间距
+    /// 同系统宽度 270
+    public var alert_width = W_Scale(270)
+    /// 同系统高度
+    public var action_height = W_Scale(44)
+    /// 同系统分割线 0.33, 不能小于0.5,否则不显示
+    public var line_height: CGFloat = 0.5
+    /// 消息体行间距
+    public var msg_LineSpacing: CGFloat = 7.5
+    /// 标题与alert边框大间距
+    public var kpadding = W_Scale(20)
+    /// 标题与内容小间距
+    public var s_kpadding = W_Scale(5)
+    /// 左边距
+    public var l_kpadding = W_Scale(15)
 
     fileprivate var t_height: CGFloat = 0  // title 总高度
     fileprivate var i_width:  CGFloat = 0  // icon 总宽度
@@ -117,7 +155,7 @@ public class Wto_AlertView: UIView {
     fileprivate var alert_height: CGFloat = 0 // content 总高度
     fileprivate var mmin_height: CGFloat = 0  // message 可视高度
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: UIApplication.shared.keyWindow?.bounds ?? UIScreen.main.bounds)
         //FIXME:适配不同系统版本高斯模糊
         blurEffectView.effect = UIBlurEffect(style: .light)
@@ -161,19 +199,19 @@ public class Wto_AlertView: UIView {
         messageLabel.lineBreakMode = .byCharWrapping
     }
     
-    func setup(title: String?, message: String?, actions: [String]?) {
+    public func setup(title: String?, message: String?, actions: [String]?) {
         assert(!((title == nil || title == "") && (message == nil || message == "")), "标题和正文不能同时为空")
         assert(!(actions?.count ?? 0 > 5), "交互按钮不能超过5个")
         
         if let t_title = title, t_title != "" {
-            let rect = NSString(string: t_title).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: titleLabel.font ?? UIFont.systemFont(ofSize: W_Scale(16), weight: .medium)], context: nil)
+            let rect = NSString(string: t_title).boundingRect(with: CGSize(width: alert_width - kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: titleLabel.font ?? UIFont.systemFont(ofSize: W_Scale(16), weight: .medium)], context: nil)
             t_height = rect.size.height
         }
         
         if let t_msg = message, t_msg != "" {
             // 设置行间距
             let attributes = setLabelLineSpacing(label: messageLabel, lineSpacing: msg_LineSpacing)
-            let rect = NSString(string: t_msg).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+            let rect = NSString(string: t_msg).boundingRect(with: CGSize(width: alert_width - kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
             m_height = rect.size.height
             mmin_height = m_height
         }
@@ -194,8 +232,8 @@ public class Wto_AlertView: UIView {
             alert_height = max_alert_height
         }
         
-        titleLabel.frame = CGRect(x: kpadding, y: kpadding, width: alert_width - 2 * kpadding, height: t_height)
-        messageScroll.frame = CGRect(x: kpadding, y: kpadding + t_height + s_kpadding, width: alert_width - 2 * kpadding, height: mmin_height)
+        titleLabel.frame = CGRect(x: l_kpadding, y: kpadding, width: alert_width - kpadding, height: t_height)
+        messageScroll.frame = CGRect(x: l_kpadding, y: kpadding + t_height + s_kpadding, width: alert_width - kpadding, height: mmin_height)
         messageLabel.frame = CGRect(x: 0, y: 0, width: messageScroll.frame.width, height: m_height)
         actionsView.frame = CGRect(x: 0, y: messageScroll.frame.maxY + kpadding, width: alert_width, height: a_height)
         contentView.frame = CGRect(x: 0, y: 0, width: alert_width, height: alert_height)
@@ -272,12 +310,12 @@ public class Wto_AlertView: UIView {
     }
     
     //MARK: 带图标说明布局
-    func setup(title: String?, icon: String?, iconSize: CGSize?, message: String?, actions: [String]?) {
+    public func setup(title: String?, icon: String?, iconSize: CGSize?, message: String?, actions: [String]?) {
         assert(!((title == nil || title == "") && (message == nil || message == "")), "标题和正文不能同时为空")
         assert(!(actions?.count ?? 0 > 5), "交互按钮不能超过5个")
         
         if let t_title = title, t_title.isEmpty == false {
-            let rect = NSString(string: t_title).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: titleLabel.font ?? UIFont.systemFont(ofSize: W_Scale(16), weight: .medium)], context: nil)
+            let rect = NSString(string: t_title).boundingRect(with: CGSize(width: alert_width - kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: titleLabel.font ?? UIFont.systemFont(ofSize: W_Scale(16), weight: .medium)], context: nil)
             t_height = rect.size.height
         }
         
@@ -297,7 +335,7 @@ public class Wto_AlertView: UIView {
         if let t_msg = message, t_msg.isEmpty == false {
             // 设置行间距
             let attributes = setLabelLineSpacing(label: messageLabel, lineSpacing: msg_LineSpacing)
-            let rect = NSString(string: t_msg).boundingRect(with: CGSize(width: alert_width - 2 * kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+            let rect = NSString(string: t_msg).boundingRect(with: CGSize(width: alert_width - kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
             m_height = rect.size.height
             mmin_height = m_height
         }
@@ -318,9 +356,9 @@ public class Wto_AlertView: UIView {
             alert_height = max_alert_height
         }
         
-        titleLabel.frame = CGRect(x: kpadding, y: kpadding, width: alert_width - 2 * kpadding, height: t_height)
+        titleLabel.frame = CGRect(x: l_kpadding, y: kpadding, width: alert_width - 2 * kpadding, height: t_height)
         iconView.frame = CGRect(x: (alert_width - i_width)/2, y: kpadding + t_height + s_kpadding, width: i_width, height: i_height)
-        messageScroll.frame = CGRect(x: kpadding, y: kpadding + t_height + i_height + 2 * s_kpadding, width: alert_width - 2 * kpadding, height: mmin_height)
+        messageScroll.frame = CGRect(x: l_kpadding, y: kpadding + t_height + i_height + 2 * s_kpadding, width: alert_width - 2 * kpadding, height: mmin_height)
         messageLabel.frame = CGRect(x: 0, y: 0, width: messageScroll.frame.width, height: m_height)
         actionsView.frame = CGRect(x: 0, y: messageScroll.frame.maxY + kpadding, width: alert_width, height: a_height)
         contentView.frame = CGRect(x: 0, y: 0, width: alert_width, height: alert_height)
