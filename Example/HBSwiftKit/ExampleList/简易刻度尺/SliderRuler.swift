@@ -104,16 +104,16 @@ class SliderRuler: UIView {
     ///   - minValue: 刻度最小值
     ///   - maxValue: 刻度最大值
     ///   - stepValue: 单格小刻度值
-    convenience init(frame: CGRect, direction: UICollectionView.ScrollDirection, rulerLineSpacing: Int = 15, betweenNum: Int = 2, stepNum: Int = 50, minValue: Float = 1.0, maxValue: Float = 100.0, stepValue: Float = 1.0) {
+    convenience init(frame: CGRect, direction: UICollectionView.ScrollDirection, rulerLineSpacing: Int = 15, betweenNum: Int = 2,/* stepNum: Int = 50,*/ minValue: Float = 1.0, maxValue: Float = 100.0, stepValue: Float = 1.0) {
         self.init(frame: frame)
         self.direction = direction
         self.rulerLineSpacing = rulerLineSpacing
         self.betweenNum = betweenNum
-        self.stepNum = stepNum
         self.minValue = minValue
         self.maxValue = maxValue
         self.stepValue = stepValue
-        
+        let tValue = Int(maxValue - minValue)
+        self.stepNum = (tValue % 2 == 0) ? tValue/2: tValue/2 + 1
         addSubview(rulerCollection)
         addSubview(flagLineView)
     }
@@ -199,48 +199,55 @@ extension SliderRuler: UIScrollViewDelegate {
         if direction == .horizontal {
             offsetValue = Int(scrollView.contentOffset.x) / rulerLineSpacing
         } else {
-            offsetValue =  Int(scrollView.contentOffset.y) / rulerLineSpacing
+            offsetValue = Int(scrollView.contentOffset.y) / rulerLineSpacing
         }
         var value = Float(offsetValue) * stepValue + minValue
         value = value > maxValue ? maxValue: value
         value = value < minValue ? minValue: value
         //print("isTracking:\(scrollView.isTracking) isDragging:\(scrollView.isDragging) isDecelerating:\(scrollView.isDecelerating)")
         /// 规避设置默认值错误回调
-        guard self.rulerValue != value, scrollView.isDragging == true else { return }
+        guard scrollView.isDragging == true else { return }
         //print("rulerValue:\(value)")
-        self.rulerValue = value
         rulerDelegate?.sliderRulerValueUpdate(sliderRuler: self, value: value)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            var offsetValue: CGFloat = 0
-            if direction == .horizontal {
-                offsetValue = scrollView.contentOffset.x / CGFloat(rulerLineSpacing)
-                /// 规避区块划分多余的误差
-                offsetValue = offsetValue > CGFloat(maxValue - minValue) ? CGFloat(maxValue - minValue): offsetValue
-                scrollView.setContentOffset(CGPoint(x: Int(offsetValue) * rulerLineSpacing, y: 0), animated: true)
-            } else {
-                offsetValue = scrollView.contentOffset.y / CGFloat(rulerLineSpacing)
-                offsetValue = offsetValue > CGFloat(maxValue - minValue) ? CGFloat(maxValue - minValue): offsetValue
-                scrollView.setContentOffset(CGPoint(x: 0, y: Int(offsetValue) * rulerLineSpacing), animated: true)
-            }
+        var offsetValue: CGFloat = 0
+        if direction == .horizontal {
+            offsetValue = scrollView.contentOffset.x / CGFloat(rulerLineSpacing)
+            /// 规避区块划分多余的误差
+            offsetValue = CGFloat(round(Double(offsetValue))) > CGFloat(maxValue - minValue) ? CGFloat(maxValue - minValue): CGFloat(round(Double(offsetValue)))
+            scrollView.setContentOffset(CGPoint(x: Int(offsetValue) * rulerLineSpacing, y: 0), animated: true)
+        } else {
+            offsetValue = scrollView.contentOffset.y / CGFloat(rulerLineSpacing)
+            offsetValue = CGFloat(round(Double(offsetValue))) > CGFloat(maxValue - minValue) ? CGFloat(maxValue - minValue): CGFloat(round(Double(offsetValue)))
+            scrollView.setContentOffset(CGPoint(x: 0, y: Int(offsetValue) * rulerLineSpacing), animated: true)
         }
-        rulerDelegate?.sliderRulerDidEndScroll(sliderRuler: self, value: self.rulerValue)
+        var value = Float(offsetValue) * stepValue + minValue
+        value = value > maxValue ? maxValue: value
+        value = value < minValue ? minValue: value
+        self.rulerValue = value
+        rulerDelegate?.sliderRulerDidEndScroll(sliderRuler: self, value: value)
+        print("rulerValue&: \(value)")
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         var offsetValue: CGFloat = 0
         if direction == .horizontal {
             offsetValue = scrollView.contentOffset.x / CGFloat(rulerLineSpacing)
-            offsetValue = offsetValue > CGFloat(maxValue - minValue) ? CGFloat(maxValue - minValue): offsetValue
+            offsetValue = CGFloat(round(Double(offsetValue))) > CGFloat(maxValue - minValue) ? CGFloat(maxValue - minValue): CGFloat(round(Double(offsetValue)))
             scrollView.setContentOffset(CGPoint(x: Int(offsetValue) * rulerLineSpacing, y: 0), animated: true)
         } else {
             offsetValue = scrollView.contentOffset.y / CGFloat(rulerLineSpacing)
-            offsetValue = offsetValue > CGFloat(maxValue - minValue) ? CGFloat(maxValue - minValue): offsetValue
+            offsetValue = CGFloat(round(Double(offsetValue))) > CGFloat(maxValue - minValue) ? CGFloat(maxValue - minValue): CGFloat(round(Double(offsetValue)))
             scrollView.setContentOffset(CGPoint(x: 0, y: Int(offsetValue) * rulerLineSpacing), animated: true)
         }
-        rulerDelegate?.sliderRulerDidEndScroll(sliderRuler: self, value: self.rulerValue)
+        var value = Float(offsetValue) * stepValue + minValue
+        value = value > maxValue ? maxValue: value
+        value = value < minValue ? minValue: value
+        self.rulerValue = value
+        rulerDelegate?.sliderRulerDidEndScroll(sliderRuler: self, value: value)
+        print("rulerValue@: \(value)")
     }
 }
 

@@ -25,16 +25,31 @@ open class BaseTabBarController: UITabBarController {
     ///   - titles: 页签标题
     ///   - normalImages: 常态图片数组
     ///   - selectedImages: 选中图片数组
-    public func addChildVcs(naviVcs: [UIViewController], titles: [String?], normalImages: [UIImage?], selectedImages: [UIImage?]) {
-        guard naviVcs.count == titles.count && naviVcs.count == normalImages.count && naviVcs.count == selectedImages.count else {
+    public func addChildVcs(naviVcs: [UIViewController], titles: [String?], normalImages: [UIImage?], selectImages: [UIImage?]) {
+        guard naviVcs.count == titles.count && naviVcs.count == normalImages.count && naviVcs.count == selectImages.count else {
             print("初始数组元素个数有误!")
             return
         }
         for idx in 0..<naviVcs.count {
             let navi = naviVcs[idx]
-            navi.tabBarItem = UITabBarItem.init(title: titles[idx], image: normalImages[idx], selectedImage: selectedImages[idx])
+            let normal_image = normalImages[idx]?.withRenderingMode(.alwaysOriginal)
+            let select_image = selectImages[idx]?.withRenderingMode(.alwaysOriginal)
+            navi.tabBarItem = UITabBarItem.init(title: titles[idx], image: normal_image, selectedImage: select_image)
         }
         self.viewControllers = naviVcs
+    }
+    
+    /// 设置TabBar颜色相关项
+    /// - Parameters:
+    ///   - barTintColor: 背景色
+    ///   - normalColor: 标题正常颜色
+    ///   - selectColor: 标题选中颜色
+    public func setTabBarColors(barTintColor: UIColor = .white, normalColor: UIColor, selectColor: UIColor) {
+        self.tabBar.barTintColor = barTintColor
+        //self.tabBar.backgroundImage = nil
+        //self.tabBar.shadowImage = nil
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: normalColor], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: selectColor], for: .selected)
     }
 }
 

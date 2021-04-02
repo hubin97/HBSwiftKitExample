@@ -44,7 +44,7 @@ class UIKitTestController: BaseViewController {
         return []
     }()
     
-    //var rulerView: SliderRuler!
+    var rulerView: SliderRuler!
     //var isExpand = false
     let ball = UIImageView()
     
@@ -55,86 +55,88 @@ class UIKitTestController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction))
                 
         // 刻度尺
-//        rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 150, width: 50, height: 400), direction: .vertical, rulerLineSpacing: 15)
-//        view.addSubview(rulerView)
-//        rulerView.setRoundCorners()
+        rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 150, width: 50, height: 400), direction: .vertical, rulerLineSpacing: 15, minValue: 15, maxValue: 40)
+        view.addSubview(rulerView)
+        rulerView.setRoundCorners()
+
+        let rulerView2 = SliderRuler.init(frame: CGRect(x: 20, y: 0, width: kScreenWidth - 40, height: 50), direction: .horizontal, rulerLineSpacing: 15, minValue: 16, maxValue: 32)
+        view.addSubview(rulerView2)
+        rulerView2.setRoundCorners()
+        
+        
+//        view.addSubview(ball)
+//        ball.frame = CGRect(x: 40, y: 200, width: 100, height: 100)
+//        ball.backgroundColor = .brown
+//        ball.setRectCorner(radiiSize: 50)
 //
-//        let rulerView2 = SliderRuler.init(frame: CGRect(x: 20, y: 0, width: kScreenWidth - 40, height: 50), direction: .horizontal, rulerLineSpacing: 15)
-//        view.addSubview(rulerView2)
-//        rulerView2.setRoundCorners()
-        
-        
-        view.addSubview(ball)
-        ball.frame = CGRect(x: 40, y: 200, width: 100, height: 100)
-        ball.backgroundColor = .brown
-        ball.setRectCorner(radiiSize: 50)
-        
-        var str = "ABCDEFG"
-//        let tmp = str[2, 5]
+//        var str = "ABCDEFG"
+////        let tmp = str[2, 5]
+////        print("tmp:\(tmp)")
+////        let tmp2 = str[2, 7]
+////        print("tmp2:\(tmp2)")
+////
+////        str[2, 4] = "cdef"
+////        print("str:\(str)")
+////        str[2, 7] = "cdefghijk"
+////        print("str:\(str)")
+//
+//        let tmp = str[0]
 //        print("tmp:\(tmp)")
-//        let tmp2 = str[2, 7]
-//        print("tmp2:\(tmp2)")
+//        // Prints tmp:A
 //
-//        str[2, 4] = "cdef"
+//        let tmp2 = str[5]
+//        print("tmp2:\(tmp2)")
+//        // Prints tmp2:F
+//
+//        str[5] = "*"
 //        print("str:\(str)")
-//        str[2, 7] = "cdefghijk"
+//        // Prints str:ABCDE*G
+//
+//        str[1] = "###"
 //        print("str:\(str)")
-
-        let tmp = str[0]
-        print("tmp:\(tmp)")
-        // Prints tmp:A
-
-        let tmp2 = str[5]
-        print("tmp2:\(tmp2)")
-        // Prints tmp2:F
-
-        str[5] = "*"
-        print("str:\(str)")
-        // Prints str:ABCDE*G
-        
-        str[1] = "###"
-        print("str:\(str)")
-        // Prints str:A###CDE*G
-        _ = QPath.filePaths(documentPath ?? "")
-        QPath.removeFile("")
-//        QPath.createFile(name: "111.txt", fileBaseUrl: URL.init(fileURLWithPath: documentPath ?? ""))
-//        QPath.createFile(name: "222.txt", fileBaseUrl: URL.init(fileURLWithPath: documentPath ?? ""))
-        QPath.writingToFile(filePath: "\(documentPath ?? "")/222.txt", contents: "啦啦啦啦")
-        QPath.writingToFile(filePath: "\(documentPath ?? "")/222.txt", contents: "\n哦哦哦哦")
-        let dicPath = QPath.createDirectory(basePath: "\(documentPath ?? "")", dicName: "Img")
-        QPath.createFile(filePath: "\(dicPath)/string", contents: "string")
-        QPath.createFile(filePath: "\(dicPath)/img", contents: R.image.tabBar.home_h()!)
-        if let img = R.image.tabBar.home_h(), let imgdata = UIImagePNGRepresentation(img) {
-            QPath.createFile(filePath: "\(dicPath)/data", contents: imgdata)
-        }
-
-        /**
-         ➜  Documents tree
-            .
-            ├── 111.txt
-            ├── 222.txt
-            └── Img
-                ├── data
-                ├── img
-                └── string
-
-            1 directory, 5 files
-         */
-        
-        /**
-         (lldb) po String(data: FileManager.default.contents(atPath: "\(documentPath ?? "")/222.txt")!, encoding: String.Encoding.utf8)
-         ▿ Optional<String>
-           - some : "啦啦啦啦\n哦哦哦哦"
-         */
-        
-        let testView = UIImageView.init(frame: CGRect(x: 200, y: 200, width: 100, height: 100))
-        view.addSubview(testView)
-        testView.backgroundColor = .white
-        //testView.setLayerShadow(color: .red, offset: CGSize(width: 3, height: 5), radius: 10)
-        //testView.setLayerCornerShadow(color: .red, offset: CGSize(width: 3, height: 5), radius: 10)
-        //let img = generateQRCode(text: "setLayerCornerShadow", width: 100)
-        testView.image = CodeScanner.makeQRCode(text: "哈哈哈--", width: 100, fillImage: R.image.tabBar.home_h(), color: .orange)
-        
+//        // Prints str:A###CDE*G
+//        _ = QPath.filePaths(documentPath ?? "")
+//        QPath.removeFile("")
+////        QPath.createFile(name: "111.txt", fileBaseUrl: URL.init(fileURLWithPath: documentPath ?? ""))
+////        QPath.createFile(name: "222.txt", fileBaseUrl: URL.init(fileURLWithPath: documentPath ?? ""))
+//        QPath.writingToFile(filePath: "\(documentPath ?? "")/222.txt", contents: "啦啦啦啦")
+//        QPath.writingToFile(filePath: "\(documentPath ?? "")/222.txt", contents: "\n哦哦哦哦")
+//        let dicPath = QPath.createDirectory(basePath: "\(documentPath ?? "")", dicName: "Img")
+//        QPath.createFile(filePath: "\(dicPath)/string", contents: "string")
+//        QPath.createFile(filePath: "\(dicPath)/img", contents: R.image.tabBar.home_h()!)
+//        if let img = R.image.tabBar.home_h(), let imgdata = UIImagePNGRepresentation(img) {
+//            QPath.createFile(filePath: "\(dicPath)/data", contents: imgdata)
+//        }
+//
+//        /**
+//         ➜  Documents tree
+//            .
+//            ├── 111.txt
+//            ├── 222.txt
+//            └── Img
+//                ├── data
+//                ├── img
+//                └── string
+//
+//            1 directory, 5 files
+//         */
+//
+//        /**
+//         (lldb) po String(data: FileManager.default.contents(atPath: "\(documentPath ?? "")/222.txt")!, encoding: String.Encoding.utf8)
+//         ▿ Optional<String>
+//           - some : "啦啦啦啦\n哦哦哦哦"
+//         */
+//
+//        let testView = UIImageView.init(frame: CGRect(x: 200, y: 200, width: 100, height: 100))
+//        view.addSubview(testView)
+//        testView.backgroundColor = .white
+//        //testView.setLayerShadow(color: .red, offset: CGSize(width: 3, height: 5), radius: 10)
+//        //testView.setLayerCornerShadow(color: .red, offset: CGSize(width: 3, height: 5), radius: 10)
+//        //let img = generateQRCode(text: "setLayerCornerShadow", width: 100)
+//        testView.image = CodeScanner.makeQRCode(text: "哈哈哈--", width: 100, fillImage: R.image.tabBar.home_h(), color: .orange)
+//        let zhs = ["埃尔派", "百世", "橙光", "黄河", "戴尔", "创维"]
+//        zhs.map({ print("zh.toPinyin():\($0.toPinyin())") })
+//        zhs.map({ print("zh.toPYHead():\($0.toPYHead())") })
     }
 }
 

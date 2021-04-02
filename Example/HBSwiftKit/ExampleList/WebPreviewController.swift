@@ -15,8 +15,10 @@ class WebPreviewController: BaseWKWebController {
     override func setupUi() {
         super.setupUi()
         self.title = "Web Preview"
-        self.remoteUrl = "https://space.bilibili.com/325538782"
+        self.remoteUrl = "https://www.baidu.com" //"https://space.bilibili.com/325538782"
         //self.localPath = "help_cn.html"
+        self.progressViewBackColor = .systemBlue
+        self.progressViewTintColor = .red
     }
 }
 

@@ -529,7 +529,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/HBSwiftKit/Resources/R.generated.swift",
+				$SRCROOT/HBSwiftKit/Resources/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

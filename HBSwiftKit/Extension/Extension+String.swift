@@ -43,6 +43,29 @@ extension Extension_String {
         return cfstr as String
     }
     
+    //MARK: - 中文转拼音
+    // 参考：https://blog.csdn.net/yao1500/article/details/106032904
+    /// 中文转拼音
+    /// - Parameter withTone: 是否带音调, 默认不带音调
+    /// - Returns: 拼音字符串
+    public func toPinyin(withTone: Bool = false) -> String {
+        let mutableString = NSMutableString(string: self)
+        CFStringTransform(mutableString, nil, kCFStringTransformToLatin, false)
+        if !withTone {
+            CFStringTransform(mutableString, nil, kCFStringTransformStripDiacritics, false)
+        }
+       return String(mutableString)
+    }
+    
+    /// 提取拼音首字母
+    /// - Returns: 字符串
+    public func toPYHead() -> String {
+        let pinyinArray = self.toPinyin().components(separatedBy: " ")
+        let initials = pinyinArray.compactMap { String(format: "%c", $0.cString(using:.utf8)![0]) }
+        let firstCharJoin = initials.joined().uppercased()
+        return firstCharJoin
+    }
+    
     //MARK: - 字符转日期
     /// string to date
     /// - Parameters:

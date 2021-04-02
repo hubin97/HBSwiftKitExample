@@ -1,23 +1,23 @@
 PODS:
-  - HBSwiftKit (0.2.0):
-    - HBSwiftKit/Base (= 0.2.0)
-    - HBSwiftKit/Extension (= 0.2.0)
-    - HBSwiftKit/Global (= 0.2.0)
-    - HBSwiftKit/Network (= 0.2.0)
-    - HBSwiftKit/Tools (= 0.2.0)
-    - HBSwiftKit/UIKit (= 0.2.0)
-  - HBSwiftKit/Base (0.2.0):
+  - HBSwiftKit (0.2.1):
+    - HBSwiftKit/Base (= 0.2.1)
+    - HBSwiftKit/Extension (= 0.2.1)
+    - HBSwiftKit/Global (= 0.2.1)
+    - HBSwiftKit/Network (= 0.2.1)
+    - HBSwiftKit/Tools (= 0.2.1)
+    - HBSwiftKit/UIKit (= 0.2.1)
+  - HBSwiftKit/Base (0.2.1):
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
-  - HBSwiftKit/Extension (0.2.0):
+  - HBSwiftKit/Extension (0.2.1):
     - HBSwiftKit/Global
-  - HBSwiftKit/Global (0.2.0)
-  - HBSwiftKit/Network (0.2.0):
+  - HBSwiftKit/Global (0.2.1)
+  - HBSwiftKit/Network (0.2.1):
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
     - HBSwiftKit/UIKit
-  - HBSwiftKit/Tools (0.2.0)
-  - HBSwiftKit/UIKit (0.2.0):
+  - HBSwiftKit/Tools (0.2.1)
+  - HBSwiftKit/UIKit (0.2.1):
     - HBSwiftKit/Base
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
@@ -42,7 +42,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  HBSwiftKit: 5e2aabab94627fa210a836cda53e8ad5518f2f79
+  HBSwiftKit: c7d07a869a36f83699cd4789cca68bf617986879
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   R.swift: 56ec7e3aef34b9eee47a659e42462db2c1cc5ac3
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
