@@ -33,6 +33,7 @@
 		B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */; };
 		B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CC7A4525E88F1400D263B4 /* AdvancedFilter.swift */; };
 		B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */ = {isa = PBXBuildFile; fileRef = B5CC7A4925E8989300D263B4 /* advfilterdata.json */; };
+		B5D55405261D40AE007A20F5 /* jstest.html in Resources */ = {isa = PBXBuildFile; fileRef = B5D55404261D40AE007A20F5 /* jstest.html */; };
 		B5DCC71425F3266D007E3237 /* areacode.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5DCC71325F3266D007E3237 /* areacode.plist */; };
 		B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4F26257A365E007F1238 /* WebPreviewController.swift */; };
 		B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */; };
@@ -87,6 +88,7 @@
 		B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTestController.swift; sourceTree = "<group>"; };
 		B5CC7A4525E88F1400D263B4 /* AdvancedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedFilter.swift; sourceTree = "<group>"; };
 		B5CC7A4925E8989300D263B4 /* advfilterdata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = advfilterdata.json; sourceTree = "<group>"; };
+		B5D55404261D40AE007A20F5 /* jstest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = jstest.html; sourceTree = "<group>"; };
 		B5DCC71325F3266D007E3237 /* areacode.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = areacode.plist; sourceTree = "<group>"; };
 		B5DCC71725F3274D007E3237 /* areacode.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = areacode.json; sourceTree = "<group>"; };
 		B5EA0E1125B67C38004783C1 /* AppSandBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSandBox.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 				B5389B7825EF8FB400ED67F9 /* R.generated.swift */,
 				B575D5F825A9900C0068EB19 /* help_cn.html */,
 				B575D5F725A9900C0068EB19 /* help_es.html */,
+				B5D55404261D40AE007A20F5 /* jstest.html */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				B5BAC834255A7875005A5179 /* images.json */,
 				B5CC7A4925E8989300D263B4 /* advfilterdata.json */,
@@ -432,6 +435,7 @@
 				B5BAC835255A7875005A5179 /* images.json in Resources */,
 				B5DCC71425F3266D007E3237 /* areacode.plist in Resources */,
 				B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */,
+				B5D55405261D40AE007A20F5 /* jstest.html in Resources */,
 				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
 				B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,

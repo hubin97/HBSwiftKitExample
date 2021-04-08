@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name             = 'HBSwiftKit'
-  s.version          = '0.2.1'
+  s.version          = '0.2.2'
   s.summary          = 'some common components.'
   s.description      = <<-DESC
                     仅仅一些个人常用组件.学习工作使用.
@@ -51,7 +51,7 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'UIKit' do |ss|
-      ss.source_files  = 'HBSwiftKit/UIKit/AlertView/', 'HBSwiftKit/UIKit/DatePicker/'
+      ss.source_files  = 'HBSwiftKit/UIKit/AlertView/', 'HBSwiftKit/UIKit/DatePicker/', 'HBSwiftKit/UIKit/YTHitView/'
       ss.dependency 'HBSwiftKit/Global'
       ss.dependency 'HBSwiftKit/Extension'
       ss.dependency 'HBSwiftKit/Base'
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.requires_arc = true
-  # test -- ??? 
+  # test -- 
   #s.static_framework = true
 
 end

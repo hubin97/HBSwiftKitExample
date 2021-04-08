@@ -114,7 +114,7 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.file` struct is generated, and contains static references to 6 files.
+  /// This `R.file` struct is generated, and contains static references to 7 files.
   struct file {
     /// Resource file `README_SWIFT.md`.
     static let readme_SWIFTMd = Rswift.FileResource(bundle: R.hostingBundle, name: "README_SWIFT", pathExtension: "md")
@@ -128,6 +128,8 @@ struct R: Rswift.Validatable {
     static let help_esHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "help_es", pathExtension: "html")
     /// Resource file `images.json`.
     static let imagesJson = Rswift.FileResource(bundle: R.hostingBundle, name: "images", pathExtension: "json")
+    /// Resource file `jstest.html`.
+    static let jstestHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "jstest", pathExtension: "html")
 
     /// `bundle.url(forResource: "README_SWIFT", withExtension: "md")`
     static func readme_SWIFTMd(_: Void = ()) -> Foundation.URL? {
@@ -165,10 +167,16 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
 
+    /// `bundle.url(forResource: "jstest", withExtension: "html")`
+    static func jstestHtml(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.jstestHtml
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 11 images.
+  /// This `R.image` struct is generated, and contains static references to 14 images.
   struct image {
     /// Image `ib_back`.
     static let ib_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "ib_back")
@@ -192,6 +200,12 @@ struct R: Rswift.Validatable {
     static let next_month_enabled = Rswift.ImageResource(bundle: R.hostingBundle, name: "next_month_enabled")
     /// Image `next_month_normal`.
     static let next_month_normal = Rswift.ImageResource(bundle: R.hostingBundle, name: "next_month_normal")
+    /// Image `redWarning`.
+    static let redWarning = Rswift.ImageResource(bundle: R.hostingBundle, name: "redWarning")
+    /// Image `topHintbg`.
+    static let topHintbg = Rswift.ImageResource(bundle: R.hostingBundle, name: "topHintbg")
+    /// Image `yellow_arrow`.
+    static let yellow_arrow = Rswift.ImageResource(bundle: R.hostingBundle, name: "yellow_arrow")
 
     #if os(iOS) || os(tvOS)
     /// `UIImage(named: "ib_back", bundle: ..., traitCollection: ...)`
@@ -267,6 +281,27 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "next_month_normal", bundle: ..., traitCollection: ...)`
     static func next_month_normal(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.next_month_normal, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "redWarning", bundle: ..., traitCollection: ...)`
+    static func redWarning(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.redWarning, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "topHintbg", bundle: ..., traitCollection: ...)`
+    static func topHintbg(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.topHintbg, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "yellow_arrow", bundle: ..., traitCollection: ...)`
+    static func yellow_arrow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.yellow_arrow, compatibleWith: traitCollection)
     }
     #endif
 

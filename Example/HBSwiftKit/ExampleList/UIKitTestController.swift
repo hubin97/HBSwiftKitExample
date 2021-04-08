@@ -167,12 +167,27 @@ extension UIKitTestController {
 //        }
 //        alert.show()
         
-        let alert = Wto_AlertView.init(Aukey_title: "New Device!", icon: R.image.tabBar.home_h.name, message: "AUKEY T7S")
-        alert.addAction("Cancel", .lightGray, tapAction: nil)
-        alert.addAction("Continue") {
-            print("Continue")
-        }
-        alert.show()
+//        let alert = Wto_AlertView.init(Aukey_title: "New Device!", icon: R.image.tabBar.home_h.name, message: "AUKEY T7S")
+//        alert.addAction("Cancel", .lightGray, tapAction: nil)
+//        alert.addAction("Continue") {
+//            print("Continue")
+//        }
+//        alert.show()
+        
+        //YTHitView.show(message: "哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈")
+        //YTHitView.show(message: "哈哈哈哈哈哈哈哈", position: .top)
+//        let targetRect = CGRect(x: 10, y: kScreenHeight - kBottomSafeHeight - 65 - 135, width: kScreenWidth - 20, height: 65)
+//        YTHitView.show(message: "哈哈哈哈哈哈哈哈", position: .none, noneRect: targetRect)
+//        YTHitView.showSuccess(message: "操作成功")
+//        YTHitView.showSuccess(message: "操作成功", position: .bottom)
+        YTHitView.showWarnning(message: "操作成功", position: .top)
+//        YTHitView.showSuccess(message: "操作成功", position: .none, noneRect: targetRect, duration: 1)
+//        YTHitView.setHitHeight(44).showSuccess(message: "OJBK!!!")
+        //YTHitView.setHitWidth(200).setHitSuccImg("ib_select").showSuccess(message: "WTF???")
+        
+        /// R库不勾选provides namespace时, 获取到的图片名无效, 无法显示图片
+//        let name = R.image.tabBar.home_h.name
+//        YTHitView.setHitWidth(200).setHitSuccImg(name).showSuccess(message: "WTF???")
     }
     
     func bouncesAni() {
@@ -263,3 +278,14 @@ extension UIKitTestController {
 }
 
 //MARK: - other classes
+
+
+/// 正确设置标签行间距 默认 7
+//fileprivate func setLabelLineSpacing(label: UILabel, lineSpacing: CGFloat = 7, _ alignment: NSTextAlignment = .center) -> [NSAttributedString.Key : Any]? {
+//    let paragraphStyle = NSMutableParagraphStyle()
+//    paragraphStyle.lineSpacing = lineSpacing - (label.font.lineHeight - label.font.pointSize)
+//    paragraphStyle.alignment = alignment
+//    let attributes = [NSAttributedString.Key.font: label.font, NSAttributedString.Key.paragraphStyle: paragraphStyle]
+//    return attributes as [NSAttributedString.Key : Any]
+//}
+

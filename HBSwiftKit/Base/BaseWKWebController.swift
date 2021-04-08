@@ -14,6 +14,7 @@ import WebKit
 //3. JS交互规格标准
 //4. 代理回调处理???
 
+//fileprivate typealias MethodName = String
 //MARK: - main class
 open class BaseWKWebController: BaseViewController {
 
@@ -21,7 +22,11 @@ open class BaseWKWebController: BaseViewController {
     public var remoteUrl: String?
     /// 指定本地地址
     public var localPath: String?
-
+    /// 指定需要监听的脚本方法名
+    public var scriptMsgName: String?
+    private var scriptMsgHandleBlock: ((_ name: String, _ param: Any) -> ())?
+    
+    /// 是否显示进度条
     public var showProgress: Bool = true
     public var progressViewBackColor: UIColor? {
         didSet {
@@ -72,17 +77,10 @@ open class BaseWKWebController: BaseViewController {
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if showProgress {
-            self.progressView.isHidden = false
-            self.wkWebView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
-        }
-        
         // 远端
         if let remoteUrl = remoteUrl {
             wkWebView.load(URLRequest(url: URL(string: remoteUrl)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 20.0))
         }
-        
         // 本地
         if let localPath = localPath {
             let mainpath = URL.init(fileURLWithPath: Bundle.main.bundlePath)
@@ -90,12 +88,22 @@ open class BaseWKWebController: BaseViewController {
             guard let html = try? String.init(contentsOfFile: htmlpath, encoding: .utf8) else { return }
             wkWebView.loadHTMLString(html, baseURL: mainpath)
         }
+        if showProgress {
+            self.progressView.isHidden = false
+            self.wkWebView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        }
+//        if let methodName = self.scriptMsgName, methodName.isEmpty == false {
+//            self.addMethod(name: methodName)
+//        }
     }
     
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if showProgress {
             wkWebView.removeObserver(self, forKeyPath: "estimatedProgress")
+        }
+        if let methodName = self.scriptMsgName, methodName.isEmpty == false {
+            self.removeMethod(name: methodName)
         }
     }
     
@@ -117,14 +125,51 @@ open class BaseWKWebController: BaseViewController {
 //MARK: - private mothods
 extension BaseWKWebController {
     
+    /// JS注入回调
+    /// - Parameters:
+    ///   - jsCode: js代码字符串
+    ///   - completeBlock: 回调
+    /// - Returns: block
+    public func evaluateJs(jsCode: String, completeBlock: ((_ result: Any?, _ error: Error?) -> ())?) {
+        self.wkWebView.evaluateJavaScript(jsCode) { (result, error) in
+            completeBlock?(result, error)
+        }
+    }
+    
+    public func addMethod(name: String) {
+        self.scriptMsgName = name
+        self.wkConfig.userContentController.add(self, name: name)
+    }
+    
+    public func addMethod(name: String, completeBlock: ((_ name: String, _ param: Any) -> ())?) {
+        self.scriptMsgHandleBlock = completeBlock
+        self.addMethod(name: name)
+    }
+    
+    public func removeMethod(name: String) {
+        self.wkConfig.userContentController.removeScriptMessageHandler(forName: name)
+    }
+    
+    public func removeAllMethods() {
+        self.wkConfig.userContentController.removeAllUserScripts()
+    }
 }
 
 //MARK: - call backs
 extension BaseWKWebController {
     
+    /// 回调到外部 message.body可以固定格式: {"methodname":"xxx","callback":{}}
+    /// - Parameters:
+    ///   - name: 指定监听方法名(scriptMsgName)
+    ///   - param: message.body回调内容
+    public func scriptMsgHandle(name: String, param: Any) {
+        //print("scriptMsgHandle--\(param)")
+        self.scriptMsgHandleBlock?(name, param)
+    }
 }
 
 //MARK: - delegate or data source
+//MARK: - WKUIDelegate, WKNavigationDelegate
 extension BaseWKWebController: WKUIDelegate, WKNavigationDelegate {
  
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
@@ -138,6 +183,19 @@ extension BaseWKWebController: WKUIDelegate, WKNavigationDelegate {
     
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("webView#didFail--")
+    }
+}
+
+//MARK: - WKScriptMessageHandler
+extension BaseWKWebController: WKScriptMessageHandler {
+    
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print("method name:\(message.name)")
+        //print("content:\(message.body)")
+        guard let methodName = self.scriptMsgName, methodName.isEmpty == false else { return }
+        if methodName == message.name {
+            self.scriptMsgHandle(name: methodName, param: message.body)
+        }
     }
 }
 

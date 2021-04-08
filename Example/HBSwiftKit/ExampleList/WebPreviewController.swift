@@ -15,10 +15,21 @@ class WebPreviewController: BaseWKWebController {
     override func setupUi() {
         super.setupUi()
         self.title = "Web Preview"
-        self.remoteUrl = "https://www.baidu.com" //"https://space.bilibili.com/325538782"
-        //self.localPath = "help_cn.html"
+        //self.remoteUrl = "https://www.baidu.com" //"https://space.bilibili.com/325538782"
+        self.remoteUrl = "http://192.168.2.70:8080"
+        //self.localPath = "jstest.html"
         self.progressViewBackColor = .systemBlue
         self.progressViewTintColor = .red
+        self.scriptMsgName = "ScanAction"
+        self.addMethod(name: "ScanAction") {[weak self] (methodname, content) in
+            print("methodname:\(methodname), content:\(content)")
+            //self?.evaluateJs(jsCode: "1111", completeBlock: nil)
+        }
+        
+//        self.scriptMsgHandleBlock = { (methodname, content) in
+//            //
+//            print("2methodname:\(methodname), content:\(content)")
+//        }
     }
 }
 
