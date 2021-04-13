@@ -5,6 +5,7 @@
 //  Created by Hubin_Huang on 2021/3/8.
 //  Copyright © 2020 Wingto. All rights reserved.
 
+import UIKit
 import Foundation
 
 //MARK: - global var and methods

@@ -14,6 +14,24 @@ import WebKit
 //3. JS交互规格标准
 //4. 代理回调处理???
 
+//#1. 若需要支持http,主工程必要ATS配置, 详情参考 https://onevcat.com/2016/06/ios-10-ats/
+/**
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+ <plist version="1.0">
+ <dict>
+     <key>NSAllowsArbitraryLoads</key>
+     <true/>
+     <key>NSAllowsArbitraryLoadsInWebContent</key>
+     <true/>
+     <key>NSAllowsArbitraryLoadsForMedia</key>
+     <true/>
+ </dict>
+ </plist>
+ */
+
+//#2. 白屏问题参考 WKWebView 那些坑 https://mp.weixin.qq.com/s/rhYKLIbXOsUJC_n6dt9UfA?
+
 //fileprivate typealias MethodName = String
 //MARK: - main class
 open class BaseWKWebController: BaseViewController {
@@ -23,7 +41,7 @@ open class BaseWKWebController: BaseViewController {
     /// 指定本地地址
     public var localPath: String?
     /// 指定需要监听的脚本方法名
-    public var scriptMsgName: String?
+    private var scriptMsgName: String?
     private var scriptMsgHandleBlock: ((_ name: String, _ param: Any) -> ())?
     
     /// 是否显示进度条
@@ -66,6 +84,7 @@ open class BaseWKWebController: BaseViewController {
         let wkWebView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - kNavBarAndSafeHeight), configuration: self.wkConfig)
         wkWebView.uiDelegate = self
         wkWebView.navigationDelegate = self
+        wkWebView.scrollView.delegate = self
         return wkWebView
     }()
     
@@ -95,6 +114,14 @@ open class BaseWKWebController: BaseViewController {
 //        if let methodName = self.scriptMsgName, methodName.isEmpty == false {
 //            self.addMethod(name: methodName)
 //        }
+    }
+    
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // 白屏问题处理
+        if wkWebView.title == nil {
+            wkWebView.reload()
+        }
     }
     
     open override func viewWillDisappear(_ animated: Bool) {
@@ -136,11 +163,13 @@ extension BaseWKWebController {
         }
     }
     
+    /// 建议只注册一个标识, 通过配置的参数体区分调用即可
     public func addMethod(name: String) {
         self.scriptMsgName = name
         self.wkConfig.userContentController.add(self, name: name)
     }
     
+    /// 回调到外部 message.body可以固定格式: {"methodname":"xxx","callback":{}}
     public func addMethod(name: String, completeBlock: ((_ name: String, _ param: Any) -> ())?) {
         self.scriptMsgHandleBlock = completeBlock
         self.addMethod(name: name)
@@ -183,6 +212,21 @@ extension BaseWKWebController: WKUIDelegate, WKNavigationDelegate {
     
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("webView#didFail--")
+        self.progressView.isHidden = true
+    }
+    
+    public func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        print("webView#webViewWebContentProcessDidTerminate--")
+        webView.reload()
+    }
+}
+
+extension BaseWKWebController: UIScrollViewDelegate {
+
+    // 调整webview滚动速率
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollView.decelerationRate = .normal //.fast 惯性变小
+        print("wkWebView#scrollViewWillBeginDragging--")
     }
 }
 
