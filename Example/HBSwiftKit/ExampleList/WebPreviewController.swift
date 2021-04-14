@@ -16,7 +16,7 @@ class WebPreviewController: BaseWKWebController {
         super.setupUi()
         self.title = "Web Preview"
         //self.remoteUrl = "https://www.baidu.com" //"https://space.bilibili.com/325538782"
-        self.remoteUrl = "http://192.168.2.70:8080" //"http://172.16.1.139/smarthome/ythomesdk-ios" //
+        self.remoteUrl = "http://172.16.1.139/smarthome/ythomesdk-ios" //"http://192.168.2.70:8080" // //
         //self.localPath = "jstest.html"
         self.progressViewBackColor = .systemBlue
         self.progressViewTintColor = .red
