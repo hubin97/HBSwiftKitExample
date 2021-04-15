@@ -191,7 +191,7 @@ extension BaseWKWebController {
     /// - Parameters:
     ///   - name: 指定监听方法名(scriptMsgName)
     ///   - param: message.body回调内容
-    public func scriptMsgHandle(name: String, param: Any) {
+    private func scriptMsgHandle(name: String, param: Any) {
         //print("scriptMsgHandle--\(param)")
         self.scriptMsgHandleBlock?(name, param)
     }
