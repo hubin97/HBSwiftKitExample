@@ -14,7 +14,7 @@ import Foundation
 class DatePickerController: BaseViewController {
 
     lazy var datePicker: Wto_DatePicker = {
-        let datePicker = Wto_DatePicker.init(frame: CGRect(x: 15, y: kScreenHeight - kBottomSafeHeight - 250 - kNavBarAndSafeHeight, width: kScreenWidth - 30, height: 250))
+        let datePicker = Wto_DatePicker.init(frame: CGRect(x: 15, y: kScreenH - kBottomSafeHeight - 250 - kNavBarAndSafeHeight, width: kScreenW - 30, height: 250))
         datePicker.datePickerMode = .year_week
         //datePicker.isSelectDecs = true
         datePicker.showiOS14SelectedBgColor = false
@@ -36,13 +36,13 @@ class DatePickerController: BaseViewController {
         // "乘积C的第m行第n列的元素等于矩阵A的第m行的元素与矩阵B的第n列对应元素乘积之和。"
         let textlabel = UILabel.init(text: "乘积C的第m行第n列的元素等于矩阵A的第m行的元素与矩阵B的第n列对应元素乘积之和。", textColor: .orange, lineBreakMode: .byCharWrapping, numberLines: 0, lineSpacing: 10)
         view.addSubview(textlabel)
-        textlabel.frame = CGRect(x: 15, y: 10, width: kScreenWidth - 30, height: 75)
+        textlabel.frame = CGRect(x: 15, y: 10, width: kScreenW - 30, height: 75)
         textlabel.setRoundCorners()
         
         let w = textlabel.estimatedWidth(maxHeight: 30)
         print("w:\(w)")
 
-        let h = textlabel.estimatedHeight(maxWidth: kScreenWidth - 30)
+        let h = textlabel.estimatedHeight(maxWidth: kScreenW - 30)
         print("h:\(h)")
 
         /// 渐变色

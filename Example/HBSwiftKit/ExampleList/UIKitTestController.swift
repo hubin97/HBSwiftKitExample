@@ -49,21 +49,58 @@ class UIKitTestController: BaseViewController {
     //var isExpand = false
     let ball = UIImageView()
     
+    @objc func btnAction1(_ sender: UIButton) {
+        print("btnAction1")
+    }
+    
+    @objc func btnAction2(_ sender: UIButton) {
+        print("btnAction2")
+    }
+    
+    @objc func btnAction3(_ sender: UIButton) {
+        print("btnAction3")
+    }
+    
     override func setupUi() {
         super.setupUi()
         
         self.title = "UIKit Test"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction))
-                
-        // 刻度尺
-        rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 150, width: 50, height: 400), direction: .vertical, rulerLineSpacing: 15, minValue: 15, maxValue: 40)
-        view.addSubview(rulerView)
-        rulerView.setRoundCorners()
-
-        let rulerView2 = SliderRuler.init(frame: CGRect(x: 20, y: 0, width: kScreenWidth - 40, height: 50), direction: .horizontal, rulerLineSpacing: 15, minValue: 16, maxValue: 32)
-        view.addSubview(rulerView2)
-        rulerView2.setRoundCorners()
+          
+        let btn1 = UIButton.init(frame: CGRect(x: 20, y: 100, width: 300, height: 100))
+        btn1.addTarget(self, action: #selector(btnAction1), for: .touchUpInside)
+        btn1.setTitle("哈HH阿卡", for: .normal)
+        btn1.setTitleColor(.black, for: .normal)
+        btn1.titleLabel?.font = UIFont.systemFont(ofSize: kScaleW(30), weight: .semibold)
+        btn1.drawTextLineColor = .orange
+        btn1.drawTextLineWidth = 2
+        view.addSubview(btn1)
+        btn1.setRoundCorners(borderColor: .red)
         
+        let btn2 = UIButton.init(frame: CGRect(x: 100, y: 300, width: 100, height: 100))
+        btn2.addTarget(self, action: #selector(btnAction2), for: .touchUpInside)
+        btn2.touchAreaInsets = UIEdgeInsetsMake(50, 50, 50, 50)
+        view.addSubview(btn2)
+        btn2.setRoundCorners(borderColor: .green)
+
+        let btn3 = UIButton.init(type: .custom)
+        btn3.frame = CGRect(x: 100, y: 500, width: 100, height: 100)
+        btn3.setBackgroundImage(UIImage().imageWithColor(color: .brown), for: .normal)
+        btn3.addTarget(self, action: #selector(btnAction3), for: .touchUpInside)
+        //btn3.touchAreaInsets = UIEdgeInsetsMake(50, 150, 50, 150)
+        btn3.showScaleAnimate = true
+        btn3.showScale = 3
+        view.addSubview(btn3)
+        btn3.setRoundCorners(borderColor: .blue)
+
+//        // 刻度尺
+//        rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 150, width: 50, height: 400), direction: .vertical, rulerLineSpacing: 15, minValue: 15, maxValue: 40)
+//        view.addSubview(rulerView)
+//        rulerView.setRoundCorners()
+//
+//        let rulerView2 = SliderRuler.init(frame: CGRect(x: 20, y: 0, width: kScreenW - 40, height: 50), direction: .horizontal, rulerLineSpacing: 15, minValue: 16, maxValue: 32)
+//        view.addSubview(rulerView2)
+//        rulerView2.setRoundCorners()
         
 //        view.addSubview(ball)
 //        ball.frame = CGRect(x: 40, y: 200, width: 100, height: 100)
@@ -189,6 +226,8 @@ extension UIKitTestController {
         /// R库不勾选provides namespace时, 获取到的图片名无效, 无法显示图片
 //        let name = R.image.tabBar.home_h.name
 //        YTHitView.setHitWidth(200).setHitSuccImg(name).showSuccess(message: "WTF???")
+        
+        //MFMessageComposeViewController
     }
     
     func bouncesAni() {

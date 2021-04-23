@@ -7,17 +7,6 @@
 
 import UIKit
 
-// https://github.com/Tliens/SpeedySwift
-struct reqHead {
-    let magicl: UInt8 = 0xFF  // 1  0xff
-    let magic2: UInt8 = 0x55  // 1  0x55
-    let msg_type: Int16 = 3 // 2
-    let msg_len: Int16 = 12 // 2
-    let res_code: Int16 = 0 // 2
-    let reserv: Int32 = 0   // 4
-    
-}
-
 //MARK: - main class
 class ViewController: BaseViewController {
 
@@ -34,7 +23,7 @@ class ViewController: BaseViewController {
     }()
     
     lazy var listView: UITableView = {
-        let listView = UITableView.init(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - kNavBarAndSafeHeight - kBottomSafeHeight), style: .plain)
+        let listView = UITableView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight), style: .plain)
         listView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
         listView.tableFooterView = UIView.init(frame: CGRect.zero)
         listView.dataSource = self
@@ -50,17 +39,6 @@ class ViewController: BaseViewController {
         
         view.addSubview(listView)
         listView.reloadData()
-        
-//        var car = "Benz"
-//        let closure = { [car] in
-//          print("I drive \(car)")
-//        }
-//        car = "Tesla"
-//        closure()
-        
-        let head = reqHead()
-        //head.magicl
-        print("head:\(head)")
     }
     
     override func viewWillAppear(_ animated: Bool) {

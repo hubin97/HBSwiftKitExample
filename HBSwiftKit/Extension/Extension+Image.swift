@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 //MARK: - global var and methods
-public typealias Extension_Image = UIImage
+fileprivate typealias Extension_Image = UIImage
 
 //MARK: - main class
 extension Extension_Image {

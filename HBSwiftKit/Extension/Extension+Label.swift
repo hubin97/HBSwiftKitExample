@@ -5,10 +5,11 @@
 //  Created by Hubin_Huang on 2021/1/20.
 //  Copyright © 2020 Wingto. All rights reserved.
 
+//单元测试 ✅
 import Foundation
 
 //MARK: - global var and methods
-public typealias Extension_Label = UILabel
+fileprivate typealias Extension_Label = UILabel
 
 //MARK: - main class
 extension Extension_Label {

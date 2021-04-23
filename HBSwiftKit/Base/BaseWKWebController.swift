@@ -11,7 +11,7 @@ import WebKit
 //MARK: - global var and methods
 //1. 加载区分本地/远端的url ✅
 //2. 监听加载进度,可定制 ✅
-//3. JS交互规格标准
+//3. JS交互规格标准 ✅
 //4. 代理回调处理???
 
 //#1. 若需要支持http,主工程必要ATS配置, 详情参考 https://onevcat.com/2016/06/ios-10-ats/
@@ -43,14 +43,15 @@ open class BaseWKWebController: BaseViewController {
     /// 指定需要监听的脚本方法名
     private var scriptMsgName: String?
     private var scriptMsgHandleBlock: ((_ name: String, _ param: Any) -> ())?
-    
     /// 是否显示进度条
     public var showProgress: Bool = true
+    /// 进度条背景色
     public var progressViewBackColor: UIColor? {
         didSet {
             progressView.trackTintColor = progressViewBackColor
         }
     }
+    /// 进度条填充色
     public var progressViewTintColor: UIColor?  {
         didSet {
             progressView.tintColor = progressViewTintColor

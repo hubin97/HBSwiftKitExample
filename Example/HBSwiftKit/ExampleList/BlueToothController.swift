@@ -15,7 +15,7 @@ class BlueToothController: BaseViewController {
 
     var dataArrays = [BleModel]()
     lazy var listView: UITableView = {
-        let listView = UITableView.init(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - kNavBarAndSafeHeight - kBottomSafeHeight), style: .plain)
+        let listView = UITableView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight), style: .plain)
         listView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
         listView.tableFooterView = UIView.init(frame: CGRect.zero)
         listView.dataSource = self

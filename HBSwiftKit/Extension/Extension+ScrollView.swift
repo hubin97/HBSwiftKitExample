@@ -8,7 +8,7 @@
 import Foundation
 
 //MARK: - global var and methods
-public typealias Extension_ScrollView = UIScrollView
+fileprivate typealias Extension_ScrollView = UIScrollView
 
 //MARK: - main class
 

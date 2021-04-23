@@ -232,7 +232,7 @@ public class Wto_AlertView: UIView {
             alert_height = max_alert_height
         }
         
-        titleLabel.frame = CGRect(x: l_kpadding, y: kpadding, width: alert_width - kpadding, height: t_height)
+        titleLabel.frame = CGRect(x: kpadding, y: kpadding, width: alert_width - 2 * kpadding, height: t_height)
         messageScroll.frame = CGRect(x: l_kpadding, y: kpadding + t_height + s_kpadding, width: alert_width - kpadding, height: mmin_height)
         messageLabel.frame = CGRect(x: 0, y: 0, width: messageScroll.frame.width, height: m_height)
         actionsView.frame = CGRect(x: 0, y: messageScroll.frame.maxY + kpadding, width: alert_width, height: a_height)
@@ -509,3 +509,68 @@ extension Wto_AlertView {
 }
 
 
+//MARK: - AlertBlockView
+public class AlertBlockView: UIViewController {
+    
+    var alertVc: UIAlertController?
+    var alertActions = [UIAlertAction]()
+    
+    /// 便捷初始化1
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - message: 消息体
+    convenience init(title: String?, message: String?) {
+        self.init()
+        alertVc = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+    }
+    
+    /// 便捷初始化2
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - message: 消息体
+    ///   - actions: 按钮数组
+    ///   - tapAction: 按钮事件回调
+    convenience init(title: String?, message: String?, actions: [String]?, tapAction: ((_ index: Int, _ title: String) -> ())?) {
+        self.init(title: title, message: message)
+        guard let actions = actions, actions.count > 0 else { return }
+        for idx in 0..<actions.count {
+            let title = actions[idx]
+            let action = UIAlertAction.init(title: title, style: .default) { (alertAction) in
+                tapAction?(idx, title)
+            }
+            alertActions.append(action)
+            alertVc?.addAction(action)
+        }
+    }
+    
+    /// 添加按钮及事件回调
+    /// 注意设置系统样式为cancel, 则按钮固定居左(超过2个时放最底部), 其余顺序排; 一个alert最多一个cancel
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - style: 同系统样式
+    ///   - tapAction: block回调
+    public func addAction(title: String, style: UIAlertAction.Style = .default, tapAction: ((_ alertAction: UIAlertAction) -> Void)?) {
+        let actionMeta = UIAlertAction.init(title: title, style: style, handler: tapAction)
+        alertActions.append(actionMeta)
+        alertVc?.addAction(actionMeta)
+    }
+    
+    /// 展示alert, 必须放最后调用
+    /// - Parameter duration: 仅在无UIAlertAction时生效
+    public func show(_ duration: Double = 2) {
+        guard let alertVc = alertVc else { return }
+        DispatchQueue.main.async {
+            getCurrentVc()?.present(alertVc, animated: true, completion: nil)
+            if self.alertActions.count == 0 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                    self.hide()
+                }
+            }
+        }
+    }
+    
+    public func hide() {
+        guard let alertVc = alertVc else { return }
+        alertVc.dismiss(animated: true, completion: nil)
+    }
+}

@@ -5,11 +5,12 @@
 //  Created by hubin.h@wingto.cn on 2020/12/26.
 //  Copyright © 2020 云图数字 All rights reserved.
 
+//单元测试 ✅
 import Foundation
 import CoreFoundation
 
 //MARK: - global var and methods
-public typealias Extension_String = String
+fileprivate typealias Extension_String = String
 //public typealias NSExtension_String = NSString
 
 //MARK: - main class
@@ -81,6 +82,25 @@ extension Extension_String {
             return formatter.date(from: formatter.string(from: Date()))!
         }
         return date
+    }
+
+    /// 计算文本段落的尺寸(默认字号17, 行距5)
+    /// - Parameters:
+    ///   - maxSize: 最大尺寸
+    ///   - attributes: 属性
+    ///   - font: 字号. 仅attributes =nil时生效
+    ///   - lineSpacing: 行距. 仅attributes =nil时生效
+    /// - Returns: 预计尺寸
+    public func estimatedSize(maxSize: CGSize, attributes: [NSAttributedString.Key : Any]? = nil, font: UIFont = UIFont.systemFont(ofSize: 17), lineSpacing: CGFloat = 5) -> CGSize {
+        guard let attributes = attributes else {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = lineSpacing - (font.lineHeight - font.pointSize)
+            paragraphStyle.alignment = .left
+            paragraphStyle.lineBreakMode = .byCharWrapping
+            let attributes_def = [NSAttributedString.Key.font: font, NSAttributedString.Key.paragraphStyle: paragraphStyle]
+            return NSString(string: self).boundingRect(with: maxSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes_def, context: nil).size
+        }
+        return NSString(string: self).boundingRect(with: maxSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes, context: nil).size
     }
 }
 

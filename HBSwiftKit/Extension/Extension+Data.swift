@@ -7,7 +7,7 @@
 
 import Foundation
 
-public typealias Extension_Data = Data
+fileprivate typealias Extension_Data = Data
 
 extension Extension_Data {
     

@@ -8,7 +8,7 @@
 import Foundation
 
 //MARK: - global var and methods
-public typealias Extension_Date = Date
+fileprivate typealias Extension_Date = Date
 
 //MARK: - main class
 extension Extension_Date {

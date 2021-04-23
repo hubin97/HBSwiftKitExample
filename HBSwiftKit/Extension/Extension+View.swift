@@ -18,7 +18,7 @@ import Foundation
  */
 
 //MARK: - global var and methods
-public typealias Extension_View = UIView
+fileprivate typealias Extension_View = UIView
 
 //MARK: - main class
 //MARK: 快捷属性操作

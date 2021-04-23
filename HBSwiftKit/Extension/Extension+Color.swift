@@ -5,10 +5,11 @@
 //  Created by Hubin_Huang on 2021/3/8.
 //  Copyright © 2020 Wingto. All rights reserved.
 
+//单元测试 ✅
 import Foundation
 
 //MARK: - global var and methods
-public typealias Extension_Color = UIColor
+fileprivate typealias Extension_Color = UIColor
 
 //MARK: - main class
 
@@ -32,6 +33,8 @@ extension Extension_Color {
         let scanner = Scanner(string: hexString)
         if hexString.hasPrefix("#") {
             scanner.scanLocation = 1
+        } else if hexString.hasPrefix("0x") || hexString.hasPrefix("0X") {
+            scanner.scanLocation = 2
         }
         var color: UInt32 = 0
         scanner.scanHexInt32(&color)

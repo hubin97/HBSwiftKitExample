@@ -69,7 +69,7 @@ class ImageBrowerController: BaseViewController {
     }()
     
     lazy var layout: UICollectionViewFlowLayout = {
-        let albumItemWidth = (kScreenWidth - CGFloat(albumCol + 1) * albumMinSpacing - 2 * albumMinSpacing) / CGFloat(albumCol)
+        let albumItemWidth = (kScreenW - CGFloat(albumCol + 1) * albumMinSpacing - 2 * albumMinSpacing) / CGFloat(albumCol)
         let layout = UICollectionViewFlowLayout.init()
         layout.sectionInset = UIEdgeInsets(top: albumMinSpacing, left: 2 * albumMinSpacing, bottom: albumMinSpacing, right: 2 * albumMinSpacing)
         layout.minimumLineSpacing = albumMinSpacing
@@ -79,7 +79,7 @@ class ImageBrowerController: BaseViewController {
     }()
     
     lazy var albumCollect: UICollectionView = {
-        let collection = UICollectionView.init(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - kNavBarAndSafeHeight - kBottomSafeHeight), collectionViewLayout: layout)
+        let collection = UICollectionView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight), collectionViewLayout: layout)
         collection.backgroundColor = .clear
         collection.register(SnapshotItem.self, forCellWithReuseIdentifier: NSStringFromClass(SnapshotItem.self))
         collection.dataSource = self
@@ -88,7 +88,7 @@ class ImageBrowerController: BaseViewController {
     }()
     
     lazy var toolBar: IBToolBar = {
-        let toolBar = IBToolBar.init(frame: CGRect(x: 0, y: albumCollect.frame.maxY, width: kScreenWidth, height: kTabBarAndSafeHeight))
+        let toolBar = IBToolBar.init(frame: CGRect(x: 0, y: albumCollect.frame.maxY, width: kScreenW, height: kTabBarAndSafeHeight))
         toolBar.leftBtn.addTarget(self, action: #selector(shareAction), for: .touchUpInside)
         toolBar.rightBtn.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
         return toolBar
@@ -327,7 +327,7 @@ class IBToolBar: UIView {
         super.init(frame: frame)
         
         self.backgroundColor = .white
-        let lineView = UIView.init(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 0.5))
+        let lineView = UIView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: 0.5))
         self.addSubview(lineView)
         lineView.backgroundColor = .groupTableViewBackground
         
@@ -337,11 +337,11 @@ class IBToolBar: UIView {
         leftBtn.isEnabled = false
         
         self.addSubview(rightBtn)
-        rightBtn.frame = CGRect(x: kScreenWidth - 60, y: 4.5, width: 40, height: 40)
+        rightBtn.frame = CGRect(x: kScreenW - 60, y: 4.5, width: 40, height: 40)
         rightBtn.setImage(UIImage(named: "ib_remove"), for: .normal)
         rightBtn.isEnabled = false
 
-        countLabel.frame = CGRect(x: 70, y: 4.5, width: kScreenWidth - 140, height: 40)
+        countLabel.frame = CGRect(x: 70, y: 4.5, width: kScreenW - 140, height: 40)
         self.addSubview(countLabel)
         countLabel.text = "选择照片"
         countLabel.font = UIFont.systemFont(ofSize: 18)

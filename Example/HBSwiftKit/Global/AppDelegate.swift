@@ -24,6 +24,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //tabBarVc.tabBar.barTintColor = .orange
         tabBarVc.setTabBarColors(normalColor: .lightGray, selectColor: .systemBlue)
         self.window?.rootViewController = tabBarVc
+        
+        AuthStatus.locationServices { (status) in
+            print("定位权限\(status ? "on": "off")")
+        }
+        AuthStatus.apnsServices { (status) in
+            print("推送权限\(status ? "on": "off")")
+        }
+        AuthStatus.cameraService { (status) in
+            print("相机权限\(status ? "on": "off")")
+        }
+        AuthStatus.albumService { (status) in
+            print("相册权限\(status ? "on": "off")")
+        }
+        AuthStatus.microphoneService { (status) in
+            print("麦克风权限\(status ? "on": "off")")
+        }
+        AuthStatus.bleService { (status) in
+            print("蓝牙权限\(status ? "on": "off")")
+        }
+        AuthStatus.cellularDataService { (status) in
+            print("蜂窝权限\(status ? "on": "off")")
+        }
+        AuthStatus.networkService { (status) in
+            print("网络状态\(status ? "on": "off")")
+        }
+        
         return true
     }
 }
