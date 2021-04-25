@@ -61,7 +61,7 @@ public let kUUIDString = UIDevice.current.identifierForVendor?.uuidString
 
 /// info.plist
 public let kInfoPlist = Bundle.main.infoDictionary ?? Dictionary()
-public let kAppVersion = kInfoPlist.value(forKey: "CFBundleShortVersionString")
+//public let kAppVersion = kInfoPlist.value(forKey: "CFBundleShortVersionString")
 
 
 public func getCurrentVc(_ vc: UIViewController? = nil) -> UIViewController? {

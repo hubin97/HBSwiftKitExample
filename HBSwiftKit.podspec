@@ -66,6 +66,8 @@ Pod::Spec.new do |s|
   
   s.subspec 'Tools' do |ss|
       ss.source_files  = 'HBSwiftKit/Tools/'
+      ss.dependency 'HBSwiftKit/Global'
+      ss.dependency 'HBSwiftKit/UIKit'
   end
   
 #  s.subspec 'Assets' do |dd|
