@@ -13,8 +13,8 @@ import Foundation
 //MARK: - main class
 class DatePickerController: BaseViewController {
 
-    lazy var datePicker: Wto_DatePicker = {
-        let datePicker = Wto_DatePicker.init(frame: CGRect(x: 15, y: kScreenH - kBottomSafeHeight - 250 - kNavBarAndSafeHeight, width: kScreenW - 30, height: 250))
+    lazy var datePicker: YTDatePicker = {
+        let datePicker = YTDatePicker.init(frame: CGRect(x: 15, y: kScreenH - kBottomSafeHeight - 250 - kNavBarAndSafeHeight, width: kScreenW - 30, height: 250))
         datePicker.datePickerMode = .year_week
         //datePicker.isSelectDecs = true
         datePicker.showiOS14SelectedBgColor = false

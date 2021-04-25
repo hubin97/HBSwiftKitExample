@@ -6,6 +6,7 @@
             var ctuapp_share_img="www.baidu.com";
             function scanClick() {
                 window.webkit.messageHandlers.ScanAction.postMessage(null);
+                android.webSend();
             }
                 
             function shareClick() {

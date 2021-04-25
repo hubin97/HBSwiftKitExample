@@ -1,5 +1,5 @@
 //
-//  Wto_AlertView.swift
+//  YTAlertView.swift
 //  WingToSmart
 //
 //  Created by hubin.h@wingto.cn on 2020/7/31.
@@ -7,18 +7,18 @@
 
 /**
      // 1
-     Wto_AlertView.init(title: "温馨提示", message: "确定要执行此操作确定要执行此操作确定要执行此操作确定要执行此操作吗?", actions: nil, tapAction: nil).show()
+     YTAlertView.init(title: "温馨提示", message: "确定要执行此操作确定要执行此操作确定要执行此操作确定要执行此操作吗?", actions: nil, tapAction: nil).show()
      
      // 2
      let actions = ["取消", "确定"] //[String]() //["取消", "确定", "保存"] //["取消", "确定", "保存", "重置", "提交"]
-     let alert = Wto_AlertView.init(title: "温馨提示", message: "确定要执行此操作确定要执行此操作确定要执行此操作吗?", actions: actions) { (index, title) in
+     let alert = YTAlertView.init(title: "温馨提示", message: "确定要执行此操作确定要执行此操作确定要执行此操作吗?", actions: actions) { (index, title) in
          print("index:\(index) title - \(title)")
      }
      alert.setActionTextColor(0, .gray)
      alert.show()
      
      // 3
-     let alert = Wto_AlertView.init(title: "温馨提示", message: "确定要执行此操作确定要执行此操作确定要执行此操作吗?")
+     let alert = YTAlertView.init(title: "温馨提示", message: "确定要执行此操作确定要执行此操作确定要执行此操作吗?")
      alert.addAction("取消") {
          print("addAction- 取消")
      }
@@ -33,7 +33,7 @@
      alert.show()
      
      // 4
-     let alert = Wto_AlertView.init(title: "温馨提示", message: "确定要执行此操作吗?", actions: ["取消11", "确定11"]) { (index, action) in
+     let alert = YTAlertView.init(title: "温馨提示", message: "确定要执行此操作吗?", actions: ["取消11", "确定11"]) { (index, action) in
          print("actions - \(action)")
      }
      
@@ -51,7 +51,7 @@
      alert.show()
  
      // 5 扩展间距变更
- public typealias AlertView = Wto_AlertView
+ public typealias AlertView = YTAlertView
  extension AlertView {
      
      /** 默认间距变更
@@ -80,6 +80,9 @@
          setup(title: title, icon: icon, iconSize: iconSize, message: message, actions: nil)
      }
  }
+ 
+    // 6. 系统类封装 AlertBlockView
+    AlertBlockView.init(title: "标题", message: "这是消息体", actions: ["我知道了"], tapAction: nil).show()
  */
 import UIKit
 import Foundation
@@ -117,7 +120,7 @@ fileprivate func setLabelLineSpacing(label: UILabel, lineSpacing: CGFloat = 9, _
 
 
 //MARK: - main class
-public class Wto_AlertView: UIView {
+public class YTAlertView: UIView {
     
     var allActions = [Wto_Action]()
     var tapAction: ((_ index: Int, _ title: String) -> ())?
@@ -430,7 +433,7 @@ public class Wto_Action {
 }
 
 //MARK: - private mothods
-extension Wto_AlertView {
+extension YTAlertView {
     
     public func show() {
         DispatchQueue.main.async {
@@ -488,7 +491,7 @@ extension Wto_AlertView {
 }
 
 //MARK: - call backs
-extension Wto_AlertView {
+extension YTAlertView {
 
     @objc func btnTapAction(_ sender: UIButton) {
         //print("tapAction--\(sender.titleLabel?.text ?? "")")
@@ -512,14 +515,14 @@ extension Wto_AlertView {
 //MARK: - AlertBlockView
 public class AlertBlockView: UIViewController {
     
-    var alertVc: UIAlertController?
-    var alertActions = [UIAlertAction]()
+    private var alertVc: UIAlertController?
+    private var alertActions = [UIAlertAction]()
     
     /// 便捷初始化1
     /// - Parameters:
     ///   - title: 标题
     ///   - message: 消息体
-    convenience init(title: String?, message: String?) {
+    public convenience init(title: String?, message: String?) {
         self.init()
         alertVc = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
     }
@@ -530,7 +533,7 @@ public class AlertBlockView: UIViewController {
     ///   - message: 消息体
     ///   - actions: 按钮数组
     ///   - tapAction: 按钮事件回调
-    convenience init(title: String?, message: String?, actions: [String]?, tapAction: ((_ index: Int, _ title: String) -> ())?) {
+    public convenience init(title: String?, message: String?, actions: [String]?, tapAction: ((_ index: Int, _ title: String) -> ())?) {
         self.init(title: title, message: message)
         guard let actions = actions, actions.count > 0 else { return }
         for idx in 0..<actions.count {
@@ -549,7 +552,7 @@ public class AlertBlockView: UIViewController {
     ///   - title: 标题
     ///   - style: 同系统样式
     ///   - tapAction: block回调
-    public func addAction(title: String, style: UIAlertAction.Style = .default, tapAction: ((_ alertAction: UIAlertAction) -> Void)?) {
+    public func addAction(_ title: String, _ style: UIAlertAction.Style = .default, tapAction: ((_ alertAction: UIAlertAction) -> Void)?) {
         let actionMeta = UIAlertAction.init(title: title, style: style, handler: tapAction)
         alertActions.append(actionMeta)
         alertVc?.addAction(actionMeta)

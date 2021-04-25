@@ -1,10 +1,4 @@
-//
-//  SpeedySandBox.swift
-//  SpeedySwift
-//
-//  Created by Quinn Von on 2020/4/29.
-//  Copyright © 2020 Quinn Von. All rights reserved.
-//
+
 // MARK: 沙盒
 import UIKit
 public class AppSandbox: NSObject {

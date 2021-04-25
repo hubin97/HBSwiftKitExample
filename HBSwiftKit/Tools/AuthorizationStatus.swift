@@ -12,7 +12,6 @@ import Photos
 import CoreBluetooth
 //iOS9新增蜂窝网络权限授权 CoreTelephony/CTCellularData
 import CoreTelephony
-//import AlamofireReachability
 
 /**
  <!-- 相册 -->
@@ -233,8 +232,8 @@ public class AuthorizationStatus: NSObject {
         if let productName = kInfoPlist.value(forKey: "CFBundleName") as? String,
            let message = kInfoPlist.value(forKey: "NSBluetoothPeripheralUsageDescription") as? String {
             let alert = AlertBlockView.init(title: "\"\(productName)\"想要使用蓝牙", message: message)
-            alert.addAction(title: "忽略", style: .cancel, tapAction: nil)
-            alert.addAction(title: "去设置") { [weak self] _ in
+            alert.addAction("忽略", .cancel, tapAction: nil)
+            alert.addAction("去设置") { [weak self] _ in
                 self?.openSettings()
             }
             alert.show()

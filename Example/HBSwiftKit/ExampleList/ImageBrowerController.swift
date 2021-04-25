@@ -169,7 +169,7 @@ extension ImageBrowerController {
     }
     
     @objc func deleteAction() {
-        let alert = Wto_AlertView.init(title: "温馨提示", message: "照片将被删除，确认删除吗？")
+        let alert = YTAlertView.init(title: "温馨提示", message: "照片将被删除，确认删除吗？")
         alert.addAction("取消", .lightGray, tapAction: nil)
         alert.addAction("确定") {
             let photoIdList = self.snapshotModels.filter({ $0.isSelected == true }).map({ $0.id! })

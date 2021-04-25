@@ -67,7 +67,7 @@ open class BaseWKWebController: BaseViewController {
     }()
     
     /// 特定配置
-    public lazy var wkConfig: WKWebViewConfiguration = {
+    open lazy var wkConfig: WKWebViewConfiguration = {
         let config = WKWebViewConfiguration.init()
         config.preferences = WKPreferences()
         config.preferences.minimumFontSize = 10
@@ -81,8 +81,8 @@ open class BaseWKWebController: BaseViewController {
     }()
     
     /// 容器
-    public lazy var wkWebView: WKWebView = {
-        let wkWebView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - kNavBarAndSafeHeight), configuration: self.wkConfig)
+    open lazy var wkWebView: WKWebView = {
+        let wkWebView = WKWebView.init(frame: CGRect(x: 0, y: kTopSafeHeight, width: self.view.bounds.width, height: self.view.bounds.height - kTopSafeHeight - kBottomSafeHeight), configuration: self.wkConfig)
         wkWebView.uiDelegate = self
         wkWebView.navigationDelegate = self
         wkWebView.scrollView.delegate = self
@@ -133,6 +133,9 @@ open class BaseWKWebController: BaseViewController {
         if let methodName = self.scriptMsgName, methodName.isEmpty == false {
             self.removeMethod(name: methodName)
         }
+        ///
+        wkWebView.navigationDelegate = nil
+        wkWebView.uiDelegate = nil
     }
     
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -170,7 +173,7 @@ extension BaseWKWebController {
         self.wkConfig.userContentController.add(self, name: name)
     }
     
-    /// 回调到外部 message.body可以固定格式: {"methodname":"xxx","callback":{}}
+    /// 回调到外部 message.body可以固定格式: {"method": String, "content": Any?}
     public func addMethod(name: String, completeBlock: ((_ name: String, _ param: Any) -> ())?) {
         self.scriptMsgHandleBlock = completeBlock
         self.addMethod(name: name)
@@ -202,21 +205,21 @@ extension BaseWKWebController {
 //MARK: - WKUIDelegate, WKNavigationDelegate
 extension BaseWKWebController: WKUIDelegate, WKNavigationDelegate {
  
-    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    open func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         print("webView#didStart--\(webView.title ?? "")")
     }
     
-    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    open func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("webView#didFinish--\(webView.title ?? "")")
         self.navigationItem.title = webView.title
     }
     
-    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    open func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("webView#didFail--")
         self.progressView.isHidden = true
     }
     
-    public func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+    open func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         print("webView#webViewWebContentProcessDidTerminate--")
         webView.reload()
     }
@@ -227,7 +230,7 @@ extension BaseWKWebController: UIScrollViewDelegate {
     // 调整webview滚动速率
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollView.decelerationRate = .normal //.fast 惯性变小
-        print("wkWebView#scrollViewWillBeginDragging--")
+        //print("wkWebView#scrollViewWillBeginDragging--")
     }
 }
 
@@ -235,7 +238,7 @@ extension BaseWKWebController: UIScrollViewDelegate {
 extension BaseWKWebController: WKScriptMessageHandler {
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("method name:\(message.name)")
+        print("scriptName:\(message.name)")
         //print("content:\(message.body)")
         guard let methodName = self.scriptMsgName, methodName.isEmpty == false else { return }
         if methodName == message.name {

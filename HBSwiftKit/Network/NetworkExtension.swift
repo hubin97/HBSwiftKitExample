@@ -39,9 +39,9 @@ class NetworkExtension {
         if #available(iOS 13.0, *) {
             if CLLocationManager.authorizationStatus() == .denied {
                 // 提示弹框可跳转至当前应用的系统设置页面
-                let alert = Wto_AlertView.init(title: "提示", message: "获取WiFi信息需要开启定位, 是否去设置?")
+                let alert = AlertBlockView.init(title: "提示", message: "获取WiFi信息需要开启定位, 是否去设置?")
                 alert.addAction("取消", tapAction: nil)
-                alert.addAction("去设置") {
+                alert.addAction("去设置") {_ in 
                     let settingUrl = NSURL(string: UIApplication.openSettingsURLString)
                     if UIApplication.shared.canOpenURL(settingUrl! as URL) {
                         UIApplication.shared.openURL(settingUrl! as URL)

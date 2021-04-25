@@ -64,7 +64,7 @@ class UIKitTestController: BaseViewController {
     override func setupUi() {
         super.setupUi()
         
-        self.title = "UIKit Test"
+        self.navigationItem.title = "UIKit Test"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction))
           
         let btn1 = UIButton.init(frame: CGRect(x: 20, y: 100, width: 300, height: 100))
@@ -218,7 +218,7 @@ extension UIKitTestController {
 //        YTHitView.show(message: "哈哈哈哈哈哈哈哈", position: .none, noneRect: targetRect)
 //        YTHitView.showSuccess(message: "操作成功")
 //        YTHitView.showSuccess(message: "操作成功", position: .bottom)
-        YTHitView.showWarnning(message: "操作成功", position: .top)
+//        YTHitView.showWarnning(message: "操作成功", position: .top)
 //        YTHitView.showSuccess(message: "操作成功", position: .none, noneRect: targetRect, duration: 1)
 //        YTHitView.setHitHeight(44).showSuccess(message: "OJBK!!!")
         //YTHitView.setHitWidth(200).setHitSuccImg("ib_select").showSuccess(message: "WTF???")
@@ -228,6 +228,8 @@ extension UIKitTestController {
 //        YTHitView.setHitWidth(200).setHitSuccImg(name).showSuccess(message: "WTF???")
         
         //MFMessageComposeViewController
+        AlertBlockView.init(title: "标题", message: "这是消息体", actions: ["我知道了"], tapAction: nil).show()
+
     }
     
     func bouncesAni() {
@@ -257,7 +259,7 @@ extension UIKitTestController {
     }
 }
 
-public typealias AlertView = Wto_AlertView
+public typealias AlertView = YTAlertView
 extension AlertView {
     
     /** 默认间距变更

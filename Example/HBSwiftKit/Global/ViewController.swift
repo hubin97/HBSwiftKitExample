@@ -34,11 +34,8 @@ class ViewController: BaseViewController {
     
     override func setupUi() {
         super.setupUi()
-        
-        title = "Example List"
-        
+        self.navigationItem.title = "Example List"
         view.addSubview(listView)
-        listView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
