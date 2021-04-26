@@ -13,6 +13,21 @@ import Nimble
 @testable import HBSwiftKit_Example
 @testable import HBSwiftKit
 
+class StringLenghtTest: QuickSpec {
+    override func spec() {
+        fdescribe("StringLenghtTest") {
+            it("should print correct test data") {
+                let num = "12345"
+                let alp = "hah"
+                let zh = "哈哈哈"
+                print("数字:\(num.count)")
+                print("字母:\(alp.count)")
+                print("中文:\(zh.count)")
+            }
+        }
+    }
+}
+
 //FIXME: 仍有很大误差
 class ImageHandleTest: QuickSpec {
     override func spec() {
