@@ -59,7 +59,7 @@ open class BaseWKWebController: BaseViewController {
     }
 
     fileprivate lazy var progressView: UIProgressView = {
-        let progressView = UIProgressView.init(frame: CGRect(x: 0, y: self.wkWebView.frame.minY, width: self.wkWebView.frame.width, height: 2))
+        let progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: self.wkWebView.frame.width, height: 2))
         progressView.tintColor = .systemBlue
         progressView.backgroundColor = .lightGray
         progressView.isHidden = true
