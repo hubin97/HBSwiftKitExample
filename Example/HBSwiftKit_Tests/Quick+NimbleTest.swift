@@ -13,6 +13,51 @@ import Nimble
 @testable import HBSwiftKit_Example
 @testable import HBSwiftKit
 
+class ImgExtensionTest: QuickSpec {
+    override func spec() {
+        fdescribe("ImgExtensionTest") {
+            it("should print correct test data") {
+                let img = UIImage.init(color: .brown)
+                
+            }
+        }
+    }
+}
+
+class QPathTest: QuickSpec {
+    override func spec() {
+        fdescribe("QPathTest") {
+            it("should print correct test data") {
+                _ = QPath.filePaths(documentPath ?? "")
+                QPath.removeFile("")
+                //        QPath.createFile(name: "111.txt", fileBaseUrl: URL.init(fileURLWithPath: documentPath ?? ""))
+                //        QPath.createFile(name: "222.txt", fileBaseUrl: URL.init(fileURLWithPath: documentPath ?? ""))
+                QPath.writingToFile(filePath: "\(documentPath ?? "")/222.txt", contents: "啦啦啦啦")
+                QPath.writingToFile(filePath: "\(documentPath ?? "")/222.txt", contents: "\n哦哦哦哦")
+                let dicPath = QPath.createDirectory(basePath: "\(documentPath ?? "")", dicName: "Img")
+                QPath.createFile(filePath: "\(dicPath)/string", contents: "string")
+                QPath.createFile(filePath: "\(dicPath)/img", contents: R.image.tabBar.home_h()!)
+                if let img = R.image.tabBar.home_h(), let imgdata = img.pngData() {
+                    QPath.createFile(filePath: "\(dicPath)/data", contents: imgdata)
+                }
+                
+                /**
+                 ➜  Documents tree
+                 .
+                 ├── 111.txt
+                 ├── 222.txt
+                 └── Img
+                 ├── data
+                 ├── img
+                 └── string
+                 
+                 1 directory, 5 files
+                 */
+            }
+        }
+    }
+}
+
 class StringLenghtTest: QuickSpec {
     override func spec() {
         fdescribe("StringLenghtTest") {
@@ -23,6 +68,35 @@ class StringLenghtTest: QuickSpec {
                 print("数字:\(num.count)")
                 print("字母:\(alp.count)")
                 print("中文:\(zh.count)")
+                
+                        var str = "ABCDEFG"
+                //        let tmp = str[2, 5]
+                //        print("tmp:\(tmp)")
+                //        let tmp2 = str[2, 7]
+                //        print("tmp2:\(tmp2)")
+                //
+                //        str[2, 4] = "cdef"
+                //        print("str:\(str)")
+                //        str[2, 7] = "cdefghijk"
+                //        print("str:\(str)")
+                
+                let tmp = str[0]
+                print("tmp:\(tmp)")
+                // Prints tmp:A
+                
+                let tmp2 = str[5]
+                print("tmp2:\(tmp2)")
+                // Prints tmp2:F
+                
+                str[5] = "*"
+                print("str:\(str)")
+                // Prints str:ABCDE*G
+                
+                str[1] = "###"
+                print("str:\(str)")
+                // Prints str:A###CDE*G
+                
+                str.containEmoji
             }
         }
     }

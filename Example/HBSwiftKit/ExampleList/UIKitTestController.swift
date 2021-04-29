@@ -85,11 +85,11 @@ class UIKitTestController: BaseViewController {
 
         let btn3 = UIButton.init(type: .custom)
         btn3.frame = CGRect(x: 100, y: 500, width: 100, height: 100)
-        btn3.setBackgroundImage(UIImage().imageWithColor(color: .brown), for: .normal)
+        btn3.setBackgroundImage(UIImage(color: .brown), for: .normal)
         btn3.addTarget(self, action: #selector(btnAction3), for: .touchUpInside)
         //btn3.touchAreaInsets = UIEdgeInsetsMake(50, 150, 50, 150)
         btn3.showScaleAnimate = true
-        btn3.showScale = 3
+        btn3.showScale = 1.2
         view.addSubview(btn3)
         btn3.setRoundCorners(borderColor: .blue)
 
@@ -107,74 +107,6 @@ class UIKitTestController: BaseViewController {
 //        ball.backgroundColor = .brown
 //        ball.setRectCorner(radiiSize: 50)
 //
-//        var str = "ABCDEFG"
-////        let tmp = str[2, 5]
-////        print("tmp:\(tmp)")
-////        let tmp2 = str[2, 7]
-////        print("tmp2:\(tmp2)")
-////
-////        str[2, 4] = "cdef"
-////        print("str:\(str)")
-////        str[2, 7] = "cdefghijk"
-////        print("str:\(str)")
-//
-//        let tmp = str[0]
-//        print("tmp:\(tmp)")
-//        // Prints tmp:A
-//
-//        let tmp2 = str[5]
-//        print("tmp2:\(tmp2)")
-//        // Prints tmp2:F
-//
-//        str[5] = "*"
-//        print("str:\(str)")
-//        // Prints str:ABCDE*G
-//
-//        str[1] = "###"
-//        print("str:\(str)")
-//        // Prints str:A###CDE*G
-//        _ = QPath.filePaths(documentPath ?? "")
-//        QPath.removeFile("")
-////        QPath.createFile(name: "111.txt", fileBaseUrl: URL.init(fileURLWithPath: documentPath ?? ""))
-////        QPath.createFile(name: "222.txt", fileBaseUrl: URL.init(fileURLWithPath: documentPath ?? ""))
-//        QPath.writingToFile(filePath: "\(documentPath ?? "")/222.txt", contents: "啦啦啦啦")
-//        QPath.writingToFile(filePath: "\(documentPath ?? "")/222.txt", contents: "\n哦哦哦哦")
-//        let dicPath = QPath.createDirectory(basePath: "\(documentPath ?? "")", dicName: "Img")
-//        QPath.createFile(filePath: "\(dicPath)/string", contents: "string")
-//        QPath.createFile(filePath: "\(dicPath)/img", contents: R.image.tabBar.home_h()!)
-//        if let img = R.image.tabBar.home_h(), let imgdata = UIImagePNGRepresentation(img) {
-//            QPath.createFile(filePath: "\(dicPath)/data", contents: imgdata)
-//        }
-//
-//        /**
-//         ➜  Documents tree
-//            .
-//            ├── 111.txt
-//            ├── 222.txt
-//            └── Img
-//                ├── data
-//                ├── img
-//                └── string
-//
-//            1 directory, 5 files
-//         */
-//
-//        /**
-//         (lldb) po String(data: FileManager.default.contents(atPath: "\(documentPath ?? "")/222.txt")!, encoding: String.Encoding.utf8)
-//         ▿ Optional<String>
-//           - some : "啦啦啦啦\n哦哦哦哦"
-//         */
-//
-//        let testView = UIImageView.init(frame: CGRect(x: 200, y: 200, width: 100, height: 100))
-//        view.addSubview(testView)
-//        testView.backgroundColor = .white
-//        //testView.setLayerShadow(color: .red, offset: CGSize(width: 3, height: 5), radius: 10)
-//        //testView.setLayerCornerShadow(color: .red, offset: CGSize(width: 3, height: 5), radius: 10)
-//        //let img = generateQRCode(text: "setLayerCornerShadow", width: 100)
-//        testView.image = CodeScanner.makeQRCode(text: "哈哈哈--", width: 100, fillImage: R.image.tabBar.home_h(), color: .orange)
-//        let zhs = ["埃尔派", "百世", "橙光", "黄河", "戴尔", "创维"]
-//        zhs.map({ print("zh.toPinyin():\($0.toPinyin())") })
-//        zhs.map({ print("zh.toPYHead():\($0.toPYHead())") })
     }
 }
 

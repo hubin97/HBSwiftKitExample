@@ -22,22 +22,6 @@ fileprivate func imagePathToImage(imagePath: String) -> UIImage? {
     return nil
 }
 
-
-fileprivate func imageWithColor(_ color: UIColor) -> UIImage? {
-    
-    let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-    UIGraphicsBeginImageContext(rect.size)
-    let context = UIGraphicsGetCurrentContext()
-    
-    context?.setFillColor(color.cgColor)
-    context?.fill(rect)
-    
-    let image = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    
-    return image
-}
-
 //MARK: - main class
 class ImageBrowerController: BaseViewController {
 
@@ -166,6 +150,13 @@ extension ImageBrowerController {
         let activityVc = UIActivityViewController.init(activityItems: activityItems as [Any], applicationActivities: nil)
         //activityVc.excludedActivityTypes = [.postToFacebook, .postToTwitter, .postToWeibo, .message, .mail, .print, .copyToPasteboard, .assignToContact, .saveToCameraRoll, .addToReadingList, .postToFlickr, .postToVimeo, .postToTencentWeibo, .airDrop, .openInIBooks]
         self.present(activityVc, animated: true, completion: nil)
+        activityVc.completionWithItemsHandler = {(activityType, completed, items, error) -> Void in
+            if completed == true {
+                print("分享成功")
+            }
+            // 不能少
+            activityVc.completionWithItemsHandler = nil
+        }
     }
     
     @objc func deleteAction() {
@@ -293,8 +284,8 @@ class SnapshotItem: UICollectionViewCell {
         markIconBtn.frame = self.bounds
         markIconBtn.setImage(UIImage(named: "ib_unselect"), for: .normal)
         markIconBtn.setImage(UIImage(named: "ib_select"), for: .selected)
-        markIconBtn.setBackgroundImage(imageWithColor(UIColor.init(white: 0, alpha: 0)), for: .normal)
-        markIconBtn.setBackgroundImage(imageWithColor(UIColor.init(white: 0, alpha: 0.3)), for: .selected)
+        markIconBtn.setBackgroundImage(UIImage(color:UIColor.init(white: 0, alpha: 0)), for: .normal)
+        markIconBtn.setBackgroundImage(UIImage(color:UIColor.init(white: 0, alpha: 0.3)), for: .selected)
         markIconBtn.imageEdgeInsets = UIEdgeInsets(top: self.bounds.size.height - 25, left: self.bounds.size.width - 25, bottom: 0, right: 0)
 
         markIconBtn.addTarget(self, action: #selector(selectAction), for: .touchUpInside)

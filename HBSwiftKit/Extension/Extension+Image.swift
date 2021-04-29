@@ -19,17 +19,19 @@ extension Extension_Image {
     /// - Parameters:
     ///   - color: 颜色
     ///   - size: 尺寸
-    /// - Returns: 图片
-    public func imageWithColor(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
+    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0)) {
         if size.width <= 0 || size.height <= 0 { return nil }
-        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        UIGraphicsBeginImageContext(rect.size)
+        UIGraphicsBeginImageContextWithOptions(size, true, UIScreen.main.scale)
+        defer {
+            UIGraphicsEndImageContext()
+        }
         let context = UIGraphicsGetCurrentContext()
         context?.setFillColor(color.cgColor)
-        context?.fill(rect)
+        context?.fill(CGRect(origin: CGPoint.zero, size: size))
+        context?.setShouldAntialias(true)
         let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
     }
     
     /// 以base64字符串初始化
@@ -88,26 +90,39 @@ extension Extension_Image {
         return flipImage
     }
     
-    /// 根据颜色生成图片
-    /// - Parameters:
-    ///   - color: 颜色
-    ///   - size: 尺寸
-    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0)) {
-        UIGraphicsBeginImageContextWithOptions(size, true, UIScreen.main.scale)
-        defer {
-            UIGraphicsEndImageContext()
+    ///MARK: 人脸检测, 识别人脸数统计
+    /// 若处理人脸截图居中, 使用 #pod 'FaceAware'
+    /// - Returns: 人脸数
+    public func foundFaces() -> Int? {
+        guard let ciImage = CIImage(image: self) else { return nil }
+        let detector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyLow])
+        if let features = detector?.features(in: ciImage), features.count > 0 {
+            //print("found \(features.count) faces")
+            return features.count
         }
-        let context = UIGraphicsGetCurrentContext()
-        context?.setFillColor(color.cgColor)
-        context?.fill(CGRect(origin: CGPoint.zero, size: size))
-        context?.setShouldAntialias(true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        guard let cgImage = image?.cgImage else {
-            self.init()
-            return nil
-        }
-        self.init(cgImage: cgImage)
+        return nil
     }
+    
+    public static func systemShare(activityItems: [UIImage], excludedTypes: [UIActivity.ActivityType]? = nil, completeHandle:((_ isFinish: Bool) -> Void)? = nil) {
+        let activityVc = UIActivityViewController.init(activityItems: activityItems as [Any], applicationActivities: nil)
+        if let excludedTypes = excludedTypes {
+            //activityVc.excludedActivityTypes = [.postToFacebook, .postToTwitter, .postToWeibo, .message, .mail, .print, .copyToPasteboard, .assignToContact, .saveToCameraRoll, .addToReadingList, .postToFlickr, .postToVimeo, .postToTencentWeibo, .airDrop, .openInIBooks]
+            activityVc.excludedActivityTypes = excludedTypes
+        }
+        keyViewController()?.present(activityVc, animated: true, completion: nil)
+        activityVc.completionWithItemsHandler = {(activityType, completed, items, error) -> Void in
+            if completed == true {
+                print("分享成功")
+                completeHandle?(true)
+            }
+            // 不能少
+            activityVc.completionWithItemsHandler = nil
+        }
+    }
+}
+
+//MARK: - 图片压缩处理
+extension Extension_Image {
     
     /// 质量压缩 (2分压缩5次)
     /// 注意 data.count长度判断可能与实际文件占用内存有差异
