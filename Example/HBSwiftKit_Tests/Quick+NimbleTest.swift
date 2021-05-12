@@ -13,6 +13,29 @@ import Nimble
 @testable import HBSwiftKit_Example
 @testable import HBSwiftKit
 
+//swiftClassFromString
+
+
+class GlobalFuncTest: QuickSpec {
+    override func spec() {
+        fdescribe("GlobalFuncTest") {
+            it("should print correct test data") {
+                let vc1 = swiftClassFromString("ImageBrowerController")
+                print("vc1:\(vc1)")
+                if let vc1_1 = vc1 as? UIViewController.Type {
+                    print("vc1_1:\(vc1_1)")
+                }
+                
+                let vc2 = swiftClassFromString("SnapshotModel")
+                print("vc2:\(vc2)")
+                if let vc2_1 = vc2 as? UIViewController.Type {
+                    print("vc2_1:\(vc2_1)")
+                }
+            }
+        }
+    }
+}
+
 class ImgExtensionTest: QuickSpec {
     override func spec() {
         fdescribe("ImgExtensionTest") {

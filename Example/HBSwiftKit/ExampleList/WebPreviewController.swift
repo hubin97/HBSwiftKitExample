@@ -16,18 +16,48 @@ class WebPreviewController: BaseWKWebController {
     override func setupUi() {
         super.setupUi()
         self.navigationItem.title = "Web Preview"
-        //self.remoteUrl = "https://www.baidu.com" //"https://space.bilibili.com/325538782"
-        //self.remoteUrl = "http://172.16.1.139/smarthome/ythomesdk-ios"
-        self.remoteUrl = "http://192.168.2.70:8080"
-
-        //self.localPath = "jstest.html"
+        
         self.progressViewBackColor = .systemBlue
         self.progressViewTintColor = .red
+        self.wkWebView.frame = CGRect(x: 0, y: kTopSafeHeight, width: self.view.bounds.width, height: self.view.bounds.height - kNavBarAndSafeHeight - kBottomSafeHeight)
         //self.wkWebView.navigationDelegate = self
-        self.addMethod(name: "WINGTO") {[weak self] (methodname, content) in
-            print("scriptName:\(methodname), content:\(content)")
-            
+        self.addMethod(name: "WINGTO") {[weak self] (methodname, callback) in
+            print("scriptName:\(methodname), callback:\(callback)")
+            if let tmp_content = callback as? [String: String], let method = tmp_content.value(forKey: "title") as? String {
+                // OC反射
+                // @objc(userContentController:didReceiveScriptMessage:)
+                let selector = NSSelectorFromString(method)
+                if self?.responds(to:selector) == true {
+                    //self?.perform(selector)
+                    //self?.perform(selector, with: tmp_content.value(forKey: "content"))
+                    self?.perform(selector, with: tmp_content.value(forKey: "content"), with: tmp_content.value(forKey: "content"))
+                }
+            }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //self.remoteUrl = "https://www.baidu.com" //"https://space.bilibili.com/325538782"
+        //self.remoteUrl = "http://192.168.2.70:8080"
+        //self.localPath = "jstest.html"
+        loadHTML(urlString: "jstest.html", isLocalHtml: true)
+    }
+    
+    // 对应方法名:  "test"
+    @objc func test() {
+        print("test------")
+    }
+
+    // 对应方法名:  "test:"
+    @objc func test(_ param: Any) {
+        print("test------\(param)")
+    }
+    
+    // 对应方法名:  "test::"
+    // 仅提供最多带2参数? func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>!
+    @objc func test(_ param1: Any, _ param2: Any) {
+        print("test------1\(param1), 2\(param2)")
     }
 }
 
@@ -44,7 +74,6 @@ extension WebPreviewController {
 //MARK: - delegate or data source
 extension WebPreviewController {
     
-    //open func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         super.webView(webView, didFinish: navigation)
         

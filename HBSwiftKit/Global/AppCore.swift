@@ -85,6 +85,21 @@ public func keyViewController(_ vc: UIViewController? = nil) -> UIViewController
     return currentVc
 }
 
+/// 根据字符串获取工程中的对应Swift类
+/// \\ 使用 swiftClassFromString("xxx") as? UIViewController.Type
+///
+/// - Parameter aClassName: 类名字符串
+/// - Returns: 类
+public func swiftClassFromString(_ aClassName: String) -> AnyClass? {
+    // 获取工程名
+    guard let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String else { return nil }
+    // 过滤无效字符 空格不转换的话 得不到准确类名
+    let formattedAppName = appName.replacingOccurrences(of: " ", with: "_")
+    // 拼接控制器名
+    let classStringName = "\(formattedAppName).\(aClassName)"
+    // 将控制名转换为类
+    return NSClassFromString(classStringName)
+}
 
 ////
 //public let getIpAddress:(() -> String? ) = { () -> String? in

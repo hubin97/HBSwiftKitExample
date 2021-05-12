@@ -8,17 +8,14 @@
 import Foundation
 
 //MARK: - global var and methods
-fileprivate let kpadding: CGFloat = 2.0
-fileprivate let ShowOutstandingFontMaxSize: CGFloat = 16.0
-fileprivate let ShowOutstandingFontMinSize: CGFloat = 14.0
 
 /// 事件回调
-protocol TitleSegmentDelegate: class {
+public protocol TitleSegmentDelegate: class {
     func titleSegmentTapAction(title: String?, index: Int)
 }
 
 //MARK: - main class
-class TitleSegment: UIView {
+open class TitleSegment: UIView {
 
     /// 切换样式
     public enum ShowStyle {
@@ -37,6 +34,15 @@ class TitleSegment: UIView {
     fileprivate var style: ShowStyle = .line
     ///** 是否突出显示 (fontsize大小改变) 默认NO */
     var isShowOutstanding: Bool = false
+    fileprivate let kpadding: CGFloat = 2.0
+    fileprivate var showOutMinFont: UIFont = UIFont.systemFont(ofSize: 13)
+    fileprivate var showOutMaxFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium)
+    
+    /// 滚动容器
+    fileprivate var segmentScroll: UIScrollView?
+    /// 标签最小占用宽度
+    fileprivate var minTextWidth: CGFloat = 30
+    
     ///** 下划线长度, 默认按钮的1/2 */
     fileprivate var indexLineWidth: CGFloat = 0
     /// 下划线高度
@@ -102,7 +108,9 @@ class TitleSegment: UIView {
     }()
     
     
-    /// 便捷初始化
+    /// 标准便捷初始化
+    /// 不可滚动
+    ///
     /// - Parameters:
     ///   - frame: 位置
     ///   - showStyle: 风格, 默认划线
@@ -112,8 +120,8 @@ class TitleSegment: UIView {
     ///   - normalColor: 标题常态颜色
     ///   - selectColor: 标题选中颜色
     ///   - isShowOutstanding: 是否改变选中字号大小
-    convenience init(frame: CGRect, showStyle: TitleSegment.ShowStyle, titles: [String], indexLineWidth: CGFloat? = nil, indexLineHeight: CGFloat? = nil, normalColor: UIColor = .systemGray, selectColor: UIColor = .systemBlue, isShowOutstanding: Bool = false) {
-        self.init(frame: frame)
+    public convenience init(viewFrame: CGRect, showStyle: TitleSegment.ShowStyle, titles: [String], indexLineWidth: CGFloat? = nil, indexLineHeight: CGFloat? = nil, normalColor: UIColor = .systemGray, selectColor: UIColor = .systemBlue, showOutMinFont: UIFont = UIFont.systemFont(ofSize: 13), showOutMaxFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium), isShowOutstanding: Bool = false) {
+        self.init(frame: viewFrame)
         self.style = showStyle
         self.titles = titles
         self.indexLineWidth = indexLineWidth ?? self.bounds.width/CGFloat(titles.count)/2
@@ -121,7 +129,9 @@ class TitleSegment: UIView {
         self.isShowOutstanding = isShowOutstanding
         self.normalColor = normalColor
         self.selectColor = selectColor
-        
+        self.showOutMinFont = showOutMinFont
+        self.showOutMaxFont = showOutMaxFont
+
         let count = titles.count
         let btnWidth = (count > 1) ? (self.bounds.size.width - CGFloat(count - 1) * kpadding)/CGFloat(count): self.bounds.size.width
         var assagnBtnRect = CGRect.zero
@@ -132,7 +142,7 @@ class TitleSegment: UIView {
             titleBtn.frame = CGRect(x: btnMinX, y: 2 * kpadding, width: btnWidth, height: self.bounds.size.height - 4 * kpadding)
             titleBtn.tag = 1000 + i
             titleBtn.isSelected = false
-            titleBtn.titleLabel?.font = UIFont.systemFont(ofSize: ShowOutstandingFontMinSize)
+            titleBtn.titleLabel?.font = showOutMinFont
             titleBtn.setTitle(titles[i], for: .normal)
             titleBtn.setTitleColor(normalColor, for: .normal)
             if showStyle != .line {
@@ -144,7 +154,7 @@ class TitleSegment: UIView {
                 assagnBtnRect = titleBtn.frame
                 titleBtn.isSelected = true
                 if isShowOutstanding {
-                    titleBtn.titleLabel?.font = UIFont.systemFont(ofSize: ShowOutstandingFontMaxSize)
+                    titleBtn.titleLabel?.font = showOutMaxFont
                 }
             }
         }
@@ -160,11 +170,63 @@ class TitleSegment: UIView {
         }
     }
     
+    /// 便捷初始化
+    /// 动态适配文字长度
+    ///
+    /// - Parameters:
+    ///   - frame: 位置
+    ///   - showStyle: 风格, 默认划线// 暂时仅支持 .color
+    ///   - titles: 标题数组
+    ///   - normalColor: 标题常态颜色
+    ///   - selectColor: 标题选中颜色
+    ///   - isShowOutstanding: 是否改变选中字号大小
+    public convenience init(scrollFrame: CGRect/*, showStyle: WTSegment.ShowStyle*/, titles: [String], minTextWidth: CGFloat = 30, normalColor: UIColor = .systemGray, selectColor: UIColor = .systemBlue, showOutMinFont: UIFont = UIFont.systemFont(ofSize: 13), showOutMaxFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium), isShowOutstanding: Bool = false) {
+        self.init(frame: scrollFrame)
+        self.style = .color
+        self.titles = titles
+        self.isShowOutstanding = isShowOutstanding
+        self.normalColor = normalColor
+        self.selectColor = selectColor
+        self.showOutMinFont = showOutMinFont
+        self.showOutMaxFont = showOutMaxFont
+        self.minTextWidth = minTextWidth
+
+        segmentScroll = UIScrollView.init(frame: self.bounds)
+        addSubview(segmentScroll!)
+        segmentScroll?.showsHorizontalScrollIndicator = false
+        segmentScroll?.showsVerticalScrollIndicator = false
+        
+        let itemSpacing: CGFloat = 10
+        let count = titles.count
+        var contentWidth = itemSpacing * 2
+        for idx in 0..<count {
+            let title = titles[idx]
+            var btnWidth = NSString(string: title).boundingRect(with: CGSize(width: scrollFrame.size.width, height: scrollFrame.size.height), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: showOutMaxFont], context: nil).size.width + itemSpacing
+            btnWidth = max(btnWidth, minTextWidth)
+            
+            let btnX = contentWidth
+            let titleBtn = UIButton.init(type: .custom)
+            segmentScroll?.addSubview(titleBtn)
+            titleBtn.frame = CGRect(x: btnX, y: 2 * kpadding, width: btnWidth, height: self.bounds.size.height - 4 * kpadding)
+            titleBtn.tag = 1000 + idx
+            titleBtn.isSelected = idx == 0 ? true: false
+            titleBtn.titleLabel?.font = isShowOutstanding ? (idx == 0 ? showOutMaxFont: showOutMinFont): showOutMinFont
+            titleBtn.setTitle(titles[idx], for: .normal)
+            titleBtn.setTitleColor(normalColor, for: .normal)
+            titleBtn.addTarget(self, action: #selector(tapAction(_:)), for: .touchUpInside)
+            
+            titleBtn.backgroundColor = .groupTableViewBackground
+            contentWidth += (btnWidth + itemSpacing)
+        }
+        segmentScroll?.contentSize = CGSize(width: contentWidth, height: 0)
+    }
+    
+    
     private override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -185,18 +247,18 @@ extension TitleSegment {
             let tag = 1000 + i
             if let btn = self.viewWithTag(tag) as? UIButton {
                 btn.isSelected = false
-                btn.titleLabel?.font = UIFont.systemFont(ofSize: ShowOutstandingFontMinSize)
+                btn.titleLabel?.font = showOutMinFont
             }
         }
         tapBtn.isSelected = true
         if isShowOutstanding {
-            tapBtn.titleLabel?.font = UIFont.systemFont(ofSize: ShowOutstandingFontMaxSize)
+            tapBtn.titleLabel?.font = showOutMaxFont
         }
     }
     
     /// 指定默认选中的下标
     public func setTargetIndex(with index: Int) {
-        guard index < 0 || index > titles.count - 1 else { return }
+        guard index >= 0 && index <= titles.count - 1 else { return }
         guard let defaultTapBtn = self.viewWithTag(1000 + index) as? UIButton else { return }
         if style == .line {
             updateIndexLine(with: defaultTapBtn)
@@ -206,6 +268,20 @@ extension TitleSegment {
             updateIndexLine(with: defaultTapBtn)
             updateTapBtnColor(with: defaultTapBtn)
         }
+        updateScrollOffset(with: defaultTapBtn)
+    }
+    
+    /// 更新标签滚动位置
+    fileprivate func updateScrollOffset(with tapBtn: UIButton) {
+        /// 先计算偏移量
+        let offsetX = tapBtn.center.x - self.center.x
+        var lastOffsetX: CGFloat = 0
+        if offsetX > 0 {
+            lastOffsetX = min((self.segmentScroll?.contentSize.width ?? self.bounds.size.width) - self.bounds.size.width, offsetX)
+        } else {
+            lastOffsetX = max(0, offsetX)
+        }
+        segmentScroll?.setContentOffset(CGPoint(x: lastOffsetX, y: 0), animated: true)
     }
 }
 
@@ -223,6 +299,7 @@ extension TitleSegment {
         }
         callBackTapTitleBlock?(sender.titleLabel?.text, sender.tag - 1000)
         delegate?.titleSegmentTapAction(title: sender.titleLabel?.text, index: sender.tag - 1000)
+        updateScrollOffset(with: sender)
     }
 }
 
@@ -230,5 +307,3 @@ extension TitleSegment {
 extension TitleSegment {
     
 }
-
-//MARK: - other classes
