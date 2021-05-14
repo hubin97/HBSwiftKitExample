@@ -52,7 +52,7 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'UIKit' do |ss|
-      ss.source_files  = 'HBSwiftKit/UIKit/YTAlertView/', 'HBSwiftKit/UIKit/YTDatePicker/', 'HBSwiftKit/UIKit/YTHitView/'
+      ss.source_files  = 'HBSwiftKit/UIKit/YTAlertView/', 'HBSwiftKit/UIKit/MTDatePicker/', 'HBSwiftKit/UIKit/YTHitView/', 'HBSwiftKit/UIKit/TitleSegment/'
       ss.dependency 'HBSwiftKit/Global'
       ss.dependency 'HBSwiftKit/Extension'
       ss.dependency 'HBSwiftKit/Base'

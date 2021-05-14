@@ -1,0 +1,111 @@
+{
+    "data": [
+        {
+            "famlyname": "云图数字",
+            "famlyId": 0,
+            "authlev": -1,
+            "areas": [
+                {
+                    "areaname": "舒服的区域1",
+                    "areaId": 0
+                },
+                {
+                    "areaname": "奢侈的区域2",
+                    "areaId": 1
+                },
+                {
+                    "areaname": "高光的区域3",
+                    "areaId": 2
+                },
+                {
+                    "areaname": "高级的区域4",
+                    "areaId": 3
+                },
+                {
+                    "areaname": "没得亮点的区域5",
+                    "areaId": 4
+                }
+            ]
+        },
+        {
+            "famlyname": "管理员的家",
+            "famlyId": 10,
+            "authlev": 0,
+            "areas": [
+                {
+                    "areaname": "!区域1",
+                    "areaId": 10
+                },
+                {
+                    "areaname": "!区域2",
+                    "areaId": 11
+                },
+                {
+                    "areaname": "!区域3",
+                    "areaId": 12
+                }
+            ]
+        },
+        {
+            "famlyname": "一个普通成员",
+            "famlyId": 20,
+            "authlev": 1,
+            "areas": [
+                {
+                    "areaname": "@@区域1",
+                    "areaId": 21
+                },
+                {
+                    "areaname": "@区域2",
+                    "areaId": 22
+                },
+                {
+                    "areaname": "@区域3",
+                    "areaId": 23
+                },
+                {
+                    "areaname": "@%",
+                    "areaId": 24
+                },
+                {
+                    "areaname": "@#~",
+                    "areaId": 25
+                }
+            ]
+        },
+        {
+            "famlyname": "只是一个普通成员",
+            "famlyId": 21,
+            "authlev": 1,
+            "areas": [
+                {
+                    "areaname": "@区域1",
+                    "areaId": 26
+                },
+                {
+                    "areaname": "@区域2",
+                    "areaId": 27
+                },
+                {
+                    "areaname": "@区域3",
+                    "areaId": 28
+                }
+            ]
+        },
+        {
+            "famlyname": "路人甲的窝",
+            "famlyId": 100,
+            "authlev": 2,
+            "areas": [
+                {
+                    "areaname": "有限区域1",
+                    "areaId": 101
+                },
+                {
+                    "areaname": "有限区域2",
+                    "areaId": 102
+                }
+            ]
+        }
+    ]
+}

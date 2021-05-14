@@ -1,5 +1,5 @@
 //
-//  YTDatePicker.swift
+//  MTDatePicker.swift
 //  HBSwiftKitDemo
 //
 //  Created by hubin.h@wingto.cn on 2020/9/11.
@@ -12,7 +12,7 @@ import Foundation
 fileprivate let minYear = 1970
 fileprivate let maxYear = 2050
 
-extension YTDatePicker {
+extension MTDatePicker {
     
     public enum Mode {
         /// 年
@@ -27,10 +27,10 @@ extension YTDatePicker {
 }
 
 //MARK: - main class
-open class YTDatePicker: UIPickerView {
+open class MTDatePicker: UIPickerView {
 
     /// 默认 年月日
-    public var datePickerMode: YTDatePicker.Mode = .year_month_day {
+    public var datePickerMode: MTDatePicker.Mode = .year_month_day {
         didSet {
             initDatePicker()
         }
@@ -173,7 +173,7 @@ open class YTDatePicker: UIPickerView {
 }
 
 //MARK: - private mothods
-extension YTDatePicker {
+extension MTDatePicker {
     
     func initDatePicker(date: Date = Date()) {
         
@@ -206,12 +206,12 @@ extension YTDatePicker {
 }
 
 //MARK: - call backs
-extension YTDatePicker {
+extension MTDatePicker {
     
 }
 
 //MARK: - delegate or data source
-extension YTDatePicker: UIPickerViewDataSource, UIPickerViewDelegate {
+extension MTDatePicker: UIPickerViewDataSource, UIPickerViewDelegate {
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         

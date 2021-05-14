@@ -66,32 +66,36 @@ class UIKitTestController: BaseViewController {
         
         self.navigationItem.title = "UIKit Test"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction))
-          
-        let btn1 = UIButton.init(frame: CGRect(x: 20, y: 100, width: 300, height: 100))
-        btn1.addTarget(self, action: #selector(btnAction1), for: .touchUpInside)
-        btn1.setTitle("哈HH阿卡", for: .normal)
-        btn1.setTitleColor(.black, for: .normal)
-        btn1.titleLabel?.font = UIFont.systemFont(ofSize: kScaleW(30), weight: .semibold)
-        btn1.drawTextLineColor = .orange
-        btn1.drawTextLineWidth = 2
-        view.addSubview(btn1)
-        btn1.setRoundCorners(borderColor: .red)
-        
-        let btn2 = UIButton.init(frame: CGRect(x: 100, y: 300, width: 100, height: 100))
-        btn2.addTarget(self, action: #selector(btnAction2), for: .touchUpInside)
-        btn2.touchAreaInsets = UIEdgeInsetsMake(50, 50, 50, 50)
-        view.addSubview(btn2)
-        btn2.setRoundCorners(borderColor: .green)
-
-        let btn3 = UIButton.init(type: .custom)
-        btn3.frame = CGRect(x: 100, y: 500, width: 100, height: 100)
-        btn3.setBackgroundImage(UIImage(color: .brown), for: .normal)
-        btn3.addTarget(self, action: #selector(btnAction3), for: .touchUpInside)
-        //btn3.touchAreaInsets = UIEdgeInsetsMake(50, 150, 50, 150)
-        btn3.showScaleAnimate = true
-        btn3.showScale = 1.2
-        view.addSubview(btn3)
-        btn3.setRoundCorners(borderColor: .blue)
+  
+//        let dualView = DualListView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width * 3/4, height: UIScreen.main.bounds.size.height / 2))
+//        view.addSubview(dualView)
+//        dualView.setRoundCorners(borderColor: .brown, isDotted: true, lineDashPattern: [6, 2])
+                
+//        let btn1 = UIButton.init(frame: CGRect(x: 20, y: 100, width: 300, height: 100))
+//        btn1.addTarget(self, action: #selector(btnAction1), for: .touchUpInside)
+//        btn1.setTitle("哈HH阿卡", for: .normal)
+//        btn1.setTitleColor(.black, for: .normal)
+//        btn1.titleLabel?.font = UIFont.systemFont(ofSize: kScaleW(30), weight: .semibold)
+//        btn1.drawTextLineColor = .orange
+//        btn1.drawTextLineWidth = 2
+//        view.addSubview(btn1)
+//        btn1.setRoundCorners(borderColor: .red)
+//
+//        let btn2 = UIButton.init(frame: CGRect(x: 100, y: 300, width: 100, height: 100))
+//        btn2.addTarget(self, action: #selector(btnAction2), for: .touchUpInside)
+//        btn2.touchAreaInsets = UIEdgeInsetsMake(50, 50, 50, 50)
+//        view.addSubview(btn2)
+//        btn2.setRoundCorners(borderColor: .green)
+//
+//        let btn3 = UIButton.init(type: .custom)
+//        btn3.frame = CGRect(x: 100, y: 500, width: 100, height: 100)
+//        btn3.setBackgroundImage(UIImage(color: .brown), for: .normal)
+//        btn3.addTarget(self, action: #selector(btnAction3), for: .touchUpInside)
+//        //btn3.touchAreaInsets = UIEdgeInsetsMake(50, 150, 50, 150)
+//        btn3.showScaleAnimate = true
+//        btn3.showScale = 1.2
+//        view.addSubview(btn3)
+//        btn3.setRoundCorners(borderColor: .blue)
 
 //        // 刻度尺
 //        rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 150, width: 50, height: 400), direction: .vertical, rulerLineSpacing: 15, minValue: 15, maxValue: 40)
@@ -191,8 +195,8 @@ extension UIKitTestController {
     }
 }
 
-public typealias AlertView = YTAlertView
-extension AlertView {
+public typealias AKAlertView = YTAlertView
+extension AKAlertView {
     
     /** 默认间距变更
      // 标题与alert边框大间距
@@ -225,6 +229,9 @@ extension AlertView {
 extension UIKitTestController {
     
     @objc func filterAction() {
+        
+        FamilyAreaOptionsView.init(data: nil).show()
+
         
 //        let rulerValue = rulerView.rulerValue
 //        rulerView.removeFromSuperview()

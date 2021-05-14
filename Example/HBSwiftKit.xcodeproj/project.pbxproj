@@ -14,12 +14,13 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		B518517626269E340013A973 /* Quick+NimbleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518517526269E340013A973 /* Quick+NimbleTest.swift */; };
 		B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */; };
-		B5389B3C25EE1F1500ED67F9 /* TitleSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5389B3B25EE1F1500ED67F9 /* TitleSegment.swift */; };
 		B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5389B7825EF8FB400ED67F9 /* R.generated.swift */; };
 		B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */; };
 		B53D570326268EBE001D0BC0 /* HBSwiftKit_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D570226268EBE001D0BC0 /* HBSwiftKit_UITests.swift */; };
 		B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557E4DA2631304800C62147 /* ThemeStyle.swift */; };
 		B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */ = {isa = PBXBuildFile; fileRef = B567FCE42596F39F006AFA69 /* README_SWIFT.md */; };
+		B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F689C264B8AB300FD62CF /* DualListView.swift */; };
+		B56F68A2264B8AF400FD62CF /* duallist.json in Resources */ = {isa = PBXBuildFile; fileRef = B56F68A1264B8AF400FD62CF /* duallist.json */; };
 		B575D5F925A9900C0068EB19 /* help_es.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F725A9900C0068EB19 /* help_es.html */; };
 		B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F825A9900C0068EB19 /* help_cn.html */; };
 		B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC828255A7818005A5179 /* ImageBrowerController.swift */; };
@@ -75,7 +76,6 @@
 		9A8871220770A8D795C87930 /* Pods-HBSwiftKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Tests/Pods-HBSwiftKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B518517526269E340013A973 /* Quick+NimbleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Quick+NimbleTest.swift"; path = "HBSwiftKit_Tests/Quick+NimbleTest.swift"; sourceTree = SOURCE_ROOT; };
 		B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wto_Calendar.swift; sourceTree = "<group>"; };
-		B5389B3B25EE1F1500ED67F9 /* TitleSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSegment.swift; sourceTree = "<group>"; };
 		B5389B7825EF8FB400ED67F9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B53D570026268EBE001D0BC0 /* HBSwiftKit_UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HBSwiftKit_UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +83,8 @@
 		B53D570426268EBE001D0BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B557E4DA2631304800C62147 /* ThemeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStyle.swift; sourceTree = "<group>"; };
 		B567FCE42596F39F006AFA69 /* README_SWIFT.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README_SWIFT.md; path = ../README_SWIFT.md; sourceTree = "<group>"; };
+		B56F689C264B8AB300FD62CF /* DualListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualListView.swift; sourceTree = "<group>"; };
+		B56F68A1264B8AF400FD62CF /* duallist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = duallist.json; sourceTree = "<group>"; };
 		B575D5F725A9900C0068EB19 /* help_es.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_es.html; sourceTree = "<group>"; };
 		B575D5F825A9900C0068EB19 /* help_cn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_cn.html; sourceTree = "<group>"; };
 		B5BAC828255A7818005A5179 /* ImageBrowerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowerController.swift; sourceTree = "<group>"; };
@@ -236,6 +238,14 @@
 			path = HBSwiftKit_UITests;
 			sourceTree = "<group>";
 		};
+		B5887FA3264CD719003C1896 /* 双列表关联 */ = {
+			isa = PBXGroup;
+			children = (
+				B56F689C264B8AB300FD62CF /* DualListView.swift */,
+			);
+			path = "双列表关联";
+			sourceTree = "<group>";
+		};
 		B5C6C5C225ECCA0E00C88C1C /* 高级筛选器 */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,14 +276,6 @@
 				B5C6C5FC25ECD4F100C88C1C /* EasyAdScrollTool.swift */,
 			);
 			path = "简易轮播页";
-			sourceTree = "<group>";
-		};
-		B5C6C5DD25ECD1B000C88C1C /* 标题切换器 */ = {
-			isa = PBXGroup;
-			children = (
-				B5389B3B25EE1F1500ED67F9 /* TitleSegment.swift */,
-			);
-			path = "标题切换器";
 			sourceTree = "<group>";
 		};
 		B5C6C5DF25ECD1BD00C88C1C /* 照片浏览器 */ = {
@@ -313,11 +315,11 @@
 				B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */,
 				B5FB4F26257A365E007F1238 /* WebPreviewController.swift */,
 				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
+				B5887FA3264CD719003C1896 /* 双列表关联 */,
 				B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */,
 				B5C6C5E125ECD1C400C88C1C /* 主题适配器 */,
 				B5C6C5DF25ECD1BD00C88C1C /* 照片浏览器 */,
 				B5389B2725EE1BB900ED67F9 /* 日历选择器 */,
-				B5C6C5DD25ECD1B000C88C1C /* 标题切换器 */,
 				B5C6C5C325ECCADF00C88C1C /* 简易刻度尺 */,
 				B5C6C5C225ECCA0E00C88C1C /* 高级筛选器 */,
 				B5C6C5CF25ECD08900C88C1C /* 列表左滑改 */,
@@ -334,6 +336,7 @@
 				B5D55404261D40AE007A20F5 /* jstest.html */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				B5BAC834255A7875005A5179 /* images.json */,
+				B56F68A1264B8AF400FD62CF /* duallist.json */,
 				B5CC7A4925E8989300D263B4 /* advfilterdata.json */,
 				B5DCC71325F3266D007E3237 /* areacode.plist */,
 				B5DCC71725F3274D007E3237 /* areacode.json */,
@@ -474,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				B56F68A2264B8AF400FD62CF /* duallist.json in Resources */,
 				B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */,
 				B5BAC835255A7875005A5179 /* images.json in Resources */,
 				B5DCC71425F3266D007E3237 /* areacode.plist in Resources */,
@@ -618,6 +622,7 @@
 			files = (
 				B5C6C5EA25ECD38800C88C1C /* Wto_ImageBrower.swift in Sources */,
 				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
+				B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */,
 				B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
@@ -628,7 +633,6 @@
 				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
 				B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */,
-				B5389B3C25EE1F1500ED67F9 /* TitleSegment.swift in Sources */,
 				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
 				B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */,
 				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,

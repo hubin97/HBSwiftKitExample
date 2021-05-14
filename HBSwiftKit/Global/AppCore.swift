@@ -24,6 +24,8 @@ public func kScaleH(_ h: CGFloat) -> CGFloat { return kScaleH * h }
 
 /// 默认导航栏高度
 public let kNavBarHeight: CGFloat = 44.0
+/// 默认标签栏高度
+public let kTabBarHeight: CGFloat = 49.0
 
 /// 状态栏高度 iPhone X (44.0) / iPhone 11 (48.0) / 20.0
 public let kStatusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
@@ -43,7 +45,7 @@ public let kBottomSafeHeight: CGFloat = kIsHaveBangs ? 34: 0.0
 public let kNavBarAndSafeHeight: CGFloat = kStatusBarHeight + kNavBarHeight
 
 /// tabbar和底部安全区域总高度
-public let kTabBarAndSafeHeight: CGFloat = kBottomSafeHeight + 49.0
+public let kTabBarAndSafeHeight: CGFloat = kBottomSafeHeight + kTabBarHeight
 
 //MARK: - Info
 /// UIDevice

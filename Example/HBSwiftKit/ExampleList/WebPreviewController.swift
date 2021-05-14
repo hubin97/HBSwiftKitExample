@@ -41,7 +41,8 @@ class WebPreviewController: BaseWKWebController {
         //self.remoteUrl = "https://www.baidu.com" //"https://space.bilibili.com/325538782"
         //self.remoteUrl = "http://192.168.2.70:8080"
         //self.localPath = "jstest.html"
-        loadHTML(urlString: "jstest.html", isLocalHtml: true)
+        //loadHTML(urlString: "jstest.html", isLocalHtml: true)
+        loadHTML(urlString: "http://192.168.2.70:8080?deviceId=12313&token=123123213213123")
     }
     
     // 对应方法名:  "test"

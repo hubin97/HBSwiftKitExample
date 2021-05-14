@@ -17,12 +17,22 @@ class EasyAdScrollController: BaseViewController {
 
         self.title = "标题轮播页"
         
-        let titleSegment = TitleSegment.init(frame: CGRect(x: 0, y: 50, width: self.view.frame.width, height: 44), showStyle: .all, titles: ["AAA", "BBB", "CCC", "DDD", "EEE"], isShowOutstanding: true)
+        let titleSegment = TitleSegment.init(viewFrame: CGRect(x: 0, y: 50, width: self.view.frame.width, height: 44), showStyle: .all, titles: ["AAA", "BBB", "CCC", "DDD", "EEE"], isShowOutstanding: true)
         view.addSubview(titleSegment)
         titleSegment.setRoundCorners(borderColor: .brown, borderWidth: 1, isDotted: true, lineDashPattern: [4, 1])
         titleSegment.setTargetIndex(with: 3)
         titleSegment.isNeedSeparateLine = true
         titleSegment.callBackTapTitleBlock = { (title, index) in
+            print("index:\(index), title:\(title ?? "")")
+        }
+        
+        let segment = TitleSegment.init(scrollFrame: CGRect(x: 0, y: 150, width: self.view.frame.width, height: 44), titles: ["用户交互设计", "用户交互", "用设计", "用户交互设计", "设计", "用户交互设计设计设计", "用户交互设计", "设"], normalColor: .gray, selectColor: .black, isShowOutstanding: true)
+        
+        view.addSubview(segment)
+        //titleSegment.setRoundCorners(borderColor: .brown, borderWidth: 1, isDotted: true, lineDashPattern: [4, 1])
+        segment.setTargetIndex(with: 3)
+        //titleSegment.isNeedSeparateLine = true
+        segment.callBackTapTitleBlock = { (title, index) in
             print("index:\(index), title:\(title ?? "")")
         }
         
@@ -37,7 +47,7 @@ class EasyAdScrollController: BaseViewController {
                 items.append(model)
             }
         }
-        let adView = EasyAdScrollTool.init(frame: CGRect(x: 50, y: 200, width: 300, height: 44), style: .Page, datas: items)
+        let adView = EasyAdScrollTool.init(frame: CGRect(x: 50, y: 300, width: 300, height: 44), style: .Page, datas: items)
         adView.setRoundCorners(borderColor: .systemBlue, borderWidth: 1, isDotted: true, lineDashPattern: [2, 4])
         view.addSubview(adView)
     }
