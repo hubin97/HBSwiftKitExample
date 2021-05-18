@@ -164,8 +164,8 @@ extension UIKitTestController {
 //        YTHitView.setHitWidth(200).setHitSuccImg(name).showSuccess(message: "WTF???")
         
         //MFMessageComposeViewController
-        AlertBlockView.init(title: "标题", message: "这是消息体", actions: ["我知道了"], tapAction: nil).show()
-
+        //AlertBlockView.init(title: "标题", message: "这是消息体", actions: ["我知道了"], tapAction: nil).show()
+        YTAlertView(tags_title: "标题", options: ["标签标签标签标签", "标签签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签"], actions: ["确定"], tapAction: nil).show()
     }
     
     func bouncesAni() {

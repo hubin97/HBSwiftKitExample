@@ -511,6 +511,103 @@ extension YTAlertView {
     }
 }
 
+//MARK: collection样式
+extension YTAlertView {
+    
+    /// 标签组样式
+    public convenience init(tags_title title: String?, options: [String]?, optionFont: UIFont = UIFont.systemFont(ofSize: 15), optionMaxHeight: CGFloat = 40, actions: [String]?, tapAction: ((_ index: Int, _ title: String) -> ())? ) {
+        self.init(frame: CGRect.zero)
+        setup(title: title, options: options, optionFont: optionFont, optionMaxHeight: optionMaxHeight, actions: actions)
+        self.tapAction = tapAction
+    }
+    
+    func setup(title: String?, options: [String]?, optionFont: UIFont, optionMaxHeight: CGFloat, actions: [String]?) {
+        assert(!(title == nil || title == ""), "标题不能为空")
+        assert(!(actions?.count ?? 0 > 2), "此样式交互按钮不能超过2个")
+        
+        if let t_title = title, t_title != "" {
+            let rect = NSString(string: t_title).boundingRect(with: CGSize(width: alert_width - kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: titleLabel.font ?? UIFont.systemFont(ofSize: W_Scale(16), weight: .medium)], context: nil)
+            t_height = rect.size.height
+        }
+        
+        /// collection 高度估算
+        if let t_option = options, t_option.count > 0 {
+            messageLabel.removeFromSuperview()
+            let limit_width = alert_width - 2 * kpadding
+            var item_width: CGFloat = 0
+            var total_height: CGFloat = kpadding/2
+            
+            for idx in 0..<t_option.count {
+                let op = t_option[idx]
+                let btn = UIButton.init(type: .custom)
+                messageScroll.addSubview(btn)
+                btn.setTitle(op, for: .normal)
+                btn.setTitleColor(.black, for: .normal)
+                btn.setBackgroundImage(UIImage(color: .lightGray), for: .normal)
+                btn.setTitleColor(.white, for: .selected)
+                btn.setBackgroundImage(UIImage(color: .systemBlue), for: .selected)
+                btn.titleLabel?.font = optionFont
+                btn.addTarget(self, action: #selector(tagAction), for: .touchUpInside)
+                btn.titleLabel?.lineBreakMode = .byTruncatingTail
+                btn.tag = 2000 + idx
+                //btn.layer.borderColor = UIColor.red.cgColor
+                //btn.layer.borderWidth = 1
+                btn.layer.masksToBounds = true
+                btn.layer.cornerRadius = 5
+                
+                let rect = NSString(string: op).boundingRect(with: CGSize(width: limit_width, height: optionMaxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: optionFont], context: nil)
+                let text_width = rect.size.width + kpadding
+                if item_width + text_width + kpadding > limit_width {
+                    item_width = 0
+                    total_height += (optionMaxHeight + kpadding/2)
+                }
+                btn.frame = CGRect(x: item_width, y: total_height, width: text_width, height: optionMaxHeight)
+                item_width += text_width + kpadding/2
+            }
+            mmin_height = max(100, min(300, total_height))
+            m_height = total_height + optionMaxHeight
+        }
+
+        if let a_count = actions?.count, a_count > 0 {
+            allActions.removeAll()
+            actions?.forEach({ allActions.append(Wto_Action.init($0, nil, nil)) })
+            a_height = action_height
+        }
+        
+        alert_height = (t_height + kpadding) + (m_height + s_kpadding) + (a_height + kpadding)
+        // 限制高度
+        if alert_height > max_alert_height {
+            mmin_height = max_alert_height - ((t_height + kpadding) + (a_height + kpadding) + s_kpadding)
+            alert_height = max_alert_height
+        }
+        
+        titleLabel.frame = CGRect(x: kpadding, y: kpadding, width: alert_width - 2 * kpadding, height: t_height)
+        messageScroll.frame = CGRect(x: l_kpadding, y: kpadding + t_height + s_kpadding, width: alert_width - kpadding, height: mmin_height)
+        //messageLabel.frame = CGRect(x: 0, y: 0, width: messageScroll.frame.width, height: m_height)
+        actionsView.frame = CGRect(x: 0, y: messageScroll.frame.maxY + kpadding, width: alert_width, height: a_height)
+        contentView.frame = CGRect(x: 0, y: 0, width: alert_width, height: alert_height)
+        contentView.center = self.center
+        blurEffectView.frame = contentView.bounds
+        messageScroll.contentSize = CGSize(width: 0, height: m_height)
+        
+        titleLabel.text = title
+      
+        if let a_count = actions?.count, a_count > 0 {
+            actionSetup()
+        }
+    }
+    
+    @objc func tagAction(_ sender: UIButton) {
+        print("\(sender.titleLabel?.text ?? ""), tag:\(sender.tag)")
+        messageScroll.subviews.forEach { (view) in
+            if let btn = view as? UIButton {
+                btn.isSelected = false
+            }
+        }
+        sender.isSelected = true
+    }
+}
+
 
 //MARK: - AlertBlockView
 public class AlertBlockView: UIViewController {
