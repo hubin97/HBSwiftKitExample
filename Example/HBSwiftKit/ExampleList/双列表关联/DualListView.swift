@@ -35,7 +35,7 @@ class FamilyAreaOptionsView: UIView, DualListDataSourceDelegate {
         _managerBtn.setTitle("家庭管理", for: .normal)
         _managerBtn.setTitleColor(.white, for: .normal)
         _managerBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        _managerBtn.setBackgroundImage(UIImage(color: .red), for: .normal)
+        _managerBtn.setBackgroundImage(UIImage(color: .lightGray), for: .normal)
         _managerBtn.setRectCorner(radiiSize: 55/2)
         //okBtn.setBackgroundImage(UIImage.init(color: .red), for: .highlighted)
         _managerBtn.addTarget(self, action: #selector(managerAction), for: .touchUpInside)

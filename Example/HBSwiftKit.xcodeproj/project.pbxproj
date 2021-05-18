@@ -241,6 +241,7 @@
 		B5887FA3264CD719003C1896 /* 双列表关联 */ = {
 			isa = PBXGroup;
 			children = (
+				B56F68A1264B8AF400FD62CF /* duallist.json */,
 				B56F689C264B8AB300FD62CF /* DualListView.swift */,
 			);
 			path = "双列表关联";
@@ -336,7 +337,6 @@
 				B5D55404261D40AE007A20F5 /* jstest.html */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				B5BAC834255A7875005A5179 /* images.json */,
-				B56F68A1264B8AF400FD62CF /* duallist.json */,
 				B5CC7A4925E8989300D263B4 /* advfilterdata.json */,
 				B5DCC71325F3266D007E3237 /* areacode.plist */,
 				B5DCC71725F3274D007E3237 /* areacode.json */,
