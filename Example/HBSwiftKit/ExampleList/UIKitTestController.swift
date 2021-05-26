@@ -45,12 +45,32 @@ class UIKitTestController: BaseViewController {
         return []
     }()
     
+    lazy var tagsView: TagsOptionView = {
+        let tags = ["标签", "标", "标签签", "标签签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签签", "标", "标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签"]
+        //let tags = ["标签", "标签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签"]
+        var ops = [TagsMeta]()
+        for idx in 0..<tags.count {
+            let title = tags[idx]
+            let isSel = idx == 2 ? true: false
+            ops.append(TagsMeta(title: title, param: ["\(idx)": title], isSelected: isSel))
+        }
+        let _tagsView = TagsOptionView(title: "标题", isMultiple: true, options: ops, optionNormalBgColor: UIColor(hexStr: "#F1F1F3"), optionSelectBgColor: UIColor(hexStr: "#6165C5"), optionNormalTextColor: UIColor(hexStr: "#5E5E83"), optionSelectTextColor: .white, optionFont: UIFont.systemFont(ofSize: 15), optionMaxHeight: 40, actionTitle: "我知道了", actionTitleColor: .orange, tapAction: {[weak self] (tags) in
+            self?.opPrint(ops: tags)
+        })
+        _tagsView.contentView.backgroundColor = .white
+        _tagsView.titleLabel.textAlignment = .left
+        return _tagsView
+    }()
+    
     var rulerView: SliderRuler!
     //var isExpand = false
     let ball = UIImageView()
     
     @objc func btnAction1(_ sender: UIButton) {
         print("btnAction1")
+        
+        let ff = sender.convert(sender.bounds, to: UIApplication.shared.keyWindow)
+        tagsView.show(ff)
     }
     
     @objc func btnAction2(_ sender: UIButton) {
@@ -65,21 +85,23 @@ class UIKitTestController: BaseViewController {
         super.setupUi()
         
         self.navigationItem.title = "UIKit Test"
+        //let filterBtn = UIButton
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction))
   
 //        let dualView = DualListView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width * 3/4, height: UIScreen.main.bounds.size.height / 2))
 //        view.addSubview(dualView)
 //        dualView.setRoundCorners(borderColor: .brown, isDotted: true, lineDashPattern: [6, 2])
                 
-//        let btn1 = UIButton.init(frame: CGRect(x: 20, y: 100, width: 300, height: 100))
-//        btn1.addTarget(self, action: #selector(btnAction1), for: .touchUpInside)
-//        btn1.setTitle("哈HH阿卡", for: .normal)
-//        btn1.setTitleColor(.black, for: .normal)
-//        btn1.titleLabel?.font = UIFont.systemFont(ofSize: kScaleW(30), weight: .semibold)
-//        btn1.drawTextLineColor = .orange
-//        btn1.drawTextLineWidth = 2
-//        view.addSubview(btn1)
-//        btn1.setRoundCorners(borderColor: .red)
+        let btn1 = UIButton.init(frame: CGRect(x: 20, y: 100, width: 300, height: 100))
+        btn1.addTarget(self, action: #selector(btnAction1), for: .touchUpInside)
+        btn1.setTitle("哈HH阿卡", for: .normal)
+        btn1.setTitleColor(.black, for: .normal)
+        btn1.titleLabel?.font = UIFont.systemFont(ofSize: kScaleW(30), weight: .semibold)
+        btn1.drawTextLineColor = .orange
+        btn1.drawTextLineWidth = 2
+        view.addSubview(btn1)
+        btn1.setRoundCorners(borderColor: .red)
 //
 //        let btn2 = UIButton.init(frame: CGRect(x: 100, y: 300, width: 100, height: 100))
 //        btn2.addTarget(self, action: #selector(btnAction2), for: .touchUpInside)
@@ -165,7 +187,20 @@ extension UIKitTestController {
         
         //MFMessageComposeViewController
         //AlertBlockView.init(title: "标题", message: "这是消息体", actions: ["我知道了"], tapAction: nil).show()
-        YTAlertView(tags_title: "标题", options: ["标签标签标签标签", "标签签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签"], actions: ["确定"], tapAction: nil).show()
+        //YTAlertView(tags_title: "标题", options: ["标签标签标签标签", "标签签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签"], actions: ["确定"], tapAction: nil).show()
+
+//        TagsOptionView(title: "标题", options: ops, optionFont: UIFont.systemFont(ofSize: 15), optionMaxHeight: 40, actionTitle: nil, actionTitleColor: .orange, tapAction: {[weak self] (tags) in
+//            self?.opPrint(ops: tags)
+//        }).show()
+
+//        tagsView.show()
+    }
+    
+    func opPrint(ops: [TagsMeta]?) {
+        ops?.forEach({ (meta) in
+            print("op_title:\(meta.title ?? "")")
+            print("op_param:\(meta.param ?? 0)")
+        })
     }
     
     func bouncesAni() {

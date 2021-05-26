@@ -1,0 +1,298 @@
+//
+//  TagsOptionView.swift
+//  HBSwiftKit_Example
+//
+//  Created by Hubin_Huang on 2021/5/26.
+//  Copyright © 2020 Wingto. All rights reserved.
+
+import Foundation
+
+//MARK: - global var and methods
+
+//MARK: - main class
+class TagsOptionView: UIView {
+
+    fileprivate var tapAction: ((_ tagMetas: [TagsMeta]?) -> ())?
+    fileprivate let alert_width: CGFloat = 335 // 系统宽度 270
+    fileprivate let action_height: CGFloat = 44 // 系统高度 44
+    fileprivate let max_alert_height = UIScreen.main.bounds.height * 2/3
+    fileprivate var alert_height: CGFloat = 0 // content 总高度
+    fileprivate var mmin_height: CGFloat = 0  // message 可视高度
+    fileprivate var t_height: CGFloat = 0  // title 总高度
+    fileprivate var a_height: CGFloat = 0  // actions 总高度(底部可交互按钮)
+    fileprivate var m_height: CGFloat = 0  // message 总高度
+
+    public var kpadding: CGFloat = 20 //
+    /// 同系统分割线 0.33, 不能小于0.5,否则不显示
+    public var line_height: CGFloat = 0.5
+    /// 消息体行间距
+    public var msg_LineSpacing: CGFloat = 7.5
+
+    var maskingView = UIView()
+    var contentView = UIView()
+    var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    var titleLabel = UILabel()
+    var messageScroll = UIScrollView()
+    var actionsView = UIView()
+    var tags: [TagsMeta]?
+    fileprivate var actionTitle: String?
+    fileprivate var isMultiple: Bool = false
+    
+    public override init(frame: CGRect) {
+        super.init(frame: UIApplication.shared.keyWindow?.bounds ?? UIScreen.main.bounds)
+        blurEffectView.effect = UIBlurEffect(style: .light)
+        if #available(iOS 10, *) {
+            blurEffectView.effect = UIBlurEffect(style: .prominent)
+            if #available(iOS 13, *) {
+                blurEffectView.effect = UIBlurEffect(style: .systemMaterialLight)
+            }
+        }
+        contentView.addSubview(blurEffectView)
+
+        addSubview(maskingView)
+        maskingView.frame = UIApplication.shared.keyWindow?.bounds ?? UIScreen.main.bounds
+        maskingView.backgroundColor = UIColor.init(white: 0, alpha: 0.2) // 同系统蒙层
+        maskingView.addSubview(contentView)
+        maskingView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(maskTapAction(_:))))
+        
+        contentView.frame = CGRect(x: 0, y: 0, width: alert_width, height: alert_height)
+        contentView.center = self.center
+        contentView.layer.masksToBounds = true
+        contentView.layer.cornerRadius = 15.0
+        
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(messageScroll)
+        contentView.addSubview(actionsView)
+
+        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = .black
+        titleLabel.numberOfLines = 0
+        titleLabel.lineBreakMode = .byCharWrapping
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+//MARK: - private mothods
+extension TagsOptionView {
+    
+    /// 标签组样式
+    ///
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - isMultiple: 是否多选
+    ///   - options: 可以标签组 [TagsMeta]?
+    ///   - optionNormalBgColor: 标签正常背景色
+    ///   - optionSelectBgColor: 标签选中背景色
+    ///   - optionNormalTextColor: 标签正常字体色
+    ///   - optionSelectTextColor: 标签选中字体色
+    ///   - optionFont: 标签字体大小
+    ///   - optionMaxHeight: 标签最大高度
+    ///   - actionTitle: 确认键标题
+    ///   - actionTitleColor: 确认键字体色
+    ///   - tapAction: 最终事件回调
+    /// - Returns: self
+    public convenience init(title: String?, isMultiple: Bool = false, options: [TagsMeta]?, optionNormalBgColor: UIColor = .lightGray, optionSelectBgColor: UIColor = .blue, optionNormalTextColor: UIColor = .black, optionSelectTextColor: UIColor = .white, optionFont: UIFont = UIFont.systemFont(ofSize: 15), optionMaxHeight: CGFloat = 40, actionTitle: String?, actionTitleColor: UIColor = .systemBlue, tapAction: ((_ tagMetas: [TagsMeta]?) -> ())? ) {
+        self.init(frame: CGRect.zero)
+        self.tapAction = tapAction
+        setup(title: title, isMultiple: isMultiple, options: options, optionNormalBgColor: optionNormalBgColor, optionSelectBgColor: optionSelectBgColor, optionNormalTextColor: optionNormalTextColor, optionSelectTextColor: optionSelectTextColor, optionFont: optionFont, optionMaxHeight: optionMaxHeight, actionTitle: actionTitle, actionTitleColor: actionTitleColor)
+    }
+    
+    func setup(title: String?, isMultiple: Bool, options: [TagsMeta]?, optionNormalBgColor: UIColor, optionSelectBgColor: UIColor, optionNormalTextColor: UIColor, optionSelectTextColor: UIColor, optionFont: UIFont, optionMaxHeight: CGFloat, actionTitle: String?, actionTitleColor: UIColor) {
+        assert(!(title == nil || title == ""), "标题不能为空")
+        assert(!(title == nil && isMultiple == true), "多选时标题不能为空")
+        self.actionTitle = actionTitle
+        self.tags = options
+        self.isMultiple = isMultiple
+        
+        if let t_title = title, t_title != "" {
+            let rect = NSString(string: t_title).boundingRect(with: CGSize(width: alert_width - kpadding, height: CGFloat(Int.max)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: titleLabel.font ?? UIFont.systemFont(ofSize: 16, weight: .medium)], context: nil)
+            t_height = rect.size.height
+        }
+        
+        /// tags flow 高度估算
+        if let t_option = options, t_option.count > 0 {
+            let limit_width = alert_width - kpadding
+            var item_width: CGFloat = 0
+            var total_height: CGFloat = kpadding/2
+            
+            for idx in 0..<t_option.count {
+                let op = t_option[idx]
+                let btn = UIButton.init(type: .custom)
+                messageScroll.addSubview(btn)
+                btn.setTitle(op.title, for: .normal)
+                btn.setTitleColor(optionNormalTextColor, for: .normal)
+                btn.setBackgroundImage(UIImage(color: optionNormalBgColor), for: .normal)
+                btn.setTitleColor(optionSelectTextColor, for: .selected)
+                btn.setBackgroundImage(UIImage(color: optionSelectBgColor), for: .selected)
+                btn.setTitleColor(optionSelectTextColor, for: .highlighted)
+                btn.setBackgroundImage(UIImage(color: optionSelectBgColor), for: .highlighted)
+                btn.titleLabel?.font = optionFont
+                btn.addTarget(self, action: #selector(tagAction), for: .touchUpInside)
+                btn.titleLabel?.lineBreakMode = .byTruncatingTail
+                btn.tag = 2000 + idx
+                btn.layer.masksToBounds = true
+                btn.layer.cornerRadius = 5
+                btn.isSelected = op.isSelected
+                op.tag = btn.tag
+                
+                let rect = NSString(string: op.title ?? "").boundingRect(with: CGSize(width: limit_width, height: optionMaxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: optionFont], context: nil)
+                let text_width = rect.size.width + kpadding
+                if item_width + text_width + kpadding/2 > limit_width {
+                    item_width = 0
+                    total_height += (optionMaxHeight + kpadding/2)
+                }
+                btn.frame = CGRect(x: item_width, y: total_height, width: text_width, height: optionMaxHeight)
+                item_width += text_width + kpadding/2  // itemspace
+            }
+            total_height += optionMaxHeight
+            mmin_height = max(100, min(300, total_height))
+            m_height = total_height
+        }
+
+        if actionTitle != nil {
+            a_height = action_height
+        }
+        
+        alert_height = (t_height + kpadding) + (m_height + kpadding) + (a_height + kpadding)
+        // 限制高度
+        if alert_height > max_alert_height {
+            mmin_height = max_alert_height - ((t_height + kpadding) + (a_height + kpadding) + kpadding)
+            alert_height = max_alert_height
+        }
+        
+        titleLabel.frame = CGRect(x: kpadding + kpadding/2, y: kpadding, width: alert_width - 3 * kpadding, height: t_height)
+        messageScroll.frame = CGRect(x: kpadding, y: kpadding + t_height + kpadding, width: alert_width - 2 * kpadding, height: mmin_height)
+        actionsView.frame = CGRect(x: 0, y: messageScroll.frame.maxY + kpadding, width: alert_width, height: a_height)
+        contentView.frame = CGRect(x: 0, y: 0, width: alert_width, height: alert_height)
+        contentView.center = self.center
+        blurEffectView.frame = contentView.bounds
+        messageScroll.contentSize = CGSize(width: 0, height: m_height)
+        
+        titleLabel.text = title
+      
+        if actionTitle != nil {
+            let button = UIButton.init(type: .system)
+            button.frame = actionsView.bounds
+            actionsView.addSubview(button)
+            button.setTitle(actionTitle, for: .normal)
+            button.setTitleColor(.systemBlue, for: .normal)
+            button.setBackgroundImage(UIImage(color: .lightGray), for: .highlighted)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+            button.addTarget(self, action: #selector(btnTapAction(_:)), for: .touchUpInside)
+            
+            let lineView = UIView.init(frame: CGRect(x: 0, y: 0, width: actionsView.bounds.size.width, height: line_height))
+            actionsView.addSubview(lineView)
+            lineView.backgroundColor = UIColor(white: 0, alpha: 0.2)
+        }
+    }
+        
+    @objc func btnTapAction(_ sender: UIButton) {
+        hide()
+        let ops = self.tags?.filter({ $0.isSelected == true })
+        self.tapAction?(ops)
+    }
+    
+    @objc func tagAction(_ sender: UIButton) {
+        //print("\(sender.titleLabel?.text ?? ""), tag:\(sender.tag)")
+        if self.isMultiple == true {
+            sender.isSelected = !sender.isSelected
+        } else {
+            messageScroll.subviews.forEach { (view) in
+                if let btn = view as? UIButton {
+                    btn.isSelected = false
+                }
+            }
+            sender.isSelected = true
+        }
+        
+        // 同步数据源
+        let selTags = messageScroll.subviews.filter({ $0.isKind(of: UIButton.self) })
+            .map({ $0 as! UIButton }).filter({ $0.isSelected == true }).map({ $0.tag })
+        //let tag = sender.tag
+        self.tags?.forEach({ $0.isSelected = false })
+        self.tags?.filter({ selTags.contains($0.tag ?? 0) }).forEach({ $0.isSelected = true })
+        if self.actionTitle == nil {
+            hide()
+            let ops = self.tags?.filter({ $0.isSelected == true })
+            self.tapAction?(ops)
+        }
+    }
+}
+
+//MARK: - call backs
+extension TagsOptionView {
+    
+    /// show
+    ///
+    /// let ff = sender.convert(sender.bounds, to: UIApplication.shared.keyWindow)
+    /// - Parameter orignFrame: 不传默认为nil, 以UIApplication.shared.keyWindow为参考计算frame
+    public func show(_ orignFrame: CGRect? = nil) {
+        DispatchQueue.main.async {
+            UIApplication.shared.keyWindow?.addSubview(self)
+            guard let orignFrame = orignFrame else {
+                self.systemAnimate()
+                return
+            }
+            
+            /// 取给定的起始frame拉伸到目标frame
+            let targetFrame = self.contentView.frame
+            self.contentView.frame = orignFrame
+            UIView.animate(withDuration: 0.3) {
+                self.contentView.frame = targetFrame
+            } completion: { (finish) in
+                
+            }
+        }
+    }
+    
+    public func hide() {
+        self.removeFromSuperview()
+    }
+    
+    @objc func maskTapAction(_ tap: UITapGestureRecognizer) {
+        let tap_point = tap.location(in: self)
+        let isincontent = self.contentView.frame.contains(tap_point)
+        // 无操作键可点击蒙层移除, 点不在contentView上
+        if self.actionTitle == nil && isincontent == false {
+            hide()
+        }
+    }
+    
+    // 模拟系统弹框动画
+    func systemAnimate() {
+        let animateKeyframes = CAKeyframeAnimation(keyPath: "transform")
+        animateKeyframes.duration = 0.3
+        animateKeyframes.values = [NSValue(caTransform3D: CATransform3DMakeScale(0.01, 0.01, 1.0)),
+                                   NSValue(caTransform3D: CATransform3DMakeScale(1.1, 1.1, 1.0)),
+                                   NSValue(caTransform3D: CATransform3DIdentity)]
+        animateKeyframes.keyTimes = [0.0, 0.7, 1.0]
+        animateKeyframes.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
+                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
+                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)]
+        self.contentView.layer.add(animateKeyframes, forKey: nil)
+    }
+}
+
+//MARK: - delegate or data source
+extension TagsOptionView {
+    
+}
+
+//MARK: - other classes
+class TagsMeta {
+    var title: String?
+    var param: Any?
+    var isSelected: Bool = false
+    var tag: Int?
+    convenience init(title: String?, param: Any?, isSelected: Bool = false, tag: Int? = nil) {
+        self.init()
+        self.title = title
+        self.param = param
+        self.isSelected = isSelected
+        self.tag = tag
+    }
+}
