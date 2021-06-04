@@ -8,12 +8,19 @@
 import Foundation
 
 //MARK: - global var and methods
+protocol TagsOptionViewDelegate: class {
+    func tagsOpResult(_ tagMetas: [TagsMeta]?)
+}
 
 //MARK: - main class
+fileprivate func WScale(_ x: CGFloat) -> CGFloat {
+    return UIScreen.main.bounds.size.width/375 * x
+}
 class TagsOptionView: UIView {
 
+    weak var delegate: TagsOptionViewDelegate?
     fileprivate var tapAction: ((_ tagMetas: [TagsMeta]?) -> ())?
-    fileprivate let alert_width: CGFloat = 335 // 系统宽度 270
+    fileprivate let alert_width: CGFloat = WScale(335) // 系统宽度 270
     fileprivate let action_height: CGFloat = 44 // 系统高度 44
     fileprivate let max_alert_height = UIScreen.main.bounds.height * 2/3
     fileprivate var alert_height: CGFloat = 0 // content 总高度
@@ -226,6 +233,7 @@ extension TagsOptionView {
         hide()
         let ops = self.tags?.filter({ $0.isSelected == true })
         self.tapAction?(ops)
+        self.delegate?.tagsOpResult(ops)
     }
     
     @objc func tagAction(_ sender: UIButton) {
@@ -251,6 +259,7 @@ extension TagsOptionView {
             hide()
             let ops = self.tags?.filter({ $0.isSelected == true })
             self.tapAction?(ops)
+            self.delegate?.tagsOpResult(ops)
         }
     }
 }
@@ -261,22 +270,29 @@ extension TagsOptionView {
     /// show
     ///
     /// let ff = sender.convert(sender.bounds, to: UIApplication.shared.keyWindow)
-    /// - Parameter orignFrame: 不传默认为nil, 以UIApplication.shared.keyWindow为参考计算frame
-    public func show(_ orignFrame: CGRect? = nil) {
+    /// - Parameter originFrame: 不传默认为nil, 以UIApplication.shared.keyWindow为参考计算frame
+    public func show(originFrame: CGRect? = nil, isLinkOrigin: Bool = false) {
         DispatchQueue.main.async {
             UIApplication.shared.keyWindow?.addSubview(self)
-            guard let orignFrame = orignFrame else {
+            guard let originFrame = originFrame else {
                 self.systemAnimate()
                 return
             }
             
             /// 取给定的起始frame拉伸到目标frame
             let targetFrame = self.contentView.frame
-            self.contentView.frame = orignFrame
+            self.contentView.frame = originFrame
             UIView.animate(withDuration: 0.3) {
-                self.contentView.frame = targetFrame
-            } completion: { (finish) in
-                
+                if isLinkOrigin {
+                    let minY = originFrame.origin.y
+                    if minY + targetFrame.size.height > UIScreen.main.bounds.size.height - kTabBarHeight {
+                        self.contentView.frame = targetFrame
+                    } else {
+                        self.contentView.frame = CGRect(x: targetFrame.origin.x, y: originFrame.origin.y, width: targetFrame.size.width, height: targetFrame.size.height)
+                    }
+                } else {
+                    self.contentView.frame = targetFrame
+                }
             }
         }
     }
