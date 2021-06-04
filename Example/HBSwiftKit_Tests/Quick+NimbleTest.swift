@@ -91,7 +91,9 @@ class StringLenghtTest: QuickSpec {
                 print("数字:\(num.count)")
                 print("字母:\(alp.count)")
                 print("中文:\(zh.count)")
-                
+                print("数字#:\(num.fullwidthToHalfwidth().count)")
+                print("字母#:\(alp.fullwidthToHalfwidth().count)")
+
                         var str = "ABCDEFG"
                 //        let tmp = str[2, 5]
                 //        print("tmp:\(tmp)")

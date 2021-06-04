@@ -189,11 +189,23 @@ extension UIKitTestController {
         //AlertBlockView.init(title: "标题", message: "这是消息体", actions: ["我知道了"], tapAction: nil).show()
         //YTAlertView(tags_title: "标题", options: ["标签标签标签标签", "标签签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签"], actions: ["确定"], tapAction: nil).show()
 
-//        TagsOptionView(title: "标题", options: ops, optionFont: UIFont.systemFont(ofSize: 15), optionMaxHeight: 40, actionTitle: nil, actionTitleColor: .orange, tapAction: {[weak self] (tags) in
+        var ops1 = [TagsMeta]()
+        var ops2 = [TagsMeta]()
+        for idx in 0..<21 {
+            let tag1 = TagsMeta(title: "标签\(idx)", iconn: R.image.tabBar.like_n.name, iconh: R.image.tabBar.like_h.name, param: "idx=>\(idx)")
+            let tag2 = TagsMeta(title: "标签\(idx)", param: "idx=>\(idx)")
+            ops1.append(tag1)
+            ops2.append(tag2)
+        }
+        
+        TagsOptionView(title: "标题", options: ops1, optionFont: UIFont.systemFont(ofSize: 12), actionTitle: nil, actionTitleColor: .orange, tapAction: {[weak self] (tags) in
+            self?.opPrint(ops: tags)
+        }).show()
+
+//        TagsOptionView(title: "标题", options: ops2, optionFont: UIFont.systemFont(ofSize: 15), actionTitle: nil, actionTitleColor: .orange, tapAction: {[weak self] (tags) in
 //            self?.opPrint(ops: tags)
 //        }).show()
-
-//        tagsView.show()
+        
     }
     
     func opPrint(ops: [TagsMeta]?) {

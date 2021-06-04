@@ -28,18 +28,6 @@ open class BaseNavigationController: UINavigationController {
         }
     }
     
-    public override init(rootViewController: UIViewController) {
-        super.init(rootViewController: rootViewController)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,17 +41,21 @@ open class BaseNavigationController: UINavigationController {
         }
     }
     
-    //
-    public override var preferredStatusBarStyle: UIStatusBarStyle {
-        .default
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.topViewController?.preferredStatusBarStyle ?? .default
     }
 }
 
 // MARK: - Others
 extension BaseNavigationController {
     
-    @objc func backAction() {
-        popViewController(animated: true)
+    //MARK: 回调返回到上层控制器,
+    @objc func backTapAction() {
+        if self.topViewController?.responds(to: #selector(backTapAction)) == true {
+            self.topViewController?.perform(#selector(backTapAction))
+        } else {
+            self.popViewController(animated: true)
+        }
     }
 }
 
@@ -73,7 +65,7 @@ extension BaseNavigationController: UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         let rooVc = navigationController.viewControllers[0]
         if rooVc != viewController {
-            viewController.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBtnImage?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backAction))
+            viewController.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBtnImage?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backTapAction))
             navigationBar.backIndicatorImage = UIImage()
             navigationBar.backIndicatorTransitionMaskImage = UIImage()
             // 设置系统自带的右滑手势返回

@@ -95,13 +95,13 @@ extension TagsOptionView {
     ///   - actionTitleColor: 确认键字体色
     ///   - tapAction: 最终事件回调
     /// - Returns: self
-    public convenience init(title: String?, isMultiple: Bool = false, options: [TagsMeta]?, optionNormalBgColor: UIColor = .lightGray, optionSelectBgColor: UIColor = .blue, optionNormalTextColor: UIColor = .black, optionSelectTextColor: UIColor = .white, optionFont: UIFont = UIFont.systemFont(ofSize: 15), optionMaxHeight: CGFloat = 40, actionTitle: String?, actionTitleColor: UIColor = .systemBlue, tapAction: ((_ tagMetas: [TagsMeta]?) -> ())? ) {
+    public convenience init(title: String?, isMultiple: Bool = false, options: [TagsMeta]?, columns: Int = 4, optionNormalBgColor: UIColor = .lightGray, optionSelectBgColor: UIColor = .blue, optionNormalTextColor: UIColor = .black, optionSelectTextColor: UIColor = .white, optionFont: UIFont = UIFont.systemFont(ofSize: 15), optionMaxHeight: CGFloat = 40, actionTitle: String?, actionTitleColor: UIColor = .systemBlue, tapAction: ((_ tagMetas: [TagsMeta]?) -> ())? ) {
         self.init(frame: CGRect.zero)
         self.tapAction = tapAction
-        setup(title: title, isMultiple: isMultiple, options: options, optionNormalBgColor: optionNormalBgColor, optionSelectBgColor: optionSelectBgColor, optionNormalTextColor: optionNormalTextColor, optionSelectTextColor: optionSelectTextColor, optionFont: optionFont, optionMaxHeight: optionMaxHeight, actionTitle: actionTitle, actionTitleColor: actionTitleColor)
+        setup(title: title, isMultiple: isMultiple, options: options, columns: columns, optionNormalBgColor: optionNormalBgColor, optionSelectBgColor: optionSelectBgColor, optionNormalTextColor: optionNormalTextColor, optionSelectTextColor: optionSelectTextColor, optionFont: optionFont, optionMaxHeight: optionMaxHeight, actionTitle: actionTitle, actionTitleColor: actionTitleColor)
     }
     
-    func setup(title: String?, isMultiple: Bool, options: [TagsMeta]?, optionNormalBgColor: UIColor, optionSelectBgColor: UIColor, optionNormalTextColor: UIColor, optionSelectTextColor: UIColor, optionFont: UIFont, optionMaxHeight: CGFloat, actionTitle: String?, actionTitleColor: UIColor) {
+    func setup(title: String?, isMultiple: Bool, options: [TagsMeta]?, columns: Int, optionNormalBgColor: UIColor, optionSelectBgColor: UIColor, optionNormalTextColor: UIColor, optionSelectTextColor: UIColor, optionFont: UIFont, optionMaxHeight: CGFloat, actionTitle: String?, actionTitleColor: UIColor) {
         assert(!(title == nil || title == ""), "标题不能为空")
         assert(!(title == nil && isMultiple == true), "多选时标题不能为空")
         self.actionTitle = actionTitle
@@ -116,41 +116,73 @@ extension TagsOptionView {
         /// tags flow 高度估算
         if let t_option = options, t_option.count > 0 {
             let limit_width = alert_width - kpadding
-            var item_width: CGFloat = 0
-            var total_height: CGFloat = kpadding/2
-            
-            for idx in 0..<t_option.count {
-                let op = t_option[idx]
-                let btn = UIButton.init(type: .custom)
-                messageScroll.addSubview(btn)
-                btn.setTitle(op.title, for: .normal)
-                btn.setTitleColor(optionNormalTextColor, for: .normal)
-                btn.setBackgroundImage(UIImage(color: optionNormalBgColor), for: .normal)
-                btn.setTitleColor(optionSelectTextColor, for: .selected)
-                btn.setBackgroundImage(UIImage(color: optionSelectBgColor), for: .selected)
-                btn.setTitleColor(optionSelectTextColor, for: .highlighted)
-                btn.setBackgroundImage(UIImage(color: optionSelectBgColor), for: .highlighted)
-                btn.titleLabel?.font = optionFont
-                btn.addTarget(self, action: #selector(tagAction), for: .touchUpInside)
-                btn.titleLabel?.lineBreakMode = .byTruncatingTail
-                btn.tag = 2000 + idx
-                btn.layer.masksToBounds = true
-                btn.layer.cornerRadius = 5
-                btn.isSelected = op.isSelected
-                op.tag = btn.tag
-                
-                let rect = NSString(string: op.title ?? "").boundingRect(with: CGSize(width: limit_width, height: optionMaxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: optionFont], context: nil)
-                let text_width = rect.size.width + kpadding
-                if item_width + text_width + kpadding/2 > limit_width {
-                    item_width = 0
-                    total_height += (optionMaxHeight + kpadding/2)
+
+            if let _ = t_option.first?.iconn, columns > 0 {
+                let item_width = (limit_width - CGFloat(columns + 1) * kpadding)/CGFloat(columns)
+                let item_height = item_width
+                for idx in 0..<t_option.count {
+                    let row = idx / columns
+                    let index = idx - row * columns
+                    let op = t_option[idx]
+                    let btn = TagIconBtn.init(type: .custom)
+                    messageScroll.addSubview(btn)
+                    btn.frame = CGRect(x: kpadding/2 + (item_width + kpadding) * CGFloat(index), y: kpadding/2 + (item_height + kpadding) * CGFloat(row), width: item_width, height: item_height)
+                    btn.setTitle(op.title, for: .normal)
+                    btn.setTitleColor(optionNormalTextColor, for: .normal)
+                    btn.setTitleColor(optionSelectTextColor, for: .selected)
+                    btn.setTitleColor(optionSelectTextColor, for: .highlighted)
+                    btn.setImage(UIImage(named: op.iconn ?? ""), for: .normal)
+                    btn.setImage(UIImage(named: op.iconh ?? ""), for: .selected)
+                    btn.setImage(UIImage(named: op.iconh ?? ""), for: .highlighted)
+                    btn.titleLabel?.font = optionFont
+                    btn.addTarget(self, action: #selector(tagAction), for: .touchUpInside)
+                    btn.titleLabel?.lineBreakMode = .byTruncatingTail
+                    btn.titleLabel?.textAlignment = .center
+                    btn.tag = 2000 + idx
+                    btn.isSelected = op.isSelected
+                    op.tag = btn.tag
                 }
-                btn.frame = CGRect(x: item_width, y: total_height, width: text_width, height: optionMaxHeight)
-                item_width += text_width + kpadding/2  // itemspace
+                let total_row = t_option.count % columns == 0 ? (t_option.count / columns): (t_option.count / columns) + 1
+                let total_height = kpadding + (item_height + kpadding) * CGFloat(total_row)
+                mmin_height = max(100, min(300, total_height))
+                m_height = total_height
+            } else {
+                var item_width: CGFloat = 0
+                var total_height: CGFloat = kpadding/2
+                
+                for idx in 0..<t_option.count {
+                    let op = t_option[idx]
+                    let btn = UIButton.init(type: .custom)
+                    messageScroll.addSubview(btn)
+                    btn.setTitle(op.title, for: .normal)
+                    btn.setTitleColor(optionNormalTextColor, for: .normal)
+                    btn.setBackgroundImage(UIImage(color: optionNormalBgColor), for: .normal)
+                    btn.setTitleColor(optionSelectTextColor, for: .selected)
+                    btn.setBackgroundImage(UIImage(color: optionSelectBgColor), for: .selected)
+                    btn.setTitleColor(optionSelectTextColor, for: .highlighted)
+                    btn.setBackgroundImage(UIImage(color: optionSelectBgColor), for: .highlighted)
+                    btn.titleLabel?.font = optionFont
+                    btn.addTarget(self, action: #selector(tagAction), for: .touchUpInside)
+                    btn.titleLabel?.lineBreakMode = .byTruncatingTail
+                    btn.tag = 2000 + idx
+                    btn.layer.masksToBounds = true
+                    btn.layer.cornerRadius = 5
+                    btn.isSelected = op.isSelected
+                    op.tag = btn.tag
+                    
+                    let rect = NSString(string: op.title ?? "").boundingRect(with: CGSize(width: limit_width, height: optionMaxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: optionFont], context: nil)
+                    let text_width = rect.size.width + kpadding
+                    if item_width + text_width + kpadding/2 > limit_width {
+                        item_width = 0
+                        total_height += (optionMaxHeight + kpadding/2)
+                    }
+                    btn.frame = CGRect(x: item_width, y: total_height, width: text_width, height: optionMaxHeight)
+                    item_width += text_width + kpadding/2  // itemspace
+                }
+                total_height += optionMaxHeight
+                mmin_height = max(100, min(300, total_height))
+                m_height = total_height
             }
-            total_height += optionMaxHeight
-            mmin_height = max(100, min(300, total_height))
-            m_height = total_height
         }
 
         if actionTitle != nil {
@@ -283,13 +315,36 @@ extension TagsOptionView {
 }
 
 //MARK: - other classes
+class TagIconBtn: UIButton {
+    
+    override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
+        var imageRect = contentRect
+        imageRect.size.width = contentRect.size.width/2
+        imageRect.size.height = imageRect.size.width
+        imageRect.origin.x = contentRect.size.width/4
+        imageRect.origin.y = contentRect.size.width/8
+        return imageRect
+    }
+    
+    override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
+        var titleRect = contentRect
+        titleRect.origin.y = contentRect.size.width * 3/4
+        titleRect.size.height = contentRect.size.height - titleRect.origin.y
+        return titleRect
+    }
+}
+
 class TagsMeta {
     var title: String?
+    var iconn: String?
+    var iconh: String?
     var param: Any?
     var isSelected: Bool = false
     var tag: Int?
-    convenience init(title: String?, param: Any?, isSelected: Bool = false, tag: Int? = nil) {
+    convenience init(title: String?, iconn: String? = nil, iconh: String? = nil, param: Any?, isSelected: Bool = false, tag: Int? = nil) {
         self.init()
+        self.iconn = iconn
+        self.iconh = iconh
         self.title = title
         self.param = param
         self.isSelected = isSelected
