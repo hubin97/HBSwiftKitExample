@@ -318,9 +318,9 @@ extension TagsOptionView {
                                    NSValue(caTransform3D: CATransform3DMakeScale(1.1, 1.1, 1.0)),
                                    NSValue(caTransform3D: CATransform3DIdentity)]
         animateKeyframes.keyTimes = [0.0, 0.7, 1.0]
-        animateKeyframes.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
-                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
-                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)]
+        animateKeyframes.timingFunctions = [CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+                                            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+                                            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)]
         self.contentView.layer.add(animateKeyframes, forKey: nil)
     }
 }
