@@ -133,6 +133,7 @@ extension Extension_String {
         return false
     }
     
+    //MARK: - Encoded/ Decoded
     /// SwifterSwift: Readable string from a URL string.
     ///
     ///        "it's%20easy%20to%20decode%20strings".urlDecoded -> "it's easy to decode strings"
@@ -147,6 +148,22 @@ extension Extension_String {
     ///
     var urlEncoded: String {
         return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+    }
+    
+    //MARK: - NSRange usage
+    /// 截取NSRange范围的子字符串
+    func subString(with range: NSRange) -> String {
+        let text = self as NSString
+        let subStr = text.substring(with: range) as String
+        return subStr
+    }
+    
+    /// 获取子字符串的范围NSRange
+    /// - Parameter subString: <#subString description#>
+    /// - Returns: <#description#>
+    func nsRange(of subString: String) -> NSRange {
+        let text = self as NSString
+        return text.range(of: subString)
     }
 }
 

@@ -70,7 +70,7 @@ class UIKitTestController: BaseViewController {
         print("btnAction1")
         
         let ff = sender.convert(sender.bounds, to: UIApplication.shared.keyWindow)
-        tagsView.show(ff)
+        tagsView.show(originFrame: ff)
     }
     
     @objc func btnAction2(_ sender: UIButton) {

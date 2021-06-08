@@ -121,7 +121,17 @@ class StringLenghtTest: QuickSpec {
                 print("str:\(str)")
                 // Prints str:A###CDE*G
                 
-                str.containEmoji
+                //str.containEmoji
+                //subString
+                let test = "abcdefg"
+                let key = "cd"
+                let r = test.nsRange(of: key)
+                print("r: \(r)")
+                
+                let r2 = NSRange(location: 0, length: 3)
+                let s = test.subString(with: r2)
+                print("s: \(s)")
+
             }
         }
     }
