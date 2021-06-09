@@ -8,7 +8,7 @@
 import Foundation
 
 //MARK: - global var and methods
-protocol TagsOptionViewDelegate: class {
+public protocol TagsOptionViewDelegate: class {
     func tagsOpResult(_ tagMetas: [TagsMeta]?)
 }
 
@@ -16,7 +16,7 @@ protocol TagsOptionViewDelegate: class {
 fileprivate func WScale(_ x: CGFloat) -> CGFloat {
     return UIScreen.main.bounds.size.width/375 * x
 }
-class TagsOptionView: UIView {
+open class TagsOptionView: UIView {
 
     weak var delegate: TagsOptionViewDelegate?
     fileprivate var tapAction: ((_ tagMetas: [TagsMeta]?) -> ())?
@@ -35,13 +35,13 @@ class TagsOptionView: UIView {
     /// 消息体行间距
     public var msg_LineSpacing: CGFloat = 7.5
 
-    var maskingView = UIView()
-    var contentView = UIView()
-    var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-    var titleLabel = UILabel()
-    var messageScroll = UIScrollView()
-    var actionsView = UIView()
-    var tags: [TagsMeta]?
+    public var maskingView = UIView()
+    public var contentView = UIView()
+    public var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    public var titleLabel = UILabel()
+    public var messageScroll = UIScrollView()
+    public var actionsView = UIView()
+    public var tags: [TagsMeta]?
     fileprivate var actionTitle: String?
     fileprivate var isMultiple: Bool = false
     
@@ -78,7 +78,7 @@ class TagsOptionView: UIView {
         titleLabel.lineBreakMode = .byCharWrapping
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -331,9 +331,9 @@ extension TagsOptionView {
 }
 
 //MARK: - other classes
-class TagIconBtn: UIButton {
+open class TagIconBtn: UIButton {
     
-    override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
+    open override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
         var imageRect = contentRect
         imageRect.size.width = contentRect.size.width/2
         imageRect.size.height = imageRect.size.width
@@ -342,7 +342,7 @@ class TagIconBtn: UIButton {
         return imageRect
     }
     
-    override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
+    open override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
         var titleRect = contentRect
         titleRect.origin.y = contentRect.size.width * 3/4
         titleRect.size.height = contentRect.size.height - titleRect.origin.y
@@ -350,14 +350,14 @@ class TagIconBtn: UIButton {
     }
 }
 
-class TagsMeta {
-    var title: String?
-    var iconn: String?
-    var iconh: String?
-    var param: Any?
-    var isSelected: Bool = false
-    var tag: Int?
-    convenience init(title: String?, iconn: String? = nil, iconh: String? = nil, param: Any?, isSelected: Bool = false, tag: Int? = nil) {
+open class TagsMeta {
+    public var title: String?
+    public var iconn: String?
+    public var iconh: String?
+    public var param: Any?
+    public var isSelected: Bool = false
+    public var tag: Int?
+    public convenience init(title: String?, iconn: String? = nil, iconh: String? = nil, param: Any?, isSelected: Bool = false, tag: Int? = nil) {
         self.init()
         self.iconn = iconn
         self.iconh = iconh

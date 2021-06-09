@@ -17,6 +17,8 @@
 		B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5389B7825EF8FB400ED67F9 /* R.generated.swift */; };
 		B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */; };
 		B53D570326268EBE001D0BC0 /* HBSwiftKit_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D570226268EBE001D0BC0 /* HBSwiftKit_UITests.swift */; };
+		B5557A302670614E007F5B44 /* LoadAnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5557A2F2670614E007F5B44 /* LoadAnimateView.swift */; };
+		B5557A3526706188007F5B44 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = B5557A3426706188007F5B44 /* loading.gif */; };
 		B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557E4DA2631304800C62147 /* ThemeStyle.swift */; };
 		B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */ = {isa = PBXBuildFile; fileRef = B567FCE42596F39F006AFA69 /* README_SWIFT.md */; };
 		B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F689C264B8AB300FD62CF /* DualListView.swift */; };
@@ -81,6 +83,8 @@
 		B53D570026268EBE001D0BC0 /* HBSwiftKit_UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HBSwiftKit_UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53D570226268EBE001D0BC0 /* HBSwiftKit_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBSwiftKit_UITests.swift; sourceTree = "<group>"; };
 		B53D570426268EBE001D0BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5557A2F2670614E007F5B44 /* LoadAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAnimateView.swift; sourceTree = "<group>"; };
+		B5557A3426706188007F5B44 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		B557E4DA2631304800C62147 /* ThemeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStyle.swift; sourceTree = "<group>"; };
 		B567FCE42596F39F006AFA69 /* README_SWIFT.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README_SWIFT.md; path = ../README_SWIFT.md; sourceTree = "<group>"; };
 		B56F689C264B8AB300FD62CF /* DualListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualListView.swift; sourceTree = "<group>"; };
@@ -316,6 +320,7 @@
 				B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */,
 				B5FB4F26257A365E007F1238 /* WebPreviewController.swift */,
 				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
+				B5557A2F2670614E007F5B44 /* LoadAnimateView.swift */,
 				B5887FA3264CD719003C1896 /* 双列表关联 */,
 				B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */,
 				B5C6C5E125ECD1C400C88C1C /* 主题适配器 */,
@@ -331,6 +336,7 @@
 		B5E1D8E62562831C0093AC4C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B5557A3426706188007F5B44 /* loading.gif */,
 				B5389B7825EF8FB400ED67F9 /* R.generated.swift */,
 				B575D5F825A9900C0068EB19 /* help_cn.html */,
 				B575D5F725A9900C0068EB19 /* help_es.html */,
@@ -485,6 +491,7 @@
 				B5D55405261D40AE007A20F5 /* jstest.html in Resources */,
 				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
 				B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */,
+				B5557A3526706188007F5B44 /* loading.gif in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */,
 			);
@@ -629,6 +636,7 @@
 				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
 				B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */,
 				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
+				B5557A302670614E007F5B44 /* LoadAnimateView.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
