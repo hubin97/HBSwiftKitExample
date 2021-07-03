@@ -121,6 +121,7 @@ extension TagsOptionView {
         }
         
         /// tags flow 高度估算
+        var total_height: CGFloat = 0
         if let t_option = options, t_option.count > 0 {
             let limit_width = alert_width - kpadding
 
@@ -150,13 +151,12 @@ extension TagsOptionView {
                     op.tag = btn.tag
                 }
                 let total_row = t_option.count % columns == 0 ? (t_option.count / columns): (t_option.count / columns) + 1
-                let total_height = kpadding + (item_height + kpadding) * CGFloat(total_row)
-                mmin_height = max(100, min(300, total_height))
-                m_height = total_height
+                total_height = kpadding + (item_height + kpadding) * CGFloat(total_row)
+                mmin_height = max(optionMaxHeight, min(300, total_height))
+                m_height = mmin_height//total_height
             } else {
                 var item_width: CGFloat = 0
-                var total_height: CGFloat = kpadding/2
-                
+                total_height = kpadding/2
                 for idx in 0..<t_option.count {
                     let op = t_option[idx]
                     let btn = UIButton.init(type: .custom)
@@ -187,12 +187,12 @@ extension TagsOptionView {
                     item_width += text_width + kpadding/2  // itemspace
                 }
                 total_height += optionMaxHeight
-                mmin_height = max(100, min(300, total_height))
-                m_height = total_height
+                mmin_height = max(optionMaxHeight, min(300, total_height))
+                m_height = mmin_height//total_height
             }
         }
 
-        if actionTitle != nil {
+        if let actionTitle = actionTitle, !actionTitle.isEmpty {
             a_height = action_height
         }
         
@@ -209,11 +209,11 @@ extension TagsOptionView {
         contentView.frame = CGRect(x: 0, y: 0, width: alert_width, height: alert_height)
         contentView.center = self.center
         blurEffectView.frame = contentView.bounds
-        messageScroll.contentSize = CGSize(width: 0, height: m_height)
+        messageScroll.contentSize = CGSize(width: 0, height: total_height)
         
         titleLabel.text = title
       
-        if actionTitle != nil {
+        if let actionTitle = actionTitle, !actionTitle.isEmpty {
             let button = UIButton.init(type: .system)
             button.frame = actionsView.bounds
             actionsView.addSubview(button)
@@ -255,7 +255,7 @@ extension TagsOptionView {
         //let tag = sender.tag
         self.tags?.forEach({ $0.isSelected = false })
         self.tags?.filter({ selTags.contains($0.tag ?? 0) }).forEach({ $0.isSelected = true })
-        if self.actionTitle == nil {
+        if self.actionTitle == nil || actionTitle?.isEmpty == true {
             hide()
             let ops = self.tags?.filter({ $0.isSelected == true })
             self.tapAction?(ops)

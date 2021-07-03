@@ -46,8 +46,10 @@ class UIKitTestController: BaseViewController {
     }()
     
     lazy var tagsView: TagsOptionView = {
-        let tags = ["标签", "标", "标签签", "标签签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签签", "标", "标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签"]
-        //let tags = ["标签", "标签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签"]
+//        let tags = ["标签", "标", "标签签", "标签签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签签", "标", "标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签"]
+//        let tags = ["标签", "标签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签"]
+        let tags = ["标签", "标签", "标签"]
+
         var ops = [TagsMeta]()
         for idx in 0..<tags.count {
             let title = tags[idx]
@@ -198,7 +200,7 @@ extension UIKitTestController {
             ops2.append(tag2)
         }
         
-        TagsOptionView(title: "标题", options: ops1, optionFont: UIFont.systemFont(ofSize: 12), actionTitle: nil, actionTitleColor: .orange, tapAction: {[weak self] (tags) in
+        TagsOptionView(title: "标题", options: ops1, optionFont: UIFont.systemFont(ofSize: 12), actionTitle: "", actionTitleColor: .orange, tapAction: {[weak self] (tags) in
             self?.opPrint(ops: tags)
         }).show()
 

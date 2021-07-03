@@ -180,9 +180,6 @@ class AuthStatusTest: QuickSpec {
                 AuthStatus.locationServices { (status) in
                     print("定位权限\(status ? "on": "off")")
                 }
-                AuthStatus.locationServices { (status) in
-                    print("定位权限\(status ? "on": "off")")
-                }
                 AuthStatus.apnsServices { (status) in
                     print("推送权限\(status ? "on": "off")")
                 }
