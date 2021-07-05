@@ -65,7 +65,31 @@ import CoreTelephony
 public typealias AuthStatus = AuthorizationStatus
 public typealias AuthsBlock = (_ isEnable: Bool) -> Void
 
-//MARK: - main class
+/**
+ // AuthStatusLocationDelegate
+ //FIXME: 注意 locManager必须由外部全局持有, 否则弹框会一闪而过, 无法交互点击
+ // 辅助弹框提示
+ public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+     print("didUpdateLocations---")
+ }
+ public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+     print("didFailWithError---")
+ }
+ */
+public protocol AuthStatusLocationDelegate: CLLocationManagerDelegate {
+    var locManager: CLLocationManager { set get }
+    func startLocation()
+}
+
+extension AuthStatusLocationDelegate {
+    public func startLocation() {
+        locManager.delegate = self
+        locManager.requestLocation()
+        locManager.requestAlwaysAuthorization()
+        locManager.requestWhenInUseAuthorization()
+    }
+}
+
 /// 权限控制类
 public class AuthorizationStatus: NSObject {
 
@@ -120,17 +144,8 @@ public class AuthorizationStatus: NSObject {
         if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() != .notDetermined {
             return authsBlock(true)
         }
-        AuthStatus().startLocation()
+        //AuthStatus().startLocation()
         return authsBlock(false)
-    }
-    
-    /// 注意必须要有实例对象后下面3句,不然弹框提示一闪而过; 默认10s移除
-    //fileprivate var locationManager = CLLocationManager()
-    func startLocation() {
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestLocation()
-        locationManager.requestWhenInUseAuthorization()
     }
     
     /// 相机权限
@@ -271,15 +286,15 @@ extension AuthorizationStatus {
 }
 
 //MARK: - delegate or data source
-extension AuthorizationStatus: CLLocationManagerDelegate {
-    /// 辅助弹框提示
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("didUpdateLocations---")
-    }
-    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("didFailWithError---")
-    }
-}
+//extension AuthorizationStatus: AuthStatusLocationDelegate {
+//    /// 辅助弹框提示
+//    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        print("didUpdateLocations---")
+//    }
+//    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//        print("didFailWithError---")
+//    }
+//}
 
 extension AuthorizationStatus: CBCentralManagerDelegate {
     /// 辅助弹框提示

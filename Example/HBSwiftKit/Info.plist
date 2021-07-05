@@ -37,6 +37,8 @@
 	<string>App需要您的同意,才能访问蓝牙</string>
 	<key>NSCameraUsageDescription</key>
 	<string>App需要您的同意,才能访问相机</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App需要您的同意,才能访问地理位置</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>App需要您的同意,才能始终访问位置</string>
 	<key>NSLocationUsageDescription</key>

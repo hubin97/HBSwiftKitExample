@@ -17,8 +17,8 @@ class ViewController: BaseViewController {
                      DemoRowModel(title: "数字选择器", dclass: NumberPickerController()),
                      DemoRowModel(title: "蓝牙测试页", dclass: BlueToothController()),
                      DemoRowModel(title: "标题轮播页", dclass: EasyAdScrollController()),
-                     DemoRowModel(title: "网页预览页", dclass: WebPreviewController())
-                     ]
+                     DemoRowModel(title: "网页预览页", dclass: WebPreviewController()),
+                     DemoRowModel(title: "地图定位页", dclass: MapLocationController())]
         return datas
     }()
     
