@@ -17,7 +17,7 @@ class MapLocationController: BaseViewController {
     
     lazy var locManager: CLLocationManager = {
         let _locManager = CLLocationManager.init()
-        _locManager.delegate = self
+        //_locManager.delegate = self
         return _locManager
     }()
     
@@ -39,7 +39,7 @@ class MapLocationController: BaseViewController {
         
         AuthStatus.locationServices {[weak self] (status) in
             print("定位权限\(status ? "on": "off")")
-            self?.startLocation()
+            self?.wakeupAuthAlert()
         }
     }
 }
@@ -57,13 +57,12 @@ extension MapLocationController {
 //MARK: - delegate or data source
 extension MapLocationController: MKMapViewDelegate, AuthStatusLocationDelegate {
  
-    /// 辅助弹框提示
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("didUpdateLocations---")
-    }
-    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("didFailWithError---")
-    }
+//    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        print("didUpdateLocations---")
+//    }
+//    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//        print("didFailWithError---")
+//    }
 }
 
 //MARK: - other classes

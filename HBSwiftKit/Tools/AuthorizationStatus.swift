@@ -65,26 +65,15 @@ import CoreTelephony
 public typealias AuthStatus = AuthorizationStatus
 public typealias AuthsBlock = (_ isEnable: Bool) -> Void
 
-/**
- // AuthStatusLocationDelegate
- //FIXME: 注意 locManager必须由外部全局持有, 否则弹框会一闪而过, 无法交互点击
- // 辅助弹框提示
- public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-     print("didUpdateLocations---")
- }
- public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-     print("didFailWithError---")
- }
- */
-public protocol AuthStatusLocationDelegate: CLLocationManagerDelegate {
+/// 唤起定位权限弹框
+public protocol AuthStatusLocationDelegate {
+    //FIXME: 注意locManager必须由外部全局持有, 否则弹框会一闪而过, 无法交互点击
     var locManager: CLLocationManager { set get }
-    func startLocation()
+    func wakeupAuthAlert()
 }
 
 extension AuthStatusLocationDelegate {
-    public func startLocation() {
-        locManager.delegate = self
-        locManager.requestLocation()
+    public func wakeupAuthAlert() {
         locManager.requestAlwaysAuthorization()
         locManager.requestWhenInUseAuthorization()
     }
