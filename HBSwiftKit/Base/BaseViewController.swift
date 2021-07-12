@@ -11,6 +11,18 @@ import Foundation
 
 open class BaseViewController: UIViewController {
  
+    //MARK: 隐藏底部边线
+    var isHideNaviBarBottomLine = false {
+        didSet {
+            if isHideNaviBarBottomLine {
+                // 注意iOS13和iOS14底线层级顺序有变,故遍历获取
+                //self.navigationController?.navigationBar.subviews.first?.subviews.first?.isHidden = true
+                self.navigationController?.navigationBar.subviews.first?.subviews.filter({ $0.bounds.height < 1})
+                    .forEach({ $0.isHidden = true })
+            }
+        }
+    }
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,10 +36,6 @@ open class BaseViewController: UIViewController {
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //MARK: 隐藏底部边线, 注意iOS13和iOS14底线层级顺序有变,故遍历获取
-        //self.navigationController?.navigationBar.subviews.first?.subviews.first?.isHidden = true
-        self.navigationController?.navigationBar.subviews.first?.subviews.filter({ $0.bounds.height < 1})
-            .forEach({ $0.isHidden = true })
     }
 
     open override var preferredStatusBarStyle: UIStatusBarStyle {

@@ -114,7 +114,7 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.file` struct is generated, and contains static references to 9 files.
+  /// This `R.file` struct is generated, and contains static references to 10 files.
   struct file {
     /// Resource file `README_SWIFT.md`.
     static let readme_SWIFTMd = Rswift.FileResource(bundle: R.hostingBundle, name: "README_SWIFT", pathExtension: "md")
@@ -134,6 +134,8 @@ struct R: Rswift.Validatable {
     static let jstestHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "jstest", pathExtension: "html")
     /// Resource file `loading.gif`.
     static let loadingGif = Rswift.FileResource(bundle: R.hostingBundle, name: "loading", pathExtension: "gif")
+    /// Resource file `温柔女声.mp3`.
+    static let 温柔女声Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "温柔女声", pathExtension: "mp3")
 
     /// `bundle.url(forResource: "README_SWIFT", withExtension: "md")`
     static func readme_SWIFTMd(_: Void = ()) -> Foundation.URL? {
@@ -186,6 +188,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "loading", withExtension: "gif")`
     static func loadingGif(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.loadingGif
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "温柔女声", withExtension: "mp3")`
+    static func 温柔女声Mp3(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.温柔女声Mp3
       return fileResource.bundle.url(forResource: fileResource)
     }
 

@@ -42,6 +42,7 @@
 		B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */ = {isa = PBXBuildFile; fileRef = B5CC7A4925E8989300D263B4 /* advfilterdata.json */; };
 		B5D55405261D40AE007A20F5 /* jstest.html in Resources */ = {isa = PBXBuildFile; fileRef = B5D55404261D40AE007A20F5 /* jstest.html */; };
 		B5DCC71425F3266D007E3237 /* areacode.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5DCC71325F3266D007E3237 /* areacode.plist */; };
+		B5F8390226982D8E0001C484 /* 温柔女声.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */; };
 		B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4F26257A365E007F1238 /* WebPreviewController.swift */; };
 		B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */; };
 		FE480E90E2CA32C49FC5A2F3 /* Pods_HBSwiftKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4845C4375F7293ACE69A0714 /* Pods_HBSwiftKit_Example.framework */; };
@@ -116,6 +117,7 @@
 		B5E0A44526269729005D248D /* HBSwiftKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HBSwiftKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E0A44926269729005D248D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5EA0E1125B67C38004783C1 /* AppSandBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSandBox.swift; sourceTree = "<group>"; };
+		B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "温柔女声.mp3"; sourceTree = "<group>"; };
 		B5FB4F26257A365E007F1238 /* WebPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPreviewController.swift; sourceTree = "<group>"; };
 		B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAdScrollController.swift; sourceTree = "<group>"; };
 		CA78FCF42199CA49DD9F7856 /* HBSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HBSwiftKit.podspec; path = ../HBSwiftKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -339,6 +341,7 @@
 		B5E1D8E62562831C0093AC4C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */,
 				B5557A3426706188007F5B44 /* loading.gif */,
 				B5389B7825EF8FB400ED67F9 /* R.generated.swift */,
 				B575D5F825A9900C0068EB19 /* help_cn.html */,
@@ -496,6 +499,7 @@
 				B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */,
 				B5557A3526706188007F5B44 /* loading.gif in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				B5F8390226982D8E0001C484 /* 温柔女声.mp3 in Resources */,
 				B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

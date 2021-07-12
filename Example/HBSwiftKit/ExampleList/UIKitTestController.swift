@@ -68,11 +68,24 @@ class UIKitTestController: BaseViewController {
     //var isExpand = false
     let ball = UIImageView()
     
+    var avPlayer: AVAudioPlayer?
+    
     @objc func btnAction1(_ sender: UIButton) {
         print("btnAction1")
         
-        let ff = sender.convert(sender.bounds, to: UIApplication.shared.keyWindow)
-        tagsView.show(originFrame: ff)
+//        let ff = sender.convert(sender.bounds, to: UIApplication.shared.keyWindow)
+//        tagsView.show(originFrame: ff)
+        
+        //完美回调
+        playSoundEffect(name: R.file.温柔女声Mp3.fullName) {
+            print("播放完成!")
+        }
+        
+        //完美回调
+//        if let flag = self.avPlayer?.prepareToPlay(), flag {
+//            self.avPlayer?.play()
+//            print("开始播放!")
+//        }
     }
     
     @objc func btnAction2(_ sender: UIButton) {
@@ -104,7 +117,9 @@ class UIKitTestController: BaseViewController {
         btn1.drawTextLineWidth = 2
         view.addSubview(btn1)
         btn1.setRoundCorners(borderColor: .red)
-//
+        //audioPlay(name: "离歌.mp3")
+        audioPlay(name: "温柔女声.mp3")
+
 //        let btn2 = UIButton.init(frame: CGRect(x: 100, y: 300, width: 100, height: 100))
 //        btn2.addTarget(self, action: #selector(btnAction2), for: .touchUpInside)
 //        btn2.touchAreaInsets = UIEdgeInsetsMake(50, 50, 50, 50)
@@ -139,7 +154,48 @@ class UIKitTestController: BaseViewController {
 }
 
 //MARK: - private mothods
+import AudioToolbox
+import AVFoundation
+extension UIKitTestController: AVAudioPlayerDelegate {
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        print("audioPlayerDidFinishPlaying, flag:\(flag)")
+    }
+
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        print("audioPlayerDecodeErrorDidOccur, error: \(error?.localizedDescription ?? "")")
+    }
+}
+
 extension UIKitTestController {
+
+    // 播放方式1
+    func playSoundEffect(name: String, inCompletionBlock: (() -> Void)?) {
+        guard let audioFile = Bundle.main.path(forResource: name, ofType: nil) else { return }
+        let fileUrl = NSURL.fileURL(withPath: audioFile)
+        
+        var soundId: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(fileUrl as CFURL, &soundId)
+        AudioServicesPlaySystemSoundWithCompletion(soundId, inCompletionBlock)
+    }
+    
+    // 播放方式2
+    func audioPlay(name: String) {
+        guard let audioFile = Bundle.main.path(forResource: name, ofType: nil) else { return }
+        let fileUrl = URL.init(fileURLWithPath: audioFile)
+        guard let fileData = try? Data.init(contentsOf: fileUrl) else { return }
+        do {
+            let player = try AVAudioPlayer.init(data: fileData)
+            player.delegate = self
+            player.prepareToPlay()
+            self.avPlayer = player
+            print("准备播放")
+        } catch {
+            print("播放失败")
+        }
+    }
+    
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -190,19 +246,19 @@ extension UIKitTestController {
         //MFMessageComposeViewController
         //AlertBlockView.init(title: "标题", message: "这是消息体", actions: ["我知道了"], tapAction: nil).show()
         //YTAlertView(tags_title: "标题", options: ["标签标签标签标签", "标签签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签"], actions: ["确定"], tapAction: nil).show()
-
-        var ops1 = [TagsMeta]()
-        var ops2 = [TagsMeta]()
-        for idx in 0..<21 {
-            let tag1 = TagsMeta(title: "标签\(idx)", iconn: R.image.tabBar.like_n.name, iconh: R.image.tabBar.like_h.name, param: "idx=>\(idx)")
-            let tag2 = TagsMeta(title: "标签\(idx)", param: "idx=>\(idx)")
-            ops1.append(tag1)
-            ops2.append(tag2)
-        }
-        
-        TagsOptionView(title: "标题", options: ops1, optionFont: UIFont.systemFont(ofSize: 12), actionTitle: "", actionTitleColor: .orange, tapAction: {[weak self] (tags) in
-            self?.opPrint(ops: tags)
-        }).show()
+//
+//        var ops1 = [TagsMeta]()
+//        var ops2 = [TagsMeta]()
+//        for idx in 0..<21 {
+//            let tag1 = TagsMeta(title: "标签\(idx)", iconn: R.image.tabBar.like_n.name, iconh: R.image.tabBar.like_h.name, param: "idx=>\(idx)")
+//            let tag2 = TagsMeta(title: "标签\(idx)", param: "idx=>\(idx)")
+//            ops1.append(tag1)
+//            ops2.append(tag2)
+//        }
+//
+//        TagsOptionView(title: "标题", options: ops1, optionFont: UIFont.systemFont(ofSize: 12), actionTitle: "", actionTitleColor: .orange, tapAction: {[weak self] (tags) in
+//            self?.opPrint(ops: tags)
+//        }).show()
 
 //        TagsOptionView(title: "标题", options: ops2, optionFont: UIFont.systemFont(ofSize: 15), actionTitle: nil, actionTitleColor: .orange, tapAction: {[weak self] (tags) in
 //            self?.opPrint(ops: tags)
