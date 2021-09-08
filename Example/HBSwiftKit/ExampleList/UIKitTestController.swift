@@ -375,3 +375,16 @@ extension UIKitTestController {
 //    return attributes as [NSAttributedString.Key : Any]
 //}
 
+class SwiftFuncInvokeTest {
+    
+    required init() {
+    }
+    
+    func test1() {
+        print("test1")
+    }
+    
+    func test2(param: String) {
+        print("test2: \(param)")
+    }
+}

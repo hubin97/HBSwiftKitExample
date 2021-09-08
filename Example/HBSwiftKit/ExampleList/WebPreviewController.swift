@@ -21,7 +21,7 @@ class WebPreviewController: BaseWKWebController {
         self.progressViewTintColor = .red
         self.wkWebView.frame = CGRect(x: 0, y: kTopSafeHeight, width: self.view.bounds.width, height: self.view.bounds.height - kNavBarAndSafeHeight - kBottomSafeHeight)
         //self.wkWebView.navigationDelegate = self
-        self.addMethod(name: "WINGTO") {[weak self] (methodname, callback) in
+        self.addMethod(name: "WINGTO_NATIVE") {[weak self] (methodname, callback) in
             print("scriptName:\(methodname), callback:\(callback)")
             if let tmp_content = callback as? [String: String], let method = tmp_content.value(forKey: "title") as? String {
                 // OC反射
@@ -42,7 +42,7 @@ class WebPreviewController: BaseWKWebController {
         //self.remoteUrl = "http://192.168.2.70:8080"
         //self.localPath = "jstest.html"
         //loadHTML(urlString: "jstest.html", isLocalHtml: true)
-        loadHTML(urlString: "http://192.168.2.70:8080?deviceId=12313&token=123123213213123")
+        loadHTML(urlString: "http://192.168.2.70:8080")
     }
     
     // 对应方法名:  "test"
@@ -78,9 +78,9 @@ extension WebPreviewController {
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         super.webView(webView, didFinish: navigation)
         
-        self.evaluateJs(jsCode: "onSwithChange()", completeBlock: { (result, error) in
-            print("evaluateJs#result:\(result ?? ""), error:\(error?.localizedDescription ?? "")")
-        })
+//        self.evaluateJs(jsCode: "onSwithChange()", completeBlock: { (result, error) in
+//            print("evaluateJs#result:\(result ?? ""), error:\(error?.localizedDescription ?? "")")
+//        })
 
     }
 }

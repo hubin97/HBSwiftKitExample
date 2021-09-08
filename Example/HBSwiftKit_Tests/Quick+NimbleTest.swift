@@ -15,6 +15,35 @@ import Nimble
 
 //swiftClassFromString
 
+class SwiftyReferenceTest: QuickSpec {
+    override func spec() {
+        fdescribe("cSwiftyReferenceTest") {
+            it("should print correct test data") {
+                guard let class_ = swiftClassFromString("SwiftFuncInvokeTest") as? SwiftFuncInvokeTest.Type else { return }
+                let clazzInstance = class_.init()
+                // getting and calling its methods in Swifty way
+                
+                let method1 = clazzInstance.test1
+                let method2 = clazzInstance.test2
+                method1()
+                method2("something")
+            }
+        }
+    }
+}
+
+class ArraySortTest: QuickSpec {
+    override func spec() {
+        fdescribe("ArraySortTest") {
+            it("should print correct test data") {
+                var arr1 = [2, 3, 4, 5, 7]
+                let arr2 = arr1.sorted()
+                print("arr1 == arr2: \(arr1 == arr2)")
+                //print("arr1 === arr2: \(arr1.compare)")
+            }
+        }
+    }
+}
 
 class GlobalFuncTest: QuickSpec {
     override func spec() {
@@ -176,32 +205,32 @@ class ImageHandleTest: QuickSpec {
 class AuthStatusTest: QuickSpec {
     override func spec() {
         fdescribe("test name") {
-            it("should print correct test data") {
-                AuthStatus.locationServices { (status) in
-                    print("定位权限\(status ? "on": "off")")
-                }
-                AuthStatus.apnsServices { (status) in
-                    print("推送权限\(status ? "on": "off")")
-                }
-                AuthStatus.cameraService { (status) in
-                    print("相机权限\(status ? "on": "off")")
-                }
-                AuthStatus.albumService { (status) in
-                    print("相册权限\(status ? "on": "off")")
-                }
-                AuthStatus.microphoneService { (status) in
-                    print("麦克风权限\(status ? "on": "off")")
-                }
-                AuthStatus.bleService { (status) in
-                    print("蓝牙权限\(status ? "on": "off")")
-                }
-                AuthStatus.cellularDataService { (status) in
-                    print("蜂窝权限\(status ? "on": "off")")
-                }
-                AuthStatus.networkService { (status) in
-                    print("网络状态\(status ? "on": "off")")
-                }
-            }
+//            it("should print correct test data") {
+//                AuthStatus.locationServices { (status) in
+//                    print("定位权限\(status ? "on": "off")")
+//                }
+//                AuthStatus.apnsServices { (status) in
+//                    print("推送权限\(status ? "on": "off")")
+//                }
+//                AuthStatus.cameraService { (status) in
+//                    print("相机权限\(status ? "on": "off")")
+//                }
+//                AuthStatus.albumService { (status) in
+//                    print("相册权限\(status ? "on": "off")")
+//                }
+//                AuthStatus.microphoneService { (status) in
+//                    print("麦克风权限\(status ? "on": "off")")
+//                }
+//                AuthStatus.bleService { (status) in
+//                    print("蓝牙权限\(status ? "on": "off")")
+//                }
+//                AuthStatus.cellularDataService { (status) in
+//                    print("蜂窝权限\(status ? "on": "off")")
+//                }
+//                AuthStatus.networkService { (status) in
+//                    print("网络状态\(status ? "on": "off")")
+//                }
+//            }
         }
     }
 }
