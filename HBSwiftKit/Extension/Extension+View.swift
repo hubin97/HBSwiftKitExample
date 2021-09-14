@@ -335,6 +335,7 @@ extension Extension_View {
     //MARK: 高斯模糊
     //https://www.cnblogs.com/kenshincui/p/12181735.html
     //https://www.jianshu.com/p/341a06dd0b46
+    /// 系统模糊方案
     @discardableResult
     public func addBlur(style: UIBlurEffect.Style = .dark, alpha: CGFloat = 0.7) -> UIVisualEffectView {
         let blurEffect = UIBlurEffect(style: style)
@@ -347,23 +348,25 @@ extension Extension_View {
     
     // UIToolBar  自定义样式太少
     // UIVisualEffectView  模糊效果不好
-    public func addImageBlur(style: UIBlurEffect.Style = .dark, alpha: CGFloat = 0.7, img: UIImage?) {
-        
-        let imageView = UIImageView.init(image: img)
-        imageView.frame = self.bounds;
-        imageView.contentMode = .scaleAspectFit
-        addSubview(imageView)
-        
-        let blurBackground = UIVisualEffectView(effect: UIBlurEffect(style: style))
-        blurBackground.frame = self.bounds
-        blurBackground.alpha = alpha
-        imageView.addSubview(blurBackground)
-    }
+//    public func addImageBlur(style: UIBlurEffect.Style = .dark, alpha: CGFloat = 0.7, img: UIImage?) {
+//
+//        let imageView = UIImageView.init(image: img)
+//        imageView.frame = self.bounds;
+//        imageView.contentMode = .scaleAspectFit
+//        addSubview(imageView)
+//
+//        let blurBackground = UIVisualEffectView(effect: UIBlurEffect(style: style))
+//        blurBackground.frame = self.bounds
+//        blurBackground.alpha = alpha
+//        imageView.addSubview(blurBackground)
+//    }
     
-    /// CIFilter  最终方案
-    public func addImageBlur2(style: UIBlurEffect.Style = .dark, alpha: CGFloat = 1, img: UIImage?) {
-        
-        if let image = ciFilter(img) {
+    /// 高斯模糊 CIFilter  最终方案
+    /// - Parameters:
+    ///   - img: 模糊图片
+    ///   - radius: 模糊程度
+    public func addImageBlur(img: UIImage?, radius: Float = 5) {
+        if let image = ciFilter(img, inputRadius: radius) {
             let imageView = UIImageView.init(image: image)
             imageView.frame = self.bounds;
             imageView.contentMode = .scaleAspectFit
@@ -383,19 +386,13 @@ extension Extension_View {
     
     // CoreImage
     //https://www.shuzhiduo.com/A/QV5Z60O75y/
-    public func ciFilter(_ image: UIImage?) -> UIImage? {
-        
-        guard let img = image, let cgImage = img.cgImage else {
-            return nil
-        }
-        
+    private func ciFilter(_ image: UIImage?, inputRadius: Float = 5) -> UIImage? {
+        guard let img = image, let cgImage = img.cgImage else { return nil }
         let input_ciImage = CIImage(cgImage: cgImage)
         let filter = CIFilter(name: "CIGaussianBlur", parameters: [kCIInputImageKey: input_ciImage])
-        //设置模糊程度
-        //filter?.setValue(5, forKey: "inputRadius")
+        filter?.setValue(inputRadius, forKey: "inputRadius")
         
         let outputImage = filter?.outputImage
-
         let context = CIContext.init(options: nil)
         // 尺寸大小问题处理
         let cgimg = context.createCGImage(outputImage!, from: input_ciImage.extent)

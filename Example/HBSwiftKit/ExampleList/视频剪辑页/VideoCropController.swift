@@ -1,0 +1,216 @@
+//
+//  VideoCropController.swift
+//  HBSwiftKit_Example
+//
+//  Created by Hubin_Huang on 2021/9/8.
+//  Copyright © 2020 Wingto. All rights reserved.
+
+import Foundation
+import AVFoundation
+import MobileCoreServices
+
+//MARK: - global var and methods
+
+//MARK: - main class
+class VideoCropController: BaseViewController {
+
+    var playTimer: DispatchSourceTimer?
+
+    lazy var rightEditBtn: UIButton = {
+        let rightEditBtn = UIButton.init(type: .custom)
+        rightEditBtn.setTitle("选择", for: .normal)
+        rightEditBtn.setTitleColor(.black, for: .normal)
+        rightEditBtn.addTarget(self, action: #selector(editAction), for: .touchUpInside)
+        return rightEditBtn
+    }()
+    
+    lazy var cropView: VideoCropView = {
+        let _cropView = VideoCropView.init(frame: CGRect(x: 0, y: 20, width: kScreenW, height: kScreenW * 4/3))
+        _cropView.delegate = self
+        return _cropView
+    }()
+    
+    lazy var timeView: VideoTimeView = {
+        let _timeView = VideoTimeView.init(frame: CGRect(x: 0, y: kScreenH - kNavBarAndSafeHeight - kTabBarAndSafeHeight - 70, width: kScreenW, height: 65))
+        _timeView.delegate = self
+        return _timeView
+    }()
+    
+    lazy var toolView: VideoToolView = {
+        let _toolView = VideoToolView.init(frame: CGRect(x: 0, y: kScreenH - kNavBarAndSafeHeight - kTabBarAndSafeHeight, width: kScreenW, height: kTabBarAndSafeHeight))
+        _toolView.delegate = self
+        return _toolView
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.title = "视频剪辑"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.rightEditBtn)
+        self.view.backgroundColor = .black
+        
+        view.addSubview(cropView)
+        view.addSubview(timeView)
+        view.addSubview(toolView)
+    }
+}
+
+//MARK: - private mothods
+extension VideoCropController {}
+
+//MARK: - call backs
+extension VideoCropController {
+    
+    @objc func editAction() {
+        let pickerVC = UIImagePickerController()
+        pickerVC.delegate = self
+        pickerVC.modalPresentationStyle = .currentContext
+        //pickerVC.videoQuality = .typeMedium
+        pickerVC.mediaTypes = [kUTTypeMovie as String]
+        pickerVC.allowsEditing = true
+        //pickerVC.videoMaximumDuration = 10  /// 限制裁剪长度
+        self.navigationController?.present(pickerVC, animated: true, completion: nil)
+    }
+}
+
+//MARK: - delegate or data source
+extension VideoCropController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        print("didFinishPickingMediaWithInfo1---")
+        self.navigationController?.dismiss(animated: true, completion: { [weak self] in
+            if let url = info[UIImagePickerControllerMediaURL] as? URL {
+                let asset = AVAsset.init(url: url)
+                print("asset---\(CMTimeGetSeconds(asset.duration))")
+                self?.cropHandle(asset: asset, whRatio: 3.0/4)
+                self?.timeView.configData(avAsset: asset)
+            }
+        })
+    }
+   
+    func cropHandle(asset: AVAsset, whRatio: Float) {
+        let showWidth = UIScreen.main.bounds.width
+        let showHeight = showWidth / CGFloat(whRatio)
+        cropView.frame = CGRect(x: 0, y: 20, width: showWidth, height: showHeight)
+        cropView.load(asset: asset, cropSize: CGSize(width: 480, height: 640))
+    }
+}
+
+
+// MARK: VideoPlayerViewDelegate
+extension VideoCropController: VideoPlayerViewDelegate {
+    func playerView(_ playerView: VideoCropView, didPlayAt time: CMTime) {
+        timeView.startLineAnimation(at: time)
+    }
+    func playerView(_ playerView: VideoCropView, didPauseAt time: CMTime) {
+        timeView.stopLineAnimation()
+    }
+    func playerView(_ playerViewReadyForDisplay: VideoCropView) {
+//        if firstPlay {
+//            croppingAction()
+//            firstPlay = false
+//        }
+    }
+}
+
+//MARK: - VideoTimeViewDelegate
+extension VideoCropController: VideoTimeViewDelegate {
+    func timeView(_ timeView: VideoTimeView, didChangedValidRectAt time: CMTime) {
+        pausePlay(at: time)
+    }
+    
+    func timeView(_ timeView: VideoTimeView, endChangedValidRectAt time: CMTime) {
+        startPlay(at: time)
+    }
+    
+    func timeView(_ timeView: VideoTimeView, didScrollAt time: CMTime) {
+        pausePlay(at: time)
+    }
+    
+    func timeView(_ timeView: VideoTimeView, endScrollAt time: CMTime) {
+        startPlay(at: time)
+    }
+    
+    func timeView(_ timeView: VideoTimeView, progressLineDragBeganAt time: CMTime) {
+    }
+    
+    func timeView(_ timeView: VideoTimeView, progressLineDragChangedAt time: CMTime) {
+    }
+    
+    func timeView(_ timeView: VideoTimeView, progressLineDragEndAt time: CMTime) {
+    }
+    
+    //MARK:-
+    func pausePlay(at time: CMTime) {
+        //if state == .cropping && !orientationDidChange {
+        stopPlayTimer()
+        cropView.shouldPlay = false
+        cropView.playStartTime = time
+        cropView.pause()
+        cropView.seek(to: time)
+        timeView.stopLineAnimation()
+        //}
+    }
+    func startPlay(at time: CMTime) {
+        //if state == .cropping && !orientationDidChange {
+        cropView.playStartTime = time
+        cropView.playEndTime = timeView.getEndTime(real: true)
+        cropView.resetPlay()
+        cropView.shouldPlay = true
+        startPlayTimer()
+        //}
+    }
+    func startPlayTimer(reset: Bool = true) {
+        startPlayTimer(reset: reset, startTime: timeView.getStartTime(real: true), endTime: timeView.getEndTime(real: true))
+    }
+    func startPlayTimer(reset: Bool = true, startTime: CMTime, endTime: CMTime) {
+        stopPlayTimer()
+        let playTimer = DispatchSource.makeTimerSource()
+        var microseconds: Double
+        if reset {
+            microseconds = (endTime.seconds - startTime.seconds) * 1000000
+        }else {
+            microseconds = (cropView.player.currentTime().seconds - timeView.getStartTime(real: true).seconds) * 1000000
+        }
+        playTimer.schedule(deadline: .now(), repeating: .microseconds(Int(microseconds)), leeway: .microseconds(0))
+        playTimer.setEventHandler(handler: {
+            DispatchQueue.main.sync {
+                self.cropView.resetPlay()
+            }
+        })
+        playTimer.resume()
+        self.playTimer = playTimer
+    }
+    func stopPlayTimer() {
+        if let playTimer = playTimer {
+            playTimer.cancel()
+            self.playTimer = nil
+        }
+    }
+}
+
+//MARK: - VideoToolViewDelegate
+extension VideoCropController: VideoToolViewDelegate {
+    func videoToolActionCancel() {
+        cropView.pause()
+        timeView.stopLineAnimation()
+        toolView.playBtn.isSelected = false
+    }
+    
+    func videoToolActionConfir() {
+    }
+    
+    func videoToolActionPlay(_ isPlay: Bool) {
+        if isPlay {
+            cropView.play()
+            timeView.startLineAnimation(at: cropView.player.currentTime())
+        } else {
+            cropView.pause()
+            timeView.stopLineAnimation()
+        }
+    }
+}
+
+//MARK: - other classes

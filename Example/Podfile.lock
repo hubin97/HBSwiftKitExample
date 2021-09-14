@@ -29,6 +29,7 @@ PODS:
   - R.swift (5.3.1):
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
+  - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - HBSwiftKit (from `../`)
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - Nimble
   - Quick
   - R.swift (~> 5.3.1)
+  - SnapKit
 
 SPEC REPOS:
   trunk:
@@ -44,6 +46,7 @@ SPEC REPOS:
     - Quick
     - R.swift
     - R.swift.Library
+    - SnapKit
 
 EXTERNAL SOURCES:
   HBSwiftKit:
@@ -56,7 +59,8 @@ SPEC CHECKSUMS:
   Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
   R.swift: 56ec7e3aef34b9eee47a659e42462db2c1cc5ac3
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 83373442c166e0fc2474be6659190c2038bd828c
+PODFILE CHECKSUM: a472cbef703717fa8b2ab72e1c175180b2544330
 
 COCOAPODS: 1.10.1
