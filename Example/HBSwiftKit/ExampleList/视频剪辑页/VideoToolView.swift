@@ -38,11 +38,11 @@ class VideoToolView: UIView {
     }()
     
     lazy var playBtn: UIButton = {
-        let _playBtn = UIButton.init(type: .system)
-//        _playBtn.setImage(UIImage(named: ""), for: .normal)
-//        _playBtn.setImage(UIImage(named: ""), for: .selected)
-        _playBtn.setTitle(">", for: .normal)
-        _playBtn.setTitle("||", for: .selected)
+        let _playBtn = UIButton.init(type: .custom)
+        _playBtn.setImage(UIImage(named: "play"), for: .normal)
+        _playBtn.setImage(UIImage(named: "pause"), for: .selected)
+        //_playBtn.setTitle(">", for: .normal)
+        //_playBtn.setTitle("||", for: .selected)
         _playBtn.addTarget(self, action: #selector(playAtion), for: .touchUpInside)
         return _playBtn
     }()
@@ -70,6 +70,8 @@ class VideoToolView: UIView {
             make.center.equalToSuperview()
             make.width.height.equalTo(40)
         }
+        
+        playBtn.isHidden = true
     }
     
     required init?(coder: NSCoder) {

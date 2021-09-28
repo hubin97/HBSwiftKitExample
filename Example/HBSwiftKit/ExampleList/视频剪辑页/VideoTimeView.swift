@@ -449,12 +449,10 @@ extension VideoTimeView: UICollectionViewDataSource, UICollectionViewDelegate, U
 
 extension VideoTimeView: VideoEditorFrameMaskViewDelegate {
     func frameMaskView(validRectDidChanged frameMaskView: VideoEditorFrameMaskView) {
-        print("frameMaskView(validRectDidChanged)")
         delegate?.timeView(self, didChangedValidRectAt: getStartTime(real: true))
         updateTimeLabels()
     }
     func frameMaskView(validRectEndChanged frameMaskView: VideoEditorFrameMaskView) {
-        print("frameMaskView(validRectEndChanged)")
         delegate?.timeView(self, endChangedValidRectAt: getStartTime(real: true))
         updateTimeLabels()
     }

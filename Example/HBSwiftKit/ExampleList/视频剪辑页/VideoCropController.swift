@@ -26,7 +26,8 @@ class VideoCropController: BaseViewController {
     
     lazy var cropView: VideoCropView = {
         let _cropView = VideoCropView.init(frame: CGRect(x: 0, y: 20, width: kScreenW, height: kScreenW * 4/3))
-        _cropView.delegate = self
+        _cropView.playDelegate = self
+        _cropView.cropDelegate = self
         return _cropView
     }()
     
@@ -115,6 +116,21 @@ extension VideoCropController: VideoPlayerViewDelegate {
     }
 }
 
+//MARK: VideoCropDelegate
+extension VideoCropController: VideoCropViewDelegate {
+    func exportFailed(error: Error?) {
+        print("exportFailed:\(error?.localizedDescription ?? "")")
+    }
+    
+    func exportSuccess(outputUrl: URL) {
+        print("exportSuccess:\(outputUrl)")
+    }
+    
+    func exportProgress(progress: CGFloat) {
+        print("exportProgress:\(progress)")
+    }
+}
+
 //MARK: - VideoTimeViewDelegate
 extension VideoCropController: VideoTimeViewDelegate {
     func timeView(_ timeView: VideoTimeView, didChangedValidRectAt time: CMTime) {
@@ -200,6 +216,28 @@ extension VideoCropController: VideoToolViewDelegate {
     }
     
     func videoToolActionConfir() {
+        // 完成处理
+        
+        /**
+         (lldb) po timeView.getEndDuration()
+         11.0
+
+         (lldb) po timeView.getStartDuration()
+         2.7164852915290387
+
+         (lldb) po timeView.getMiddleDuration()
+         8.149455874587117
+         */
+        
+        /// 可行
+        //let start = CMTimeMakeWithSeconds(4, 600)
+        //let end = CMTimeMakeWithSeconds(8, 600)
+        let root = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+        let path = root!+"/out.mp4"
+        if FileManager.default.fileExists(atPath: path) {
+            try! FileManager.default.removeItem(atPath: path)
+        }
+        cropView.export(timeView.avAsset, cropView.cropRect(), CMTimeRange(start: timeView.getStartTime(), end: timeView.getEndTime()), cropView.outputSize ?? cropView.size, URL(fileURLWithPath: path))
     }
     
     func videoToolActionPlay(_ isPlay: Bool) {
