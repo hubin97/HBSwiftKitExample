@@ -200,7 +200,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 18 images.
+  /// This `R.image` struct is generated, and contains static references to 19 images.
   struct image {
     /// Image `ib_back`.
     static let ib_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "ib_back")
@@ -222,6 +222,8 @@ struct R: Rswift.Validatable {
     static let last_month_normal = Rswift.ImageResource(bundle: R.hostingBundle, name: "last_month_normal")
     /// Image `loading.gif`.
     static let loadingGif = Rswift.ImageResource(bundle: R.hostingBundle, name: "loading.gif")
+    /// Image `logger`.
+    static let logger = Rswift.ImageResource(bundle: R.hostingBundle, name: "logger")
     /// Image `next_month_enabled`.
     static let next_month_enabled = Rswift.ImageResource(bundle: R.hostingBundle, name: "next_month_enabled")
     /// Image `next_month_normal`.
@@ -306,6 +308,13 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "loading.gif", bundle: ..., traitCollection: ...)`
     static func loadingGif(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.loadingGif, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "logger", bundle: ..., traitCollection: ...)`
+    static func logger(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.logger, compatibleWith: traitCollection)
     }
     #endif
 

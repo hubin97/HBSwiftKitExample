@@ -199,6 +199,7 @@ extension UIKitTestController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        DDLogWarn("🔥DDLogWarnDDLogWarnDDLogWarn")
 //        let alert = Wto_AlertView.init(title: "New Device!", icon: "test", message: "AUKEY T7S", actions: ["Cancel", "Continue"]) { (index, title) in
 //            print("index:\(index), title:\(title)")
 //        }
