@@ -6,6 +6,9 @@
 //  Copyright © 2020 Wingto. All rights reserved.
 
 //单元测试 ✅
+// label代码自适应高度宽度几种方法
+// https://blog.csdn.net/weixin_39944515/article/details/112701925
+
 import Foundation
 
 //MARK: - global var and methods

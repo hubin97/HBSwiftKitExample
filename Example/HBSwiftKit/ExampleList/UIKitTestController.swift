@@ -70,6 +70,7 @@ class UIKitTestController: BaseViewController {
     
     var avPlayer: AVAudioPlayer?
     
+    var noti = GlobalNoti()
     @objc func btnAction1(_ sender: UIButton) {
         print("btnAction1")
         
@@ -150,6 +151,12 @@ class UIKitTestController: BaseViewController {
 //        ball.backgroundColor = .brown
 //        ball.setRectCorner(radiiSize: 50)
 //
+        
+        noti.register(name: NSNotification.Name(rawValue: "ahha"), object: nil) { (notification) in
+            print("noti:\(notification.name) \(notification.object) \(notification.userInfo)")
+        }
+        
+        //noti.remove(name: <#T##NSNotification.Name#>, object: <#T##Any?#>)
     }
 }
 
@@ -199,6 +206,8 @@ extension UIKitTestController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        GlobalNoti.post(name: NSNotification.Name(rawValue: "ahha"), object: "wwwww")
+
 //        let alert = Wto_AlertView.init(title: "New Device!", icon: "test", message: "AUKEY T7S", actions: ["Cancel", "Continue"]) { (index, title) in
 //            print("index:\(index), title:\(title)")
 //        }
