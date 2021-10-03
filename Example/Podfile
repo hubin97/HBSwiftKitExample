@@ -10,7 +10,6 @@ target 'HBSwiftKit_Example' do
   pod 'SnapKit'
   pod 'Kingfisher'
   pod 'R.swift', '~> 5.3.1'
-  pod 'CocoaLumberjack/Swift'
 
   target 'HBSwiftKit_Tests' do
     inherit! :search_paths

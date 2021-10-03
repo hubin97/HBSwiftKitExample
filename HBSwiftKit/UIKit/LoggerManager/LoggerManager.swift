@@ -54,6 +54,29 @@ open class LoggerManager {
     }
 }
 
+extension LoggerManager {
+    
+    public static func logError(_ message: String) {
+        DDLogError(message)
+    }
+    
+    public static func logWarn(_ message: String) {
+        DDLogWarn(message)
+    }
+    
+    public static func logInfo(_ message: String) {
+        DDLogInfo(message)
+    }
+    
+    public static func logDebug(_ message: String) {
+        DDLogDebug(message)
+    }
+    
+    public static func logVerbose(_ message: String) {
+        DDLogVerbose(message)
+    }
+}
+
 //MARK: - other classes
 
 open class LoggerFormatter: NSObject, DDLogFormatter {
