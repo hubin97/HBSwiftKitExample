@@ -14,6 +14,7 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		B518517626269E340013A973 /* Quick+NimbleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518517526269E340013A973 /* Quick+NimbleTest.swift */; };
+		B533677326E852550009B60F /* VideoCropController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533677226E852550009B60F /* VideoCropController.swift */; };
 		B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */; };
 		B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5389B7825EF8FB400ED67F9 /* R.generated.swift */; };
 		B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */; };
@@ -27,6 +28,10 @@
 		B56F68A2264B8AF400FD62CF /* duallist.json in Resources */ = {isa = PBXBuildFile; fileRef = B56F68A1264B8AF400FD62CF /* duallist.json */; };
 		B575D5F925A9900C0068EB19 /* help_es.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F725A9900C0068EB19 /* help_es.html */; };
 		B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F825A9900C0068EB19 /* help_cn.html */; };
+		B5825E2E26F04D7D00539866 /* VideoEditorFrameMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E2D26F04D7D00539866 /* VideoEditorFrameMaskView.swift */; };
+		B5825E3326F0877C00539866 /* VideoCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E3226F0877C00539866 /* VideoCropView.swift */; };
+		B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E3726F087FA00539866 /* VideoTimeView.swift */; };
+		B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E3C26F0884F00539866 /* VideoToolView.swift */; };
 		B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC828255A7818005A5179 /* ImageBrowerController.swift */; };
 		B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC829255A7818005A5179 /* NumberPickerController.swift */; };
 		B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */; };
@@ -43,6 +48,10 @@
 		B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */ = {isa = PBXBuildFile; fileRef = B5CC7A4925E8989300D263B4 /* advfilterdata.json */; };
 		B5D55405261D40AE007A20F5 /* jstest.html in Resources */ = {isa = PBXBuildFile; fileRef = B5D55404261D40AE007A20F5 /* jstest.html */; };
 		B5DCC71425F3266D007E3237 /* areacode.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5DCC71325F3266D007E3237 /* areacode.plist */; };
+		B5F520932704615E00BACB9C /* VideoPlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F520922704615E00BACB9C /* VideoPlayController.swift */; };
+		B5F520D22705649E00BACB9C /* LoggerAassistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F520D12705649D00BACB9C /* LoggerAassistant.swift */; };
+		B5F520E72705A54200BACB9C /* LoggerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F520E62705A54200BACB9C /* LoggerListController.swift */; };
+		B5F521152705AC6700BACB9C /* LoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F521142705AC6700BACB9C /* LoggerManager.swift */; };
 		B5F8390226982D8E0001C484 /* 温柔女声.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */; };
 		B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4F26257A365E007F1238 /* WebPreviewController.swift */; };
 		B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */; };
@@ -81,6 +90,7 @@
 		60A90EE9A7E1640E361223EE /* Pods-HBSwiftKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Example.release.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9A8871220770A8D795C87930 /* Pods-HBSwiftKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Tests/Pods-HBSwiftKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B518517526269E340013A973 /* Quick+NimbleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Quick+NimbleTest.swift"; path = "HBSwiftKit_Tests/Quick+NimbleTest.swift"; sourceTree = SOURCE_ROOT; };
+		B533677226E852550009B60F /* VideoCropController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCropController.swift; sourceTree = "<group>"; };
 		B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wto_Calendar.swift; sourceTree = "<group>"; };
 		B5389B7825EF8FB400ED67F9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -96,6 +106,10 @@
 		B56F68A1264B8AF400FD62CF /* duallist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = duallist.json; sourceTree = "<group>"; };
 		B575D5F725A9900C0068EB19 /* help_es.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_es.html; sourceTree = "<group>"; };
 		B575D5F825A9900C0068EB19 /* help_cn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_cn.html; sourceTree = "<group>"; };
+		B5825E2D26F04D7D00539866 /* VideoEditorFrameMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoEditorFrameMaskView.swift; sourceTree = "<group>"; };
+		B5825E3226F0877C00539866 /* VideoCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCropView.swift; sourceTree = "<group>"; };
+		B5825E3726F087FA00539866 /* VideoTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTimeView.swift; sourceTree = "<group>"; };
+		B5825E3C26F0884F00539866 /* VideoToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoToolView.swift; sourceTree = "<group>"; };
 		B5BAC828255A7818005A5179 /* ImageBrowerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowerController.swift; sourceTree = "<group>"; };
 		B5BAC829255A7818005A5179 /* NumberPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberPickerController.swift; sourceTree = "<group>"; };
 		B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerController.swift; sourceTree = "<group>"; };
@@ -119,6 +133,10 @@
 		B5E0A44526269729005D248D /* HBSwiftKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HBSwiftKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E0A44926269729005D248D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5EA0E1125B67C38004783C1 /* AppSandBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSandBox.swift; sourceTree = "<group>"; };
+		B5F520922704615E00BACB9C /* VideoPlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayController.swift; sourceTree = "<group>"; };
+		B5F520D12705649D00BACB9C /* LoggerAassistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerAassistant.swift; sourceTree = "<group>"; };
+		B5F520E62705A54200BACB9C /* LoggerListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerListController.swift; sourceTree = "<group>"; };
+		B5F521142705AC6700BACB9C /* LoggerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerManager.swift; sourceTree = "<group>"; };
 		B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "温柔女声.mp3"; sourceTree = "<group>"; };
 		B5FB4F26257A365E007F1238 /* WebPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPreviewController.swift; sourceTree = "<group>"; };
 		B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAdScrollController.swift; sourceTree = "<group>"; };
@@ -231,6 +249,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B533677026E84FED0009B60F /* 视频剪辑页 */ = {
+			isa = PBXGroup;
+			children = (
+				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
+				B533677226E852550009B60F /* VideoCropController.swift */,
+				B5825E2D26F04D7D00539866 /* VideoEditorFrameMaskView.swift */,
+				B5825E3226F0877C00539866 /* VideoCropView.swift */,
+				B5825E3726F087FA00539866 /* VideoTimeView.swift */,
+				B5825E3C26F0884F00539866 /* VideoToolView.swift */,
+			);
+			path = "视频剪辑页";
+			sourceTree = "<group>";
+		};
 		B5389B2725EE1BB900ED67F9 /* 日历选择器 */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +360,8 @@
 				B541412C268EAF06008CE14B /* MapLocationController.swift */,
 				B5557A2F2670614E007F5B44 /* LoadAnimateView.swift */,
 				1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */,
+				B5F520D02704708800BACB9C /* 日志列表页 */,
+				B533677026E84FED0009B60F /* 视频剪辑页 */,
 				B5887FA3264CD719003C1896 /* 双列表关联 */,
 				B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */,
 				B5C6C5E125ECD1C400C88C1C /* 主题适配器 */,
@@ -377,6 +410,16 @@
 				B5EA0E1125B67C38004783C1 /* AppSandBox.swift */,
 			);
 			path = Vendors;
+			sourceTree = "<group>";
+		};
+		B5F520D02704708800BACB9C /* 日志列表页 */ = {
+			isa = PBXGroup;
+			children = (
+				B5F521142705AC6700BACB9C /* LoggerManager.swift */,
+				B5F520D12705649D00BACB9C /* LoggerAassistant.swift */,
+				B5F520E62705A54200BACB9C /* LoggerListController.swift */,
+			);
+			path = "日志列表页";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -531,15 +574,19 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/HBSwiftKit/HBSwiftKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBSwiftKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -638,20 +685,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5C6C5EA25ECD38800C88C1C /* Wto_ImageBrower.swift in Sources */,
+				B5F520932704615E00BACB9C /* VideoPlayController.swift in Sources */,
+				B5825E2E26F04D7D00539866 /* VideoEditorFrameMaskView.swift in Sources */,
 				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
 				B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */,
 				B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				B5825E3326F0877C00539866 /* VideoCropView.swift in Sources */,
 				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
 				1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */,
+				B5F520E72705A54200BACB9C /* LoggerListController.swift in Sources */,
 				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
 				B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */,
 				B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */,
+				B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */,
+				B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */,
 				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
 				B5557A302670614E007F5B44 /* LoadAnimateView.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				B5F520D22705649E00BACB9C /* LoggerAassistant.swift in Sources */,
 				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
+				B5F521152705AC6700BACB9C /* LoggerManager.swift in Sources */,
 				B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */,
 				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
 				B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */,
@@ -660,6 +715,7 @@
 				B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */,
 				B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */,
 				B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */,
+				B533677326E852550009B60F /* VideoCropController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

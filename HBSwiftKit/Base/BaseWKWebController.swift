@@ -189,7 +189,28 @@ extension BaseWKWebController: UIScrollViewDelegate {
 extension BaseWKWebController {
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        jscriptMsgHandle(message: message)
+        //jscriptMsgHandle(message: message)
+        guard let methodName = self.scriptMsgName, methodName.isEmpty == false else { return }
+        if methodName == message.name {
+            if let jsHandleBlcok = self.scriptMsgHandleBlock {
+                jsHandleBlcok(methodName, message.body)
+            } else {
+                // 自定义默认反射
+                guard let msg = message.body as? String, let dict = msg.data(using: .utf8)?.toDict() else { return }
+                guard let method = dict["method"] as? String else { return }
+                var selectorName = method
+                var param: [String: Any]?
+                if let value = dict["data"] as? [String: Any] {
+                    selectorName = "\(method):"
+                    param = value
+                }
+                print("method=> \(selectorName), param =>\(param?.toJSONString() ?? "")")
+                let selector = NSSelectorFromString(selectorName)
+                if self.responds(to:selector) {
+                    self.perform(selector, with: param)
+                }
+            }
+        }
     }
 }
 
@@ -202,35 +223,35 @@ public protocol WKWebScriptMsgHandleAble: WKScriptMessageHandler {
 
     /// 指定需要监听的脚本方法名
     var scriptMsgName: String? { get set }
-    //    var scriptMsgHandleBlock: ((_ action: String, _ param: Any, _ callback: ((_ jsParam: Any) -> ())?) -> ())? { get set }
+    /// 实现方法监听, 通过Block回调
     var scriptMsgHandleBlock: ((_ action: String, _ param: Any) -> ())? { get set }
 
-    func loadHTML(urlString: String, isLocalHtml: Bool)
-    func jscriptMsgHandle(message: WKScriptMessage)
+    func loadHTML(urlString: String, isLocalHtml: Bool, cachePolicy: NSURLRequest.CachePolicy)
+    //func jscriptMsgHandle(message: WKScriptMessage)
 }
 
 extension WKWebScriptMsgHandleAble {
     
     /// 加载网页 本地 或是 远端
-    public func loadHTML(urlString: String, isLocalHtml: Bool = false) {
+    public func loadHTML(urlString: String, isLocalHtml: Bool = false, cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy) {
         if isLocalHtml {
             let mainpath = URL.init(fileURLWithPath: Bundle.main.bundlePath)
             guard let htmlpath = Bundle.main.path(forResource: urlString, ofType: nil) else { return }
             guard let html = try? String.init(contentsOfFile: htmlpath, encoding: .utf8) else { return }
             wkWebView.loadHTMLString(html, baseURL: mainpath)
         } else {
-            wkWebView.load(URLRequest(url: URL(string: urlString)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 20.0))
+            wkWebView.load(URLRequest(url: URL(string: urlString)!, cachePolicy: cachePolicy, timeoutInterval: 20.0))
         }
     }
 
-    /// 插入代理 @objc(userContentController:didReceiveScriptMessage:) 消息处理
-    public func jscriptMsgHandle(message: WKScriptMessage) {
-        print("scriptName:\(message.name)")
-        guard let methodName = self.scriptMsgName, methodName.isEmpty == false else { return }
-        if methodName == message.name {
-            self.scriptMsgHandleBlock?(methodName, message.body)
-        }
-    }
+    /// 消息处理 插入代理 @objc(userContentController:didReceiveScriptMessage:)
+//    public func jscriptMsgHandle(message: WKScriptMessage) {
+//        print("scriptName:\(message.name)")
+//        guard let methodName = self.scriptMsgName, methodName.isEmpty == false else { return }
+//        if methodName == message.name {
+//            self.scriptMsgHandleBlock?(methodName, message.body)
+//        }
+//    }
     
     /// JS注入回调
     /// - Parameters:

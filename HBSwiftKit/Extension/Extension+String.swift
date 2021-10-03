@@ -9,6 +9,7 @@
 //单元测试 ✅
 import Foundation
 import CoreFoundation
+import CommonCrypto
 
 //MARK: - global var and methods
 fileprivate typealias Extension_String = String
@@ -148,6 +149,17 @@ extension Extension_String {
     ///
     var urlEncoded: String {
         return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+    }
+    
+    /// SHA256加密
+    /// import CommonCrypto
+    /// SHA 是 Secure Hash Algorithm 的缩写，即安全哈希算法。
+    /// SHA256 也成为 SHA2，它是从SHA1进化而来，目前没有发现SHA256被破坏，但随着计算机计算能力越来越强大，它肯定会被破坏，所以SHA3已经在路上了。
+    func sha256() -> String {
+        let utf8 = cString(using: .utf8)
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+        CC_SHA256(utf8, CC_LONG(utf8!.count - 1), &digest)
+        return digest.reduce("") { $0 + String(format:"%02x", $1) }
     }
     
     //MARK: - NSRange usage

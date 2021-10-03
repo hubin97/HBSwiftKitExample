@@ -200,7 +200,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 16 images.
+  /// This `R.image` struct is generated, and contains static references to 19 images.
   struct image {
     /// Image `ib_back`.
     static let ib_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "ib_back")
@@ -222,10 +222,16 @@ struct R: Rswift.Validatable {
     static let last_month_normal = Rswift.ImageResource(bundle: R.hostingBundle, name: "last_month_normal")
     /// Image `loading.gif`.
     static let loadingGif = Rswift.ImageResource(bundle: R.hostingBundle, name: "loading.gif")
+    /// Image `logger`.
+    static let logger = Rswift.ImageResource(bundle: R.hostingBundle, name: "logger")
     /// Image `next_month_enabled`.
     static let next_month_enabled = Rswift.ImageResource(bundle: R.hostingBundle, name: "next_month_enabled")
     /// Image `next_month_normal`.
     static let next_month_normal = Rswift.ImageResource(bundle: R.hostingBundle, name: "next_month_normal")
+    /// Image `pause`.
+    static let pause = Rswift.ImageResource(bundle: R.hostingBundle, name: "pause")
+    /// Image `play`.
+    static let play = Rswift.ImageResource(bundle: R.hostingBundle, name: "play")
     /// Image `redWarning`.
     static let redWarning = Rswift.ImageResource(bundle: R.hostingBundle, name: "redWarning")
     /// Image `swift`.
@@ -306,6 +312,13 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "logger", bundle: ..., traitCollection: ...)`
+    static func logger(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.logger, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UIImage(named: "next_month_enabled", bundle: ..., traitCollection: ...)`
     static func next_month_enabled(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.next_month_enabled, compatibleWith: traitCollection)
@@ -316,6 +329,20 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "next_month_normal", bundle: ..., traitCollection: ...)`
     static func next_month_normal(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.next_month_normal, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "pause", bundle: ..., traitCollection: ...)`
+    static func pause(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.pause, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "play", bundle: ..., traitCollection: ...)`
+    static func play(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.play, compatibleWith: traitCollection)
     }
     #endif
 

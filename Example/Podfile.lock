@@ -1,4 +1,7 @@
 PODS:
+  - CocoaLumberjack/Core (3.7.2)
+  - CocoaLumberjack/Swift (3.7.2):
+    - CocoaLumberjack/Core
   - HBSwiftKit (0.3.2):
     - HBSwiftKit/Base (= 0.3.2)
     - HBSwiftKit/Extension (= 0.3.2)
@@ -29,34 +32,41 @@ PODS:
   - R.swift (5.3.1):
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
+  - SnapKit (4.2.0)
 
 DEPENDENCIES:
+  - CocoaLumberjack/Swift
   - HBSwiftKit (from `../`)
   - Kingfisher
   - Nimble
   - Quick
   - R.swift (~> 5.3.1)
+  - SnapKit
 
 SPEC REPOS:
   trunk:
+    - CocoaLumberjack
     - Kingfisher
     - Nimble
     - Quick
     - R.swift
     - R.swift.Library
+    - SnapKit
 
 EXTERNAL SOURCES:
   HBSwiftKit:
     :path: "../"
 
 SPEC CHECKSUMS:
+  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
   HBSwiftKit: dbdafde26219fa9b879bd623b98d8436d051325a
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
   Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
   R.swift: 56ec7e3aef34b9eee47a659e42462db2c1cc5ac3
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 83373442c166e0fc2474be6659190c2038bd828c
+PODFILE CHECKSUM: e4930cb84772aeb42d3e8d226dd5d30d315aeef8
 
 COCOAPODS: 1.10.1

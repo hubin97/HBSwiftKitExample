@@ -23,7 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarVc.addChildVcs(naviVcs: [navi, navi2, navi3], titles: ["Example List", "UIKit Test", "Web Preview"], normalImages: [R.image.tabBar.home_n(), R.image.tabBar.like_n(), R.image.tabBar.web_n()], selectImages: [R.image.tabBar.home_h(), R.image.tabBar.like_h(), R.image.tabBar.web_h()])
         //tabBarVc.tabBar.barTintColor = .orange
         tabBarVc.setTabBarColors(normalColor: .lightGray, selectColor: .systemBlue)
-        self.window?.rootViewController = tabBarVc 
+        self.window?.rootViewController = tabBarVc
+        
+        LoggerManager.shared.launch()
+        DDLogWarn("🔥🔥🔥🔥🔥")
+        LoggerAassistant.init(icon: R.image.logger()) {[weak self] in
+            print("LoggerAassistant--")
+            keyViewController()?.navigationController?.pushViewController(LoggerListController(), animated: true)
+        }
         return true
     }
 }

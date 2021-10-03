@@ -208,6 +208,8 @@ extension UIKitTestController {
         
         GlobalNoti.post(name: NSNotification.Name(rawValue: "ahha"), object: "wwwww")
 
+        DDLogWarn("🔥DDLogWarnDDLogWarnDDLogWarn")
+
 //        let alert = Wto_AlertView.init(title: "New Device!", icon: "test", message: "AUKEY T7S", actions: ["Cancel", "Continue"]) { (index, title) in
 //            print("index:\(index), title:\(title)")
 //        }
@@ -384,3 +386,16 @@ extension UIKitTestController {
 //    return attributes as [NSAttributedString.Key : Any]
 //}
 
+class SwiftFuncInvokeTest {
+    
+    required init() {
+    }
+    
+    func test1() {
+        print("test1")
+    }
+    
+    func test2(param: String) {
+        print("test2: \(param)")
+    }
+}

@@ -63,7 +63,7 @@ import CoreTelephony
  */
 //MARK: - global var and methods
 public typealias AuthStatus = AuthorizationStatus
-public typealias AuthsBlock = (_ isEnable: Bool) -> Void
+public typealias AuthsBlock = (_ isEnable: Bool?) -> Void
 
 /// 唤起定位权限弹框
 public protocol AuthStatusLocationDelegate {
@@ -129,12 +129,19 @@ public class AuthorizationStatus: NSObject {
      
      Error: This app has attempted to access privacy-sensitive data without a usage description. The app's Info.plist must contain an “NSLocationWhenInUseUsageDescription” key with a string value explaining to the user how the app uses this data
      */
+    /// 返回 nil, 表示未选定, 
     public static func locationServices(authsBlock: AuthsBlock) {
-        if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() != .notDetermined {
-            return authsBlock(true)
+        let authState = CLLocationManager.authorizationStatus()
+        if CLLocationManager.locationServicesEnabled() {
+            if authState != .notDetermined {
+                return authsBlock((authState == .authorizedAlways || authState == .authorizedWhenInUse) ? true: false)
+            } else {
+                //AuthStatus().startLocation()
+                return authsBlock(nil)
+            }
+        } else {
+            return authsBlock(false)
         }
-        //AuthStatus().startLocation()
-        return authsBlock(false)
     }
     
     /// 相机权限

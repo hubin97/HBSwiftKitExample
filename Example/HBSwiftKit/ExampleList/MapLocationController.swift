@@ -66,9 +66,14 @@ class MapLocationController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        /// 注意格式: 询问权限后可以继续之前focusAtion操作, 可以更新到位置信息
         AuthStatus.locationServices {[weak self] (status) in
+            guard let status = status else {
+                return
+            }
             print("定位权限\(status ? "on": "off")")
             self?.wakeupAuthAlert()
+            self?.focusAtion()
         }
     }
     
