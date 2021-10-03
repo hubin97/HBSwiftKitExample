@@ -1,5 +1,5 @@
 //
-//  LoggerAassistant.swift
+//  LoggerAssistant.swift
 //  HBSwiftKit_Example
 //
 //  Created by Hubin_Huang on 2021/9/30.
@@ -10,26 +10,26 @@ import Foundation
 //MARK: - global var and methods
 
 //MARK: - main class
-class LoggerAassistant: UIView {
-
-    var beginPoint: CGPoint?
-    var movedPoint: CGPoint?
+open class LoggerAssistant: UIView {
 
     private var icon: UIImage?
     private var tapEventBlock: (() -> ())?
+    private var beginPoint: CGPoint?
+    private var movedPoint: CGPoint?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(size: CGSize? = nil, icon: UIImage? = nil, tapEvent: @escaping (() -> ())) {
+    required convenience public init(size: CGSize? = nil, icon: UIImage? = nil, tapEvent: @escaping (() -> ())) {
         self.init()
         defer {
             UIApplication.shared.delegate?.window??.addSubview(self)
-            UIApplication.shared.delegate?.window??.bringSubview(toFront: self)
+            UIApplication.shared.delegate?.window??.bringSubviewToFront(self)
         }
         self.icon = icon
         self.tapEventBlock = tapEvent
@@ -39,14 +39,14 @@ class LoggerAassistant: UIView {
             self.frame = CGRect(x: UIScreen.main.bounds.size.width - 44, y: UIScreen.main.bounds.size.height/2, width: 44, height: 44)
         }
         self.addGestureRecognizer(UIPanGestureRecognizer.init(target: self, action: #selector(panGes(_:))))
-        self.setUp()
+        //self.show()
     }
 }
 
 //MARK: - private mothods
-extension LoggerAassistant {
+extension LoggerAssistant {
  
-    func setUp() {
+    open func show() {
         let opBtn = UIButton.init(type: .custom)
         opBtn.frame = self.bounds
         if let img = icon {
@@ -65,7 +65,7 @@ extension LoggerAassistant {
 }
 
 //MARK: - call backs
-extension LoggerAassistant {
+extension LoggerAssistant {
     
     @objc func tapAction() {
         tapEventBlock?()
@@ -138,10 +138,3 @@ extension LoggerAassistant {
         }
     }
 }
-
-//MARK: - delegate or data source
-extension LoggerAassistant {
-    
-}
-
-//MARK: - other classes

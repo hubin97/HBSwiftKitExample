@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name             = 'HBSwiftKit'
-  s.version          = '0.3.2'
+  s.version          = '0.3.3'
   s.summary          = 'some common components.'
   s.description      = <<-DESC
                     仅仅一些个人常用组件.学习工作使用.
@@ -56,6 +56,7 @@ Pod::Spec.new do |s|
       ss.dependency 'HBSwiftKit/Global'
       ss.dependency 'HBSwiftKit/Extension'
       ss.dependency 'HBSwiftKit/Base'
+      ss.dependency 'CocoaLumberjack/Swift'
   end
   
   s.subspec 'Network' do |ss|
