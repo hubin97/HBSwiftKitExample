@@ -9,13 +9,16 @@ import Foundation
 import CocoaLumberjack
 
 //MARK: - global var and methods
-private let KdateFormatString = "yyyy/MM/dd HH:mm:ss"
+//private let KdateFormatString = "yyyy/MM/dd HH:mm:ss"
 
 //MARK: - main class
 class LoggerManager {
 
     static let shared = LoggerManager()
     
+    // 定义Log等级 *  Error, warning, info, debug and verbose logs
+    var logLevel: DDLogLevel = .debug
+
     /// 存7天
     lazy var fileLogger: DDFileLogger = {
         let _fileLogger = DDFileLogger.init()
@@ -80,27 +83,29 @@ class LoggerFormatter: NSObject, DDLogFormatter {
     }()
     
     func format(message logMessage: DDLogMessage) -> String? {
-        var level = ""
+        guard logMessage.flag.rawValue < LoggerManager.shared.logLevel.rawValue else { return nil }
+        
+        var flag = ""
         switch logMessage.flag {
         case .error:
-            level = "❌"
+            flag = "❌"
             break
         case .warning:
-            level = "⚠️"
+            flag = "⚠️"
             break
         case .info:
-            level = "Info"
+            flag = "I"
             break
         case .debug:
-            level = "Debug"
+            flag = "D"
             break
         default:
-            level = "Verbose"
+            flag = "V" // Verbose
             break
         }
         let time = dateFormatter.string(from: Date())
         let message = logMessage.message
-        let format = "[\(time)] " + "[\(level)] " + message
+        let format = "[\(time)] " + "[\(flag)] " + message
         return format
     }
     

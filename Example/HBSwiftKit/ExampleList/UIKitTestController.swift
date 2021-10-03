@@ -208,7 +208,7 @@ extension UIKitTestController {
         
         GlobalNoti.post(name: NSNotification.Name(rawValue: "ahha"), object: "wwwww")
 
-        DDLogWarn("🔥DDLogWarnDDLogWarnDDLogWarn")
+        DDLogInfo("DDLogInfo")
 
 //        let alert = Wto_AlertView.init(title: "New Device!", icon: "test", message: "AUKEY T7S", actions: ["Cancel", "Continue"]) { (index, title) in
 //            print("index:\(index), title:\(title)")
