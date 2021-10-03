@@ -31,9 +31,8 @@ class LoggerListController: BaseViewController {
     
     override func setupUi() {
         super.setupUi()
-        
         self.navigationItem.title = "日志列表"
-        //LoggerManager.shared.launch()
+        
         logFiles = LoggerManager.shared.fileLogger.logFileManager.sortedLogFileInfos
         //DDLogInfo("logFiles:\(logFiles.count)")
         view.addSubview(listView)

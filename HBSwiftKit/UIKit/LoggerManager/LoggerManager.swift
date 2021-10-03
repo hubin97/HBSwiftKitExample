@@ -12,15 +12,15 @@ import CocoaLumberjack
 //private let KdateFormatString = "yyyy/MM/dd HH:mm:ss"
 
 //MARK: - main class
-class LoggerManager {
+open class LoggerManager {
 
-    static let shared = LoggerManager()
+    public static let shared = LoggerManager()
     
     // 定义Log等级 *  Error, warning, info, debug and verbose logs
-    var logLevel: DDLogLevel = .debug
+    public var logLevel: DDLogLevel = .debug
 
     /// 存7天
-    lazy var fileLogger: DDFileLogger = {
+    open lazy var fileLogger: DDFileLogger = {
         let _fileLogger = DDFileLogger.init()
         //重用log文件，不要每次启动都创建新的log文件(默认值是false)
         _fileLogger.doNotReuseLogFiles = false
@@ -36,7 +36,7 @@ class LoggerManager {
         return _fileLogger
     }()
     
-    func launch() {
+    public func launch() {
         if #available(iOS 10.0, *) {
             // Uses os_log
             DDLog.add(DDOSLogger.sharedInstance)
@@ -47,42 +47,25 @@ class LoggerManager {
             DDLog.add(DDASLLogger.sharedInstance)  // ASL = Apple System Logs
         }
         DDLog.add(fileLogger)
-
-//        DDLogVerbose("Verbose");
-//        DDLogDebug("Debug");
-//        DDLogInfo("Info");
-//        DDLogWarn("Warn");
-//        DDLogError("Error");
+        
+        LoggerAssistant.init(icon: UIImage.bundleImage(named: "logger")) {
+            keyViewController()?.navigationController?.pushViewController(LoggerListController(), animated: true)
+        }.show()
     }
-}
-
-//MARK: - private mothods
-extension LoggerManager {
-    
-}
-
-//MARK: - call backs
-extension LoggerManager {
-    
-}
-
-//MARK: - delegate or data source
-extension LoggerManager {
-    
 }
 
 //MARK: - other classes
 
-class LoggerFormatter: NSObject, DDLogFormatter {
+open class LoggerFormatter: NSObject, DDLogFormatter {
     
-    lazy var dateFormatter: DateFormatter = {
+    open lazy var dateFormatter: DateFormatter = {
         let _dateFormatter = DateFormatter.init()
         _dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         _dateFormatter.timeZone = TimeZone.current
         return _dateFormatter
     }()
     
-    func format(message logMessage: DDLogMessage) -> String? {
+    open func format(message logMessage: DDLogMessage) -> String? {
         guard logMessage.flag.rawValue < LoggerManager.shared.logLevel.rawValue else { return nil }
         
         var flag = ""

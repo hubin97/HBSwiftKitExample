@@ -27,10 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         LoggerManager.shared.launch()
         DDLogWarn("🔥🔥🔥🔥🔥")
-        LoggerAassistant.init(icon: R.image.logger()) {[weak self] in
-            print("LoggerAassistant--")
-            keyViewController()?.navigationController?.pushViewController(LoggerListController(), animated: true)
-        }
         return true
     }
 }
