@@ -69,8 +69,8 @@ class VideoTimeView: UIView {
         return lineView
     }()
     
-    lazy var frameMaskView: VideoEditorFrameMaskView = {
-        let frameMaskView = VideoEditorFrameMaskView.init()
+    lazy var frameMaskView: VideoFrameView = {
+        let frameMaskView = VideoFrameView.init()
         frameMaskView.delegate = self
         return frameMaskView
     }()
@@ -332,14 +332,14 @@ extension VideoTimeView {
                 if let cgImage = cgImage {
                     self?.videoFrameMap[index] = cgImage
                     if hasError {
-                        for inde in errorIndex {
-                            self?.setCurrentCell(image: UIImage.init(cgImage: cgImage), index: inde)
+                        for index in errorIndex {
+                            self?.setCurrentCell(image: UIImage.init(cgImage: cgImage), index: index)
                         }
                         errorIndex.removeAll()
                         hasError = false
                     }
                     self?.setCurrentCell(image: UIImage.init(cgImage: cgImage), index: index)
-                }else {
+                } else {
                     if let cgImage = self?.videoFrameMap[index - 1] {
                         self?.setCurrentCell(image: UIImage.init(cgImage: cgImage), index: index)
                     } else {
@@ -354,7 +354,6 @@ extension VideoTimeView {
     
     func getVideoCurrentTime(avAsset: AVAsset, for index: Int) -> CMTime {
         var second: CGFloat
-        let interval: CGFloat = -1
         let maxIndex = videoFrameCount - 1
         if index == 0 {
             second = 0.1
@@ -419,9 +418,6 @@ extension VideoTimeView: UICollectionViewDataSource, UICollectionViewDelegate, U
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(VideoEditorCropViewCell.self), for: indexPath) as! VideoEditorCropViewCell
-//        if let cgImg = videoFrameMap[indexPath.item] {
-//            item.image = UIImage.init(cgImage: cgImg)
-//        }
         return item
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -447,12 +443,12 @@ extension VideoTimeView: UICollectionViewDataSource, UICollectionViewDelegate, U
 }
 
 
-extension VideoTimeView: VideoEditorFrameMaskViewDelegate {
-    func frameMaskView(validRectDidChanged frameMaskView: VideoEditorFrameMaskView) {
+extension VideoTimeView: VideoFrameViewDelegate {
+    func frameMaskView(validRectDidChanged frameMaskView: VideoFrameView) {
         delegate?.timeView(self, didChangedValidRectAt: getStartTime(real: true))
         updateTimeLabels()
     }
-    func frameMaskView(validRectEndChanged frameMaskView: VideoEditorFrameMaskView) {
+    func frameMaskView(validRectEndChanged frameMaskView: VideoFrameView) {
         delegate?.timeView(self, endChangedValidRectAt: getStartTime(real: true))
         updateTimeLabels()
     }

@@ -1,5 +1,5 @@
 //
-//  VideoEditorFrameMaskView.swift
+//  VideoFrameView.swift
 //  HXPHPicker
 //
 //  Created by Slience on 2021/1/9.
@@ -7,22 +7,22 @@
 
 import UIKit
 
-protocol VideoEditorFrameMaskViewDelegate: NSObjectProtocol {
-    func frameMaskView(validRectDidChanged frameMaskView: VideoEditorFrameMaskView)
-    func frameMaskView(validRectEndChanged frameMaskView: VideoEditorFrameMaskView)
+protocol VideoFrameViewDelegate: NSObjectProtocol {
+    func frameMaskView(validRectDidChanged frameMaskView: VideoFrameView)
+    func frameMaskView(validRectEndChanged frameMaskView: VideoFrameView)
 }
 
-class VideoEditorFrameMaskView: UIView {
+class VideoFrameView: UIView {
     let imageWidth: CGFloat = 8
     var validRectX: CGFloat {
         30 //+ UIDevice.leftMargin
     }
     
-    weak var delegate: VideoEditorFrameMaskViewDelegate?
+    weak var delegate: VideoFrameViewDelegate?
     var validRect: CGRect = .zero {
         didSet {
-            leftControl.frame = CGRect(x: validRect.minX - imageWidth * 0.5, y: 0, width: imageWidth, height: height)
-            rightControl.frame = CGRect(x: validRect.maxX - imageWidth * 0.5, y: 0, width: imageWidth, height: height)
+            leftControl.frame = CGRect(x: validRect.minX - imageWidth * 0.5, y: 0, width: imageWidth, height: validRect.height)
+            rightControl.frame = CGRect(x: validRect.maxX - imageWidth * 0.5, y: 0, width: imageWidth, height: validRect.height)
             drawMaskLayer()
         }
     }
@@ -75,7 +75,7 @@ class VideoEditorFrameMaskView: UIView {
         
         let gripPath = UIBezierPath.init()
         let lineWidth = gripMaskLayer.lineWidth
-        let bheight = height/2/2
+        let bheight = validRect.height/2/2
         gripPath.move(to: CGPoint(x: validRect.minX + 1.5, y: validRect.midY - bheight))
         gripPath.addLine(to: CGPoint(x: validRect.minX - 1.5, y: validRect.midY + lineWidth/2))
         gripPath.move(to: CGPoint(x: validRect.minX - 1.5, y: validRect.midY - lineWidth/2))

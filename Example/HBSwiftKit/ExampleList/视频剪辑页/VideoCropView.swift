@@ -71,6 +71,7 @@ class VideoCropView: UIView {
     var videoExportFinished = false
     var audioExprotFinished = false
     var audioTrackExists = false
+    var addObserverReadyForDisplay = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -80,6 +81,13 @@ class VideoCropView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI()
+    }
+    
+    deinit {
+        if addObserverReadyForDisplay {
+            playerLayer?.removeObserver(self, forKeyPath: "readyForDisplay")
+        }
+        //NotificationCenter.default.removeObserver(self)
     }
     
     override func layoutSubviews() {
@@ -137,6 +145,9 @@ class VideoCropView: UIView {
         playerLayer = AVPlayerLayer(player: player)
         scrollView.layer.addSublayer(playerLayer!)
         adjustLayout()
+        
+        playerLayer?.addObserver(self, forKeyPath: "readyForDisplay", options: [.new, .old], context: nil)
+        addObserverReadyForDisplay = true
     }
     
     func pause() {
@@ -177,6 +188,20 @@ class VideoCropView: UIView {
         }
     }
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if object is AVPlayerLayer && keyPath == "readyForDisplay" {
+            if object as? AVPlayerLayer != playerLayer {
+                return
+            }
+            if playerLayer?.isReadyForDisplay == true {
+                //coverImageView.isHidden = true
+                play()
+                playDelegate?.playerView(self)
+            }
+        }
+    }
+    
+    ///
     func cropRect() -> CGRect {
         let contentOffset = scrollView.contentOffset
         let contentSize = scrollView.contentSize

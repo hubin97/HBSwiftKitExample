@@ -15,14 +15,7 @@ import MobileCoreServices
 class VideoCropController: BaseViewController {
 
     var playTimer: DispatchSourceTimer?
-
-    lazy var rightEditBtn: UIButton = {
-        let rightEditBtn = UIButton.init(type: .custom)
-        rightEditBtn.setTitle("选择", for: .normal)
-        rightEditBtn.setTitleColor(.black, for: .normal)
-        rightEditBtn.addTarget(self, action: #selector(editAction), for: .touchUpInside)
-        return rightEditBtn
-    }()
+    var autoPlay: Bool = true
     
     lazy var cropView: VideoCropView = {
         let _cropView = VideoCropView.init(frame: CGRect(x: 0, y: 20, width: kScreenW, height: kScreenW * 4/3))
@@ -46,7 +39,6 @@ class VideoCropController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "视频剪辑"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.rightEditBtn)
         self.view.backgroundColor = .black
         
         view.addSubview(cropView)
@@ -56,47 +48,27 @@ class VideoCropController: BaseViewController {
 }
 
 //MARK: - private mothods
-extension VideoCropController {}
+extension VideoCropController {
+    
+    func cropConfig(asset: AVAsset, whRatio: Float = 3.0/4, autoPlay: Bool = true) {
+        self.autoPlay = autoPlay
+        let showWidth = UIScreen.main.bounds.width
+        let showHeight = showWidth / CGFloat(whRatio)
+        self.cropView.frame = CGRect(x: 0, y: 20, width: showWidth, height: showHeight)
+        self.cropView.load(asset: asset, cropSize: CGSize(width: 480, height: 640))
+        
+        self.timeView.configData(avAsset: asset)
+    }
+}
 
 //MARK: - call backs
 extension VideoCropController {
     
-    @objc func editAction() {
-        let pickerVC = UIImagePickerController()
-        pickerVC.delegate = self
-        pickerVC.modalPresentationStyle = .currentContext
-        //pickerVC.videoQuality = .typeMedium
-        pickerVC.mediaTypes = [kUTTypeMovie as String]
-        pickerVC.allowsEditing = true
-        //pickerVC.videoMaximumDuration = 10  /// 限制裁剪长度
-        self.navigationController?.present(pickerVC, animated: true, completion: nil)
-    }
+ 
 }
 
 //MARK: - delegate or data source
-extension VideoCropController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.navigationController?.dismiss(animated: true, completion: nil)
-    }
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        print("didFinishPickingMediaWithInfo1---")
-        self.navigationController?.dismiss(animated: true, completion: { [weak self] in
-            if let url = info[UIImagePickerControllerMediaURL] as? URL {
-                let asset = AVAsset.init(url: url)
-                print("asset---\(CMTimeGetSeconds(asset.duration))")
-                self?.cropHandle(asset: asset, whRatio: 3.0/4)
-                self?.timeView.configData(avAsset: asset)
-            }
-        })
-    }
-   
-    func cropHandle(asset: AVAsset, whRatio: Float) {
-        let showWidth = UIScreen.main.bounds.width
-        let showHeight = showWidth / CGFloat(whRatio)
-        cropView.frame = CGRect(x: 0, y: 20, width: showWidth, height: showHeight)
-        cropView.load(asset: asset, cropSize: CGSize(width: 480, height: 640))
-    }
+extension VideoCropController {
 }
 
 
@@ -113,6 +85,12 @@ extension VideoCropController: VideoPlayerViewDelegate {
 //            croppingAction()
 //            firstPlay = false
 //        }
+        if autoPlay {
+            self.startPlayTimer()
+            self.cropView.resetPlay()
+            self.timeView.updateTimeLabels()
+            self.timeView.resetValidRect()
+        }
     }
 }
 

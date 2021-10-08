@@ -2,27 +2,27 @@ PODS:
   - CocoaLumberjack/Core (3.7.2)
   - CocoaLumberjack/Swift (3.7.2):
     - CocoaLumberjack/Core
-  - HBSwiftKit (0.3.3):
-    - HBSwiftKit/Base (= 0.3.3)
-    - HBSwiftKit/Extension (= 0.3.3)
-    - HBSwiftKit/Global (= 0.3.3)
-    - HBSwiftKit/Network (= 0.3.3)
-    - HBSwiftKit/Tools (= 0.3.3)
-    - HBSwiftKit/UIKit (= 0.3.3)
-  - HBSwiftKit/Base (0.3.3):
+  - HBSwiftKit (0.3.4):
+    - HBSwiftKit/Base (= 0.3.4)
+    - HBSwiftKit/Extension (= 0.3.4)
+    - HBSwiftKit/Global (= 0.3.4)
+    - HBSwiftKit/Network (= 0.3.4)
+    - HBSwiftKit/Tools (= 0.3.4)
+    - HBSwiftKit/UIKit (= 0.3.4)
+  - HBSwiftKit/Base (0.3.4):
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
-  - HBSwiftKit/Extension (0.3.3):
+  - HBSwiftKit/Extension (0.3.4):
     - HBSwiftKit/Global
-  - HBSwiftKit/Global (0.3.3)
-  - HBSwiftKit/Network (0.3.3):
+  - HBSwiftKit/Global (0.3.4)
+  - HBSwiftKit/Network (0.3.4):
     - HBSwiftKit/Extension
     - HBSwiftKit/Global
     - HBSwiftKit/UIKit
-  - HBSwiftKit/Tools (0.3.3):
+  - HBSwiftKit/Tools (0.3.4):
     - HBSwiftKit/Global
     - HBSwiftKit/UIKit
-  - HBSwiftKit/UIKit (0.3.3):
+  - HBSwiftKit/UIKit (0.3.4):
     - CocoaLumberjack/Swift
     - HBSwiftKit/Base
     - HBSwiftKit/Extension
@@ -59,7 +59,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
-  HBSwiftKit: 29ecc6000f2fcd4870afc06d0b4c41635c98e691
+  HBSwiftKit: 8730e19d07823a7aa365de4b14ea984b3bae8105
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
   Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
@@ -67,6 +67,6 @@ SPEC CHECKSUMS:
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: bcddfac390e43e109125ee8ed53f3bf1de1b88ce
+PODFILE CHECKSUM: ecff0679484ca226fd28c8eb7a5bd7ffcbba45af
 
 COCOAPODS: 1.10.1

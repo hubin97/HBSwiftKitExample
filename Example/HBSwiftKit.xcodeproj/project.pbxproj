@@ -28,10 +28,11 @@
 		B56F68A2264B8AF400FD62CF /* duallist.json in Resources */ = {isa = PBXBuildFile; fileRef = B56F68A1264B8AF400FD62CF /* duallist.json */; };
 		B575D5F925A9900C0068EB19 /* help_es.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F725A9900C0068EB19 /* help_es.html */; };
 		B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F825A9900C0068EB19 /* help_cn.html */; };
-		B5825E2E26F04D7D00539866 /* VideoEditorFrameMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E2D26F04D7D00539866 /* VideoEditorFrameMaskView.swift */; };
+		B5825E2E26F04D7D00539866 /* VideoFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E2D26F04D7D00539866 /* VideoFrameView.swift */; };
 		B5825E3326F0877C00539866 /* VideoCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E3226F0877C00539866 /* VideoCropView.swift */; };
 		B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E3726F087FA00539866 /* VideoTimeView.swift */; };
 		B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E3C26F0884F00539866 /* VideoToolView.swift */; };
+		B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5832B1F270FD6EE0084C78E /* VideoTestController.swift */; };
 		B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC828255A7818005A5179 /* ImageBrowerController.swift */; };
 		B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC829255A7818005A5179 /* NumberPickerController.swift */; };
 		B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */; };
@@ -103,10 +104,11 @@
 		B56F68A1264B8AF400FD62CF /* duallist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = duallist.json; sourceTree = "<group>"; };
 		B575D5F725A9900C0068EB19 /* help_es.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_es.html; sourceTree = "<group>"; };
 		B575D5F825A9900C0068EB19 /* help_cn.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_cn.html; sourceTree = "<group>"; };
-		B5825E2D26F04D7D00539866 /* VideoEditorFrameMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoEditorFrameMaskView.swift; sourceTree = "<group>"; };
+		B5825E2D26F04D7D00539866 /* VideoFrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoFrameView.swift; sourceTree = "<group>"; };
 		B5825E3226F0877C00539866 /* VideoCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCropView.swift; sourceTree = "<group>"; };
 		B5825E3726F087FA00539866 /* VideoTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTimeView.swift; sourceTree = "<group>"; };
 		B5825E3C26F0884F00539866 /* VideoToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoToolView.swift; sourceTree = "<group>"; };
+		B5832B1F270FD6EE0084C78E /* VideoTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTestController.swift; sourceTree = "<group>"; };
 		B5BAC828255A7818005A5179 /* ImageBrowerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowerController.swift; sourceTree = "<group>"; };
 		B5BAC829255A7818005A5179 /* NumberPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberPickerController.swift; sourceTree = "<group>"; };
 		B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerController.swift; sourceTree = "<group>"; };
@@ -246,9 +248,8 @@
 		B533677026E84FED0009B60F /* 视频剪辑页 */ = {
 			isa = PBXGroup;
 			children = (
-				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
 				B533677226E852550009B60F /* VideoCropController.swift */,
-				B5825E2D26F04D7D00539866 /* VideoEditorFrameMaskView.swift */,
+				B5825E2D26F04D7D00539866 /* VideoFrameView.swift */,
 				B5825E3226F0877C00539866 /* VideoCropView.swift */,
 				B5825E3726F087FA00539866 /* VideoTimeView.swift */,
 				B5825E3C26F0884F00539866 /* VideoToolView.swift */,
@@ -352,6 +353,8 @@
 				B5FB4F26257A365E007F1238 /* WebPreviewController.swift */,
 				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
 				B541412C268EAF06008CE14B /* MapLocationController.swift */,
+				B5832B1F270FD6EE0084C78E /* VideoTestController.swift */,
+				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
 				B5557A2F2670614E007F5B44 /* LoadAnimateView.swift */,
 				1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */,
 				B533677026E84FED0009B60F /* 视频剪辑页 */,
@@ -669,13 +672,14 @@
 			files = (
 				B5C6C5EA25ECD38800C88C1C /* Wto_ImageBrower.swift in Sources */,
 				B5F520932704615E00BACB9C /* VideoPlayController.swift in Sources */,
-				B5825E2E26F04D7D00539866 /* VideoEditorFrameMaskView.swift in Sources */,
+				B5825E2E26F04D7D00539866 /* VideoFrameView.swift in Sources */,
 				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
 				B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */,
 				B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				B5825E3326F0877C00539866 /* VideoCropView.swift in Sources */,
 				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
+				B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */,
 				1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */,
 				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
 				B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */,
