@@ -20,7 +20,6 @@
 		B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */; };
 		B53D570326268EBE001D0BC0 /* HBSwiftKit_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D570226268EBE001D0BC0 /* HBSwiftKit_UITests.swift */; };
 		B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541412C268EAF06008CE14B /* MapLocationController.swift */; };
-		B5557A302670614E007F5B44 /* LoadAnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5557A2F2670614E007F5B44 /* LoadAnimateView.swift */; };
 		B5557A3526706188007F5B44 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = B5557A3426706188007F5B44 /* loading.gif */; };
 		B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557E4DA2631304800C62147 /* ThemeStyle.swift */; };
 		B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */ = {isa = PBXBuildFile; fileRef = B567FCE42596F39F006AFA69 /* README_SWIFT.md */; };
@@ -96,7 +95,6 @@
 		B53D570226268EBE001D0BC0 /* HBSwiftKit_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBSwiftKit_UITests.swift; sourceTree = "<group>"; };
 		B53D570426268EBE001D0BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B541412C268EAF06008CE14B /* MapLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationController.swift; sourceTree = "<group>"; };
-		B5557A2F2670614E007F5B44 /* LoadAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAnimateView.swift; sourceTree = "<group>"; };
 		B5557A3426706188007F5B44 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		B557E4DA2631304800C62147 /* ThemeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStyle.swift; sourceTree = "<group>"; };
 		B567FCE42596F39F006AFA69 /* README_SWIFT.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README_SWIFT.md; path = ../README_SWIFT.md; sourceTree = "<group>"; };
@@ -351,11 +349,10 @@
 				B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */,
 				B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */,
 				B5FB4F26257A365E007F1238 /* WebPreviewController.swift */,
-				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
 				B541412C268EAF06008CE14B /* MapLocationController.swift */,
 				B5832B1F270FD6EE0084C78E /* VideoTestController.swift */,
 				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
-				B5557A2F2670614E007F5B44 /* LoadAnimateView.swift */,
+				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
 				1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */,
 				B533677026E84FED0009B60F /* 视频剪辑页 */,
 				B5887FA3264CD719003C1896 /* 双列表关联 */,
@@ -687,7 +684,6 @@
 				B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */,
 				B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */,
 				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
-				B5557A302670614E007F5B44 /* LoadAnimateView.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,

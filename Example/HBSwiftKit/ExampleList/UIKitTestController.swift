@@ -104,10 +104,6 @@ class UIKitTestController: BaseViewController {
         //let filterBtn = UIButton
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction))
-  
-//        let dualView = DualListView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width * 3/4, height: UIScreen.main.bounds.size.height / 2))
-//        view.addSubview(dualView)
-//        dualView.setRoundCorners(borderColor: .brown, isDotted: true, lineDashPattern: [6, 2])
                 
         let btn1 = UIButton.init(frame: CGRect(x: 20, y: 100, width: 300, height: 100))
         btn1.addTarget(self, action: #selector(btnAction1), for: .touchUpInside)
@@ -121,37 +117,6 @@ class UIKitTestController: BaseViewController {
         //audioPlay(name: "离歌.mp3")
         audioPlay(name: "温柔女声.mp3")
 
-//        let btn2 = UIButton.init(frame: CGRect(x: 100, y: 300, width: 100, height: 100))
-//        btn2.addTarget(self, action: #selector(btnAction2), for: .touchUpInside)
-//        btn2.touchAreaInsets = UIEdgeInsetsMake(50, 50, 50, 50)
-//        view.addSubview(btn2)
-//        btn2.setRoundCorners(borderColor: .green)
-//
-//        let btn3 = UIButton.init(type: .custom)
-//        btn3.frame = CGRect(x: 100, y: 500, width: 100, height: 100)
-//        btn3.setBackgroundImage(UIImage(color: .brown), for: .normal)
-//        btn3.addTarget(self, action: #selector(btnAction3), for: .touchUpInside)
-//        //btn3.touchAreaInsets = UIEdgeInsetsMake(50, 150, 50, 150)
-//        btn3.showScaleAnimate = true
-//        btn3.showScale = 1.2
-//        view.addSubview(btn3)
-//        btn3.setRoundCorners(borderColor: .blue)
-
-//        // 刻度尺
-//        rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 150, width: 50, height: 400), direction: .vertical, rulerLineSpacing: 15, minValue: 15, maxValue: 40)
-//        view.addSubview(rulerView)
-//        rulerView.setRoundCorners()
-//
-//        let rulerView2 = SliderRuler.init(frame: CGRect(x: 20, y: 0, width: kScreenW - 40, height: 50), direction: .horizontal, rulerLineSpacing: 15, minValue: 16, maxValue: 32)
-//        view.addSubview(rulerView2)
-//        rulerView2.setRoundCorners()
-        
-//        view.addSubview(ball)
-//        ball.frame = CGRect(x: 40, y: 200, width: 100, height: 100)
-//        ball.backgroundColor = .brown
-//        ball.setRectCorner(radiiSize: 50)
-//
-        
         noti.register(name: NSNotification.Name(rawValue: "ahha"), object: nil) { (notification) in
             print("noti:\(notification.name) \(notification.object) \(notification.userInfo)")
         }
@@ -205,76 +170,8 @@ extension UIKitTestController {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         GlobalNoti.post(name: NSNotification.Name(rawValue: "ahha"), object: "wwwww")
-
         DDLogInfo("DDLogInfo")
-
-//        let alert = Wto_AlertView.init(title: "New Device!", icon: "test", message: "AUKEY T7S", actions: ["Cancel", "Continue"]) { (index, title) in
-//            print("index:\(index), title:\(title)")
-//        }
-//        let alert = Wto_AlertView.init(title: "New Device!", icon: "test", iconSize: CGSize(width: 40, height: 85), message: "AUKEY T7S", actions: ["Cancel", "Continue"]) { (index, title) in
-//            print("index:\(index), title:\(title)")
-//        }
-//        alert.show()
-//        let alert = Wto_AlertView.init(title: "New Device!", icon: R.image.tabBar.home_h.name, iconSize: CGSize(width: 40, height: 40), message: "AUKEY T7S")
-//        alert.addAction("Cancel", .lightGray, tapAction: nil)
-//        alert.addAction("Continue") {
-//            print("Continue")
-//        }
-//        alert.show()
-        //(title: "“Aukey Life” Wants To Use “Facebook.com” To Log In", message: "This will allow the App to share your information with the website", alertWidth: 250)
-        
-//        let alert = AlertView.init(Aukey_title: "“Aukey Life” Wants To Use “Facebook.com” To Log In", message: "This will allow the App to share your information with the website")
-//        alert.addAction("Cancel", .lightGray, tapAction: nil)
-//        alert.addAction("Continue") {
-//            print("Continue")
-//        }
-//        alert.show()
-        
-//        let alert = Wto_AlertView.init(Aukey_title: "New Device!", icon: R.image.tabBar.home_h.name, message: "AUKEY T7S")
-//        alert.addAction("Cancel", .lightGray, tapAction: nil)
-//        alert.addAction("Continue") {
-//            print("Continue")
-//        }
-//        alert.show()
-        
-        //YTHitView.show(message: "哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈")
-        //YTHitView.show(message: "哈哈哈哈哈哈哈哈", position: .top)
-//        let targetRect = CGRect(x: 10, y: kScreenHeight - kBottomSafeHeight - 65 - 135, width: kScreenWidth - 20, height: 65)
-//        YTHitView.show(message: "哈哈哈哈哈哈哈哈", position: .none, noneRect: targetRect)
-//        YTHitView.showSuccess(message: "操作成功")
-//        YTHitView.showSuccess(message: "操作成功", position: .bottom)
-//        YTHitView.showWarnning(message: "操作成功", position: .top)
-//        YTHitView.showSuccess(message: "操作成功", position: .none, noneRect: targetRect, duration: 1)
-//        YTHitView.setHitHeight(44).showSuccess(message: "OJBK!!!")
-        //YTHitView.setHitWidth(200).setHitSuccImg("ib_select").showSuccess(message: "WTF???")
-        
-        /// R库不勾选provides namespace时, 获取到的图片名无效, 无法显示图片
-//        let name = R.image.tabBar.home_h.name
-//        YTHitView.setHitWidth(200).setHitSuccImg(name).showSuccess(message: "WTF???")
-        
-        //MFMessageComposeViewController
-        //AlertBlockView.init(title: "标题", message: "这是消息体", actions: ["我知道了"], tapAction: nil).show()
-        //YTAlertView(tags_title: "标题", options: ["标签标签标签标签", "标签签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签"], actions: ["确定"], tapAction: nil).show()
-//
-//        var ops1 = [TagsMeta]()
-//        var ops2 = [TagsMeta]()
-//        for idx in 0..<21 {
-//            let tag1 = TagsMeta(title: "标签\(idx)", iconn: R.image.tabBar.like_n.name, iconh: R.image.tabBar.like_h.name, param: "idx=>\(idx)")
-//            let tag2 = TagsMeta(title: "标签\(idx)", param: "idx=>\(idx)")
-//            ops1.append(tag1)
-//            ops2.append(tag2)
-//        }
-//
-//        TagsOptionView(title: "标题", options: ops1, optionFont: UIFont.systemFont(ofSize: 12), actionTitle: "", actionTitleColor: .orange, tapAction: {[weak self] (tags) in
-//            self?.opPrint(ops: tags)
-//        }).show()
-
-//        TagsOptionView(title: "标题", options: ops2, optionFont: UIFont.systemFont(ofSize: 15), actionTitle: nil, actionTitleColor: .orange, tapAction: {[weak self] (tags) in
-//            self?.opPrint(ops: tags)
-//        }).show()
-        
     }
     
     func opPrint(ops: [TagsMeta]?) {

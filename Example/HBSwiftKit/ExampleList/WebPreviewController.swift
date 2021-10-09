@@ -19,6 +19,7 @@ class WebPreviewController: BaseWKWebController {
         
         self.progressViewBackColor = .systemBlue
         self.progressViewTintColor = .red
+        self.progressViewHeight = 1
         self.wkWebView.frame = CGRect(x: 0, y: kTopSafeHeight, width: self.view.bounds.width, height: self.view.bounds.height - kNavBarAndSafeHeight - kBottomSafeHeight)
         //self.wkWebView.navigationDelegate = self
         self.addMethod(name: "WINGTO_NATIVE") {[weak self] (methodname, callback) in
@@ -38,11 +39,9 @@ class WebPreviewController: BaseWKWebController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //self.remoteUrl = "https://www.baidu.com" //"https://space.bilibili.com/325538782"
-        //self.remoteUrl = "http://192.168.2.70:8080"
         //self.localPath = "jstest.html"
         //loadHTML(urlString: "jstest.html", isLocalHtml: true)
-        loadHTML(urlString: "http://192.168.2.70:8080")
+        loadHTML(urlString: "https://www.baidu.com")
     }
     
     // 对应方法名:  "test"

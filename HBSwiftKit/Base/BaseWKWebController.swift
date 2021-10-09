@@ -68,6 +68,11 @@ open class BaseWKWebController: BaseViewController, WKWebScriptMsgHandleAble {
         wkWebView.uiDelegate = self
         wkWebView.navigationDelegate = self
         wkWebView.scrollView.delegate = self
+        if #available(iOS 11.0, *) {
+            wkWebView.scrollView.contentInsetAdjustmentBehavior = .never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
         return wkWebView
     }()
     
@@ -86,13 +91,24 @@ open class BaseWKWebController: BaseViewController, WKWebScriptMsgHandleAble {
             progressView.tintColor = progressViewTintColor
         }
     }
-
+    /// 进度条高度
+    public var progressViewHeight: CGFloat? {
+        didSet {
+            if let height = progressViewHeight {
+                let rate = height/progressView.frame.size.height
+                progressView.transform = CGAffineTransform.init(scaleX: 1.0, y: rate)
+            }
+        }
+    }
+    
     fileprivate lazy var progressView: UIProgressView = {
-        let progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: self.wkWebView.frame.width, height: 2))
-        progressView.tintColor = .systemBlue
-        progressView.backgroundColor = .lightGray
-        progressView.isHidden = true
-        return progressView
+        ///UIProgressView的高度设置无效, 且 iOS14高度还有变化
+        let _progressView = UIProgressView.init(frame: CGRect(x: 0, y: kTopSafeHeight, width: self.wkWebView.frame.width, height: 1))
+        _progressView.progressViewStyle = .bar
+        _progressView.tintColor = .systemBlue
+        _progressView.backgroundColor = .lightGray
+        _progressView.isHidden = true
+        return _progressView
     }()
     
     open override func setupUi() {
