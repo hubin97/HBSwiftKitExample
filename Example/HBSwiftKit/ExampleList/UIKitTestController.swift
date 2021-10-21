@@ -243,7 +243,9 @@ extension UIKitTestController {
     
     @objc func filterAction() {
         
-        FamilyAreaOptionsView.init(data: nil).show()
+        LoggerManager.shared.removeEntrance()
+        
+//        FamilyAreaOptionsView.init(data: nil).show()
 
         
 //        let rulerValue = rulerView.rulerValue

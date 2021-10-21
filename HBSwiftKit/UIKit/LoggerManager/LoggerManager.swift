@@ -36,7 +36,9 @@ open class LoggerManager {
         return _fileLogger
     }()
     
-    public func launch() {
+    /// 开启日志记录
+    @discardableResult
+    public func launch() -> Self {
         if #available(iOS 10.0, *) {
             // Uses os_log
             DDLog.add(DDOSLogger.sharedInstance)
@@ -47,10 +49,19 @@ open class LoggerManager {
             DDLog.add(DDASLLogger.sharedInstance)  // ASL = Apple System Logs
         }
         DDLog.add(fileLogger)
-        
+        return self
+    }
+    
+    /// 初始化日志入口
+    public func entrance() {
         LoggerAssistant.init(icon: UIImage.bundleImage(named: "logger")) {
             keyViewController()?.navigationController?.pushViewController(LoggerListController(), animated: true)
         }.show()
+    }
+    
+    /// 移除日志入口
+    public func removeEntrance() {
+        UIApplication.shared.delegate?.window??.subviews.first(where: { $0.isKind(of: LoggerAssistant.classForCoder()) })?.removeFromSuperview()
     }
 }
 

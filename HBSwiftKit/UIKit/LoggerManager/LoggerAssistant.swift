@@ -62,6 +62,10 @@ extension LoggerAssistant {
         opBtn.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
         self.addSubview(opBtn)
     }
+    
+    open func hide() {
+        self.removeFromSuperview()
+    }
 }
 
 //MARK: - call backs

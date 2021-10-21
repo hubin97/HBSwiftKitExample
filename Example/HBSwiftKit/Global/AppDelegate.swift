@@ -25,10 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarVc.setTabBarColors(normalColor: .lightGray, selectColor: .systemBlue)
         self.window?.rootViewController = tabBarVc
         
-        LoggerManager.shared.launch()
-        LoggerManager.logDebug("DEBUG")
-        
-        DDLogWarn("🔥🔥🔥🔥🔥")
+        LoggerManager.shared.launch().entrance()
+        //LoggerManager.logDebug("DEBUG")
         return true
     }
 }

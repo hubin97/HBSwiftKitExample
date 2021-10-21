@@ -32,9 +32,19 @@ open class BaseNavigationController: UINavigationController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
-        navigationBar.barTintColor = .white
-        navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20)]
         navigationBar.isTranslucent = false
+        
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18, weight: .medium)]
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance.init()
+            appearance.backgroundColor = .white
+            navigationBar.titleTextAttributes = titleTextAttributes
+            navigationBar.standardAppearance = appearance
+            navigationBar.scrollEdgeAppearance = appearance
+        } else {
+            navigationBar.barTintColor = .white
+            navigationBar.titleTextAttributes = titleTextAttributes
+        }
         
         if responds(to: #selector(getter: interactivePopGestureRecognizer)) {
             delegate = self
