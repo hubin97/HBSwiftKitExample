@@ -7,7 +7,7 @@
 
 import Foundation
 import AVFoundation
-//MARK: - global var and methods
+// MARK: - global var and methods
 
 protocol VideoPlayerViewDelegate: NSObjectProtocol {
     func playerView(_ playerView: VideoCropView, didPlayAt time: CMTime)
@@ -21,12 +21,11 @@ protocol VideoCropViewDelegate: class {
     func exportProgress(progress: CGFloat)
 }
 
-
-//MARK: 尺寸剪辑预览视图
+// MARK: 尺寸剪辑预览视图
 class VideoCropView: UIView {
-    
+
     weak var playDelegate: VideoPlayerViewDelegate?
-    
+
     var playStartTime: CMTime?
     var playEndTime: CMTime?
     var isPlaying: Bool = false
@@ -34,15 +33,15 @@ class VideoCropView: UIView {
 
     let scrollView = UIScrollView()
     var playerLayer: AVPlayerLayer?
-    //var player: AVPlayer?
+    // var player: AVPlayer?
     lazy var player: AVPlayer = {
         let player = AVPlayer.init()
         return player
     }()
-    
+
     var videoSize = CGSize.zero
     var cropSize = CGSize.zero
-    
+
     public var outputSize: CGSize?
     public var rect: CGRect?
     public var timeRange: CMTimeRange?
@@ -51,12 +50,11 @@ class VideoCropView: UIView {
     public var fileType: String?
     public var outputUrl: URL?
 
-    
     // public
     public weak var cropDelegate: VideoCropViewDelegate?
-    public var exportFailedHandler: ((_ error: Error?)->Void)?
-    public var exportSuccessHandler: ((_ outputUrl: URL)->Void)?
-    public var exportProgressHandler: ((_ progress: CGFloat)->Void)?
+    public var exportFailedHandler: ((_ error: Error?) -> Void)?
+    public var exportSuccessHandler: ((_ outputUrl: URL) -> Void)?
+    public var exportProgressHandler: ((_ progress: CGFloat) -> Void)?
 
     // private
     var writer: AVAssetWriter?
@@ -67,7 +65,7 @@ class VideoCropView: UIView {
     var readerAudioOutput: AVAssetReaderAudioMixOutput?
     var videoExportQueue: DispatchQueue?
     var audioExportQueue: DispatchQueue?
-    
+
     var videoExportFinished = false
     var audioExprotFinished = false
     var audioTrackExists = false
@@ -77,24 +75,24 @@ class VideoCropView: UIView {
         super.init(frame: frame)
         setupUI()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI()
     }
-    
+
     deinit {
         if addObserverReadyForDisplay {
             playerLayer?.removeObserver(self, forKeyPath: "readyForDisplay")
         }
-        //NotificationCenter.default.removeObserver(self)
+        // NotificationCenter.default.removeObserver(self)
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         adjustLayout()
     }
-    
+
     func setupUI() {
 //        scrollView.showsHorizontalScrollIndicator = false
 //        scrollView.showsVerticalScrollIndicator = false
@@ -103,7 +101,7 @@ class VideoCropView: UIView {
 //        scrollView.maximumZoomScale = 3.0
         addSubview(scrollView)
     }
-    
+
     func adjustLayout() {
         if videoSize.equalTo(CGSize.zero) || cropSize.equalTo(CGSize.zero) {
             return
@@ -111,14 +109,14 @@ class VideoCropView: UIView {
         let length = bounds.width
         let videoRatio = videoSize.width/videoSize.height
         let cropRatio = cropSize.width/cropSize.height
-        
+
         // calculate scrollSize
         var scrollSize = CGSize.zero
         var scrollOrigin = CGPoint.zero
         if cropRatio > 1 {
             scrollSize = CGSize(width: length, height: length/cropRatio)
             scrollOrigin = CGPoint(x: CGFloat(0), y: (1-1/cropRatio)*0.5*length)
-        }else {
+        } else {
             scrollSize = CGSize(width: length*cropRatio, height: length)
             scrollOrigin = CGPoint(x: (1-cropRatio)*0.5*length, y: CGFloat(0))
         }
@@ -126,30 +124,30 @@ class VideoCropView: UIView {
         var contentSize = CGSize.zero
         if videoRatio > cropRatio {
             contentSize = CGSize(width: scrollSize.height*videoRatio, height: scrollSize.height)
-        }else {
+        } else {
             contentSize = CGSize(width: scrollSize.width, height: scrollSize.width/videoRatio)
         }
         scrollView.frame = CGRect(origin: scrollOrigin, size: scrollSize)
         scrollView.contentSize = contentSize
-        //scrollView.center = CGPoint(x: bounds.width/2, y: bounds.height/2)
+        // scrollView.center = CGPoint(x: bounds.width/2, y: bounds.height/2)
         playerLayer?.frame = CGRect(origin: CGPoint.zero, size: contentSize)
     }
-    
+
     // MARK: Public
     func load(asset: AVAsset, cropSize: CGSize) {
         videoSize = transformedSize(asset)
         self.cropSize = cropSize
         self.outputSize = cropSize
-        
+
         player = AVPlayer(playerItem: AVPlayerItem(asset: asset))
         playerLayer = AVPlayerLayer(player: player)
         scrollView.layer.addSublayer(playerLayer!)
         adjustLayout()
-        
+
         playerLayer?.addObserver(self, forKeyPath: "readyForDisplay", options: [.new, .old], context: nil)
         addObserverReadyForDisplay = true
     }
-    
+
     func pause() {
         if isPlaying {
             player.pause()
@@ -164,13 +162,13 @@ class VideoCropView: UIView {
             playDelegate?.playerView(self, didPlayAt: player.currentTime())
         }
     }
-    
+
     func seek(to time: CMTime, comletion: ((Bool) -> Void)? = nil) {
         player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero) { (isFinished) in
             comletion?(isFinished)
         }
     }
-    
+
     func resetPlay() {
         isPlaying = false
         if let startTime = playStartTime {
@@ -179,7 +177,7 @@ class VideoCropView: UIView {
                     self.play()
                 }
             }
-        }else {
+        } else {
             seek(to: kCMTimeZero) { (isFinished) in
                 if isFinished {
                     self.play()
@@ -187,20 +185,20 @@ class VideoCropView: UIView {
             }
         }
     }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if object is AVPlayerLayer && keyPath == "readyForDisplay" {
             if object as? AVPlayerLayer != playerLayer {
                 return
             }
             if playerLayer?.isReadyForDisplay == true {
-                //coverImageView.isHidden = true
+                // coverImageView.isHidden = true
                 play()
                 playDelegate?.playerView(self)
             }
         }
     }
-    
+
     ///
     func cropRect() -> CGRect {
         let contentOffset = scrollView.contentOffset
@@ -210,7 +208,7 @@ class VideoCropView: UIView {
         let size = CGSize(width: scrollViewSize.width/contentSize.width, height: scrollViewSize.height/contentSize.height)
         return CGRect(origin: origin, size: size)
     }
-    
+
     func transformedSize(_ asset: AVAsset) -> CGSize {
         let videoTrack = asset.tracks(withMediaType: AVMediaType.video).first
         if let track = videoTrack {
@@ -225,31 +223,31 @@ class VideoCropView: UIView {
         return CGSize(width: 0, height: 0)
     }
 }
-//MARK: - private mothods
+// MARK: - private mothods
 extension VideoCropView {
-    
+
     // MARK: public
-    
+
     public func export(_ asset: AVAsset, _ rect: CGRect, _ timeRange: CMTimeRange, _ outputSize: CGSize, _ outputUrl: URL) {
         self.rect = rect
         self.outputSize = outputSize
         self.timeRange = timeRange
-        export(asset,outputUrl)
+        export(asset, outputUrl)
     }
-    
+
     func export(_ asset: AVAsset, _ outputUrl: URL) {
         self.outputUrl = outputUrl
         setupExportSession(asset, outputUrl)
         startExportSession()
     }
-    
-    func setupExportSession(_ asset: AVAsset,_ outputUrl: URL) {
+
+    func setupExportSession(_ asset: AVAsset, _ outputUrl: URL) {
         // optional settings
         configureOptionalSettings(asset: asset)
-        
+
         // composition
         let composition = createComposition(asset: asset)
-        
+
         // reader
         do {
             reader = try AVAssetReader(asset: composition)
@@ -257,7 +255,7 @@ extension VideoCropView {
             failedHandler(error: nil)
             return
         }
-        readerVideoOutput = AVAssetReaderVideoCompositionOutput(videoTracks: composition.tracks(withMediaType: AVMediaType.video), videoSettings: [kCVPixelBufferPixelFormatTypeKey as String:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange])
+        readerVideoOutput = AVAssetReaderVideoCompositionOutput(videoTracks: composition.tracks(withMediaType: AVMediaType.video), videoSettings: [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_420YpCbCr8BiPlanarFullRange])
         readerVideoOutput?.alwaysCopiesSampleData = false
         readerVideoOutput?.videoComposition = createVideoComposition(composition: composition)
         reader?.add(readerVideoOutput!)
@@ -274,20 +272,20 @@ extension VideoCropView {
 
         // queue
         videoExportQueue = DispatchQueue(label: "com.worthy.tailor.video")
-        
+
         // audio
         if audioTrackExists {
-            readerAudioOutput = AVAssetReaderAudioMixOutput(audioTracks: composition.tracks(withMediaType: AVMediaType.audio), audioSettings: [AVFormatIDKey:kAudioFormatLinearPCM])
+            readerAudioOutput = AVAssetReaderAudioMixOutput(audioTracks: composition.tracks(withMediaType: AVMediaType.audio), audioSettings: [AVFormatIDKey: kAudioFormatLinearPCM])
             readerAudioOutput?.alwaysCopiesSampleData = false
             reader?.add(readerAudioOutput!)
             writerAudioInput = AVAssetWriterInput(mediaType: AVMediaType.audio, outputSettings: audioOutputSettings())
             writer?.add(writerAudioInput!)
             audioExportQueue = DispatchQueue(label: "com.worthy.tailor.audio")
-        }else {
+        } else {
             audioExprotFinished = true
         }
     }
-    
+
     func startExportSession() {
         reader?.startReading()
         writer?.startWriting()
@@ -300,50 +298,50 @@ extension VideoCropView {
                     let time = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
                     let progress = CMTimeGetSeconds(time)/CMTimeGetSeconds(self.timeRange!.duration)
                     self.progressHandler(progress: CGFloat(progress))
-                }else {
+                } else {
                     if !self.videoExportFinished {
                         self.videoExportFinished = true
                         self.writerVideoInput?.markAsFinished()
                         self.checkExportSession()
-                        break;
+                        break
                     }
                 }
-                
+
             }
         })
-        
+
         // audio
         if audioTrackExists {
             writerAudioInput?.requestMediaDataWhenReady(on: audioExportQueue!, using: {
                 while self.writerAudioInput!.isReadyForMoreMediaData {
                     if let sampleBuffer = self.readerAudioOutput?.copyNextSampleBuffer() {
                         self.writerAudioInput?.append(sampleBuffer)
-                    }else {
+                    } else {
                         if !self.audioExprotFinished {
                             self.audioExprotFinished = true
                             self.writerAudioInput?.markAsFinished()
                             self.checkExportSession()
-                            break;
+                            break
                         }
                     }
-                    
+
                 }
             })
         }
     }
-    
+
     func checkExportSession() {
         if audioExprotFinished && videoExportFinished {
             writer?.finishWriting {
                 if let error = self.writer?.error {
                     self.failedHandler(error: error)
-                }else {
+                } else {
                     self.successHandler()
                 }
             }
         }
     }
-    
+
     func configureOptionalSettings(asset: AVAsset) {
         let videoTrack = asset.tracks(withMediaType: AVMediaType.video).first
         let audioTrack = asset.tracks(withMediaType: AVMediaType.audio).first
@@ -351,7 +349,7 @@ extension VideoCropView {
         var bitRateRatio: Float = 1.0
         if outputSize == nil {
             outputSize = inputSize
-        }else {
+        } else {
             bitRateRatio = Float(outputSize!.width*outputSize!.height/(inputSize.width*inputSize.height))
         }
         if bitRate == nil {
@@ -364,14 +362,14 @@ extension VideoCropView {
             rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         }
     }
-    
+
     func createComposition(asset: AVAsset) -> AVMutableComposition {
         let composition = AVMutableComposition()
         let compositionVideoTrack = composition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)
         let compositionAudioTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: kCMPersistentTrackID_Invalid)
         let sourceVideoTrack = asset.tracks(withMediaType: AVMediaType.video).first
         let sourceAudioTrack = asset.tracks(withMediaType: AVMediaType.audio).first
-        
+
         // add tracks
         if let track = sourceVideoTrack {
             do {
@@ -387,61 +385,61 @@ extension VideoCropView {
                 audioTrackExists = false
             }
             audioTrackExists = true
-        }else {
+        } else {
             audioTrackExists = false
         }
         return composition
     }
-    
+
     func createVideoComposition(composition: AVMutableComposition) -> AVMutableVideoComposition {
         let videoTrack = composition.tracks(withMediaType: AVMediaType.video).first!
         // transform
         var offsetX, offsetY, rotate: CGFloat
-        
+
         let sourceSize = transformedSize(videoTrack)
         let trackTrans = videoTrack.preferredTransform
         let middleSize = CGSize(width: sourceSize.width * rect!.width, height: sourceSize.height*rect!.height)
         let scale = outputSize!.width / middleSize.width
-        
-        if trackTrans.b == 1 && trackTrans.c == -1 {            //90 angle
+
+        if trackTrans.b == 1 && trackTrans.c == -1 {            // 90 angle
             rotate = CGFloat(Double.pi/2)
-            offsetX = (1 - rect!.origin.x) * sourceSize.width;
-            offsetY = -rect!.origin.y * sourceSize.height;
-        }else if (trackTrans.a == -1 && trackTrans.d == -1) {   //180 angle
+            offsetX = (1 - rect!.origin.x) * sourceSize.width
+            offsetY = -rect!.origin.y * sourceSize.height
+        } else if trackTrans.a == -1 && trackTrans.d == -1 {   // 180 angle
             rotate = CGFloat(Double.pi)
-            offsetX = (1 - rect!.origin.x) * sourceSize.width;
-            offsetY = (1 - rect!.origin.y) * sourceSize.height;
-        }else if (trackTrans.b == -1 && trackTrans.c == 1) {    //270 angle
+            offsetX = (1 - rect!.origin.x) * sourceSize.width
+            offsetY = (1 - rect!.origin.y) * sourceSize.height
+        } else if trackTrans.b == -1 && trackTrans.c == 1 {    // 270 angle
             rotate = CGFloat(Double.pi/2 * 3)
             offsetX = -rect!.origin.x * sourceSize.width
             offsetY = (1-rect!.origin.y) * sourceSize.height
-        }else{
-            rotate = 0;
+        } else {
+            rotate = 0
             offsetX = -rect!.origin.x * sourceSize.width
             offsetY = -rect!.origin.y * sourceSize.height
         }
         var transform = CGAffineTransform(rotationAngle: rotate)
         transform = transform.concatenating(CGAffineTransform(scaleX: scale, y: scale))
         transform = transform.concatenating(CGAffineTransform(translationX: offsetX*scale, y: offsetY*scale))
-        
+
         // instruction
         let instruction = AVMutableVideoCompositionInstruction()
         let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
         instruction.timeRange = videoTrack.timeRange
         instruction.layerInstructions = [layerInstruction]
         layerInstruction.setTransform(transform, at: kCMTimeZero)
-        
+
         // videoComposition
         let videoComposition = AVMutableVideoComposition(propertiesOf: composition)
         videoComposition.renderSize = outputSize!
         videoComposition.instructions = [instruction]
         videoComposition.frameDuration = CMTimeMake(1, Int32(videoTrack.nominalFrameRate))
-        
+
         return videoComposition
     }
 
     // MARK: tool
-    func transformedSize(_ videoTrack: AVAssetTrack) -> CGSize{
+    func transformedSize(_ videoTrack: AVAssetTrack) -> CGSize {
         let naturalSize = videoTrack.naturalSize
         var sourceSize = naturalSize
         let trackTrans = videoTrack.preferredTransform
@@ -450,16 +448,16 @@ extension VideoCropView {
         }
         return sourceSize
     }
-    
+
     // MARK: handler
-    
+
     func failedHandler(error: Error?) {
         DispatchQueue.main.async {
             self.cropDelegate?.exportFailed(error: error)
             self.exportFailedHandler?(error)
         }
     }
-    
+
     func successHandler() {
         DispatchQueue.main.async {
             self.cropDelegate?.exportProgress(progress: 1.0)
@@ -468,66 +466,66 @@ extension VideoCropView {
             self.exportSuccessHandler?(self.outputUrl!)
         }
     }
-    
+
     func progressHandler(progress: CGFloat) {
         DispatchQueue.main.async {
             self.cropDelegate?.exportProgress(progress: progress)
             self.exportProgressHandler?(progress)
         }
     }
-    
+
     // MARK: configuration
-    
+
     func videoOutputSettings() -> [String: Any] {
         let width = outputSize!.width
         let height = outputSize!.height
         return [AVVideoHeightKey: height,
                 AVVideoWidthKey: width,
                 AVVideoCodecKey: AVVideoCodecH264,
-                AVVideoScalingModeKey:AVVideoScalingModeResizeAspectFill,
-                AVVideoCompressionPropertiesKey:[AVVideoAverageBitRateKey:bitRate!,
+                AVVideoScalingModeKey: AVVideoScalingModeResizeAspectFill,
+                AVVideoCompressionPropertiesKey: [AVVideoAverageBitRateKey: bitRate!,
                                                  AVVideoProfileLevelKey: profile ?? AVVideoProfileLevelH264MainAutoLevel,
-                                                 AVVideoCleanApertureKey:[
-                                                    AVVideoCleanApertureWidthKey:width,
-                                                    AVVideoCleanApertureHeightKey:height,
-                                                    AVVideoCleanApertureHorizontalOffsetKey:10,
-                                                    AVVideoCleanApertureVerticalOffsetKey:10],
-                                                 AVVideoPixelAspectRatioKey:[
-                                                    AVVideoPixelAspectRatioHorizontalSpacingKey:1,
-                                                    AVVideoPixelAspectRatioVerticalSpacingKey:1]
+                                                 AVVideoCleanApertureKey: [
+                                                    AVVideoCleanApertureWidthKey: width,
+                                                    AVVideoCleanApertureHeightKey: height,
+                                                    AVVideoCleanApertureHorizontalOffsetKey: 10,
+                                                    AVVideoCleanApertureVerticalOffsetKey: 10],
+                                                 AVVideoPixelAspectRatioKey: [
+                                                    AVVideoPixelAspectRatioHorizontalSpacingKey: 1,
+                                                    AVVideoPixelAspectRatioVerticalSpacingKey: 1]
                 ]
         ]
     }
-    
+
     func audioOutputSettings() -> [String: Any] {
         var audioChannelLayout = AudioChannelLayout()
-        memset(&audioChannelLayout, 0, MemoryLayout<AudioChannelLayout>.size);
+        memset(&audioChannelLayout, 0, MemoryLayout<AudioChannelLayout>.size)
         audioChannelLayout.mChannelLayoutTag = kAudioChannelLayoutTag_Mono
 
         let audioChannelLayoutValue = NSData(bytes: &audioChannelLayout,
                length: MemoryLayout<AudioChannelLayout>.size)
-        
+
         let sampleRate = AVAudioSession.sharedInstance().sampleRate
         return [AVFormatIDKey: kAudioFormatMPEG4AAC,
-                AVSampleRateKey:sampleRate,
-                AVChannelLayoutKey:audioChannelLayoutValue,
+                AVSampleRateKey: sampleRate,
+                AVChannelLayoutKey: audioChannelLayoutValue,
                 AVNumberOfChannelsKey: 1
         ]
     }
 }
 
-//MARK: - call backs
+// MARK: - call backs
 extension VideoCropView {
-    
+
 }
 
-//MARK: - delegate or data source
+// MARK: - delegate or data source
 extension VideoCropView: UIScrollViewDelegate {
-    
+
 //    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
 //         //return scrollView.subviews.filter( { $0.isKind(of: UIImageView.self) } ).first
 //        return scrollView.subviews.first
 //     }
 }
 
-//MARK: - other classes
+// MARK: - other classes

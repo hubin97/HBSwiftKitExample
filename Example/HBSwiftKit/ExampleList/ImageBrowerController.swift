@@ -9,20 +9,20 @@ import UIKit
 import Foundation
 import Kingfisher
 
-//MARK: - global var and methods
+// MARK: - global var and methods
 /// String -> UIimage
-fileprivate func imagePathToImage(imagePath: String) -> UIImage? {
-    
+private func imagePathToImage(imagePath: String) -> UIImage? {
+
     do {
         let data = try Data(contentsOf: URL(string: imagePath)!)
         return UIImage.init(data: data)
     } catch {
     }
-    
+
     return nil
 }
 
-//MARK: - main class
+// MARK: - main class
 class ImageBrowerController: BaseViewController {
 
     fileprivate let albumCol = 3  // 3列
@@ -31,10 +31,10 @@ class ImageBrowerController: BaseViewController {
     lazy var snapshotModels: [SnapshotModel] = {
         let path = Bundle.main.path(forResource: "images", ofType: "json")
         let url = URL(fileURLWithPath: path ?? "")
-        
+
         do {
             let json = try JSONSerialization.jsonObject(with: Data.init(contentsOf: url), options: .mutableContainers)
-            if let dic = json as? Dictionary<String, Any>, let datas = dic["data"] as? [[String: Any]] {
+            if let dic = json as? [String: Any], let datas = dic["data"] as? [[String: Any]] {
                 var models = [SnapshotModel]()
                 for meta in datas {
                     let model = SnapshotModel.init()
@@ -51,7 +51,7 @@ class ImageBrowerController: BaseViewController {
         }
         return []
     }()
-    
+
     lazy var layout: UICollectionViewFlowLayout = {
         let albumItemWidth = (kScreenW - CGFloat(albumCol + 1) * albumMinSpacing - 2 * albumMinSpacing) / CGFloat(albumCol)
         let layout = UICollectionViewFlowLayout.init()
@@ -61,7 +61,7 @@ class ImageBrowerController: BaseViewController {
         layout.itemSize = CGSize(width: albumItemWidth, height: albumItemWidth)
         return layout
     }()
-    
+
     lazy var albumCollect: UICollectionView = {
         let collection = UICollectionView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight), collectionViewLayout: layout)
         collection.backgroundColor = .clear
@@ -70,22 +70,22 @@ class ImageBrowerController: BaseViewController {
         collection.delegate = self
         return collection
     }()
-    
+
     lazy var toolBar: IBToolBar = {
         let toolBar = IBToolBar.init(frame: CGRect(x: 0, y: albumCollect.frame.maxY, width: kScreenW, height: kTabBarAndSafeHeight))
         toolBar.leftBtn.addTarget(self, action: #selector(shareAction), for: .touchUpInside)
         toolBar.rightBtn.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
         return toolBar
     }()
-    
+
     var isEditable: Bool? // 是否可编辑
     var rightEditBtn = UIButton.init(type: .custom)
 
     override func setupUi() {
         super.setupUi()
-        
+
         self.title = "照片浏览器"
-        
+
         self.rightEditBtn.setTitle("选择", for: .normal)
         self.rightEditBtn.setTitleColor(.gray, for: .normal)
         self.rightEditBtn.addTarget(self, action: #selector(editAction), for: .touchUpInside)
@@ -97,16 +97,16 @@ class ImageBrowerController: BaseViewController {
     }
 }
 
-//MARK: - private mothods
+// MARK: - private mothods
 extension ImageBrowerController {
-    
+
 }
 
-//MARK: - call backs
+// MARK: - call backs
 extension ImageBrowerController {
-    
+
     @objc func editAction() {
-        
+
         self.isEditable = (self.isEditable == true) ? false: true
         self.rightEditBtn.setTitle((self.isEditable == true) ? "取消" :"选择", for: .normal)
 
@@ -120,37 +120,37 @@ extension ImageBrowerController {
                 self.albumCollect.frame.size.height += kTabBarAndSafeHeight
                 self.toolBar.center.y += kTabBarAndSafeHeight
             }
-            
+
             // 取消后清空选中项
             snapshotModels.forEach { (model) in
                 model.isSelected = false
             }
             updateSelectCount()
         }
-        
+
         snapshotModels.forEach { (model) in
             model.isEditable = self.isEditable
         }
-        
+
         albumCollect.reloadData()
     }
-    
+
     @objc func shareAction() {
         print("to do share")
-        
+
         let selectModels = self.snapshotModels.filter({ $0.isSelected == true })
-            
+
         var activityItems = [UIImage]()
         selectModels.forEach { (model) in
             if let image = imagePathToImage(imagePath: model.photoPath ?? "") {
                 activityItems.append(image)
             }
         }
-        
+
         let activityVc = UIActivityViewController.init(activityItems: activityItems as [Any], applicationActivities: nil)
-        //activityVc.excludedActivityTypes = [.postToFacebook, .postToTwitter, .postToWeibo, .message, .mail, .print, .copyToPasteboard, .assignToContact, .saveToCameraRoll, .addToReadingList, .postToFlickr, .postToVimeo, .postToTencentWeibo, .airDrop, .openInIBooks]
+        // activityVc.excludedActivityTypes = [.postToFacebook, .postToTwitter, .postToWeibo, .message, .mail, .print, .copyToPasteboard, .assignToContact, .saveToCameraRoll, .addToReadingList, .postToFlickr, .postToVimeo, .postToTencentWeibo, .airDrop, .openInIBooks]
         self.present(activityVc, animated: true, completion: nil)
-        activityVc.completionWithItemsHandler = {(activityType, completed, items, error) -> Void in
+        activityVc.completionWithItemsHandler = {(_, completed, _, _) -> Void in
             if completed == true {
                 print("分享成功")
             }
@@ -158,16 +158,16 @@ extension ImageBrowerController {
             activityVc.completionWithItemsHandler = nil
         }
     }
-    
+
     @objc func deleteAction() {
         let alert = YTAlertView.init(title: "温馨提示", message: "照片将被删除，确认删除吗？")
         alert.addAction("取消", .lightGray, tapAction: nil)
         alert.addAction("确定") {
             let photoIdList = self.snapshotModels.filter({ $0.isSelected == true }).map({ $0.id! })
             print("to do delete\(photoIdList)")
-            //self.deleteHandle(photoIdList: photoIdList)
-            
-            self.snapshotModels = self.snapshotModels.filter( { $0.isSelected == false })
+            // self.deleteHandle(photoIdList: photoIdList)
+
+            self.snapshotModels = self.snapshotModels.filter({ $0.isSelected == false })
             self.albumCollect.reloadData()
         }
         alert.show()
@@ -176,9 +176,9 @@ extension ImageBrowerController {
 }
 
 extension ImageBrowerController: UpdateSelectCountDelegate {
-    
+
     func updateSelectCount() {
-        
+
         var count = 0
         snapshotModels.forEach { (model) in
             if model.isSelected == true {
@@ -192,15 +192,15 @@ extension ImageBrowerController: UpdateSelectCountDelegate {
     }
 }
 
-//MARK: - delegate or data source
+// MARK: - delegate or data source
 extension ImageBrowerController: UICollectionViewDataSource, UICollectionViewDelegate {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         snapshotModels.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+
         let model = snapshotModels[indexPath.row]
         let itemCell: SnapshotItem = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(SnapshotItem.self), for: indexPath) as! SnapshotItem
         itemCell.contentView.backgroundColor = .gray
@@ -208,43 +208,43 @@ extension ImageBrowerController: UICollectionViewDataSource, UICollectionViewDel
         itemCell.updateDelegate = self
         return itemCell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
         let model = snapshotModels[indexPath.row]
         print("####indexPath:\(indexPath.row)#######")
         print("model.id: \(model.id ?? 0)")
         print("model.createTimeMs: \(model.createTimeMs ?? 0)")
         print("model.thumbnailPath: \(model.thumbnailPath ?? "")")
         print("model.photoPath: \(model.photoPath ?? "")")
-        
+
         let cell = collectionView.cellForItem(at: indexPath)
         var rect = cell?.convert(cell?.bounds ?? CGRect.zero, to: self.view) ?? CGRect.zero
         rect.origin.y += kNavBarAndSafeHeight
-        
-        let imagePaths = snapshotModels.map( { $0.photoPath ?? "" })
+
+        let imagePaths = snapshotModels.map({ $0.photoPath ?? "" })
         let imageBrower = Wto_ImageBrower.init(loadMode: .imagePath, dataSource: imagePaths)
-        //imageBrower.backgroundColor = .black
-        //imageBrower.loadImagePaths(imagePaths: imagePaths, tapIndex: indexPath.row, originRect: rect)
+        // imageBrower.backgroundColor = .black
+        // imageBrower.loadImagePaths(imagePaths: imagePaths, tapIndex: indexPath.row, originRect: rect)
         imageBrower.show()
-        
+
     }
 }
 
-//MARK: - other classes
+// MARK: - other classes
 class SnapshotModel {
-    
+
     var id: Int?
     var createTimeMs: Int?
     var photoPath: String?
     var thumbnailPath: String?
-    
+
     var isEditable: Bool? = false
     var isSelected: Bool? = false
-    
+
     /// 6月11日 ，2020 yyyy-MM-dd
     var date: String? {
-     
+
         let timeInterVal = Int((createTimeMs ?? 0) / 1000)
         let date = Date.init(timeIntervalSince1970: TimeInterval(timeInterVal))
         let dateString = Wto_CalendarUtils.stringFromDate(date: date, format: "MM月dd日 ,yyyy")
@@ -258,47 +258,47 @@ protocol UpdateSelectCountDelegate: class {
 }
 
 class SnapshotItem: UICollectionViewCell {
-    
+
     var model: SnapshotModel? {
         didSet {
             iconView.kf.setImage(with: URL.init(string: (model?.thumbnailPath ?? "")), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
-            
+
             markIconBtn.isHidden = (model?.isEditable == true) ? false : true
             markIconBtn.isSelected = (model?.isSelected == true) ? true: false
         }
     }
-    
+
     weak var updateDelegate: UpdateSelectCountDelegate?
     var iconView = UIImageView()
     var markIconBtn = UIButton.init(type: .custom)
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         self.setRectCorner(radiiSize: 4)
 
         self.contentView.addSubview(iconView)
         iconView.frame = self.bounds
-        
+
         self.contentView.addSubview(markIconBtn)
         markIconBtn.frame = self.bounds
         markIconBtn.setImage(UIImage(named: "ib_unselect"), for: .normal)
         markIconBtn.setImage(UIImage(named: "ib_select"), for: .selected)
-        markIconBtn.setBackgroundImage(UIImage(color:UIColor.init(white: 0, alpha: 0)), for: .normal)
-        markIconBtn.setBackgroundImage(UIImage(color:UIColor.init(white: 0, alpha: 0.3)), for: .selected)
+        markIconBtn.setBackgroundImage(UIImage(color: UIColor.init(white: 0, alpha: 0)), for: .normal)
+        markIconBtn.setBackgroundImage(UIImage(color: UIColor.init(white: 0, alpha: 0.3)), for: .selected)
         markIconBtn.imageEdgeInsets = UIEdgeInsets(top: self.bounds.size.height - 25, left: self.bounds.size.width - 25, bottom: 0, right: 0)
 
         markIconBtn.addTarget(self, action: #selector(selectAction), for: .touchUpInside)
         markIconBtn.isSelected = false
         markIconBtn.isHidden = true
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     @objc func selectAction() {
-        
+
         markIconBtn.isSelected = !markIconBtn.isSelected
         model?.isSelected = markIconBtn.isSelected
 
@@ -306,27 +306,26 @@ class SnapshotItem: UICollectionViewCell {
     }
 }
 
-
-//MARK: 底部工具栏
+// MARK: 底部工具栏
 class IBToolBar: UIView {
-    
+
     var leftBtn = UIButton.init(type: .custom)
     var rightBtn = UIButton.init(type: .custom)
     var countLabel = UILabel.init()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         self.backgroundColor = .white
         let lineView = UIView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: 0.5))
         self.addSubview(lineView)
         lineView.backgroundColor = .groupTableViewBackground
-        
+
         self.addSubview(leftBtn)
         leftBtn.frame = CGRect(x: 20, y: 4.5, width: 40, height: 40)
         leftBtn.setImage(UIImage(named: "ib_share"), for: .normal)
         leftBtn.isEnabled = false
-        
+
         self.addSubview(rightBtn)
         rightBtn.frame = CGRect(x: kScreenW - 60, y: 4.5, width: 40, height: 40)
         rightBtn.setImage(UIImage(named: "ib_remove"), for: .normal)
@@ -339,7 +338,7 @@ class IBToolBar: UIView {
         countLabel.textColor = .gray
         countLabel.textAlignment = .center
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -11,22 +11,22 @@ import AudioToolbox
 /**
  iOS11以下版本,实际上拖拽的不是cell,而是cell的快照imageView.并且同时将cell隐藏,当拖拽手势结束时,通过moveRow方法调换cell位置,进行数据修改.并且将imageView删除再将cell展示出来,就实现了拖拽动画.
  */
-//MARK: 兼容iOS11以下版本插入排序
+// MARK: 兼容iOS11以下版本插入排序
 protocol TableViewDragInsertAble: NSObject {
-    
+
     /// 指定应用操作的列表
     var listView: UITableView { get set}
     /// 指定任意类型数据源, 可使用dataTypeTransfer转换内部元素遍历
     var dataSource: [Any]? { get set }
-    
-    //MARK: 辅助字段, 外部无需关注和实现
+
+    // MARK: 辅助字段, 外部无需关注和实现
     /// 手势储存point,保证有两个,为初始点和结束点
     var touchPoints: [CGPoint]? { get set }
     /// 手势选中cell.index
     var sourceIndexPath: IndexPath? { get set }
     /// 将手势选中cell以image形式表现
     var cellImageView: UIImageView? { get set }
-    
+
     /** 协议不兼容@objc, 外部委托类实现两个方法
      func addLongPress(for view: UIView) {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(dragGesture))
@@ -52,14 +52,14 @@ protocol TableViewDragInsertAble: NSObject {
     func dataTypeTransfer<T: Any>(_ with: T.Type) -> [T]?
 }
 
-//MARK: - private mothods
+// MARK: - private mothods
 extension TableViewDragInsertAble {
-    
+
     /// 数据源内部元素类型转换
     func dataTypeTransfer<T: Any>(_ with: T.Type) -> [T]? {
         return (dataSource as? [T])
     }
-    
+
     /// 手势方法
     func longPressGesture(_ recognise: UILongPressGestureRecognizer) {
         let currentPoint: CGPoint = recognise.location(in: listView)
@@ -68,12 +68,12 @@ extension TableViewDragInsertAble {
             removeCellImageView()
             return
         }
-        
+
         guard indexPath.row < dataSource?.count ?? 0 else {
             removeCellImageView()
             return
         }
-        
+
         switch recognise.state {
         case .began:
             longPressGestureBegan(recognise)
@@ -89,7 +89,7 @@ extension TableViewDragInsertAble {
             removeCellImageView()
         }
     }
-    
+
     /// 长按开始状态调用方法
     private func longPressGestureBegan(_ recognise: UILongPressGestureRecognizer) {
         /// 获取长按手势触发时的接触点
@@ -110,7 +110,7 @@ extension TableViewDragInsertAble {
         currentCell.isHidden = true
         impactFeedBack()
     }
-    
+
     /// 拖拽手势过程中方法,核心方法,实现拖拽动画和数据的更新
     private func longPressGestureChanged(_ recognise: UILongPressGestureRecognizer) {
         let selectedPoint: CGPoint = recognise.location(in: listView)
@@ -137,7 +137,7 @@ extension TableViewDragInsertAble {
             listView.beginUpdates()
             /// 线程锁
             objc_sync_enter(self)
-            
+
             /// 先更新tableView数据源
             if let sourceIndexPath = sourceIndexPath, let cellModel = dataSource?[sourceIndexPath.row] {
                 dataSource?.remove(at: sourceIndexPath.row)
@@ -156,13 +156,13 @@ extension TableViewDragInsertAble {
             sourceIndexPath = selectedIndexPath
         }
     }
-    
+
     /// 将生成的cell快照删除
     private func removeCellImageView() {
         self.cellImageView?.removeFromSuperview()
         listView.reloadData()
     }
-    
+
     /// 震动反馈
     private func impactFeedBack() {
         if #available(iOS 10.0, *) {

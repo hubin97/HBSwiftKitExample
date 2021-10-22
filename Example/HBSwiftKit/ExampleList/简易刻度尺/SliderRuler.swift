@@ -7,22 +7,22 @@
 
 import Foundation
 
-//MARK: - global var and methods
-fileprivate let rulerLineWidth = 1.5
+// MARK: - global var and methods
+private let rulerLineWidth = 1.5
 /// 刻度线短线
-fileprivate let rulerLineShort = 17
+private let rulerLineShort = 17
 /// 刻度线长线
-fileprivate let rulerLineLong  = 30
+private let rulerLineLong  = 30
 /// 刻度指示线长度
-fileprivate let flagLineLength = 45
+private let flagLineLength = 45
 
 protocol SliderRulerDelegate: class {
     func sliderRulerValueUpdate(sliderRuler: SliderRuler, value: Float)
     func sliderRulerDidEndScroll(sliderRuler: SliderRuler, value: Float)
 }
-//MARK: - main class
+// MARK: - main class
 class SliderRuler: UIView {
-    
+
     /// 刻度尺代理
     weak var rulerDelegate: SliderRulerDelegate?
     /// 是否被禁用交互
@@ -32,10 +32,10 @@ class SliderRuler: UIView {
             rulerCollection.isUserInteractionEnabled = isEnabled
         }
     }
-    
+
     /// 刻度值方向
     fileprivate var direction: UICollectionView.ScrollDirection = .horizontal
-    
+
     /// 共多少个刻度 分多少个区
     fileprivate var stepNum: Int = 0
     /// 两个长刻度中间包括多少个刻度
@@ -65,7 +65,7 @@ class SliderRuler: UIView {
         layout.scrollDirection = direction
         return layout
     }()
-    
+
     lazy var rulerCollection: UICollectionView = {
         let rulerCollection = UICollectionView.init(frame: self.bounds, collectionViewLayout: self.layout)
         rulerCollection.backgroundColor = .clear
@@ -77,7 +77,7 @@ class SliderRuler: UIView {
         rulerCollection.showsVerticalScrollIndicator = false
         return rulerCollection
     }()
-    
+
     /// 指示线
     lazy var flagLineView: UIView = {
         let flagLineView = UIView()
@@ -89,11 +89,11 @@ class SliderRuler: UIView {
         }
         return flagLineView
     }()
-    
+
     private override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     /// 滑动尺快捷初始化
     /// - Parameters:
     ///   - frame: 位置
@@ -104,7 +104,7 @@ class SliderRuler: UIView {
     ///   - minValue: 刻度最小值
     ///   - maxValue: 刻度最大值
     ///   - stepValue: 单格小刻度值
-    convenience init(frame: CGRect, direction: UICollectionView.ScrollDirection, rulerLineSpacing: Int = 15, betweenNum: Int = 2,/* stepNum: Int = 50,*/ minValue: Float = 1.0, maxValue: Float = 100.0, stepValue: Float = 1.0) {
+    convenience init(frame: CGRect, direction: UICollectionView.ScrollDirection, rulerLineSpacing: Int = 15, betweenNum: Int = 2, /* stepNum: Int = 50,*/ minValue: Float = 1.0, maxValue: Float = 100.0, stepValue: Float = 1.0) {
         self.init(frame: frame)
         self.direction = direction
         self.rulerLineSpacing = rulerLineSpacing
@@ -117,15 +117,15 @@ class SliderRuler: UIView {
         addSubview(rulerCollection)
         addSubview(flagLineView)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-//MARK: - private mothods
+// MARK: - private mothods
 extension SliderRuler {
-    
+
     /// 设定默认值
     /// - Parameters:
     ///   - rulerValue: 刻度值
@@ -140,17 +140,17 @@ extension SliderRuler {
     }
 }
 
-//MARK: - call backs
+// MARK: - call backs
 extension SliderRuler {
-    
+
 }
 
-//MARK: - delegate or data source
+// MARK: - delegate or data source
 extension SliderRuler: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         stepNum + 2
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0 || indexPath.item == stepNum + 1 {
             let spacecell = collectionView.dequeueReusableCell(withReuseIdentifier: "spacecell", for: indexPath) as! SliderRulerSpaceItem
@@ -175,7 +175,7 @@ extension SliderRuler: UICollectionViewDataSource, UICollectionViewDelegate {
 }
 
 extension SliderRuler: UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if direction == .vertical {
             if indexPath.item == 0 || indexPath.item == stepNum + 1 {
@@ -192,7 +192,7 @@ extension SliderRuler: UICollectionViewDelegateFlowLayout {
 }
 
 extension SliderRuler: UIScrollViewDelegate {
-    
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView == rulerCollection else { return }
         var offsetValue: Int = 0
@@ -204,13 +204,13 @@ extension SliderRuler: UIScrollViewDelegate {
         var value = Float(offsetValue) * stepValue + minValue
         value = value > maxValue ? maxValue: value
         value = value < minValue ? minValue: value
-        //print("isTracking:\(scrollView.isTracking) isDragging:\(scrollView.isDragging) isDecelerating:\(scrollView.isDecelerating)")
+        // print("isTracking:\(scrollView.isTracking) isDragging:\(scrollView.isDragging) isDecelerating:\(scrollView.isDecelerating)")
         /// 规避设置默认值错误回调
         guard scrollView.isDragging == true else { return }
-        //print("rulerValue:\(value)")
+        // print("rulerValue:\(value)")
         rulerDelegate?.sliderRulerValueUpdate(sliderRuler: self, value: value)
     }
-    
+
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         var offsetValue: CGFloat = 0
         if direction == .horizontal {
@@ -230,7 +230,7 @@ extension SliderRuler: UIScrollViewDelegate {
         rulerDelegate?.sliderRulerDidEndScroll(sliderRuler: self, value: value)
         print("rulerValue&: \(value)")
     }
-    
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         var offsetValue: CGFloat = 0
         if direction == .horizontal {
@@ -251,9 +251,9 @@ extension SliderRuler: UIScrollViewDelegate {
     }
 }
 
-//MARK: - other classes
+// MARK: - other classes
 class SliderRulerItem: UICollectionViewCell {
-    
+
     /// 刻度值方向
     var direction: UICollectionView.ScrollDirection = .horizontal
     /// 两个长刻度中间包括多少个刻度
@@ -271,42 +271,42 @@ class SliderRulerItem: UICollectionViewCell {
     var unit: String = ""
     var valueFont = UIFont.systemFont(ofSize: 10)
     var valueColor = UIColor.black
-    
+
     /// 显示刻度值
     var showValue = true
-    
+
     override func draw(_ rect: CGRect) {
         let startX: CGFloat = 0
         let lineCenterX     = CGFloat(rulerLineSpacing)
         let shortLineY      = (direction == .horizontal) ? (rect.size.height - CGFloat(rulerLineLong)): (rect.size.width - CGFloat(rulerLineLong))
         let longLineY       = (direction == .horizontal) ? (rect.size.height - CGFloat(rulerLineShort)): rect.size.width - CGFloat(rulerLineShort)
         let topY: CGFloat   = (direction == .horizontal) ? rect.size.height: rect.size.width
-        
+
         let context = UIGraphicsGetCurrentContext()
         context?.setLineWidth(CGFloat(rulerLineWidth))
         context?.setLineCap(CGLineCap.butt)
-        //context?.setStrokeColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        // context?.setStrokeColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
         context?.setStrokeColor(UIColor.gray.cgColor)
 
         for i in 0...betweenNum {
-            //print(i)
+            // print(i)
             // 目标总刻度数 跟区块对应不上, 去掉不必要的绘制
             if (Int(maxValue - minValue) / betweenNum != stepNum) && index == stepNum && i == betweenNum {
-                //print("cancel index:\(index)")
+                // print("cancel index:\(index)")
                 return
             }
             if direction == .horizontal {
                 context?.move(to: CGPoint.init(x: startX+lineCenterX*CGFloat(i), y: topY))
                 if i % betweenNum == 0 {
                     context!.addLine(to: CGPoint.init(x: startX+lineCenterX*CGFloat(i), y: longLineY))
-                }else{
+                } else {
                     context!.addLine(to: CGPoint.init(x: startX+lineCenterX*CGFloat(i), y: shortLineY))
                 }
             } else {
                 context?.move(to: CGPoint.init(x: topY, y: startX+lineCenterX*CGFloat(i)))
                 if i % betweenNum == 0 {
                     context!.addLine(to: CGPoint.init(x: longLineY, y: startX+lineCenterX*CGFloat(i)))
-                }else{
+                } else {
                     context!.addLine(to: CGPoint.init(x: shortLineY, y: startX+lineCenterX*CGFloat(i)))
                 }
             }
@@ -316,22 +316,22 @@ class SliderRulerItem: UICollectionViewCell {
 }
 
 class SliderRulerSpaceItem: UICollectionViewCell {
-    
+
     var direction: UICollectionView.ScrollDirection = .horizontal
 
     var headerMinValue = 0
     var headerUnit = ""
-    
-    //var unit: String = ""
+
+    // var unit: String = ""
     var valueFont = UIFont.systemFont(ofSize: 10)
     var valueColor = UIColor.black
     var isFirstItem = false
 
     override func draw(_ rect: CGRect) {
         guard isFirstItem else { return }
-        //let longLineY = rect.size.height - CGFloat(rulerLineShort)
+        // let longLineY = rect.size.height - CGFloat(rulerLineShort)
         let context = UIGraphicsGetCurrentContext()
-        //context?.setStrokeColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        // context?.setStrokeColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
         context?.setStrokeColor(UIColor.gray.cgColor)
         context?.setLineWidth(CGFloat(rulerLineWidth))
         context?.setLineCap(CGLineCap.butt)

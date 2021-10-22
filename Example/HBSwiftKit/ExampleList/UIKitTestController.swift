@@ -9,19 +9,19 @@ import Foundation
 import UIKit
 import QuartzCore
 
-//MARK: - global var and methods
-//swift单元测试（八）总结 https://blog.csdn.net/lin1109221208/article/details/93486230?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-8.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-8.control
+// MARK: - global var and methods
+// swift单元测试（八）总结 https://blog.csdn.net/lin1109221208/article/details/93486230?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-8.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-8.control
 
-//MARK: - main class
+// MARK: - main class
 class UIKitTestController: BaseViewController {
 
     lazy var filterModels: [AdvancedFilterSecModel] = {
         let path = Bundle.main.path(forResource: "advfilterdata", ofType: "json")
         let url = URL(fileURLWithPath: path ?? "")
-        
+
         do {
             let json = try JSONSerialization.jsonObject(with: Data.init(contentsOf: url), options: .mutableContainers)
-            if let dic = json as? Dictionary<String, Any>, let datas = dic["data"] as? [[String: Any]] {
+            if let dic = json as? [String: Any], let datas = dic["data"] as? [[String: Any]] {
                 var models = [AdvancedFilterSecModel]()
                 for dict in datas {
                     let secModel = AdvancedFilterSecModel.init()
@@ -44,7 +44,7 @@ class UIKitTestController: BaseViewController {
         }
         return []
     }()
-    
+
     lazy var tagsView: TagsOptionView = {
 //        let tags = ["标签", "标", "标签签", "标签签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签签", "标", "标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签"]
 //        let tags = ["标签", "标签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签"]
@@ -63,48 +63,48 @@ class UIKitTestController: BaseViewController {
         _tagsView.titleLabel.textAlignment = .left
         return _tagsView
     }()
-    
+
     var rulerView: SliderRuler!
-    //var isExpand = false
+    // var isExpand = false
     let ball = UIImageView()
-    
+
     var avPlayer: AVAudioPlayer?
-    
+
     var noti = GlobalNoti()
     @objc func btnAction1(_ sender: UIButton) {
         print("btnAction1")
-        
+
 //        let ff = sender.convert(sender.bounds, to: UIApplication.shared.keyWindow)
 //        tagsView.show(originFrame: ff)
-        
-        //完美回调
+
+        // 完美回调
         playSoundEffect(name: R.file.温柔女声Mp3.fullName) {
             print("播放完成!")
         }
-        
-        //完美回调
+
+        // 完美回调
 //        if let flag = self.avPlayer?.prepareToPlay(), flag {
 //            self.avPlayer?.play()
 //            print("开始播放!")
 //        }
     }
-    
+
     @objc func btnAction2(_ sender: UIButton) {
         print("btnAction2")
     }
-    
+
     @objc func btnAction3(_ sender: UIButton) {
         print("btnAction3")
     }
-    
+
     override func setupUi() {
         super.setupUi()
-        
+
         self.navigationItem.title = "UIKit Test"
-        //let filterBtn = UIButton
-        
+        // let filterBtn = UIButton
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction))
-                
+
         let btn1 = UIButton.init(frame: CGRect(x: 20, y: 100, width: 300, height: 100))
         btn1.addTarget(self, action: #selector(btnAction1), for: .touchUpInside)
         btn1.setTitle("哈HH阿卡", for: .normal)
@@ -114,22 +114,22 @@ class UIKitTestController: BaseViewController {
         btn1.drawTextLineWidth = 2
         view.addSubview(btn1)
         btn1.setRoundCorners(borderColor: .red)
-        //audioPlay(name: "离歌.mp3")
+        // audioPlay(name: "离歌.mp3")
         audioPlay(name: "温柔女声.mp3")
 
         noti.register(name: NSNotification.Name(rawValue: "ahha"), object: nil) { (notification) in
             print("noti:\(notification.name) \(notification.object) \(notification.userInfo)")
         }
-        
-        //noti.remove(name: <#T##NSNotification.Name#>, object: <#T##Any?#>)
+
+        // noti.remove(name: <#T##NSNotification.Name#>, object: <#T##Any?#>)
     }
 }
 
-//MARK: - private mothods
+// MARK: - private mothods
 import AudioToolbox
 import AVFoundation
 extension UIKitTestController: AVAudioPlayerDelegate {
-    
+
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         print("audioPlayerDidFinishPlaying, flag:\(flag)")
     }
@@ -145,12 +145,12 @@ extension UIKitTestController {
     func playSoundEffect(name: String, inCompletionBlock: (() -> Void)?) {
         guard let audioFile = Bundle.main.path(forResource: name, ofType: nil) else { return }
         let fileUrl = NSURL.fileURL(withPath: audioFile)
-        
+
         var soundId: SystemSoundID = 0
         AudioServicesCreateSystemSoundID(fileUrl as CFURL, &soundId)
         AudioServicesPlaySystemSoundWithCompletion(soundId, inCompletionBlock)
     }
-    
+
     // 播放方式2
     func audioPlay(name: String) {
         guard let audioFile = Bundle.main.path(forResource: name, ofType: nil) else { return }
@@ -166,21 +166,19 @@ extension UIKitTestController {
             print("播放失败")
         }
     }
-    
-    
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         GlobalNoti.post(name: NSNotification.Name(rawValue: "ahha"), object: "wwwww")
         DDLogInfo("DDLogInfo")
     }
-    
+
     func opPrint(ops: [TagsMeta]?) {
         ops?.forEach({ (meta) in
             print("op_title:\(meta.title ?? "")")
             print("op_param:\(meta.param ?? 0)")
         })
     }
-    
+
     func bouncesAni() {
         let orignPoint = ball.center
         let animateKeyframes = CAKeyframeAnimation(keyPath: "position")
@@ -210,7 +208,7 @@ extension UIKitTestController {
 
 public typealias AKAlertView = YTAlertView
 extension AKAlertView {
-    
+
     /** 默认间距变更
      // 标题与alert边框大间距
      fileprivate var kpadding = W_Scale(30)
@@ -227,7 +225,7 @@ extension AKAlertView {
         self.l_kpadding = l_kpadding
         setup(title: title, message: message, actions: nil)
     }
-    
+
     public convenience init(Aukey_title title: String?, icon: String?, iconSize: CGSize? = nil, message: String?, alertWidth: CGFloat = 250, kpadding: CGFloat = 30, s_kpadding: CGFloat = 20, l_kpadding: CGFloat = 15) {
         self.init(frame: CGRect.zero)
         self.alert_width = alertWidth
@@ -238,16 +236,15 @@ extension AKAlertView {
     }
 }
 
-//MARK: - call backs
+// MARK: - call backs
 extension UIKitTestController {
-    
+
     @objc func filterAction() {
-        
+
         LoggerManager.shared.removeEntrance()
-        
+
 //        FamilyAreaOptionsView.init(data: nil).show()
 
-        
 //        let rulerValue = rulerView.rulerValue
 //        rulerView.removeFromSuperview()
 //        print("rulerView.rulerValue:\(rulerView.rulerValue)")
@@ -268,32 +265,31 @@ extension UIKitTestController {
     }
 }
 
-//MARK: - delegate or data source
+// MARK: - delegate or data source
 extension UIKitTestController {
-    
+
 }
 
-//MARK: - other classes
-
+// MARK: - other classes
 
 /// 正确设置标签行间距 默认 7
-//fileprivate func setLabelLineSpacing(label: UILabel, lineSpacing: CGFloat = 7, _ alignment: NSTextAlignment = .center) -> [NSAttributedString.Key : Any]? {
+// fileprivate func setLabelLineSpacing(label: UILabel, lineSpacing: CGFloat = 7, _ alignment: NSTextAlignment = .center) -> [NSAttributedString.Key : Any]? {
 //    let paragraphStyle = NSMutableParagraphStyle()
 //    paragraphStyle.lineSpacing = lineSpacing - (label.font.lineHeight - label.font.pointSize)
 //    paragraphStyle.alignment = alignment
 //    let attributes = [NSAttributedString.Key.font: label.font, NSAttributedString.Key.paragraphStyle: paragraphStyle]
 //    return attributes as [NSAttributedString.Key : Any]
-//}
+// }
 
 class SwiftFuncInvokeTest {
-    
+
     required init() {
     }
-    
+
     func test1() {
         print("test1")
     }
-    
+
     func test2(param: String) {
         print("test2: \(param)")
     }

@@ -8,19 +8,19 @@
 import UIKit
 import Foundation
 
-//MARK: - global var and methods
+// MARK: - global var and methods
 
-//MARK: - main class
+// MARK: - main class
 class DatePickerController: BaseViewController {
 
     lazy var datePicker: MTDatePicker = {
         let datePicker = MTDatePicker.init(frame: CGRect(x: 15, y: kScreenH - kBottomSafeHeight - 250 - kNavBarAndSafeHeight, width: kScreenW - 30, height: 250))
         datePicker.datePickerMode = .year_week
-        //datePicker.isSelectDecs = true
+        // datePicker.isSelectDecs = true
         datePicker.showiOS14SelectedBgColor = false
         return datePicker
     }()
-        
+
     override func setupUi() {
         super.setupUi()
 
@@ -32,13 +32,13 @@ class DatePickerController: BaseViewController {
 
         datePicker.reloadAllComponents()
         datePicker.setRoundCorners(borderColor: .brown, borderWidth: 2, raddi: 5, isDotted: true)
-        
+
         // "乘积C的第m行第n列的元素等于矩阵A的第m行的元素与矩阵B的第n列对应元素乘积之和。"
         let textlabel = UILabel.init(text: "乘积C的第m行第n列的元素等于矩阵A的第m行的元素与矩阵B的第n列对应元素乘积之和。", textColor: .orange, lineBreakMode: .byCharWrapping, numberLines: 0, lineSpacing: 10)
         view.addSubview(textlabel)
         textlabel.frame = CGRect(x: 15, y: 10, width: kScreenW - 30, height: 75)
         textlabel.setRoundCorners()
-        
+
         let w = textlabel.estimatedWidth(maxHeight: 30)
         print("w:\(w)")
 
@@ -52,25 +52,25 @@ class DatePickerController: BaseViewController {
     }
 }
 
-//MARK: - private mothods
+// MARK: - private mothods
 extension DatePickerController {
-    
+
 }
 
-//MARK: - call backs
+// MARK: - call backs
 extension DatePickerController {
-    
+
     @objc func doneDateAction() {
-        
+
         let dateIndex = datePicker.dateIndex
         print("\(dateIndex.year), \(dateIndex.month), \(dateIndex.day), \(dateIndex.week)")
         print("\(datePicker.weekdates(year: dateIndex.year)[dateIndex.weekIndex])")
     }
 }
 
-//MARK: - delegate or data source
+// MARK: - delegate or data source
 extension DatePickerController {
-    
+
 }
 
-//MARK: - other classes
+// MARK: - other classes

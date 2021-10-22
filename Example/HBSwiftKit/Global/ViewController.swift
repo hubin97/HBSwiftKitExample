@@ -7,7 +7,7 @@
 
 import UIKit
 
-//MARK: - main class
+// MARK: - main class
 class ViewController: BaseViewController {
 
     lazy var dataArrays: [DemoRowModel] = {
@@ -23,7 +23,7 @@ class ViewController: BaseViewController {
                      DemoRowModel(title: "视频播放页", dclass: VideoPlayController())]
         return datas
     }()
-    
+
     lazy var listView: UITableView = {
         let listView = UITableView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight), style: .plain)
         listView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
@@ -33,43 +33,43 @@ class ViewController: BaseViewController {
         listView.rowHeight = 50
         return listView
     }()
-    
+
     override func setupUi() {
         super.setupUi()
         self.navigationItem.title = "Example List"
         view.addSubview(listView)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
     }
 }
 
-//MARK: - private mothods
+// MARK: - private mothods
 extension ViewController {
-    
+
 }
 
-//MARK: - call backs
+// MARK: - call backs
 extension ViewController {
-    
+
 }
 
-//MARK: - delegate or data source
+// MARK: - delegate or data source
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dataArrays.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = dataArrays[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UITableViewCell.self), for: indexPath)
         cell.textLabel?.text = model.title
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = dataArrays[indexPath.row]
         if let tclass = model.class {
@@ -79,15 +79,15 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-//MARK: - other classes
+// MARK: - other classes
 class DemoRowModel {
-    
+
     var title: String?
     var `class`: BaseViewController?
-    
+
     init() {
     }
-    
+
     convenience init(title: String?, dclass: BaseViewController?) {
         self.init()
         self.title = title

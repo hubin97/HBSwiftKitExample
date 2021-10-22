@@ -8,33 +8,33 @@
 import UIKit
 import Foundation
 
-//MARK: - global var and methods
+// MARK: - global var and methods
 public typealias ThemeView = UIView
 public extension ThemeView {
-    
+
 //    public var theme: ThemeViewX {
 //        return ThemeViewXX(view: self)
 //    }
 }
 
-//MARK: - main class
+// MARK: - main class
 open class Wto_ThemeMode {
 
 }
 
-//MARK: - private mothods
+// MARK: - private mothods
 extension Wto_ThemeMode {
-    
+
 }
 
-//MARK: - call backs
+// MARK: - call backs
 extension Wto_ThemeMode {
-    
+
 }
 
-//MARK: - delegate or data source
+// MARK: - delegate or data source
 extension Wto_ThemeMode {
-    
+
 }
 
-//MARK: - other classes
+// MARK: - other classes

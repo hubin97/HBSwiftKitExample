@@ -8,7 +8,7 @@
 import Foundation
 import AVKit
 
-//MARK: - global var and methods
+// MARK: - global var and methods
 protocol VideoTimeViewDelegate: NSObjectProtocol {
     func timeView(_ timeView: VideoTimeView, didChangedValidRectAt time: CMTime)
     func timeView(_ timeView: VideoTimeView, endChangedValidRectAt time: CMTime)
@@ -19,18 +19,18 @@ protocol VideoTimeViewDelegate: NSObjectProtocol {
     func timeView(_ timeView: VideoTimeView, endScrollAt time: CMTime)
 }
 
-//MARK: 长度剪辑预览视图
+// MARK: 长度剪辑预览视图
 class VideoTimeView: UIView {
-    
+
     weak var delegate: VideoTimeViewDelegate?
 
     var avAsset: AVAsset!
-    
+
     var videoFrameCount = 0
     /// 一个item代表多少秒
     var interval: CGFloat = -1
     var itemWidth: CGFloat = 0
-    var itemHeight: CGFloat = 40 //60
+    var itemHeight: CGFloat = 40 // 60
     let imageWidth: CGFloat = 8
     var validRectX: CGFloat = 30
     var contentWidth: CGFloat = 0
@@ -38,7 +38,7 @@ class VideoTimeView: UIView {
 
     var videoFrameMap: [Int: CGImage] = [:]
     var imageGenerator: AVAssetImageGenerator?
-    
+
     lazy var startTimeLb: UILabel = {
         let startTimeLb = UILabel.init()
         startTimeLb.font = UIFont.systemFont(ofSize: 12)
@@ -68,13 +68,13 @@ class VideoTimeView: UIView {
         lineView.isHidden = true
         return lineView
     }()
-    
+
     lazy var frameMaskView: VideoFrameView = {
         let frameMaskView = VideoFrameView.init()
         frameMaskView.delegate = self
         return frameMaskView
     }()
-    
+
     lazy var flowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout.init()
         flowLayout.scrollDirection = .horizontal
@@ -105,15 +105,15 @@ class VideoTimeView: UIView {
         addSubview(endTimeLb)
         addSubview(totalTimeLb)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         collectionView.frame = CGRect(x: 0, y: 20, width: width, height: itemHeight)
-        
+
         startTimeLb.frame = CGRect(x: validRectX, y: 0, width: 100, height: 20)
         endTimeLb.frame = CGRect(x: width - validRectX - 100, y: 0, width: 100, height: 20)
         totalTimeLb.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
@@ -124,7 +124,7 @@ class VideoTimeView: UIView {
             resetValidRect()
         }
     }
-    
+
     deinit {
         imageGenerator?.cancelAllCGImageGeneration()
         videoFrameMap.removeAll()
@@ -133,7 +133,7 @@ class VideoTimeView: UIView {
 
 // MARK: function
 extension VideoTimeView {
-    
+
     func startLineAnimation(at time: CMTime) {
         if lineDidAnimate {
             return
@@ -145,7 +145,7 @@ extension VideoTimeView {
         var x: CGFloat
         if time.seconds == getStartTime(real: true).seconds {
             x = mixX
-        }else {
+        } else {
             x = CGFloat(time.seconds / avAsset.duration.seconds) * contentWidth - collectionView.contentOffset.x
         }
         setLineAnimation(x: x, duration: TimeInterval(duration))
@@ -170,8 +170,8 @@ extension VideoTimeView {
         progressLineView.isHidden = true
         progressLineView.layer.removeAllAnimations()
     }
-    
-    //MARK:
+
+    // MARK: 
     func getMiddleDuration(real: Bool = false) -> CGFloat {
         let validWidth = frameMaskView.validRect.width - imageWidth
         let second = validWidth / contentWidth * videoDuration(real: real)
@@ -187,7 +187,7 @@ extension VideoTimeView {
         var second = (offsetX + validX) / contentWidth * videoDuration(real: real)
         if second < 0 {
             second = 0
-        }else if second > videoDuration(real: real) {
+        } else if second > videoDuration(real: real) {
             second = videoDuration(real: real)
         }
         return second
@@ -213,7 +213,7 @@ extension VideoTimeView {
         let maxOffsetX = contentWidth - (collectionView.width - inset.left)
         if offset.x < -inset.left {
             offset.x = -inset.left
-        }else if offset.x > maxOffsetX {
+        } else if offset.x > maxOffsetX {
             offset.x = maxOffsetX
         }
         collectionView.setContentOffset(offset, animated: false)
@@ -224,7 +224,7 @@ extension VideoTimeView {
         }
         return CGFloat(round(avAsset.duration.seconds))
     }
-    
+
     func updateTimeLabels() {
         if avAsset == nil {
             return
@@ -236,34 +236,34 @@ extension VideoTimeView {
         totalTimeLb.text = transformVideoDurationToString(duration: TimeInterval(totalDuration))
         startTimeLb.text = transformVideoDurationToString(duration: TimeInterval(round(endDuration) - totalDuration))
     }
-    
+
     /// 转换视频时长为 mm:ss 格式的字符串
     func transformVideoDurationToString(duration: TimeInterval) -> String {
         let time = Int(round(Double(duration)))
         if time < 10 {
             return String.init(format: "00:0%d", arguments: [time])
-        }else if time < 60 {
+        } else if time < 60 {
             return String.init(format: "00:%d", arguments: [time])
-        }else {
+        } else {
             let min = Int(time / 60)
             let sec = time - (min * 60)
             if sec < 10 {
-                return String.init(format: "%d:0%d", arguments: [min,sec])
-            }else {
-                return String.init(format: "%d:%d", arguments: [min,sec])
+                return String.init(format: "%d:0%d", arguments: [min, sec])
+            } else {
+                return String.init(format: "%d:%d", arguments: [min, sec])
             }
         }
     }
 }
 
-//MARK: - private mothods
+// MARK: - private mothods
 extension VideoTimeView {
-    
+
     func configData(avAsset: AVAsset) {
         self.avAsset = avAsset
         imageGenerator?.cancelAllCGImageGeneration()
         videoFrameMap.removeAll()
-        
+
         var videoSecond: CGFloat = CGFloat(avAsset.duration.seconds)
         let videoSize = getVideoThumbnailImage(avAsset: avAsset, atTime: 0.1)?.size ?? .zero
         collectionView.contentInset = UIEdgeInsets(top: 2, left: validRectX + imageWidth, bottom: 2, right: validRectX + imageWidth)
@@ -279,7 +279,7 @@ extension VideoTimeView {
             }
         }
         resetValidRect()
-        
+
         if videoSecond <= 0 {
             videoSecond = 1
         }
@@ -295,7 +295,7 @@ extension VideoTimeView {
             contentWidth = maxWidth
             videoFrameCount = Int(ceilf(Float(itemCount)))
             interval = singleItemSecond
-        }else {
+        } else {
             let singleSecondWidth = maxWidth / videoMaximumCropDuration
             singleItemSecond = itemWidth / singleSecondWidth
             contentWidth = singleSecondWidth * videoSecond
@@ -311,15 +311,15 @@ extension VideoTimeView {
         collectionView.reloadData()
         getVideoFrame(avAsset: avAsset)
     }
-    
-    func getVideoFrame(avAsset: AVAsset) {        
+
+    func getVideoFrame(avAsset: AVAsset) {
         imageGenerator = AVAssetImageGenerator.init(asset: avAsset)
         imageGenerator?.maximumSize = CGSize(width: itemWidth * 2, height: itemHeight * 2)
         imageGenerator?.appliesPreferredTrackTransform = true
         imageGenerator?.requestedTimeToleranceAfter = kCMTimeZero
         imageGenerator?.requestedTimeToleranceBefore = kCMTimeZero
-         
-        var times:[NSValue] = []
+
+        var times: [NSValue] = []
         for index in 0..<videoFrameCount {
             let time = getVideoCurrentTime(avAsset: avAsset, for: index)
             times.append(NSValue.init(time: time))
@@ -327,7 +327,7 @@ extension VideoTimeView {
         var index: Int = 0
         var hasError = false
         var errorIndex: [Int] = []
-        imageGenerator?.generateCGImagesAsynchronously(forTimes: times) {[weak self] (time, cgImage, actualTime, result, error) in
+        imageGenerator?.generateCGImagesAsynchronously(forTimes: times) {[weak self] (_, cgImage, _, result, _) in
             if result != .cancelled {
                 if let cgImage = cgImage {
                     self?.videoFrameMap[index] = cgImage
@@ -347,40 +347,40 @@ extension VideoTimeView {
                         hasError = true
                     }
                 }
-                index = index + 1
+                index += 1
             }
         }
     }
-    
+
     func getVideoCurrentTime(avAsset: AVAsset, for index: Int) -> CMTime {
         var second: CGFloat
         let maxIndex = videoFrameCount - 1
         if index == 0 {
             second = 0.1
-        }else if index >= maxIndex {
+        } else if index >= maxIndex {
             if avAsset.duration.seconds < 1 {
                 second = CGFloat(avAsset.duration.seconds - 0.1)
-            }else {
+            } else {
                 second = CGFloat(avAsset.duration.seconds - 0.5)
             }
-        }else {
+        } else {
             if avAsset.duration.seconds < 1 {
                 second = 0
-            }else {
+            } else {
                 second = CGFloat(index) * interval + interval * 0.5
             }
         }
         let time = CMTimeMakeWithSeconds(Float64(second), avAsset.duration.timescale)
         return time
     }
-    
+
     /// 根据视频地址获取视频封面
     func getVideoThumbnailImage(videoURL: URL?, atTime: TimeInterval) -> UIImage? {
         guard let videoURL = videoURL else { return nil }
         let urlAsset = AVURLAsset.init(url: videoURL)
         return getVideoThumbnailImage(avAsset: urlAsset as AVAsset, atTime: atTime)
     }
-    
+
     /// 根据avAsset获取视频封面
     func getVideoThumbnailImage(avAsset: AVAsset?, atTime: TimeInterval) -> UIImage? {
         guard let avAsset = avAsset else { return nil }
@@ -396,7 +396,7 @@ extension VideoTimeView {
             return nil
         }
     }
-    
+
     /// 根据视频地址获取视频时长
     func getVideoDuration(videoURL: URL?) -> TimeInterval {
         guard let videoURL = videoURL else { return 0 }
@@ -405,7 +405,7 @@ extension VideoTimeView {
 //        let second = TimeInterval(urlAsset.duration.value) / TimeInterval(urlAsset.duration.timescale)
         return TimeInterval(round(urlAsset.duration.seconds))
     }
-    
+
     func resetValidRect() {
         let imgWidth = imageWidth * 0.5
         frameMaskView.validRect = CGRect(x: validRectX + imgWidth, y: 0, width: width - (validRectX + imgWidth) * 2, height: itemHeight)
@@ -433,7 +433,7 @@ extension VideoTimeView: UICollectionViewDataSource, UICollectionViewDelegate, U
             myCell.image = UIImage.init(cgImage: cgImage)
         }
     }
-    
+
     func setCurrentCell(image: UIImage, index: Int) {
         DispatchQueue.main.async {
             let cell = self.collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? VideoEditorCropViewCell
@@ -441,7 +441,6 @@ extension VideoTimeView: UICollectionViewDataSource, UICollectionViewDelegate, U
         }
     }
 }
-
 
 extension VideoTimeView: VideoFrameViewDelegate {
     func frameMaskView(validRectDidChanged frameMaskView: VideoFrameView) {
@@ -452,8 +451,8 @@ extension VideoTimeView: VideoFrameViewDelegate {
         delegate?.timeView(self, endChangedValidRectAt: getStartTime(real: true))
         updateTimeLabels()
     }
-    
-    //MARK:
+
+    // MARK: 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if videoFrameCount > 0 {
             delegate?.timeView(self, didScrollAt: getStartTime(real: true))
@@ -472,54 +471,51 @@ extension VideoTimeView: VideoFrameViewDelegate {
     }
 }
 
-
-
 /// 时间轴图片
 class VideoEditorCropViewCell: UICollectionViewCell {
-    
+
     lazy var imageView: UIImageView = {
         let imageView = UIImageView.init()
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-    
+
     var image: UIImage? {
         didSet {
             imageView.image = image
         }
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        //imageView.frame = bounds
+        // imageView.frame = bounds
         self.contentView.addSubview(imageView)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         imageView.frame = bounds
     }
 }
 
-
-//MARK: - private mothods
+// MARK: - private mothods
 extension VideoTimeView {
-    
+
 }
 
-//MARK: - call backs
+// MARK: - call backs
 extension VideoTimeView {
-    
+
 }
 
-//MARK: - delegate or data source
+// MARK: - delegate or data source
 extension VideoTimeView {
-    
+
 }
 
-//MARK: - other classes
+// MARK: - other classes

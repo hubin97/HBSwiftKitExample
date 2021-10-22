@@ -5,7 +5,7 @@
 //  Created by design on 2021/4/14.
 //  Copyright © 2021 CocoaPods. All rights reserved.
 //
-//swift单元测试（八）总结 https://blog.csdn.net/lin1109221208/article/details/93486230?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-8.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-8.control
+// swift单元测试（八）总结 https://blog.csdn.net/lin1109221208/article/details/93486230?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-8.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-8.control
 
 import Quick
 import Nimble
@@ -13,7 +13,7 @@ import Nimble
 @testable import HBSwiftKit_Example
 @testable import HBSwiftKit
 
-//swiftClassFromString
+// swiftClassFromString
 
 class SwiftyReferenceTest: QuickSpec {
     override func spec() {
@@ -22,7 +22,7 @@ class SwiftyReferenceTest: QuickSpec {
                 guard let class_ = swiftClassFromString("SwiftFuncInvokeTest") as? SwiftFuncInvokeTest.Type else { return }
                 let clazzInstance = class_.init()
                 // getting and calling its methods in Swifty way
-                
+
                 let method1 = clazzInstance.test1
                 let method2 = clazzInstance.test2
                 method1()
@@ -39,7 +39,7 @@ class ArraySortTest: QuickSpec {
                 var arr1 = [2, 3, 4, 5, 7]
                 let arr2 = arr1.sorted()
                 print("arr1 == arr2: \(arr1 == arr2)")
-                //print("arr1 === arr2: \(arr1.compare)")
+                // print("arr1 === arr2: \(arr1.compare)")
             }
         }
     }
@@ -54,7 +54,7 @@ class GlobalFuncTest: QuickSpec {
                 if let vc1_1 = vc1 as? UIViewController.Type {
                     print("vc1_1:\(vc1_1)")
                 }
-                
+
                 let vc2 = swiftClassFromString("SnapshotModel")
                 print("vc2:\(vc2)")
                 if let vc2_1 = vc2 as? UIViewController.Type {
@@ -70,7 +70,7 @@ class ImgExtensionTest: QuickSpec {
         fdescribe("ImgExtensionTest") {
             it("should print correct test data") {
                 let img = UIImage.init(color: .brown)
-                
+
             }
         }
     }
@@ -92,7 +92,7 @@ class QPathTest: QuickSpec {
                 if let img = R.image.tabBar.home_h(), let imgdata = img.pngData() {
                     QPath.createFile(filePath: "\(dicPath)/data", contents: imgdata)
                 }
-                
+
                 /**
                  ➜  Documents tree
                  .
@@ -133,30 +133,30 @@ class StringLenghtTest: QuickSpec {
                 //        print("str:\(str)")
                 //        str[2, 7] = "cdefghijk"
                 //        print("str:\(str)")
-                
+
                 let tmp = str[0]
                 print("tmp:\(tmp)")
                 // Prints tmp:A
-                
+
                 let tmp2 = str[5]
                 print("tmp2:\(tmp2)")
                 // Prints tmp2:F
-                
+
                 str[5] = "*"
                 print("str:\(str)")
                 // Prints str:ABCDE*G
-                
+
                 str[1] = "###"
                 print("str:\(str)")
                 // Prints str:A###CDE*G
-                
-                //str.containEmoji
-                //subString
+
+                // str.containEmoji
+                // subString
                 let test = "abcdefg"
                 let key = "cd"
                 let r = test.nsRange(of: key)
                 print("r: \(r)")
-                
+
                 let r2 = NSRange(location: 0, length: 3)
                 let s = test.subString(with: r2)
                 print("s: \(s)")
@@ -166,7 +166,7 @@ class StringLenghtTest: QuickSpec {
     }
 }
 
-//FIXME: 仍有很大误差
+// FIXME: 仍有很大误差
 class ImageHandleTest: QuickSpec {
     override func spec() {
         fdescribe("ImageHandleTest") {
@@ -175,16 +175,16 @@ class ImageHandleTest: QuickSpec {
                 print(originImg)
                 let icon = originImg?.resize(maxpt: 30)
                 print(icon)
-                
-                //let img = originImg?.compress(maxSize: <#T##Int#>)
+
+                // let img = originImg?.compress(maxSize: <#T##Int#>)
                 guard let data1 = originImg?.jpegData(compressionQuality: 0.9) else { return }
                 guard let data2 = originImg?.pngData() else { return }
 
                 let type = data2.imageType()
-                
+
 //                let ex = UIImage(named: "IMG_0197")?.imageExtensionName()
 //                print(ex)
-               
+
                 let formatted = ByteCountFormatter.string(fromByteCount: Int64(data1.count), countStyle: .memory)
                 print(formatted)
 
@@ -239,7 +239,7 @@ class StructTest: QuickSpec {
     override func spec() {
         fdescribe("StructTest") {
             it("should print correct test data") {
-                
+
                 // https://github.com/Tliens/SpeedySwift
                 struct reqHead {
                     let magicl: UInt8 = 0xFF  // 1  0xff
@@ -248,7 +248,7 @@ class StructTest: QuickSpec {
                     let msg_len: Int16 = 12 // 2
                     let res_code: Int16 = 0 // 2
                     let reserv: Int32 = 0   // 4
-                    
+
                 }
                 //        var car = "Benz"
                 //        let closure = { [car] in
@@ -258,7 +258,7 @@ class StructTest: QuickSpec {
                 //        closure()
 
                 let head = reqHead()
-                //head.magicl
+                // head.magicl
                 print("head:\(head)")
             }
         }
@@ -269,19 +269,19 @@ class ThemeModeTest: QuickSpec {
     override func spec() {
         fdescribe("ThemeModeTest") {
             it("should print correct test data") {
-                
+
                 let color1 = UIColor.init(hexStr: "#57CBFF")
                 let color2 = UIColor.init(hexStr: "0x57CBFF")
                 let color3 = UIColor.init(hexStr: "0X57CBFF")
 
                 ThemeMode.light.setColors(bind: ["#000", "#010", "#001"])
                 ThemeMode.dark.setColors(bind: ["#100", "#110", "#111"])
-                //ThemeMode.main.setColors(bind: ["#100", "#111"])
+                // ThemeMode.main.setColors(bind: ["#100", "#111"])
 
                 print(ThemeMode.dynamicColor(idx: 2))
                 print(ThemeMode.dynamicColor(idx: 0))
                 print(ThemeMode.dynamicColor(idx: 3))
-                
+
                 ThemeMode.mode = .dark
                 print(ThemeMode.dynamicColor(idx: 2))
                 print(ThemeMode.dynamicColor(idx: 0))
@@ -296,7 +296,7 @@ class DictionaryTest: QuickSpec {
     override func spec() {
         fdescribe("DictionaryTest") {
             it("should print correct test data") {
-                var dict: Dictionary<String, Any> = ["aaa": 123, "bbb": "444", "ccc": [555, 666, 777]]
+                var dict: [String: Any] = ["aaa": 123, "bbb": "444", "ccc": [555, 666, 777]]
                 let data = dict.toData()
                 let json = dict.toJSONString()
                 let value = dict.value(forKey: "ccc")
@@ -325,9 +325,9 @@ class StringTest: QuickSpec {
                 expect(str1).to(equal(string2))
                 expect("山河".toPinyin()).to(equal("shan he"))
                 expect("山河".toPYHead()).to(equal("SH"))
-                
-                //expect("ａｂｃｄｅｆｇ，。".fullwidthToHalfwidth())
-                //expect(10.0).to(beGreaterThan(10))
+
+                // expect("ａｂｃｄｅｆｇ，。".fullwidthToHalfwidth())
+                // expect(10.0).to(beGreaterThan(10))
                 //
             }
         }
