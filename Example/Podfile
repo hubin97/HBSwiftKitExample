@@ -10,13 +10,15 @@ target 'HBSwiftKit_Example' do
   pod 'SnapKit'
   pod 'Kingfisher'
   pod 'R.swift' #, '~> 5.3.1'
-
+  pod 'SwiftLint', '~> 0.44.0'
+  
   target 'HBSwiftKit_Tests' do
     inherit! :search_paths
 
     pod 'Quick'#, '~> 1.2.0'
-    pod 'Nimble'#, '~> 7.0'
-#    pod 'FBSnapshotTestCase' , '~> 2.1.4'
+    #Nimble Library not found for -libswiftXCTest https://github.com/Quick/Nimble/issues/855
+    pod 'Nimble', '~> 9.2.1'
+    #    pod 'FBSnapshotTestCase' , '~> 2.1.4'
 #    pod 'Nimble-Snapshots' , '~> 6.3.0'
   end
   
