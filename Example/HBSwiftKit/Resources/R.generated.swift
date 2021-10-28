@@ -114,12 +114,10 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.file` struct is generated, and contains static references to 11 files.
+  /// This `R.file` struct is generated, and contains static references to 10 files.
   struct file {
     /// Resource file `.swiftlint.yml`.
     static let swiftlintYml = Rswift.FileResource(bundle: R.hostingBundle, name: ".swiftlint", pathExtension: "yml")
-    /// Resource file `README_SWIFT.md`.
-    static let readme_SWIFTMd = Rswift.FileResource(bundle: R.hostingBundle, name: "README_SWIFT", pathExtension: "md")
     /// Resource file `advfilterdata.json`.
     static let advfilterdataJson = Rswift.FileResource(bundle: R.hostingBundle, name: "advfilterdata", pathExtension: "json")
     /// Resource file `areacode.plist`.
@@ -142,12 +140,6 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: ".swiftlint", withExtension: "yml")`
     static func swiftlintYml(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.swiftlintYml
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-
-    /// `bundle.url(forResource: "README_SWIFT", withExtension: "md")`
-    static func readme_SWIFTMd(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.readme_SWIFTMd
       return fileResource.bundle.url(forResource: fileResource)
     }
 

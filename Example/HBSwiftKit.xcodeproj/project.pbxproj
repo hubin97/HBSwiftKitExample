@@ -23,7 +23,6 @@
 		B5557A3526706188007F5B44 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = B5557A3426706188007F5B44 /* loading.gif */; };
 		B557085027225E5500C22CD4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B557084F27225E5500C22CD4 /* .swiftlint.yml */; };
 		B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557E4DA2631304800C62147 /* ThemeStyle.swift */; };
-		B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */ = {isa = PBXBuildFile; fileRef = B567FCE42596F39F006AFA69 /* README_SWIFT.md */; };
 		B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F689C264B8AB300FD62CF /* DualListView.swift */; };
 		B56F68A2264B8AF400FD62CF /* duallist.json in Resources */ = {isa = PBXBuildFile; fileRef = B56F68A1264B8AF400FD62CF /* duallist.json */; };
 		B575D5F925A9900C0068EB19 /* help_es.html in Resources */ = {isa = PBXBuildFile; fileRef = B575D5F725A9900C0068EB19 /* help_es.html */; };
@@ -99,7 +98,6 @@
 		B5557A3426706188007F5B44 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		B557084F27225E5500C22CD4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		B557E4DA2631304800C62147 /* ThemeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStyle.swift; sourceTree = "<group>"; };
-		B567FCE42596F39F006AFA69 /* README_SWIFT.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README_SWIFT.md; path = ../README_SWIFT.md; sourceTree = "<group>"; };
 		B56F689C264B8AB300FD62CF /* DualListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualListView.swift; sourceTree = "<group>"; };
 		B56F68A1264B8AF400FD62CF /* duallist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = duallist.json; sourceTree = "<group>"; };
 		B575D5F725A9900C0068EB19 /* help_es.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help_es.html; sourceTree = "<group>"; };
@@ -229,7 +227,6 @@
 			children = (
 				CA78FCF42199CA49DD9F7856 /* HBSwiftKit.podspec */,
 				5217653375CCE7602F1DA3F5 /* README.md */,
-				B567FCE42596F39F006AFA69 /* README_SWIFT.md */,
 				5CA296E7E757B6B9CCC2CB2F /* LICENSE */,
 			);
 			name = "Podspec Metadata";
@@ -529,7 +526,6 @@
 				B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */,
 				B5D55405261D40AE007A20F5 /* jstest.html in Resources */,
 				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
-				B567FCE52596F39F006AFA69 /* README_SWIFT.md in Resources */,
 				B5557A3526706188007F5B44 /* loading.gif in Resources */,
 				B557085027225E5500C22CD4 /* .swiftlint.yml in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -879,6 +875,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -905,6 +902,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

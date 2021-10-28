@@ -111,13 +111,13 @@ open class LoggerFormatter: NSObject, DDLogFormatter {
             flag = "⚠️"
             break
         case .info:
-            flag = "I"
+            flag = "ℹ️"
             break
         case .debug:
-            flag = "D"
+            flag = "🛠"
             break
         default:
-            flag = "V" // Verbose
+            flag = "☕️" // Verbose
             break
         }
         let time = dateFormatter.string(from: Date())

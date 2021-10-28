@@ -253,7 +253,7 @@ extension Wto_Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
             day = index - self.firstDayIsWeekInMonth + 1
             item.daysLabel.text = String(day)
 
-            /// FIXME: 匹配日期格式(yyyy-MM-dd)数组
+            /// TODO: 匹配日期格式(yyyy-MM-dd)数组
             let dateStr = Wto_CalendarUtils.stringFromDate(date: date, format: "yyyy-MM")
             let current_date = dateStr + String(format: "-%02d", day)
 

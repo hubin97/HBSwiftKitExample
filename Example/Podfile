@@ -3,6 +3,8 @@ platform :ios, '9.0'
 use_frameworks! :linkage => :dynamic
 supports_swift_versions '>= 4.2' #, '< 4.0'
 #warn_for_unused_master_specs_repo 'false'
+#忽略引入库的所有警告
+inhibit_all_warnings!
 
 target 'HBSwiftKit_Example' do
   pod 'HBSwiftKit', :path => '../'

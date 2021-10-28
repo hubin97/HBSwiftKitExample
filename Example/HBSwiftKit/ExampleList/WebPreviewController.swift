@@ -41,7 +41,7 @@ class WebPreviewController: BaseWKWebController {
         super.viewWillAppear(animated)
         // self.localPath = "jstest.html"
         // loadHTML(urlString: "jstest.html", isLocalHtml: true)
-        loadHTML(urlString: "https://www.baidu.com")
+        load(urlPath: "https://www.baidu.com")
     }
 
     // 对应方法名:  "test"

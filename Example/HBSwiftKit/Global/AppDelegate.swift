@@ -26,7 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = tabBarVc
 
         LoggerManager.shared.launch().entrance()
-        // LoggerManager.logDebug("DEBUG")
+#if DEBUG
+        LoggerManager.shared.logLevel = .debug
+#else
+        LoggerManager.shared.logLevel = .info
+#endif
+        // DDLogInfo("LoggerManager...🚀")
+        LoggerManager.logInfo("LoggerManager...🚀")
         return true
     }
 }

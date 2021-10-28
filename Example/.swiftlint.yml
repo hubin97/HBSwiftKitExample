@@ -1,5 +1,3 @@
-#https://sg.jianshu.io/p/40aa8695503f
-#Xcode代码规范之SwiftLint配置 https://juejin.cn/post/6844903576800608270
 #项目目录下校验自定义规则文件适用指令: $swiftlint lint --config .swiftlint.yml
 disabled_rules: # 执行时排除掉的规则
 #  - colon
@@ -18,6 +16,7 @@ included: # 执行 linting 时包含的路径。如果出现这个 `--path` 会�
   - HBSwiftKit
 excluded: # 执行 linting 时忽略的路径。 优先级比 `included` 更高。
   - Pods
+  - Resources
 
 #use_nested_configs: true
 # 可配置的规则可以通过这个配置文件来自定义
@@ -27,7 +26,7 @@ force_try:
   severity: warning # 显式
 # 同时有警告和错误等级的规则，可以只设置它的警告等级
 # 隐式
-line_length: 200
+line_length: 300
 # 可以通过一个数组同时进行隐式设置
 type_body_length:
   - 300 # warning

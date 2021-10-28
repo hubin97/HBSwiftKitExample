@@ -7,12 +7,13 @@
 
 import Foundation
 import WebKit
+import CocoaLumberjack
 
 //MARK: - global var and methods
 //1. 加载区分本地/远端的url ✅
 //2. 监听加载进度,可定制 ✅
 //3. JS交互规格标准 ✅
-//4. 代理回调处理???
+//4. 代理回调处理 ✅
 //5. 缓存机制 ?
 //
 
@@ -44,10 +45,7 @@ import WebKit
 //fileprivate typealias MethodName = String
 //MARK: - main class
 open class BaseWKWebController: BaseViewController, WKWebScriptMsgHandleAble {
-    
-    public var scriptMsgName: String?
-    public var scriptMsgHandleBlock: ((String, Any) -> ())?
-    
+
     /// 特定配置
     open lazy var wkConfig: WKWebViewConfiguration = {
         let config = WKWebViewConfiguration.init()
@@ -171,9 +169,9 @@ extension BaseWKWebController {}
 //MARK: - delegate or data source
 //MARK: - WKUIDelegate, WKNavigationDelegate
 extension BaseWKWebController: WKUIDelegate, WKNavigationDelegate {
-
+    
     open func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        print("webView#didStart--\(webView.title ?? "")")
+        DDLogDebug("webView#didStart--\(webView.title ?? "")")
     }
 
     open func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -184,6 +182,15 @@ extension BaseWKWebController: WKUIDelegate, WKNavigationDelegate {
     open func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("webView#didFail--")
         self.progressView.isHidden = true
+    }
+
+    open func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print("webView#didFailProvisionalNavigation--")
+    }
+
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        print("webView#decidePolicyFor--")
+        decisionHandler(.allow)
     }
 
     open func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
@@ -205,7 +212,6 @@ extension BaseWKWebController: UIScrollViewDelegate {
 extension BaseWKWebController {
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        //jscriptMsgHandle(message: message)
         guard let methodName = self.scriptMsgName, methodName.isEmpty == false else { return }
         if methodName == message.name {
             if let jsHandleBlcok = self.scriptMsgHandleBlock {
@@ -230,33 +236,52 @@ extension BaseWKWebController {
     }
 }
 
-//MARK: - other classes
+//MARK: - WKWebScriptMsgHandleAble
 public protocol WKWebScriptMsgHandleAble: WKScriptMessageHandler {
 
+    /// Web容器
     var wkWebView: WKWebView { get set }
     /// 特定配置
     var wkConfig: WKWebViewConfiguration { get set }
-
-    /// 指定需要监听的脚本方法名
-    var scriptMsgName: String? { get set }
-    /// 实现方法监听, 通过Block回调
-    var scriptMsgHandleBlock: ((_ action: String, _ param: Any) -> ())? { get set }
-
-    func loadHTML(urlString: String, isLocalHtml: Bool, cachePolicy: NSURLRequest.CachePolicy)
-    //func jscriptMsgHandle(message: WKScriptMessage)
+    /// 加载方式
+    func load(urlPath: String, isLocalHtml: Bool, cachePolicy: NSURLRequest.CachePolicy, timeout: TimeInterval)
 }
 
+private var scriptMsgNameKey = "scriptMsgNameKey"
+private var scriptMsgHandleBlockKey = "scriptMsgHandleBlockKey"
 extension WKWebScriptMsgHandleAble {
-    
+
+    /// 指定需要监听的脚本方法名
+    var scriptMsgName: String? {
+        get {
+            return objc_getAssociatedObject(self, &scriptMsgNameKey) as? String
+        }
+        set {
+            objc_setAssociatedObject(self, &scriptMsgNameKey, newValue, .OBJC_ASSOCIATION_COPY)
+        }
+    }
+
+    /// 实现方法监听, 通过Block回调
+    var scriptMsgHandleBlock: ((_ action: String, _ param: Any) -> Void)? {
+        get {
+            return objc_getAssociatedObject(self, &scriptMsgHandleBlockKey) as? ((String, Any) -> Void)
+        }
+        set {
+            objc_setAssociatedObject(self, &scriptMsgHandleBlockKey, newValue, .OBJC_ASSOCIATION_COPY)
+        }
+    }
+
     /// 加载网页 本地 或是 远端
-    public func loadHTML(urlString: String, isLocalHtml: Bool = false, cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy) {
+    public func load(urlPath: String, isLocalHtml: Bool = false, cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy, timeout: TimeInterval = 20.0) {
         if isLocalHtml {
             let mainpath = URL.init(fileURLWithPath: Bundle.main.bundlePath)
-            guard let htmlpath = Bundle.main.path(forResource: urlString, ofType: nil) else { return }
+            guard let htmlpath = Bundle.main.path(forResource: urlPath, ofType: nil) else { return }
             guard let html = try? String.init(contentsOfFile: htmlpath, encoding: .utf8) else { return }
             wkWebView.loadHTMLString(html, baseURL: mainpath)
         } else {
-            wkWebView.load(URLRequest(url: URL(string: urlString)!, cachePolicy: cachePolicy, timeoutInterval: 20.0))
+            if let url = URL(string: urlPath) {
+                wkWebView.load(URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeout))
+            }
         }
     }
 
