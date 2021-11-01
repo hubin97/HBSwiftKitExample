@@ -211,7 +211,7 @@ extension VideoCropController: VideoToolViewDelegate {
         let root = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
         let path = root!+"/out.mp4"
         if FileManager.default.fileExists(atPath: path) {
-            try! FileManager.default.removeItem(atPath: path)
+            try? FileManager.default.removeItem(atPath: path)
         }
         cropView.export(timeView.avAsset, cropView.cropRect(), CMTimeRange(start: timeView.getStartTime(), end: timeView.getEndTime()), cropView.outputSize ?? cropView.size, URL(fileURLWithPath: path))
     }

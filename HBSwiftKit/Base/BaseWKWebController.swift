@@ -101,7 +101,7 @@ open class BaseWKWebController: BaseViewController, WKWebScriptMsgHandleAble {
     
     fileprivate lazy var progressView: UIProgressView = {
         ///UIProgressView的高度设置无效, 且 iOS14高度还有变化
-        let _progressView = UIProgressView.init(frame: CGRect(x: 0, y: kTopSafeHeight, width: self.wkWebView.frame.width, height: 1))
+        let _progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: self.wkWebView.frame.width, height: 1))
         _progressView.progressViewStyle = .bar
         _progressView.tintColor = .systemBlue
         _progressView.backgroundColor = .lightGray
@@ -171,30 +171,24 @@ extension BaseWKWebController {}
 extension BaseWKWebController: WKUIDelegate, WKNavigationDelegate {
     
     open func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        DDLogDebug("webView#didStart--\(webView.title ?? "")")
     }
 
     open func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("webView#didFinish--\(webView.title ?? "")")
         self.navigationItem.title = webView.title
     }
 
     open func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print("webView#didFail--")
         self.progressView.isHidden = true
     }
 
     open func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print("webView#didFailProvisionalNavigation--")
     }
 
     public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        print("webView#decidePolicyFor--")
         decisionHandler(.allow)
     }
 
     open func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
-        print("webView#webViewWebContentProcessDidTerminate--")
         webView.reload()
     }
 }

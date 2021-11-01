@@ -17,7 +17,7 @@ open class LoggerManager {
     public static let shared = LoggerManager()
     
     // 定义Log等级 *  Error, warning, info, debug and verbose logs
-    public var logLevel: DDLogLevel = .debug
+    public var logLevel: DDLogLevel = .all
 
     /// 存7天
     open lazy var fileLogger: DDFileLogger = {
@@ -38,7 +38,8 @@ open class LoggerManager {
     
     /// 开启日志记录
     @discardableResult
-    public func launch() -> Self {
+    public func launch(_ logLevel: DDLogLevel = .all) -> Self {
+        self.logLevel = logLevel
         if #available(iOS 10.0, *) {
             // Uses os_log
             DDLog.add(DDOSLogger.sharedInstance)
@@ -100,8 +101,8 @@ open class LoggerFormatter: NSObject, DDLogFormatter {
     }()
     
     open func format(message logMessage: DDLogMessage) -> String? {
-        guard logMessage.flag.rawValue < LoggerManager.shared.logLevel.rawValue else { return nil }
-        
+        guard logMessage.flag.rawValue <= LoggerManager.shared.logLevel.rawValue else { return nil }
+
         var flag = ""
         switch logMessage.flag {
         case .error:
@@ -111,13 +112,13 @@ open class LoggerFormatter: NSObject, DDLogFormatter {
             flag = "⚠️"
             break
         case .info:
-            flag = "ℹ️"
+            flag = "📝"//"🧩"
             break
         case .debug:
             flag = "🛠"
             break
         default:
-            flag = "☕️" // Verbose
+            flag = "🔍" // Verbose📋📁🗒
             break
         }
         let time = dateFormatter.string(from: Date())

@@ -115,11 +115,11 @@ class UIKitTestController: BaseViewController {
         view.addSubview(btn1)
         btn1.setRoundCorners(borderColor: .red)
         // audioPlay(name: "离歌.mp3")
-        audioPlay(name: "温柔女声.mp3")
-
-        noti.register(name: NSNotification.Name(rawValue: "ahha"), object: nil) { (notification) in
-            print("noti:\(notification.name) \(notification.object) \(notification.userInfo)")
-        }
+//        audioPlay(name: "温柔女声.mp3")
+//
+//        noti.register(name: NSNotification.Name(rawValue: "ahha"), object: nil) { (notification) in
+//            print("noti:\(notification.name) \(notification.object) \(notification.userInfo)")
+//        }
 
         // noti.remove(name: <#T##NSNotification.Name#>, object: <#T##Any?#>)
     }
@@ -168,8 +168,8 @@ extension UIKitTestController {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        GlobalNoti.post(name: NSNotification.Name(rawValue: "ahha"), object: "wwwww")
-        DDLogInfo("DDLogInfo")
+        //GlobalNoti.post(name: NSNotification.Name(rawValue: "ahha"), object: "wwwww")
+        DDLogWarn("warn hahah")
     }
 
     func opPrint(ops: [TagsMeta]?) {

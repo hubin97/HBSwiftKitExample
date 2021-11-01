@@ -12,7 +12,10 @@ import CocoaLumberjack
 //MARK: - main class
 class LoggerListController: BaseViewController {
 
-    var logFiles = [DDLogFileInfo]()
+    lazy var logFiles: [DDLogFileInfo] = {
+        return LoggerManager.shared.fileLogger.logFileManager.sortedLogFileInfos
+    }()
+
     lazy var dateFormatter: DateFormatter = {
         let _dateFormatter = DateFormatter.init()
         _dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -32,10 +35,13 @@ class LoggerListController: BaseViewController {
     override func setupUi() {
         super.setupUi()
         self.navigationItem.title = "日志列表"
-        
-        logFiles = LoggerManager.shared.fileLogger.logFileManager.sortedLogFileInfos
-        //DDLogInfo("logFiles:\(logFiles.count)")
         view.addSubview(listView)
+        LoggerManager.shared.removeEntrance()
+        // DDLogInfo("LoggerManager LogFiles Count:\(logFiles.count)")
+    }
+
+    deinit {
+        LoggerManager.shared.entrance()
     }
 }
 

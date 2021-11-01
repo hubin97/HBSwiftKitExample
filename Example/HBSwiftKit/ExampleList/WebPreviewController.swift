@@ -20,7 +20,7 @@ class WebPreviewController: BaseWKWebController {
         self.progressViewBackColor = .systemBlue
         self.progressViewTintColor = .red
         self.progressViewHeight = 1
-        self.wkWebView.frame = CGRect(x: 0, y: kTopSafeHeight, width: self.view.bounds.width, height: self.view.bounds.height - kNavBarAndSafeHeight - kBottomSafeHeight)
+        self.wkWebView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - kNavBarAndSafeHeight - kBottomSafeHeight)
         // self.wkWebView.navigationDelegate = self
         self.addMethod(name: "WINGTO_NATIVE") {[weak self] (methodname, callback) in
             print("scriptName:\(methodname), callback:\(callback)")

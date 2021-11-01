@@ -9,6 +9,7 @@ import UIKit
 import Foundation
 import CoreLocation
 import MapKit
+import CocoaLumberjack
 
 // MARK: - global var and methods
 
@@ -75,6 +76,8 @@ class MapLocationController: BaseViewController {
             self?.wakeupAuthAlert()
             self?.focusAtion()
         }
+
+        DDLogInfo("locationServices...")
     }
 
     @objc func focusAtion() {
@@ -83,6 +86,7 @@ class MapLocationController: BaseViewController {
     }
 
     @objc func poiSearchAtion() {
+        DDLogDebug("poiSearchAtion")
         guard let location = self.curLocation else { return }
         self.poiSearch(location: location, keyword: "侨城北")
     }
