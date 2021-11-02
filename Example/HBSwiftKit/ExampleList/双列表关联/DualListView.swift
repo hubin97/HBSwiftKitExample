@@ -5,6 +5,8 @@
 //  Created by Hubin_Huang on 2021/5/12.
 //  Copyright © 2020 Wingto. All rights reserved.
 
+// swiftlint:disable inclusive_language
+
 /// 云图家庭区域选取双列表
 import Foundation
 

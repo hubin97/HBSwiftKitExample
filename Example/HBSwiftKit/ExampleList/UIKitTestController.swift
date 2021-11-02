@@ -10,7 +10,6 @@ import UIKit
 import QuartzCore
 
 // MARK: - global var and methods
-// swift单元测试（八）总结 https://blog.csdn.net/lin1109221208/article/details/93486230?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-8.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-8.control
 
 // MARK: - main class
 class UIKitTestController: BaseViewController {
@@ -46,16 +45,14 @@ class UIKitTestController: BaseViewController {
     }()
 
     lazy var tagsView: TagsOptionView = {
-//        let tags = ["标签", "标", "标签签", "标签签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签签", "标", "标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签", "标签标签标签标签", "标签签", "标签标签", "标签标签标签", "标签标签标签标签标签标签标签", "标签", "标签标签", "标签标签标签标签", "标签", "标签标签", "标签标签标签"]
-//        let tags = ["标签", "标签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签"]
-        let tags = ["标签", "标签", "标签"]
-
+        let tags = ["标签", "标签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签"]
         var ops = [TagsMeta]()
         for idx in 0..<tags.count {
             let title = tags[idx]
             let isSel = idx == 2 ? true: false
             ops.append(TagsMeta(title: title, param: ["\(idx)": title], isSelected: isSel))
         }
+        // swiftlint:disable line_length
         let _tagsView = TagsOptionView(title: "标题", isMultiple: true, options: ops, optionNormalBgColor: UIColor(hexStr: "#F1F1F3"), optionSelectBgColor: UIColor(hexStr: "#6165C5"), optionNormalTextColor: UIColor(hexStr: "#5E5E83"), optionSelectTextColor: .white, optionFont: UIFont.systemFont(ofSize: 15), optionMaxHeight: 40, actionTitle: "我知道了", actionTitleColor: .orange, tapAction: {[weak self] (tags) in
             self?.opPrint(ops: tags)
         })
@@ -64,47 +61,34 @@ class UIKitTestController: BaseViewController {
         return _tagsView
     }()
 
-    var rulerView: SliderRuler!
-    // var isExpand = false
-    let ball = UIImageView()
-
     var avPlayer: AVAudioPlayer?
-
-    var noti = GlobalNoti()
-    @objc func btnAction1(_ sender: UIButton) {
-        print("btnAction1")
-
-//        let ff = sender.convert(sender.bounds, to: UIApplication.shared.keyWindow)
-//        tagsView.show(originFrame: ff)
-
-        // 完美回调
-        playSoundEffect(name: R.file.温柔女声Mp3.fullName) {
-            print("播放完成!")
-        }
-
-        // 完美回调
-//        if let flag = self.avPlayer?.prepareToPlay(), flag {
-//            self.avPlayer?.play()
-//            print("开始播放!")
-//        }
-    }
-
-    @objc func btnAction2(_ sender: UIButton) {
-        print("btnAction2")
-    }
-
-    @objc func btnAction3(_ sender: UIButton) {
-        print("btnAction3")
-    }
 
     override func setupUi() {
         super.setupUi()
-
         self.navigationItem.title = "UIKit Test"
-        // let filterBtn = UIButton
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction(_:)))
+    }
+}
 
+// MARK: - call backs
+extension UIKitTestController {
+
+    @objc func filterAction(_ sender: UIBarButtonItem) {
+        // showRulerView()
+        showTagsView(nil)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        DDLogWarn("warn hahah")
+    }
+}
+
+// MARK: - 测试代码
+extension UIKitTestController {
+
+    /// 自定义扩展按钮
+    func customBtn() {
         let btn1 = UIButton.init(frame: CGRect(x: 20, y: 100, width: 300, height: 100))
         btn1.addTarget(self, action: #selector(btnAction1), for: .touchUpInside)
         btn1.setTitle("哈HH阿卡", for: .normal)
@@ -112,74 +96,30 @@ class UIKitTestController: BaseViewController {
         btn1.titleLabel?.font = UIFont.systemFont(ofSize: kScaleW(30), weight: .semibold)
         btn1.drawTextLineColor = .orange
         btn1.drawTextLineWidth = 2
+        btn1.showScaleAnimate = true
         view.addSubview(btn1)
         btn1.setRoundCorners(borderColor: .red)
-        // audioPlay(name: "离歌.mp3")
-//        audioPlay(name: "温柔女声.mp3")
-//
-//        noti.register(name: NSNotification.Name(rawValue: "ahha"), object: nil) { (notification) in
-//            print("noti:\(notification.name) \(notification.object) \(notification.userInfo)")
-//        }
-
-        // noti.remove(name: <#T##NSNotification.Name#>, object: <#T##Any?#>)
-    }
-}
-
-// MARK: - private mothods
-import AudioToolbox
-import AVFoundation
-extension UIKitTestController: AVAudioPlayerDelegate {
-
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        print("audioPlayerDidFinishPlaying, flag:\(flag)")
     }
 
-    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
-        print("audioPlayerDecodeErrorDidOccur, error: \(error?.localizedDescription ?? "")")
-    }
-}
-
-extension UIKitTestController {
-
-    // 播放方式1
-    func playSoundEffect(name: String, inCompletionBlock: (() -> Void)?) {
-        guard let audioFile = Bundle.main.path(forResource: name, ofType: nil) else { return }
-        let fileUrl = NSURL.fileURL(withPath: audioFile)
-
-        var soundId: SystemSoundID = 0
-        AudioServicesCreateSystemSoundID(fileUrl as CFURL, &soundId)
-        AudioServicesPlaySystemSoundWithCompletion(soundId, inCompletionBlock)
+    @objc func btnAction1(_ sender: UIButton) {
+        print("btnAction1")
     }
 
-    // 播放方式2
-    func audioPlay(name: String) {
-        guard let audioFile = Bundle.main.path(forResource: name, ofType: nil) else { return }
-        let fileUrl = URL.init(fileURLWithPath: audioFile)
-        guard let fileData = try? Data.init(contentsOf: fileUrl) else { return }
-        do {
-            let player = try AVAudioPlayer.init(data: fileData)
-            player.delegate = self
-            player.prepareToPlay()
-            self.avPlayer = player
-            print("准备播放")
-        } catch {
-            print("播放失败")
-        }
+    /// 双列表关联
+    func showDualList() {
+        FamilyAreaOptionsView.init(data: nil).show()
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //GlobalNoti.post(name: NSNotification.Name(rawValue: "ahha"), object: "wwwww")
-        DDLogWarn("warn hahah")
+    /// 高级筛选器
+    func filterView() {
+        let filterView = AdvancedFilter.init()
+        filterView.filterModels = self.filterModels
+        filterView.show()
     }
 
-    func opPrint(ops: [TagsMeta]?) {
-        ops?.forEach({ (meta) in
-            print("op_title:\(meta.title ?? "")")
-            print("op_param:\(meta.param ?? 0)")
-        })
-    }
-
+    /// 弹性帧动画
     func bouncesAni() {
+        let ball = UIImageView()
         let orignPoint = ball.center
         let animateKeyframes = CAKeyframeAnimation(keyPath: "position")
         animateKeyframes.duration = 2
@@ -202,7 +142,71 @@ extension UIKitTestController {
                                             CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
                                             CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
                                             CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)]
-        self.ball.layer.add(animateKeyframes, forKey: nil)
+        ball.layer.add(animateKeyframes, forKey: nil)
+    }
+
+    /// 音频文件播放
+    // 播放方式1
+    func playSoundEffect(name: String, inCompletionBlock: (() -> Void)?) {
+        guard let audioFile = Bundle.main.path(forResource: name, ofType: nil) else { return }
+        let fileUrl = NSURL.fileURL(withPath: audioFile)
+
+        var soundId: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(fileUrl as CFURL, &soundId)
+        AudioServicesPlaySystemSoundWithCompletion(soundId, inCompletionBlock)
+    }
+    // 播放方式2
+    func audioPlay(name: String) {
+        guard let audioFile = Bundle.main.path(forResource: name, ofType: nil) else { return }
+        let fileUrl = URL.init(fileURLWithPath: audioFile)
+        guard let fileData = try? Data.init(contentsOf: fileUrl) else { return }
+        do {
+            let player = try AVAudioPlayer.init(data: fileData)
+            player.delegate = self
+            player.prepareToPlay()
+            self.avPlayer = player
+            print("准备播放")
+        } catch {
+            print("播放失败")
+        }
+    }
+
+    /// 标签 瀑布流
+    func showTagsView(_ sender: UIView?) {
+        if let view = sender {
+            let ff = view.convert(view.bounds, to: UIApplication.shared.keyWindow)
+            tagsView.show(originFrame: ff)
+        } else {
+            tagsView.show()
+        }
+    }
+    func opPrint(ops: [TagsMeta]?) {
+        ops?.forEach({ (meta) in
+            print("op_title:\(meta.title ?? "")")
+            print("op_param:\(meta.param ?? 0)")
+        })
+    }
+
+    /// 简易标尺
+    func showRulerView() {
+        let rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 50, width: 50, height: 200), direction: .vertical, rulerLineSpacing: 7)
+        view.addSubview(rulerView)
+        // rulerView.setRulerValue(rulerValue: rulerValue, animated: true)
+        rulerView.setRoundCorners()
+    }
+}
+
+// MARK: - private mothods
+import AudioToolbox
+import AVFoundation
+extension UIKitTestController: AVAudioPlayerDelegate {
+
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        print("audioPlayerDidFinishPlaying, flag:\(flag)")
+    }
+
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        print("audioPlayerDecodeErrorDidOccur, error: \(error?.localizedDescription ?? "")")
     }
 }
 
@@ -236,51 +240,7 @@ extension AKAlertView {
     }
 }
 
-// MARK: - call backs
-extension UIKitTestController {
-
-    @objc func filterAction() {
-
-        LoggerManager.shared.removeEntrance()
-
-//        FamilyAreaOptionsView.init(data: nil).show()
-
-//        let rulerValue = rulerView.rulerValue
-//        rulerView.removeFromSuperview()
-//        print("rulerView.rulerValue:\(rulerView.rulerValue)")
-//        isExpand = !isExpand
-//        if isExpand {
-//            rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 50, width: 50, height: 400), direction: .vertical, rulerLineSpacing: 15)
-//        } else {
-//            rulerView = SliderRuler.init(frame: CGRect(x: 20, y: 50, width: 50, height: 200), direction: .vertical, rulerLineSpacing: 7)
-//        }
-//        view.addSubview(rulerView)
-//        rulerView.setRulerValue(rulerValue: rulerValue, animated: true)
-//        rulerView.setRoundCorners()
-
-        // filterModels
-//        let filterView = AdvancedFilter.init()
-//        filterView.filterModels = self.filterModels
-//        filterView.show()
-    }
-}
-
-// MARK: - delegate or data source
-extension UIKitTestController {
-
-}
-
-// MARK: - other classes
-
-/// 正确设置标签行间距 默认 7
-// fileprivate func setLabelLineSpacing(label: UILabel, lineSpacing: CGFloat = 7, _ alignment: NSTextAlignment = .center) -> [NSAttributedString.Key : Any]? {
-//    let paragraphStyle = NSMutableParagraphStyle()
-//    paragraphStyle.lineSpacing = lineSpacing - (label.font.lineHeight - label.font.pointSize)
-//    paragraphStyle.alignment = alignment
-//    let attributes = [NSAttributedString.Key.font: label.font, NSAttributedString.Key.paragraphStyle: paragraphStyle]
-//    return attributes as [NSAttributedString.Key : Any]
-// }
-
+// 单元测试
 class SwiftFuncInvokeTest {
 
     required init() {

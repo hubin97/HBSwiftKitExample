@@ -30,8 +30,7 @@ class AdvancedFilter: UIView {
         resetBtn.frame = CGRect(x: 0, y: 0, width: toolView.bounds.size.width/2, height: toolView.bounds.size.height)
         resetBtn.setTitle("重置", for: .normal)
         resetBtn.setTitleColor(.black, for: .normal)
-        resetBtn.setBackgroundImage(UIImage.init(color: .lightGray), for: .normal)
-        resetBtn.setBackgroundImage(UIImage.init(color: .gray), for: .highlighted)
+        resetBtn.setBackgroundImage(UIImage.init(color: .groupTableViewBackground), for: .normal)
         resetBtn.addTarget(self, action: #selector(resetAction), for: .touchUpInside)
 
         let okBtn = UIButton.init(type: .custom)
@@ -304,7 +303,7 @@ class AdvancedFilterFlowCell: UITableViewCell, UICollectionViewDataSource, UICol
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(dataCollection)
+        self.contentView.addSubview(dataCollection)
     }
 
     required init?(coder: NSCoder) {

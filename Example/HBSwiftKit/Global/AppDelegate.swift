@@ -27,10 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarVc.setTabBarColors(normalColor: .lightGray, selectColor: .systemBlue)
         self.window?.rootViewController = tabBarVc
 
-//        LoggerManager.shared.logLevel = .debug
-        LoggerManager.shared.launch(.warning).entrance()
-        DDLogInfo("DDLogInfo Override point for customization after application launch. Override point for customization after application launch. Override point for customization after application launch")
-        DDLogDebug("DDLogDebug Override point for customization after application launch. Override point for customization after application launch. Override point for customization after application launch")
+        LoggerManager.shared.launch(.debug).entrance()
+        // LoggerManager.shared.removeEntrance() // 隐藏入口
+        // LoggerManager.shared.logLevel = .debug // 设置日志级别
+        DDLogInfo("DDLogInfo Override point for customization after application launch. ")
+        DDLogDebug("DDLogDebug Override point for customization after application launch. Override point for customization after application launch. ")
         DDLogVerbose("DDLogVerbose Override point for customization after application launch. Override point for customization after application launch. Override point for customization after application launch")
         return true
     }

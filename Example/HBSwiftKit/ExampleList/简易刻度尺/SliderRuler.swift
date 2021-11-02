@@ -17,9 +17,20 @@ private let rulerLineLong  = 30
 private let flagLineLength = 45
 
 protocol SliderRulerDelegate: class {
+
+    /// 滚动回调
+    /// - Parameters:
+    ///   - sliderRuler: obj
+    ///   - value: 变动值
     func sliderRulerValueUpdate(sliderRuler: SliderRuler, value: Float)
+
+    /// 滚动完成回调
+    /// - Parameters:
+    ///   - sliderRuler: obj
+    ///   - value: 最终值
     func sliderRulerDidEndScroll(sliderRuler: SliderRuler, value: Float)
 }
+
 // MARK: - main class
 class SliderRuler: UIView {
 
@@ -57,6 +68,8 @@ class SliderRuler: UIView {
             flagLineView.backgroundColor = flagColor
         }
     }
+    /// 是否正在交互中
+    var isTouching = false
 
     lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout.init()
@@ -75,6 +88,7 @@ class SliderRuler: UIView {
         rulerCollection.delegate = self
         rulerCollection.showsHorizontalScrollIndicator = false
         rulerCollection.showsVerticalScrollIndicator = false
+        // rulerCollection.decelerationRate = .fast
         return rulerCollection
     }()
 
@@ -83,9 +97,9 @@ class SliderRuler: UIView {
         let flagLineView = UIView()
         flagLineView.backgroundColor = .red
         if direction == .horizontal {
-            flagLineView.frame = CGRect(x: self.bounds.width/2 - 1, y: self.bounds.height - CGFloat(flagLineLength), width: 2, height: CGFloat(flagLineLength))
+            flagLineView.frame = CGRect(x: self.bounds.width/2 - 2, y: self.bounds.height - CGFloat(flagLineLength), width: 2, height: CGFloat(flagLineLength))
         } else if direction == .vertical {
-            flagLineView.frame = CGRect(x: self.bounds.width - CGFloat(flagLineLength), y: self.bounds.height/2 - 1, width: CGFloat(flagLineLength), height: 2)
+            flagLineView.frame = CGRect(x: self.bounds.width - CGFloat(flagLineLength), y: self.bounds.height/2 - 2, width: CGFloat(flagLineLength), height: 2)
         }
         return flagLineView
     }()
@@ -104,16 +118,16 @@ class SliderRuler: UIView {
     ///   - minValue: 刻度最小值
     ///   - maxValue: 刻度最大值
     ///   - stepValue: 单格小刻度值
-    convenience init(frame: CGRect, direction: UICollectionView.ScrollDirection, rulerLineSpacing: Int = 15, betweenNum: Int = 2, /* stepNum: Int = 50,*/ minValue: Float = 1.0, maxValue: Float = 100.0, stepValue: Float = 1.0) {
+    convenience init(frame: CGRect, direction: UICollectionView.ScrollDirection, rulerLineSpacing: Int = 15, betweenNum: Int = 2, stepNum: Int = 50, minValue: Float = 1.0, maxValue: Float = 100.0, stepValue: Float = 1.0) {
         self.init(frame: frame)
         self.direction = direction
         self.rulerLineSpacing = rulerLineSpacing
         self.betweenNum = betweenNum
+        self.stepNum = stepNum
         self.minValue = minValue
         self.maxValue = maxValue
         self.stepValue = stepValue
-        let tValue = Int(maxValue - minValue)
-        self.stepNum = (tValue % 2 == 0) ? tValue/2: tValue/2 + 1
+
         addSubview(rulerCollection)
         addSubview(flagLineView)
     }
@@ -129,8 +143,8 @@ extension SliderRuler {
     /// 设定默认值
     /// - Parameters:
     ///   - rulerValue: 刻度值
-    ///   - animated: 是否开启动画
-    func setRulerValue(rulerValue: Float, animated: Bool) {
+    ///   - animated: 是否开启动画, 取消代理回调 animated = false
+    func setRulerValue(rulerValue: Float, animated: Bool = false) {
         self.rulerValue = rulerValue
         if direction == .horizontal {
             rulerCollection.setContentOffset(CGPoint(x: Int((rulerValue - minValue)/stepValue) * rulerLineSpacing, y: 0), animated: animated)
@@ -157,6 +171,7 @@ extension SliderRuler: UICollectionViewDataSource, UICollectionViewDelegate {
             spacecell.backgroundColor = .clear
             spacecell.direction = direction
             spacecell.isFirstItem = indexPath.item == 0 ? true: false
+            spacecell.valueColor = rulerColor
             spacecell.setNeedsDisplay()
             return spacecell
         }
@@ -169,6 +184,7 @@ extension SliderRuler: UICollectionViewDataSource, UICollectionViewDelegate {
         itemcell.rulerLineSpacing = rulerLineSpacing
         itemcell.minValue = minValue
         itemcell.maxValue = maxValue
+        itemcell.valueColor = rulerColor
         itemcell.setNeedsDisplay()
         return itemcell
     }
@@ -193,22 +209,32 @@ extension SliderRuler: UICollectionViewDelegateFlowLayout {
 
 extension SliderRuler: UIScrollViewDelegate {
 
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isTouching = true
+    }
+
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        isTouching = true
+    }
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView == rulerCollection else { return }
         var offsetValue: Int = 0
         if direction == .horizontal {
             offsetValue = Int(scrollView.contentOffset.x) / rulerLineSpacing
         } else {
-            offsetValue = Int(scrollView.contentOffset.y) / rulerLineSpacing
+            offsetValue =  Int(scrollView.contentOffset.y) / rulerLineSpacing
         }
         var value = Float(offsetValue) * stepValue + minValue
         value = value > maxValue ? maxValue: value
         value = value < minValue ? minValue: value
         // print("isTracking:\(scrollView.isTracking) isDragging:\(scrollView.isDragging) isDecelerating:\(scrollView.isDecelerating)")
         /// 规避设置默认值错误回调
-        guard scrollView.isDragging == true else { return }
-        // print("rulerValue:\(value)")
+        guard /*self.rulerValue != value, */scrollView.isDragging == true else {
+            return
+        }
         rulerDelegate?.sliderRulerValueUpdate(sliderRuler: self, value: value)
+        // print("rulerValue-:\(value)")
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -227,6 +253,7 @@ extension SliderRuler: UIScrollViewDelegate {
         value = value > maxValue ? maxValue: value
         value = value < minValue ? minValue: value
         self.rulerValue = value
+        self.isTouching = false
         rulerDelegate?.sliderRulerDidEndScroll(sliderRuler: self, value: value)
         print("rulerValue&: \(value)")
     }
@@ -246,6 +273,7 @@ extension SliderRuler: UIScrollViewDelegate {
         value = value > maxValue ? maxValue: value
         value = value < minValue ? minValue: value
         self.rulerValue = value
+        self.isTouching = false
         rulerDelegate?.sliderRulerDidEndScroll(sliderRuler: self, value: value)
         print("rulerValue@: \(value)")
     }
@@ -270,7 +298,7 @@ class SliderRulerItem: UICollectionViewCell {
     /// 单位
     var unit: String = ""
     var valueFont = UIFont.systemFont(ofSize: 10)
-    var valueColor = UIColor.black
+    var valueColor = UIColor.gray
 
     /// 显示刻度值
     var showValue = true
@@ -286,12 +314,12 @@ class SliderRulerItem: UICollectionViewCell {
         context?.setLineWidth(CGFloat(rulerLineWidth))
         context?.setLineCap(CGLineCap.butt)
         // context?.setStrokeColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
-        context?.setStrokeColor(UIColor.gray.cgColor)
+        context?.setStrokeColor(valueColor.cgColor)
 
         for i in 0...betweenNum {
             // print(i)
             // 目标总刻度数 跟区块对应不上, 去掉不必要的绘制
-            if (Int(maxValue - minValue) / betweenNum != stepNum) && index == stepNum && i == betweenNum {
+            if (Int(maxValue - minValue) / betweenNum != stepNum) && index == stepNum && i == 0 {
                 // print("cancel index:\(index)")
                 return
             }
@@ -324,7 +352,7 @@ class SliderRulerSpaceItem: UICollectionViewCell {
 
     // var unit: String = ""
     var valueFont = UIFont.systemFont(ofSize: 10)
-    var valueColor = UIColor.black
+    var valueColor = UIColor.gray
     var isFirstItem = false
 
     override func draw(_ rect: CGRect) {
@@ -332,7 +360,7 @@ class SliderRulerSpaceItem: UICollectionViewCell {
         // let longLineY = rect.size.height - CGFloat(rulerLineShort)
         let context = UIGraphicsGetCurrentContext()
         // context?.setStrokeColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
-        context?.setStrokeColor(UIColor.gray.cgColor)
+        context?.setStrokeColor(valueColor.cgColor)
         context?.setLineWidth(CGFloat(rulerLineWidth))
         context?.setLineCap(CGLineCap.butt)
         if direction == .horizontal {

@@ -29,27 +29,41 @@ class ImageBrowerController: BaseViewController {
     fileprivate let albumMinSpacing: CGFloat = 10
 
     lazy var snapshotModels: [SnapshotModel] = {
-        let path = Bundle.main.path(forResource: "images", ofType: "json")
-        let url = URL(fileURLWithPath: path ?? "")
+//        let path = Bundle.main.path(forResource: "images", ofType: "json")
+//        let url = URL(fileURLWithPath: path ?? "")
+//
+//        do {
+//            let json = try JSONSerialization.jsonObject(with: Data.init(contentsOf: url), options: .mutableContainers)
+//            if let dic = json as? [String: Any], let datas = dic["data"] as? [[String: Any]] {
+//                var models = [SnapshotModel]()
+//                for meta in datas {
+//                    let model = SnapshotModel.init()
+//                    model.id = meta["id"] as? Int
+//                    model.createTimeMs = meta["createTimeMs"] as? Int
+//                    model.thumbnailPath = meta["thumbnailPath"] as? String
+//                    model.photoPath = meta["photoPath"] as? String
+//                    models.append(model)
+//                }
+//                return models
+//            }
+//        } catch {
+//            print("tojsonErro: \(error)")
+//        }
+//        return []
 
-        do {
-            let json = try JSONSerialization.jsonObject(with: Data.init(contentsOf: url), options: .mutableContainers)
-            if let dic = json as? [String: Any], let datas = dic["data"] as? [[String: Any]] {
-                var models = [SnapshotModel]()
-                for meta in datas {
-                    let model = SnapshotModel.init()
-                    model.id = meta["id"] as? Int
-                    model.createTimeMs = meta["createTimeMs"] as? Int
-                    model.thumbnailPath = meta["thumbnailPath"] as? String
-                    model.photoPath = meta["photoPath"] as? String
-                    models.append(model)
-                }
-                return models
-            }
-        } catch {
-            print("tojsonErro: \(error)")
+        //
+        let count = 17
+        let path = "https://wt-oss-test.oss-cn-shenzhen.aliyuncs.com/pic/scene03.png"
+        var models = [SnapshotModel]()
+        for idx in 0..<count {
+            let model = SnapshotModel.init()
+            model.id = idx
+            model.createTimeMs = Int(Date().timeIntervalSince1970)/10 + idx
+            model.thumbnailPath = path
+            model.photoPath = path
+            models.append(model)
         }
-        return []
+        return models
     }()
 
     lazy var layout: UICollectionViewFlowLayout = {
@@ -279,6 +293,7 @@ class SnapshotItem: UICollectionViewCell {
 
         self.contentView.addSubview(iconView)
         iconView.frame = self.bounds
+        iconView.contentMode = .scaleAspectFill
 
         self.contentView.addSubview(markIconBtn)
         markIconBtn.frame = self.bounds

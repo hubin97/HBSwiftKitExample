@@ -1,4 +1,5 @@
 #项目目录下校验自定义规则文件适用指令: $swiftlint lint --config .swiftlint.yml
+#常用指令: $swiftlint autocorrect // 自动修正
 disabled_rules: # 执行时排除掉的规则
 #  - colon
 #  - comma

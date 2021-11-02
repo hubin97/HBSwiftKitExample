@@ -28,6 +28,7 @@ open class TagsOptionView: UIView {
     fileprivate var t_height: CGFloat = 0  // title 总高度
     fileprivate var a_height: CGFloat = 0  // actions 总高度(底部可交互按钮)
     fileprivate var m_height: CGFloat = 0  // message 总高度
+    fileprivate let tagBase: Int = 2000  // tag基准
 
     public var kpadding: CGFloat = 20 //
     /// 同系统分割线 0.33, 不能小于0.5,否则不显示
@@ -35,13 +36,31 @@ open class TagsOptionView: UIView {
     /// 消息体行间距
     public var msg_LineSpacing: CGFloat = 7.5
 
+    /// 点击空白处是否可以取消, 默认 false
+    public var isTapMaskHide: Bool = false
+    /// 是否需要刷新选中状态, 默认 true
+    public var isNeedUpdateTagState: Bool = true
+    /// 是否需要展示右上角角标, 默认不展示
+    public var isNeedTopRightMark: Bool = false {
+        didSet {
+            markImgView.isHidden = !isNeedTopRightMark
+        }
+    }
+
     public var maskingView = UIView()
     public var contentView = UIView()
     public var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     public var titleLabel = UILabel()
+    public var markImgView = UIImageView.init(image: UIImage(named: "fast_up"))
     public var messageScroll = UIScrollView()
     public var actionsView = UIView()
-    public var tags: [TagsMeta]?
+    public var tags: [TagsMeta]? {
+        didSet {
+            tags?.enumerated().forEach({ (idx, meta) in
+                meta.tag = tagBase + idx
+            })
+        }
+    }
     fileprivate var actionTitle: String?
     fileprivate var isMultiple: Bool = false
     
@@ -68,6 +87,7 @@ open class TagsOptionView: UIView {
         contentView.layer.cornerRadius = 15.0
         
         contentView.addSubview(titleLabel)
+        contentView.addSubview(markImgView)
         contentView.addSubview(messageScroll)
         contentView.addSubview(actionsView)
 
@@ -97,18 +117,19 @@ extension TagsOptionView {
     ///   - optionNormalTextColor: 标签正常字体色
     ///   - optionSelectTextColor: 标签选中字体色
     ///   - optionFont: 标签字体大小
+    ///   - optionMinWidth: 标签最小宽度
     ///   - optionMaxHeight: 标签最大高度
     ///   - actionTitle: 确认键标题
     ///   - actionTitleColor: 确认键字体色
     ///   - tapAction: 最终事件回调
     /// - Returns: self
-    public convenience init(title: String?, isMultiple: Bool = false, options: [TagsMeta]?, columns: Int = 4, optionNormalBgColor: UIColor = .lightGray, optionSelectBgColor: UIColor = .blue, optionNormalTextColor: UIColor = .black, optionSelectTextColor: UIColor = .white, optionFont: UIFont = UIFont.systemFont(ofSize: 15), optionMaxHeight: CGFloat = 40, actionTitle: String?, actionTitleColor: UIColor = .systemBlue, tapAction: ((_ tagMetas: [TagsMeta]?) -> ())? ) {
+    public convenience init(title: String?, isMultiple: Bool = false, options: [TagsMeta]?, columns: Int = 4, optionNormalBgColor: UIColor = .lightGray, optionSelectBgColor: UIColor = .blue, optionNormalTextColor: UIColor = .black, optionSelectTextColor: UIColor = .white, optionFont: UIFont = UIFont.systemFont(ofSize: 15), optionMinWidth: CGFloat = 30, optionMaxHeight: CGFloat = 40, actionTitle: String?, actionTitleColor: UIColor = .systemBlue, tapAction: ((_ tagMetas: [TagsMeta]?) -> ())? ) {
         self.init(frame: CGRect.zero)
         self.tapAction = tapAction
-        setup(title: title, isMultiple: isMultiple, options: options, columns: columns, optionNormalBgColor: optionNormalBgColor, optionSelectBgColor: optionSelectBgColor, optionNormalTextColor: optionNormalTextColor, optionSelectTextColor: optionSelectTextColor, optionFont: optionFont, optionMaxHeight: optionMaxHeight, actionTitle: actionTitle, actionTitleColor: actionTitleColor)
+        setup(title: title, isMultiple: isMultiple, options: options, columns: columns, optionNormalBgColor: optionNormalBgColor, optionSelectBgColor: optionSelectBgColor, optionNormalTextColor: optionNormalTextColor, optionSelectTextColor: optionSelectTextColor, optionFont: optionFont, optionMinWidth: optionMinWidth, optionMaxHeight: optionMaxHeight, actionTitle: actionTitle, actionTitleColor: actionTitleColor)
     }
     
-    func setup(title: String?, isMultiple: Bool, options: [TagsMeta]?, columns: Int, optionNormalBgColor: UIColor, optionSelectBgColor: UIColor, optionNormalTextColor: UIColor, optionSelectTextColor: UIColor, optionFont: UIFont, optionMaxHeight: CGFloat, actionTitle: String?, actionTitleColor: UIColor) {
+    func setup(title: String?, isMultiple: Bool, options: [TagsMeta]?, columns: Int, optionNormalBgColor: UIColor, optionSelectBgColor: UIColor, optionNormalTextColor: UIColor, optionSelectTextColor: UIColor, optionFont: UIFont, optionMinWidth: CGFloat, optionMaxHeight: CGFloat, actionTitle: String?, actionTitleColor: UIColor) {
         assert(!(title == nil || title == ""), "标题不能为空")
         assert(!(title == nil && isMultiple == true), "多选时标题不能为空")
         self.actionTitle = actionTitle
@@ -146,7 +167,7 @@ extension TagsOptionView {
                     btn.addTarget(self, action: #selector(tagAction), for: .touchUpInside)
                     btn.titleLabel?.lineBreakMode = .byTruncatingTail
                     btn.titleLabel?.textAlignment = .center
-                    btn.tag = 2000 + idx
+                    btn.tag = tagBase + idx
                     btn.isSelected = op.isSelected
                     op.tag = btn.tag
                 }
@@ -171,15 +192,15 @@ extension TagsOptionView {
                     btn.titleLabel?.font = optionFont
                     btn.addTarget(self, action: #selector(tagAction), for: .touchUpInside)
                     btn.titleLabel?.lineBreakMode = .byTruncatingTail
-                    btn.tag = 2000 + idx
+                    btn.tag = tagBase + idx
                     btn.layer.masksToBounds = true
                     btn.layer.cornerRadius = 5
                     btn.isSelected = op.isSelected
                     op.tag = btn.tag
                     
                     let rect = NSString(string: op.title ?? "").boundingRect(with: CGSize(width: limit_width, height: optionMaxHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: optionFont], context: nil)
-                    let text_width = rect.size.width + kpadding
-                    if item_width + text_width + kpadding/2 > limit_width {
+                    let text_width = max(rect.size.width + kpadding/2, optionMinWidth)
+                    if item_width + text_width + kpadding > limit_width {
                         item_width = 0
                         total_height += (optionMaxHeight + kpadding/2)
                     }
@@ -204,6 +225,7 @@ extension TagsOptionView {
         }
         
         titleLabel.frame = CGRect(x: kpadding + kpadding/2, y: kpadding, width: alert_width - 3 * kpadding, height: t_height)
+        markImgView.frame = CGRect(x: alert_width - 2 * kpadding + 10, y: kpadding, width: 15, height: 15)
         messageScroll.frame = CGRect(x: kpadding, y: kpadding + t_height + kpadding, width: alert_width - 2 * kpadding, height: mmin_height)
         actionsView.frame = CGRect(x: 0, y: messageScroll.frame.maxY + kpadding, width: alert_width, height: a_height)
         contentView.frame = CGRect(x: 0, y: 0, width: alert_width, height: alert_height)
@@ -212,7 +234,8 @@ extension TagsOptionView {
         messageScroll.contentSize = CGSize(width: 0, height: total_height)
         
         titleLabel.text = title
-      
+        markImgView.isHidden = true
+
         if let actionTitle = actionTitle, !actionTitle.isEmpty {
             let button = UIButton.init(type: .system)
             button.frame = actionsView.bounds
@@ -262,6 +285,15 @@ extension TagsOptionView {
             self.delegate?.tagsOpResult(ops)
         }
     }
+    
+    // 同步数据源
+    func updateTagState() {
+        if let selTags = self.tags?.filter({ $0.isSelected == true }).map({ $0.tag ?? 0 }) {
+            messageScroll.subviews
+                .filter({ $0.isKind(of: UIButton.self) }).map({ $0 as! UIButton })
+                .forEach({ $0.isSelected = selTags.contains($0.tag) })
+        }
+    }
 }
 
 //MARK: - call backs
@@ -273,6 +305,9 @@ extension TagsOptionView {
     /// - Parameter originFrame: 不传默认为nil, 以UIApplication.shared.keyWindow为参考计算frame
     public func show(originFrame: CGRect? = nil, isLinkOrigin: Bool = false) {
         DispatchQueue.main.async {
+            if self.isNeedUpdateTagState {
+                self.updateTagState()
+            }
             UIApplication.shared.keyWindow?.addSubview(self)
             guard let originFrame = originFrame else {
                 self.systemAnimate()
@@ -305,7 +340,7 @@ extension TagsOptionView {
         let tap_point = tap.location(in: self)
         let isincontent = self.contentView.frame.contains(tap_point)
         // 无操作键可点击蒙层移除, 点不在contentView上
-        if self.actionTitle == nil && isincontent == false {
+        if ((self.actionTitle == nil || self.isTapMaskHide) && isincontent == false) {
             hide()
         }
     }

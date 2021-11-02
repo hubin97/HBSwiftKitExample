@@ -29,7 +29,7 @@ extension Extension_Button {
             objc_getAssociatedObject(self, &touchAreaInsetsKey) as? UIEdgeInsets
         }
         set {
-            objc_setAssociatedObject(self, &touchAreaInsetsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &touchAreaInsetsKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
     
@@ -39,7 +39,7 @@ extension Extension_Button {
             objc_getAssociatedObject(self, &showScaleAnimateKey) as? Bool
         }
         set {
-            objc_setAssociatedObject(self, &showScaleAnimateKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &showScaleAnimateKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
     /// 注意:必须同showScaleAnimate属性联用, 表示缩放比例, 默认1.2
@@ -48,7 +48,7 @@ extension Extension_Button {
             objc_getAssociatedObject(self, &showScaleKey) as? CGFloat
         }
         set {
-            objc_setAssociatedObject(self, &showScaleKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &showScaleKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
     
@@ -68,7 +68,7 @@ extension Extension_Button {
             objc_getAssociatedObject(self, &drawTextLineWidthKey) as? CGFloat
         }
         set {
-            objc_setAssociatedObject(self, &drawTextLineWidthKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &drawTextLineWidthKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
 }
