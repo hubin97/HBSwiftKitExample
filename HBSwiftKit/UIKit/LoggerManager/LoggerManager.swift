@@ -64,6 +64,22 @@ open class LoggerManager {
     public func removeEntrance() {
         UIApplication.shared.delegate?.window??.subviews.first(where: { $0.isKind(of: LoggerAssistant.classForCoder()) })?.removeFromSuperview()
     }
+
+
+    /// 是否已展示入口
+    public func hasEntrance() -> Bool {
+        if let isOn = UserDefaults.standard.value(forKey: "LoggerAssistant") as? Bool {
+            return isOn
+        }
+        return false
+    }
+
+    /// 更新入口状态
+    /// - Parameter state: 开启/关闭
+    public func updateEntrance(_ state: Bool) {
+        UserDefaults.standard.setValue(state, forKey: "LoggerAssistant")
+        UserDefaults.standard.synchronize()
+    }
 }
 
 extension LoggerManager {

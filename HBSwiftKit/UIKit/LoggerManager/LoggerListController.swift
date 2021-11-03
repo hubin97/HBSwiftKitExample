@@ -10,19 +10,19 @@ import CocoaLumberjack
 //MARK: - global var and methods
 
 //MARK: - main class
-class LoggerListController: BaseViewController {
+open class LoggerListController: BaseViewController {
 
-    lazy var logFiles: [DDLogFileInfo] = {
+    open lazy var logFiles: [DDLogFileInfo] = {
         return LoggerManager.shared.fileLogger.logFileManager.sortedLogFileInfos
     }()
 
-    lazy var dateFormatter: DateFormatter = {
+    open lazy var dateFormatter: DateFormatter = {
         let _dateFormatter = DateFormatter.init()
         _dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         _dateFormatter.timeZone = TimeZone.current
         return _dateFormatter
     }()
-    lazy var listView: UITableView = {
+    open lazy var listView: UITableView = {
         let listView = UITableView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight), style: .plain)
         listView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
         listView.tableFooterView = UIView.init(frame: CGRect.zero)
@@ -32,7 +32,7 @@ class LoggerListController: BaseViewController {
         return listView
     }()
     
-    override func setupUi() {
+    open override func setupUi() {
         super.setupUi()
         self.navigationItem.title = "日志列表"
         view.addSubview(listView)
@@ -58,11 +58,11 @@ extension LoggerListController {
 //MARK: - delegate or data source
 extension LoggerListController: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         logFiles.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let file = logFiles[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UITableViewCell.self), for: indexPath)
         var logdate = dateFormatter.string(from: file.creationDate ?? Date())
@@ -73,7 +73,7 @@ extension LoggerListController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailVc = LoggerDetailController()
         detailVc.file = logFiles[indexPath.row]
@@ -83,21 +83,65 @@ extension LoggerListController: UITableViewDataSource, UITableViewDelegate {
 
 
 //MARK: - other classes
-class LoggerDetailController: BaseViewController {
+open class LoggerDetailController: BaseViewController {
 
     var file: DDLogFileInfo?
-    lazy var logTextView: UITextView = {
+    open lazy var logTextView: UITextView = {
         let _logTextView = UITextView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight))
         _logTextView.isEditable = false
         return _logTextView
     }()
-    override func setupUi() {
+
+    lazy var rightItems: [UIBarButtonItem] = {
+        var rightItems = [UIBarButtonItem]()
+        let bottomItem = UIBarButtonItem.init(title: "To底部", style: .plain, target: self, action: #selector(scrollToBottom))
+        rightItems.append(bottomItem)
+        if #available(iOS 11.0, *) {
+            let fileItem = UIBarButtonItem.init(title: "To文件", style: .plain, target: self, action: #selector(saveToFile))
+            rightItems.append(fileItem)
+        }
+        return rightItems
+    }()
+
+    open override func setupUi() {
         super.setupUi()
         self.navigationItem.title = "日志详情"
-        
+        self.navigationItem.rightBarButtonItems = rightItems
+
         view.addSubview(logTextView)
         if let fpath = file?.filePath, let fdata = try? Data.init(contentsOf: URL.init(fileURLWithPath: fpath)) {
             logTextView.text = String(data: fdata, encoding: .utf8)
         }
+    }
+
+    @objc func scrollToBottom() {
+        self.logTextView.scrollRangeToVisible(NSRange(location: self.logTextView.text.count - 1, length: 1))
+    }
+
+    @objc func saveToFile() {
+        guard let fpath = file?.filePath else { return }
+        let fUrl = URL.init(fileURLWithPath: fpath)
+        let documentVc = UIDocumentPickerViewController.init(url: fUrl, in: .exportToService)
+        documentVc.delegate = self
+        documentVc.modalPresentationStyle = .pageSheet
+        self.navigationController?.present(documentVc, animated: true, completion: nil)
+    }
+}
+
+extension LoggerDetailController: UIDocumentPickerDelegate {
+
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let url = urls.first, let auth = urls.first?.startAccessingSecurityScopedResource(), auth else {
+            print("授权失败")
+            return
+        }
+        // 通过文件协调工具来得到新的文件地址，以此得到文件保护功能
+        let fileCoordinator = NSFileCoordinator.init()
+        var error: NSError?
+        fileCoordinator.coordinate(readingItemAt: url, options: .withoutChanges, error: &error) { newUrl in
+            let fileName = newUrl.lastPathComponent
+            print("文件名" + fileName)
+        }
+        urls.first?.stopAccessingSecurityScopedResource()
     }
 }
