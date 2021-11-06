@@ -36,7 +36,7 @@ class ArraySortTest: QuickSpec {
     override func spec() {
         fdescribe("ArraySortTest") {
             it("should print correct test data") {
-                var arr1 = [2, 3, 4, 5, 7]
+                let arr1 = [2, 3, 4, 5, 7]
                 let arr2 = arr1.sorted()
                 print("arr1 == arr2: \(arr1 == arr2)")
                 // print("arr1 === arr2: \(arr1.compare)")
@@ -47,32 +47,32 @@ class ArraySortTest: QuickSpec {
 
 class GlobalFuncTest: QuickSpec {
     override func spec() {
-        fdescribe("GlobalFuncTest") {
-            it("should print correct test data") {
-                let vc1 = swiftClassFromString("ImageBrowerController")
-                print("vc1:\(vc1)")
-                if let vc1_1 = vc1 as? UIViewController.Type {
-                    print("vc1_1:\(vc1_1)")
-                }
-
-                let vc2 = swiftClassFromString("SnapshotModel")
-                print("vc2:\(vc2)")
-                if let vc2_1 = vc2 as? UIViewController.Type {
-                    print("vc2_1:\(vc2_1)")
-                }
-            }
-        }
+//        fdescribe("GlobalFuncTest") {
+//            it("should print correct test data") {
+//                let vc1 = swiftClassFromString("ImageBrowerController")
+//                print("vc1:\(vc1)")
+//                if let vc1_1 = vc1 as? UIViewController.Type {
+//                    print("vc1_1:\(vc1_1)")
+//                }
+//
+//                let vc2 = swiftClassFromString("SnapshotModel")
+//                print("vc2:\(vc2)")
+//                if let vc2_1 = vc2 as? UIViewController.Type {
+//                    print("vc2_1:\(vc2_1)")
+//                }
+//            }
+//        }
     }
 }
 
 class ImgExtensionTest: QuickSpec {
     override func spec() {
-        fdescribe("ImgExtensionTest") {
-            it("should print correct test data") {
-                let img = UIImage.init(color: .brown)
-
-            }
-        }
+//        fdescribe("ImgExtensionTest") {
+//            it("should print correct test data") {
+//                let img = UIImage.init(color: .brown)
+//
+//            }
+//        }
     }
 }
 
@@ -168,38 +168,38 @@ class StringLenghtTest: QuickSpec {
 
 // FIXME: 仍有很大误差
 class ImageHandleTest: QuickSpec {
-    override func spec() {
-        fdescribe("ImageHandleTest") {
-            it("should print correct test data") {
-                let originImg = R.image.swift()
-                print(originImg)
-                let icon = originImg?.resize(maxpt: 30)
-                print(icon)
-
-                // let img = originImg?.compress(maxSize: <#T##Int#>)
-                guard let data1 = originImg?.jpegData(compressionQuality: 0.9) else { return }
-                guard let data2 = originImg?.pngData() else { return }
-
-                let type = data2.imageType()
-
-//                let ex = UIImage(named: "IMG_0197")?.imageExtensionName()
-//                print(ex)
-
-                let formatted = ByteCountFormatter.string(fromByteCount: Int64(data1.count), countStyle: .memory)
-                print(formatted)
-
-//                let img = UIImage.init(contentsOfFile: Bundle.main.path(forResource: "swift@2x", ofType: "png")!)
-//                guard let data1 = img?.jpegData(compressionQuality: 0.9) else { return }
-//                let formatted1 = ByteCountFormatter.string(fromByteCount: Int64(data1.count), countStyle: .file)
-//                print(formatted1)
-
-                if let icon2 = originImg?.compress(maxBytes: 3), let img = UIImage.init(data: icon2) {
-                    print(img)
-                }
-
-            }
-        }
-    }
+//    override func spec() {
+//        fdescribe("ImageHandleTest") {
+//            it("should print correct test data") {
+//                let originImg = R.image.swift()
+//                //print(originImg)
+//                //let icon = originImg?.resize(maxpt: 30)
+//                //print(icon)
+//
+//                // let img = originImg?.compress(maxSize: <#T##Int#>)
+//                guard let data1 = originImg?.jpegData(compressionQuality: 0.9) else { return }
+//                guard let data2 = originImg?.pngData() else { return }
+//
+//                //let type = data2.imageType()
+//
+////                let ex = UIImage(named: "IMG_0197")?.imageExtensionName()
+////                print(ex)
+//
+//                let formatted = ByteCountFormatter.string(fromByteCount: Int64(data1.count), countStyle: .memory)
+//                print(formatted)
+//
+////                let img = UIImage.init(contentsOfFile: Bundle.main.path(forResource: "swift@2x", ofType: "png")!)
+////                guard let data1 = img?.jpegData(compressionQuality: 0.9) else { return }
+////                let formatted1 = ByteCountFormatter.string(fromByteCount: Int64(data1.count), countStyle: .file)
+////                print(formatted1)
+//
+//                if let icon2 = originImg?.compress(maxBytes: 3), let img = UIImage.init(data: icon2) {
+//                    print(img)
+//                }
+//
+//            }
+//        }
+//    }
 }
 
 class AuthStatusTest: QuickSpec {
@@ -268,47 +268,47 @@ class StructTest: QuickSpec {
 class ThemeModeTest: QuickSpec {
     override func spec() {
         fdescribe("ThemeModeTest") {
-            it("should print correct test data") {
-
-                let color1 = UIColor.init(hexStr: "#57CBFF")
-                let color2 = UIColor.init(hexStr: "0x57CBFF")
-                let color3 = UIColor.init(hexStr: "0X57CBFF")
-
-                ThemeMode.light.setColors(bind: ["#000", "#010", "#001"])
-                ThemeMode.dark.setColors(bind: ["#100", "#110", "#111"])
-                // ThemeMode.main.setColors(bind: ["#100", "#111"])
-
-                print(ThemeMode.dynamicColor(idx: 2))
-                print(ThemeMode.dynamicColor(idx: 0))
-                print(ThemeMode.dynamicColor(idx: 3))
-
-                ThemeMode.mode = .dark
-                print(ThemeMode.dynamicColor(idx: 2))
-                print(ThemeMode.dynamicColor(idx: 0))
-                print(ThemeMode.dynamicColor(idx: 3))
-
-            }
+//            it("should print correct test data") {
+//
+//                let color1 = UIColor.init(hexStr: "#57CBFF")
+//                let color2 = UIColor.init(hexStr: "0x57CBFF")
+//                let color3 = UIColor.init(hexStr: "0X57CBFF")
+//
+//                ThemeMode.light.setColors(bind: ["#000", "#010", "#001"])
+//                ThemeMode.dark.setColors(bind: ["#100", "#110", "#111"])
+//                // ThemeMode.main.setColors(bind: ["#100", "#111"])
+//
+//                print(ThemeMode.dynamicColor(idx: 2))
+//                print(ThemeMode.dynamicColor(idx: 0))
+//                print(ThemeMode.dynamicColor(idx: 3))
+//
+//                ThemeMode.mode = .dark
+//                print(ThemeMode.dynamicColor(idx: 2))
+//                print(ThemeMode.dynamicColor(idx: 0))
+//                print(ThemeMode.dynamicColor(idx: 3))
+//
+//            }
         }
     }
 }
 
 class DictionaryTest: QuickSpec {
     override func spec() {
-        fdescribe("DictionaryTest") {
-            it("should print correct test data") {
-                var dict: [String: Any] = ["aaa": 123, "bbb": "444", "ccc": [555, 666, 777]]
-                let data = dict.toData()
-                let json = dict.toJSONString()
-                let value = dict.value(forKey: "ccc")
-                dict.setValue(["1": 1, "2": 2], forKey: "ddd")
-                let value2 = dict.value(forKey: "ddd")
-
-                print(data)
-                print(json)
-                print(value)
-                print(value2)
-            }
-        }
+//        fdescribe("DictionaryTest") {
+//            it("should print correct test data") {
+//                var dict: [String: Any] = ["aaa": 123, "bbb": "444", "ccc": [555, 666, 777]]
+//                let data = dict.toData()
+//                let json = dict.toJSONString()
+//                let value = dict.value(forKey: "ccc")
+//                dict.setValue(["1": 1, "2": 2], forKey: "ddd")
+//                let value2 = dict.value(forKey: "ddd")
+//
+//                print(data)
+//                print(json)
+//                print(value)
+//                print(value2)
+//            }
+//        }
     }
 }
 

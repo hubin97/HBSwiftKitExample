@@ -165,7 +165,8 @@ extension AdvancedFilter: UITableViewDataSource, UITableViewDelegate {
         let secModel = filterModels[indexPath.section]
         secModel.cellHeight = getRowHeight(with: indexPath.section)
         secModel.isMultiPiker = (secModel.sectitle == "添加日期") ? false: true
-        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(AdvancedFilterFlowCell.self), for: indexPath) as! AdvancedFilterFlowCell
+        // swiftlint:disable force_cast
+        let cell: AdvancedFilterFlowCell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(AdvancedFilterFlowCell.self), for: indexPath) as! AdvancedFilterFlowCell
         cell.secModel = secModel
         return cell
     }

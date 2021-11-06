@@ -97,9 +97,9 @@ extension MapLocationController {
 
     func poiSearch(location: CLLocation, keyword: String) {
         // let span = MKCoordinateSpanMake(0.01, 0.01)
-        let span = MKCoordinateSpanMake(1000, 1000)
-        let localSearchReq = MKLocalSearchRequest.init()
-        let region = MKCoordinateRegionMake(location.coordinate, span)
+        let span = MKCoordinateSpan.init(latitudeDelta: 1000, longitudeDelta: 1000)
+        let localSearchReq = MKLocalSearch.Request.init()
+        let region = MKCoordinateRegion.init(center: location.coordinate, span: span)
 
         localSearchReq.region = region
         localSearchReq.naturalLanguageQuery = keyword

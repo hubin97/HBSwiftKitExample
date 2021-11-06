@@ -259,6 +259,7 @@ extension VideoTimeView {
 // MARK: - private mothods
 extension VideoTimeView {
 
+    // swiftlint:disable function_body_length
     func configData(avAsset: AVAsset) {
         self.avAsset = avAsset
         imageGenerator?.cancelAllCGImageGeneration()
@@ -417,6 +418,7 @@ extension VideoTimeView: UICollectionViewDataSource, UICollectionViewDelegate, U
         return videoFrameCount
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // swiftlint:disable force_cast
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(VideoEditorCropViewCell.self), for: indexPath) as! VideoEditorCropViewCell
         return item
     }
@@ -429,6 +431,7 @@ extension VideoTimeView: UICollectionViewDataSource, UICollectionViewDelegate, U
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cgImage = videoFrameMap[indexPath.item] {
+            // swiftlint:disable force_cast
             let myCell = cell as! VideoEditorCropViewCell
             myCell.image = UIImage.init(cgImage: cgImage)
         }

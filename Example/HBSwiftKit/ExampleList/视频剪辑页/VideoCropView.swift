@@ -15,7 +15,7 @@ protocol VideoPlayerViewDelegate: NSObjectProtocol {
     func playerView(_ playerViewReadyForDisplay: VideoCropView)
 }
 
-protocol VideoCropViewDelegate: class {
+protocol VideoCropViewDelegate: AnyObject {
     func exportFailed(error: Error?)
     func exportSuccess(outputUrl: URL)
     func exportProgress(progress: CGFloat)
@@ -164,7 +164,7 @@ class VideoCropView: UIView {
     }
 
     func seek(to time: CMTime, comletion: ((Bool) -> Void)? = nil) {
-        player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero) { (isFinished) in
+        player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished) in
             comletion?(isFinished)
         }
     }
@@ -178,7 +178,7 @@ class VideoCropView: UIView {
                 }
             }
         } else {
-            seek(to: kCMTimeZero) { (isFinished) in
+            seek(to: CMTime.zero) { (isFinished) in
                 if isFinished {
                     self.play()
                 }
@@ -186,6 +186,7 @@ class VideoCropView: UIView {
         }
     }
 
+    // swiftlint:disable block_based_kvo
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if object is AVPlayerLayer && keyPath == "readyForDisplay" {
             if object as? AVPlayerLayer != playerLayer {
@@ -289,7 +290,7 @@ extension VideoCropView {
     func startExportSession() {
         reader?.startReading()
         writer?.startWriting()
-        writer?.startSession(atSourceTime: kCMTimeZero)
+        writer?.startSession(atSourceTime: CMTime.zero)
         // video
         writerVideoInput?.requestMediaDataWhenReady(on: videoExportQueue!, using: {
             while self.writerVideoInput!.isReadyForMoreMediaData {
@@ -373,14 +374,14 @@ extension VideoCropView {
         // add tracks
         if let track = sourceVideoTrack {
             do {
-                try compositionVideoTrack?.insertTimeRange(timeRange!, of: track, at: kCMTimeZero)
+                try compositionVideoTrack?.insertTimeRange(timeRange!, of: track, at: CMTime.zero)
                 compositionVideoTrack?.preferredTransform = track.preferredTransform
             } catch {
             }
         }
         if let track = sourceAudioTrack {
             do {
-                try compositionAudioTrack?.insertTimeRange(timeRange!, of: track, at: kCMTimeZero)
+                try compositionAudioTrack?.insertTimeRange(timeRange!, of: track, at: CMTime.zero)
             } catch {
                 audioTrackExists = false
             }
@@ -427,13 +428,13 @@ extension VideoCropView {
         let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
         instruction.timeRange = videoTrack.timeRange
         instruction.layerInstructions = [layerInstruction]
-        layerInstruction.setTransform(transform, at: kCMTimeZero)
+        layerInstruction.setTransform(transform, at: CMTime.zero)
 
         // videoComposition
         let videoComposition = AVMutableVideoComposition(propertiesOf: composition)
         videoComposition.renderSize = outputSize!
         videoComposition.instructions = [instruction]
-        videoComposition.frameDuration = CMTimeMake(1, Int32(videoTrack.nominalFrameRate))
+        videoComposition.frameDuration = CMTimeMake(value: 1, timescale: Int32(videoTrack.nominalFrameRate))
 
         return videoComposition
     }
@@ -480,20 +481,20 @@ extension VideoCropView {
         let width = outputSize!.width
         let height = outputSize!.height
         return [AVVideoHeightKey: height,
-                AVVideoWidthKey: width,
-                AVVideoCodecKey: AVVideoCodecH264,
-                AVVideoScalingModeKey: AVVideoScalingModeResizeAspectFill,
-                AVVideoCompressionPropertiesKey: [AVVideoAverageBitRateKey: bitRate!,
-                                                 AVVideoProfileLevelKey: profile ?? AVVideoProfileLevelH264MainAutoLevel,
-                                                 AVVideoCleanApertureKey: [
-                                                    AVVideoCleanApertureWidthKey: width,
-                                                    AVVideoCleanApertureHeightKey: height,
-                                                    AVVideoCleanApertureHorizontalOffsetKey: 10,
-                                                    AVVideoCleanApertureVerticalOffsetKey: 10],
-                                                 AVVideoPixelAspectRatioKey: [
-                                                    AVVideoPixelAspectRatioHorizontalSpacingKey: 1,
-                                                    AVVideoPixelAspectRatioVerticalSpacingKey: 1]
-                ]
+                 AVVideoWidthKey: width,
+                 AVVideoCodecKey: AVVideoCodecH264,
+           AVVideoScalingModeKey: AVVideoScalingModeResizeAspectFill,
+ AVVideoCompressionPropertiesKey: [AVVideoAverageBitRateKey: bitRate!,
+                                     AVVideoProfileLevelKey: (profile ?? AVVideoProfileLevelH264MainAutoLevel) as Any,
+                                    AVVideoCleanApertureKey: [
+                                        AVVideoCleanApertureWidthKey: width,
+                                        AVVideoCleanApertureHeightKey: height,
+                                        AVVideoCleanApertureHorizontalOffsetKey: 10,
+                                        AVVideoCleanApertureVerticalOffsetKey: 10],
+                                 AVVideoPixelAspectRatioKey: [
+                                    AVVideoPixelAspectRatioHorizontalSpacingKey: 1,
+                                    AVVideoPixelAspectRatioVerticalSpacingKey: 1]
+                                  ]
         ]
     }
 

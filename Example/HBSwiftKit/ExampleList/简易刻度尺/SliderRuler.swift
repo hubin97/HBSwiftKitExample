@@ -167,6 +167,7 @@ extension SliderRuler: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0 || indexPath.item == stepNum + 1 {
+            // swiftlint:disable force_cast
             let spacecell = collectionView.dequeueReusableCell(withReuseIdentifier: "spacecell", for: indexPath) as! SliderRulerSpaceItem
             spacecell.backgroundColor = .clear
             spacecell.direction = direction
@@ -175,6 +176,7 @@ extension SliderRuler: UICollectionViewDataSource, UICollectionViewDelegate {
             spacecell.setNeedsDisplay()
             return spacecell
         }
+        // swiftlint:disable force_cast
         let itemcell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemcell", for: indexPath) as! SliderRulerItem
         itemcell.backgroundColor = .clear
         itemcell.index = indexPath.item

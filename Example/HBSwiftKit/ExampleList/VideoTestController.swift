@@ -55,10 +55,10 @@ extension VideoTestController: UIImagePickerControllerDelegate, UINavigationCont
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         print("didFinishPickingMediaWithInfo1---")
         self.navigationController?.dismiss(animated: true, completion: { [weak self] in
-            if let url = info[UIImagePickerControllerMediaURL] as? URL {
+            if let url = info[UIImagePickerController.InfoKey.mediaURL.rawValue] as? URL {
                 let asset = AVAsset.init(url: url)
                 print("asset---\(CMTimeGetSeconds(asset.duration))")
                 // self?.cropHandle(asset: asset, whRatio: 3.0/4)

@@ -159,7 +159,7 @@ extension Extension_View {
     //MARK: 移除所有子视图
     /// 移除所有子视图
     public func removeAllSubviews() {
-        _ = self.subviews.map({ $0.removeFromSuperview() })
+        self.subviews.forEach({ $0.removeFromSuperview() })
     }
     
     //MARK: 指定矩形圆角

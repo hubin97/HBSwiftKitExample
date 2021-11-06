@@ -214,8 +214,8 @@ extension ImageBrowerController: UICollectionViewDataSource, UICollectionViewDel
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         let model = snapshotModels[indexPath.row]
+        // swiftlint:disable force_cast
         let itemCell: SnapshotItem = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(SnapshotItem.self), for: indexPath) as! SnapshotItem
         itemCell.contentView.backgroundColor = .gray
         itemCell.model = model

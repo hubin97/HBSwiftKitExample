@@ -181,7 +181,7 @@ extension Wto_Calendar {
         let nowDate: String = Wto_CalendarUtils.stringFromDate(date: Date(), format: "yyyy-MM")
         self.isCurrentMonth = nowDate == dateStr
 
-        /// FIXME: 限制当前月不能查看下个月
+        // 限制当前月不能查看下个月
         self.nextMonthButton.isEnabled = !self.isCurrentMonth
 
         // 重置日历高度  2020/02   2020/08  2019/11
@@ -240,8 +240,8 @@ extension Wto_Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // let item = collectionView.getRecycleCell(indexPath, CalendarItem.self)
+        // swiftlint:disable force_cast
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(CalendarItem.self), for: indexPath) as! CalendarItem
-
         item.clearDaysLabelStyle()
 
         var day = 0
@@ -253,7 +253,7 @@ extension Wto_Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
             day = index - self.firstDayIsWeekInMonth + 1
             item.daysLabel.text = String(day)
 
-            /// TODO: 匹配日期格式(yyyy-MM-dd)数组
+            // 匹配日期格式(yyyy-MM-dd)数组
             let dateStr = Wto_CalendarUtils.stringFromDate(date: date, format: "yyyy-MM")
             let current_date = dateStr + String(format: "-%02d", day)
 
@@ -274,7 +274,7 @@ extension Wto_Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
                     item.isSelectedItem = false
                 }
 
-                /// FIXME: 限制当月当天以后的日期置灰，不可点击
+                // 限制当月当天以后的日期置灰，不可点击
                 if day > Int(today)! {
                     item.isDisable = true
                 }
@@ -288,7 +288,7 @@ extension Wto_Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
         let currentCell = collectionView.cellForItem(at: indexPath) as! CalendarItem
 
         /// 是否已经选中
-        // FIXME: 允许选中可重复点击, 再次选中当天修改
+        // 允许选中可重复点击, 再次选中当天修改
 //        guard !currentCell.isSelectedItem else {
 //            return
 //        }
@@ -299,7 +299,7 @@ extension Wto_Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
             return
         }
 
-        /// FIXME: 限制当月当天以后的日期置灰，不可点击
+        // 限制当月当天以后的日期置灰，不可点击
         let currDay = indexPath.row - self.firstDayIsWeekInMonth + 1
         // print("###\(currDay)")
 
@@ -308,6 +308,7 @@ extension Wto_Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
         }
 
         /// 获取上一次选中的item
+        // swiftlint:disable force_cast
         let preCell = collectionView.cellForItem(at: self.lastSelectedItemIndex!) as! CalendarItem
         preCell.isSelectedItem = false
 

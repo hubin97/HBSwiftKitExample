@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import QuartzCore
+// import opencv2
 
 // MARK: - global var and methods
 
@@ -68,6 +69,8 @@ class UIKitTestController: BaseViewController {
         self.navigationItem.title = "UIKit Test"
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction(_:)))
+
+        customBtn()
     }
 }
 
@@ -102,7 +105,17 @@ extension UIKitTestController {
     }
 
     @objc func btnAction1(_ sender: UIButton) {
-        print("btnAction1")
+        // print("btnAction1")
+        print("\([Date()]) enter()")
+        Throttler.shared.fire(duration: TimeInterval(3)) {
+            print("\([Date()]) call()")
+        }
+
+//        print("\([Date()]) enter()")
+//        let tt = Throttler.init(time: .milliseconds(500), queue: DispatchQueue.main, immediateFire: true) {
+//            print("\([Date()]) call()")
+//        }
+//        tt.call()
     }
 
     /// 双列表关联
@@ -133,15 +146,15 @@ extension UIKitTestController {
                                    NSValue(cgPoint: CGPoint(x: orignPoint.x, y: orignPoint.y - 10)),
                                    NSValue(cgPoint: orignPoint)]
         animateKeyframes.keyTimes = [0, 0.2, 0.38, 0.52, 0.66, 0.76, 0.86, 0.93, 1]
-        animateKeyframes.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
-                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
-                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
-                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
-                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
-                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
-                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
-                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
-                                            CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)]
+        animateKeyframes.timingFunctions = [CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+                                            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+                                            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+                                            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+                                            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+                                            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+                                            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+                                            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+                                            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)]
         ball.layer.add(animateKeyframes, forKey: nil)
     }
 
@@ -252,5 +265,19 @@ class SwiftFuncInvokeTest {
 
     func test2(param: String) {
         print("test2: \(param)")
+    }
+}
+
+// 节流
+class Throttler {
+    static let shared = Throttler()
+    var isValid = true
+    func fire(duration: TimeInterval, completeHandle: (() -> Void)?) {
+        guard isValid else { return }
+        self.isValid = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
+            self?.isValid = true
+            completeHandle?()
+        }
     }
 }

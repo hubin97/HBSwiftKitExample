@@ -109,7 +109,7 @@ extension Wto_ImageBrower {
     @objc public func show() {
 
         self.albumCollect.reloadData()
-        // TODO: 这个地方的方向待确认
+        // 这个地方的方向待确认
         self.albumCollect.scrollToItem(at: IndexPath.init(item: self.currentPage, section: 0), at: .centeredHorizontally, animated: true)
 
         DispatchQueue.main.async {
@@ -157,8 +157,8 @@ extension Wto_ImageBrower: UICollectionViewDataSource, UICollectionViewDelegate 
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         let model = imageModels[indexPath.row]
+        // swiftlint:disable force_cast
         let itemCell: Wto_ImageBrowerItem = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(Wto_ImageBrowerItem.self), for: indexPath) as! Wto_ImageBrowerItem
         itemCell.contentView.backgroundColor = .black
         itemCell.model = model
@@ -174,6 +174,7 @@ open class Wto_ImageBrowerItem: UICollectionViewCell {
 
             if model?.mode == Wto_ImageBrower.Mode.imagePath {
                 // iconView.kf.indicatorType = .activity
+                // swiftlint:disable multiple_closures_with_trailing_closure
                 iconView.kf.setImage(with: URL(string: model?.path ?? ""), placeholder: nil, options: [.transition(.fade(1))], progressBlock: { (_, _) in
                     if self.activityView.isAnimating == false {
                         self.activityView.startAnimating()

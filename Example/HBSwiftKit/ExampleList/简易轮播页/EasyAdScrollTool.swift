@@ -153,6 +153,7 @@ extension EasyAdScrollTool: UICollectionViewDataSource, UICollectionViewDelegate
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let model = datas[indexPath.item]
+        // swiftlint:disable force_cast
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(EasyAdScrollItem.self), for: indexPath) as! EasyAdScrollItem
         item.model = model
         return item
