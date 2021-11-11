@@ -62,6 +62,7 @@ import CoreTelephony
  https://www.jianshu.com/p/0902b2b0b3e3?from=singlemessage
  */
 //MARK: - global var and methods
+// !!!: 务必考虑回调内容是否需要主线程处理
 public typealias AuthStatus = AuthorizationStatus
 public typealias AuthsBlock = (_ isEnable: Bool?) -> Void
 

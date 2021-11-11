@@ -267,7 +267,7 @@ class SnapshotModel {
 }
 
 /// 选中计算更新代理
-protocol UpdateSelectCountDelegate: class {
+protocol UpdateSelectCountDelegate: AnyObject {
     func updateSelectCount()
 }
 

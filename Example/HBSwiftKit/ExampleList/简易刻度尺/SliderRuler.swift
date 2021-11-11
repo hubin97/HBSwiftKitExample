@@ -16,7 +16,7 @@ private let rulerLineLong  = 30
 /// 刻度指示线长度
 private let flagLineLength = 45
 
-protocol SliderRulerDelegate: class {
+protocol SliderRulerDelegate: AnyObject {
 
     /// 滚动回调
     /// - Parameters:

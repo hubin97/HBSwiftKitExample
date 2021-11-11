@@ -8,7 +8,7 @@
 import Foundation
 import SnapKit
 // MARK: - global var and methods
-protocol VideoToolViewDelegate: class {
+protocol VideoToolViewDelegate: AnyObject {
     func videoToolActionCancel()
     func videoToolActionConfir()
     func videoToolActionPlay(_ isPlay: Bool)

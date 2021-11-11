@@ -219,7 +219,7 @@ class AdvancedFilterRowModel {
     var isSelected: Bool? = false
 }
 
-protocol AdvancedFilterSecHeaderDelegate: class {
+protocol AdvancedFilterSecHeaderDelegate: AnyObject {
     func updateHeaderExpand(isExpanded: Bool)
 }
 
@@ -302,7 +302,7 @@ class AdvancedFilterFlowCell: UITableViewCell, UICollectionViewDataSource, UICol
         return dataCollection
     }()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(dataCollection)
     }

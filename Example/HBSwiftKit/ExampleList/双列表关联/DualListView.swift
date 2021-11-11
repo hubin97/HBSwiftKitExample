@@ -112,7 +112,7 @@ class FamilyAreaOptionsView: UIView, DualListDataSourceDelegate {
     }
 }
 
-protocol DualListDataSourceDelegate: class {
+protocol DualListDataSourceDelegate: AnyObject {
     func didSelectedModel(mModel: DualListMasterModel?, dModel: DualListDetailModel?)
 }
 
@@ -262,7 +262,7 @@ class DualListDetailModel {
 
 class DualListMasterCell: UITableViewCell {
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
 
@@ -273,7 +273,7 @@ class DualListMasterCell: UITableViewCell {
 
 class DualListDetailCell: UITableViewCell {
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
 

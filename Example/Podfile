@@ -13,6 +13,7 @@ target 'HBSwiftKit_Example' do
   pod 'Kingfisher'
   pod 'R.swift' #, '~> 5.3.1'
   pod 'SwiftLint', '~> 0.44.0'
+  #pod 'OpenCV', '~> 4.3.0'
   
   target 'HBSwiftKit_Tests' do
     inherit! :search_paths

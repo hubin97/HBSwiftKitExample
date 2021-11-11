@@ -193,7 +193,7 @@ extension VideoTimeView {
         return second
     }
     func getStartTime(real: Bool = false) -> CMTime {
-        return CMTimeMakeWithSeconds(Float64(getStartDuration(real: real)), avAsset.duration.timescale)
+        return CMTimeMakeWithSeconds(Float64(getStartDuration(real: real)), preferredTimescale: avAsset.duration.timescale)
     }
     func getEndDuration(real: Bool = false) -> CGFloat {
         let videoSecond = videoDuration(real: real)
@@ -205,7 +205,7 @@ extension VideoTimeView {
         return second
     }
     func getEndTime(real: Bool = false) -> CMTime {
-        return CMTimeMakeWithSeconds(Float64(getEndDuration(real: real)), avAsset.duration.timescale)
+        return CMTimeMakeWithSeconds(Float64(getEndDuration(real: real)), preferredTimescale: avAsset.duration.timescale)
     }
     func stopScroll() {
         let inset = collectionView.contentInset
@@ -317,8 +317,8 @@ extension VideoTimeView {
         imageGenerator = AVAssetImageGenerator.init(asset: avAsset)
         imageGenerator?.maximumSize = CGSize(width: itemWidth * 2, height: itemHeight * 2)
         imageGenerator?.appliesPreferredTrackTransform = true
-        imageGenerator?.requestedTimeToleranceAfter = kCMTimeZero
-        imageGenerator?.requestedTimeToleranceBefore = kCMTimeZero
+        imageGenerator?.requestedTimeToleranceAfter = CMTime.zero
+        imageGenerator?.requestedTimeToleranceBefore = CMTime.zero
 
         var times: [NSValue] = []
         for index in 0..<videoFrameCount {
@@ -371,7 +371,7 @@ extension VideoTimeView {
                 second = CGFloat(index) * interval + interval * 0.5
             }
         }
-        let time = CMTimeMakeWithSeconds(Float64(second), avAsset.duration.timescale)
+        let time = CMTimeMakeWithSeconds(Float64(second), preferredTimescale: avAsset.duration.timescale)
         return time
     }
 

@@ -189,7 +189,7 @@ open class Wto_ImageBrowerItem: UICollectionViewCell {
     }
 
     let subScroll = UIScrollView()
-    let activityView = UIActivityIndicatorView.init(activityIndicatorStyle: .whiteLarge)
+    let activityView = UIActivityIndicatorView.init(style: .whiteLarge)
     let iconView = UIImageView()
 
     override init(frame: CGRect) {
