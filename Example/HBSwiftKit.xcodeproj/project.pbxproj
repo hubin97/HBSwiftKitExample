@@ -20,6 +20,7 @@
 		B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */; };
 		B53D570326268EBE001D0BC0 /* HBSwiftKit_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D570226268EBE001D0BC0 /* HBSwiftKit_UITests.swift */; };
 		B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541412C268EAF06008CE14B /* MapLocationController.swift */; };
+		B54DF45F273E5C5100F564FB /* resource in Resources */ = {isa = PBXBuildFile; fileRef = B54DF45E273E5C5100F564FB /* resource */; };
 		B5557A3526706188007F5B44 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = B5557A3426706188007F5B44 /* loading.gif */; };
 		B557085027225E5500C22CD4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B557084F27225E5500C22CD4 /* .swiftlint.yml */; };
 		B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557E4DA2631304800C62147 /* ThemeStyle.swift */; };
@@ -33,6 +34,7 @@
 		B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E3C26F0884F00539866 /* VideoToolView.swift */; };
 		B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5832B1F270FD6EE0084C78E /* VideoTestController.swift */; };
 		B58F80AE273CB51500C778D5 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = B58F80AC273CB51500C778D5 /* OpenCVWrapper.mm */; };
+		B58F80B1273CBF5600C778D5 /* HSVPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58F80B0273CBF5600C778D5 /* HSVPickerView.swift */; };
 		B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC828255A7818005A5179 /* ImageBrowerController.swift */; };
 		B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC829255A7818005A5179 /* NumberPickerController.swift */; };
 		B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */; };
@@ -96,6 +98,7 @@
 		B53D570226268EBE001D0BC0 /* HBSwiftKit_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBSwiftKit_UITests.swift; sourceTree = "<group>"; };
 		B53D570426268EBE001D0BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B541412C268EAF06008CE14B /* MapLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationController.swift; sourceTree = "<group>"; };
+		B54DF45E273E5C5100F564FB /* resource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resource; sourceTree = "<group>"; };
 		B5557A3426706188007F5B44 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		B557084F27225E5500C22CD4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		B557E4DA2631304800C62147 /* ThemeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStyle.swift; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 		B58F80AB273CB4ED00C778D5 /* wechat_qrcode.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = wechat_qrcode.zip; sourceTree = "<group>"; };
 		B58F80AC273CB51500C778D5 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
 		B58F80AD273CB51500C778D5 /* OpenCVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
+		B58F80B0273CBF5600C778D5 /* HSVPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSVPickerView.swift; sourceTree = "<group>"; };
 		B5BAC828255A7818005A5179 /* ImageBrowerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowerController.swift; sourceTree = "<group>"; };
 		B5BAC829255A7818005A5179 /* NumberPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberPickerController.swift; sourceTree = "<group>"; };
 		B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerController.swift; sourceTree = "<group>"; };
@@ -276,6 +280,15 @@
 			path = HBSwiftKit_UITests;
 			sourceTree = "<group>";
 		};
+		B54DF449273E5A7F00F564FB /* 色盘选择器 */ = {
+			isa = PBXGroup;
+			children = (
+				B54DF45E273E5C5100F564FB /* resource */,
+				B58F80B0273CBF5600C778D5 /* HSVPickerView.swift */,
+			);
+			path = "色盘选择器";
+			sourceTree = "<group>";
+		};
 		B5887FA3264CD719003C1896 /* 双列表关联 */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +371,7 @@
 				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
 				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
 				1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */,
+				B54DF449273E5A7F00F564FB /* 色盘选择器 */,
 				B533677026E84FED0009B60F /* 视频剪辑页 */,
 				B5887FA3264CD719003C1896 /* 双列表关联 */,
 				B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */,
@@ -531,6 +545,7 @@
 				B5BAC835255A7875005A5179 /* images.json in Resources */,
 				B5DCC71425F3266D007E3237 /* areacode.plist in Resources */,
 				B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */,
+				B54DF45F273E5C5100F564FB /* resource in Resources */,
 				B5D55405261D40AE007A20F5 /* jstest.html in Resources */,
 				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
 				B5557A3526706188007F5B44 /* loading.gif in Resources */,
@@ -568,6 +583,7 @@
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/HBSwiftKit/HBSwiftKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
@@ -576,6 +592,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBSwiftKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
@@ -662,7 +679,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/HBSwiftKit/Resources/R.generated.swift,
+				"$SRCROOT/HBSwiftKit/Resources/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -721,6 +738,7 @@
 				B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */,
 				B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */,
 				B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */,
+				B58F80B1273CBF5600C778D5 /* HSVPickerView.swift in Sources */,
 				B533677326E852550009B60F /* VideoCropController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

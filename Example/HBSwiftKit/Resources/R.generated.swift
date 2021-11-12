@@ -114,7 +114,7 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.file` struct is generated, and contains static references to 10 files.
+  /// This `R.file` struct is generated, and contains static references to 11 files.
   struct file {
     /// Resource file `.swiftlint.yml`.
     static let swiftlintYml = Rswift.FileResource(bundle: R.hostingBundle, name: ".swiftlint", pathExtension: "yml")
@@ -134,6 +134,8 @@ struct R: Rswift.Validatable {
     static let jstestHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "jstest", pathExtension: "html")
     /// Resource file `loading.gif`.
     static let loadingGif = Rswift.FileResource(bundle: R.hostingBundle, name: "loading", pathExtension: "gif")
+    /// Resource file `resource`.
+    static let resource = Rswift.FileResource(bundle: R.hostingBundle, name: "resource", pathExtension: "")
     /// Resource file `温柔女声.mp3`.
     static let 温柔女声Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "温柔女声", pathExtension: "mp3")
 
@@ -188,6 +190,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "loading", withExtension: "gif")`
     static func loadingGif(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.loadingGif
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "resource", withExtension: "")`
+    static func resource(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.resource
       return fileResource.bundle.url(forResource: fileResource)
     }
 

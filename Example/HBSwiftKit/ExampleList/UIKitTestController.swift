@@ -79,7 +79,8 @@ extension UIKitTestController {
 
     @objc func filterAction(_ sender: UIBarButtonItem) {
         // showRulerView()
-        showTagsView(nil)
+        //showTagsView(nil)
+        HSVPickerView().show()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -53,7 +53,7 @@ open class BaseWKWebController: BaseViewController, WKWebScriptMsgHandleAble {
         config.preferences.minimumFontSize = 10
         config.preferences.javaScriptEnabled = true
         //config.preferences.allowsContentJavaScript = true
-        config.preferences.javaScriptCanOpenWindowsAutomatically = false
+        //config.preferences.javaScriptCanOpenWindowsAutomatically = false
         let js_source = "document.documentElement.style.webkitTouchCallout='none';" + "document.documentElement.style.webkitUserSelect='none';"
         let userScript = WKUserScript.init(source: js_source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         config.userContentController.addUserScript(userScript)

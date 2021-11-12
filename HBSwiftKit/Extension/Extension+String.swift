@@ -109,7 +109,7 @@ extension Extension_String {
     ///
     ///        "Hello 😀".containEmoji -> true
     ///
-    var containEmoji: Bool {
+    public var containEmoji: Bool {
         // http://stackoverflow.com/questions/30757193/find-out-if-character-in-string-is-emoji
         for scalar in unicodeScalars {
             switch scalar.value {
@@ -139,7 +139,7 @@ extension Extension_String {
     ///
     ///        "it's%20easy%20to%20decode%20strings".urlDecoded -> "it's easy to decode strings"
     ///
-    var urlDecoded: String {
+    public var urlDecoded: String {
         return removingPercentEncoding ?? self
     }
     
@@ -147,7 +147,7 @@ extension Extension_String {
     ///
     ///        "it's easy to encode strings".urlEncoded -> "it's%20easy%20to%20encode%20strings"
     ///
-    var urlEncoded: String {
+    public var urlEncoded: String {
         return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
     }
     
@@ -155,7 +155,7 @@ extension Extension_String {
     /// import CommonCrypto
     /// SHA 是 Secure Hash Algorithm 的缩写，即安全哈希算法。
     /// SHA256 也成为 SHA2，它是从SHA1进化而来，目前没有发现SHA256被破坏，但随着计算机计算能力越来越强大，它肯定会被破坏，所以SHA3已经在路上了。
-    func sha256() -> String {
+    public func sha256() -> String {
         let utf8 = cString(using: .utf8)
         var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
         CC_SHA256(utf8, CC_LONG(utf8!.count - 1), &digest)

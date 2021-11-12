@@ -29,6 +29,7 @@ PODS:
     - HBSwiftKit/Global
   - Kingfisher (4.10.1)
   - Nimble (9.2.1)
+  - ObjectMapper (4.2.0)
   - Quick (3.1.2)
   - R.swift (5.4.0):
     - R.swift.Library (~> 5.3.0)
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - HBSwiftKit (from `../`)
   - Kingfisher
   - Nimble (~> 9.2.1)
+  - ObjectMapper
   - Quick
   - R.swift
   - SnapKit
@@ -50,6 +52,7 @@ SPEC REPOS:
     - CocoaLumberjack
     - Kingfisher
     - Nimble
+    - ObjectMapper
     - Quick
     - R.swift
     - R.swift.Library
@@ -65,12 +68,13 @@ SPEC CHECKSUMS:
   HBSwiftKit: 8730e19d07823a7aa365de4b14ea984b3bae8105
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
   R.swift: c533450b0f7dc494e0993f5f1a1db925d84c3006
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
 
-PODFILE CHECKSUM: 51dd8d4d6616335a6c91a91284ea65c0ef505ff9
+PODFILE CHECKSUM: 74a8504f5b5dde0852b9333633cf0d7487ccfcb4
 
 COCOAPODS: 1.10.1
