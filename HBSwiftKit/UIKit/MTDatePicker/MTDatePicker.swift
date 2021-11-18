@@ -153,17 +153,7 @@ open class MTDatePicker: UIPickerView {
     open override func layoutSubviews() {
         super.layoutSubviews()
         if !showiOS14SelectedBgColor {
-            hideHighlightBgColor()
-        }
-    }
-    
-    /// 适配iOS14的选中灰色背景, 排除分割线; show()
-    func hideHighlightBgColor() {
-        if #available(iOS 14.0, *) {
-            let selectViews = self.subviews.filter({ $0.subviews.count == 0 })
-            if selectViews.count > 0 {
-                _ = selectViews.filter({ $0.bounds.size.height > 1 }).map({ $0.backgroundColor = .clear })
-            }
+            self.hideHighlightBgColor()
         }
     }
     

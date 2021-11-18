@@ -64,6 +64,14 @@ class UIKitTestController: BaseViewController {
 
     var avPlayer: AVAudioPlayer?
 
+    var allBrightList: [Int] {
+        var temp = [Int]()
+        for index in 0...100 {
+            temp.append(index)
+        }
+        return temp
+    }
+
     override func setupUi() {
         super.setupUi()
         self.navigationItem.title = "UIKit Test"
@@ -79,8 +87,11 @@ extension UIKitTestController {
 
     @objc func filterAction(_ sender: UIBarButtonItem) {
         // showRulerView()
-        //showTagsView(nil)
-        HSVPickerView().show()
+        // showTagsView(nil)
+        // let picker = DPAttrsPickerView(mode: .hsv, duration: 3, colorValue: HsvColor(hue: 0, saturation: 0))
+        let picker = DPAttrsPickerView(mode: .brightness, duration: 3)
+        picker.pickerDatas = allBrightList
+        picker.show()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

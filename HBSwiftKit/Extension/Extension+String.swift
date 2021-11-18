@@ -146,9 +146,9 @@ extension Extension_String {
     /// SwifterSwift: URL escaped string.
     ///
     ///        "it's easy to encode strings".urlEncoded -> "it's%20easy%20to%20encode%20strings"
-    ///
+    /// ???  .urlQueryAllowed
     public var urlEncoded: String {
-        return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        return addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     }
     
     /// SHA256加密
@@ -164,18 +164,33 @@ extension Extension_String {
     
     //MARK: - NSRange usage
     /// 截取NSRange范围的子字符串
-    func subString(with range: NSRange) -> String {
+    public func subString(with range: NSRange) -> String {
         let text = self as NSString
         let subStr = text.substring(with: range) as String
         return subStr
     }
     
     /// 获取子字符串的范围NSRange
-    /// - Parameter subString: <#subString description#>
-    /// - Returns: <#description#>
-    func nsRange(of subString: String) -> NSRange {
+    /// - Parameter subString: 子字符串
+    /// - Returns: NSRange
+    public func nsRange(of subString: String) -> NSRange {
         let text = self as NSString
         return text.range(of: subString)
+    }
+
+    public func toNSRange(_ range: Range<String.Index>) -> NSRange {
+        guard let from = range.lowerBound.samePosition(in: utf16), let to = range.upperBound.samePosition(in: utf16) else {
+            return NSMakeRange(0, 0)
+        }
+        return NSMakeRange(utf16.distance(from: utf16.startIndex, to: from), utf16.distance(from: from, to: to))
+    }
+
+    public func toRange(_ range: NSRange) -> Range<String.Index>? {
+        guard let from16 = utf16.index(utf16.startIndex, offsetBy: range.location, limitedBy: utf16.endIndex) else { return nil }
+        guard let to16 = utf16.index(from16, offsetBy: range.length, limitedBy: utf16.endIndex) else { return nil }
+        guard let from = String.Index(from16, within: self) else { return nil }
+        guard let to = String.Index(to16, within: self) else { return nil }
+        return from ..< to
     }
 }
 

@@ -34,13 +34,13 @@
 		B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E3C26F0884F00539866 /* VideoToolView.swift */; };
 		B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5832B1F270FD6EE0084C78E /* VideoTestController.swift */; };
 		B58F80AE273CB51500C778D5 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = B58F80AC273CB51500C778D5 /* OpenCVWrapper.mm */; };
-		B58F80B1273CBF5600C778D5 /* HSVPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58F80B0273CBF5600C778D5 /* HSVPickerView.swift */; };
 		B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC828255A7818005A5179 /* ImageBrowerController.swift */; };
 		B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC829255A7818005A5179 /* NumberPickerController.swift */; };
 		B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */; };
 		B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82B255A7818005A5179 /* BlueToothController.swift */; };
 		B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82C255A7818005A5179 /* DatePickerController.swift */; };
 		B5BAC835255A7875005A5179 /* images.json in Resources */ = {isa = PBXBuildFile; fileRef = B5BAC834255A7875005A5179 /* images.json */; };
+		B5BEA1A92744B88B005B8F54 /* DPAttrsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BEA1A82744B88A005B8F54 /* DPAttrsPickerView.swift */; };
 		B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5C625ECCE7700C88C1C /* SliderRuler.swift */; };
 		B5C6C5EA25ECD38800C88C1C /* Wto_ImageBrower.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5DE25ECD1BD00C88C1C /* Wto_ImageBrower.swift */; };
 		B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5E025ECD1C400C88C1C /* Wto_ThemeMode.swift */; };
@@ -55,6 +55,7 @@
 		B5F8390226982D8E0001C484 /* 温柔女声.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */; };
 		B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4F26257A365E007F1238 /* WebPreviewController.swift */; };
 		B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */; };
+		B5FEFA3B27462A6F00DA6999 /* SlidePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BEA1AC2744B91F005B8F54 /* SlidePickerView.swift */; };
 		FE480E90E2CA32C49FC5A2F3 /* Pods_HBSwiftKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4845C4375F7293ACE69A0714 /* Pods_HBSwiftKit_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,7 +115,6 @@
 		B58F80AB273CB4ED00C778D5 /* wechat_qrcode.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = wechat_qrcode.zip; sourceTree = "<group>"; };
 		B58F80AC273CB51500C778D5 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
 		B58F80AD273CB51500C778D5 /* OpenCVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
-		B58F80B0273CBF5600C778D5 /* HSVPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSVPickerView.swift; sourceTree = "<group>"; };
 		B5BAC828255A7818005A5179 /* ImageBrowerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowerController.swift; sourceTree = "<group>"; };
 		B5BAC829255A7818005A5179 /* NumberPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberPickerController.swift; sourceTree = "<group>"; };
 		B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerController.swift; sourceTree = "<group>"; };
@@ -122,6 +122,8 @@
 		B5BAC82C255A7818005A5179 /* DatePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		B5BAC834255A7875005A5179 /* images.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = images.json; sourceTree = "<group>"; };
 		B5BAC85B255A7C0C005A5179 /* HBSwiftKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HBSwiftKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		B5BEA1A82744B88A005B8F54 /* DPAttrsPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPAttrsPickerView.swift; sourceTree = "<group>"; };
+		B5BEA1AC2744B91F005B8F54 /* SlidePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidePickerView.swift; sourceTree = "<group>"; };
 		B5C6C5C625ECCE7700C88C1C /* SliderRuler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderRuler.swift; sourceTree = "<group>"; };
 		B5C6C5CE25ECD08900C88C1C /* EditTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableView.swift; sourceTree = "<group>"; };
 		B5C6C5DE25ECD1BD00C88C1C /* Wto_ImageBrower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wto_ImageBrower.swift; sourceTree = "<group>"; };
@@ -284,7 +286,8 @@
 			isa = PBXGroup;
 			children = (
 				B54DF45E273E5C5100F564FB /* resource */,
-				B58F80B0273CBF5600C778D5 /* HSVPickerView.swift */,
+				B5BEA1A82744B88A005B8F54 /* DPAttrsPickerView.swift */,
+				B5BEA1AC2744B91F005B8F54 /* SlidePickerView.swift */,
 			);
 			path = "色盘选择器";
 			sourceTree = "<group>";
@@ -679,7 +682,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/HBSwiftKit/Resources/R.generated.swift",
+				$SRCROOT/HBSwiftKit/Resources/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -722,6 +725,7 @@
 				1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */,
 				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
 				B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */,
+				B5BEA1A92744B88B005B8F54 /* DPAttrsPickerView.swift in Sources */,
 				B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */,
 				B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */,
 				B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */,
@@ -734,11 +738,11 @@
 				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
 				B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */,
 				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,
+				B5FEFA3B27462A6F00DA6999 /* SlidePickerView.swift in Sources */,
 				B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */,
 				B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */,
 				B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */,
 				B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */,
-				B58F80B1273CBF5600C778D5 /* HSVPickerView.swift in Sources */,
 				B533677326E852550009B60F /* VideoCropController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

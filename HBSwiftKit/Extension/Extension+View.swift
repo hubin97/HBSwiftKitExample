@@ -25,7 +25,7 @@ fileprivate typealias Extension_View = UIView
 extension Extension_View {
     
     ///< Shortcut for frame.origin.x.
-    public var left: CGFloat {
+    public var minX: CGFloat {
         get {
             return self.frame.origin.x
         }
@@ -37,7 +37,7 @@ extension Extension_View {
     }
     
     ///< Shortcut for frame.origin.y
-    public var top: CGFloat {
+    public var minY: CGFloat {
         get {
             return self.frame.origin.y
         }
@@ -49,7 +49,7 @@ extension Extension_View {
     }
     
     ///< Shortcut for frame.origin.x + frame.size.width
-    public var right: CGFloat {
+    public var maxX: CGFloat {
         get {
             return self.frame.origin.x + self.frame.size.width
         }
@@ -61,7 +61,7 @@ extension Extension_View {
     }
     
     ///< Shortcut for frame.origin.y + frame.size.height
-    public var bottom: CGFloat {
+    public var maxY: CGFloat {
         get {
             return self.frame.origin.y + self.frame.size.height
         }

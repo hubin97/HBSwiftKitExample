@@ -210,16 +210,6 @@ extension NumberPicker {
         super.layoutSubviews()
         hideHighlightBgColor()
     }
-
-    /// 适配iOS14的选中灰色背景, 排除分割线; show()
-    func hideHighlightBgColor() {
-        if #available(iOS 14.0, *) {
-            let selectViews = self.subviews.filter({ $0.subviews.count == 0 })
-            if selectViews.count > 0 {
-                _ = selectViews.filter({ $0.bounds.size.height > 1 }).map({ $0.backgroundColor = .clear })
-            }
-        }
-    }
 }
 
 // MARK: data source /delegate
@@ -341,18 +331,18 @@ class HorizonNumPickerView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        hideHighlightBgColor()
+        numPicker.hideHighlightBgColor()
     }
 
     /// 适配iOS14的选中灰色背景, 排除分割线; show()
-    func hideHighlightBgColor() {
-        if #available(iOS 14.0, *) {
-            let selectViews = numPicker.subviews.filter({ $0.subviews.count == 0 })
-            if selectViews.count > 0 {
-                _ = selectViews.filter({ $0.bounds.size.height > 1 }).map({ $0.backgroundColor = .clear })
-            }
-        }
-    }
+//    func hideHighlightBgColor() {
+//        if #available(iOS 14.0, *) {
+//            let selectViews = numPicker.subviews.filter({ $0.subviews.count == 0 })
+//            if selectViews.count > 0 {
+//                _ = selectViews.filter({ $0.bounds.size.height > 1 }).map({ $0.backgroundColor = .clear })
+//            }
+//        }
+//    }
 }
 
 extension HorizonNumPickerView: UIPickerViewDataSource, UIPickerViewDelegate {
