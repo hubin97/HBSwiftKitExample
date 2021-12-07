@@ -72,13 +72,17 @@ class UIKitTestController: BaseViewController {
         return temp
     }
 
+    var signalPlate: SignalPlateView!
+    var signalMark: SignalMarkView!
     override func setupUi() {
         super.setupUi()
         self.navigationItem.title = "UIKit Test"
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction(_:)))
 
-        customBtn()
+        //customBtn()
+
+        signalCheck()
     }
 }
 
@@ -88,19 +92,45 @@ extension UIKitTestController {
     @objc func filterAction(_ sender: UIBarButtonItem) {
         // showRulerView()
         // showTagsView(nil)
-        // let picker = DPAttrsPickerView(mode: .hsv, duration: 3, colorValue: HsvColor(hue: 0, saturation: 0))
-        let picker = DPAttrsPickerView(mode: .brightness, duration: 3)
+        let picker = DPAttrsPickerView(mode: .hsv, duration: 3, colorValue: HsvColor(hue: 0, saturation: 0))
+        //let picker = DPAttrsPickerView(mode: .brightness, duration: 3)
         picker.pickerDatas = allBrightList
         picker.show()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        DDLogWarn("warn hahah")
+        //DDLogWarn("warn hahah")
+        if self.signalPlate.isAnimating {
+            self.signalPlate.resultAngle(CGFloat.pi * CGFloat(arc4random()%26)/18)
+            self.signalMark.resultMark(Int(arc4random()%4))
+        } else {
+            signalMark.startAnimate(7)
+            signalPlate.startAnimate(7) {[weak self] in
+                self?.signalPlate.resultAngle(CGFloat.pi * 26/18)
+                self?.signalMark.resultMark(0)
+            }
+        }
     }
 }
 
 // MARK: - 测试代码
 extension UIKitTestController {
+
+    /// 信号检测盘
+    func signalCheck() {
+        let size: CGFloat = kScaleW(300)
+        signalPlate = SignalPlateView.init(frame: CGRect(x: (kScreenW - size)/2, y: 35, width: size, height: size))
+        self.view.addSubview(signalPlate)
+        signalPlate.startAnimate(14) {[weak self] in
+            self?.signalPlate.resultAngle(CGFloat.pi * 13/36)
+            self?.signalMark.resultMark(3)
+        }
+
+        signalMark = SignalMarkView.init(frame: CGRect(x: 0, y: signalPlate.maxY + 20, width: 0, height: 0))
+        self.view.addSubview(signalMark)
+        signalMark.centerX = signalPlate.centerX
+        signalMark.startAnimate(14)
+    }
 
     /// 自定义扩展按钮
     func customBtn() {

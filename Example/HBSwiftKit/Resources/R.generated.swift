@@ -208,7 +208,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 19 images.
+  /// This `R.image` struct is generated, and contains static references to 24 images.
   struct image {
     /// Image `ib_back`.
     static let ib_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "ib_back")
@@ -242,6 +242,16 @@ struct R: Rswift.Validatable {
     static let play = Rswift.ImageResource(bundle: R.hostingBundle, name: "play")
     /// Image `redWarning`.
     static let redWarning = Rswift.ImageResource(bundle: R.hostingBundle, name: "redWarning")
+    /// Image `ring_max`.
+    static let ring_max = Rswift.ImageResource(bundle: R.hostingBundle, name: "ring_max")
+    /// Image `ring_mid`.
+    static let ring_mid = Rswift.ImageResource(bundle: R.hostingBundle, name: "ring_mid")
+    /// Image `ring_min`.
+    static let ring_min = Rswift.ImageResource(bundle: R.hostingBundle, name: "ring_min")
+    /// Image `signalplate`.
+    static let signalplate = Rswift.ImageResource(bundle: R.hostingBundle, name: "signalplate")
+    /// Image `signalpointer`.
+    static let signalpointer = Rswift.ImageResource(bundle: R.hostingBundle, name: "signalpointer")
     /// Image `swift`.
     static let swift = Rswift.ImageResource(bundle: R.hostingBundle, name: "swift")
     /// Image `topHintbg`.
@@ -358,6 +368,41 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "redWarning", bundle: ..., traitCollection: ...)`
     static func redWarning(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.redWarning, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ring_max", bundle: ..., traitCollection: ...)`
+    static func ring_max(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ring_max, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ring_mid", bundle: ..., traitCollection: ...)`
+    static func ring_mid(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ring_mid, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ring_min", bundle: ..., traitCollection: ...)`
+    static func ring_min(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ring_min, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "signalplate", bundle: ..., traitCollection: ...)`
+    static func signalplate(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.signalplate, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "signalpointer", bundle: ..., traitCollection: ...)`
+    static func signalpointer(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.signalpointer, compatibleWith: traitCollection)
     }
     #endif
 
