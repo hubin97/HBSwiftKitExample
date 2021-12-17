@@ -195,6 +195,15 @@ extension Extension_String {
 }
 
 extension Extension_String {
+
+    /// json转模型
+    public func jsonToObj<T: Codable>(_ objType: T.Type) -> T? {
+        guard let data = self.data(using: .utf8) else { return nil }
+        return try? JSONDecoder().decode(objType, from: data)
+    }
+}
+
+extension Extension_String {
     
     //MARK: - 扩展下标取值方法
     ///    var str = "ABCDEFG"

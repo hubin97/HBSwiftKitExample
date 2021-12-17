@@ -39,6 +39,7 @@ extension Extension_Data {
     /// - Returns: String?
     public func toString() -> String? {
         return String(data: self, encoding: String.Encoding.utf8)
+        //return String(decoding: self, as: UTF8.self)
     }
     
     /// Data To jsonObject

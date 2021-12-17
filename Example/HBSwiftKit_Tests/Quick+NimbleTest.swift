@@ -15,6 +15,29 @@ import Nimble
 
 // swiftClassFromString
 
+struct Std: Codable {
+    var name: String?
+    var sex: Int?
+}
+
+class SwiftCodableTest: QuickSpec {
+    override func spec() {
+        fdescribe("SwiftCodableTest") {
+            it("should print correct test data") {
+                let json = #"{"name": "Jhon", "sex": 1}"#
+                let s = json.jsonToObj(Std.self)
+                print(s ?? Std())
+                // Std(name: Optional("Jhon"), sex: Optional(1))
+
+                let s1 = Std(name: "lala", sex: 0)
+                let js = s1.objToJson()
+                print(js ?? "")
+                // {"name":"lala","sex":0}
+            }
+        }
+    }
+}
+
 class SwiftyReferenceTest: QuickSpec {
     override func spec() {
         fdescribe("cSwiftyReferenceTest") {
