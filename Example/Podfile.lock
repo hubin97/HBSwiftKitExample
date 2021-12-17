@@ -1,6 +1,6 @@
 PODS:
-  - CocoaLumberjack/Core (3.7.2)
-  - CocoaLumberjack/Swift (3.7.2):
+  - CocoaLumberjack/Core (3.7.4)
+  - CocoaLumberjack/Swift (3.7.4):
     - CocoaLumberjack/Core
   - HBSwiftKit (0.3.5):
     - HBSwiftKit/Base (= 0.3.5)
@@ -64,7 +64,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
+  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   HBSwiftKit: a16561240813c9001c3768d0d8c4ce1401c006be
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5

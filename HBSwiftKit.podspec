@@ -38,6 +38,7 @@ Pod::Spec.new do |s|
   s.subspec 'Global' do |ss|
       ss.source_files  = 'HBSwiftKit/Global/'
       ss.framework  = "Foundation", "UIKit"
+      ss.dependency 'CocoaLumberjack/Swift'
   end
   
   s.subspec 'Extension' do |ss|
@@ -56,7 +57,6 @@ Pod::Spec.new do |s|
       ss.dependency 'HBSwiftKit/Global'
       ss.dependency 'HBSwiftKit/Extension'
       ss.dependency 'HBSwiftKit/Base'
-      ss.dependency 'CocoaLumberjack/Swift'
   end
   
   s.subspec 'Network' do |ss|
