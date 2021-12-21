@@ -46,7 +46,7 @@ open class BaseViewController: UIViewController {
 extension BaseViewController {
     
     ///!!!!: 响应BaseNavigation导航左按钮事件
-    @objc func backTapAction() {
+    @objc open func backTapAction() {
         //print("Base_backTapAction")
         self.navigationController?.popViewController(animated: true)
     }

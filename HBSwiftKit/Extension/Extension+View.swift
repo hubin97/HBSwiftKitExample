@@ -163,6 +163,21 @@ extension Extension_View {
     }
     
     //MARK: 指定矩形圆角
+    public func cornerRadiusBorder(cornerRadius: CGFloat?, makeToBounds: Bool?, borderColor: UIColor?, borderWidth: CGFloat?) {
+        if let cr = cornerRadius {
+            self.layer.cornerRadius = cr
+        }
+        if let mb = makeToBounds {
+            self.layer.masksToBounds = mb
+        }
+        if let bc = borderColor {
+            self.layer.borderColor = bc.cgColor
+        }
+        if let bw = borderWidth {
+           self.layer.borderWidth = bw
+        }
+    }
+
     /// 指定矩形某个/多个角为圆角, 默认全圆角
     /// - Parameters:
     ///   - rectCorner: 圆角位置

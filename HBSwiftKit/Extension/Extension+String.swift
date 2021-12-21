@@ -150,7 +150,30 @@ extension Extension_String {
     public var urlEncoded: String {
         return addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     }
-    
+
+
+    /// 转Data
+    /// - Returns:
+    public func toData() -> Data {
+        return self.data(using: String.Encoding.utf8) ?? Data()
+    }
+
+    /// md5加密
+    /// - Returns: 加密后的字符串
+    public func md5() -> String {
+        let str = self.cString(using: String.Encoding.utf8)
+        let strLen = CUnsignedInt(self.lengthOfBytes(using: String.Encoding.utf8))
+        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
+        let result = UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
+        CC_MD5(str!, strLen, result)
+        let hash = NSMutableString()
+        for i in 0 ..< digestLen {
+            hash.appendFormat("%02x", result[i])
+        }
+        free(result)
+        return String(format: hash as String)
+    }
+
     /// SHA256加密
     /// import CommonCrypto
     /// SHA 是 Secure Hash Algorithm 的缩写，即安全哈希算法。
@@ -161,7 +184,30 @@ extension Extension_String {
         CC_SHA256(utf8, CC_LONG(utf8!.count - 1), &digest)
         return digest.reduce("") { $0 + String(format:"%02x", $1) }
     }
-    
+
+    /// base64编码
+    /// - Returns:
+    public func base64Encode() -> String? {
+        if let data = self.data(using: String.Encoding.utf8) {
+            return data.base64EncodedString(options: .lineLength64Characters)
+        }
+        return nil
+    }
+
+    /// base64解码
+    public func base64Decode() -> String? {
+        if let data = Data.init(base64Encoded: self, options: .ignoreUnknownCharacters) {
+            return String(data: data, encoding: String.Encoding.utf8)
+        }
+        return nil
+    }
+
+    /// 字符串转Bytes
+    public func toBytes() -> [UInt8] {
+        guard let data = self.data(using: String.Encoding.utf8) else { return [] }
+        return [UInt8](data)
+    }
+
     //MARK: - NSRange usage
     /// 截取NSRange范围的子字符串
     public func subString(with range: NSRange) -> String {
@@ -191,6 +237,12 @@ extension Extension_String {
         guard let from = String.Index(from16, within: self) else { return nil }
         guard let to = String.Index(to16, within: self) else { return nil }
         return from ..< to
+    }
+
+    /// 字符串转富文本
+    /// - Returns: 富文本对象
+    public func toAttributedString() -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: self)
     }
 }
 
@@ -291,4 +343,41 @@ extension Extension_String {
             self = tmp
         }
     }
+}
+
+
+extension Extension_String {
+
+    /// 字符串转Html
+    public func toHtml() -> String {
+//        let styleStr: String = String(format: "<head><style>img{max-width:%ldpx !important;}ul {margin:0; padding:0; text-align:left;}</style><head>", kScreenW  * 0.95)
+//        let styleStr: String = String(format: "<head><style>body, div, span, a, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p, th, td, pre, form, fieldset, legend, input, button, textarea, select {margin:0;padding:5;}img{max-width:%ldpx !important;}li {list-style:none;}</style><head>", kScreenW  * 0.95)
+        var str: String = self
+        let scaner: Scanner = Scanner.init(string: self)
+        let dict = ["&amp;":"&", "&lt;":"<", "&gt;":">", "&nbsp;":"", "&quot;":"\"", "width":"wid"]
+        while scaner.isAtEnd == false {
+            for (key, value) in dict {
+                scaner.scanUpTo(key, into: nil)
+                str = str.replacingOccurrences(of: key, with: value)
+            }
+        }
+        return str
+    }
+
+    /// Html转字符串
+    public var htmlToString: String? {
+        guard let data = data(using: .utf8) else { return nil }
+        return try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil).string
+    }
+
+//    /// 转化为char * (待测试验证)
+//    public func toCharPtr() -> UnsafeMutablePointer<Int8> {
+//        let charArray = self.cString(using: .utf8)!
+//        let length = charArray.count
+//        let pointer = UnsafeMutablePointer<Int8>.allocate(capacity: length)
+//        for i in 0..<length {
+//            pointer[i] = charArray[i]
+//        }
+//        return pointer
+//    }
 }

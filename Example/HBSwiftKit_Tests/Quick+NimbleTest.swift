@@ -20,6 +20,22 @@ struct Std: Codable {
     var sex: Int?
 }
 
+
+class SwiftStringTest: QuickSpec {
+    override func spec() {
+        fdescribe("StringTest") {
+            it("should print correct test data") {
+                let str = "aaabbbcccddd"
+                //print("=> \(str.toCharPtr())")
+                let range1 = NSMakeRange(0, str.count)
+                let range2 = str.nsRange(of: str)
+                print("range1: \(range1), range2:\(range2)")
+            }
+        }
+    }
+}
+
+
 class SwiftCodableTest: QuickSpec {
     override func spec() {
         fdescribe("SwiftCodableTest") {

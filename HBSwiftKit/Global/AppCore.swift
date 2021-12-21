@@ -65,7 +65,7 @@ public let kUUIDString = UIDevice.current.identifierForVendor?.uuidString
 public let kInfoPlist = Bundle.main.infoDictionary ?? Dictionary()
 
 /// Top of stack Vc
-public func keyViewController(_ vc: UIViewController? = nil) -> UIViewController? {
+public func StackTopViewController(_ vc: UIViewController? = nil) -> UIViewController? {
     //注意UIApplication.shared.keyWindow?.rootViewController有时为nil 比如当页面有菊花在转的时候，这个rootViewController就为nil
     guard let tmpRootVc = UIApplication.shared.delegate?.window??.rootViewController else { return nil }
     let rootVc = vc ?? tmpRootVc
@@ -76,11 +76,11 @@ public func keyViewController(_ vc: UIViewController? = nil) -> UIViewController
     //presentedViewController 和presentingViewController
     //当A弹出B //A.presentedViewController=B //B.presentingViewController=A
     if rootVc.presentedViewController != nil {
-        currentVc = keyViewController(rootVc.presentedViewController)
+        currentVc = StackTopViewController(rootVc.presentedViewController)
     } else if (rootVc.isKind(of: UITabBarController.classForCoder())) {
-        currentVc = keyViewController((rootVc as! UITabBarController).selectedViewController)
+        currentVc = StackTopViewController((rootVc as! UITabBarController).selectedViewController)
     } else if (rootVc.isKind(of: UINavigationController.classForCoder())) {
-        currentVc = keyViewController((rootVc as! UINavigationController).visibleViewController)
+        currentVc = StackTopViewController((rootVc as! UINavigationController).visibleViewController)
     } else {
         currentVc = rootVc
     }

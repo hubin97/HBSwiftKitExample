@@ -30,10 +30,34 @@ extension Extension_Date {
     public var day: Int {
         Extension_Date.calendar.component(.day, from: self)
     }
-    
+}
+
+//MARK: - private mothods
+extension Extension_Date {
+
+    /// 获取当前 秒级 时间戳
+    public var timeStamp: Int {
+        return Int(self.timeIntervalSince1970)
+    }
+
+    /// 获取当前 毫秒级 时间戳 - 13位
+    public var milliStamp: Int {
+        return Int(CLongLong(round(self.timeIntervalSince1970 * 1000)))
+    }
+
+    /// 转指定格式字符串 (注意: 时区为系统时区)
+    /// - Parameter format: 格式: yyyy-MM-dd HH:mm:ss / yyyy-MM-dd ...
+    /// - Returns: 字符串
+    public func format(with format: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let dateFomatter = DateFormatter()
+        dateFomatter.dateFormat = format
+        dateFomatter.timeZone = TimeZone.current
+        return dateFomatter.string(from: self)
+    }
+
     /// date to string
     /// - Parameters:
-    ///   - identifier: 时区
+    ///   - identifier: 指定时区
     ///   - dateFormat: 格式
     /// - Returns: String
     public func toString(identifier: String = "zh_CN", dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> String {
@@ -42,11 +66,6 @@ extension Extension_Date {
         formatter.dateFormat = dateFormat
         return formatter.string(from: self)
     }
-}
-
-//MARK: - private mothods
-extension Extension_Date {
-    
 }
 
 //MARK: - call backs

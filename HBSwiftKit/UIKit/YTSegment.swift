@@ -1,5 +1,5 @@
 //
-//  TitleSegment.swift
+//  YTSegment.swift
 //  HBSwiftKit_Example
 //
 //  Created by Hubin_Huang on 2021/3/2.
@@ -10,12 +10,12 @@ import Foundation
 //MARK: - global var and methods
 
 /// 事件回调
-public protocol TitleSegmentDelegate: class {
-    func titleSegmentTapAction(segment: TitleSegment, title: String?, index: Int)
+public protocol YTSegmentDelegate: class {
+    func YTSegmentTapAction(segment: YTSegment, title: String?, index: Int)
 }
 
 //MARK: - main class
-open class TitleSegment: UIView {
+open class YTSegment: UIView {
 
     /// 切换样式
     public enum ShowStyle {
@@ -26,7 +26,7 @@ open class TitleSegment: UIView {
     
     /// 回调选中下标及标题
     public var callBackTapTitleBlock: ((_ title: String?, _ index: Int) -> ())?
-    public weak var delegate: TitleSegmentDelegate?
+    public weak var delegate: YTSegmentDelegate?
     /// 数据源
     fileprivate var titles = [String]()
     
@@ -120,7 +120,7 @@ open class TitleSegment: UIView {
     ///   - normalColor: 标题常态颜色
     ///   - selectColor: 标题选中颜色
     ///   - isShowOutstanding: 是否改变选中字号大小
-    public convenience init(viewFrame: CGRect, showStyle: TitleSegment.ShowStyle, titles: [String], indexLineWidth: CGFloat? = nil, indexLineHeight: CGFloat? = nil, normalColor: UIColor = .systemGray, selectColor: UIColor = .systemBlue, showOutMinFont: UIFont = UIFont.systemFont(ofSize: 13), showOutMaxFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium), isShowOutstanding: Bool = false) {
+    public convenience init(viewFrame: CGRect, showStyle: YTSegment.ShowStyle, titles: [String], indexLineWidth: CGFloat? = nil, indexLineHeight: CGFloat? = nil, normalColor: UIColor = .systemGray, selectColor: UIColor = .systemBlue, showOutMinFont: UIFont = UIFont.systemFont(ofSize: 13), showOutMaxFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium), isShowOutstanding: Bool = false) {
         self.init(frame: viewFrame)
         self.style = showStyle
         self.titles = titles
@@ -184,7 +184,7 @@ open class TitleSegment: UIView {
     ///   - showOutMinFont: 文字最小尺寸
     ///   - showOutMaxFont: 文字最大尺寸
     ///   - isShowOutstanding: 是否改变选中字号大小
-    public convenience init(scrollFrame: CGRect, showStyle: TitleSegment.ShowStyle = .all, titles: [String], minTextWidth: CGFloat = 30, indexLineHeight: CGFloat = 1.5, normalColor: UIColor = .systemGray, selectColor: UIColor = .systemBlue, showOutMinFont: UIFont = UIFont.systemFont(ofSize: 13), showOutMaxFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium), isShowOutstanding: Bool = false) {
+    public convenience init(scrollFrame: CGRect, showStyle: YTSegment.ShowStyle = .all, titles: [String], minTextWidth: CGFloat = 30, indexLineHeight: CGFloat = 1.5, normalColor: UIColor = .systemGray, selectColor: UIColor = .systemBlue, showOutMinFont: UIFont = UIFont.systemFont(ofSize: 13), showOutMaxFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium), isShowOutstanding: Bool = false) {
         self.init(frame: scrollFrame)
         self.style = showStyle
         self.titles = titles
@@ -255,7 +255,7 @@ open class TitleSegment: UIView {
 }
 
 //MARK: - private mothods
-extension TitleSegment {
+extension YTSegment {
     
     fileprivate func updateIndexLine(with tapBtn: UIButton) {
         UIView.animate(withDuration: 0.3) { [weak self] in
@@ -324,7 +324,7 @@ extension TitleSegment {
 }
 
 //MARK: - call backs
-extension TitleSegment {
+extension YTSegment {
     
     @objc func tapAction(_ sender: UIButton) {
         updateScrollOffset(with: sender)
@@ -338,11 +338,11 @@ extension TitleSegment {
             updateTapBtnColor(with: sender)
         }
         callBackTapTitleBlock?(sender.titleLabel?.text, sender.tag - 1000)
-        delegate?.titleSegmentTapAction(segment: self, title: sender.titleLabel?.text, index: sender.tag - 1000)
+        delegate?.YTSegmentTapAction(segment: self, title: sender.titleLabel?.text, index: sender.tag - 1000)
     }
 }
 
 //MARK: - delegate or data source
-extension TitleSegment {
+extension YTSegment {
     
 }

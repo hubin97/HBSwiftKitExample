@@ -45,7 +45,7 @@ class UIKitTestController: BaseViewController {
         return []
     }()
 
-    lazy var tagsView: TagsOptionView = {
+    lazy var tagsView: YTTagsView = {
         let tags = ["标签", "标签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签"]
         var ops = [TagsMeta]()
         for idx in 0..<tags.count {
@@ -54,7 +54,7 @@ class UIKitTestController: BaseViewController {
             ops.append(TagsMeta(title: title, param: ["\(idx)": title], isSelected: isSel))
         }
         // swiftlint:disable line_length
-        let _tagsView = TagsOptionView(title: "标题", isMultiple: true, options: ops, optionNormalBgColor: UIColor(hexStr: "#F1F1F3"), optionSelectBgColor: UIColor(hexStr: "#6165C5"), optionNormalTextColor: UIColor(hexStr: "#5E5E83"), optionSelectTextColor: .white, optionFont: UIFont.systemFont(ofSize: 15), optionMaxHeight: 40, actionTitle: "我知道了", actionTitleColor: .orange, tapAction: {[weak self] (tags) in
+        let _tagsView = YTTagsView(title: "标题", isMultiple: true, options: ops, optionNormalBgColor: UIColor(hexStr: "#F1F1F3"), optionSelectBgColor: UIColor(hexStr: "#6165C5"), optionNormalTextColor: UIColor(hexStr: "#5E5E83"), optionSelectTextColor: .white, optionFont: UIFont.systemFont(ofSize: 15), optionMaxHeight: 40, actionTitle: "我知道了", actionTitleColor: .orange, tapAction: {[weak self] (tags) in
             self?.opPrint(ops: tags)
         })
         _tagsView.contentView.backgroundColor = .white
@@ -81,8 +81,8 @@ class UIKitTestController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction(_:)))
 
         //customBtn()
-
-        signalCheck()
+        //signalCheck()
+        attributedTest()
     }
 }
 
@@ -100,21 +100,46 @@ extension UIKitTestController {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //DDLogWarn("warn hahah")
-        if self.signalPlate.isAnimating {
-            self.signalPlate.resultAngle(CGFloat.pi * CGFloat(arc4random()%26)/18)
-            self.signalMark.resultMark(Int(arc4random()%4))
-        } else {
-            signalMark.startAnimate(7)
-            signalPlate.startAnimate(7) {[weak self] in
-                self?.signalPlate.resultAngle(CGFloat.pi * 26/18)
-                self?.signalMark.resultMark(0)
-            }
-        }
+//        if self.signalPlate.isAnimating {
+//            self.signalPlate.resultAngle(CGFloat.pi * CGFloat(arc4random()%26)/18)
+//            self.signalMark.resultMark(Int(arc4random()%4))
+//        } else {
+//            signalMark.startAnimate(7)
+//            signalPlate.startAnimate(7) {[weak self] in
+//                self?.signalPlate.resultAngle(CGFloat.pi * 26/18)
+//                self?.signalMark.resultMark(0)
+//            }
+//        }
     }
 }
 
 // MARK: - 测试代码
 extension UIKitTestController {
+
+    /// 富文本测试
+    func attributedTest() {
+        let text = "1.打开查找功能\n2.输入你要替换的内容 比如,我这边想全局修改作者名称\n3.点击Find,会出现一个框,会有replace出来,就和我们文件内查找替换一样\n4.改成你想要的内容,点击replace all"
+        let subText1 = "1.打开查找功能"
+        let subText2 = "2.输入你要替换的内容 比如,我这边想全局修改作者名称"
+        let subText3 = "3.点击Find,会出现一个框,会有replace出来,就和我们文件内查找替换一样"
+        let subText4 = "点击Find"
+        let subText5 = "会有replace出来"
+        let textView = UITextView.init(frame: CGRect(x: 20, y: 20, width: kScreenW - 40, height: 200))
+        view.addSubview(textView)
+        textView.setRoundCorners(borderColor: UIColor.random, borderWidth: 1, isDotted: true, lineDashPattern: [5, 2])
+        //textLabel.numberOfLines = 0
+        textView.delegate = self
+        textView.isEditable = false
+        let attrs = NSMutableAttributedString(string: text).addAttr_font(UIFont.systemFont(ofSize: 15)).addAttr_fColor(.black).addAttr_kern(5).addAttr_lineSpacing(10, font: UIFont.systemFont(ofSize: 15))
+//        attrs.addAttr_stroke(width: 4, color: .magenta, range: text.nsRange(of: subText1))
+//            .addAttr_midline(lineWidth: 3, color: .random, range: text.nsRange(of: subText2))
+//            .addAttr_underline(style: .single, color: .yellow, range: text.nsRange(of: subText3))
+//            .addAttr_shadow(color: .random)
+        // "https://github.com/hubin97/HBSwiftKitExample"
+        attrs.addAttr_link(url: URL(string: "https://github.com/hubin97/HBSwiftKitExample")!, range: text.nsRange(of: subText4))
+        attrs.addAttr_textEffect(textEffect: .letterpressStyle, range: text.nsRange(of: subText5))
+        textView.attributedText = attrs
+    }
 
     /// 信号检测盘
     func signalCheck() {
@@ -292,6 +317,15 @@ extension AKAlertView {
         self.s_kpadding = s_kpadding
         self.l_kpadding = l_kpadding
         setup(title: title, icon: icon, iconSize: iconSize, message: message, actions: nil)
+    }
+}
+
+extension UIKitTestController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        if UIApplication.shared.canOpenURL(URL) {
+            UIApplication.shared.open(URL, options: [:], completionHandler: nil)
+        }
+        return true
     }
 }
 

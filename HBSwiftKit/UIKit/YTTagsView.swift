@@ -1,5 +1,5 @@
 //
-//  TagsOptionView.swift
+//  YTTagsView.swift
 //  HBSwiftKit_Example
 //
 //  Created by Hubin_Huang on 2021/5/26.
@@ -8,7 +8,7 @@
 import Foundation
 
 //MARK: - global var and methods
-public protocol TagsOptionViewDelegate: class {
+public protocol YTTagsViewDelegate: class {
     func tagsOpResult(_ tagMetas: [TagsMeta]?)
 }
 
@@ -16,9 +16,9 @@ public protocol TagsOptionViewDelegate: class {
 fileprivate func WScale(_ x: CGFloat) -> CGFloat {
     return UIScreen.main.bounds.size.width/375 * x
 }
-open class TagsOptionView: UIView {
+open class YTTagsView: UIView {
 
-    weak var delegate: TagsOptionViewDelegate?
+    public weak var delegate: YTTagsViewDelegate?
     fileprivate var tapAction: ((_ tagMetas: [TagsMeta]?) -> ())?
     fileprivate let alert_width: CGFloat = WScale(335) // 系统宽度 270
     fileprivate let action_height: CGFloat = 44 // 系统高度 44
@@ -104,7 +104,7 @@ open class TagsOptionView: UIView {
 }
 
 //MARK: - private mothods
-extension TagsOptionView {
+extension YTTagsView {
     
     /// 标签组样式
     ///
@@ -297,7 +297,7 @@ extension TagsOptionView {
 }
 
 //MARK: - call backs
-extension TagsOptionView {
+extension YTTagsView {
     
     /// show
     ///
@@ -361,7 +361,7 @@ extension TagsOptionView {
 }
 
 //MARK: - delegate or data source
-extension TagsOptionView {
+extension YTTagsView {
     
 }
 

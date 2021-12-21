@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name             = 'HBSwiftKit'
-  s.version          = '0.3.5'
+  s.version          = '0.3.6'
   s.summary          = 'some common components.'
   s.description      = <<-DESC
                     仅仅一些个人常用组件.学习工作使用.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
   
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.source           = { :git => 'https://github.com/hubin97/HBSwiftKitExample.git', :tag => s.version.to_s }
@@ -36,40 +36,40 @@ Pod::Spec.new do |s|
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #s.source_files  = 'HBSwiftKit/**/*.{h,m,swift}'
   s.subspec 'Global' do |ss|
-      ss.source_files  = 'HBSwiftKit/Global/'
+      ss.source_files  = 'HBSwiftKit/Global'
       ss.framework  = "Foundation", "UIKit"
       ss.dependency 'CocoaLumberjack/Swift'
   end
   
   s.subspec 'Extension' do |ss|
-      ss.source_files  = 'HBSwiftKit/Extension/'
+      ss.source_files  = 'HBSwiftKit/Extension'
       ss.dependency 'HBSwiftKit/Global'
   end
   
   s.subspec 'Base' do |ss|
       ss.source_files  = 'HBSwiftKit/Base/'
-      ss.dependency 'HBSwiftKit/Global'
       ss.dependency 'HBSwiftKit/Extension'
   end
   
   s.subspec 'UIKit' do |ss|
       ss.source_files  = 'HBSwiftKit/UIKit/**/*'
-      ss.dependency 'HBSwiftKit/Global'
-      ss.dependency 'HBSwiftKit/Extension'
       ss.dependency 'HBSwiftKit/Base'
   end
   
   s.subspec 'Network' do |ss|
-      ss.source_files  = 'HBSwiftKit/Network/'
-      ss.dependency 'HBSwiftKit/Global'
-      ss.dependency 'HBSwiftKit/Extension'
+      ss.source_files  = 'HBSwiftKit/Network'
       ss.dependency 'HBSwiftKit/UIKit'
   end
   
-  s.subspec 'Tools' do |ss|
-      ss.source_files  = 'HBSwiftKit/Tools/'
-      ss.dependency 'HBSwiftKit/Global'
+  s.subspec 'Utils' do |ss|
+      ss.source_files  = 'HBSwiftKit/Utils'
       ss.dependency 'HBSwiftKit/UIKit'
+      ss.subspec 'AuthStatus' do |sss|
+          sss.source_files  = 'HBSwiftKit/Utils/AuthStatus'
+      end
+      ss.subspec 'LoggerManager' do |sss|
+          sss.source_files  = 'HBSwiftKit/Utils/LoggerManager'
+      end
   end
   
 #  s.subspec 'Assets' do |dd|
@@ -78,13 +78,8 @@ Pod::Spec.new do |s|
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.resource     = 'HBSwiftKit/HBSwiftKit.bundle'
-#  s.resource_bundles = {
-#      'HBSwiftKit' => ['HBSwiftKit/Assets/*.png']
-#  }
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.requires_arc = true
-  # static lib
-  s.static_framework = true
 
 end

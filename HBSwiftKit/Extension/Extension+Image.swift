@@ -89,6 +89,22 @@ extension Extension_Image {
         )
         return flipImage
     }
+
+    /// 获取位置处颜色
+    public func pixelColor(pos: CGPoint) -> UIColor? {
+        let pixelData = self.cgImage?.dataProvider?.data
+        guard pixelData != nil else { return nil }
+        let data:UnsafePointer<UInt8> =  CFDataGetBytePtr(pixelData)
+        let pixelInfo: Int = ((Int(self.size.width) * Int(pos.y)) + Int(pos.x)) * 4
+
+        let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
+        let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
+        let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
+        let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
+        print(r, g, b, a)
+        let corlor = UIColor.init(red: r, green: g, blue: b, alpha: a)
+        return corlor
+    }
     
     ///MARK: 人脸检测, 识别人脸数统计
     /// 若处理人脸截图居中, 使用 #pod 'FaceAware'
@@ -109,7 +125,7 @@ extension Extension_Image {
             //activityVc.excludedActivityTypes = [.postToFacebook, .postToTwitter, .postToWeibo, .message, .mail, .print, .copyToPasteboard, .assignToContact, .saveToCameraRoll, .addToReadingList, .postToFlickr, .postToVimeo, .postToTencentWeibo, .airDrop, .openInIBooks]
             activityVc.excludedActivityTypes = excludedTypes
         }
-        keyViewController()?.present(activityVc, animated: true, completion: nil)
+        StackTopViewController()?.present(activityVc, animated: true, completion: nil)
         activityVc.completionWithItemsHandler = {(activityType, completed, items, error) -> Void in
             if completed == true {
                 print("分享成功")
