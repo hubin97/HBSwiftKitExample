@@ -10,8 +10,8 @@ import Foundation
 //MARK: - global var and methods
 
 /// 事件回调
-public protocol YTSegmentDelegate: class {
-    func YTSegmentTapAction(segment: YTSegment, title: String?, index: Int)
+public protocol YTSegmentDelegate: AnyObject {
+    func ytSegmentTapAction(segment: YTSegment, title: String?, index: Int)
 }
 
 //MARK: - main class
@@ -28,7 +28,7 @@ open class YTSegment: UIView {
     public var callBackTapTitleBlock: ((_ title: String?, _ index: Int) -> ())?
     public weak var delegate: YTSegmentDelegate?
     /// 数据源
-    fileprivate var titles = [String]()
+    public var titles = [String]()
     
     ///** 风格样式 默认 Line */
     fileprivate var style: ShowStyle = .line
@@ -39,7 +39,9 @@ open class YTSegment: UIView {
     fileprivate var showOutMaxFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium)
 
     /// 滚动标签容器
-    fileprivate var segmentScroll: UIScrollView?
+    public var segmentScroll: UIScrollView?
+    /// 是否需要点击标签时滚动
+    public var isTapScroll: Bool = true
     /// 文本最小占用宽度
     fileprivate var minTextWidth: CGFloat = 30
     
@@ -176,6 +178,7 @@ open class YTSegment: UIView {
     /// - Parameters:
     ///   - scrollFrame: 位置
     ///   - showStyle: 风格, 默认 .all
+    ///   - isTapScroll: 是否点击滚动调整, 默认 true
     ///   - titles: 标题数组
     ///   - minTextWidth: 文字最小占用宽度
     ///   - indexLineHeight: 下划线高度, 默认1.5
@@ -184,9 +187,10 @@ open class YTSegment: UIView {
     ///   - showOutMinFont: 文字最小尺寸
     ///   - showOutMaxFont: 文字最大尺寸
     ///   - isShowOutstanding: 是否改变选中字号大小
-    public convenience init(scrollFrame: CGRect, showStyle: YTSegment.ShowStyle = .all, titles: [String], minTextWidth: CGFloat = 30, indexLineHeight: CGFloat = 1.5, normalColor: UIColor = .systemGray, selectColor: UIColor = .systemBlue, showOutMinFont: UIFont = UIFont.systemFont(ofSize: 13), showOutMaxFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium), isShowOutstanding: Bool = false) {
+    public convenience init(scrollFrame: CGRect, showStyle: YTSegment.ShowStyle = .all, isTapScroll: Bool = true, titles: [String], minTextWidth: CGFloat = 30, indexLineHeight: CGFloat = 1.5, normalColor: UIColor = .systemGray, selectColor: UIColor = .systemBlue, showOutMinFont: UIFont = UIFont.systemFont(ofSize: 13), showOutMaxFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium), isShowOutstanding: Bool = false) {
         self.init(frame: scrollFrame)
         self.style = showStyle
+        self.isTapScroll = isTapScroll
         self.titles = titles
         self.isShowOutstanding = isShowOutstanding
         self.normalColor = normalColor
@@ -204,7 +208,7 @@ open class YTSegment: UIView {
         
         let itemSpacing: CGFloat = 10
         let count = titles.count
-        var contentWidth = itemSpacing * 2
+        var contentWidth = itemSpacing // 起始位置
         var assagnBtnRect = CGRect.zero
         for idx in 0..<count {
             let title = titles[idx]
@@ -231,8 +235,6 @@ open class YTSegment: UIView {
                 }
             }
             titleBtn.addTarget(self, action: #selector(tapAction(_:)), for: .touchUpInside)
-            
-            titleBtn.backgroundColor = .groupTableViewBackground
             contentWidth += (btnWidth + itemSpacing)
         }
         if count > 1 && (showStyle == .line || showStyle == .all) {
@@ -260,7 +262,7 @@ extension YTSegment {
     fileprivate func updateIndexLine(with tapBtn: UIButton) {
         UIView.animate(withDuration: 0.3) { [weak self] in
             var indexViewFrame = self?.indexView.frame ?? CGRect.zero
-            if (self?.segmentScroll) != nil {
+            if (self?.segmentScroll) != nil && self?.isTapScroll == true {
                 indexViewFrame.origin.x = tapBtn.frame.minX
                 indexViewFrame.size.width  = tapBtn.frame.maxX - tapBtn.frame.minX
             } else {
@@ -274,10 +276,9 @@ extension YTSegment {
         for i in 0..<titles.count {
             let tag = 1000 + i
             if let btn = self.viewWithTag(tag) as? UIButton {
-                btn.isSelected = false
+                btn.isSelected = (btn.tag == tapBtn.tag)
             }
         }
-        tapBtn.isSelected = true
     }
     
     fileprivate func updateTextShowOut(with tapBtn: UIButton) {
@@ -285,18 +286,15 @@ extension YTSegment {
         for i in 0..<titles.count {
             let tag = 1000 + i
             if let btn = self.viewWithTag(tag) as? UIButton {
-                btn.titleLabel?.font = showOutMinFont
+                btn.titleLabel?.font = ((btn.tag == tapBtn.tag) ? showOutMaxFont: showOutMinFont)
             }
-        }
-        if isShowOutstanding {
-            tapBtn.titleLabel?.font = showOutMaxFont
         }
     }
     
     /// 指定默认选中的下标
     public func setTargetIndex(with index: Int) {
         guard index >= 0 && index <= titles.count - 1 else { return }
-        guard let defaultTapBtn = self.viewWithTag(1000 + index) as? UIButton else { return }
+        guard let defaultTapBtn = self.viewWithTag(1000 + index) as? UIButton, defaultTapBtn.isSelected == false else { return }
         updateScrollOffset(with: defaultTapBtn)
         updateTextShowOut(with: defaultTapBtn)
         if style == .line {
@@ -319,7 +317,7 @@ extension YTSegment {
         } else {
             lastOffsetX = max(0, offsetX)
         }
-        segmentScroll?.setContentOffset(CGPoint(x: lastOffsetX, y: 0), animated: true)
+        segmentScroll?.setContentOffset(CGPoint(x: lastOffsetX, y: 0), animated: false)
     }
 }
 
@@ -327,8 +325,11 @@ extension YTSegment {
 extension YTSegment {
     
     @objc func tapAction(_ sender: UIButton) {
-        updateScrollOffset(with: sender)
+        guard sender.isSelected == false else { return }
         updateTextShowOut(with: sender)
+        if segmentScroll != nil && self.isTapScroll == true {
+            updateScrollOffset(with: sender)
+        }
         if style == .line {
             updateIndexLine(with: sender)
         } else if style == .color {
@@ -338,7 +339,7 @@ extension YTSegment {
             updateTapBtnColor(with: sender)
         }
         callBackTapTitleBlock?(sender.titleLabel?.text, sender.tag - 1000)
-        delegate?.YTSegmentTapAction(segment: self, title: sender.titleLabel?.text, index: sender.tag - 1000)
+        delegate?.ytSegmentTapAction(segment: self, title: sender.titleLabel?.text, index: sender.tag - 1000)
     }
 }
 

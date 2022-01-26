@@ -437,8 +437,8 @@ extension YTAlertView {
     
     public func show() {
         DispatchQueue.main.async {
-            let keyWindow = UIApplication.shared.keyWindow
-            keyWindow?.addSubview(self)
+            UIApplication.shared.keyWindow?.subviews.filter({ $0.isKind(of: YTAlertView.self) }).forEach({ $0.removeFromSuperview() })
+            UIApplication.shared.keyWindow?.addSubview(self)
             self.scaleAnimate()
         }
     }
@@ -446,7 +446,14 @@ extension YTAlertView {
     public func hide() {
         self.removeFromSuperview()
     }
-    
+
+    /// 清除规避 重叠效果
+    public static func clear() {
+        DispatchQueue.main.async {
+            UIApplication.shared.keyWindow?.subviews.filter({ $0.isKind(of: YTAlertView.self) }).forEach({ $0.removeFromSuperview() })
+        }
+    }
+
     /// 给actions内特定下标按钮设置背景色
     public func setActionTextColor(_ index: Int, _ color: UIColor) {
         guard allActions.count > 0 else { return }

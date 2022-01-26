@@ -130,14 +130,14 @@ extension UIKitTestController {
         //textLabel.numberOfLines = 0
         textView.delegate = self
         textView.isEditable = false
-        let attrs = NSMutableAttributedString(string: text).addAttr_font(UIFont.systemFont(ofSize: 15)).addAttr_fColor(.black).addAttr_kern(5).addAttr_lineSpacing(10, font: UIFont.systemFont(ofSize: 15))
+        let attrs = NSMutableAttributedString(string: text).addAttr_font(UIFont.systemFont(ofSize: 15)).addAttr_fColor(.black).addAttr_kern(5)//.addAttr_lineSpacing(10, font: UIFont.systemFont(ofSize: 15))
 //        attrs.addAttr_stroke(width: 4, color: .magenta, range: text.nsRange(of: subText1))
 //            .addAttr_midline(lineWidth: 3, color: .random, range: text.nsRange(of: subText2))
 //            .addAttr_underline(style: .single, color: .yellow, range: text.nsRange(of: subText3))
 //            .addAttr_shadow(color: .random)
         // "https://github.com/hubin97/HBSwiftKitExample"
         attrs.addAttr_link(url: URL(string: "https://github.com/hubin97/HBSwiftKitExample")!, range: text.nsRange(of: subText4))
-        attrs.addAttr_textEffect(textEffect: .letterpressStyle, range: text.nsRange(of: subText5))
+        //attrs.addAttr_textEffect(textEffect: .letterpressStyle, range: text.nsRange(of: subText5))
         textView.attributedText = attrs
     }
 
