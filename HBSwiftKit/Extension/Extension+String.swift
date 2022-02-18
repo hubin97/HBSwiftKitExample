@@ -151,11 +151,9 @@ extension Extension_String {
         return addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     }
 
-
     /// 转Data
-    /// - Returns:
-    public func toData() -> Data {
-        return self.data(using: String.Encoding.utf8) ?? Data()
+    public var data: Data? {
+        return self.data(using: String.Encoding.utf8)
     }
 
     /// md5加密

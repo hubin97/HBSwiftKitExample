@@ -10,51 +10,34 @@ import Foundation
 fileprivate typealias Extension_Data = Data
 
 extension Extension_Data {
-    
-    /// Data To Dictionary
-    /// - Returns: Dictionary?
-    public func toDict() -> Dictionary<String, Any>? {
-        do {
-            let json = try JSONSerialization.jsonObject(with: self, options: .mutableContainers)
-            let dic = json as! Dictionary<String, Any>
-            return dic
-        } catch _ {
-            return nil
-        }
-    }
-    
-    /// Data To Array
-    /// - Returns: Array?
-    public func toArray() -> [Any]? {
-        do {
-            let json = try JSONSerialization.jsonObject(with: self, options: .mutableContainers)
-            let array = json as! [Any]
-            return array
-        } catch _ {
-            return nil
-        }
-    }
-    
-    /// Data To String
-    /// - Returns: String?
-    public func toString() -> String? {
+
+    /// data转string
+    public var string: String? {
         return String(data: self, encoding: String.Encoding.utf8)
-        //return String(decoding: self, as: UTF8.self)
     }
-    
-    /// Data To jsonObject
-    /// - Returns: AnyObject?
-    public func toJson() -> AnyObject? {
-        do {
-            return try JSONSerialization.jsonObject(with: self , options: .allowFragments) as AnyObject
-        } catch {
-            print("tojsonErro: \(error)")
+
+    /// data转obj
+    public var object: Any? {
+        if let obj = try? JSONSerialization.jsonObject(with: self, options: .mutableContainers) {
+            return obj
         }
         return nil
     }
-    
-    func toDataString() -> String? {
-         return String(format: "%@", self as CVarArg)
+
+    /// data转dict
+    public var dict: [String: Any]? {
+        if let dict = self.object as? [String: Any] {
+            return dict
+        }
+        return nil
+    }
+
+    /// data转array
+    public var array: [Any]? {
+        if let arr = self.object as? [Any] {
+            return arr
+        }
+        return nil
     }
 }
 

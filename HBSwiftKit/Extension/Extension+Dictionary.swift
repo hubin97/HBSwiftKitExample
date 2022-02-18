@@ -7,6 +7,7 @@
 
 //单元测试 ✅
 import Foundation
+import UIKit
 
 //MARK: - global var and methods
 fileprivate typealias Extension_Dictionary = Dictionary
@@ -15,7 +16,7 @@ fileprivate typealias Extension_Dictionary = Dictionary
 
 //MARK: - private mothods
 extension Extension_Dictionary {
-    
+
     public mutating func setValue(_ value: Dictionary.Value, forKey key: Dictionary.Key) {
         self[key] = value
     }
@@ -26,38 +27,38 @@ extension Extension_Dictionary {
         }
         return nil
     }
-    
-    public func toData() -> Data? {
-        if (!JSONSerialization.isValidJSONObject(self)) {
-            print("is not a valid json object")
-            return nil
-        }
-        /**
-         //如果设置options为JSONSerialization.WritingOptions.prettyPrinted，则打印格式带"\n"
-         <<<<<<<<<
-         Optional(43 bytes)
-         Optional("{\"bbb\":\"444\",\"ccc\":[555,666,777],\"aaa\":123}")
-         >>>>>>>>>
-         Optional(77 bytes)
-         Optional("{\n  \"ccc\" : [\n    555,\n    666,\n    777\n  ],\n  \"bbb\" : \"444\",\n  \"aaa\" : 123\n}")
-         */
-        return try? JSONSerialization.data(withJSONObject: self, options: [])
-    }
-    
-    public func toJSONString() -> String? {
-        guard let data = self.toData() else { return nil }
-        return String(data:data, encoding: String.Encoding.utf8)
-    }
 }
 
 //MARK: - call backs
+/**
+ //如果设置options为JSONSerialization.WritingOptions.prettyPrinted，则打印格式带"\n"
+ <<<<<<<<<
+ Optional(43 bytes)
+ Optional("{\"bbb\":\"444\",\"ccc\":[555,666,777],\"aaa\":123}")
+ >>>>>>>>>
+ Optional(77 bytes)
+ Optional("{\n  \"ccc\" : [\n    555,\n    666,\n    777\n  ],\n  \"bbb\" : \"444\",\n  \"aaa\" : 123\n}")
+ */
 extension Extension_Dictionary {
-    
+
+    /// dict转data
+    public var data: Data? {
+        if (JSONSerialization.isValidJSONObject(self)) {
+            return try? JSONSerialization.data(withJSONObject: self, options: [])
+        }
+        return nil
+    }
+
+    /// dict转string
+    public var string: String? {
+        if let data = self.data {
+            return String(data: data, encoding: String.Encoding.utf8)
+        }
+        return nil
+    }
 }
 
 //MARK: - delegate or data source
 extension Extension_Dictionary {
     
 }
-
-//MARK: - other classes

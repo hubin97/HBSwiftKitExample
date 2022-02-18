@@ -99,6 +99,11 @@ extension UIKitTestController {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        let jsons = ###"[{"funcionName":"开启","functionCode":"group_function_on","ifBasic":1},{"funcionName":"开关分离设置","functionCode":"group_function_separate_key_and_relay","ifBasic":0},{"funcionName":"上电设置","functionCode":"group_function_power_on_relay_setting","ifBasic":0},{"funcionName":"关联智能常开","functionCode":"group_function_normally_open","ifBasic":0},{"funcionName":"关闭","functionCode":"group_function_off","ifBasic":1}]"###
+        print("jsons: \(jsons.data?.array)")
+
+
         //DDLogWarn("warn hahah")
 //        if self.signalPlate.isAnimating {
 //            self.signalPlate.resultAngle(CGFloat.pi * CGFloat(arc4random()%26)/18)

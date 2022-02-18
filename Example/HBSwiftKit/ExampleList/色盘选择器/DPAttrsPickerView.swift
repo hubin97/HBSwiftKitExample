@@ -237,7 +237,7 @@ extension DPAttrsPickerView: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         // print("message==>", message.body, message.name)
         guard message.name == "WINGTO_NATIVE" else { return }
-        guard let msg = message.body as? String, let dict = msg.data(using: .utf8)?.toDict() else { return }
+        guard let msg = message.body as? String, let dict = msg.data?.dict else { return }
         guard let methodname = dict["method"] as? String else { return }
         var selectorName = methodname
         var param: [String: Any]?
@@ -281,7 +281,7 @@ extension DPAttrsPickerView: WKScriptMessageHandler {
     /// 设置默认颜色
     /// - Parameter param: {"hue": 0-360, "saturation": 0-254}
     func setColor(param: [String: Any]) {
-        self.evaluateJs(jsCode: "WINGTO_H5.onSetHsvColor('\(param.toJSONString() ?? "")')") { result, error in
+        self.evaluateJs(jsCode: "WINGTO_H5.onSetHsvColor('\(param.string ?? "")')") { result, error in
             print("result:\(result ?? ""), error:\(error?.localizedDescription ?? "")")
         }
     }

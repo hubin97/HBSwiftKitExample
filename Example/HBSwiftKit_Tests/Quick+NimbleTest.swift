@@ -25,11 +25,28 @@ class SwiftStringTest: QuickSpec {
     override func spec() {
         fdescribe("StringTest") {
             it("should print correct test data") {
-                let str = "aaabbbcccddd"
-                //print("=> \(str.toCharPtr())")
-                let range1 = NSMakeRange(0, str.count)
-                let range2 = str.nsRange(of: str)
-                print("range1: \(range1), range2:\(range2)")
+//                let str = "aaabbbcccddd"
+//                //print("=> \(str.toCharPtr())")
+//                let range1 = NSMakeRange(0, str.count)
+//                let range2 = str.nsRange(of: str)
+//                print("range1: \(range1), range2:\(range2)")
+                let dd: [String : Any] = ["eee": "eee", "fff": 666]
+                let hh = [1, 2, 3, 4, 1, 5]
+                //  "ccc": nil,
+                let dict: [String : Any] = ["aaa": "AAAA", "bbb": 123, "ddd": dd, "hh": hh]
+                let ss = dict.string ?? ""
+                print("ss: \(ss)")
+
+                let dic = dict.data?.dict
+                print("dic: \(dic ?? [:])")
+
+                let hhs = hh.string
+                print("hhs: \(hhs)")
+                print("hhs#: \(hh.deduplication())")
+                let json = ###"{"dataId":"67512","dataTypeEnum":"endpoint","deviceMac":"84-2E-14-FF-FE-4C-C6-BA","deviceName":"AA.玻璃一位B","deviceStateEnum":"online","firmwarVersion":"10000","functionList":[{"funcionName":"开启","functionCode":"group_function_on","ifBasic":1},{"funcionName":"开关分离设置","functionCode":"group_function_separate_key_and_relay","ifBasic":0},{"funcionName":"上电设置","functionCode":"group_function_power_on_relay_setting","ifBasic":0},{"funcionName":"关联智能常开","functionCode":"group_function_normally_open","ifBasic":0},{"funcionName":"关闭","functionCode":"group_function_off","ifBasic":1}],"goalDeviceRoomName":"客厅1","ifLogicGroupEnum":"no","snCode":"C6-BA","typeIconUrlAbs":"https://wt-oss-test.oss-cn-shenzhen.aliyuncs.com//g1/M00/00/47/rBKhs18r2KOAVEbIAAAIFNFyR6A750.png","zigbeeTypeEnum":"OnOffSwitch"}"###
+                //print("jsond: \(json.data?.dict)")
+                let jsons = ###"[{"funcionName":"开启","functionCode":"group_function_on","ifBasic":1},{"funcionName":"开关分离设置","functionCode":"group_function_separate_key_and_relay","ifBasic":0},{"funcionName":"上电设置","functionCode":"group_function_power_on_relay_setting","ifBasic":0},{"funcionName":"关联智能常开","functionCode":"group_function_normally_open","ifBasic":0},{"funcionName":"关闭","functionCode":"group_function_off","ifBasic":1}]"###
+                print("jsons: \(jsons.data?.array)")
             }
         }
     }

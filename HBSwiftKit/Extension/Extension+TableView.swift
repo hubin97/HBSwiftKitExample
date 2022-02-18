@@ -40,7 +40,7 @@ extension Extension_TableView {
     
     /// 便捷注册cell
     /// - Parameter type: cell类
-    public func register<T: UITableViewCell>(_ type: T.Type) {
+    public func registerCell<T: UITableViewCell>(_ type: T.Type) {
         self.register(type.classForCoder(), forCellReuseIdentifier: NSStringFromClass(type.classForCoder()))
     }
     
@@ -49,6 +49,16 @@ extension Extension_TableView {
     /// - Returns: 复用cell
     public func getReusableCell<T: UITableViewCell>( _ type: T.Type) -> T {
         return self.dequeueReusableCell(withIdentifier: NSStringFromClass(type.classForCoder())) as! T
+    }
+
+    /// 便捷注册段头/尾视图
+    public func registerView<T: UITableViewHeaderFooterView>(_ type: T.Type) {
+        self.register(type.classForCoder(), forHeaderFooterViewReuseIdentifier: NSStringFromClass(type.classForCoder()))
+    }
+
+    /// 获取复用段头/尾视图
+    public func getReusableView<T: UITableViewHeaderFooterView>( _ type: T.Type) -> T {
+        return self.dequeueReusableHeaderFooterView(withIdentifier: NSStringFromClass(type.classForCoder())) as! T
     }
 }
 
@@ -65,10 +75,24 @@ extension Extension_TableView {
 //MARK: - other classes
 //MARK: - UICollectionView复用注入
 extension UICollectionView {
-    
+
+    /// 段头/尾复用标识
+    public enum ReusableKind {
+        case header //= elementKindSectionHeader
+        case footer //= .elementKindSectionFooter
+        var rawValue: String {
+            switch self {
+            case .header:
+                return UICollectionView.elementKindSectionHeader
+            case .footer:
+                return UICollectionView.elementKindSectionFooter
+            }
+        }
+    }
+
     /// 便捷注册cell
     /// - Parameter type: cell类
-    public func register<T: UICollectionViewCell>(_ type: T.Type) {
+    public func registerCell<T: UICollectionViewCell>(_ type: T.Type) {
         self.register(type.classForCoder(), forCellWithReuseIdentifier: NSStringFromClass(type.classForCoder()))
     }
     
@@ -77,5 +101,15 @@ extension UICollectionView {
     /// - Returns: 复用cell
     public func getReusableCell<T: UICollectionViewCell>(_ indexPath: IndexPath, _ type: T.Type) -> T {
         return self.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(type.classForCoder()), for: indexPath) as! T
+    }
+
+    /// 便捷注册段头/尾视图
+    public func registerView<T: UICollectionReusableView>(_ kind: UICollectionView.ReusableKind, _ type: T.Type) {
+        self.register(type.classForCoder(), forSupplementaryViewOfKind: kind.rawValue, withReuseIdentifier: NSStringFromClass(type.classForCoder()))
+    }
+
+    /// 获取复用段头/尾视图
+    public func getReusableView<T: UICollectionReusableView>(_ kind: UICollectionView.ReusableKind, _ indexPath: IndexPath, _ type: T.Type) -> T {
+        return self.dequeueReusableSupplementaryView(ofKind: kind.rawValue, withReuseIdentifier: NSStringFromClass(type.classForCoder()), for: indexPath) as! T
     }
 }

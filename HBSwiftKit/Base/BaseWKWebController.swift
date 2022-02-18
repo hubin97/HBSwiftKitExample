@@ -212,7 +212,7 @@ extension BaseWKWebController {
                 jsHandleBlcok(methodName, message.body)
             } else {
                 // 自定义默认反射
-                guard let msg = message.body as? String, let dict = msg.data(using: .utf8)?.toDict() else { return }
+                guard let msg = message.body as? String, let dict = msg.data?.dict else { return }
                 guard let method = dict["method"] as? String else { return }
                 var selectorName = method
                 var param: [String: Any]?
@@ -220,7 +220,7 @@ extension BaseWKWebController {
                     selectorName = "\(method):"
                     param = value
                 }
-                print("method=> \(selectorName), param =>\(param?.toJSONString() ?? "")")
+                print("method=> \(selectorName), param =>\(param?.string ?? "")")
                 let selector = NSSelectorFromString(selectorName)
                 if self.responds(to:selector) {
                     self.perform(selector, with: param)

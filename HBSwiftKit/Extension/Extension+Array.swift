@@ -13,22 +13,30 @@ fileprivate typealias Extension_Array = Array
 // MARK: - private mothods
 extension Extension_Array {
 
-    public func toData() -> Data? {
-        if (!JSONSerialization.isValidJSONObject(self)) {
-            print("is not a valid json object")
-            return nil
+    /// dict转data
+    public var data: Data? {
+        if (JSONSerialization.isValidJSONObject(self)) {
+            return try? JSONSerialization.data(withJSONObject: self, options: [])
         }
-        return try? JSONSerialization.data(withJSONObject: self, options: [])
+        return nil
     }
 
-    public func toJSONString() -> String? {
-        guard let data = self.toData() else { return nil }
-        return String(data:data, encoding: String.Encoding.utf8)
+    /// arr转string
+    public var string: String? {
+        if let data = self.data {
+            return String(data: data, encoding: String.Encoding.utf8)
+        }
+        return nil
     }
 }
 
 // MARK: - call backs
-extension Extension_Array { 
+extension Extension_Array where Element: Equatable {
+
+    /// 数组去重
+    func deduplication() -> Array<Element> {
+        return self.enumerated().filter({ self.firstIndex(of: $0.element) == $0.offset }).map({ $0.element })
+    }
 }
 
 // MARK: - delegate or data source
