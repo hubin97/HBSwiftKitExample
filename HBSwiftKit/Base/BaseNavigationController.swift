@@ -20,15 +20,15 @@ open class BaseNavigationController: UINavigationController {
          navi.darkMode = true
      }
      */
-    public var leftBtnImage = UIImage.bundleImage(named: "navi_back_b")
+    open var leftBtnImage = UIImage.bundleImage(named: "navi_back_b")
     /// 夜间模式, 注意夜间白色图,白天相反
-    public var darkMode = false {
+    open var darkMode = false {
         didSet {
             leftBtnImage = UIImage.bundleImage(named: darkMode ? "navi_back_w": "navi_back_b")
         }
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
@@ -60,7 +60,7 @@ open class BaseNavigationController: UINavigationController {
 extension BaseNavigationController {
     
     //MARK: 回调返回到上层控制器,
-    @objc func backTapAction() {
+    @objc open func backTapAction() {
         if self.topViewController?.responds(to: #selector(backTapAction)) == true {
             self.topViewController?.perform(#selector(backTapAction))
         } else {
@@ -72,7 +72,7 @@ extension BaseNavigationController {
 // MARK: - UINavigationControllerDelegate
 extension BaseNavigationController: UINavigationControllerDelegate {
     
-    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    open func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         let rooVc = navigationController.viewControllers[0]
         if rooVc != viewController {
             viewController.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBtnImage?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backTapAction))
@@ -83,7 +83,7 @@ extension BaseNavigationController: UINavigationControllerDelegate {
         }
     }
     
-    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+    open func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         if responds(to: #selector(getter: interactivePopGestureRecognizer)) {
             interactivePopGestureRecognizer?.isEnabled = true
         }
@@ -95,7 +95,7 @@ extension BaseNavigationController: UINavigationControllerDelegate {
     }
     
     // 自定义非根控制左侧返回按钮
-    public override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+    open override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if children.count == 1 {
             // 根控制tabBar隐藏其他控制底部
             viewController.hidesBottomBarWhenPushed = true;

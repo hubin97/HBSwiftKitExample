@@ -12,7 +12,7 @@ import Foundation
 //MARK: - main class
 open class BaseTabBarController: UITabBarController {
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.tabBar.isTranslucent = false
@@ -25,7 +25,7 @@ open class BaseTabBarController: UITabBarController {
     ///   - titles: 页签标题
     ///   - normalImages: 常态图片数组
     ///   - selectedImages: 选中图片数组
-    public func addChildVcs(naviVcs: [UIViewController], titles: [String?], normalImages: [UIImage?], selectImages: [UIImage?]) {
+    open func addChildVcs(naviVcs: [UIViewController], titles: [String?], normalImages: [UIImage?], selectImages: [UIImage?]) {
         guard naviVcs.count == titles.count && naviVcs.count == normalImages.count && naviVcs.count == selectImages.count else {
             print("初始数组元素个数有误!")
             return
@@ -44,7 +44,7 @@ open class BaseTabBarController: UITabBarController {
     ///   - barTintColor: 背景色
     ///   - normalColor: 标题正常颜色
     ///   - selectColor: 标题选中颜色
-    public func setTabBarColors(barTintColor: UIColor = .white, normalColor: UIColor, selectColor: UIColor) {
+    open func setTabBarColors(barTintColor: UIColor = .white, normalColor: UIColor, selectColor: UIColor) {
         self.tabBar.barTintColor = barTintColor
         //self.tabBar.backgroundImage = nil
         //self.tabBar.shadowImage = nil

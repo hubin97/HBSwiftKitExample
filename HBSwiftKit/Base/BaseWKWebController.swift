@@ -196,7 +196,7 @@ extension BaseWKWebController: WKUIDelegate, WKNavigationDelegate {
 extension BaseWKWebController: UIScrollViewDelegate {
 
     // 调整webview滚动速率
-    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollView.decelerationRate = .normal //.fast 惯性变小
         //print("wkWebView#scrollViewWillBeginDragging--")
     }
@@ -205,26 +205,24 @@ extension BaseWKWebController: UIScrollViewDelegate {
 //MARK: - WKWebScriptMsgHandleAble
 extension BaseWKWebController {
     
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard let methodName = self.scriptMsgName, methodName.isEmpty == false else { return }
-        if methodName == message.name {
-            if let jsHandleBlcok = self.scriptMsgHandleBlock {
-                jsHandleBlcok(methodName, message.body)
-            } else {
-                // 自定义默认反射
-                guard let msg = message.body as? String, let dict = msg.data?.dict else { return }
-                guard let method = dict["method"] as? String else { return }
-                var selectorName = method
-                var param: [String: Any]?
-                if let value = dict["data"] as? [String: Any] {
-                    selectorName = "\(method):"
-                    param = value
-                }
-                print("method=> \(selectorName), param =>\(param?.string ?? "")")
-                let selector = NSSelectorFromString(selectorName)
-                if self.responds(to:selector) {
-                    self.perform(selector, with: param)
-                }
+    open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard let methodName = self.scriptMsgName, methodName.isEmpty == false && methodName == message.name else { return }
+        if let jsHandleBlcok = self.scriptMsgHandleBlock {
+            jsHandleBlcok(methodName, message.body)
+        } else {
+            // 自定义默认反射
+            guard let msg = message.body as? String, let dict = msg.data?.dict else { return }
+            guard let method = dict["method"] as? String else { return }
+            var selectorName = method
+            var param: [String: Any]?
+            if let value = dict["data"] as? [String: Any] {
+                selectorName = "\(method):"
+                param = value
+            }
+            print("method=> \(selectorName), param =>\(param?.string ?? "")")
+            let selector = NSSelectorFromString(selectorName)
+            if self.responds(to:selector) {
+                self.perform(selector, with: param)
             }
         }
     }
