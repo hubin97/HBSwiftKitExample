@@ -92,9 +92,9 @@ extension UIKitTestController {
     @objc func filterAction(_ sender: UIBarButtonItem) {
         // showRulerView()
         // showTagsView(nil)
-        let picker = DPAttrsPickerView(mode: .hsv, duration: 3, colorValue: HsvColor(hue: 0, saturation: 0))
+        let picker = LightAttrPickerView(hsvColor: HsvColor(hue: 0, saturation: 0), duration: 3)
         //let picker = DPAttrsPickerView(mode: .brightness, duration: 3)
-        picker.pickerDatas = allBrightList
+        //picker.pickerDatas = allBrightList
         picker.show()
     }
 

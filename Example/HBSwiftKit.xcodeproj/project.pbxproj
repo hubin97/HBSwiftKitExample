@@ -13,6 +13,11 @@
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
+		B50055A427C375A700467E55 /* LightAttrPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500558127C375A700467E55 /* LightAttrPickerView.swift */; };
+		B50055A627C375A700467E55 /* LightAttrPickerView+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = B500558327C375A700467E55 /* LightAttrPickerView+Views.swift */; };
+		B50055BD27C375CD00467E55 /* src_hsv in Resources */ = {isa = PBXBuildFile; fileRef = B50055BA27C375CD00467E55 /* src_hsv */; };
+		B50055BE27C375CD00467E55 /* src_temp in Resources */ = {isa = PBXBuildFile; fileRef = B50055BB27C375CD00467E55 /* src_temp */; };
+		B50055BF27C375CD00467E55 /* src_xy in Resources */ = {isa = PBXBuildFile; fileRef = B50055BC27C375CD00467E55 /* src_xy */; };
 		B518517626269E340013A973 /* Quick+NimbleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518517526269E340013A973 /* Quick+NimbleTest.swift */; };
 		B533677326E852550009B60F /* VideoCropController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533677226E852550009B60F /* VideoCropController.swift */; };
 		B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */; };
@@ -22,7 +27,6 @@
 		B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541412C268EAF06008CE14B /* MapLocationController.swift */; };
 		B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DE3B3275EF2C400BBDE0B /* SignalPlateView.swift */; };
 		B54DE3B6275F4C4100BBDE0B /* SignalMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DE3B5275F4C4100BBDE0B /* SignalMarkView.swift */; };
-		B54DF45F273E5C5100F564FB /* resource in Resources */ = {isa = PBXBuildFile; fileRef = B54DF45E273E5C5100F564FB /* resource */; };
 		B5557A3526706188007F5B44 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = B5557A3426706188007F5B44 /* loading.gif */; };
 		B557085027225E5500C22CD4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B557084F27225E5500C22CD4 /* .swiftlint.yml */; };
 		B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557E4DA2631304800C62147 /* ThemeStyle.swift */; };
@@ -42,7 +46,6 @@
 		B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82B255A7818005A5179 /* BlueToothController.swift */; };
 		B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82C255A7818005A5179 /* DatePickerController.swift */; };
 		B5BAC835255A7875005A5179 /* images.json in Resources */ = {isa = PBXBuildFile; fileRef = B5BAC834255A7875005A5179 /* images.json */; };
-		B5BEA1A92744B88B005B8F54 /* DPAttrsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BEA1A82744B88A005B8F54 /* DPAttrsPickerView.swift */; };
 		B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5C625ECCE7700C88C1C /* SliderRuler.swift */; };
 		B5C6C5EA25ECD38800C88C1C /* Wto_ImageBrower.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5DE25ECD1BD00C88C1C /* Wto_ImageBrower.swift */; };
 		B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6C5E025ECD1C400C88C1C /* Wto_ThemeMode.swift */; };
@@ -92,6 +95,11 @@
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		60A90EE9A7E1640E361223EE /* Pods-HBSwiftKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Example.release.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9A8871220770A8D795C87930 /* Pods-HBSwiftKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Tests/Pods-HBSwiftKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		B500558127C375A700467E55 /* LightAttrPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightAttrPickerView.swift; sourceTree = "<group>"; };
+		B500558327C375A700467E55 /* LightAttrPickerView+Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LightAttrPickerView+Views.swift"; sourceTree = "<group>"; };
+		B50055BA27C375CD00467E55 /* src_hsv */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src_hsv; sourceTree = "<group>"; };
+		B50055BB27C375CD00467E55 /* src_temp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src_temp; sourceTree = "<group>"; };
+		B50055BC27C375CD00467E55 /* src_xy */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src_xy; sourceTree = "<group>"; };
 		B518517526269E340013A973 /* Quick+NimbleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Quick+NimbleTest.swift"; path = "HBSwiftKit_Tests/Quick+NimbleTest.swift"; sourceTree = SOURCE_ROOT; };
 		B533677226E852550009B60F /* VideoCropController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCropController.swift; sourceTree = "<group>"; };
 		B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wto_Calendar.swift; sourceTree = "<group>"; };
@@ -103,7 +111,6 @@
 		B541412C268EAF06008CE14B /* MapLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationController.swift; sourceTree = "<group>"; };
 		B54DE3B3275EF2C400BBDE0B /* SignalPlateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalPlateView.swift; sourceTree = "<group>"; };
 		B54DE3B5275F4C4100BBDE0B /* SignalMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalMarkView.swift; sourceTree = "<group>"; };
-		B54DF45E273E5C5100F564FB /* resource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resource; sourceTree = "<group>"; };
 		B5557A3426706188007F5B44 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		B557084F27225E5500C22CD4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		B557E4DA2631304800C62147 /* ThemeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStyle.swift; sourceTree = "<group>"; };
@@ -126,7 +133,6 @@
 		B5BAC82C255A7818005A5179 /* DatePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		B5BAC834255A7875005A5179 /* images.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = images.json; sourceTree = "<group>"; };
 		B5BAC85B255A7C0C005A5179 /* HBSwiftKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HBSwiftKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
-		B5BEA1A82744B88A005B8F54 /* DPAttrsPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPAttrsPickerView.swift; sourceTree = "<group>"; };
 		B5BEA1AC2744B91F005B8F54 /* SlidePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidePickerView.swift; sourceTree = "<group>"; };
 		B5C6C5C625ECCE7700C88C1C /* SliderRuler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderRuler.swift; sourceTree = "<group>"; };
 		B5C6C5CE25ECD08900C88C1C /* EditTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableView.swift; sourceTree = "<group>"; };
@@ -257,6 +263,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B500558027C375A700467E55 /* LightAttrPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				B50055BC27C375CD00467E55 /* src_xy */,
+				B50055BA27C375CD00467E55 /* src_hsv */,
+				B50055BB27C375CD00467E55 /* src_temp */,
+				B500558127C375A700467E55 /* LightAttrPickerView.swift */,
+				B500558327C375A700467E55 /* LightAttrPickerView+Views.swift */,
+			);
+			path = LightAttrPickerView;
+			sourceTree = "<group>";
+		};
 		B533677026E84FED0009B60F /* 视频剪辑页 */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,8 +316,7 @@
 		B54DF449273E5A7F00F564FB /* 色盘选择器 */ = {
 			isa = PBXGroup;
 			children = (
-				B54DF45E273E5C5100F564FB /* resource */,
-				B5BEA1A82744B88A005B8F54 /* DPAttrsPickerView.swift */,
+				B500558027C375A700467E55 /* LightAttrPickerView */,
 				B5BEA1AC2744B91F005B8F54 /* SlidePickerView.swift */,
 			);
 			path = "色盘选择器";
@@ -562,13 +579,15 @@
 				B5BAC835255A7875005A5179 /* images.json in Resources */,
 				B5DCC71425F3266D007E3237 /* areacode.plist in Resources */,
 				B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */,
-				B54DF45F273E5C5100F564FB /* resource in Resources */,
 				B5D55405261D40AE007A20F5 /* jstest.html in Resources */,
+				B50055BE27C375CD00467E55 /* src_temp in Resources */,
 				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
 				B5557A3526706188007F5B44 /* loading.gif in Resources */,
+				B50055BD27C375CD00467E55 /* src_hsv in Resources */,
 				B557085027225E5500C22CD4 /* .swiftlint.yml in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				B5F8390226982D8E0001C484 /* 温柔女声.mp3 in Resources */,
+				B50055BF27C375CD00467E55 /* src_xy in Resources */,
 				B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,7 +715,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/HBSwiftKit/Resources/R.generated.swift",
+				$SRCROOT/HBSwiftKit/Resources/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -734,12 +753,12 @@
 				B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				B5825E3326F0877C00539866 /* VideoCropView.swift in Sources */,
+				B50055A427C375A700467E55 /* LightAttrPickerView.swift in Sources */,
 				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
 				B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */,
 				1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */,
 				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
 				B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */,
-				B5BEA1A92744B88B005B8F54 /* DPAttrsPickerView.swift in Sources */,
 				B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */,
 				B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */,
 				B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */,
@@ -752,6 +771,7 @@
 				B54DE3B6275F4C4100BBDE0B /* SignalMarkView.swift in Sources */,
 				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
 				B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */,
+				B50055A627C375A700467E55 /* LightAttrPickerView+Views.swift in Sources */,
 				B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */,
 				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,
 				B5FEFA3B27462A6F00DA6999 /* SlidePickerView.swift in Sources */,

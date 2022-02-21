@@ -114,7 +114,7 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.file` struct is generated, and contains static references to 11 files.
+  /// This `R.file` struct is generated, and contains static references to 13 files.
   struct file {
     /// Resource file `.swiftlint.yml`.
     static let swiftlintYml = Rswift.FileResource(bundle: R.hostingBundle, name: ".swiftlint", pathExtension: "yml")
@@ -134,8 +134,12 @@ struct R: Rswift.Validatable {
     static let jstestHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "jstest", pathExtension: "html")
     /// Resource file `loading.gif`.
     static let loadingGif = Rswift.FileResource(bundle: R.hostingBundle, name: "loading", pathExtension: "gif")
-    /// Resource file `resource`.
-    static let resource = Rswift.FileResource(bundle: R.hostingBundle, name: "resource", pathExtension: "")
+    /// Resource file `src_hsv`.
+    static let src_hsv = Rswift.FileResource(bundle: R.hostingBundle, name: "src_hsv", pathExtension: "")
+    /// Resource file `src_temp`.
+    static let src_temp = Rswift.FileResource(bundle: R.hostingBundle, name: "src_temp", pathExtension: "")
+    /// Resource file `src_xy`.
+    static let src_xy = Rswift.FileResource(bundle: R.hostingBundle, name: "src_xy", pathExtension: "")
     /// Resource file `温柔女声.mp3`.
     static let 温柔女声Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "温柔女声", pathExtension: "mp3")
 
@@ -193,9 +197,21 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
 
-    /// `bundle.url(forResource: "resource", withExtension: "")`
-    static func resource(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.resource
+    /// `bundle.url(forResource: "src_hsv", withExtension: "")`
+    static func src_hsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.src_hsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "src_temp", withExtension: "")`
+    static func src_temp(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.src_temp
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "src_xy", withExtension: "")`
+    static func src_xy(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.src_xy
       return fileResource.bundle.url(forResource: fileResource)
     }
 
