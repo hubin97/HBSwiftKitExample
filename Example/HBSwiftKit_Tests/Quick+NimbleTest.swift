@@ -47,6 +47,13 @@ class SwiftStringTest: QuickSpec {
                 //print("jsond: \(json.data?.dict)")
                 let jsons = ###"[{"funcionName":"开启","functionCode":"group_function_on","ifBasic":1},{"funcionName":"开关分离设置","functionCode":"group_function_separate_key_and_relay","ifBasic":0},{"funcionName":"上电设置","functionCode":"group_function_power_on_relay_setting","ifBasic":0},{"funcionName":"关联智能常开","functionCode":"group_function_normally_open","ifBasic":0},{"funcionName":"关闭","functionCode":"group_function_off","ifBasic":1}]"###
                 print("jsons: \(jsons.data?.array)")
+
+                // 方法三：隐式解包可空类型
+                let assumedString: String! = "An implicitly unwrapped optional string."
+                let implicitString: String = assumedString // no need for an exclamation point
+
+                // 注意：下面的语句 Swift 类型推断 optionalString 类型是 String? 而不是 String!
+                let optionalString = assumedString
             }
         }
     }

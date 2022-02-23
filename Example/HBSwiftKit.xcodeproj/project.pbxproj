@@ -28,6 +28,7 @@
 		B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DE3B3275EF2C400BBDE0B /* SignalPlateView.swift */; };
 		B54DE3B6275F4C4100BBDE0B /* SignalMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DE3B5275F4C4100BBDE0B /* SignalMarkView.swift */; };
 		B5557A3526706188007F5B44 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = B5557A3426706188007F5B44 /* loading.gif */; };
+		B5565E8E27C5BF34001A1A22 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5565E8D27C5BF34001A1A22 /* NetworkReachability.swift */; };
 		B557085027225E5500C22CD4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B557084F27225E5500C22CD4 /* .swiftlint.yml */; };
 		B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557E4DA2631304800C62147 /* ThemeStyle.swift */; };
 		B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F689C264B8AB300FD62CF /* DualListView.swift */; };
@@ -112,6 +113,7 @@
 		B54DE3B3275EF2C400BBDE0B /* SignalPlateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalPlateView.swift; sourceTree = "<group>"; };
 		B54DE3B5275F4C4100BBDE0B /* SignalMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalMarkView.swift; sourceTree = "<group>"; };
 		B5557A3426706188007F5B44 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
+		B5565E8D27C5BF34001A1A22 /* NetworkReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
 		B557084F27225E5500C22CD4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		B557E4DA2631304800C62147 /* ThemeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStyle.swift; sourceTree = "<group>"; };
 		B56F689C264B8AB300FD62CF /* DualListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualListView.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 		B5E1D8E3256282C80093AC4C /* ExampleList */ = {
 			isa = PBXGroup;
 			children = (
+				B5565E8D27C5BF34001A1A22 /* NetworkReachability.swift */,
 				B5BAC828255A7818005A5179 /* ImageBrowerController.swift */,
 				B5BAC829255A7818005A5179 /* NumberPickerController.swift */,
 				B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */,
@@ -616,18 +619,22 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/HBSwiftKit/HBSwiftKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBSwiftKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -768,6 +775,7 @@
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
 				B58F80AE273CB51500C778D5 /* OpenCVWrapper.mm in Sources */,
 				B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */,
+				B5565E8E27C5BF34001A1A22 /* NetworkReachability.swift in Sources */,
 				B54DE3B6275F4C4100BBDE0B /* SignalMarkView.swift in Sources */,
 				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
 				B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */,
