@@ -103,9 +103,9 @@ public func swiftClassFromString(_ aClassName: String) -> AnyClass? {
     return NSClassFromString(classStringName)
 }
 
-////
+//
 //public let getIpAddress:(() -> String? ) = { () -> String? in
-//    
+//
 //    var addresses = [String]()
 //    var ifaddr : UnsafeMutablePointer<ifaddrs>? = nil
 //    if getifaddrs(&ifaddr) == 0 {

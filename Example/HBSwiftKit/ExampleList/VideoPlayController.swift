@@ -8,6 +8,8 @@
 import UIKit
 import Foundation
 import AVFoundation
+import CocoaLumberjack
+
 // MARK: - global var and methods
 
 // MARK: - main class

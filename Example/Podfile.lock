@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (5.5.0)
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - CocoaLumberjack/Core (3.7.4)
   - CocoaLumberjack/Swift (3.7.4):
     - CocoaLumberjack/Core
@@ -14,8 +17,7 @@ PODS:
     - HBSwiftKit/Extension
   - HBSwiftKit/Extension (0.3.6):
     - HBSwiftKit/Global
-  - HBSwiftKit/Global (0.3.6):
-    - CocoaLumberjack/Swift
+  - HBSwiftKit/Global (0.3.6)
   - HBSwiftKit/Network (0.3.6):
     - HBSwiftKit/UIKit
   - HBSwiftKit/UIKit (0.3.6):
@@ -23,10 +25,7 @@ PODS:
   - HBSwiftKit/Utils (0.3.6):
     - HBSwiftKit/UIKit
     - HBSwiftKit/Utils/AuthStatus (= 0.3.6)
-    - HBSwiftKit/Utils/LoggerManager (= 0.3.6)
   - HBSwiftKit/Utils/AuthStatus (0.3.6):
-    - HBSwiftKit/UIKit
-  - HBSwiftKit/Utils/LoggerManager (0.3.6):
     - HBSwiftKit/UIKit
   - Kingfisher (4.10.1)
   - Moya (15.0.0):
@@ -43,6 +42,8 @@ PODS:
   - SwiftLint (0.44.0)
 
 DEPENDENCIES:
+  - Charts
+  - CocoaLumberjack/Swift
   - HBSwiftKit (from `../`)
   - Kingfisher
   - Moya
@@ -56,6 +57,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Charts
     - CocoaLumberjack
     - Kingfisher
     - Moya
@@ -73,8 +75,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
-  HBSwiftKit: becea1575cbc0b1621169ca6910b67f9b84bf5b4
+  HBSwiftKit: 3209e2d26b4d07dcea52a8a74f1ea9965200cd57
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
@@ -85,6 +88,6 @@ SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
 
-PODFILE CHECKSUM: 30e4d9878b1d8d47c8e8b51b97741600fd44ff62
+PODFILE CHECKSUM: 2295aabd4e630eb845daafe3336960a1a479eceb
 
 COCOAPODS: 1.11.2

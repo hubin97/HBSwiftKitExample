@@ -82,7 +82,8 @@ class UIKitTestController: BaseViewController {
 
         //customBtn()
         //signalCheck()
-        attributedTest()
+        //attributedTest()
+        starRateView()
     }
 }
 
@@ -98,28 +99,54 @@ extension UIKitTestController {
         picker.show()
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//
+//        let jsons = ###"[{"funcionName":"开启","functionCode":"group_function_on","ifBasic":1},{"funcionName":"开关分离设置","functionCode":"group_function_separate_key_and_relay","ifBasic":0},{"funcionName":"上电设置","functionCode":"group_function_power_on_relay_setting","ifBasic":0},{"funcionName":"关联智能常开","functionCode":"group_function_normally_open","ifBasic":0},{"funcionName":"关闭","functionCode":"group_function_off","ifBasic":1}]"###
+//        print("jsons: \(jsons.data?.array)")
+//
+//
+//        //DDLogWarn("warn hahah")
+////        if self.signalPlate.isAnimating {
+////            self.signalPlate.resultAngle(CGFloat.pi * CGFloat(arc4random()%26)/18)
+////            self.signalMark.resultMark(Int(arc4random()%4))
+////        } else {
+////            signalMark.startAnimate(7)
+////            signalPlate.startAnimate(7) {[weak self] in
+////                self?.signalPlate.resultAngle(CGFloat.pi * 26/18)
+////                self?.signalMark.resultMark(0)
+////            }
+////        }
+//    }
+}
 
-        let jsons = ###"[{"funcionName":"开启","functionCode":"group_function_on","ifBasic":1},{"funcionName":"开关分离设置","functionCode":"group_function_separate_key_and_relay","ifBasic":0},{"funcionName":"上电设置","functionCode":"group_function_power_on_relay_setting","ifBasic":0},{"funcionName":"关联智能常开","functionCode":"group_function_normally_open","ifBasic":0},{"funcionName":"关闭","functionCode":"group_function_off","ifBasic":1}]"###
-        print("jsons: \(jsons.data?.array)")
-
-
-        //DDLogWarn("warn hahah")
-//        if self.signalPlate.isAnimating {
-//            self.signalPlate.resultAngle(CGFloat.pi * CGFloat(arc4random()%26)/18)
-//            self.signalMark.resultMark(Int(arc4random()%4))
-//        } else {
-//            signalMark.startAnimate(7)
-//            signalPlate.startAnimate(7) {[weak self] in
-//                self?.signalPlate.resultAngle(CGFloat.pi * 26/18)
-//                self?.signalMark.resultMark(0)
-//            }
-//        }
+// MARK: - Copyable
+protocol Copyable {
+    func copy() -> Self
+}
+class MyClass: Copyable {
+    var num = 1
+    func copy() -> Self {
+        let type = type(of: self)
+        let result = type.init()
+        result.num = num
+        return result
     }
+    required init() {}
 }
 
 // MARK: - 测试代码
 extension UIKitTestController {
+
+    func starRateView() {
+        let max = 6
+        let rect = CGRect(x: 20, y: 40, width: kScreenW - 40, height: (kScreenW - 40)/CGFloat(max))
+        let starView = StarRateView.init(frame: rect, starMax: max, rateValue: 0)
+        starView.canAjust = true
+        self.view.addSubview(starView)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            starView.updateStarView(by: 0.6)
+        }
+    }
 
     /// 富文本测试
     func attributedTest() {

@@ -242,6 +242,14 @@ extension Extension_String {
     public func toAttributedString() -> NSMutableAttributedString {
         return NSMutableAttributedString(string: self)
     }
+
+    /// 谓词匹配(正则表达式匹配)
+    /// - Parameter regex: 正则表达式
+    /// - Returns: 是否匹配
+    public func predicateMatch(regex: String) -> Bool {
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        return predicate.evaluate(with: self)
+    }
 }
 
 extension Extension_String {

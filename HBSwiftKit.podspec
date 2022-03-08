@@ -38,7 +38,6 @@ Pod::Spec.new do |s|
   s.subspec 'Global' do |ss|
       ss.source_files  = 'HBSwiftKit/Global'
       ss.framework  = "Foundation", "UIKit"
-      ss.dependency 'CocoaLumberjack/Swift'
   end
   
   s.subspec 'Extension' do |ss|
@@ -67,9 +66,9 @@ Pod::Spec.new do |s|
       ss.subspec 'AuthStatus' do |sss|
           sss.source_files  = 'HBSwiftKit/Utils/AuthStatus'
       end
-      ss.subspec 'LoggerManager' do |sss|
-          sss.source_files  = 'HBSwiftKit/Utils/LoggerManager'
-      end
+#      ss.subspec 'LoggerManager' do |sss|
+#          sss.source_files  = 'HBSwiftKit/Utils/LoggerManager'
+#      end
   end
   
 #  s.subspec 'Assets' do |dd|

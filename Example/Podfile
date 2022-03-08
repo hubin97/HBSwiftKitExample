@@ -16,6 +16,8 @@ target 'HBSwiftKit_Example' do
   pod 'ObjectMapper'
   pod 'Moya' #, '~> 15.0.0'
   #pod 'OpenCV', '~> 4.3.0'
+  pod 'CocoaLumberjack/Swift'
+  pod 'Charts'
   
   target 'HBSwiftKit_Tests' do
     inherit! :search_paths

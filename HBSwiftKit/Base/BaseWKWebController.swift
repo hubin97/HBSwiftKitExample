@@ -7,7 +7,6 @@
 
 import Foundation
 import WebKit
-import CocoaLumberjack
 
 //MARK: - global var and methods
 //1. 加载区分本地/远端的url ✅

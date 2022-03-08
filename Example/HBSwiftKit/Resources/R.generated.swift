@@ -224,7 +224,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 24 images.
+  /// This `R.image` struct is generated, and contains static references to 26 images.
   struct image {
     /// Image `ib_back`.
     static let ib_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "ib_back")
@@ -268,6 +268,10 @@ struct R: Rswift.Validatable {
     static let signalplate = Rswift.ImageResource(bundle: R.hostingBundle, name: "signalplate")
     /// Image `signalpointer`.
     static let signalpointer = Rswift.ImageResource(bundle: R.hostingBundle, name: "signalpointer")
+    /// Image `star_nomal`.
+    static let star_nomal = Rswift.ImageResource(bundle: R.hostingBundle, name: "star_nomal")
+    /// Image `star_select`.
+    static let star_select = Rswift.ImageResource(bundle: R.hostingBundle, name: "star_select")
     /// Image `swift`.
     static let swift = Rswift.ImageResource(bundle: R.hostingBundle, name: "swift")
     /// Image `topHintbg`.
@@ -419,6 +423,20 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "signalpointer", bundle: ..., traitCollection: ...)`
     static func signalpointer(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.signalpointer, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "star_nomal", bundle: ..., traitCollection: ...)`
+    static func star_nomal(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.star_nomal, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "star_select", bundle: ..., traitCollection: ...)`
+    static func star_select(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.star_select, compatibleWith: traitCollection)
     }
     #endif
 

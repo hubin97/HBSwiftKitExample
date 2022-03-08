@@ -41,6 +41,10 @@ open class BaseViewController: UIViewController {
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
+
+    deinit {
+        print("\(String(describing: type(of: self))) deinit")
+    }
 }
 
 extension BaseViewController {

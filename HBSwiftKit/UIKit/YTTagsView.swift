@@ -385,7 +385,7 @@ open class TagIconBtn: UIButton {
     }
 }
 
-open class TagsMeta {
+open class TagsMeta: Equatable {
     public var title: String?
     public var iconn: String?
     public var iconh: String?
@@ -400,5 +400,13 @@ open class TagsMeta {
         self.param = param
         self.isSelected = isSelected
         self.tag = tag
+    }
+
+    /// 取tag(存下标)比较
+    public static func == (lhs: TagsMeta, rhs: TagsMeta) -> Bool {
+        if let lhsp = lhs.tag, let rhsp = rhs.tag {
+            return lhsp == rhsp
+        }
+        return false
     }
 }

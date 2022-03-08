@@ -20,6 +20,40 @@ struct Std: Codable {
     var sex: Int?
 }
 
+class MyClass {
+    func method(num: Int) -> Int {
+        return num + 1
+    }
+}
+
+class DynamicDispatchTest: QuickSpec {
+    override func spec() {
+        fdescribe("DynamicDispatchTest") {
+            let f = MyClass.method  // f: (MyClass) -> (Int) -> Int
+            let obj = MyClass()
+            let ret = f(obj)(9)
+            print("ret: \(ret)")
+        }
+    }
+}
+
+class RegexTest: QuickSpec {
+    override func spec() {
+        fdescribe("RegexTest") {
+            it("should print correct test data") {
+                let mail = "88888888@qq.com"
+                let pattern = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$"
+                let ret1 = RegexHelper(pattern).match(input: mail)
+                //let ret2 = pattern =~ mail
+                let ret3 = RegexHelper(RegexHelper.Pattern.alphabet.rawValue).match(input: mail)
+
+                print(ret1)
+                //print(ret2)
+                print(ret3)
+            }
+        }
+    }
+}
 
 class SwiftStringTest: QuickSpec {
     override func spec() {
