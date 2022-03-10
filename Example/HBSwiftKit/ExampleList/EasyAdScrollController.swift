@@ -22,9 +22,10 @@ class EasyAdScrollController: BaseViewController {
         ytSegment.setRoundCorners(borderColor: .brown, borderWidth: 1, isDotted: true, lineDashPattern: [4, 1])
         ytSegment.setTargetIndex(with: 3)
         ytSegment.isNeedSeparateLine = true
-        ytSegment.callBackTapTitleBlock = { (title, index) in
-            print("index:\(index), title:\(title ?? "")")
-        }
+        ytSegment.delegate = self
+//        ytSegment.callBackTapTitleBlock = { (title, index) in
+//            print("index:\(index), title:\(title ?? "")")
+//        }
 
         let segment = YTSegment.init(scrollFrame: CGRect(x: 0, y: 150, width: self.view.frame.width, height: 44), titles: ["用户交互设计", "用户交互", "用设计", "用户交互设计", "设计", "用户交互设计设计设计", "用户交互设计", "设"], normalColor: .gray, selectColor: .black, isShowOutstanding: true)
 
@@ -34,6 +35,7 @@ class EasyAdScrollController: BaseViewController {
         // YTSegment.isNeedSeparateLine = true
         segment.callBackTapTitleBlock = { (title, index) in
             print("index:\(index), title:\(title ?? "")")
+            ytSegment.setTargetIndex(with: index)
         }
 
         let scrolldts = ["1.哈哈哈哈哈哈哈哈哈", "2.哦哦哦哦哦哦哦哦哦", "3.啦啦啦啦啦啦"]
@@ -50,5 +52,11 @@ class EasyAdScrollController: BaseViewController {
         let adView = EasyAdScrollTool.init(frame: CGRect(x: 50, y: 300, width: 300, height: 44), style: .Page, datas: items)
         adView.setRoundCorners(borderColor: .systemBlue, borderWidth: 1, isDotted: true, lineDashPattern: [2, 4])
         view.addSubview(adView)
+    }
+}
+
+extension EasyAdScrollController: YTSegmentDelegate {
+    func ytSegmentTapAction(segment: YTSegment, title: String?, index: Int) {
+        print("index:\(index), title:\(title ?? "")")
     }
 }

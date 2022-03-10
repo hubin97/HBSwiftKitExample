@@ -8,26 +8,34 @@
 import Foundation
 import CoreBluetooth
 
-//MARK: - global var and methods
 /// 注意权限配置 NSBluetoothAlwaysUsageDescription
-/// 管理单例
-public let bleManager = BlueToothManager()
+//MARK: - global var and methods
+public typealias BLEManager = BlueToothManager
+
+public protocol BLEManagerDelegate: AnyObject {
+    /// 回调中心设备连接状态更新
+    func updateCentralManagerState(central: CBCentralManager)
+    /// 回调外设连接状态更新
+    func updateCBPeripheralState(peripheral: CBPeripheral)
+    /// 回调搜索外设数组更新
+    func updateDiscoveredPeripherals(peripherals: [CBPeripheral])
+    /// 回调搜索到的单个外设
+    func updateDiscoveredPeripheral(peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber)
+}
 
 //MARK: - main class
 public class BlueToothManager: NSObject {
-    
-    /// 匹配蓝牙外设前缀
+
+    /// 管理单例
+    public static let shared = BlueToothManager()
+    /// 匹配蓝牙外设前缀, 不为空时, allPeripherals匹配所有符合条件的外设
     public var matchDPre: String?
     /// 匹配蓝牙外设UUID
     public var matchUUID: String?
     /// 匹配蓝牙外设UUID2
     public var matchUUID2: String?
 
-    /// 回调搜索外设数组更新
-    public var callBackAllPeripheralsUpdateBlock: (() -> ())?
-    
-    /// 回调外设连接状态更新
-    public var callBackLinkStateUpdateBlock: (() -> ())?
+    public weak var delegate: BLEManagerDelegate?
 
     /// 系统蓝牙设备管理对象，可以把他理解为主设备，通过他，可以去扫描和链接外设
     lazy var centralManager: CBCentralManager = {
@@ -81,6 +89,7 @@ extension BlueToothManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         let statelist = ["unknown", "resetting", "unsupported", "unauthorized", "poweredOff", "poweredOn"]
         print("centralstate:\(statelist[central.state.rawValue])")
+        self.delegate?.updateCentralManagerState(central: central)
         if central.state == .poweredOn {
             scan()
         } else {
@@ -89,29 +98,29 @@ extension BlueToothManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        guard peripheral.name != nil else {
-            print("搜索到外设名UnKnown")
-            return
+        guard let pName = peripheral.name else { return }
+        self.delegate?.updateDiscoveredPeripheral(peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI)
+        guard !allPeripherals.contains(peripheral) else { return }
+        print("搜索到新外设: \(pName) => \(RSSI) => advertisementData\(advertisementData)")
+        // 有前缀匹配要求, 按条件匹配
+        if let matchDPre = matchDPre {
+            if pName.hasPrefix(matchDPre) {
+                allPeripherals.append(peripheral)
+            }
+        } else {
+            allPeripherals.append(peripheral)
         }
-        print("开始搜索外设: \(peripheral.name ?? "UnKnown")")
-        guard let matchDPre = matchDPre else {
-            if allPeripherals.contains(peripheral) == false { allPeripherals.append(peripheral) }
-            callBackAllPeripheralsUpdateBlock?()
-            return
-        }
-        if peripheral.name?.hasPrefix(matchDPre) == true {
-            if allPeripherals.contains(peripheral) == false { allPeripherals.append(peripheral) }
-            callBackAllPeripheralsUpdateBlock?()
-        }
+        self.delegate?.updateDiscoveredPeripherals(peripherals: allPeripherals)
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("外设\(peripheral.name ?? "")连接成功")
+        self.delegate?.updateCBPeripheralState(peripheral: peripheral)
         centralManager.stopScan()
         // 把已连接外设置顶🔝
         allPeripherals = allPeripherals.filter({ $0 != peripheral })
         allPeripherals.insert(peripheral, at: 0)
-        callBackLinkStateUpdateBlock?()
+        //callBackLinkStateUpdateBlock?()
         // 设置的peripheral委托CBPeripheralDelegate
         peripheral.delegate = self
         // 扫描外设Services，成功后会进入方法：didDiscoverServices
@@ -120,10 +129,12 @@ extension BlueToothManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("外设\(peripheral.name ?? "")断开连接")
+        self.delegate?.updateCBPeripheralState(peripheral: peripheral)
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         print("外设\(peripheral.name ?? "")连接失败")
+        self.delegate?.updateCBPeripheralState(peripheral: peripheral)
     }
     
     //MARK: - CBPeripheralDelegate
@@ -135,7 +146,7 @@ extension BlueToothManager: CBCentralManagerDelegate, CBPeripheralDelegate {
         print("扫描到外设服务:\(peripheral.name ?? ""),\(peripheral.services ?? [CBService]())")
         if let matchUUID = matchUUID {
             // => 扫描外设服务匹配协调头后会进入方法：didDiscoverDescriptorsFor service继续扫描特征
-            _ = peripheral.services?.filter({ $0.uuid.isEqual(CBUUID(string: matchUUID)) }).map({ peripheral.discoverCharacteristics(nil, for: $0) })
+            peripheral.services?.filter({ $0.uuid.isEqual(CBUUID(string: matchUUID)) }).forEach({ peripheral.discoverCharacteristics(nil, for: $0) })
         }
     }
     
@@ -144,12 +155,14 @@ extension BlueToothManager: CBCentralManagerDelegate, CBPeripheralDelegate {
             print("扫描到外设特征出错:\(err.localizedDescription)")
             return
         }
-        // => 设置通知，数据通知会进入：didUpdateValueForCharacteristic方法
-        _ = service.characteristics?.map({ peripheral.setNotifyValue(true, for: $0) })
-        // => 读取Characteristic的值
-        _ = service.characteristics?.map({ peripheral.readValue(for: $0) })
-        // => 获取Characteristic的值，读到数据会进入方法：didUpdateValueFor characteristic
-        _ = service.characteristics?.map({ peripheral.discoverDescriptors(for: $0) })
+        service.characteristics?.forEach({ characteristic in
+            // => 设置通知，数据通知会进入：didUpdateValueForCharacteristic方法
+            peripheral.setNotifyValue(true, for: characteristic)
+            // => 读取Characteristic的值
+            peripheral.readValue(for: characteristic)
+            // => 获取Characteristic的值，读到数据会进入方法：didUpdateValueFor characteristic
+            peripheral.discoverDescriptors(for: characteristic)
+        })
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
@@ -161,9 +174,7 @@ extension BlueToothManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     
     /// 搜索到Characteristic的Descriptors
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: Error?) {
-        print("didDiscoverDescriptorsFor characteristic uuid: \(characteristic.uuid)")
-        _ = characteristic.descriptors?.map({ print("descriptors uuid: \($0.uuid)") })
+        //print("didDiscoverDescriptorsFor characteristic uuid: \(characteristic.uuid)")
+        characteristic.descriptors?.forEach({ print("didDiscoverDescriptorsFor characteristic uuid: \($0.uuid)") })
     }
 }
-
-//MARK: - other classes
