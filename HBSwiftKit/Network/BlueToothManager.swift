@@ -32,11 +32,8 @@ public class BlueToothManager: NSObject {
     public var matchDPre: String?
     /// 匹配蓝牙外设UUID
     public var matchUUID: String?
-    /// 匹配蓝牙外设UUID2
-    public var matchUUID2: String?
-
+    /// 中心设备和外设更新代理 BLEManagerDelegate
     public weak var delegate: BLEManagerDelegate?
-
     /// 系统蓝牙设备管理对象，可以把他理解为主设备，通过他，可以去扫描和链接外设
     lazy var centralManager: CBCentralManager = {
         // CBCentralManagerScanOptionAllowDuplicatesKey值为 No，表示不重复扫描已发现的设备
@@ -45,9 +42,9 @@ public class BlueToothManager: NSObject {
         return centralManager
     }()
     /// 保存外设数组
-    public var allPeripherals = [CBPeripheral]()
+    private var allPeripherals = [CBPeripheral]()
     /// 特征值
-    public var characteristcs: CBCharacteristic?
+    ///private var characteristcs: CBCharacteristic?
 }
 
 //MARK: - private mothods
@@ -73,7 +70,7 @@ extension BlueToothManager {
     public func disconnect() {
         centralManager.stopScan()
         guard allPeripherals.count > 0 else { return }
-        _ = allPeripherals.filter({ $0.state == .connected }).map({ centralManager.cancelPeripheralConnection($0) })
+        allPeripherals.filter({ $0.state == .connected }).forEach({ centralManager.cancelPeripheralConnection($0) })
     }
 }
 
@@ -144,9 +141,9 @@ extension BlueToothManager: CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
         print("扫描到外设服务:\(peripheral.name ?? ""),\(peripheral.services ?? [CBService]())")
-        if let matchUUID = matchUUID {
+        if let uuid = matchUUID {
             // => 扫描外设服务匹配协调头后会进入方法：didDiscoverDescriptorsFor service继续扫描特征
-            peripheral.services?.filter({ $0.uuid.isEqual(CBUUID(string: matchUUID)) }).forEach({ peripheral.discoverCharacteristics(nil, for: $0) })
+            peripheral.services?.filter({ $0.uuid.isEqual(CBUUID(string: uuid)) }).forEach({ peripheral.discoverCharacteristics(nil, for: $0) })
         }
     }
     
@@ -166,7 +163,7 @@ extension BlueToothManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        if let matchUUID2 = matchUUID2, let data = characteristic.value, characteristic.uuid.isEqual(CBUUID(string: matchUUID2)) {
+        if let uuid = matchUUID, let data = characteristic.value, characteristic.uuid.isEqual(CBUUID(string: uuid)) {
             let string = String.init(data: data, encoding: .utf8) ?? ""
             print("外设特征: \(string)")
         }

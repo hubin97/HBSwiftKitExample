@@ -54,6 +54,7 @@ extension BlueToothController {
 
     @objc func scanAction() {
         bleManager.scan()
+        printLog("scan")
     }
 }
 
@@ -111,8 +112,8 @@ extension BlueToothController: UITableViewDataSource, UITableViewDelegate {
         let model = dataArrays[indexPath.row]
         model.state = .connecting
         tableView.reloadRows(at: [indexPath], with: .automatic)
-        let p = bleManager.allPeripherals.filter({ $0.name == model.name }).first
-        bleManager.connect(peripheral: p!)
+//        let p = dataArrays.filter({ $0.name == model.name }).first
+//        bleManager.connect(peripheral: p.)
     }
 }
 

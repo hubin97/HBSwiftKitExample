@@ -137,6 +137,8 @@ class ArraySortTest: QuickSpec {
                 let arr2 = arr1.sorted()
                 print("arr1 == arr2: \(arr1 == arr2)")
                 // print("arr1 === arr2: \(arr1.compare)")
+
+                print(arr1.randomElement())
             }
         }
     }

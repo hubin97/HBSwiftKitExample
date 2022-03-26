@@ -103,6 +103,18 @@ public func swiftClassFromString(_ aClassName: String) -> AnyClass? {
     return NSClassFromString(classStringName)
 }
 
+/// 自定义Log打印
+/// - Parameters:
+///   - items: 输出文本
+///   - filePath: 文件名
+///   - method: 方法
+///   - line: 所在行数
+public func printLog(_ items: Any, filePath: String = #filePath, method: String = #function, line: Int = #line) {
+    #if DEBUG
+    print("\(URL(fileURLWithPath: filePath).lastPathComponent)[line:\(line),method:\(method)]: \(items)")
+    #endif
+}
+
 //
 //public let getIpAddress:(() -> String? ) = { () -> String? in
 //
