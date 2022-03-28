@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import QuartzCore
+import ObjectMapper
+import Moya
 // import opencv2
 
 // MARK: - global var and methods
@@ -84,7 +86,73 @@ class UIKitTestController: BaseViewController {
         //signalCheck()
         //attributedTest()
         starRateView()
+
+        NetworkPrintlnPlugin.showLoggers = true
+//        fetchItems(target: NetworkApi.in_theaters, plugins: MoyaNetworkLoggerPlugin()).done { data in
+//            print(data.string ?? "")
+//        }.catch { error in
+//            print(error.localizedDescription)
+//        }
+
+        //fetchTargetMeta(targetType: <#T##T#>, target: <#T##T#>, metaType: <#T##M#>, plugins: <#T##PluginType#>)
     }
+
+    //viewwilla
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+//        fetchJSONString(targetType: NetworkApi.self, target: .in_theaters, plugins: [MoyaNetworkLoggerPlugin()]).done { result in
+//            print(result)
+//        }.catch { error in
+//            print(error.localizedDescription)
+//        }
+
+        let networkActivityClosure = { (_ change: NetworkActivityChangeType, _ target: TargetType) in
+            switch change {
+            case .began:
+                print("\(target) =>began")
+            case .ended:
+                print("\(target) =>ended")
+            }
+        }
+        fetchTargetList(targetType: NetworkApi.self, target: .in_theaters, metaType: MovieMap.self, plugins: [NetworkActivityPlugin(networkActivityClosure: networkActivityClosure), NetworkPrintlnPlugin()]).done { data in
+            data.forEach({ print($0.data?.name ?? "") })
+        }.catch { error in
+            print(error.localizedDescription)
+        }
+    }
+
+}
+
+// https://www.hangge.com/blog/cache/detail_1675.html
+class MovieMap: Mappable {
+    required init?(map: Map) {}
+    func mapping(map: Map) {
+        originalName <- map["originalName"]
+        doubanRating <- map["doubanRating"]
+        duration <- map["duration"]
+        data <- map["data.0"]
+    }
+    var originalName: String?
+    var doubanRating: String?
+    var duration: Int?
+    var data: MovieData?
+}
+
+class MovieData: Mappable {
+    required init?(map: Map) {}
+    func mapping(map: Map) {
+        id <- map["id"]
+        name <- map["name"]
+        genre <- map["genre"]
+        poster <- map["poster"]
+        name <- map["name"]
+    }
+    var id: String?
+    var name: String?
+    var genre: String?
+    var poster: String?
+    var country: String?
 }
 
 // MARK: - call backs

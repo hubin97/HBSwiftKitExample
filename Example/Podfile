@@ -1,6 +1,6 @@
 platform :ios, '10.0'
 
-use_frameworks! :linkage => :dynamic
+use_frameworks! #:linkage => :dynamic
 #supports_swift_versions '>= 4.2' #, '< 4.0'
 #warn_for_unused_master_specs_repo 'false'
 #忽略引入库的所有警告
@@ -15,10 +15,12 @@ target 'HBSwiftKit_Example' do
   pod 'SwiftLint' #, '~> 0.44.0'
   pod 'ObjectMapper'
   pod 'Moya' #, '~> 15.0.0'
+  pod 'PromiseKit' #, '~> 6.8.0'
   #pod 'OpenCV', '~> 4.3.0'
   pod 'CocoaLumberjack/Swift'
   pod 'Charts'
-  
+  pod 'Toast-Swift'
+
   target 'HBSwiftKit_Tests' do
     inherit! :search_paths
 

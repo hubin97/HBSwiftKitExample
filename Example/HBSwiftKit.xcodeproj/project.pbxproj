@@ -65,6 +65,11 @@
 		B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */ = {isa = PBXBuildFile; fileRef = B5CC7A4925E8989300D263B4 /* advfilterdata.json */; };
 		B5D55405261D40AE007A20F5 /* jstest.html in Resources */ = {isa = PBXBuildFile; fileRef = B5D55404261D40AE007A20F5 /* jstest.html */; };
 		B5DCC71425F3266D007E3237 /* areacode.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5DCC71325F3266D007E3237 /* areacode.plist */; };
+		B5E2817627F1BF42000761FD /* NetworkPlugins.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2817527F1BF42000761FD /* NetworkPlugins.swift */; };
+		B5E8E47B27EEBEAB006CED16 /* NetworkExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E8E47A27EEBEAA006CED16 /* NetworkExtension.swift */; };
+		B5E8E47D27F14E6A006CED16 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E8E47C27F14E6A006CED16 /* NetworkRequest.swift */; };
+		B5E8E47F27F18E7E006CED16 /* NetworkRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E8E47E27F18E7E006CED16 /* NetworkRequestTest.swift */; };
+		B5E8E48227F19459006CED16 /* NetworkApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E8E48027F18F22006CED16 /* NetworkApi.swift */; };
 		B5F520932704615E00BACB9C /* VideoPlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F520922704615E00BACB9C /* VideoPlayController.swift */; };
 		B5F8390226982D8E0001C484 /* 温柔女声.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */; };
 		B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4F26257A365E007F1238 /* WebPreviewController.swift */; };
@@ -167,6 +172,11 @@
 		B5E0A4292626948F005D248D /* HBSwiftKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HBSwiftKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E0A44526269729005D248D /* HBSwiftKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HBSwiftKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E0A44926269729005D248D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5E2817527F1BF42000761FD /* NetworkPlugins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPlugins.swift; sourceTree = "<group>"; };
+		B5E8E47A27EEBEAA006CED16 /* NetworkExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkExtension.swift; sourceTree = "<group>"; };
+		B5E8E47C27F14E6A006CED16 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		B5E8E47E27F18E7E006CED16 /* NetworkRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestTest.swift; sourceTree = "<group>"; };
+		B5E8E48027F18F22006CED16 /* NetworkApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkApi.swift; sourceTree = "<group>"; };
 		B5EA0E1125B67C38004783C1 /* AppSandBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSandBox.swift; sourceTree = "<group>"; };
 		B5F520922704615E00BACB9C /* VideoPlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayController.swift; sourceTree = "<group>"; };
 		B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "温柔女声.mp3"; sourceTree = "<group>"; };
@@ -343,18 +353,10 @@
 		B56D8C6D27CF5FC30032EA97 /* CombinedChart */ = {
 			isa = PBXGroup;
 			children = (
-				B56D8C6E27CF5FC30032EA97 /* ChartComponents */,
+				B56D8C6F27CF5FC30032EA97 /* BalloonMarker.swift */,
 				B56D8C7027CF5FC30032EA97 /* Wto_CombinedChart.swift */,
 			);
 			path = CombinedChart;
-			sourceTree = "<group>";
-		};
-		B56D8C6E27CF5FC30032EA97 /* ChartComponents */ = {
-			isa = PBXGroup;
-			children = (
-				B56D8C6F27CF5FC30032EA97 /* BalloonMarker.swift */,
-			);
-			path = ChartComponents;
 			sourceTree = "<group>";
 		};
 		B5887FA3264CD719003C1896 /* 双列表关联 */ = {
@@ -369,6 +371,7 @@
 		B595A8CD27CCB00B007EF16E /* 临时验证类 */ = {
 			isa = PBXGroup;
 			children = (
+				B5E8E47A27EEBEAA006CED16 /* NetworkExtension.swift */,
 				B56D8C6B27CF29E90032EA97 /* YTTabController.swift */,
 				B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */,
 				B595A8CB27C866EA007EF16E /* RegexHelper.swift */,
@@ -383,6 +386,9 @@
 				B56D8C6D27CF5FC30032EA97 /* CombinedChart */,
 				B595A8CF27CCB07E007EF16E /* LoggerManager */,
 				B5565E8D27C5BF34001A1A22 /* NetworkReachability.swift */,
+				B5E8E47C27F14E6A006CED16 /* NetworkRequest.swift */,
+				B5E2817527F1BF42000761FD /* NetworkPlugins.swift */,
+				B5E8E48027F18F22006CED16 /* NetworkApi.swift */,
 			);
 			path = "三方依赖类";
 			sourceTree = "<group>";
@@ -450,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				B518517526269E340013A973 /* Quick+NimbleTest.swift */,
+				B5E8E47E27F18E7E006CED16 /* NetworkRequestTest.swift */,
 				B5E0A44926269729005D248D /* Info.plist */,
 			);
 			path = HBSwiftKit_Tests;
@@ -691,8 +698,10 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -703,8 +712,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -789,7 +800,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/HBSwiftKit/Resources/R.generated.swift,
+				"$SRCROOT/HBSwiftKit/Resources/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -820,6 +831,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5C6C5EA25ECD38800C88C1C /* Wto_ImageBrower.swift in Sources */,
+				B5E8E48227F19459006CED16 /* NetworkApi.swift in Sources */,
 				B5F520932704615E00BACB9C /* VideoPlayController.swift in Sources */,
 				B5825E2E26F04D7D00539866 /* VideoFrameView.swift in Sources */,
 				B595A8D427CCB07F007EF16E /* LoggerAssistant.swift in Sources */,
@@ -830,6 +842,7 @@
 				B5825E3326F0877C00539866 /* VideoCropView.swift in Sources */,
 				B50055A427C375A700467E55 /* LightAttrPickerView.swift in Sources */,
 				B56D8C7227CF5FC30032EA97 /* Wto_CombinedChart.swift in Sources */,
+				B5E8E47B27EEBEAB006CED16 /* NetworkExtension.swift in Sources */,
 				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
 				B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */,
 				1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */,
@@ -839,6 +852,7 @@
 				B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */,
 				B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */,
 				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
+				B5E2817627F1BF42000761FD /* NetworkPlugins.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
@@ -856,6 +870,7 @@
 				B5FEFA3B27462A6F00DA6999 /* SlidePickerView.swift in Sources */,
 				B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */,
 				B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */,
+				B5E8E47D27F14E6A006CED16 /* NetworkRequest.swift in Sources */,
 				B56D8C7127CF5FC30032EA97 /* BalloonMarker.swift in Sources */,
 				B56D8C6C27CF29E90032EA97 /* YTTabController.swift in Sources */,
 				B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */,
@@ -878,6 +893,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5E8E47F27F18E7E006CED16 /* NetworkRequestTest.swift in Sources */,
 				B518517626269E340013A973 /* Quick+NimbleTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
