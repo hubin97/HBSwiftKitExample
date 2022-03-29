@@ -6,19 +6,66 @@
 //  Copyright © 2020 云图数字. All rights reserved.
 
 import Moya
+import SVProgressHUD
 
-/// 补充加载动画, 结合iToast一起使用
+// MARK: - 加载配置
+/**
+ 其他加载情况可以使用Moya自带的插件处理, NetworkActivityPlugin
+ let networkActivityClosure = { (_ change: NetworkActivityChangeType, _ target: TargetType) in
+     switch change {
+     case .began:
+         print("\(target) =>began")
+     case .ended:
+         print("\(target) =>ended")
+     }
+ }
+ NetworkActivityPlugin(networkActivityClosure: networkActivityClosure)
+ */
+/// 加载动画, 结合SVProgressHUD一起使用
 public class NetworkLoadingPlugin: PluginType {
 
+    let content: String?
+    let hudSize: CGSize
+    let bgColor: UIColor?
+    let fgColor: UIColor?
+
+    /// 初始化加载
+    /// - Parameters:
+    ///   - content: 文本, 默认 nil
+    ///   - hudSize: 尺寸, 默认 100 * 100
+    ///   - bgColor: 背景色, 默认.groupTableViewBackground
+    ///   - fgColor: 字体色, 默认.black
+    init(content: String? = nil, hudSize: CGSize = CGSize(width: 100, height: 100), bgColor: UIColor? = nil, fgColor: UIColor? = nil) {
+        self.content = content
+        self.hudSize = hudSize
+        self.bgColor = bgColor
+        self.fgColor = fgColor
+    }
+
     public func willSend(_ request: RequestType, target: TargetType) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            // hud loading
+            SVProgressHUD.show(withStatus: self.content)
+            SVProgressHUD.setMinimumSize(self.hudSize)
+            // 自定义hud背景色
+            SVProgressHUD.setDefaultStyle(.custom)
+            SVProgressHUD.setBackgroundColor(self.bgColor ?? .groupTableViewBackground)
+            SVProgressHUD.setForegroundColor(self.fgColor ?? .black)
+            // 禁用底下交互
+            SVProgressHUD.setDefaultMaskType(.clear)
+        }
     }
 
     public func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            SVProgressHUD.dismiss()
+        }
     }
 }
 
+// MARK: - 超时配置
 /// 默认 20s超时
 public class NetworkTimeoutPlugin: PluginType {
 
@@ -33,6 +80,7 @@ public class NetworkTimeoutPlugin: PluginType {
     }
 }
 
+// MARK: - 日志打印
 import CocoaLumberjack
 /// 日志格式输出 Moya NetworkLoggerPlugin 改
 public class NetworkPrintlnPlugin: PluginType {

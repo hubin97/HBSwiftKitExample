@@ -385,10 +385,7 @@
 			children = (
 				B56D8C6D27CF5FC30032EA97 /* CombinedChart */,
 				B595A8CF27CCB07E007EF16E /* LoggerManager */,
-				B5565E8D27C5BF34001A1A22 /* NetworkReachability.swift */,
-				B5E8E47C27F14E6A006CED16 /* NetworkRequest.swift */,
-				B5E2817527F1BF42000761FD /* NetworkPlugins.swift */,
-				B5E8E48027F18F22006CED16 /* NetworkApi.swift */,
+				B5E2817727F2A75C000761FD /* NetworkManager */,
 			);
 			path = "三方依赖类";
 			sourceTree = "<group>";
@@ -522,6 +519,17 @@
 				B5BAC85B255A7C0C005A5179 /* HBSwiftKit_Example-Bridging-Header.h */,
 			);
 			path = Global;
+			sourceTree = "<group>";
+		};
+		B5E2817727F2A75C000761FD /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				B5565E8D27C5BF34001A1A22 /* NetworkReachability.swift */,
+				B5E8E47C27F14E6A006CED16 /* NetworkRequest.swift */,
+				B5E2817527F1BF42000761FD /* NetworkPlugins.swift */,
+				B5E8E48027F18F22006CED16 /* NetworkApi.swift */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		B5EA0E0825B67AD6004783C1 /* Vendors */ = {
@@ -700,6 +708,7 @@
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 			);
@@ -714,6 +723,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 			);
@@ -800,7 +810,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/HBSwiftKit/Resources/R.generated.swift",
+				$SRCROOT/HBSwiftKit/Resources/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

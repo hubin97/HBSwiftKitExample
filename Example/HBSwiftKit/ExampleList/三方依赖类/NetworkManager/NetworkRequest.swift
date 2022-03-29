@@ -9,8 +9,9 @@ import Moya
 import ObjectMapper
 import PromiseKit
 
-// MARK: - global var and methods
+/// 自定义网络错误
 public enum NetworkError: Error {
+    /// 解析映射出错
     case objectMapperError(mapType: Any)
 }
 
@@ -42,7 +43,9 @@ public func fetchJSONString<T: TargetType>(targetType: T.Type, target: T, plugin
     }
 }
 
-func fetchTargetMeta<T: TargetType, M: Mappable>(targetType: T.Type, target: T, metaType: M.Type, plugins: [PluginType]) -> Promise<M> {
+/// 获取指定模型
+/// - Returns: Promise<M>
+public func fetchTargetMeta<T: TargetType, M: Mappable>(targetType: T.Type, target: T, metaType: M.Type, plugins: [PluginType]) -> Promise<M> {
     return Promise<M>.init { resolver in
         fetchJSONString(targetType: targetType, target: target, plugins: plugins).done { result in
             guard let meta = Mapper<M>().map(JSONString: result) else {
@@ -56,7 +59,9 @@ func fetchTargetMeta<T: TargetType, M: Mappable>(targetType: T.Type, target: T, 
     }
 }
 
-func fetchTargetList<T: TargetType, M: Mappable>(targetType: T.Type, target: T, metaType: M.Type, plugins: [PluginType]) -> Promise<[M]> {
+/// 获取指定模型数组
+/// - Returns: Promise<[M]>
+public func fetchTargetList<T: TargetType, M: Mappable>(targetType: T.Type, target: T, metaType: M.Type, plugins: [PluginType]) -> Promise<[M]> {
     return Promise<[M]>.init { resolver in
         fetchJSONString(targetType: targetType, target: target, plugins: plugins).done { result in
             guard let list = Mapper<M>().mapArray(JSONString: result) else {

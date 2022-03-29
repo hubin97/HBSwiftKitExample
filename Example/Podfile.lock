@@ -48,6 +48,7 @@ PODS:
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
   - SnapKit (4.2.0)
+  - SVProgressHUD (2.2.5)
   - SwiftLint (0.44.0)
   - Toast-Swift (5.0.1)
 
@@ -63,6 +64,7 @@ DEPENDENCIES:
   - Quick
   - R.swift
   - SnapKit
+  - SVProgressHUD
   - SwiftLint
   - Toast-Swift
 
@@ -80,6 +82,7 @@ SPEC REPOS:
     - R.swift
     - R.swift.Library
     - SnapKit
+    - SVProgressHUD
     - SwiftLint
     - Toast-Swift
 
@@ -101,9 +104,10 @@ SPEC CHECKSUMS:
   R.swift: c533450b0f7dc494e0993f5f1a1db925d84c3006
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 16b026dfb90f61ac1ad7aba166ef4daa8a83dfcc
+PODFILE CHECKSUM: 4ffcaea71c103fa718600e0ae1c6ce3cd4c78c12
 
 COCOAPODS: 1.11.2

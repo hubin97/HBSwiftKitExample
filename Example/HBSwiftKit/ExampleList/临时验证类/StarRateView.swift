@@ -83,7 +83,7 @@ extension StarRateView {
 
     @objc func panGes(_ pan: UIPanGestureRecognizer) {
         switch pan.state {
-        case .ended:
+        case .changed, .ended:
             let offsetX = pan.location(in: self).x
             let ratio = Float(offsetX) / Float(self.bounds.width)
             self.updateStarView(by: ratio)

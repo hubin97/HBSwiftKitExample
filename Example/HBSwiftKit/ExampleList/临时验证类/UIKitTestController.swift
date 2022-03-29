@@ -107,15 +107,7 @@ class UIKitTestController: BaseViewController {
 //            print(error.localizedDescription)
 //        }
 
-        let networkActivityClosure = { (_ change: NetworkActivityChangeType, _ target: TargetType) in
-            switch change {
-            case .began:
-                print("\(target) =>began")
-            case .ended:
-                print("\(target) =>ended")
-            }
-        }
-        fetchTargetList(targetType: NetworkApi.self, target: .in_theaters, metaType: MovieMap.self, plugins: [NetworkActivityPlugin(networkActivityClosure: networkActivityClosure), NetworkPrintlnPlugin()]).done { data in
+        fetchTargetList(targetType: NetworkApi.self, target: .in_theaters, metaType: MovieMap.self, plugins: [NetworkLoadingPlugin(content: "加载中...", bgColor: .gray, fgColor: .white), NetworkPrintlnPlugin()]).done { data in
             data.forEach({ print($0.data?.name ?? "") })
         }.catch { error in
             print(error.localizedDescription)

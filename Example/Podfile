@@ -20,7 +20,8 @@ target 'HBSwiftKit_Example' do
   pod 'CocoaLumberjack/Swift'
   pod 'Charts'
   pod 'Toast-Swift'
-
+  pod 'SVProgressHUD'
+  
   target 'HBSwiftKit_Tests' do
     inherit! :search_paths
 
