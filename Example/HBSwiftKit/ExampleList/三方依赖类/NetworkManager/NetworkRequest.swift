@@ -5,6 +5,9 @@
 //  Created by Hubin_Huang on 2022/3/28.
 //  Copyright © 2020 云图数字. All rights reserved.
 
+// Moya文档 https://github.com/Moya/Moya/tree/master/docs/Examples
+// Moya解析 https://dirtmelon.github.io/posts/Moya/
+
 import Moya
 import ObjectMapper
 import PromiseKit
@@ -23,6 +26,9 @@ extension NetworkError: LocalizedError {
         }
     }
 }
+
+/// 如果返回的数据并不能直接映射, 使用插件预处理
+/// func process(_ result: Result<Moya.Response, MoyaError>, target: TargetType) -> Result<Moya.Response, MoyaError>
 
 /// 获取JSONString
 /// - Returns: Promise<String>

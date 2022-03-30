@@ -20,10 +20,6 @@ it, simply add the following line to your Podfile:
 pod 'HBSwiftKit'
 ```
 
-## 
-
-[Swift常用资料整理](https://hubin97.github.io/2020/12/25/Swift常用资料整理/)
-
 ## Author
 
 970216474@qq.com, hubin.h@wingto.cn

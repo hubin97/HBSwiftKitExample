@@ -76,25 +76,28 @@ class UIKitTestController: BaseViewController {
 
     var signalPlate: SignalPlateView!
     var signalMark: SignalMarkView!
+
+    var updateData = true
+    lazy var indexList: IndexTableView = {
+        let _indexList = IndexTableView.init(frame: self.view.bounds, style: .plain)
+        _indexList.registerCell(UITableViewCell.self)
+        _indexList.dataSource = self
+        _indexList.delegate = self
+        _indexList.indexDataSource = self
+        _indexList.rowHeight = 44
+        return _indexList
+    }()
+
     override func setupUi() {
         super.setupUi()
         self.navigationItem.title = "UIKit Test"
-
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction(_:)))
 
         //customBtn()
         //signalCheck()
         //attributedTest()
-        starRateView()
-
-        NetworkPrintlnPlugin.showLoggers = true
-//        fetchItems(target: NetworkApi.in_theaters, plugins: MoyaNetworkLoggerPlugin()).done { data in
-//            print(data.string ?? "")
-//        }.catch { error in
-//            print(error.localizedDescription)
-//        }
-
-        //fetchTargetMeta(targetType: <#T##T#>, target: <#T##T#>, metaType: <#T##M#>, plugins: <#T##PluginType#>)
+        //starRateView()
+        showIndexListView()
     }
 
     //viewwilla
@@ -107,6 +110,7 @@ class UIKitTestController: BaseViewController {
 //            print(error.localizedDescription)
 //        }
 
+        //        NetworkPrintlnPlugin.showLoggers = true
         fetchTargetList(targetType: NetworkApi.self, target: .in_theaters, metaType: MovieMap.self, plugins: [NetworkLoadingPlugin(content: "加载中...", bgColor: .gray, fgColor: .white), NetworkPrintlnPlugin()]).done { data in
             data.forEach({ print($0.data?.name ?? "") })
         }.catch { error in
@@ -153,10 +157,13 @@ extension UIKitTestController {
     @objc func filterAction(_ sender: UIBarButtonItem) {
         // showRulerView()
         // showTagsView(nil)
-        let picker = LightAttrPickerView(hsvColor: HsvColor(hue: 0, saturation: 0), duration: 3)
+        //let picker = LightAttrPickerView(hsvColor: HsvColor(hue: 0, saturation: 0), duration: 3)
         //let picker = DPAttrsPickerView(mode: .brightness, duration: 3)
         //picker.pickerDatas = allBrightList
-        picker.show()
+        //picker.show()
+
+        updateData = !updateData
+        indexList.reloadData()
     }
 
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -365,6 +372,28 @@ extension UIKitTestController {
         view.addSubview(rulerView)
         // rulerView.setRulerValue(rulerValue: rulerValue, animated: true)
         rulerView.setRoundCorners()
+    }
+}
+
+// MARK: 自定义索引复用
+extension UIKitTestController: UITableViewDataSource, UITableViewDelegate, IndexTableViewDataSource {
+
+    func showIndexListView() {
+        self.view.addSubview(indexList)
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        20
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.getReusableCell(UITableViewCell.self)
+        cell.textLabel?.text = "第\(indexPath.row)行"
+        return cell
+    }
+
+    func indexTitles(for indexTableView: UITableView) -> [String] {
+        return updateData ? ["A", "B", "C", "D", "E", "F", "Z"]: ["A", "B", "C", "D", "E", "F", "Z", "A1", "B1", "C1", "D1", "E1", "F1", "Z1"]
     }
 }
 

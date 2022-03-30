@@ -25,6 +25,8 @@
 		B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */; };
 		B53D570326268EBE001D0BC0 /* HBSwiftKit_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D570226268EBE001D0BC0 /* HBSwiftKit_UITests.swift */; };
 		B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541412C268EAF06008CE14B /* MapLocationController.swift */; };
+		B546BFB527F442D9006EA745 /* ViewReusePool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546BFB427F442D9006EA745 /* ViewReusePool.swift */; };
+		B546BFB727F455C5006EA745 /* IndexTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546BFB627F455C5006EA745 /* IndexTableView.swift */; };
 		B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DE3B3275EF2C400BBDE0B /* SignalPlateView.swift */; };
 		B54DE3B6275F4C4100BBDE0B /* SignalMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DE3B5275F4C4100BBDE0B /* SignalMarkView.swift */; };
 		B5557A3526706188007F5B44 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = B5557A3426706188007F5B44 /* loading.gif */; };
@@ -123,6 +125,8 @@
 		B53D570226268EBE001D0BC0 /* HBSwiftKit_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBSwiftKit_UITests.swift; sourceTree = "<group>"; };
 		B53D570426268EBE001D0BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B541412C268EAF06008CE14B /* MapLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationController.swift; sourceTree = "<group>"; };
+		B546BFB427F442D9006EA745 /* ViewReusePool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewReusePool.swift; sourceTree = "<group>"; };
+		B546BFB627F455C5006EA745 /* IndexTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexTableView.swift; sourceTree = "<group>"; };
 		B54DE3B3275EF2C400BBDE0B /* SignalPlateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalPlateView.swift; sourceTree = "<group>"; };
 		B54DE3B5275F4C4100BBDE0B /* SignalMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalMarkView.swift; sourceTree = "<group>"; };
 		B5557A3426706188007F5B44 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
@@ -376,6 +380,7 @@
 				B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */,
 				B595A8CB27C866EA007EF16E /* RegexHelper.swift */,
 				B595A8D627CCB154007EF16E /* StarRateView.swift */,
+				B546BFB627F455C5006EA745 /* IndexTableView.swift */,
 			);
 			path = "临时验证类";
 			sourceTree = "<group>";
@@ -474,6 +479,7 @@
 				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
 				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
 				1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */,
+				B546BFB427F442D9006EA745 /* ViewReusePool.swift */,
 				B595A8CD27CCB00B007EF16E /* 临时验证类 */,
 				B595A8CE27CCB031007EF16E /* 三方依赖类 */,
 				B54DE3B2275EF14C00BBDE0B /* 信号检测器 */,
@@ -847,6 +853,7 @@
 				B595A8D427CCB07F007EF16E /* LoggerAssistant.swift in Sources */,
 				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
 				B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */,
+				B546BFB527F442D9006EA745 /* ViewReusePool.swift in Sources */,
 				B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				B5825E3326F0877C00539866 /* VideoCropView.swift in Sources */,
@@ -874,6 +881,7 @@
 				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
 				B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */,
 				B50055A627C375A700467E55 /* LightAttrPickerView+Views.swift in Sources */,
+				B546BFB727F455C5006EA745 /* IndexTableView.swift in Sources */,
 				B595A8D527CCB07F007EF16E /* LoggerListController.swift in Sources */,
 				B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */,
 				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,
