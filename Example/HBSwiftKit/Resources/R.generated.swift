@@ -461,6 +461,111 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    /// This `R.image.steerWheel` struct is generated, and contains static references to 11 images.
+    struct steerWheel {
+      /// Image `sw_ang_bottom`.
+      static let sw_ang_bottom = Rswift.ImageResource(bundle: R.hostingBundle, name: "SteerWheel/sw_ang_bottom")
+      /// Image `sw_ang_left`.
+      static let sw_ang_left = Rswift.ImageResource(bundle: R.hostingBundle, name: "SteerWheel/sw_ang_left")
+      /// Image `sw_ang_right`.
+      static let sw_ang_right = Rswift.ImageResource(bundle: R.hostingBundle, name: "SteerWheel/sw_ang_right")
+      /// Image `sw_ang_top`.
+      static let sw_ang_top = Rswift.ImageResource(bundle: R.hostingBundle, name: "SteerWheel/sw_ang_top")
+      /// Image `sw_panel_bottom`.
+      static let sw_panel_bottom = Rswift.ImageResource(bundle: R.hostingBundle, name: "SteerWheel/sw_panel_bottom")
+      /// Image `sw_panel_left`.
+      static let sw_panel_left = Rswift.ImageResource(bundle: R.hostingBundle, name: "SteerWheel/sw_panel_left")
+      /// Image `sw_panel_normal`.
+      static let sw_panel_normal = Rswift.ImageResource(bundle: R.hostingBundle, name: "SteerWheel/sw_panel_normal")
+      /// Image `sw_panel_ok`.
+      static let sw_panel_ok = Rswift.ImageResource(bundle: R.hostingBundle, name: "SteerWheel/sw_panel_ok")
+      /// Image `sw_panel_right`.
+      static let sw_panel_right = Rswift.ImageResource(bundle: R.hostingBundle, name: "SteerWheel/sw_panel_right")
+      /// Image `sw_panel_top`.
+      static let sw_panel_top = Rswift.ImageResource(bundle: R.hostingBundle, name: "SteerWheel/sw_panel_top")
+      /// Image `椭圆形备份 2`.
+      static let 椭圆形备份2 = Rswift.ImageResource(bundle: R.hostingBundle, name: "SteerWheel/椭圆形备份 2")
+
+      #if os(iOS) || os(tvOS)
+      /// `UIImage(named: "sw_ang_bottom", bundle: ..., traitCollection: ...)`
+      static func sw_ang_bottom(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.steerWheel.sw_ang_bottom, compatibleWith: traitCollection)
+      }
+      #endif
+
+      #if os(iOS) || os(tvOS)
+      /// `UIImage(named: "sw_ang_left", bundle: ..., traitCollection: ...)`
+      static func sw_ang_left(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.steerWheel.sw_ang_left, compatibleWith: traitCollection)
+      }
+      #endif
+
+      #if os(iOS) || os(tvOS)
+      /// `UIImage(named: "sw_ang_right", bundle: ..., traitCollection: ...)`
+      static func sw_ang_right(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.steerWheel.sw_ang_right, compatibleWith: traitCollection)
+      }
+      #endif
+
+      #if os(iOS) || os(tvOS)
+      /// `UIImage(named: "sw_ang_top", bundle: ..., traitCollection: ...)`
+      static func sw_ang_top(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.steerWheel.sw_ang_top, compatibleWith: traitCollection)
+      }
+      #endif
+
+      #if os(iOS) || os(tvOS)
+      /// `UIImage(named: "sw_panel_bottom", bundle: ..., traitCollection: ...)`
+      static func sw_panel_bottom(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.steerWheel.sw_panel_bottom, compatibleWith: traitCollection)
+      }
+      #endif
+
+      #if os(iOS) || os(tvOS)
+      /// `UIImage(named: "sw_panel_left", bundle: ..., traitCollection: ...)`
+      static func sw_panel_left(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.steerWheel.sw_panel_left, compatibleWith: traitCollection)
+      }
+      #endif
+
+      #if os(iOS) || os(tvOS)
+      /// `UIImage(named: "sw_panel_normal", bundle: ..., traitCollection: ...)`
+      static func sw_panel_normal(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.steerWheel.sw_panel_normal, compatibleWith: traitCollection)
+      }
+      #endif
+
+      #if os(iOS) || os(tvOS)
+      /// `UIImage(named: "sw_panel_ok", bundle: ..., traitCollection: ...)`
+      static func sw_panel_ok(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.steerWheel.sw_panel_ok, compatibleWith: traitCollection)
+      }
+      #endif
+
+      #if os(iOS) || os(tvOS)
+      /// `UIImage(named: "sw_panel_right", bundle: ..., traitCollection: ...)`
+      static func sw_panel_right(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.steerWheel.sw_panel_right, compatibleWith: traitCollection)
+      }
+      #endif
+
+      #if os(iOS) || os(tvOS)
+      /// `UIImage(named: "sw_panel_top", bundle: ..., traitCollection: ...)`
+      static func sw_panel_top(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.steerWheel.sw_panel_top, compatibleWith: traitCollection)
+      }
+      #endif
+
+      #if os(iOS) || os(tvOS)
+      /// `UIImage(named: "椭圆形备份 2", bundle: ..., traitCollection: ...)`
+      static func 椭圆形备份2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.steerWheel.椭圆形备份2, compatibleWith: traitCollection)
+      }
+      #endif
+
+      fileprivate init() {}
+    }
+
     /// This `R.image.tabBar` struct is generated, and contains static references to 6 images.
     struct tabBar {
       /// Image `home_h`.

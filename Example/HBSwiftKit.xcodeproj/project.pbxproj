@@ -68,6 +68,7 @@
 		B5D55405261D40AE007A20F5 /* jstest.html in Resources */ = {isa = PBXBuildFile; fileRef = B5D55404261D40AE007A20F5 /* jstest.html */; };
 		B5DCC71425F3266D007E3237 /* areacode.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5DCC71325F3266D007E3237 /* areacode.plist */; };
 		B5E2817627F1BF42000761FD /* NetworkPlugins.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E2817527F1BF42000761FD /* NetworkPlugins.swift */; };
+		B5E4AAC027F5585300D84C78 /* SteerWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4AABF27F5585300D84C78 /* SteerWheelView.swift */; };
 		B5E8E47B27EEBEAB006CED16 /* NetworkExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E8E47A27EEBEAA006CED16 /* NetworkExtension.swift */; };
 		B5E8E47D27F14E6A006CED16 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E8E47C27F14E6A006CED16 /* NetworkRequest.swift */; };
 		B5E8E47F27F18E7E006CED16 /* NetworkRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E8E47E27F18E7E006CED16 /* NetworkRequestTest.swift */; };
@@ -177,6 +178,7 @@
 		B5E0A44526269729005D248D /* HBSwiftKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HBSwiftKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E0A44926269729005D248D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5E2817527F1BF42000761FD /* NetworkPlugins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPlugins.swift; sourceTree = "<group>"; };
+		B5E4AABF27F5585300D84C78 /* SteerWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteerWheelView.swift; sourceTree = "<group>"; };
 		B5E8E47A27EEBEAA006CED16 /* NetworkExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkExtension.swift; sourceTree = "<group>"; };
 		B5E8E47C27F14E6A006CED16 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		B5E8E47E27F18E7E006CED16 /* NetworkRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestTest.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */,
 				B595A8CB27C866EA007EF16E /* RegexHelper.swift */,
 				B595A8D627CCB154007EF16E /* StarRateView.swift */,
+				B546BFB427F442D9006EA745 /* ViewReusePool.swift */,
 				B546BFB627F455C5006EA745 /* IndexTableView.swift */,
 			);
 			path = "临时验证类";
@@ -479,7 +482,7 @@
 				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
 				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
 				1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */,
-				B546BFB427F442D9006EA745 /* ViewReusePool.swift */,
+				B5E4AABE27F5546E00D84C78 /* 遥控方向盘 */,
 				B595A8CD27CCB00B007EF16E /* 临时验证类 */,
 				B595A8CE27CCB031007EF16E /* 三方依赖类 */,
 				B54DE3B2275EF14C00BBDE0B /* 信号检测器 */,
@@ -536,6 +539,14 @@
 				B5E8E48027F18F22006CED16 /* NetworkApi.swift */,
 			);
 			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		B5E4AABE27F5546E00D84C78 /* 遥控方向盘 */ = {
+			isa = PBXGroup;
+			children = (
+				B5E4AABF27F5585300D84C78 /* SteerWheelView.swift */,
+			);
+			path = "遥控方向盘";
 			sourceTree = "<group>";
 		};
 		B5EA0E0825B67AD6004783C1 /* Vendors */ = {
@@ -863,6 +874,7 @@
 				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
 				B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */,
 				1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */,
+				B5E4AAC027F5585300D84C78 /* SteerWheelView.swift in Sources */,
 				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
 				B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */,
 				B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */,

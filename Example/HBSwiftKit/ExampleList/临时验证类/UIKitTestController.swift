@@ -88,6 +88,13 @@ class UIKitTestController: BaseViewController {
         return _indexList
     }()
 
+    lazy var steerPanel: SteerWheelView = {
+        let _steerPanel = SteerWheelView.init(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        _steerPanel.center = self.view.center
+        _steerPanel.backgroundColor = .groupTableViewBackground
+        //_steerPanel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(panelTap(_:))))
+        return _steerPanel
+    }()
     override func setupUi() {
         super.setupUi()
         self.navigationItem.title = "UIKit Test"
@@ -97,8 +104,14 @@ class UIKitTestController: BaseViewController {
         //signalCheck()
         //attributedTest()
         //starRateView()
-        showIndexListView()
+        //showIndexListView()
+        view.backgroundColor = .groupTableViewBackground
+        view.addSubview(steerPanel)
     }
+
+//    @objc func panelTap(_ tap: UITapGestureRecognizer) {
+//        print("panelTap--\(tap.location(in: steerPanel))")
+//    }
 
     //viewwilla
     override func viewWillAppear(_ animated: Bool) {
@@ -111,11 +124,11 @@ class UIKitTestController: BaseViewController {
 //        }
 
         //        NetworkPrintlnPlugin.showLoggers = true
-        fetchTargetList(targetType: NetworkApi.self, target: .in_theaters, metaType: MovieMap.self, plugins: [NetworkLoadingPlugin(content: "加载中...", bgColor: .gray, fgColor: .white), NetworkPrintlnPlugin()]).done { data in
-            data.forEach({ print($0.data?.name ?? "") })
-        }.catch { error in
-            print(error.localizedDescription)
-        }
+//        fetchTargetList(targetType: NetworkApi.self, target: .in_theaters, metaType: MovieMap.self, plugins: [NetworkLoadingPlugin(content: "加载中...", bgColor: .gray, fgColor: .white), NetworkPrintlnPlugin()]).done { data in
+//            data.forEach({ print($0.data?.name ?? "") })
+//        }.catch { error in
+//            print(error.localizedDescription)
+//        }
     }
 
 }
