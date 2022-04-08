@@ -13,6 +13,17 @@ import Nimble
 @testable import HBSwiftKit_Example
 @testable import HBSwiftKit
 
+
+
+class DesignModeTest: QuickSpec {
+    override func spec() {
+        fdescribe("DesignModeTest") {
+            BusHanler().startHandle()
+            
+        }
+    }
+}
+
 // swiftClassFromString
 
 struct Std: Codable {
