@@ -26,6 +26,7 @@
 		B53D570326268EBE001D0BC0 /* HBSwiftKit_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D570226268EBE001D0BC0 /* HBSwiftKit_UITests.swift */; };
 		B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B541412C268EAF06008CE14B /* MapLocationController.swift */; };
 		B546325A280010420026662F /* DesignMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5463259280010410026662F /* DesignMode.swift */; };
+		B546325C2803B7960026662F /* Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546325B2803B7950026662F /* Arithmetic.swift */; };
 		B546BFB527F442D9006EA745 /* ViewReusePool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546BFB427F442D9006EA745 /* ViewReusePool.swift */; };
 		B546BFB727F455C5006EA745 /* IndexTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546BFB627F455C5006EA745 /* IndexTableView.swift */; };
 		B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DE3B3275EF2C400BBDE0B /* SignalPlateView.swift */; };
@@ -79,6 +80,7 @@
 		B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4F26257A365E007F1238 /* WebPreviewController.swift */; };
 		B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */; };
 		B5FEFA3B27462A6F00DA6999 /* SlidePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BEA1AC2744B91F005B8F54 /* SlidePickerView.swift */; };
+		B5FF3854280EA0B70063BF26 /* MVVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FF3853280EA0B70063BF26 /* MVVM.swift */; };
 		FE480E90E2CA32C49FC5A2F3 /* Pods_HBSwiftKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4845C4375F7293ACE69A0714 /* Pods_HBSwiftKit_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +130,7 @@
 		B53D570426268EBE001D0BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B541412C268EAF06008CE14B /* MapLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationController.swift; sourceTree = "<group>"; };
 		B5463259280010410026662F /* DesignMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignMode.swift; sourceTree = "<group>"; };
+		B546325B2803B7950026662F /* Arithmetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arithmetic.swift; sourceTree = "<group>"; };
 		B546BFB427F442D9006EA745 /* ViewReusePool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewReusePool.swift; sourceTree = "<group>"; };
 		B546BFB627F455C5006EA745 /* IndexTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexTableView.swift; sourceTree = "<group>"; };
 		B54DE3B3275EF2C400BBDE0B /* SignalPlateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalPlateView.swift; sourceTree = "<group>"; };
@@ -190,6 +193,7 @@
 		B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "温柔女声.mp3"; sourceTree = "<group>"; };
 		B5FB4F26257A365E007F1238 /* WebPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPreviewController.swift; sourceTree = "<group>"; };
 		B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAdScrollController.swift; sourceTree = "<group>"; };
+		B5FF3853280EA0B70063BF26 /* MVVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVM.swift; sourceTree = "<group>"; };
 		CA78FCF42199CA49DD9F7856 /* HBSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HBSwiftKit.podspec; path = ../HBSwiftKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E2964227EA3A41F6AFF29697 /* Pods-HBSwiftKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E6A4E648BABE1DD5BC725B0F /* Pods-HBSwiftKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBSwiftKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-HBSwiftKit_Tests/Pods-HBSwiftKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -379,6 +383,11 @@
 		B595A8CD27CCB00B007EF16E /* 临时验证类 */ = {
 			isa = PBXGroup;
 			children = (
+				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
+				1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */,
+				B5463259280010410026662F /* DesignMode.swift */,
+				B5FF3853280EA0B70063BF26 /* MVVM.swift */,
+				B546325B2803B7950026662F /* Arithmetic.swift */,
 				B5E8E47A27EEBEAA006CED16 /* NetworkExtension.swift */,
 				B56D8C6B27CF29E90032EA97 /* YTTabController.swift */,
 				B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */,
@@ -482,11 +491,8 @@
 				B541412C268EAF06008CE14B /* MapLocationController.swift */,
 				B5832B1F270FD6EE0084C78E /* VideoTestController.swift */,
 				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
-				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
-				1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */,
-				B5463259280010410026662F /* DesignMode.swift */,
-				B5E4AABE27F5546E00D84C78 /* 遥控方向盘 */,
 				B595A8CD27CCB00B007EF16E /* 临时验证类 */,
+				B5E4AABE27F5546E00D84C78 /* 遥控方向盘 */,
 				B595A8CE27CCB031007EF16E /* 三方依赖类 */,
 				B54DE3B2275EF14C00BBDE0B /* 信号检测器 */,
 				B54DF449273E5A7F00F564FB /* 色盘选择器 */,
@@ -637,9 +643,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = YTPNCWF278;
 						LastSwiftMigration = 1200;
-						ProvisioningStyle = Automatic;
 					};
 					B53D56FF26268EBE001D0BC0 = {
 						CreatedOnToolsVersion = 12.3;
@@ -722,6 +726,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/GDPerformanceView-Swift/GDPerformanceView_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/HBSwiftKit/HBSwiftKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
@@ -737,6 +742,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GDPerformanceView_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBSwiftKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
@@ -830,7 +836,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/HBSwiftKit/Resources/R.generated.swift,
+				"$SRCROOT/HBSwiftKit/Resources/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -885,6 +891,7 @@
 				B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */,
 				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
 				B5E2817627F1BF42000761FD /* NetworkPlugins.swift in Sources */,
+				B5FF3854280EA0B70063BF26 /* MVVM.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
@@ -911,6 +918,7 @@
 				B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */,
 				B595A8D327CCB07F007EF16E /* LoggerManager.swift in Sources */,
 				B595A8CC27C866EA007EF16E /* RegexHelper.swift in Sources */,
+				B546325C2803B7960026662F /* Arithmetic.swift in Sources */,
 				B533677326E852550009B60F /* VideoCropController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1076,7 +1084,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.HBSwiftKit-Example.x";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HBSwiftKit/Global/HBSwiftKit_Example-Bridging-Header.h";
@@ -1103,7 +1111,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.HBSwiftKit-Example.x";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HBSwiftKit/Global/HBSwiftKit_Example-Bridging-Header.h";

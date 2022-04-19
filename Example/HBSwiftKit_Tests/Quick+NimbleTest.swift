@@ -15,11 +15,42 @@ import Nimble
 
 
 
+class ArithmeticTest: QuickSpec {
+    override func spec() {
+        fdescribe("DesignModeTest") {
+//            let string = "abcdefg"
+//            print(strReversed(string))
+//
+//            let nodes = createNodeList(7)
+//            printNodeList(nodes)
+//
+//            let rodes = reversedNodeList(nodes)
+//            printNodeList(rodes)
+//
+//            let list1 = [1, 4, 6, 7, 9]
+//            let list2 = [2, 3, 5, 6, 8, 10, 11, 12]
+//            let list = combineArray(with: list1, and: list2)
+//            print(list)
+//
+//            let str = firstOnceChar(with: "ggfabaccde")
+//            print("char: \(str)")
+
+            var list = [4, 9, 7, 2, 3, 5, 6, 8, 10, 11, 12]
+//            let mid = findMedian(list)
+//            print("mid: \(mid)")
+            //let arr = quickSort(&list, 0, list.count - 1)
+            let arr = quicksort(list)
+
+            print("arr:\(arr)")
+        }
+    }
+}
+
 class DesignModeTest: QuickSpec {
     override func spec() {
         fdescribe("DesignModeTest") {
             BusHanler().startHandle()
-            
+
         }
     }
 }

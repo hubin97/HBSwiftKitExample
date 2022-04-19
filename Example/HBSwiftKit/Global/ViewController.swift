@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GDPerformanceView_Swift
 
 // MARK: - main class
 class ViewController: BaseViewController {
@@ -41,7 +42,11 @@ class ViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        PerformanceMonitor.shared().start()
     }
 }
 

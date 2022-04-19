@@ -109,6 +109,11 @@ class SteerWheelView: UIView {
         return distance < radius
     }
 
+//    // 异步绘制
+//    override func display(_ layer: CALayer) {
+//
+//    }
+
     //swiftlint:disable function_body_length
     func setUp() {
         let radiusl = self.height/2
