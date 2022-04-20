@@ -34,14 +34,27 @@ class ArithmeticTest: QuickSpec {
 //
 //            let str = firstOnceChar(with: "ggfabaccde")
 //            print("char: \(str)")
+//
+//            var list = [4, 9, 7, 2, 3, 5, 6, 8, 10, 11, 12]
+////            let mid = findMedian(list)
+////            print("mid: \(mid)")
+//            //let arr = quickSort(&list, 0, list.count - 1)
+//            let arr = quicksort(list)
+//
+//            print("arr:\(arr)")
 
-            var list = [4, 9, 7, 2, 3, 5, 6, 8, 10, 11, 12]
-//            let mid = findMedian(list)
-//            print("mid: \(mid)")
-            //let arr = quickSort(&list, 0, list.count - 1)
-            let arr = quicksort(list)
+//            let indexs = Solution().twoSum([1,7,11,15, 2], 9)
+//            print(indexs)
+//            let input = "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext"
+//            Solution().lengthLongestPath(input)
+//            var ret = Solution().hammingDistance(93, 73)
+//            print(ret)
+//            let ret =  Solution().summaryRanges([0,2,3,4,6,8,9])
 
-            print("arr:\(arr)")
+            let clips = [[0,2],[4,6],[8,9],[1,9],[1,5],[5,9]]
+            //let clips = [[0,1],[6,8],[0,2],[5,6],[0,4],[0,3],[6,7],[1,3],[4,7],[1,4],[2,5],[2,6],[3,4],[4,5],[5,7],[6,9]]
+            let ret = Solution().videoStitching(clips, 10)
+            print(ret)
         }
     }
 }

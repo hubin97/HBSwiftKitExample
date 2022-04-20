@@ -18,6 +18,7 @@
 		B50055BD27C375CD00467E55 /* src_hsv in Resources */ = {isa = PBXBuildFile; fileRef = B50055BA27C375CD00467E55 /* src_hsv */; };
 		B50055BE27C375CD00467E55 /* src_temp in Resources */ = {isa = PBXBuildFile; fileRef = B50055BB27C375CD00467E55 /* src_temp */; };
 		B50055BF27C375CD00467E55 /* src_xy in Resources */ = {isa = PBXBuildFile; fileRef = B50055BC27C375CD00467E55 /* src_xy */; };
+		B516B292280EC2E000FCC8AE /* Leetcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B516B291280EC2E000FCC8AE /* Leetcode.swift */; };
 		B518517626269E340013A973 /* Quick+NimbleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518517526269E340013A973 /* Quick+NimbleTest.swift */; };
 		B533677326E852550009B60F /* VideoCropController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533677226E852550009B60F /* VideoCropController.swift */; };
 		B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */; };
@@ -120,6 +121,7 @@
 		B50055BA27C375CD00467E55 /* src_hsv */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src_hsv; sourceTree = "<group>"; };
 		B50055BB27C375CD00467E55 /* src_temp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src_temp; sourceTree = "<group>"; };
 		B50055BC27C375CD00467E55 /* src_xy */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src_xy; sourceTree = "<group>"; };
+		B516B291280EC2E000FCC8AE /* Leetcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leetcode.swift; sourceTree = "<group>"; };
 		B518517526269E340013A973 /* Quick+NimbleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Quick+NimbleTest.swift"; path = "HBSwiftKit_Tests/Quick+NimbleTest.swift"; sourceTree = SOURCE_ROOT; };
 		B533677226E852550009B60F /* VideoCropController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCropController.swift; sourceTree = "<group>"; };
 		B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wto_Calendar.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				B5463259280010410026662F /* DesignMode.swift */,
 				B5FF3853280EA0B70063BF26 /* MVVM.swift */,
 				B546325B2803B7950026662F /* Arithmetic.swift */,
+				B516B291280EC2E000FCC8AE /* Leetcode.swift */,
 				B5E8E47A27EEBEAA006CED16 /* NetworkExtension.swift */,
 				B56D8C6B27CF29E90032EA97 /* YTTabController.swift */,
 				B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */,
@@ -892,6 +895,7 @@
 				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
 				B5E2817627F1BF42000761FD /* NetworkPlugins.swift in Sources */,
 				B5FF3854280EA0B70063BF26 /* MVVM.swift in Sources */,
+				B516B292280EC2E000FCC8AE /* Leetcode.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,

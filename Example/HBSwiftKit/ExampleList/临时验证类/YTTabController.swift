@@ -8,7 +8,7 @@
 //import UIKit
 //import Foundation
 //
-////MARK: - main class
+// // MARK: - main class
 //open class YTTabController: UIViewController {
 //
 //    public var tabBar: YTTabBar?
@@ -41,12 +41,12 @@
 //        self.navigationController?.setNavigationBarHidden(true, animated: true)
 //    }
 //
-//    //MARK: 事件点击回调
+//    // MARK: 事件点击回调
 //    open func tabBarTapAction(idx: Int, didSelect viewController: UIViewController) {
 //
 //    }
 //
-//    //MARK: 自定义过渡动画实现, 需要重写此方法
+//    // MARK: 自定义过渡动画实现, 需要重写此方法
 //    open func transitionViewController(fromVc: UIViewController, toVc: UIViewController, duration: TimeInterval = 0.2, options: UIView.AnimationOptions = .curveLinear, animations: (() -> Void)? = nil) {
 //        //print("from:\(NSStringFromClass(oldVc.classForCoder)) to: \(NSStringFromClass(newVc.classForCoder))")
 //        guard let tabBar = self.tabBar, fromVc != toVc else { return }
@@ -66,7 +66,7 @@
 //    }
 //}
 //
-////MARK: - private mothods
+// // MARK: - private mothods
 //extension YTTabController {
 //
 //    func addTabBar() {
@@ -97,7 +97,7 @@
 //    }
 //}
 //
-////MARK: - delegate
+// // MARK: - delegate
 //// https://www.it610.com/article/1291616824613478400.htm
 //extension YTTabController {
 //

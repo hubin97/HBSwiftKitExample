@@ -164,8 +164,6 @@ func quicksort<T: Comparable>(_ a: [T]) -> [T] {
     return quicksort(less) + equal + quicksort(greater)
 }
 
-
-
 func quickSort(_ arr: inout [Int], _ left: Int?, _ right: Int?) -> [Int] {
     let len = arr.count
     var partitionIndex = 0

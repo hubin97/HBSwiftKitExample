@@ -247,7 +247,6 @@ extension UIKitTestController {
 //            .addAttr_midline(lineWidth: 3, color: .random, range: text.nsRange(of: subText2))
 //            .addAttr_underline(style: .single, color: .yellow, range: text.nsRange(of: subText3))
 //            .addAttr_shadow(color: .random)
-        // "https://github.com/hubin97/HBSwiftKitExample"
         attrs.addAttr_link(url: URL(string: "https://github.com/hubin97/HBSwiftKitExample")!, range: text.nsRange(of: subText4))
         //attrs.addAttr_textEffect(textEffect: .letterpressStyle, range: text.nsRange(of: subText5))
         textView.attributedText = attrs
