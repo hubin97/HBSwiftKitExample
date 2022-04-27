@@ -9,6 +9,7 @@
 import UIKit
 import CocoaLumberjack
 import HBSwiftKit
+import FLEX
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarVc.setTabBarColors(normalColor: .lightGray, selectColor: .systemBlue)
         self.window?.rootViewController = tabBarVc
 
+        FLEXManager.shared.showExplorer()
         LoggerManager.shared.launch(.debug).entrance()
         // LoggerManager.shared.removeEntrance() // 隐藏入口
         // LoggerManager.shared.logLevel = .debug // 设置日志级别

@@ -23,7 +23,7 @@ target 'HBSwiftKit_Example' do
   pod 'GDPerformanceView-Swift'
 
   pod 'SwiftLint', :configurations => ['Debug']
-
+  pod 'FLEX', :configurations => ['Debug']
 
   target 'HBSwiftKit_Tests' do
     inherit! :search_paths

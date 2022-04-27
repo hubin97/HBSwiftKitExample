@@ -6,6 +6,7 @@ PODS:
   - CocoaLumberjack/Core (3.7.4)
   - CocoaLumberjack/Swift (3.7.4):
     - CocoaLumberjack/Core
+  - FLEX (4.6.1)
   - GDPerformanceView-Swift (2.1.1)
   - HBSwiftKit (0.3.6):
     - HBSwiftKit/Base (= 0.3.6)
@@ -56,6 +57,7 @@ PODS:
 DEPENDENCIES:
   - Charts
   - CocoaLumberjack/Swift
+  - FLEX
   - GDPerformanceView-Swift
   - HBSwiftKit (from `../`)
   - Kingfisher
@@ -75,6 +77,7 @@ SPEC REPOS:
     - Alamofire
     - Charts
     - CocoaLumberjack
+    - FLEX
     - GDPerformanceView-Swift
     - Kingfisher
     - Moya
@@ -97,6 +100,7 @@ SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
+  FLEX: bbc55d197f87d7cde2454c3981aa47069b694144
   GDPerformanceView-Swift: 22d964fe40b19e3d914dba2586237d064de8fd77
   HBSwiftKit: 3209e2d26b4d07dcea52a8a74f1ea9965200cd57
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
@@ -112,6 +116,6 @@ SPEC CHECKSUMS:
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: ca7091fd77b3f90e8c1a24cf3bd590dec0606009
+PODFILE CHECKSUM: c1ebfce27d706924ed55168032ae7b881114bf56
 
 COCOAPODS: 1.11.2

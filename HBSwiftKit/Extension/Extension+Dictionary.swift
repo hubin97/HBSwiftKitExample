@@ -17,6 +17,7 @@ fileprivate typealias Extension_Dictionary = Dictionary
 //MARK: - private mothods
 extension Extension_Dictionary {
 
+    /// 也可以选用系统方法替代 public mutating func updateValue(_ value: Value, forKey key: Key) -> Value?
     public mutating func setValue(_ value: Dictionary.Value, forKey key: Dictionary.Key) {
         self[key] = value
     }
