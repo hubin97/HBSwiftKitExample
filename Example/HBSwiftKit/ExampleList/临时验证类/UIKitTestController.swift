@@ -95,6 +95,13 @@ class UIKitTestController: BaseViewController {
         //_steerPanel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(panelTap(_:))))
         return _steerPanel
     }()
+    lazy var bgImgView: UIImageView = {
+        let _drawLayer = UIImageView.init(image: UIImage(named: "swift"))
+        _drawLayer.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
+        _drawLayer.isUserInteractionEnabled = true
+        //_drawLayer.image = sw_panel_normal
+        return _drawLayer
+    }()
     override func setupUi() {
         super.setupUi()
         self.navigationItem.title = "UIKit Test"
@@ -106,6 +113,7 @@ class UIKitTestController: BaseViewController {
         //starRateView()
         //showIndexListView()
         view.backgroundColor = .groupTableViewBackground
+        view.addSubview(bgImgView)
         view.addSubview(steerPanel)
     }
 

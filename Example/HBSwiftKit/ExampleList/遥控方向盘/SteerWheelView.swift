@@ -14,6 +14,10 @@ protocol SteerWheelAdapter: AnyObject {
     func adapter(longPressPanel: SteerWheelView, position: SteerWheelView.PanelPosition, state: UIGestureRecognizer.State)
 }
 
+extension SteerWheelAdapter {
+    func adapter(longPressPanel: SteerWheelView, position: SteerWheelView.PanelPosition, state: UIGestureRecognizer.State) {}
+}
+
 // MARK: - main class
 class SteerWheelView: UIView {
     enum PanelPosition {
@@ -52,40 +56,55 @@ class SteerWheelView: UIView {
 
     weak var panelAdapter: SteerWheelAdapter?
     var adaptPosition: PanelPosition?
-    var tColor: UIColor?
+    //var tColor: UIColor?
 
+    //
+    let sw_panel_normal = UIImage(named: "sw_panel_normal")
+    let sw_panel_top    = UIImage(named: "sw_panel_top")
+    let sw_panel_bottom = UIImage(named: "sw_panel_bottom")
+    let sw_panel_left   = UIImage(named: "sw_panel_left")
+    let sw_panel_right  = UIImage(named: "sw_panel_right")
+    let sw_panel_ok     = UIImage(named: "sw_panel_ok")
+
+    lazy var bgImgView: UIImageView = {
+        let _drawLayer = UIImageView.init(image: sw_panel_normal)
+        _drawLayer.frame = self.bounds
+        _drawLayer.isUserInteractionEnabled = true
+        return _drawLayer
+    }()
     lazy var drawLayer_top: CAShapeLayer = {
         let _drawLayer = CAShapeLayer()
-        _drawLayer.fillColor = UIColor.red.cgColor
+        _drawLayer.fillColor = UIColor.white.cgColor
         return _drawLayer
     }()
     lazy var drawLayer_left: CAShapeLayer = {
         let _drawLayer = CAShapeLayer()
-        _drawLayer.fillColor = UIColor.yellow.cgColor
+        _drawLayer.fillColor = UIColor.white.cgColor
         return _drawLayer
     }()
     lazy var drawLayer_bottom: CAShapeLayer = {
         let _drawLayer = CAShapeLayer()
-        _drawLayer.fillColor = UIColor.blue.cgColor
+        _drawLayer.fillColor = UIColor.white.cgColor
         return _drawLayer
     }()
     lazy var drawLayer_right: CAShapeLayer = {
         let _drawLayer = CAShapeLayer()
-        _drawLayer.fillColor = UIColor.green.cgColor
+        _drawLayer.fillColor = UIColor.white.cgColor
         return _drawLayer
     }()
     lazy var drawLayer_center: CAShapeLayer = {
         let _drawLayer = CAShapeLayer()
-        _drawLayer.fillColor = UIColor.lightGray.cgColor
+        _drawLayer.fillColor = UIColor.white.cgColor
         return _drawLayer
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setRoundCorners(borderColor: .brown, borderWidth: 1, raddi: 0, corners: .allCorners, isDotted: true, lineDashPattern: [2, 4])
+        self.backgroundColor = .white
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGes(_:))))
         self.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressGes(_:))))
-        setUp()
+        self.setUp()
+        self.addSubview(bgImgView)
     }
 
     required init?(coder: NSCoder) {
@@ -108,11 +127,6 @@ class SteerWheelView: UIView {
         let distance = sqrt((centerx - point.x) * (centerx - point.x) + (centery - point.y) * (centery - point.y))
         return distance < radius
     }
-
-//    // 异步绘制
-//    override func display(_ layer: CALayer) {
-//
-//    }
 
     //swiftlint:disable function_body_length
     func setUp() {
@@ -176,6 +190,16 @@ class SteerWheelView: UIView {
 // MARK: private methods
 extension SteerWheelView {
 
+    func fillBackgroundColor(_ color: UIColor) {
+        self.backgroundColor = color
+        drawLayer_center.fillColor = color.cgColor
+        drawLayer_top.fillColor = color.cgColor
+        drawLayer_left.fillColor = color.cgColor
+        drawLayer_bottom.fillColor = color.cgColor
+        drawLayer_right.fillColor = color.cgColor
+    }
+
+    // 暂不使用
     func fetchLayer(position: PanelPosition) -> CAShapeLayer {
         switch position {
         case .center:
@@ -188,6 +212,23 @@ extension SteerWheelView {
             return self.drawLayer_bottom
         case .right:
             return self.drawLayer_right
+        }
+    }
+
+    func fetchImgState(position: PanelPosition?) -> UIImage {
+        switch position {
+        case .center:
+            return self.sw_panel_ok!
+        case .top:
+            return self.sw_panel_top!
+        case .left:
+            return self.sw_panel_left!
+        case .bottom:
+            return self.sw_panel_bottom!
+        case .right:
+            return self.sw_panel_right!
+        case .none:
+            return self.sw_panel_normal!
         }
     }
 
@@ -237,12 +278,11 @@ extension SteerWheelView {
         guard let p = adaptPosition else { return }
         print("tap.state:\(tap.state.rawValue)")
 
-        let layer = self.fetchLayer(position: p)
-        let oColor = UIColor(cgColor: layer.fillColor!)
-        layer.fillColor = oColor.withAlphaComponent(0.5).cgColor
+        //TapImpact.heavy()
+        self.bgImgView.image = fetchImgState(position: p)
         if tap.state == .ended {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                layer.fillColor = oColor.cgColor
+                self.bgImgView.image = self.fetchImgState(position: nil)
             }
         }
         panelAdapter?.adapter(tapPanel: self, position: p)
@@ -255,16 +295,13 @@ extension SteerWheelView {
             print("began")
             self.eventHandle("UILongPressGes", point)
             guard let p = adaptPosition else { return }
-            let layer = self.fetchLayer(position: p)
-            let oColor = UIColor(cgColor: layer.fillColor!)
-            tColor = oColor
-            layer.fillColor = oColor.withAlphaComponent(0.5).cgColor
+            //TapImpact.heavy()
+            self.bgImgView.image = fetchImgState(position: p)
             panelAdapter?.adapter(longPressPanel: self, position: p, state: .began)
         case .ended, .cancelled:
             print("ended, .cancelled")
             guard let p = adaptPosition else { return }
-            let layer = self.fetchLayer(position: p)
-            layer.fillColor = tColor?.cgColor
+            self.bgImgView.image = fetchImgState(position: nil)
             panelAdapter?.adapter(longPressPanel: self, position: p, state: longPres.state)
         default:
             break
