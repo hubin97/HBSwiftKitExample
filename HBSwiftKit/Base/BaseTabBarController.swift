@@ -7,9 +7,11 @@
 
 import Foundation
 
-//MARK: - global var and methods
+// MARK: - global var and methods
 
-//MARK: - main class
+// MARK: - main class
+
+// 注意: 必须实现setAppearance:方法, 以便适配iOS系统新版本
 open class BaseTabBarController: UITabBarController {
 
     open override func viewDidLoad() {
@@ -44,28 +46,23 @@ open class BaseTabBarController: UITabBarController {
     ///   - barTintColor: 背景色
     ///   - normalColor: 标题正常颜色
     ///   - selectColor: 标题选中颜色
-    open func setTabBarColors(barTintColor: UIColor = .white, normalColor: UIColor, selectColor: UIColor) {
+    open func setAppearance(barTintColor: UIColor = .white, normalColor: UIColor, selectColor: UIColor) {
         self.tabBar.barTintColor = barTintColor
-        //self.tabBar.backgroundImage = nil
-        //self.tabBar.shadowImage = nil
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: normalColor], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: selectColor], for: .selected)
+
+        if #available(iOS 13.0, *) {
+            // @available(iOS 13.0, *) 新增UITabBarItemAppearance属性, 导致不适配tabbar上UITabBarItem 文字颜色失效
+            let itemAppearance = UITabBarItemAppearance()
+            itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: normalColor]
+            itemAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: selectColor]
+            
+            let appearance = UITabBarAppearance()
+            appearance.backgroundColor = barTintColor
+            appearance.stackedLayoutAppearance = itemAppearance
+            self.tabBar.standardAppearance = appearance
+            if #available(iOS 15.0, *) {
+                // @available(iOS 15.0, *) 新增tabBar.scrollEdgeAppearance属性, 导致不适配tabbar透明现象
+                self.tabBar.scrollEdgeAppearance = appearance
+            }
+        }
     }
 }
-
-//MARK: - private mothods
-extension BaseTabBarController {
-    
-}
-
-//MARK: - call backs
-extension BaseTabBarController {
-    
-}
-
-//MARK: - delegate or data source
-extension BaseTabBarController {
-    
-}
-
-//MARK: - other classes

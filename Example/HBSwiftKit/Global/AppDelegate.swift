@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarVc = BaseTabBarController()
         tabBarVc.addChildVcs(naviVcs: [navi, navi2, navi3], titles: ["Example List", "UIKit Test", "Web Preview"], normalImages: [R.image.tabBar.home_n(), R.image.tabBar.like_n(), R.image.tabBar.web_n()], selectImages: [R.image.tabBar.home_h(), R.image.tabBar.like_h(), R.image.tabBar.web_h()])
         // tabBarVc.tabBar.barTintColor = .orange
-        tabBarVc.setTabBarColors(normalColor: .lightGray, selectColor: .systemBlue)
+        tabBarVc.setAppearance(normalColor: .lightGray, selectColor: .systemBlue)
         self.window?.rootViewController = tabBarVc
 
         FLEXManager.shared.showExplorer()
