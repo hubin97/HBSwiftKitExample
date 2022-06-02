@@ -1,5 +1,5 @@
 //
-//  CodeScanner.swift
+//  QRGenerator.swift
 //  HBSwiftKit
 //
 //  Created by Hubin_Huang on 2021/3/11.
@@ -12,20 +12,20 @@ import AVFoundation
 
 //MARK: - main class
 /// 条形码,二维码扫描生成类
-open class CodeScanner {
+open class QRGenerator {
 }
 
 //MARK: - private mothods
-extension CodeScanner {
+extension QRGenerator {
     
     /// 生成二维码
     /// - Parameters:
     ///   - text: 目标字符串
-    ///   - width: 大小,
+    ///   - width: 大小,  默认100 * 100
     ///   - fillImage: 中间logo
     ///   - color: 渲染颜色
     /// - Returns: 二维码图片
-    public class func makeQRCode(text: String, width:CGFloat, fillImage:UIImage? = nil, color:UIColor? = nil) -> UIImage? {
+    public class func makeQRCode(text: String, width: CGFloat = 300, fillImage: UIImage? = nil, color: UIColor? = nil) -> UIImage? {
         guard let data = text.data(using: .utf8) else { return nil }
         
         if let filter = CIFilter(name: "CIQRCodeGenerator") {
@@ -90,12 +90,12 @@ extension CodeScanner {
 }
 
 //MARK: - call backs
-extension CodeScanner {
+extension QRGenerator {
     
 }
 
 //MARK: - delegate or data source
-extension CodeScanner {
+extension QRGenerator {
     
 }
 

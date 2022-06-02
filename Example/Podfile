@@ -1,5 +1,10 @@
 platform :ios, '10.0'
 
+# cdn服务器最近常挂,暂时禁用cdn分发方式; https://github.com/CocoaPods/CocoaPods/issues/11370
+# CDN: trunk URL couldn't be downloaded: https://cdn.jsdelivr.net/cocoa/Specs
+#source 'source 'https://cdn.cocoapods.org/'
+source 'https://github.com/CocoaPods/Specs.git'
+
 use_frameworks! #:linkage => :dynamic
 #supports_swift_versions '>= 4.2' #, '< 4.0'
 #warn_for_unused_master_specs_repo 'false'
@@ -20,8 +25,7 @@ target 'HBSwiftKit_Example' do
   pod 'Charts'
   pod 'Toast-Swift'
   pod 'SVProgressHUD'
-  pod 'GDPerformanceView-Swift'
-
+  pod 'GDPerformanceView-Swift', :configurations => ['Debug']
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', :configurations => ['Debug']
 

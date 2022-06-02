@@ -28,6 +28,7 @@ public class NetworkLoadingPlugin: PluginType {
     let hudSize: CGSize
     let bgColor: UIColor?
     let fgColor: UIColor?
+    let isEnable: Bool
 
     /// 初始化加载
     /// - Parameters:
@@ -35,11 +36,13 @@ public class NetworkLoadingPlugin: PluginType {
     ///   - hudSize: 尺寸, 默认 100 * 100
     ///   - bgColor: 背景色, 默认.groupTableViewBackground
     ///   - fgColor: 字体色, 默认.black
-    init(content: String? = nil, hudSize: CGSize = CGSize(width: 100, height: 100), bgColor: UIColor? = nil, fgColor: UIColor? = nil) {
+    ///   - isEnable: 是否允许Hud底下交互, 默认禁用 false
+    init(content: String? = nil, hudSize: CGSize = CGSize(width: 100, height: 100), bgColor: UIColor? = nil, fgColor: UIColor? = nil, isEnable: Bool = false) {
         self.content = content
         self.hudSize = hudSize
         self.bgColor = bgColor
         self.fgColor = fgColor
+        self.isEnable = isEnable
     }
 
     public func willSend(_ request: RequestType, target: TargetType) {
@@ -52,8 +55,8 @@ public class NetworkLoadingPlugin: PluginType {
             SVProgressHUD.setDefaultStyle(.custom)
             SVProgressHUD.setBackgroundColor(self.bgColor ?? .groupTableViewBackground)
             SVProgressHUD.setForegroundColor(self.fgColor ?? .black)
-            // 禁用底下交互
-            SVProgressHUD.setDefaultMaskType(.clear)
+            // 是否允许hud底下交互
+            SVProgressHUD.setDefaultMaskType(self.isEnable ? .none: .clear)
         }
     }
 
