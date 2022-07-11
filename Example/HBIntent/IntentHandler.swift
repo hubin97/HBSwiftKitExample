@@ -17,6 +17,8 @@ class IntentHandler: INExtension {
         // 用来处理匹配到 Intent 后的 UI 显示以及后续操作
         if intent is HBEventIntent {
             return HBEventHandler()
+        } else if intent is HBSiriIntent {
+            return HBSiriIntent()
         }
         return self
     }

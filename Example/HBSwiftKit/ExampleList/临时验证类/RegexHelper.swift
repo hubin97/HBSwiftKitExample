@@ -52,7 +52,7 @@ struct RegexHelper {
 
     /// 不准???
     func match(input: String) -> Bool {
-        if let matchs = regex?.matches(in: input, options: [], range: NSMakeRange(0, input.count)) {
+        if let matchs = regex?.matches(in: input, options: [], range: NSRange(location: 0, length: input.count)) {
             return matchs.count > 0
         }
         return false
