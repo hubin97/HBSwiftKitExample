@@ -10,7 +10,7 @@ import UIKit
 import CocoaLumberjack
 import HBSwiftKit
 import FLEX
-
+import Intents
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -36,6 +36,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLogInfo("DDLogInfo Override point for customization after application launch. ")
         DDLogDebug("DDLogDebug Override point for customization after application launch. Override point for customization after application launch. ")
         DDLogVerbose("DDLogVerbose Override point for customization after application launch. Override point for customization after application launch. Override point for customization after application launch")
+        return true
+    }
+}
+
+// MARK: - Intents
+extension AppDelegate {
+    /// 处理外部意图
+    // func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {}
+    func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+        /// 捷径, 打开App跳转到需要的业务控制器页
+        if userActivityType == NSStringFromClass(HBEventIntent.self) {
+            print("HBEventIntent---")
+            StackTopViewController()?.navigationController?.pushViewController(BlueToothController(), animated: true)
+        }
         return true
     }
 }

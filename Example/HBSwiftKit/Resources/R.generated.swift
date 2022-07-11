@@ -623,6 +623,18 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
+  /// This `R.info` struct is generated, and contains static references to 1 properties.
+  struct info {
+    struct nsUserActivityTypes {
+      static let hbEventIntent = infoPlistString(path: ["NSUserActivityTypes"], key: "HBEventIntent") ?? "HBEventIntent"
+      static let hbSiriIntent = infoPlistString(path: ["NSUserActivityTypes"], key: "HBSiriIntent") ?? "HBSiriIntent"
+
+      fileprivate init() {}
+    }
+
+    fileprivate init() {}
+  }
+
   fileprivate struct intern: Rswift.Validatable {
     fileprivate static func validate() throws {
       try _R.validate()
