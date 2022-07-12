@@ -27,6 +27,7 @@ class VoiceShortcutManager: NSObject {
 // MARK: - private mothods
 extension VoiceShortcutManager {
 
+    // MARK: 自定义Intents
     /// 获取所有匹配意图的快捷指令
     /// - Parameters:
     ///   - targetIntent: 指定匹配意图
@@ -65,6 +66,25 @@ extension VoiceShortcutManager {
         editShortcutVc.delegate = self
         editShortcutVc.modalPresentationStyle = .fullScreen
         StackTopViewController()?.present(editShortcutVc, animated: true)
+    }
+
+    // MARK: 捐赠方式调用
+    /**
+     // 添加
+     let intent = WingtoDonateIntent()
+     intent.title = "第\(idx)个捐赠快捷指令"
+     intent.sid = "25709"
+     intent.suggestedInvocationPhrase = "捐赠指令\(idx)"
+     let interaction = INInteraction(intent: intent, response: nil)
+     interaction.donate { error in
+         print("donate intent error:", error as Any)
+     }
+     // 删除
+     INInteraction.deleteAll()
+     */
+    func addDonateShortcut(intent: INIntent, completion: ((_ error: Error?) -> Void )? = nil) {
+        let interaction = INInteraction(intent: intent, response: nil)
+        interaction.donate(completion: completion)
     }
 }
 

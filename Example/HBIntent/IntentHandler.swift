@@ -15,11 +15,16 @@ class IntentHandler: INExtension {
     override func handler(for intent: INIntent) -> Any {
         // 这里我 return 我创建一个 HBEventIntent 类，该类准守 INExtension, HBEventIntentHandling协议。
         // 用来处理匹配到 Intent 后的 UI 显示以及后续操作
-        if intent is HBEventIntent {
+        switch intent {
+        case is HBEventIntent:
             return HBEventHandler()
-        } else if intent is HBSiriIntent {
-            return HBSiriIntent()
+        case is HBSiriIntent:
+            return HBSiriHandler()
+        case is HBDonateIntent:
+            return HBDonateHandler()
+        default:
+            return self
+
         }
-        return self
     }
 }

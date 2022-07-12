@@ -172,10 +172,21 @@ class MovieData: Mappable {
     var country: String?
 }
 
+import Intents
 // MARK: - call backs
 extension UIKitTestController {
 
     @objc func filterAction(_ sender: UIBarButtonItem) {
+        let intent = HBDonateIntent()
+        intent.title = "捐赠快捷指令"
+        intent.sid = "12345"
+        intent.suggestedInvocationPhrase = "测试捐赠指令"
+        VoiceShortcutManager.shared.addDonateShortcut(intent: intent) { error in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+        }
+        
         // showRulerView()
         // showTagsView(nil)
         //let picker = LightAttrPickerView(hsvColor: HsvColor(hue: 0, saturation: 0), duration: 3)
@@ -183,8 +194,8 @@ extension UIKitTestController {
         //picker.pickerDatas = allBrightList
         //picker.show()
 
-        updateData = !updateData
-        indexList.reloadData()
+//        updateData = !updateData
+//        indexList.reloadData()
     }
 
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

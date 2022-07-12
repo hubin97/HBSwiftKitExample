@@ -637,6 +637,7 @@ struct R: Rswift.Validatable {
   /// This `R.info` struct is generated, and contains static references to 1 properties.
   struct info {
     struct nsUserActivityTypes {
+      static let hbDonateIntent = infoPlistString(path: ["NSUserActivityTypes"], key: "HBDonateIntent") ?? "HBDonateIntent"
       static let hbEventIntent = infoPlistString(path: ["NSUserActivityTypes"], key: "HBEventIntent") ?? "HBEventIntent"
       static let hbSiriIntent = infoPlistString(path: ["NSUserActivityTypes"], key: "HBSiriIntent") ?? "HBSiriIntent"
 

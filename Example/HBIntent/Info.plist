@@ -12,6 +12,7 @@
 			<array/>
 			<key>IntentsSupported</key>
 			<array>
+				<string>HBDonateIntent</string>
 				<string>HBEventIntent</string>
 				<string>HBSiriIntent</string>
 			</array>

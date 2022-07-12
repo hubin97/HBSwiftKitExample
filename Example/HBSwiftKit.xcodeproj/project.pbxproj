@@ -21,6 +21,7 @@
 		286E97F7287852DB00014F9A /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 286E97F328784A5000014F9A /* Intents.intentdefinition */; };
 		286F6442287BD3A300BA4960 /* HBSiriHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286F6441287BD3A300BA4960 /* HBSiriHandler.swift */; };
 		286F6447287BFAF300BA4960 /* VoiceShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286F6446287BFAF300BA4960 /* VoiceShortcutManager.swift */; };
+		287B8AEA287D486200A71430 /* HBDonateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287B8AE9287D486200A71430 /* HBDonateHandler.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -160,6 +161,7 @@
 		286F6443287BDC2D00BA4960 /* HBSwiftKit_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HBSwiftKit_Example.entitlements; sourceTree = "<group>"; };
 		286F6444287BDC9300BA4960 /* HBIntent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HBIntent.entitlements; sourceTree = "<group>"; };
 		286F6446287BFAF300BA4960 /* VoiceShortcutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceShortcutManager.swift; sourceTree = "<group>"; };
+		287B8AE9287D486200A71430 /* HBDonateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBDonateHandler.swift; sourceTree = "<group>"; };
 		4845C4375F7293ACE69A0714 /* Pods_HBSwiftKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBSwiftKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5217653375CCE7602F1DA3F5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		5CA296E7E757B6B9CCC2CB2F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				286E97D72878415800014F9A /* IntentHandler.swift */,
 				286E97F52878513F00014F9A /* HBEventHandler.swift */,
 				286F6441287BD3A300BA4960 /* HBSiriHandler.swift */,
+				287B8AE9287D486200A71430 /* HBDonateHandler.swift */,
 				286E97F328784A5000014F9A /* Intents.intentdefinition */,
 				286E97D92878415800014F9A /* Info.plist */,
 			);
@@ -1039,6 +1042,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				287B8AEA287D486200A71430 /* HBDonateHandler.swift in Sources */,
 				286E97F62878513F00014F9A /* HBEventHandler.swift in Sources */,
 				286F6442287BD3A300BA4960 /* HBSiriHandler.swift in Sources */,
 				286E97F428784A5000014F9A /* Intents.intentdefinition in Sources */,
