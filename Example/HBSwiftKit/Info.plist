@@ -55,7 +55,7 @@
 	<array>
 		<string>HBDonateIntent</string>
 		<string>HBEventIntent</string>
-		<string>HBSiriIntent</string>
+		<string>HBAideIntent</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

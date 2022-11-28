@@ -19,7 +19,7 @@
 		286E97F428784A5000014F9A /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 286E97F328784A5000014F9A /* Intents.intentdefinition */; };
 		286E97F62878513F00014F9A /* HBEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286E97F52878513F00014F9A /* HBEventHandler.swift */; };
 		286E97F7287852DB00014F9A /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 286E97F328784A5000014F9A /* Intents.intentdefinition */; };
-		286F6442287BD3A300BA4960 /* HBSiriHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286F6441287BD3A300BA4960 /* HBSiriHandler.swift */; };
+		286F6442287BD3A300BA4960 /* HBAideHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286F6441287BD3A300BA4960 /* HBAideHandler.swift */; };
 		286F6447287BFAF300BA4960 /* VoiceShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286F6446287BFAF300BA4960 /* VoiceShortcutManager.swift */; };
 		287B8AEA287D486200A71430 /* HBDonateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287B8AE9287D486200A71430 /* HBDonateHandler.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -157,7 +157,7 @@
 		286E97E62878415800014F9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		286E97F328784A5000014F9A /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		286E97F52878513F00014F9A /* HBEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBEventHandler.swift; sourceTree = "<group>"; };
-		286F6441287BD3A300BA4960 /* HBSiriHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBSiriHandler.swift; sourceTree = "<group>"; };
+		286F6441287BD3A300BA4960 /* HBAideHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBAideHandler.swift; sourceTree = "<group>"; };
 		286F6443287BDC2D00BA4960 /* HBSwiftKit_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HBSwiftKit_Example.entitlements; sourceTree = "<group>"; };
 		286F6444287BDC9300BA4960 /* HBIntent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HBIntent.entitlements; sourceTree = "<group>"; };
 		286F6446287BFAF300BA4960 /* VoiceShortcutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceShortcutManager.swift; sourceTree = "<group>"; };
@@ -317,7 +317,7 @@
 				286F6444287BDC9300BA4960 /* HBIntent.entitlements */,
 				286E97D72878415800014F9A /* IntentHandler.swift */,
 				286E97F52878513F00014F9A /* HBEventHandler.swift */,
-				286F6441287BD3A300BA4960 /* HBSiriHandler.swift */,
+				286F6441287BD3A300BA4960 /* HBAideHandler.swift */,
 				287B8AE9287D486200A71430 /* HBDonateHandler.swift */,
 				286E97F328784A5000014F9A /* Intents.intentdefinition */,
 				286E97D92878415800014F9A /* Info.plist */,
@@ -1044,7 +1044,7 @@
 			files = (
 				287B8AEA287D486200A71430 /* HBDonateHandler.swift in Sources */,
 				286E97F62878513F00014F9A /* HBEventHandler.swift in Sources */,
-				286F6442287BD3A300BA4960 /* HBSiriHandler.swift in Sources */,
+				286F6442287BD3A300BA4960 /* HBAideHandler.swift in Sources */,
 				286E97F428784A5000014F9A /* Intents.intentdefinition in Sources */,
 				286E97D82878415800014F9A /* IntentHandler.swift in Sources */,
 			);
@@ -1279,7 +1279,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = YTPNCWF278;
+				DEVELOPMENT_TEAM = KWAT7HPTLT;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HBIntent/Info.plist;
@@ -1320,7 +1320,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YTPNCWF278;
+				DEVELOPMENT_TEAM = KWAT7HPTLT;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HBIntent/Info.plist;
@@ -1453,7 +1453,7 @@
 				CODE_SIGN_ENTITLEMENTS = HBSwiftKit_Example.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YTPNCWF278;
+				DEVELOPMENT_TEAM = KWAT7HPTLT;
 				INFOPLIST_FILE = HBSwiftKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1482,7 +1482,7 @@
 				CODE_SIGN_ENTITLEMENTS = HBSwiftKit_Example.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YTPNCWF278;
+				DEVELOPMENT_TEAM = KWAT7HPTLT;
 				INFOPLIST_FILE = HBSwiftKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

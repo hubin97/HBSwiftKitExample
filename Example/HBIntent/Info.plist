@@ -14,7 +14,7 @@
 			<array>
 				<string>HBDonateIntent</string>
 				<string>HBEventIntent</string>
-				<string>HBSiriIntent</string>
+				<string>HBAideIntent</string>
 			</array>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>

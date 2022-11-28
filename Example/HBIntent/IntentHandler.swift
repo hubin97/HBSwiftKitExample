@@ -18,8 +18,8 @@ class IntentHandler: INExtension {
         switch intent {
         case is HBEventIntent:
             return HBEventHandler()
-        case is HBSiriIntent:
-            return HBSiriHandler()
+        case is HBAideIntent:
+            return HBAideHandler()
         case is HBDonateIntent:
             return HBDonateHandler()
         default:
