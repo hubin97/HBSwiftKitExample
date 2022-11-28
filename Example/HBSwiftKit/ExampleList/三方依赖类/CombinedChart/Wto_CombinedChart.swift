@@ -69,7 +69,7 @@ class Wto_CombinedChart: UIView {
     var xAxisValueFormatter: ChartAxisFormatter? {
         didSet {
             let xAxis = chartView.xAxis
-            xAxis.valueFormatter = xAxisValueFormatter
+            xAxis.valueFormatter = xAxisValueFormatter as? any AxisValueFormatter
         }
     }
     lazy var marker: BalloonMarker = {
@@ -88,7 +88,7 @@ class Wto_CombinedChart: UIView {
         chartView.drawOrder = [DrawOrder.bar.rawValue, DrawOrder.line.rawValue]
         chartView.pinchZoomEnabled = false  // 是否开启捏合手势
         chartView.setScaleEnabled(false) // 是否支持拉伸
-        chartView.chartDescription?.enabled = false ///
+        chartView.chartDescription.enabled = false ///
         chartView.setExtraOffsets(left: 20, top: 20, right: 20, bottom: 10)
         // chartView.drawBarShadowEnabled = true  // 灰色补全空白bar
         chartView.delegate = self
@@ -193,7 +193,7 @@ extension Wto_CombinedChart {
     }
 
     fileprivate func generateLineData(lineSet: LineChartDataSet) -> LineChartData {
-        let set = LineChartDataSet(entries: lineSet.entries, label: lineSet.label)
+        let set = LineChartDataSet(entries: lineSet.entries, label: lineSet.label!)
         set.setColor(UIColor.red) // 线条颜色
         set.lineWidth = 1.5
         set.drawCirclesEnabled = true  // 是否有转折点
@@ -212,7 +212,7 @@ extension Wto_CombinedChart {
 
         let colors = [HEXA(hexValue: 0xEF9493, a: 0.24).cgColor, HEXA(hexValue: 0xE65C5B, a: 0.37).cgColor]
         let cggradient = CGGradient.init(colorsSpace: nil, colors: colors as CFArray, locations: nil)
-        set.fill = Fill.fillWithLinearGradient(cggradient!, angle: 90.0)
+//        set.fill = Fill.fillWithLinearGradient(cggradient!, angle: 90.0)
         //set.fillColor = .red //
         set.fillAlpha = 1.0 // 阴影透明度
         set.highlightEnabled = false  /// 禁用折线点击事件
@@ -228,7 +228,7 @@ extension Wto_CombinedChart {
 
     fileprivate func generateBarData(barSet: BarChartDataSet) -> BarChartData {
 
-        let set = BarChartDataSet(entries: barSet.entries, label: barSet.label)
+        let set = BarChartDataSet(entries: barSet.entries, label: barSet.label!)
         set.axisDependency = .left  // 依赖左y轴数据
         // set.setColor(UIColor.red.withAlphaComponent(0.5))
         set.drawValuesEnabled = false // 是否显示数据
@@ -306,7 +306,7 @@ extension Wto_CombinedChart: ChartViewDelegate {
 // MARK: - other classes
 /// 自定义字串格式轴标签
 @objc(BarChartFormatter)
-public class ChartAxisFormatter: NSObject, IAxisValueFormatter {
+public class ChartAxisFormatter: NSObject, AxisValueFormatter {
     var titles = [String]()
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return titles[Int(value)]

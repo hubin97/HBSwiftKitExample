@@ -12,6 +12,7 @@ import Photos
 import CoreBluetooth
 //iOS9新增蜂窝网络权限授权 CoreTelephony/CTCellularData
 import CoreTelephony
+import Intents
 
 /**
  <!-- 相册 -->
@@ -56,6 +57,8 @@ import CoreTelephony
  <!-- 语音识别 -->
  <key>NSSpeechRecognitionUsageDescription</key>
  <string>App需要您的同意,才能使用语音识别</string>
+ <key>NSSiriUsageDescription</key>
+ <string>App需要您的同意,才能使用Siri</string>
  ————————————————
  版权声明：本文为CSDN博主「夕阳下的守望者」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
  原文链接：https://blog.csdn.net/wgl_happy/article/details/53810647
@@ -270,6 +273,17 @@ public class AuthorizationStatus: NSObject {
         }
     }
     
+    /// 获取Siri是否已开启
+    public static func siriService(authsBlock: @escaping AuthsBlock) {
+        let siriAuthStatus = INPreferences.siriAuthorizationStatus()
+        if siriAuthStatus == .authorized {
+            authsBlock(true)
+        } else {
+            INPreferences.requestSiriAuthorization { st in
+                authsBlock(st == .authorized)
+            }
+        }
+    }
 }
 
 //MARK: - private mothods

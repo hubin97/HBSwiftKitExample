@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '12.0'
 
 # cdn服务器最近常挂,暂时禁用cdn分发方式; https://github.com/CocoaPods/CocoaPods/issues/11370
 # CDN: trunk URL couldn't be downloaded: https://cdn.jsdelivr.net/cocoa/Specs
@@ -22,7 +22,7 @@ target 'HBSwiftKit_Example' do
   pod 'PromiseKit' #, '~> 6.8.0'
   #pod 'OpenCV', '~> 4.3.0'
   pod 'CocoaLumberjack/Swift'
-  pod 'Charts'
+  pod 'Charts', '~> 4.1.0'
   pod 'Toast-Swift'
   pod 'SVProgressHUD'
   pod 'GDPerformanceView-Swift', :configurations => ['Debug']

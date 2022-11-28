@@ -1,8 +1,9 @@
 PODS:
   - Alamofire (5.5.0)
-  - Charts (3.6.0):
-    - Charts/Core (= 3.6.0)
-  - Charts/Core (3.6.0)
+  - Charts (4.1.0):
+    - Charts/Core (= 4.1.0)
+  - Charts/Core (4.1.0):
+    - SwiftAlgorithms (~> 1.0)
   - CocoaLumberjack/Core (3.7.4)
   - CocoaLumberjack/Swift (3.7.4):
     - CocoaLumberjack/Core
@@ -51,11 +52,12 @@ PODS:
   - R.swift.Library (5.3.0)
   - SnapKit (4.2.0)
   - SVProgressHUD (2.2.5)
+  - SwiftAlgorithms (1.0.0)
   - SwiftLint (0.44.0)
   - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
-  - Charts
+  - Charts (~> 4.1.0)
   - CocoaLumberjack/Swift
   - FLEX
   - GDPerformanceView-Swift
@@ -89,6 +91,7 @@ SPEC REPOS:
     - R.swift.Library
     - SnapKit
     - SVProgressHUD
+    - SwiftAlgorithms
     - SwiftLint
     - Toast-Swift
 
@@ -98,7 +101,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
-  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  Charts: 354f86803d11d9c35de280587fef50d1af063978
   CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   FLEX: bbc55d197f87d7cde2454c3981aa47069b694144
   GDPerformanceView-Swift: 22d964fe40b19e3d914dba2586237d064de8fd77
@@ -113,9 +116,10 @@ SPEC CHECKSUMS:
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 41d41a32a5b660dfb521412fd1e44980cd9ca9e1
+PODFILE CHECKSUM: b25ed6a800678925dd133ed7fabd008cf41d500e
 
 COCOAPODS: 1.11.3
