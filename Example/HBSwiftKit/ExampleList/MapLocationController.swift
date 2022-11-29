@@ -69,14 +69,12 @@ class MapLocationController: BaseViewController {
 
         /// 注意格式: 询问权限后可以继续之前focusAtion操作, 可以更新到位置信息
         AuthStatus.locationServices {[weak self] (status) in
-            guard let status = status else {
-                return
+            print("定位权限\(status == nil ? "nil": (status == true ? "on": "off"))")
+            if status != true {
+                self?.wakeupAuthAlert()
             }
-            print("定位权限\(status ? "on": "off")")
-            self?.wakeupAuthAlert()
             self?.focusAtion()
         }
-
         DDLogInfo("locationServices...")
     }
 
@@ -135,9 +133,19 @@ extension MapLocationController: MKMapViewDelegate, AuthStatusLocationDelegate, 
         self.mapView.setCenter(locations.last?.coordinate ?? CLLocationCoordinate2D(), animated: true)
         // self.poiSearch(location: locations.first!, keyword: "侨城北")
         self.locManager.stopUpdatingLocation()
+        //
+        if let location = self.mapView.userLocation.location {
+            print("精准调整位置在100m以内")
+            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 100, longitudinalMeters: 100)
+            self.mapView.setRegion(region, animated: true)
+        }
     }
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("didFailWithError---")
+    }
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        // here you call the function that manages the location rights at the app launch
+        print("didChangeAuthorization---")
     }
 }
 
