@@ -163,7 +163,7 @@ extension Extension_View {
     }
     
     //MARK: 指定矩形圆角
-    public func cornerRadiusBorder(cornerRadius: CGFloat?, makeToBounds: Bool?, borderColor: UIColor?, borderWidth: CGFloat?) {
+    public func setBorder(cornerRadius: CGFloat? = nil, makeToBounds: Bool? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil) {
         if let cr = cornerRadius {
             self.layer.cornerRadius = cr
         }

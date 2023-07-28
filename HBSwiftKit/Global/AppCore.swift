@@ -28,12 +28,25 @@ public let kNavBarHeight: CGFloat = 44.0
 public let kTabBarHeight: CGFloat = 49.0
 
 /// 状态栏高度 iPhone X (44.0) / iPhone 11 (48.0) / 20.0
-public let kStatusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
+//public let kStatusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
+
+/// 兼容适配  iOS 13 + 仅开启多任务屏时生效
+public let kStatusBarHeight: CGFloat = {
+    var statusBarHeight: CGFloat = 0
+    if #available(iOS 13.0, *), UIApplication.shared.connectedScenes.count > 0 {
+        let scene = UIApplication.shared.connectedScenes.first
+        guard let windowScene = scene as? UIWindowScene else { return 0 }
+        guard let statusBarManager = windowScene.statusBarManager else { return 0 }
+        statusBarHeight = statusBarManager.statusBarFrame.size.height
+    } else {
+        statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+    }
+    return statusBarHeight
+}()
+
 
 /// 是否有前刘海  (iPhone X系统 iOS 11+)
-public let kIsHaveBangs = kStatusBarHeight > 20.0 ? true: false
-//@available(iOS 11.0, *)
-//public let kIsHaveBangs = (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0) > 0.0 ? true: false
+public let kIsHaveBangs = kStatusBarHeight > 20.0
 
 /// 顶部安全区域高度
 public let kTopSafeHeight: CGFloat = kIsHaveBangs ? kStatusBarHeight : 0
