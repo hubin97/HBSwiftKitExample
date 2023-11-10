@@ -77,7 +77,7 @@ class ImageBrowerController: BaseViewController {
     }()
 
     lazy var albumCollect: UICollectionView = {
-        let collection = UICollectionView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight), collectionViewLayout: layout)
+        let collection = UICollectionView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight), collectionViewLayout: layout)
         collection.backgroundColor = .clear
         collection.register(SnapshotItem.self, forCellWithReuseIdentifier: NSStringFromClass(SnapshotItem.self))
         collection.dataSource = self
@@ -86,7 +86,7 @@ class ImageBrowerController: BaseViewController {
     }()
 
     lazy var toolBar: IBToolBar = {
-        let toolBar = IBToolBar.init(frame: CGRect(x: 0, y: albumCollect.frame.maxY, width: kScreenW, height: kTabBarAndSafeHeight))
+        let toolBar = IBToolBar(frame: CGRect(x: 0, y: kScreenH - kNavBarAndSafeHeight, width: kScreenW, height: kTabBarAndSafeHeight))
         toolBar.leftBtn.addTarget(self, action: #selector(shareAction), for: .touchUpInside)
         toolBar.rightBtn.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
         return toolBar
@@ -101,7 +101,7 @@ class ImageBrowerController: BaseViewController {
         self.title = "照片浏览器"
 
         self.rightEditBtn.setTitle("选择", for: .normal)
-        self.rightEditBtn.setTitleColor(.gray, for: .normal)
+        self.rightEditBtn.setTitleColor(.black, for: .normal)
         self.rightEditBtn.addTarget(self, action: #selector(editAction), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.rightEditBtn)
 
@@ -127,12 +127,12 @@ extension ImageBrowerController {
         if self.isEditable == true { // 可编辑
             UIView.animate(withDuration: 0.5) {
                 self.albumCollect.frame.size.height -= kTabBarAndSafeHeight
-                self.toolBar.center.y -= kTabBarAndSafeHeight
+                self.toolBar.frame.origin.y -= kTabBarAndSafeHeight
             }
         } else {
             UIView.animate(withDuration: 0.5) {
                 self.albumCollect.frame.size.height += kTabBarAndSafeHeight
-                self.toolBar.center.y += kTabBarAndSafeHeight
+                self.toolBar.frame.origin.y += kTabBarAndSafeHeight
             }
 
             // 取消后清空选中项
@@ -283,29 +283,43 @@ class SnapshotItem: UICollectionViewCell {
     }
 
     weak var updateDelegate: UpdateSelectCountDelegate?
-    var iconView = UIImageView()
-    var markIconBtn = UIButton.init(type: .custom)
-
+ 
+    lazy var iconView: UIImageView = {
+        let _iconView = UIImageView()
+        _iconView.frame = self.bounds
+        return _iconView
+    }()
+    
+//    lazy var grayView: UIView = {
+//        let _grayView = UIView()
+//        _grayView.frame = self.bounds
+//        _grayView.backgroundColor = UIColor(white: 0, alpha: 0.7)
+//        _grayView.isHidden = true
+//        return _grayView
+//    }()
+    
+    lazy var markIconBtn: UIButton = {
+        var _markIconBtn = UIButton(type: .custom)
+        _markIconBtn.frame = self.bounds//CGRect(x: self.bounds.size.width - kScaleW(45), y: self.bounds.size.height - kScaleW(45), width: kScaleW(40), height: kScaleW(40))
+        _markIconBtn.setImage(UIImage(named: "ib_unselect"), for: .normal)
+        _markIconBtn.setImage(UIImage(named: "ib_select"), for: .selected)
+//        markIconBtn.setBackgroundImage(UIImage(color: UIColor.init(white: 0, alpha: 0)), for: .normal)
+//        markIconBtn.setBackgroundImage(UIImage(color: UIColor.init(white: 0, alpha: 0.3)), for: .selected)
+        _markIconBtn.imageEdgeInsets = UIEdgeInsets(top: self.bounds.size.height - 25, left: self.bounds.size.width - 25, bottom: 0, right: 0)
+        _markIconBtn.addTarget(self, action: #selector(selectAction), for: .touchUpInside)
+        _markIconBtn.isSelected = false
+        _markIconBtn.isHidden = true
+        return _markIconBtn
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         self.setRectCorner(radiiSize: 4)
-
         self.contentView.addSubview(iconView)
-        iconView.frame = self.bounds
-        iconView.contentMode = .scaleAspectFill
-
+//        self.contentView.addSubview(grayView)
         self.contentView.addSubview(markIconBtn)
-        markIconBtn.frame = self.bounds
-        markIconBtn.setImage(UIImage(named: "ib_unselect"), for: .normal)
-        markIconBtn.setImage(UIImage(named: "ib_select"), for: .selected)
-        markIconBtn.setBackgroundImage(UIImage(color: UIColor.init(white: 0, alpha: 0)), for: .normal)
-        markIconBtn.setBackgroundImage(UIImage(color: UIColor.init(white: 0, alpha: 0.3)), for: .selected)
-        markIconBtn.imageEdgeInsets = UIEdgeInsets(top: self.bounds.size.height - 25, left: self.bounds.size.width - 25, bottom: 0, right: 0)
 
-        markIconBtn.addTarget(self, action: #selector(selectAction), for: .touchUpInside)
-        markIconBtn.isSelected = false
-        markIconBtn.isHidden = true
     }
 
     required init?(coder: NSCoder) {
@@ -313,10 +327,8 @@ class SnapshotItem: UICollectionViewCell {
     }
 
     @objc func selectAction() {
-
         markIconBtn.isSelected = !markIconBtn.isSelected
         model?.isSelected = markIconBtn.isSelected
-
         updateDelegate?.updateSelectCount()
     }
 }
@@ -332,9 +344,9 @@ class IBToolBar: UIView {
         super.init(frame: frame)
 
         self.backgroundColor = .white
-        let lineView = UIView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: 0.5))
+        let lineView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: 0.5))
         self.addSubview(lineView)
-        lineView.backgroundColor = .groupTableViewBackground
+        lineView.backgroundColor = .lightGray
 
         self.addSubview(leftBtn)
         leftBtn.frame = CGRect(x: 20, y: 4.5, width: 40, height: 40)

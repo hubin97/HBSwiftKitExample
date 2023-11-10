@@ -25,7 +25,7 @@ class DatePickerController: BaseViewController {
         super.setupUi()
 
         self.title = "日期选择器"
-        self.setBackBarButtonItem(modeStyle: .white) {
+        self.setBackBarButtonItem(modeStyle: .black) {
             print("\(type(of: self)) back action ....")
         }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .done, target: self, action: #selector(doneDateAction))

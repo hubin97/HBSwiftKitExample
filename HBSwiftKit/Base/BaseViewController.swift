@@ -45,7 +45,11 @@ open class BaseViewController: UIViewController {
     }
     
     open override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            return .default
+        }
     }
     
     deinit {

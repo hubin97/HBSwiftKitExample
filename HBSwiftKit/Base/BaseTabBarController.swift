@@ -46,7 +46,8 @@ open class BaseTabBarController: UITabBarController {
     ///   - barTintColor: 背景色
     ///   - normalColor: 标题正常颜色
     ///   - selectColor: 标题选中颜色
-    open func setAppearance(barTintColor: UIColor = .white, normalColor: UIColor, selectColor: UIColor) {
+    ///   - shadowColor: 标签栏顶部下划线颜色, 默认 lightGray
+    open func setAppearance(barTintColor: UIColor = .white, normalColor: UIColor, selectColor: UIColor, shadowColor: UIColor? = nil) {
         self.tabBar.barTintColor = barTintColor
 
         if #available(iOS 13.0, *) {
@@ -57,6 +58,7 @@ open class BaseTabBarController: UITabBarController {
             
             let appearance = UITabBarAppearance()
             appearance.backgroundColor = barTintColor
+            appearance.shadowColor = shadowColor ?? .lightGray
             appearance.stackedLayoutAppearance = itemAppearance
             self.tabBar.standardAppearance = appearance
             if #available(iOS 15.0, *) {
