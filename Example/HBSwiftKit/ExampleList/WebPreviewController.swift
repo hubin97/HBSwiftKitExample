@@ -59,6 +59,14 @@ class WebPreviewController: BaseWKWebController {
     @objc func test(_ param1: Any, _ param2: Any) {
         print("test------1\(param1), 2\(param2)")
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            return .default
+        }
+    }
 }
 
 // MARK: - private mothods

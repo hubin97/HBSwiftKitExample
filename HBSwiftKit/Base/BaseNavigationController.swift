@@ -11,40 +11,11 @@ import Foundation
 
 open class BaseNavigationController: UINavigationController {
     
-    /// 导航栏返回按钮图片🔙 默认黑色
-    /** 修改导航栏样式
-     if let navi = self.navigationController as? BaseNavigationController {
-         //navi.leftBtnImage = UIImage(named: "navi_back_b")
-         navi.navigationBar.barTintColor = .blue
-         navi.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20)]
-         navi.darkMode = true
-     }
-     */
-    open var leftBtnImage = UIImage.bundleImage(named: "navi_back_b")
-    /// 夜间模式, 注意夜间白色图,白天相反
-    open var darkMode = false {
-        didSet {
-            leftBtnImage = UIImage.bundleImage(named: darkMode ? "navi_back_w": "navi_back_b")
-        }
-    }
-    
     open override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
         navigationBar.isTranslucent = false
-        
-        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18, weight: .medium)]
-        if #available(iOS 13.0, *) {
-            let appearance = UINavigationBarAppearance.init()
-            appearance.backgroundColor = .white
-            navigationBar.titleTextAttributes = titleTextAttributes
-            navigationBar.standardAppearance = appearance
-            navigationBar.scrollEdgeAppearance = appearance
-        } else {
-            navigationBar.barTintColor = .white
-            navigationBar.titleTextAttributes = titleTextAttributes
-        }
         
         if responds(to: #selector(getter: interactivePopGestureRecognizer)) {
             delegate = self
@@ -59,12 +30,24 @@ open class BaseNavigationController: UINavigationController {
 // MARK: - Others
 extension BaseNavigationController {
     
-    //MARK: 回调返回到上层控制器,
-    @objc open func backTapAction() {
-        if self.topViewController?.responds(to: #selector(backTapAction)) == true {
-            self.topViewController?.perform(#selector(backTapAction))
+    /// 设置导航栏
+    /// - Parameters:
+    ///   - barTintColor: 背景色
+    ///   - titleFont: 文字大小
+    ///   - titleColor: 文字颜色
+    ///   - shadowColor: 导航栏底部下划线颜色, 默认同背景色
+    public func setBarAppearance(barTintColor: UIColor = .white, titleFont: UIFont = UIFont.systemFont(ofSize: 17, weight: .medium), titleColor: UIColor = .black, shadowColor: UIColor? = nil) {
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font : titleFont]
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.backgroundColor = barTintColor
+            appearance.titleTextAttributes = titleTextAttributes
+            appearance.shadowColor = shadowColor ?? barTintColor
+            navigationBar.standardAppearance = appearance
+            navigationBar.scrollEdgeAppearance = appearance
         } else {
-            self.popViewController(animated: true)
+            navigationBar.barTintColor = barTintColor
+            navigationBar.titleTextAttributes = titleTextAttributes
         }
     }
 }
@@ -75,7 +58,6 @@ extension BaseNavigationController: UINavigationControllerDelegate {
     open func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         let rooVc = navigationController.viewControllers[0]
         if rooVc != viewController {
-            viewController.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBtnImage?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backTapAction))
             navigationBar.backIndicatorImage = UIImage()
             navigationBar.backIndicatorTransitionMaskImage = UIImage()
             // 设置系统自带的右滑手势返回
@@ -87,7 +69,8 @@ extension BaseNavigationController: UINavigationControllerDelegate {
         if responds(to: #selector(getter: interactivePopGestureRecognizer)) {
             interactivePopGestureRecognizer?.isEnabled = true
         }
-        //if rootViewController, set delegate nil /
+        
+        // if rootViewController, set delegate nil
         if children.count == 1 {
             interactivePopGestureRecognizer?.isEnabled = false
             interactivePopGestureRecognizer?.delegate = nil

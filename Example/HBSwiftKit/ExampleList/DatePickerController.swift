@@ -25,6 +25,9 @@ class DatePickerController: BaseViewController {
         super.setupUi()
 
         self.title = "日期选择器"
+        self.setBackBarButtonItem(modeStyle: .white) {
+            print("\(type(of: self)) back action ....")
+        }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .done, target: self, action: #selector(doneDateAction))
 
         view.addSubview(datePicker)
@@ -49,6 +52,14 @@ class DatePickerController: BaseViewController {
         let colorView = UIView.init(frame: CGRect(x: 50, y: 100, width: 100, height: 100))
         view.addSubview(colorView)
         colorView.setGradientColor(colors: [.red, .yellow, .blue], locations: [NSNumber(value: 0), NSNumber(value: 0.7), NSNumber(value: 0.97)], direction: .LeftTop_to_RightBottom)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            return .default
+        }
     }
 }
 

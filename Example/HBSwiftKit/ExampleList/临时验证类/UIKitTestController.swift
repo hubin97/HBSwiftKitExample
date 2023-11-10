@@ -89,9 +89,9 @@ class UIKitTestController: BaseViewController {
     }()
 
     lazy var steerPanel: SteerWheelView = {
-        let _steerPanel = SteerWheelView.init(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        let _steerPanel = SteerWheelView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
         _steerPanel.center = self.view.center
-        _steerPanel.backgroundColor = .groupTableViewBackground
+        _steerPanel.backgroundColor = .white
         //_steerPanel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(panelTap(_:))))
         return _steerPanel
     }()
@@ -112,7 +112,7 @@ class UIKitTestController: BaseViewController {
         //attributedTest()
         //starRateView()
         //showIndexListView()
-        view.backgroundColor = .groupTableViewBackground
+        view.backgroundColor = .white
         view.addSubview(bgImgView)
         view.addSubview(steerPanel)
     }
@@ -139,6 +139,13 @@ class UIKitTestController: BaseViewController {
 //        }
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            return .default
+        }
+    }
 }
 
 // https://www.hangge.com/blog/cache/detail_1675.html

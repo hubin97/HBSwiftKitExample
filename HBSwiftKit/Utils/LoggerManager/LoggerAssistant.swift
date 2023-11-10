@@ -46,7 +46,7 @@ open class LoggerAssistant: UIView {
 //MARK: - private mothods
 extension LoggerAssistant {
  
-    open func show() {
+    public func show() {
         let opBtn = UIButton.init(type: .custom)
         opBtn.frame = self.bounds
         if let img = icon {
@@ -63,7 +63,7 @@ extension LoggerAssistant {
         self.addSubview(opBtn)
     }
     
-    open func hide() {
+    public func hide() {
         self.removeFromSuperview()
     }
 }

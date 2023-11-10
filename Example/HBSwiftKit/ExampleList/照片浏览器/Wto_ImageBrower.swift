@@ -195,8 +195,8 @@ open class Wto_ImageBrowerItem: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.addSubview(subScroll)
-        self.addSubview(activityView)
+        self.contentView.addSubview(subScroll)
+        self.contentView.addSubview(activityView)
         subScroll.addSubview(iconView)
 
         subScroll.frame = self.bounds
