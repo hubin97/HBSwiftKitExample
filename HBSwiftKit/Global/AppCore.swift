@@ -77,8 +77,17 @@ public let kUUIDString = UIDevice.current.identifierForVendor?.uuidString
 /// info.plist
 public let kInfoPlist = Bundle.main.infoDictionary ?? Dictionary()
 
+/// 获取主窗口
+public let kAppKeyWindow: UIWindow? = {
+    if #available(iOS 13, *) {
+        return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
+    } else {
+        return UIApplication.shared.keyWindow
+    }
+}()
+
 /// Top of stack Vc
-public func StackTopViewController(_ vc: UIViewController? = nil) -> UIViewController? {
+public func stackTopViewController(_ vc: UIViewController? = nil) -> UIViewController? {
     //注意UIApplication.shared.keyWindow?.rootViewController有时为nil 比如当页面有菊花在转的时候，这个rootViewController就为nil
     guard let tmpRootVc = UIApplication.shared.delegate?.window??.rootViewController else { return nil }
     let rootVc = vc ?? tmpRootVc
@@ -89,11 +98,11 @@ public func StackTopViewController(_ vc: UIViewController? = nil) -> UIViewContr
     //presentedViewController 和presentingViewController
     //当A弹出B //A.presentedViewController=B //B.presentingViewController=A
     if rootVc.presentedViewController != nil {
-        currentVc = StackTopViewController(rootVc.presentedViewController)
+        currentVc = stackTopViewController(rootVc.presentedViewController)
     } else if (rootVc.isKind(of: UITabBarController.classForCoder())) {
-        currentVc = StackTopViewController((rootVc as! UITabBarController).selectedViewController)
+        currentVc = stackTopViewController((rootVc as! UITabBarController).selectedViewController)
     } else if (rootVc.isKind(of: UINavigationController.classForCoder())) {
-        currentVc = StackTopViewController((rootVc as! UINavigationController).visibleViewController)
+        currentVc = stackTopViewController((rootVc as! UINavigationController).visibleViewController)
     } else {
         currentVc = rootVc
     }

@@ -47,7 +47,6 @@ public class NetworkLoadingPlugin: PluginType {
 
     public func willSend(_ request: RequestType, target: TargetType) {
         DispatchQueue.main.async {
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             // hud loading
             SVProgressHUD.show(withStatus: self.content)
             SVProgressHUD.setMinimumSize(self.hudSize)
@@ -57,13 +56,25 @@ public class NetworkLoadingPlugin: PluginType {
             SVProgressHUD.setForegroundColor(self.fgColor ?? .black)
             // 是否允许hud底下交互
             SVProgressHUD.setDefaultMaskType(self.isEnable ? .none: .clear)
+            
+            guard #available(iOS 13.0, *) else {
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = true
+                }
+                return
+            }
         }
     }
 
     public func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         DispatchQueue.main.async {
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             SVProgressHUD.dismiss()
+            guard #available(iOS 13.0, *) else {
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
+                return
+            }
         }
     }
 }

@@ -125,7 +125,7 @@ extension Extension_Image {
             //activityVc.excludedActivityTypes = [.postToFacebook, .postToTwitter, .postToWeibo, .message, .mail, .print, .copyToPasteboard, .assignToContact, .saveToCameraRoll, .addToReadingList, .postToFlickr, .postToVimeo, .postToTencentWeibo, .airDrop, .openInIBooks]
             activityVc.excludedActivityTypes = excludedTypes
         }
-        StackTopViewController()?.present(activityVc, animated: true, completion: nil)
+        stackTopViewController()?.present(activityVc, animated: true, completion: nil)
         activityVc.completionWithItemsHandler = {(activityType, completed, items, error) -> Void in
             if completed == true {
                 print("分享成功")

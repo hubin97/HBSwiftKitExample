@@ -5,6 +5,7 @@
 //  Created by Hubin_Huang on 2021/4/22.
 //  Copyright © 2020 Wingto. All rights reserved.
 
+import UIKit
 import Foundation
 import CoreLocation
 import AVFoundation
@@ -13,6 +14,7 @@ import CoreBluetooth
 //iOS9新增蜂窝网络权限授权 CoreTelephony/CTCellularData
 import CoreTelephony
 import Intents
+import EventKit
 
 /**
  <!-- 相册 -->
@@ -51,6 +53,8 @@ import Intents
  <!-- 蓝牙 -->
  <key>NSBluetoothPeripheralUsageDescription</key>
  <string>App需要您的同意,才能访问蓝牙</string>
+ <key>NSBluetoothAlwaysUsageDescription</key>
+ <string>App需要您的同意,才能访问蓝牙</string>
  <!-- 媒体资料库 -->
  <key>NSAppleMusicUsageDescription</key>
  <string>App需要您的同意,才能访问媒体资料库</string>
@@ -59,20 +63,26 @@ import Intents
  <string>App需要您的同意,才能使用语音识别</string>
  <key>NSSiriUsageDescription</key>
  <string>App需要您的同意,才能使用Siri</string>
+ 
+
+ Privacy - Calendars Usage Description
+ App需要您的同意,才能访问你的日历
+ Privacy - Reminders Usage Description
+ App需要您的同意,才能访问你的提醒事项
  ————————————————
  版权声明：本文为CSDN博主「夕阳下的守望者」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
  原文链接：https://blog.csdn.net/wgl_happy/article/details/53810647
  https://www.jianshu.com/p/0902b2b0b3e3?from=singlemessage
  */
-//MARK: - global var and methods
+// MARK: - global var and methods
 // !!!: 务必考虑回调内容是否需要主线程处理
 public typealias AuthStatus = AuthorizationStatus
-public typealias AuthsBlock = (_ isEnable: Bool?) -> Void
+public typealias AuthsBlock = (_ granted: Bool?) -> Void
 
 /// 唤起定位权限弹框
-public protocol AuthStatusLocationDelegate {
+public protocol AuthStatusLocationDelegate: AnyObject {
     //FIXME: 注意locManager必须由外部全局持有, 否则弹框会一闪而过, 无法交互点击
-    var locManager: CLLocationManager { set get }
+    var locManager: CLLocationManager { get set }
     func wakeupAuthAlert()
 }
 
@@ -87,12 +97,22 @@ extension AuthStatusLocationDelegate {
 public class AuthorizationStatus: NSObject {
 
     public static let shared = AuthStatus()
+        
+    /// 获取系统蓝牙状态回调,
+    var systemBTStateBlock: ((_ state: CBManagerState) -> Void)?
+    /// 系统蓝牙设备管理对象
+    lazy var centralManager: CBCentralManager = {
+        // CBCentralManagerScanOptionAllowDuplicatesKey值为 No，表示不重复扫描已发现的设备
+        let options = [CBCentralManagerOptionShowPowerAlertKey: "YES", CBCentralManagerScanOptionAllowDuplicatesKey: "NO"]
+        let centralManager = CBCentralManager(delegate: self, queue: nil, options: options)
+        return centralManager
+    }()
     
     /// 跳转到系统设置页
     public func openSettings() {
         guard let setUrl = URL.init(string: UIApplication.openSettingsURLString) else { return }
         if UIApplication.shared.canOpenURL(setUrl) {
-            UIApplication.shared.openURL(setUrl)
+            UIApplication.shared.open(setUrl)
         }
     }
     
@@ -103,7 +123,7 @@ public class AuthorizationStatus: NSObject {
                 if settings.authorizationStatus == .authorized {
                     return authsBlock(true)
                 }
-                UNUserNotificationCenter.current().requestAuthorization(options: UNAuthorizationOptions.init(rawValue: UNAuthorizationOptions.alert.rawValue | UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.sound.rawValue)) { (granted, error) in
+                UNUserNotificationCenter.current().requestAuthorization(options: UNAuthorizationOptions.init(rawValue: UNAuthorizationOptions.alert.rawValue | UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.sound.rawValue)) { (granted, _) in
                     //print("APNs授权\(granted ? "成功": "失败")")
                     return authsBlock(granted)
                 }
@@ -130,8 +150,11 @@ public class AuthorizationStatus: NSObject {
      <!-- 始终访问位置 -->
      <key>NSLocationAlwaysUsageDescription</key>
      <string>App需要您的同意,才能始终访问位置</string>
+  
+     KEY: NSLocationAlwaysAndWhenInUseUsageDescription
      
-     Error: This app has attempted to access privacy-sensitive data without a usage description. The app's Info.plist must contain an “NSLocationWhenInUseUsageDescription” key with a string value explaining to the user how the app uses this data
+     This app has attempted to access privacy-sensitive data without a usage description. The app's Info.plist must contain both “NSLocationAlwaysAndWhenInUseUsageDescription” and “NSLocationWhenInUseUsageDescription” keys with string values explaining to the user how the app uses this data
+     
      */
     /// 返回 nil, 表示未选定, 
     public static func locationServices(authsBlock: AuthsBlock) {
@@ -159,7 +182,7 @@ public class AuthorizationStatus: NSObject {
         if authStatus == .authorized {
             return authsBlock(true)
         } else if authStatus == .notDetermined {
-            AVCaptureDevice.requestAccess(for: .video) { (granted) in
+            return AVCaptureDevice.requestAccess(for: .video) { (granted) in
                 return authsBlock(granted)
             }
         }
@@ -181,7 +204,7 @@ public class AuthorizationStatus: NSObject {
         if authStatus == .authorized {
             return authsBlock(true)
         } else if authStatus == .notDetermined {
-            PHPhotoLibrary.requestAuthorization { (newStatus) in
+            return PHPhotoLibrary.requestAuthorization { (newStatus) in
                 return authsBlock(newStatus == .authorized)
             }
         }
@@ -205,54 +228,6 @@ public class AuthorizationStatus: NSObject {
             }
         }
         return authsBlock(false)
-    }
-    
-    /// 蓝牙权限
-    /**
-     <!-- 蓝牙 -->
-     <key>NSBluetoothPeripheralUsageDescription</key>
-     <string>App需要您的同意,才能访问蓝牙</string>
-     */
-    public static func bleService(authsBlock: @escaping AuthsBlock) {
-        if #available(iOS 13.1, *) {
-            let authStatus: CBManagerAuthorization = CBManager.authorization
-            if authStatus == .allowedAlways {
-                return authsBlock(true)
-            }
-            AuthStatus.shared.launchBleAlert()
-            return authsBlock(false)
-        } else {
-            // Fallback on earlier versions
-            let authStatus: CBPeripheralManagerAuthorizationStatus = CBPeripheralManager.authorizationStatus()
-            if authStatus == .authorized {
-                return authsBlock(true)
-            }
-            //AuthStatus.shared.launchBleAlert()
-            return authsBlock(false)
-        }
-    }
-    /// 呼出权限提醒弹框(此权限与蓝牙功能开启关闭无关)
-    /// 系统蓝牙设备管理对象，可以把他理解为主设备，通过他，可以去扫描和链接外设
-    fileprivate lazy var centralManager: CBCentralManager = {
-        // CBCentralManagerScanOptionAllowDuplicatesKey值为 No，表示不重复扫描已发现的设备
-        let options = [CBCentralManagerOptionShowPowerAlertKey: "YES", CBCentralManagerScanOptionAllowDuplicatesKey: "NO"]
-        let centralManager = CBCentralManager(delegate: self, queue: nil, options: options)
-        return centralManager
-    }()
-    func launchBleAlert() {
-        guard centralManager.state != .poweredOn else { return }
-        if centralManager.state == .unsupported {
-            print("unsupported ble")
-        }
-        if let productName = kInfoPlist.value(forKey: "CFBundleName") as? String,
-           let message = kInfoPlist.value(forKey: "NSBluetoothPeripheralUsageDescription") as? String {
-            let alert = AlertBlockView.init(title: "\"\(productName)\"想要使用蓝牙", message: message)
-            alert.addAction("忽略", .cancel, tapAction: nil)
-            alert.addAction("去设置") { [weak self] _ in
-                self?.openSettings()
-            }
-            alert.show()
-        }
     }
     
     /// 应用内使用数据权限, 蜂窝/WLAN网络对应CTCellularData值如下
@@ -284,19 +259,36 @@ public class AuthorizationStatus: NSObject {
             }
         }
     }
+    
+    //    Privacy - Calendars Usage Description
+    //    App需要您的同意,才能访问你的日历
+    public static func calendarService(authsBlock: @escaping AuthsBlock) {
+        // let auth = EKEventStore.authorizationStatus(for: .event)
+        return EKEventStore().requestAccess(to: .event) { granted, _ in
+            return authsBlock(granted)
+        }
+    }
+    
+    //    Privacy - Reminders Usage Description
+    //    App需要您的同意,才能访问你的提醒事项
+    public static func reminderService(authsBlock: @escaping AuthsBlock) {
+        return EKEventStore().requestAccess(to: .reminder) { granted, _ in
+            return authsBlock(granted)
+        }
+    }
 }
 
-//MARK: - private mothods
+// MARK: - private mothods
 extension AuthorizationStatus {
     
 }
 
-//MARK: - call backs
+// MARK: - call backs
 extension AuthorizationStatus {
     
 }
 
-//MARK: - delegate or data source
+// MARK: - delegate or data source
 //extension AuthorizationStatus: AuthStatusLocationDelegate {
 //    /// 辅助弹框提示
 //    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -307,14 +299,79 @@ extension AuthorizationStatus {
 //    }
 //}
 
+/// 蓝牙权限
+/**
+ <!-- 蓝牙 -->
+ <key>NSBluetoothPeripheralUsageDescription</key>
+ <string>App需要您的同意,才能访问蓝牙</string>
+ <!-- 上面权限 官方 API提示iOS13已废弃 -->
+ <key>NSBluetoothAlwaysUsageDescription</key>
+ <string>App需要您的同意,才能访问蓝牙</string>
+ */
+// MARK: - 蓝牙权限
+/// 手机系统蓝牙是否打开校验
 extension AuthorizationStatus: CBCentralManagerDelegate {
-    /// 辅助弹框提示
+    
+    /// CBCentralManagerDelegate
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state != .poweredOn && central.state != .unsupported {
-            print("central.state:\(central.state)")
+        //SVProgressHUD.dismiss()
+        systemBTStateBlock?(central.state)
+    }
+    
+    /// 获取系统蓝牙是否打开
+    /// 代理方式获取
+    /// - Parameter authsBlock: 异步返回状态
+    public static func systemBleStateUpdate(authsBlock: @escaping ((_ state: CBManagerState) -> Void)) {
+        let central = AuthStatus.shared.centralManager
+        if central.state != .unknown {
+            authsBlock(central.state)
+            return
+        }
+        AuthStatus.shared.systemBTStateBlock = authsBlock
+    }
+    
+    /// 使用此方法, 后续直接取AuthStatus.shared.centralManager.state去判断
+    /// - Parameter showHUD:  unkown 时间比较短暂, 提前调用即可
+    @available(iOS, deprecated: 13.0, message: "unkown 时间比较短暂, 提前调用即可, 使用此方法, 后续直接取AuthStatus.shared.centralManager.state去判断")
+    public static func systemBleStateUpdate(_ showHUD: Bool = false) {
+        let central = AuthStatus.shared.centralManager
+        if showHUD && central.state == .unknown {
+            //SVProgressHUD.show(withStatus: "请稍后...")
+            //TODO:
+            // AuthStatus.shared.systemBTStateBlock?(central.state)
         }
     }
+    
+    //!!!: 必要时 使用 systemBleState 方法 可全替代
+    //!!!: 此方法只能判断当前应用内是否授权, 打开蓝牙服务, 需要进一步判断手机是否打开蓝牙(此时必须使用代理方式获取)
+    public static func bleService(authsBlock: @escaping AuthsBlock) {
+        if #available(iOS 13.1, *) {
+            let authStatus = CBManager.authorization
+            if authStatus == .allowedAlways {
+                return authsBlock(true)
+            }
+            return authsBlock(false)
+        } else {
+            let authStatus = CBPeripheralManager.authorizationStatus()
+            if authStatus == .authorized {
+                return authsBlock(true)
+            }
+            return authsBlock(false)
+        }
+    }
+
+    func authorizedACK() {
+        if let productName = kInfoPlist.value(forKey: "CFBundleName") as? String,
+           let message = kInfoPlist.value(forKey: "NSBluetoothPeripheralUsageDescription") as? String {
+            let alert = AlertBlockView.init(title: "\"\(productName)\"想要使用蓝牙", message: message)
+            alert.addAction("忽略", .cancel, tapAction: nil)
+            alert.addAction("去设置") { [weak self] _ in
+                self?.openSettings()
+            }
+            alert.show()
+        }
+    }
+
 }
 
-
-//MARK: - other classes
+// MARK: - other Utils

@@ -667,7 +667,7 @@ public class AlertBlockView: UIViewController {
     public func show(_ duration: Double = 2) {
         guard let alertVc = alertVc else { return }
         DispatchQueue.main.async {
-            StackTopViewController()?.present(alertVc, animated: true, completion: nil)
+            stackTopViewController()?.present(alertVc, animated: true, completion: nil)
             if self.alertActions.count == 0 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
                     self.hide()
