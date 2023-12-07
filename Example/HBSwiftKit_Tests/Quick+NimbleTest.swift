@@ -13,8 +13,6 @@ import Nimble
 @testable import HBSwiftKit_Example
 @testable import HBSwiftKit
 
-
-
 class ArithmeticTest: QuickSpec {
     override func spec() {
         fdescribe("DesignModeTest") {
@@ -459,3 +457,30 @@ class StringTest: QuickSpec {
         }
     }
 }
+
+
+class DateStringTest: QuickSpec {
+    override func spec() {
+        fdescribe("DateStringTest") {
+            
+    //        “America/New_York” ：纽约时间
+    //        “Europe/London” ：伦敦时间
+    //        “Australia/Sydney” ：悉尼时间
+            ///
+            let string1 = Date().format()
+            let string2 = Date().format(identifier: "America/New_York")
+            let string3 = Date().format(identifier: "Europe/London")
+            print("s1: \(string1),\ns2: \(string2),\ns3: \(string3)")
+            
+            
+            // xxx
+            let time = "2023-12-07 22:03:31"
+            let date1 = time.format()
+            let date2 = time.format(identifier: "Asia/Shanghai")
+            let date3 = time.format(identifier: "UTC")  // ✅
+            let date4 = time.format(identifier: "America/New_York")
+            print("date1: \(date1),\ndate2: \(date2),\ndate3: \(date3),\ndate4: \(date4),")
+        }
+    }
+}
+

@@ -52,7 +52,7 @@ public class NetworkLoadingPlugin: PluginType {
             SVProgressHUD.setMinimumSize(self.hudSize)
             // 自定义hud背景色
             SVProgressHUD.setDefaultStyle(.custom)
-            SVProgressHUD.setBackgroundColor(self.bgColor ?? .groupTableViewBackground)
+            SVProgressHUD.setBackgroundColor(self.bgColor ?? .white)
             SVProgressHUD.setForegroundColor(self.fgColor ?? .black)
             // 是否允许hud底下交互
             SVProgressHUD.setDefaultMaskType(self.isEnable ? .none: .clear)

@@ -76,6 +76,10 @@ public let kUUIDString = UIDevice.current.identifierForVendor?.uuidString
 
 /// info.plist
 public let kInfoPlist = Bundle.main.infoDictionary ?? Dictionary()
+/// 版本号（内部标示）
+public let kAppVersion = kInfoPlist["CFBundleShortVersionString"] as? String
+/// Build号
+public let kAppBuildVersion = kInfoPlist["CFBundleVersion"] as? String
 
 /// 获取主窗口
 public let kAppKeyWindow: UIWindow? = {
@@ -89,19 +93,22 @@ public let kAppKeyWindow: UIWindow? = {
 /// Top of stack Vc
 public func stackTopViewController(_ vc: UIViewController? = nil) -> UIViewController? {
     //注意UIApplication.shared.keyWindow?.rootViewController有时为nil 比如当页面有菊花在转的时候，这个rootViewController就为nil
-    guard let tmpRootVc = UIApplication.shared.delegate?.window??.rootViewController else { return nil }
-    let rootVc = vc ?? tmpRootVc
-    //    while rootVc?.presentedViewController != nil {
-    //        rootVc = rootVc?.presentedViewController
-    //    }
+    //guard let tmpRootVc = kAppKeyWindow?.rootViewController else { return nil }
+    var rootVc = vc ?? kAppKeyWindow?.rootViewController
+   
+    /// 模态遍历
+    while rootVc?.presentedViewController != nil {
+        rootVc = rootVc?.presentedViewController
+    }
+    
     var currentVc: UIViewController?
     //presentedViewController 和presentingViewController
     //当A弹出B //A.presentedViewController=B //B.presentingViewController=A
-    if rootVc.presentedViewController != nil {
-        currentVc = stackTopViewController(rootVc.presentedViewController)
-    } else if (rootVc.isKind(of: UITabBarController.classForCoder())) {
+    if rootVc?.presentedViewController != nil {
+        currentVc = stackTopViewController(rootVc?.presentedViewController)
+    } else if (rootVc?.isKind(of: UITabBarController.self) == true) {
         currentVc = stackTopViewController((rootVc as! UITabBarController).selectedViewController)
-    } else if (rootVc.isKind(of: UINavigationController.classForCoder())) {
+    } else if (rootVc?.isKind(of: UINavigationController.self) == true) {
         currentVc = stackTopViewController((rootVc as! UINavigationController).visibleViewController)
     } else {
         currentVc = rootVc

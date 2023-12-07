@@ -45,26 +45,31 @@ extension Extension_Date {
         return Int(CLongLong(round(self.timeIntervalSince1970 * 1000)))
     }
 
-    /// 转指定格式字符串 (注意: 时区为系统时区)
+    /// 转指定格式字符串 (注意: 时区地区跟随系统)
     /// - Parameter format: 格式: yyyy-MM-dd HH:mm:ss / yyyy-MM-dd ...
     /// - Returns: 字符串
     public func format(with format: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let dateFomatter = DateFormatter()
         dateFomatter.dateFormat = format
-        dateFomatter.timeZone = TimeZone.current
+        dateFomatter.timeZone = TimeZone.autoupdatingCurrent
         return dateFomatter.string(from: self)
     }
 
-    /// date to string
+    /// 转指定格式字符串 `(注意此方法不常用)`
+    ///    “GMT”：格林威治标准时间
+    ///    “Asia/Shanghai”：北京时间  东8区
+    ///    “America/New_York”：纽约时间  西5区
+    ///    “Europe/London”：伦敦时间   0
+    ///    “Australia/Sydney”：悉尼时间
     /// - Parameters:
-    ///   - identifier: 指定时区
-    ///   - dateFormat: 格式
+    ///   - format: 格式
+    ///   - identifier: 指定时区标识,
     /// - Returns: String
-    public func toString(identifier: String = "zh_CN", dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale.init(identifier: identifier)
-        formatter.dateFormat = dateFormat
-        return formatter.string(from: self)
+    public func format(with format: String = "yyyy-MM-dd HH:mm:ss", identifier: String) -> String {
+        let dateFomatter = DateFormatter()
+        dateFomatter.timeZone = TimeZone.init(identifier: identifier)
+        dateFomatter.dateFormat = format
+        return dateFomatter.string(from: self)
     }
 }
 

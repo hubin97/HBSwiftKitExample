@@ -70,18 +70,44 @@ extension Extension_String {
     }
     
     //MARK: - 字符转日期
-    /// string to date
+    /// 转指定格式Date (注意: 时区跟随系统)
     /// - Parameters:
-    ///   - identifier: 时区
-    ///   - dateFormat: 格式
-    /// - Returns: Date?
-    public func toDate(identifier: String = "zh_CN", dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Date {
-        let formatter = DateFormatter()
-        formatter.locale = Locale.init(identifier: identifier)
-        formatter.dateFormat = dateFormat
-        guard let date = formatter.date(from: self) else {
-            print("toDate转换失败, 取当前时间")
-            return formatter.date(from: formatter.string(from: Date()))!
+    ///   - format: 格式,` 一般情况都是使用 UIDatePicker的 setDate(:)方法, 然后这里面, 系统已经帮忙处理了`
+    /// - Returns: Date
+    public func format(with format: String = "yyyy-MM-dd HH:mm:ss") -> Date {
+        let dateFomatter = DateFormatter()
+        dateFomatter.dateFormat = format
+        dateFomatter.timeZone = TimeZone.autoupdatingCurrent
+        guard let date = dateFomatter.date(from: self) else {
+            print(">> Date 转换失败, 取当前时间")
+            return dateFomatter.date(from: dateFomatter.string(from: Date()))!
+        }
+        return date
+    }
+    
+    /// 转指定格式Date  `(注意此方法不常用)`
+    ///    “GMT”：格林威治标准时间
+    ///    “Asia/Shanghai”：北京时间
+    ///    “America/New_York”：纽约时间
+    ///    “Europe/London”：伦敦时间
+    ///    “Australia/Sydney”：悉尼时间
+    ///    
+    ///    UTC是协调世界时（Coordinated Universal Time）的缩写。它是一种世界统一的时间标准，
+    ///    通过对格林威治标准时间（GMT）进行微调，以确保全球各地的时间一致性。
+    ///    UTC不受夏令时的影响，始终保持稳定。其他时区则以UTC为基准进行计算和调整。
+    ///    例如，UTC-5表示比协调世界时早5个小时，而UTC+1表示比协调世界时晚1个小时。
+    ///
+    /// - Parameters:
+    ///   - format: 格式
+    ///   - identifier: 指定时区标识  `系统默认字符串为UTC`, 默认使用 UTC 即可
+    /// - Returns: Date
+    public func format(with format: String = "yyyy-MM-dd HH:mm:ss", identifier: String = "UTC") -> Date {
+        let dateFomatter = DateFormatter()
+        dateFomatter.dateFormat = format
+        dateFomatter.timeZone = TimeZone.init(identifier: identifier)
+        guard let date = dateFomatter.date(from: self) else {
+            print(">> Date 转换失败, 取当前时间")
+            return dateFomatter.date(from: dateFomatter.string(from: Date()))!
         }
         return date
     }
