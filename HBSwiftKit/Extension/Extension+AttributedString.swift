@@ -15,7 +15,7 @@ typealias Extension_AttributedString = NSMutableAttributedString
 extension Extension_AttributedString {
 
     /// 获取范围
-    var allRange: NSRange {
+    public var allRange: NSRange {
         return NSMakeRange(0, length)
     }
 

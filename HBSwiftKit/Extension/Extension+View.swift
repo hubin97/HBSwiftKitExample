@@ -380,12 +380,26 @@ extension Extension_View {
     /// - Parameters:
     ///   - img: 模糊图片
     ///   - radius: 模糊程度
-    public func addImageBlur(img: UIImage?, radius: Float = 5) {
+    public func addImageBlur(img: UIImage?, insertSubview atIndex: Int, radius: Float = 5, contentMode: UIView.ContentMode = .scaleToFill) {
         if let image = ciFilter(img, inputRadius: radius) {
             let imageView = UIImageView.init(image: image)
             imageView.frame = self.bounds;
-            imageView.contentMode = .scaleAspectFit
-            addSubview(imageView)
+            imageView.contentMode = contentMode
+            //addSubview(imageView)
+            self.insertSubview(imageView, at: atIndex)
+        }
+    }
+    
+    public func addImageBlur(img: UIImage?, belowSubview: UIView?, radius: Float = 5, contentMode: UIView.ContentMode = .scaleToFill) {
+        if let image = ciFilter(img, inputRadius: radius) {
+            let imageView = UIImageView.init(image: image)
+            imageView.frame = self.bounds;
+            imageView.contentMode = contentMode
+            if let view = belowSubview {
+                self.insertSubview(imageView, belowSubview: view)
+            } else {
+                self.addSubview(imageView)
+            }
         }
     }
     
