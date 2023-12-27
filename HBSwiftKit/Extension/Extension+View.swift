@@ -380,27 +380,32 @@ extension Extension_View {
     /// - Parameters:
     ///   - img: 模糊图片
     ///   - radius: 模糊程度
-    public func addImageBlur(img: UIImage?, insertSubview atIndex: Int, radius: Float = 5, contentMode: UIView.ContentMode = .scaleToFill) {
+    public func addImageBlur(img: UIImage?, insertSubview atIndex: Int, radius: Float = 5, contentMode: UIView.ContentMode = .scaleAspectFill) -> UIView? {
         if let image = ciFilter(img, inputRadius: radius) {
-            let imageView = UIImageView.init(image: image)
+            let imageView = UIImageView(image: image)
             imageView.frame = self.bounds;
             imageView.contentMode = contentMode
-            //addSubview(imageView)
+            self.layer.masksToBounds = true
             self.insertSubview(imageView, at: atIndex)
+            return imageView
         }
+        return nil
     }
     
-    public func addImageBlur(img: UIImage?, belowSubview: UIView?, radius: Float = 5, contentMode: UIView.ContentMode = .scaleToFill) {
+    public func addImageBlur(img: UIImage?, belowSubview: UIView?, radius: Float = 5, contentMode: UIView.ContentMode = .scaleAspectFill) -> UIView? {
         if let image = ciFilter(img, inputRadius: radius) {
-            let imageView = UIImageView.init(image: image)
+            let imageView = UIImageView(image: image)
             imageView.frame = self.bounds;
             imageView.contentMode = contentMode
+            self.layer.masksToBounds = true
             if let view = belowSubview {
                 self.insertSubview(imageView, belowSubview: view)
             } else {
                 self.addSubview(imageView)
             }
+            return imageView
         }
+        return nil
     }
     
     // UIImage+ImageEffects  // 此方法色值有问题
