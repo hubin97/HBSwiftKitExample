@@ -56,7 +56,7 @@ extension VoiceShortcutManager {
         let addShortcutVc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
         addShortcutVc.delegate = self
         addShortcutVc.modalPresentationStyle = .fullScreen
-        StackTopViewController()?.present(addShortcutVc, animated: true)
+        stackTopViewController()?.present(addShortcutVc, animated: true)
     }
 
     /// 编辑指令
@@ -65,7 +65,7 @@ extension VoiceShortcutManager {
         let editShortcutVc = INUIEditVoiceShortcutViewController.init(voiceShortcut: vShortcut)
         editShortcutVc.delegate = self
         editShortcutVc.modalPresentationStyle = .fullScreen
-        StackTopViewController()?.present(editShortcutVc, animated: true)
+        stackTopViewController()?.present(editShortcutVc, animated: true)
     }
 
     // MARK: 捐赠方式调用

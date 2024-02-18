@@ -48,7 +48,7 @@ extension AppDelegate {
         /// 捷径, 打开App跳转到需要的业务控制器页
         if userActivityType == NSStringFromClass(HBEventIntent.self) {
             print("HBEventIntent---")
-            StackTopViewController()?.navigationController?.pushViewController(BlueToothController(), animated: true)
+            stackTopViewController()?.navigationController?.pushViewController(BlueToothController(), animated: true)
         }
         return true
     }
