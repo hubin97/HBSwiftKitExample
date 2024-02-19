@@ -20,7 +20,8 @@ class ViewController: BaseViewController {
                      DemoRowModel(title: "标题轮播页", dclass: EasyAdScrollController()),
                      DemoRowModel(title: "地图定位页", dclass: MapLocationController()),
                      DemoRowModel(title: "视频剪辑页", dclass: VideoTestController()),
-                     DemoRowModel(title: "视频播放页", dclass: VideoPlayController())]
+                     DemoRowModel(title: "视频播放页", dclass: VideoPlayController()),
+                     DemoRowModel(title: "二维码扫描", dclass: ScanWechatController())]
         return datas
     }()
 

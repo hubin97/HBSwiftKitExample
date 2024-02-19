@@ -9,26 +9,26 @@ PODS:
     - CocoaLumberjack/Core
   - FLEX (4.6.1)
   - GDPerformanceView-Swift (2.1.1)
-  - HBSwiftKit (0.4.0):
-    - HBSwiftKit/Base (= 0.4.0)
-    - HBSwiftKit/Extension (= 0.4.0)
-    - HBSwiftKit/Global (= 0.4.0)
-    - HBSwiftKit/Network (= 0.4.0)
-    - HBSwiftKit/UIKit (= 0.4.0)
-    - HBSwiftKit/Utils (= 0.4.0)
-  - HBSwiftKit/Base (0.4.0):
+  - HBSwiftKit (0.4.1):
+    - HBSwiftKit/Base (= 0.4.1)
+    - HBSwiftKit/Extension (= 0.4.1)
+    - HBSwiftKit/Global (= 0.4.1)
+    - HBSwiftKit/Network (= 0.4.1)
+    - HBSwiftKit/UIKit (= 0.4.1)
+    - HBSwiftKit/Utils (= 0.4.1)
+  - HBSwiftKit/Base (0.4.1):
     - HBSwiftKit/Extension
-  - HBSwiftKit/Extension (0.4.0):
+  - HBSwiftKit/Extension (0.4.1):
     - HBSwiftKit/Global
-  - HBSwiftKit/Global (0.4.0)
-  - HBSwiftKit/Network (0.4.0):
+  - HBSwiftKit/Global (0.4.1)
+  - HBSwiftKit/Network (0.4.1):
     - HBSwiftKit/UIKit
-  - HBSwiftKit/UIKit (0.4.0):
+  - HBSwiftKit/UIKit (0.4.1):
     - HBSwiftKit/Base
-  - HBSwiftKit/Utils (0.4.0):
+  - HBSwiftKit/Utils (0.4.1):
     - HBSwiftKit/UIKit
-    - HBSwiftKit/Utils/AuthStatus (= 0.4.0)
-  - HBSwiftKit/Utils/AuthStatus (0.4.0):
+    - HBSwiftKit/Utils/AuthStatus (= 0.4.1)
+  - HBSwiftKit/Utils/AuthStatus (0.4.1):
     - HBSwiftKit/UIKit
   - Kingfisher (4.10.1)
   - Moya (15.0.0):
@@ -105,7 +105,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   FLEX: bbc55d197f87d7cde2454c3981aa47069b694144
   GDPerformanceView-Swift: 22d964fe40b19e3d914dba2586237d064de8fd77
-  HBSwiftKit: c426c3793c29a45a2ed6825252a998b11b118911
+  HBSwiftKit: 2cb10ef7dc10c8e003dc758a1f7268704f207c04
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
@@ -120,6 +120,6 @@ SPEC CHECKSUMS:
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 8ed54942f564682842d4fabed99133bf33cf54dd
+PODFILE CHECKSUM: 042e39c52c0150dce9806343b99d3386050167f2
 
-COCOAPODS: 1.14.2
+COCOAPODS: 1.15.0

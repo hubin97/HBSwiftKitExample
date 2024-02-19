@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "opencv2/opencv2.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OpenCVWrapper : NSObject
 
-
++ (Mat *)imageToMat: (UIImage *)image;
 
 @end
 

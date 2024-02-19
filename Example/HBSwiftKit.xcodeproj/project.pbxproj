@@ -11,6 +11,15 @@
 		184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */; };
 		184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */; };
 		18B671992B3BBFC600793476 /* Extension+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B671982B3BBFC600793476 /* Extension+TextField.swift */; };
+		18B8E8EB2B83044B009EA2F0 /* ReadMe.md in Resources */ = {isa = PBXBuildFile; fileRef = 18B8E8DF2B83044B009EA2F0 /* ReadMe.md */; };
+		18B8E8EC2B83044B009EA2F0 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B8E8E12B83044B009EA2F0 /* opencv2.framework */; };
+		18B8E8ED2B83044B009EA2F0 /* wechat_qrcode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18B8E8E22B83044B009EA2F0 /* wechat_qrcode.bundle */; };
+		18B8E8EE2B83044B009EA2F0 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18B8E8E32B83044B009EA2F0 /* OpenCVWrapper.mm */; };
+		18B8E8EF2B83044B009EA2F0 /* QRScanerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8E8E52B83044B009EA2F0 /* QRScanerView.swift */; };
+		18B8E8F02B83044B009EA2F0 /* ScanWechatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8E8E62B83044B009EA2F0 /* ScanWechatController.swift */; };
+		18B8E8F22B83044B009EA2F0 /* QRScanerCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8E8E82B83044B009EA2F0 /* QRScanerCore.swift */; };
+		18B8E8F32B83044B009EA2F0 /* ScanCMSampleBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8E8E92B83044B009EA2F0 /* ScanCMSampleBuffer.swift */; };
+		18B8E8F42B83044B009EA2F0 /* qrcodetest.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B8E8EA2B83044B009EA2F0 /* qrcodetest.png */; };
 		1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */; };
 		4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207008E2A4D7D1900039415 /* BLEAdapter.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -51,7 +60,6 @@
 		B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E3726F087FA00539866 /* VideoTimeView.swift */; };
 		B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5825E3C26F0884F00539866 /* VideoToolView.swift */; };
 		B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5832B1F270FD6EE0084C78E /* VideoTestController.swift */; };
-		B58F80AE273CB51500C778D5 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = B58F80AC273CB51500C778D5 /* OpenCVWrapper.mm */; };
 		B595A8CC27C866EA007EF16E /* RegexHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595A8CB27C866EA007EF16E /* RegexHelper.swift */; };
 		B595A8D327CCB07F007EF16E /* LoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595A8D027CCB07E007EF16E /* LoggerManager.swift */; };
 		B595A8D427CCB07F007EF16E /* LoggerAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595A8D127CCB07E007EF16E /* LoggerAssistant.swift */; };
@@ -110,6 +118,17 @@
 		184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCDataPicker.swift; sourceTree = "<group>"; };
 		184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTDatePicker.swift; sourceTree = "<group>"; };
 		18B671982B3BBFC600793476 /* Extension+TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+TextField.swift"; sourceTree = "<group>"; };
+		18B8E8DF2B83044B009EA2F0 /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
+		18B8E8E02B83044B009EA2F0 /* OpenCVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
+		18B8E8E12B83044B009EA2F0 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		18B8E8E22B83044B009EA2F0 /* wechat_qrcode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = wechat_qrcode.bundle; sourceTree = "<group>"; };
+		18B8E8E32B83044B009EA2F0 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
+		18B8E8E52B83044B009EA2F0 /* QRScanerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScanerView.swift; sourceTree = "<group>"; };
+		18B8E8E62B83044B009EA2F0 /* ScanWechatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanWechatController.swift; sourceTree = "<group>"; };
+		18B8E8E72B83044B009EA2F0 /* ScanHWSMController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanHWSMController.swift; sourceTree = "<group>"; };
+		18B8E8E82B83044B009EA2F0 /* QRScanerCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScanerCore.swift; sourceTree = "<group>"; };
+		18B8E8E92B83044B009EA2F0 /* ScanCMSampleBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanCMSampleBuffer.swift; sourceTree = "<group>"; };
+		18B8E8EA2B83044B009EA2F0 /* qrcodetest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qrcodetest.png; sourceTree = "<group>"; };
 		18C2FE002AFC8D0C00AB8450 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNoti.swift; sourceTree = "<group>"; };
 		4207008E2A4D7D1900039415 /* BLEAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAdapter.swift; sourceTree = "<group>"; };
@@ -161,8 +180,6 @@
 		B5825E3C26F0884F00539866 /* VideoToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoToolView.swift; sourceTree = "<group>"; };
 		B5832B1F270FD6EE0084C78E /* VideoTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTestController.swift; sourceTree = "<group>"; };
 		B58F80AB273CB4ED00C778D5 /* wechat_qrcode.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = wechat_qrcode.zip; sourceTree = "<group>"; };
-		B58F80AC273CB51500C778D5 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
-		B58F80AD273CB51500C778D5 /* OpenCVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 		B595A8CB27C866EA007EF16E /* RegexHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexHelper.swift; sourceTree = "<group>"; };
 		B595A8D027CCB07E007EF16E /* LoggerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerManager.swift; sourceTree = "<group>"; };
 		B595A8D127CCB07E007EF16E /* LoggerAssistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerAssistant.swift; sourceTree = "<group>"; };
@@ -213,6 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18B8E8EC2B83044B009EA2F0 /* opencv2.framework in Frameworks */,
 				FE480E90E2CA32C49FC5A2F3 /* Pods_HBSwiftKit_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,6 +270,40 @@
 				18B671982B3BBFC600793476 /* Extension+TextField.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		18B8E8DD2B83044B009EA2F0 /* 二维码扫描 */ = {
+			isa = PBXGroup;
+			children = (
+				18B8E8DE2B83044B009EA2F0 /* opencv */,
+				18B8E8E42B83044B009EA2F0 /* QRScaner */,
+				18B8E8EA2B83044B009EA2F0 /* qrcodetest.png */,
+			);
+			path = "二维码扫描";
+			sourceTree = "<group>";
+		};
+		18B8E8DE2B83044B009EA2F0 /* opencv */ = {
+			isa = PBXGroup;
+			children = (
+				18B8E8DF2B83044B009EA2F0 /* ReadMe.md */,
+				18B8E8E02B83044B009EA2F0 /* OpenCVWrapper.h */,
+				18B8E8E12B83044B009EA2F0 /* opencv2.framework */,
+				18B8E8E22B83044B009EA2F0 /* wechat_qrcode.bundle */,
+				18B8E8E32B83044B009EA2F0 /* OpenCVWrapper.mm */,
+			);
+			path = opencv;
+			sourceTree = "<group>";
+		};
+		18B8E8E42B83044B009EA2F0 /* QRScaner */ = {
+			isa = PBXGroup;
+			children = (
+				18B8E8E52B83044B009EA2F0 /* QRScanerView.swift */,
+				18B8E8E62B83044B009EA2F0 /* ScanWechatController.swift */,
+				18B8E8E72B83044B009EA2F0 /* ScanHWSMController.swift */,
+				18B8E8E82B83044B009EA2F0 /* QRScanerCore.swift */,
+				18B8E8E92B83044B009EA2F0 /* ScanCMSampleBuffer.swift */,
+			);
+			path = QRScaner;
 			sourceTree = "<group>";
 		};
 		18C2FDFF2AFC8CFD00AB8450 /* Configs */ = {
@@ -521,6 +573,7 @@
 				B541412C268EAF06008CE14B /* MapLocationController.swift */,
 				B5832B1F270FD6EE0084C78E /* VideoTestController.swift */,
 				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
+				18B8E8DD2B83044B009EA2F0 /* 二维码扫描 */,
 				B595A8CD27CCB00B007EF16E /* 临时验证类 */,
 				B5E4AABE27F5546E00D84C78 /* 遥控方向盘 */,
 				B595A8CE27CCB031007EF16E /* 三方依赖类 */,
@@ -592,8 +645,6 @@
 			isa = PBXGroup;
 			children = (
 				B5EA0E1125B67C38004783C1 /* AppSandBox.swift */,
-				B58F80AD273CB51500C778D5 /* OpenCVWrapper.h */,
-				B58F80AC273CB51500C778D5 /* OpenCVWrapper.mm */,
 				B58F80AB273CB4ED00C778D5 /* wechat_qrcode.zip */,
 			);
 			path = Vendors;
@@ -710,6 +761,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18B8E8F42B83044B009EA2F0 /* qrcodetest.png in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				B56F68A2264B8AF400FD62CF /* duallist.json in Resources */,
 				B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */,
@@ -721,9 +773,11 @@
 				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
 				B5557A3526706188007F5B44 /* loading.gif in Resources */,
 				B50055BD27C375CD00467E55 /* src_hsv in Resources */,
+				18B8E8EB2B83044B009EA2F0 /* ReadMe.md in Resources */,
 				B557085027225E5500C22CD4 /* .swiftlint.yml in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				B5F8390226982D8E0001C484 /* 温柔女声.mp3 in Resources */,
+				18B8E8ED2B83044B009EA2F0 /* wechat_qrcode.bundle in Resources */,
 				B50055BF27C375CD00467E55 /* src_xy in Resources */,
 				B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */,
 			);
@@ -914,6 +968,7 @@
 				B50055A427C375A700467E55 /* LightAttrPickerView.swift in Sources */,
 				B56D8C7227CF5FC30032EA97 /* Wto_CombinedChart.swift in Sources */,
 				B5E8E47B27EEBEAB006CED16 /* NetworkExtension.swift in Sources */,
+				18B8E8F02B83044B009EA2F0 /* ScanWechatController.swift in Sources */,
 				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
 				B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */,
 				1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */,
@@ -922,9 +977,11 @@
 				184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */,
 				B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */,
 				184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */,
+				18B8E8EE2B83044B009EA2F0 /* OpenCVWrapper.mm in Sources */,
 				B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */,
 				B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */,
 				B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */,
+				18B8E8EF2B83044B009EA2F0 /* QRScanerView.swift in Sources */,
 				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
 				B5E2817627F1BF42000761FD /* NetworkPlugins.swift in Sources */,
 				B5FF3854280EA0B70063BF26 /* MVVM.swift in Sources */,
@@ -932,12 +989,12 @@
 				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
 				B595A8D727CCB154007EF16E /* StarRateView.swift in Sources */,
-				B58F80AE273CB51500C778D5 /* OpenCVWrapper.mm in Sources */,
 				B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */,
 				B5565E8E27C5BF34001A1A22 /* NetworkReachability.swift in Sources */,
 				B54DE3B6275F4C4100BBDE0B /* SignalMarkView.swift in Sources */,
 				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
 				B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */,
+				18B8E8F32B83044B009EA2F0 /* ScanCMSampleBuffer.swift in Sources */,
 				B50055A627C375A700467E55 /* LightAttrPickerView+Views.swift in Sources */,
 				4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */,
 				B546BFB727F455C5006EA745 /* IndexTableView.swift in Sources */,
@@ -948,6 +1005,7 @@
 				B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */,
 				B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */,
 				B5E8E47D27F14E6A006CED16 /* NetworkRequest.swift in Sources */,
+				18B8E8F22B83044B009EA2F0 /* QRScanerCore.swift in Sources */,
 				B56D8C7127CF5FC30032EA97 /* BalloonMarker.swift in Sources */,
 				18B671992B3BBFC600793476 /* Extension+TextField.swift in Sources */,
 				B56D8C6C27CF29E90032EA97 /* YTTabController.swift in Sources */,
@@ -1050,7 +1108,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1096,7 +1154,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1114,8 +1172,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YTPNCWF278;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HBSwiftKit/ExampleList/二维码扫描/opencv",
+				);
 				INFOPLIST_FILE = HBSwiftKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1141,8 +1203,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YTPNCWF278;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HBSwiftKit/ExampleList/二维码扫描/opencv",
+				);
 				INFOPLIST_FILE = HBSwiftKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1175,7 +1241,7 @@
 				DEVELOPMENT_TEAM = YTPNCWF278;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = HBSwiftKit_UITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1208,7 +1274,7 @@
 				DEVELOPMENT_TEAM = YTPNCWF278;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = HBSwiftKit_UITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1242,7 +1308,7 @@
 				DEVELOPMENT_TEAM = YTPNCWF278;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = HBSwiftKit_Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1277,7 +1343,7 @@
 				DEVELOPMENT_TEAM = YTPNCWF278;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = HBSwiftKit_Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

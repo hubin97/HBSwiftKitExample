@@ -114,10 +114,12 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.file` struct is generated, and contains static references to 13 files.
+  /// This `R.file` struct is generated, and contains static references to 16 files.
   struct file {
     /// Resource file `.swiftlint.yml`.
     static let swiftlintYml = Rswift.FileResource(bundle: R.hostingBundle, name: ".swiftlint", pathExtension: "yml")
+    /// Resource file `ReadMe.md`.
+    static let readMeMd = Rswift.FileResource(bundle: R.hostingBundle, name: "ReadMe", pathExtension: "md")
     /// Resource file `advfilterdata.json`.
     static let advfilterdataJson = Rswift.FileResource(bundle: R.hostingBundle, name: "advfilterdata", pathExtension: "json")
     /// Resource file `areacode.plist`.
@@ -134,18 +136,28 @@ struct R: Rswift.Validatable {
     static let jstestHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "jstest", pathExtension: "html")
     /// Resource file `loading.gif`.
     static let loadingGif = Rswift.FileResource(bundle: R.hostingBundle, name: "loading", pathExtension: "gif")
+    /// Resource file `qrcodetest.png`.
+    static let qrcodetestPng = Rswift.FileResource(bundle: R.hostingBundle, name: "qrcodetest", pathExtension: "png")
     /// Resource file `src_hsv`.
     static let src_hsv = Rswift.FileResource(bundle: R.hostingBundle, name: "src_hsv", pathExtension: "")
     /// Resource file `src_temp`.
     static let src_temp = Rswift.FileResource(bundle: R.hostingBundle, name: "src_temp", pathExtension: "")
     /// Resource file `src_xy`.
     static let src_xy = Rswift.FileResource(bundle: R.hostingBundle, name: "src_xy", pathExtension: "")
+    /// Resource file `wechat_qrcode.bundle`.
+    static let wechat_qrcodeBundle = Rswift.FileResource(bundle: R.hostingBundle, name: "wechat_qrcode", pathExtension: "bundle")
     /// Resource file `温柔女声.mp3`.
     static let 温柔女声Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "温柔女声", pathExtension: "mp3")
 
     /// `bundle.url(forResource: ".swiftlint", withExtension: "yml")`
     static func swiftlintYml(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.swiftlintYml
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "ReadMe", withExtension: "md")`
+    static func readMeMd(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.readMeMd
       return fileResource.bundle.url(forResource: fileResource)
     }
 
@@ -197,6 +209,12 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
 
+    /// `bundle.url(forResource: "qrcodetest", withExtension: "png")`
+    static func qrcodetestPng(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.qrcodetestPng
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
     /// `bundle.url(forResource: "src_hsv", withExtension: "")`
     static func src_hsv(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.src_hsv
@@ -215,6 +233,12 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
 
+    /// `bundle.url(forResource: "wechat_qrcode", withExtension: "bundle")`
+    static func wechat_qrcodeBundle(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.wechat_qrcodeBundle
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
     /// `bundle.url(forResource: "温柔女声", withExtension: "mp3")`
     static func 温柔女声Mp3(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.温柔女声Mp3
@@ -224,7 +248,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 37 images.
+  /// This `R.image` struct is generated, and contains static references to 42 images.
   struct image {
     /// Image `ib_back`.
     static let ib_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "ib_back")
@@ -238,6 +262,14 @@ struct R: Rswift.Validatable {
     static let ib_share = Rswift.ImageResource(bundle: R.hostingBundle, name: "ib_share")
     /// Image `ib_unselect`.
     static let ib_unselect = Rswift.ImageResource(bundle: R.hostingBundle, name: "ib_unselect")
+    /// Image `icon_qrcode_frame`.
+    static let icon_qrcode_frame = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon_qrcode_frame")
+    /// Image `icon_qrcode_line`.
+    static let icon_qrcode_line = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon_qrcode_line")
+    /// Image `icon_qrcode_scan`.
+    static let icon_qrcode_scan = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon_qrcode_scan")
+    /// Image `icon_qrcode_torch`.
+    static let icon_qrcode_torch = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon_qrcode_torch")
     /// Image `image`.
     static let image = Rswift.ImageResource(bundle: R.hostingBundle, name: "image")
     /// Image `last_month_enabled`.
@@ -256,6 +288,8 @@ struct R: Rswift.Validatable {
     static let pause = Rswift.ImageResource(bundle: R.hostingBundle, name: "pause")
     /// Image `play`.
     static let play = Rswift.ImageResource(bundle: R.hostingBundle, name: "play")
+    /// Image `qrcodetest`.
+    static let qrcodetest = Rswift.ImageResource(bundle: R.hostingBundle, name: "qrcodetest")
     /// Image `redWarning`.
     static let redWarning = Rswift.ImageResource(bundle: R.hostingBundle, name: "redWarning")
     /// Image `ring_max`.
@@ -344,6 +378,34 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icon_qrcode_frame", bundle: ..., traitCollection: ...)`
+    static func icon_qrcode_frame(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icon_qrcode_frame, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icon_qrcode_line", bundle: ..., traitCollection: ...)`
+    static func icon_qrcode_line(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icon_qrcode_line, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icon_qrcode_scan", bundle: ..., traitCollection: ...)`
+    static func icon_qrcode_scan(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icon_qrcode_scan, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icon_qrcode_torch", bundle: ..., traitCollection: ...)`
+    static func icon_qrcode_torch(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icon_qrcode_torch, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UIImage(named: "image", bundle: ..., traitCollection: ...)`
     static func image(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.image, compatibleWith: traitCollection)
@@ -403,6 +465,13 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "play", bundle: ..., traitCollection: ...)`
     static func play(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.play, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "qrcodetest", bundle: ..., traitCollection: ...)`
+    static func qrcodetest(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.qrcodetest, compatibleWith: traitCollection)
     }
     #endif
 

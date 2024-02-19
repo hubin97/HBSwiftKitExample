@@ -1,4 +1,4 @@
-platform :ios, '12.0'
+platform :ios, '13.0'
 
 # cdn服务器最近常挂,暂时禁用cdn分发方式; https://github.com/CocoaPods/CocoaPods/issues/11370
 # CDN: trunk URL couldn't be downloaded: https://cdn.jsdelivr.net/cocoa/Specs
@@ -44,7 +44,7 @@ target 'HBSwiftKit_Example' do
           target.build_configurations.each do |config|
               config.build_settings['SWIFT_VERSION'] = '5.0'
               #config.build_settings['COMPILER_INDEX_STORE_ENABLE'] = "NO" # OCLint配置
-              config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+              config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
           end
       end
   end
