@@ -29,6 +29,8 @@ target 'HBSwiftKit_Example' do
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', :configurations => ['Debug']
 
+  pod 'lottie-ios' #, '~> 4.4.1'
+  
   target 'HBSwiftKit_Tests' do
     inherit! :search_paths
 

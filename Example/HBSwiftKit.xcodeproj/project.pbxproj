@@ -11,6 +11,7 @@
 		184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */; };
 		184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */; };
 		18B671992B3BBFC600793476 /* Extension+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B671982B3BBFC600793476 /* Extension+TextField.swift */; };
+		18E1CF362B90270F00B5397E /* percentage.json in Resources */ = {isa = PBXBuildFile; fileRef = 18E1CF352B90270F00B5397E /* percentage.json */; };
 		1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */; };
 		4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207008E2A4D7D1900039415 /* BLEAdapter.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -111,6 +112,7 @@
 		184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTDatePicker.swift; sourceTree = "<group>"; };
 		18B671982B3BBFC600793476 /* Extension+TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+TextField.swift"; sourceTree = "<group>"; };
 		18C2FE002AFC8D0C00AB8450 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		18E1CF352B90270F00B5397E /* percentage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = percentage.json; sourceTree = "<group>"; };
 		1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNoti.swift; sourceTree = "<group>"; };
 		4207008E2A4D7D1900039415 /* BLEAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAdapter.swift; sourceTree = "<group>"; };
 		4845C4375F7293ACE69A0714 /* Pods_HBSwiftKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBSwiftKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -542,6 +544,7 @@
 		B5E1D8E62562831C0093AC4C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				18E1CF352B90270F00B5397E /* percentage.json */,
 				B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */,
 				B5557A3426706188007F5B44 /* loading.gif */,
 				B5389B7825EF8FB400ED67F9 /* R.generated.swift */,
@@ -714,6 +717,7 @@
 				B56F68A2264B8AF400FD62CF /* duallist.json in Resources */,
 				B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */,
 				B5BAC835255A7875005A5179 /* images.json in Resources */,
+				18E1CF362B90270F00B5397E /* percentage.json in Resources */,
 				B5DCC71425F3266D007E3237 /* areacode.plist in Resources */,
 				B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */,
 				B5D55405261D40AE007A20F5 /* jstest.html in Resources */,
@@ -768,6 +772,7 @@
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftAlgorithms/Algorithms.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -786,6 +791,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Algorithms.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -176,3 +176,40 @@ public class NetworkPrintlnPlugin: PluginType {
         return "\(loggerId): \(identifier): \(message)"
     }
 }
+
+
+// MARK: - 异常处理
+import Alamofire
+class NetworkHandlePlugin: PluginType {
+   
+    let dismiss: Bool
+    init(dismiss: Bool = true) {
+        self.dismiss = dismiss
+    }
+    
+    func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
+        switch result {
+        case let .success(response):
+            guard let dict = response.data.dict else {
+                // 如果接口请求正常, 移除loading
+                if self.dismiss {
+                    SVProgressHUD.dismiss()
+                }
+                return
+            }
+            // TODO: 其他错误处理
+        case let .failure(error):
+            switch error {
+            case .underlying(let err as AFError, _):
+                // 去掉 AFError 的"URLSessionTask failed with error:"前缀提示
+                if err.isSessionTaskError {
+                    SVProgressHUD.showError(withStatus: err.underlyingError?.localizedDescription ?? "")
+                } else {
+                    SVProgressHUD.showError(withStatus: error.localizedDescription)
+                }
+            default:
+                SVProgressHUD.showError(withStatus: error.localizedDescription)
+            }
+        }
+    }
+}

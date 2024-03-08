@@ -10,7 +10,7 @@ import UIKit
 import QuartzCore
 import ObjectMapper
 import Moya
-// import opencv2
+import Lottie
 
 // MARK: - global var and methods
 
@@ -102,6 +102,15 @@ class UIKitTestController: BaseViewController {
         //_drawLayer.image = sw_panel_normal
         return _drawLayer
     }()
+    
+    let lottieView: LottieAnimationView = {
+        let _lottieView = LottieAnimationView(name: "percentage")
+        _lottieView.contentMode = .scaleToFill
+        _lottieView.frame = CGRect(x: 50, y: 50, width: 200, height: 200)
+        _lottieView.currentProgress = 0
+        return _lottieView
+    }()
+
     override func setupUi() {
         super.setupUi()
         self.navigationItem.title = "UIKit Test"
@@ -113,8 +122,10 @@ class UIKitTestController: BaseViewController {
         //starRateView()
         //showIndexListView()
         view.backgroundColor = .white
-        view.addSubview(bgImgView)
-        view.addSubview(steerPanel)
+//        view.addSubview(bgImgView)
+//        view.addSubview(steerPanel)
+
+        view.addSubview(lottieView)
     }
 
 //    @objc func panelTap(_ tap: UITapGestureRecognizer) {
@@ -190,8 +201,9 @@ extension UIKitTestController {
         //picker.pickerDatas = allBrightList
         //picker.show()
 
-        updateData = !updateData
-        indexList.reloadData()
+//        updateData = !updateData
+//        indexList.reloadData()
+        lottieView.play()
     }
 
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
