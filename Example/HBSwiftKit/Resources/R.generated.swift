@@ -114,7 +114,7 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.file` struct is generated, and contains static references to 20 files.
+  /// This `R.file` struct is generated, and contains static references to 14 files.
   struct file {
     /// Resource file `.swiftlint.yml`.
     static let swiftlintYml = Rswift.FileResource(bundle: R.hostingBundle, name: ".swiftlint", pathExtension: "yml")
@@ -134,26 +134,14 @@ struct R: Rswift.Validatable {
     static let jstestHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "jstest", pathExtension: "html")
     /// Resource file `loading.gif`.
     static let loadingGif = Rswift.FileResource(bundle: R.hostingBundle, name: "loading", pathExtension: "gif")
-    /// Resource file `pausetoopen.json`.
-    static let pausetoopenJson = Rswift.FileResource(bundle: R.hostingBundle, name: "pausetoopen", pathExtension: "json")
     /// Resource file `percentage.json`.
     static let percentageJson = Rswift.FileResource(bundle: R.hostingBundle, name: "percentage", pathExtension: "json")
-    /// Resource file `percentage1.json`.
-    static let percentage1Json = Rswift.FileResource(bundle: R.hostingBundle, name: "percentage1", pathExtension: "json")
-    /// Resource file `percentage2.json`.
-    static let percentage2Json = Rswift.FileResource(bundle: R.hostingBundle, name: "percentage2", pathExtension: "json")
-    /// Resource file `percentage3.json`.
-    static let percentage3Json = Rswift.FileResource(bundle: R.hostingBundle, name: "percentage3", pathExtension: "json")
-    /// Resource file `setting.json`.
-    static let settingJson = Rswift.FileResource(bundle: R.hostingBundle, name: "setting", pathExtension: "json")
     /// Resource file `src_hsv`.
     static let src_hsv = Rswift.FileResource(bundle: R.hostingBundle, name: "src_hsv", pathExtension: "")
     /// Resource file `src_temp`.
     static let src_temp = Rswift.FileResource(bundle: R.hostingBundle, name: "src_temp", pathExtension: "")
     /// Resource file `src_xy`.
     static let src_xy = Rswift.FileResource(bundle: R.hostingBundle, name: "src_xy", pathExtension: "")
-    /// Resource file `test.json`.
-    static let testJson = Rswift.FileResource(bundle: R.hostingBundle, name: "test", pathExtension: "json")
     /// Resource file `温柔女声.mp3`.
     static let 温柔女声Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "温柔女声", pathExtension: "mp3")
 
@@ -211,39 +199,9 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
 
-    /// `bundle.url(forResource: "pausetoopen", withExtension: "json")`
-    static func pausetoopenJson(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.pausetoopenJson
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-
     /// `bundle.url(forResource: "percentage", withExtension: "json")`
     static func percentageJson(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.percentageJson
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-
-    /// `bundle.url(forResource: "percentage1", withExtension: "json")`
-    static func percentage1Json(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.percentage1Json
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-
-    /// `bundle.url(forResource: "percentage2", withExtension: "json")`
-    static func percentage2Json(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.percentage2Json
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-
-    /// `bundle.url(forResource: "percentage3", withExtension: "json")`
-    static func percentage3Json(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.percentage3Json
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-
-    /// `bundle.url(forResource: "setting", withExtension: "json")`
-    static func settingJson(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.settingJson
       return fileResource.bundle.url(forResource: fileResource)
     }
 
@@ -262,12 +220,6 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "src_xy", withExtension: "")`
     static func src_xy(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.src_xy
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-
-    /// `bundle.url(forResource: "test", withExtension: "json")`
-    static func testJson(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.testJson
       return fileResource.bundle.url(forResource: fileResource)
     }
 

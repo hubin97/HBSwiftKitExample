@@ -105,7 +105,26 @@ extension LoggerManager {
     }
 }
 
-//MARK: - other classes
+/// 需要在Podfile中启用资源跟踪
+/**
+ # Enable tracing resources
+ installer.pods_project.targets.each do |target|
+   if target.name == 'RxSwift'
+     target.build_configurations.each do |config|
+       if config.name == 'Debug'
+         config.build_settings['OTHER_SWIFT_FLAGS'] ||= ['-D', 'TRACE_RESOURCES']
+       end
+     end
+   end
+ end
+ */
+public func logResourcesCount() {
+    #if DEBUG
+    //logDebug("RxSwift resources count: \(RxSwift.Resources.total)")
+    #endif
+}
+
+// MARK: - other classes
 
 open class LoggerFormatter: NSObject, DDLogFormatter {
     
@@ -128,13 +147,13 @@ open class LoggerFormatter: NSObject, DDLogFormatter {
             flag = "⚠️"
             break
         case .info:
-            flag = "📝"//"🧩"
+            flag = "📝"
             break
         case .debug:
             flag = "🛠"
             break
         default:
-            flag = "🔍" // Verbose📋📁🗒
+            flag = "🧩"
             break
         }
         let time = dateFormatter.string(from: Date())
@@ -142,65 +161,4 @@ open class LoggerFormatter: NSObject, DDLogFormatter {
         let format = "[\(time)] " + "[\(flag)] " + message
         return format
     }
-    
-//    var atomicLoggerCounter: DDAtomicCounter?
-//    var threadUnsafeDateFormatter: DateFormatter?
-//
-//    func format(message logMessage: DDLogMessage) -> String? {
-//        var level = ""
-//        switch logMessage.flag {
-//        case .error:
-//            level = "Error"
-//            break
-//        case .warning:
-//            level = "Warning"
-//            break
-//        case .info:
-//            level = "Info"
-//            break
-//        case .debug:
-//            level = "Debug"
-//            break
-//        default:
-//            level = "Verbose"
-//            break
-//        }
-//        let time = self.stringFromDate(date: logMessage.timestamp)
-//        let message = logMessage.message
-//        let format = level + time + "|" + message
-//        return format
-//    }
-//
-//    func stringFromDate(date: Date) -> String {
-//        let count = atomicLoggerCounter?.value()
-//        if count ?? 0 <= 1 {
-//            // Single-threaded mode.
-//            if (threadUnsafeDateFormatter == nil) {
-//                threadUnsafeDateFormatter = DateFormatter.init()
-//                threadUnsafeDateFormatter?.date(from: KdateFormatString)
-//            }
-//            return threadUnsafeDateFormatter?.string(from: date) ?? ""
-//        } else {
-//            // Multi-threaded mode.
-//            // NSDateFormatter is NOT thread-safe.
-//            let key = "LoggerFormatter_DateFormatter"
-//            let threadDict = Thread.current.threadDictionary
-//            if let dateFormatter = threadDict.object(forKey: key) as? DateFormatter {
-//                return dateFormatter.string(from: date)
-//            } else {
-//                let dateFormatter = DateFormatter.init()
-//                dateFormatter.date(from: KdateFormatString)
-//                threadDict.setObject(dateFormatter, forKey: key as NSCopying)
-//                return dateFormatter.string(from: date)
-//            }
-//        }
-//    }
-//
-//    func didAdd(to logger: DDLogger) {
-//        atomicLoggerCounter?.increment()
-//    }
-//
-//    func willRemove(from logger: DDLogger) {
-//        atomicLoggerCounter?.decrement()
-//    }
 }

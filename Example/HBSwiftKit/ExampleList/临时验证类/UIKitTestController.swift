@@ -110,22 +110,19 @@ class UIKitTestController: BaseViewController {
         _lottieView.currentProgress = 0
         return _lottieView
     }()
+    
+    lazy var waveView: WaveAnimateView = {
+        let _waveView = WaveAnimateView(frame: CGRect(x: 50, y: 50, width: 200, height: 500))
+        return _waveView
+    }()
 
     override func setupUi() {
         super.setupUi()
         self.navigationItem.title = "UIKit Test"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction(_:)))
 
-        //customBtn()
-        //signalCheck()
-        //attributedTest()
-        //starRateView()
-        //showIndexListView()
         view.backgroundColor = .white
-//        view.addSubview(bgImgView)
-//        view.addSubview(steerPanel)
-
-        view.addSubview(lottieView)
+        view.addSubview(waveView)
     }
 
 //    @objc func panelTap(_ tap: UITapGestureRecognizer) {
@@ -148,6 +145,17 @@ class UIKitTestController: BaseViewController {
 //        }.catch { error in
 //            print(error.localizedDescription)
 //        }
+        
+        waveView.refresh(0.1, speed: 3)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.waveView.refresh(0.3, speed: 2)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.waveView.refresh(0.7, speed: 1, amp: 3)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.waveView.refresh(0.9, speed: 0, amp: 0)
+                }
+            }
+        }
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {

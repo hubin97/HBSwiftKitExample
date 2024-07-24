@@ -9,7 +9,7 @@
 import UIKit
 import CocoaLumberjack
 import HBSwiftKit
-import FLEX
+//import FLEX
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarVc.addChildVcs(naviVcs: [navi, navi2, navi3], titles: ["Example List", "UIKit Test", "Web Preview"], normalImages: [R.image.tabBar.home_n(), R.image.tabBar.like_n(), R.image.tabBar.web_n()], selectImages: [R.image.tabBar.home_h(), R.image.tabBar.like_h(), R.image.tabBar.web_h()])
         // tabBarVc.tabBar.barTintColor = .orange
         tabBarVc.setAppearance(normalColor: .lightGray, selectColor: .systemBlue)
-        
+    
         navi.setBarAppearance(shadowColor: .blue)
         navi2.setBarAppearance(barTintColor: UIColor(hexStr: "#F7F7F7"), titleColor: .black)
         navi3.setBarAppearance(titleFont: UIFont.systemFont(ofSize: 20, weight: .medium), titleColor: .brown)

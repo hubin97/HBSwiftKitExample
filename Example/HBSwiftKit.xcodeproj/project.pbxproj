@@ -10,6 +10,7 @@
 		0630D2901133ACAA226C5EF5 /* Pods_HBSwiftKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F5E5A4DC30D6A96A4CC4E3 /* Pods_HBSwiftKit_Tests.framework */; };
 		184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */; };
 		184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */; };
+		186750992C05B7DF00A369B5 /* WaveAnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186750982C05B7DF00A369B5 /* WaveAnimateView.swift */; };
 		18B671992B3BBFC600793476 /* Extension+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B671982B3BBFC600793476 /* Extension+TextField.swift */; };
 		18E1CF362B90270F00B5397E /* percentage.json in Resources */ = {isa = PBXBuildFile; fileRef = 18E1CF352B90270F00B5397E /* percentage.json */; };
 		1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */; };
@@ -110,6 +111,7 @@
 		12F5E5A4DC30D6A96A4CC4E3 /* Pods_HBSwiftKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBSwiftKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCDataPicker.swift; sourceTree = "<group>"; };
 		184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTDatePicker.swift; sourceTree = "<group>"; };
+		186750982C05B7DF00A369B5 /* WaveAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimateView.swift; sourceTree = "<group>"; };
 		18B671982B3BBFC600793476 /* Extension+TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+TextField.swift"; sourceTree = "<group>"; };
 		18C2FE002AFC8D0C00AB8450 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		18E1CF352B90270F00B5397E /* percentage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = percentage.json; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
+				186750982C05B7DF00A369B5 /* WaveAnimateView.swift */,
 				1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */,
 				B5463259280010410026662F /* DesignMode.swift */,
 				B5FF3853280EA0B70063BF26 /* MVVM.swift */,
@@ -760,7 +763,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
 				"${BUILT_PRODUCTS_DIR}/GDPerformanceView-Swift/GDPerformanceView_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/HBSwiftKit/HBSwiftKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
@@ -779,7 +781,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GDPerformanceView_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBSwiftKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
@@ -876,7 +877,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/HBSwiftKit/Resources/R.generated.swift,
+				"$SRCROOT/HBSwiftKit/Resources/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -923,6 +924,7 @@
 				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
 				B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */,
 				1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */,
+				186750992C05B7DF00A369B5 /* WaveAnimateView.swift in Sources */,
 				B5E4AAC027F5585300D84C78 /* SteerWheelView.swift in Sources */,
 				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
 				184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */,
@@ -1119,7 +1121,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YTPNCWF278;
+				DEVELOPMENT_TEAM = YP9F4937J4;
 				INFOPLIST_FILE = HBSwiftKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1146,7 +1148,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YTPNCWF278;
+				DEVELOPMENT_TEAM = YP9F4937J4;
 				INFOPLIST_FILE = HBSwiftKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

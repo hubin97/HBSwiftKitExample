@@ -27,7 +27,7 @@ target 'HBSwiftKit_Example' do
   pod 'SVProgressHUD'
   pod 'GDPerformanceView-Swift', :configurations => ['Debug']
   pod 'SwiftLint', :configurations => ['Debug']
-  pod 'FLEX', :configurations => ['Debug']
+#  pod 'FLEX'#, :configurations => ['Debug']
 
   pod 'lottie-ios' #, '~> 4.4.1'
   
