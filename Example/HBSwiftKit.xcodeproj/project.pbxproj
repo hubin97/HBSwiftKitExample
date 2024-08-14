@@ -11,7 +11,9 @@
 		184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */; };
 		184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */; };
 		186750992C05B7DF00A369B5 /* WaveAnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186750982C05B7DF00A369B5 /* WaveAnimateView.swift */; };
+		188692CB2C5743D5007CD12A /* MQTTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188692CA2C5743D5007CD12A /* MQTTClient.swift */; };
 		18B671992B3BBFC600793476 /* Extension+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B671982B3BBFC600793476 /* Extension+TextField.swift */; };
+		18C5037F2C50F82700EB50B4 /* MQTTTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5037E2C50F82700EB50B4 /* MQTTTestController.swift */; };
 		18E1CF362B90270F00B5397E /* percentage.json in Resources */ = {isa = PBXBuildFile; fileRef = 18E1CF352B90270F00B5397E /* percentage.json */; };
 		1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */; };
 		4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207008E2A4D7D1900039415 /* BLEAdapter.swift */; };
@@ -112,8 +114,10 @@
 		184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCDataPicker.swift; sourceTree = "<group>"; };
 		184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTDatePicker.swift; sourceTree = "<group>"; };
 		186750982C05B7DF00A369B5 /* WaveAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimateView.swift; sourceTree = "<group>"; };
+		188692CA2C5743D5007CD12A /* MQTTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTClient.swift; sourceTree = "<group>"; };
 		18B671982B3BBFC600793476 /* Extension+TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+TextField.swift"; sourceTree = "<group>"; };
 		18C2FE002AFC8D0C00AB8450 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		18C5037E2C50F82700EB50B4 /* MQTTTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTTestController.swift; sourceTree = "<group>"; };
 		18E1CF352B90270F00B5397E /* percentage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = percentage.json; sourceTree = "<group>"; };
 		1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNoti.swift; sourceTree = "<group>"; };
 		4207008E2A4D7D1900039415 /* BLEAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAdapter.swift; sourceTree = "<group>"; };
@@ -248,6 +252,14 @@
 				9A8871220770A8D795C87930 /* Pods-HBSwiftKit_Tests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		188692C92C5743C7007CD12A /* CocoaMQTT */ = {
+			isa = PBXGroup;
+			children = (
+				188692CA2C5743D5007CD12A /* MQTTClient.swift */,
+			);
+			path = CocoaMQTT;
 			sourceTree = "<group>";
 		};
 		18B671972B3BBFC600793476 /* Extension */ = {
@@ -526,6 +538,8 @@
 				B541412C268EAF06008CE14B /* MapLocationController.swift */,
 				B5832B1F270FD6EE0084C78E /* VideoTestController.swift */,
 				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
+				18C5037E2C50F82700EB50B4 /* MQTTTestController.swift */,
+				188692C92C5743C7007CD12A /* CocoaMQTT */,
 				B595A8CD27CCB00B007EF16E /* 临时验证类 */,
 				B5E4AABE27F5546E00D84C78 /* 遥控方向盘 */,
 				B595A8CE27CCB031007EF16E /* 三方依赖类 */,
@@ -763,10 +777,12 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaMQTT/CocoaMQTT.framework",
 				"${BUILT_PRODUCTS_DIR}/GDPerformanceView-Swift/GDPerformanceView_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/HBSwiftKit/HBSwiftKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/MqttCocoaAsyncSocket/MqttCocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
@@ -781,10 +797,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaMQTT.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GDPerformanceView_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBSwiftKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MqttCocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
@@ -877,7 +895,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/HBSwiftKit/Resources/R.generated.swift",
+				$SRCROOT/HBSwiftKit/Resources/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -949,9 +967,11 @@
 				B50055A627C375A700467E55 /* LightAttrPickerView+Views.swift in Sources */,
 				4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */,
 				B546BFB727F455C5006EA745 /* IndexTableView.swift in Sources */,
+				188692CB2C5743D5007CD12A /* MQTTClient.swift in Sources */,
 				B595A8D527CCB07F007EF16E /* LoggerListController.swift in Sources */,
 				B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */,
 				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,
+				18C5037F2C50F82700EB50B4 /* MQTTTestController.swift in Sources */,
 				B5FEFA3B27462A6F00DA6999 /* SlidePickerView.swift in Sources */,
 				B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */,
 				B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */,

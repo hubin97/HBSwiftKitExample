@@ -174,9 +174,19 @@ extension Extension_String {
     ///        "it's easy to encode strings".urlEncoded -> "it's%20easy%20to%20encode%20strings"
     /// ???  .urlQueryAllowed
     public var urlEncoded: String {
+        if isURLEncoded { return self }
         return addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     }
 
+    /// 使用正则表达式检测 URL 中是否存在百分比编码
+    public var isURLEncoded: Bool {
+        let percentEncodedPattern = "%[0-9A-Fa-f]{2}"
+        if let _ = range(of: percentEncodedPattern, options: .regularExpression) {
+            return true
+        }
+        return false
+    }
+    
     /// 转Data
     public var data: Data? {
         return self.data(using: String.Encoding.utf8)

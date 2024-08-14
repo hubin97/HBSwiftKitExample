@@ -93,5 +93,47 @@ extension Extension_Label {
         label.sizeToFit()
         return label.frame.width
     }
+}
 
+extension Extension_Label {
+    /// 为 UILabel 文本设置渐变颜色
+    /// - Parameters:
+    ///   - colors: 渐变的颜色数组
+    ///   - startPoint: 渐变的起始点
+    ///   - endPoint: 渐变的结束点
+    public func setGradientTextColor(colors: [UIColor], startPoint: CGPoint = CGPoint(x: 0, y: 0), endPoint: CGPoint = CGPoint(x: 1, y: 0)) {
+        
+        // 确保有文本可以渲染
+        guard let text = self.text, !text.isEmpty else { return }
+        
+        // 移除旧的 gradientLayer
+        self.layer.sublayers?.filter { $0.name == "gradientTextLayer" }.forEach { $0.removeFromSuperlayer() }
+        
+        // 确保布局已更新
+        self.layoutIfNeeded()
+        
+        // 创建 CAGradientLayer
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = colors.map { $0.cgColor }
+        gradientLayer.startPoint = startPoint
+        gradientLayer.endPoint = endPoint
+        gradientLayer.frame = self.bounds
+        
+        // 创建图像上下文并绘制文本
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0.0)
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        self.layer.render(in: context)
+        let textImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // 创建带文本图像的 CALayer 并将其设置为 gradientLayer 的 mask
+        let textMaskLayer = CALayer()
+        textMaskLayer.contents = textImage?.cgImage
+        textMaskLayer.frame = self.bounds
+        gradientLayer.mask = textMaskLayer
+        
+        // 设置 gradientLayer 的名称并添加到标签上
+        gradientLayer.name = "gradientTextLayer"
+        self.layer.addSublayer(gradientLayer)
+    }
 }

@@ -123,6 +123,12 @@ class UIKitTestController: BaseViewController {
 
         view.backgroundColor = .white
         view.addSubview(waveView)
+        
+        //"it's easy to encode strings".urlEncoded -> "it's%20easy%20to%20encode%20strings"
+        let string1 = "it's easy to encode strings"
+        let string2 = "it's%20easy%20to%20encode%20strings"
+        print("...")
+        
     }
 
 //    @objc func panelTap(_ tap: UITapGestureRecognizer) {

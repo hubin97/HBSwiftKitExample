@@ -28,6 +28,7 @@ target 'HBSwiftKit_Example' do
   pod 'GDPerformanceView-Swift', :configurations => ['Debug']
   pod 'SwiftLint', :configurations => ['Debug']
 #  pod 'FLEX'#, :configurations => ['Debug']
+  pod 'CocoaMQTT'  # https://github.com/emqx/CocoaMQTT
 
   pod 'lottie-ios' #, '~> 4.4.1'
   
