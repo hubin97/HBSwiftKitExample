@@ -10,7 +10,7 @@ import CoreBluetooth
 
 /// 注意权限配置 NSBluetoothAlwaysUsageDescription
 //MARK: - global var and methods
-public typealias BLEManager = BlueToothManager
+//public typealias BLEManager = BlueToothManager
 
 public protocol BLEManagerDelegate: AnyObject {
     /// 回调中心设备连接状态更新

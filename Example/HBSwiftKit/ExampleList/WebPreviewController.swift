@@ -40,8 +40,9 @@ class WebPreviewController: BaseWKWebController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // self.localPath = "jstest.html"
-        // loadHTML(urlString: "jstest.html", isLocalHtml: true)
-        load(urlPath: "https://www.baidu.com")
+        //loadHTML(urlString: "jstest.html", isLocalHtml: true)
+        load(urlPath: "jstest.html", isLocalHtml: true)
+        //load(urlPath: "https://www.baidu.com")
     }
 
     // 对应方法名:  "test"

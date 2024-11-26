@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0630D2901133ACAA226C5EF5 /* Pods_HBSwiftKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F5E5A4DC30D6A96A4CC4E3 /* Pods_HBSwiftKit_Tests.framework */; };
+		180AD2752CF5739D00A2B901 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD2742CF5739D00A2B901 /* BLEManager.swift */; };
+		180AD2782CF5762F00A2B901 /* BLEPeripheralMatching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD2772CF5762F00A2B901 /* BLEPeripheralMatching.swift */; };
+		180AD27A2CF5A23C00A2B901 /* BLEReconnectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD2792CF5A23C00A2B901 /* BLEReconnectable.swift */; };
 		184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */; };
 		184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */; };
 		186750992C05B7DF00A369B5 /* WaveAnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186750982C05B7DF00A369B5 /* WaveAnimateView.swift */; };
@@ -111,6 +114,9 @@
 
 /* Begin PBXFileReference section */
 		12F5E5A4DC30D6A96A4CC4E3 /* Pods_HBSwiftKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBSwiftKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		180AD2742CF5739D00A2B901 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
+		180AD2772CF5762F00A2B901 /* BLEPeripheralMatching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEPeripheralMatching.swift; sourceTree = "<group>"; };
+		180AD2792CF5A23C00A2B901 /* BLEReconnectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEReconnectable.swift; sourceTree = "<group>"; };
 		184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCDataPicker.swift; sourceTree = "<group>"; };
 		184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTDatePicker.swift; sourceTree = "<group>"; };
 		186750982C05B7DF00A369B5 /* WaveAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimateView.swift; sourceTree = "<group>"; };
@@ -252,6 +258,16 @@
 				9A8871220770A8D795C87930 /* Pods-HBSwiftKit_Tests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		180AD2762CF573FA00A2B901 /* 蓝牙管理类 */ = {
+			isa = PBXGroup;
+			children = (
+				180AD2742CF5739D00A2B901 /* BLEManager.swift */,
+				180AD2772CF5762F00A2B901 /* BLEPeripheralMatching.swift */,
+				180AD2792CF5A23C00A2B901 /* BLEReconnectable.swift */,
+			);
+			path = "蓝牙管理类";
 			sourceTree = "<group>";
 		};
 		188692C92C5743C7007CD12A /* CocoaMQTT */ = {
@@ -528,8 +544,6 @@
 				B5BAC828255A7818005A5179 /* ImageBrowerController.swift */,
 				B5BAC829255A7818005A5179 /* NumberPickerController.swift */,
 				B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */,
-				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
-				4207008E2A4D7D1900039415 /* BLEAdapter.swift */,
 				184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */,
 				184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */,
 				B5BAC82C255A7818005A5179 /* DatePickerController.swift */,
@@ -539,6 +553,9 @@
 				B5832B1F270FD6EE0084C78E /* VideoTestController.swift */,
 				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
 				18C5037E2C50F82700EB50B4 /* MQTTTestController.swift */,
+				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
+				4207008E2A4D7D1900039415 /* BLEAdapter.swift */,
+				180AD2762CF573FA00A2B901 /* 蓝牙管理类 */,
 				188692C92C5743C7007CD12A /* CocoaMQTT */,
 				B595A8CD27CCB00B007EF16E /* 临时验证类 */,
 				B5E4AABE27F5546E00D84C78 /* 遥控方向盘 */,
@@ -933,6 +950,7 @@
 				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
 				B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */,
 				B546BFB527F442D9006EA745 /* ViewReusePool.swift in Sources */,
+				180AD2782CF5762F00A2B901 /* BLEPeripheralMatching.swift in Sources */,
 				B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				B5825E3326F0877C00539866 /* VideoCropView.swift in Sources */,
@@ -970,6 +988,7 @@
 				188692CB2C5743D5007CD12A /* MQTTClient.swift in Sources */,
 				B595A8D527CCB07F007EF16E /* LoggerListController.swift in Sources */,
 				B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */,
+				180AD2752CF5739D00A2B901 /* BLEManager.swift in Sources */,
 				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,
 				18C5037F2C50F82700EB50B4 /* MQTTTestController.swift in Sources */,
 				B5FEFA3B27462A6F00DA6999 /* SlidePickerView.swift in Sources */,
@@ -980,6 +999,7 @@
 				18B671992B3BBFC600793476 /* Extension+TextField.swift in Sources */,
 				B56D8C6C27CF29E90032EA97 /* YTTabController.swift in Sources */,
 				B546325A280010420026662F /* DesignMode.swift in Sources */,
+				180AD27A2CF5A23C00A2B901 /* BLEReconnectable.swift in Sources */,
 				B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */,
 				B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */,
 				B595A8D327CCB07F007EF16E /* LoggerManager.swift in Sources */,
