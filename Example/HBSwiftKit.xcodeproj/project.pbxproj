@@ -11,6 +11,8 @@
 		180AD2752CF5739D00A2B901 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD2742CF5739D00A2B901 /* BLEManager.swift */; };
 		180AD2782CF5762F00A2B901 /* BLEPeripheralMatching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD2772CF5762F00A2B901 /* BLEPeripheralMatching.swift */; };
 		180AD27A2CF5A23C00A2B901 /* BLEReconnectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD2792CF5A23C00A2B901 /* BLEReconnectable.swift */; };
+		180AD27C2CF5FE4500A2B901 /* BLEAdvDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD27B2CF5FE4500A2B901 /* BLEAdvDataParser.swift */; };
+		180AD27E2CF6FDDC00A2B901 /* BLEEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD27D2CF6FDDC00A2B901 /* BLEEnums.swift */; };
 		184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */; };
 		184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */; };
 		186750992C05B7DF00A369B5 /* WaveAnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186750982C05B7DF00A369B5 /* WaveAnimateView.swift */; };
@@ -117,6 +119,8 @@
 		180AD2742CF5739D00A2B901 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		180AD2772CF5762F00A2B901 /* BLEPeripheralMatching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEPeripheralMatching.swift; sourceTree = "<group>"; };
 		180AD2792CF5A23C00A2B901 /* BLEReconnectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEReconnectable.swift; sourceTree = "<group>"; };
+		180AD27B2CF5FE4500A2B901 /* BLEAdvDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAdvDataParser.swift; sourceTree = "<group>"; };
+		180AD27D2CF6FDDC00A2B901 /* BLEEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEEnums.swift; sourceTree = "<group>"; };
 		184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCDataPicker.swift; sourceTree = "<group>"; };
 		184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTDatePicker.swift; sourceTree = "<group>"; };
 		186750982C05B7DF00A369B5 /* WaveAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimateView.swift; sourceTree = "<group>"; };
@@ -263,9 +267,11 @@
 		180AD2762CF573FA00A2B901 /* 蓝牙管理类 */ = {
 			isa = PBXGroup;
 			children = (
+				180AD27D2CF6FDDC00A2B901 /* BLEEnums.swift */,
 				180AD2742CF5739D00A2B901 /* BLEManager.swift */,
 				180AD2772CF5762F00A2B901 /* BLEPeripheralMatching.swift */,
 				180AD2792CF5A23C00A2B901 /* BLEReconnectable.swift */,
+				180AD27B2CF5FE4500A2B901 /* BLEAdvDataParser.swift */,
 			);
 			path = "蓝牙管理类";
 			sourceTree = "<group>";
@@ -553,8 +559,8 @@
 				B5832B1F270FD6EE0084C78E /* VideoTestController.swift */,
 				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
 				18C5037E2C50F82700EB50B4 /* MQTTTestController.swift */,
-				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
 				4207008E2A4D7D1900039415 /* BLEAdapter.swift */,
+				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
 				180AD2762CF573FA00A2B901 /* 蓝牙管理类 */,
 				188692C92C5743C7007CD12A /* CocoaMQTT */,
 				B595A8CD27CCB00B007EF16E /* 临时验证类 */,
@@ -974,6 +980,7 @@
 				B5FF3854280EA0B70063BF26 /* MVVM.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
+				180AD27E2CF6FDDC00A2B901 /* BLEEnums.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
 				B595A8D727CCB154007EF16E /* StarRateView.swift in Sources */,
 				B58F80AE273CB51500C778D5 /* OpenCVWrapper.mm in Sources */,
@@ -983,6 +990,7 @@
 				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
 				B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */,
 				B50055A627C375A700467E55 /* LightAttrPickerView+Views.swift in Sources */,
+				180AD27C2CF5FE4500A2B901 /* BLEAdvDataParser.swift in Sources */,
 				4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */,
 				B546BFB727F455C5006EA745 /* IndexTableView.swift in Sources */,
 				188692CB2C5743D5007CD12A /* MQTTClient.swift in Sources */,

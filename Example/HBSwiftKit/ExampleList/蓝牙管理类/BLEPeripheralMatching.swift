@@ -31,6 +31,7 @@ struct DefaultMatchingStrategy: BLEPeripheralMatching {
     }
 }
 
+// MARK: - 以下为示例
 /// 字节匹配策略
 struct StartsByteMatchingStrategy: BLEPeripheralMatching {
     let targetBytes: [UInt8]

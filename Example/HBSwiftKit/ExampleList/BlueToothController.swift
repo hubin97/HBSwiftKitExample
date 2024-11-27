@@ -19,8 +19,10 @@ class BlueToothController: BaseViewController {
             .setDebugMode(true)
             .setLogTag("[BLEManager]: ")
             .enableAutoReconnect(true)
-            .setMatchingStrategy(RegexMatchingStrategy(mode: .advertisementData([0xaa])))
+            .setMatchingStrategy(RegexMatchingStrategy(mode: .advertisementData([0xaa, 0x01])))
             .setTargetServices([CBUUID(string: "AF00")])  // "AF00": 服务UUID
+            .setWriteCharUUID(CBUUID(string: "AF01"))     // "AF01": 写特征UUID
+            .setNotifyCharUUID(CBUUID(string: "AF02"))    // "AF02": 通知特征UUID
     }()
     
     var peripherals = [CBPeripheral]()
@@ -71,12 +73,22 @@ extension BlueToothController {
             .setOnStateChanged { state in
                 print("蓝牙状态更新: \(state.rawValue)")
             }
-            .setOnPeripheralDiscovered {[weak self] peripheral in
-                guard let self = self else { return }
-                print("发现外设: \(peripheral.name ?? "未知"); 共: \(self.bleManager.discoveredPeripherals.map({ $0.name ?? "未知" }))")
-                self.peripherals.append(peripheral)
-                self.listView.reloadData()
+            .setAdvertisementParser(MACParser())
+            .setOnPeripheralDiscoveredWithParser {[weak self] (peripheral, pDataProvider, parse: String?) in
+                if let self = self, let data = parse, let manufacturerData = pDataProvider.advertisementData["kCBAdvDataManufacturerData"] as? Data {
+                    let manufacturerBytes = [UInt8](manufacturerData).map({String(format: "%02x", $0).uppercased()})
+                    print("发现外设: \(peripheral.name ?? "未知") 广播包: \(manufacturerBytes) 信号: \(pDataProvider.rssi) 解析Mac地址: \(data)")
+                    self.peripherals.append(peripheral)
+                    self.listView.reloadData()
+                }
             }
+//            .setOnPeripheralDiscovered {[weak self] peripheral, pDataProvider in
+//                guard let self = self, let manufacturerData = pDataProvider.advertisementData["kCBAdvDataManufacturerData"] else { return }
+//                print("发现外设: \(peripheral.name ?? "未知"), \(manufacturerData), \(pDataProvider.rssi)")
+//                //print("共: \(self.bleManager.discoveredPeripherals.map({ $0.name ?? "未知" }))")
+//                self.peripherals.append(peripheral)
+//                self.listView.reloadData()
+//            }
 //            .setOnScanCompleted {[weak self] peripherals in
 //                guard let self = self else { return }
 //                print("扫描完成. 共发现 \(peripherals.count) 个外设, 共: \(self.bleManager.discoveredPeripherals.map({ $0.name ?? "未知" }))")
@@ -116,14 +128,22 @@ extension BlueToothController {
                 case .timedOut(let peripheral):
                     print("连接超时: \(peripheral.name ?? "未知")")
                 case .disconnected(let peripheral, let reason):
-                     switch reason {
-                     case .userInitiated:
-                         print("用户主动断开设备: \(peripheral.name ?? "未知")")
-                         // 不做重连
-                     case .unexpected(let error):
-                         print("设备异常断开: \(peripheral.name ?? "未知")，错误: \(error.localizedDescription)")
-                         // 触发重连或其他逻辑
-                     }
+                    switch reason {
+                    case .userInitiated:
+                        print("用户主动断开设备: \(peripheral.name ?? "未知")")
+                    case .unexpected(let error):
+                        print("设备异常断开: \(peripheral.name ?? "未知")，错误: \(error.localizedDescription)")
+                    }
+                case .onReady(let result):
+                    switch result {
+                    case .success(let peripheral, _):
+                        print("通道准备就绪: \(peripheral.name ?? "未知")")
+                        
+                        let cmd = ["AA", "55", "00", "F0", "04", "AA", "55", "11", "00", "FC"].map { UInt8($0, radix: 16)! }
+                        bleManager.wirteData(Data(cmd), for: peripheral)
+                    case .failure(let peripheral, let error):
+                        print("通道准备失败: \(peripheral.name ?? "未知")，错误: \(error.localizedDescription)")
+                    }
                 }
             }
 //            .setOnDisconnected {[weak self] peripheral, error  in
@@ -144,11 +164,43 @@ extension BlueToothController {
             .onMaxReconnectAttemptsReached { peripheral in
                 print("达到最大重连次数: \(peripheral.name ?? "未知")")
             }
-
-            .setOnDataReceived { peripheral, data in
-                print("收到数据: \(peripheral.name ?? "未知"). \(data.count) 字节")
+//            .setOnChannalReadyResult {[weak self] result in
+//                guard let self = self else { return }
+//                switch result {
+//                case .success(let peripheral, let service):
+//                    print("通道准备就绪: \(peripheral.name ?? "未知") \(service.characteristics?.count ?? 0) 个")
+//
+//                    //let cmd = [0xAA, 0x55, 0x00]
+//                    let cmd = ["AA", "55", "00", "F0", "04", "AA", "55", "11", "00", "FC"].map { UInt8($0, radix: 16)! }
+//                    bleManager.wirteData(Data(cmd), for: peripheral)
+//                case .failure(let peripheral, let error):
+//                    print("通道准备失败: \(peripheral.name ?? "未知")，错误: \(error.localizedDescription)")
+//                }
+//            }
+//            .setOnCharWriteResult { result in
+//                switch result {
+//                case .success(let peripheral, _):
+//                    print("写入成功: \(peripheral.name ?? "未知")")
+//                case .failure(let peripheral, _, let error):
+//                    print("写入失败: \(peripheral.name ?? "未知"), Error: \(error.localizedDescription)")
+//                }
+//            }
+            .setOnDataReceived { result in
+                // 仅有成功的情况
+                if case let .success(peripheral, _, data) = result {
+                    let hex = data.map { String(format: "%02X", $0) }
+                    print("收到数据: \(peripheral.name ?? "未知"). \(hex)")
+                }
             }
-        
+//            .setOnCharValueUpdateResult { result in
+//                switch result {
+//                case .success(let peripheral, _, let data):
+//                    let hex = data.map { String(format: "%02X", $0) }
+//                    print("特征值更新: \(peripheral.name ?? "未知"). \(hex)")
+//                case .failure(let peripheral, _, let error):
+//                    print("特征值更新失败: \(peripheral.name ?? "未知"), Error: \(error.localizedDescription)")
+//                }
+//            }
     }
 }
 
@@ -156,7 +208,17 @@ extension BlueToothController {
 extension BlueToothController {
 
     @objc func scanAction() {
-        bleManager.startScanning(timeout: 20)
+        let sheet = UIAlertController.init(title: "", message: "选择操作方式", preferredStyle: .actionSheet)
+        sheet.addAction(UIAlertAction.init(title: "开始扫描", style: .default, handler: { [weak self] _ in
+            self?.bleManager.startScanning(timeout: 20)
+        }))
+        sheet.addAction(UIAlertAction.init(title: "下发指令F0", style: .default, handler: { [weak self] _ in
+            let cmd = ["AA", "55", "00", "F0", "04", "AA", "55", "11", "00", "FC"].map { UInt8($0, radix: 16)! }
+            if let p = self?.peripherals.first(where: { $0.state == .connected }) {
+                self?.bleManager.wirteData(Data(cmd), for: p)
+            }
+        }))
+        self.present(sheet, animated: true, completion: nil)
     }
     
     func updatePreipherals(with peripheral: CBPeripheral) {
