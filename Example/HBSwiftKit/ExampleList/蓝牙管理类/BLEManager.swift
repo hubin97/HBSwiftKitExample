@@ -37,7 +37,7 @@ struct BLEPeripheraData {
 }
 
 // MARK: - main class
-class BLEManager: NSObject, BLEReconnectable {
+class BLEManager: NSObject, BLEReconnectable, BLEWriteTimeoutHandler {
 
     static let shared = BLEManager()
 
@@ -54,6 +54,14 @@ class BLEManager: NSObject, BLEReconnectable {
     var onReconnectStarted: ((CBPeripheral) -> Void)?
     var onReconnectFinished: ((CBPeripheral) -> Void)?
     var currentReconnectAttempts: [CBPeripheral: Int] = [:]
+    
+    // MARK: BLEWriteTimeoutHandler 协议属性
+    var writeCmdLock = NSLock()
+    var openWriteTimeout: Bool = false
+    var withResponse: Bool = false
+    var cmdComparisonRule: ((BLEWriteData, Data) -> Bool)?
+    var peripheralQueues: [String: BLEPriorityQueue<BLEWriteData>] = [:]
+    var writeTimeoutHandle: ((BLEWriteData) -> Void)?
     
     // MARK: Peripheral Data Parsing
     private var parser: (any BLEAdvDataParser)?
@@ -94,7 +102,7 @@ class BLEManager: NSObject, BLEReconnectable {
     // notify特征值UUID
     private var notifyCharUUID: CBUUID?
     // 记录写特征值 (兼容多设备连接场景, 一个外设对应一个写特征值)
-    private var writeChars: [CBPeripheral: CBCharacteristic] = [:]
+    var writeChars: [CBPeripheral: CBCharacteristic] = [:]
 
     /// 数据回调 (仅返回`BLECharValueUpdateResult` 成功的回调)
     private var onDataReceived: ((BLECharValueUpdateResult) -> Void)?
@@ -297,6 +305,9 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
         if let data = characteristic.value {
             onDataReceived?(.success(peripheral, characteristic, data))
             onCharValueUpdateResult?(.success(peripheral, characteristic, data))
+            
+            // 如果开启写超时处理, 更新外设队列数据
+            didUpdatePeripheralQueues(peripheral: peripheral, receiveData: data)
         }
     }
     
@@ -385,8 +396,16 @@ extension BLEManager {
             printLog("未找到可写特征值")
             return self
         }
-        printLog("写入数据(\(char)): \(data.map({ String(format: "%02x", $0) }).joined(separator: " "))")
-        peripheral.writeValue(data, for: char, type: type)
+        
+        // 如果开启写超时处理, 使用队列处理
+        if openWriteTimeout {
+            let bleData = BLEWriteData(peripheral: peripheral, writeChar: char, data: data)
+            writeData(bleData, withResponse: type == .withResponse)
+            printLog("写入数据(\(bleData.requestId.uuidString)): \(bleData.data.map({ String(format: "%02x", $0) }).joined(separator: " "))")
+        } else {
+            peripheral.writeValue(data, for: char, type: type)
+            printLog("写入数据(\(peripheral.identifier.uuidString)): \(data.map({ String(format: "%02x", $0) }).joined(separator: " "))")
+        }
         return self
     }
 }
@@ -435,6 +454,24 @@ extension BLEManager {
     @discardableResult
     func setNotifyCharUUID(_ uuid: CBUUID) -> Self {
         self.notifyCharUUID = uuid
+        return self
+    }
+    
+    @discardableResult
+    func setOpenWriteTimeout(_ open: Bool) -> Self {
+        self.openWriteTimeout = open
+        return self
+    }
+    
+    @discardableResult
+    func setCmdComparisonRule(_ rule: @escaping (BLEWriteData, Data) -> Bool) -> Self {
+        self.cmdComparisonRule = rule
+        return self
+    }
+    
+    @discardableResult
+    func setWriteTimeoutHandle(_ handler: @escaping (BLEWriteData) -> Void) -> Self {
+        self.writeTimeoutHandle = handler
         return self
     }
 }

@@ -13,6 +13,9 @@
 		180AD27A2CF5A23C00A2B901 /* BLEReconnectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD2792CF5A23C00A2B901 /* BLEReconnectable.swift */; };
 		180AD27C2CF5FE4500A2B901 /* BLEAdvDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD27B2CF5FE4500A2B901 /* BLEAdvDataParser.swift */; };
 		180AD27E2CF6FDDC00A2B901 /* BLEEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD27D2CF6FDDC00A2B901 /* BLEEnums.swift */; };
+		180AD2802CF716A100A2B901 /* BLEWriteTimeoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD27F2CF716A100A2B901 /* BLEWriteTimeoutHandler.swift */; };
+		180AD28C2CF8720A00A2B901 /* BLEPriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD28B2CF8720A00A2B901 /* BLEPriorityQueue.swift */; };
+		180AD28E2CF95B8300A2B901 /* BLEWriteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD28D2CF95B8300A2B901 /* BLEWriteData.swift */; };
 		184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */; };
 		184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */; };
 		186750992C05B7DF00A369B5 /* WaveAnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186750982C05B7DF00A369B5 /* WaveAnimateView.swift */; };
@@ -121,6 +124,9 @@
 		180AD2792CF5A23C00A2B901 /* BLEReconnectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEReconnectable.swift; sourceTree = "<group>"; };
 		180AD27B2CF5FE4500A2B901 /* BLEAdvDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAdvDataParser.swift; sourceTree = "<group>"; };
 		180AD27D2CF6FDDC00A2B901 /* BLEEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEEnums.swift; sourceTree = "<group>"; };
+		180AD27F2CF716A100A2B901 /* BLEWriteTimeoutHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEWriteTimeoutHandler.swift; sourceTree = "<group>"; };
+		180AD28B2CF8720A00A2B901 /* BLEPriorityQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEPriorityQueue.swift; sourceTree = "<group>"; };
+		180AD28D2CF95B8300A2B901 /* BLEWriteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEWriteData.swift; sourceTree = "<group>"; };
 		184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCDataPicker.swift; sourceTree = "<group>"; };
 		184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTDatePicker.swift; sourceTree = "<group>"; };
 		186750982C05B7DF00A369B5 /* WaveAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimateView.swift; sourceTree = "<group>"; };
@@ -272,6 +278,9 @@
 				180AD2772CF5762F00A2B901 /* BLEPeripheralMatching.swift */,
 				180AD2792CF5A23C00A2B901 /* BLEReconnectable.swift */,
 				180AD27B2CF5FE4500A2B901 /* BLEAdvDataParser.swift */,
+				180AD27F2CF716A100A2B901 /* BLEWriteTimeoutHandler.swift */,
+				180AD28D2CF95B8300A2B901 /* BLEWriteData.swift */,
+				180AD28B2CF8720A00A2B901 /* BLEPriorityQueue.swift */,
 			);
 			path = "蓝牙管理类";
 			sourceTree = "<group>";
@@ -951,8 +960,10 @@
 				B5C6C5EA25ECD38800C88C1C /* Wto_ImageBrower.swift in Sources */,
 				B5E8E48227F19459006CED16 /* NetworkApi.swift in Sources */,
 				B5F520932704615E00BACB9C /* VideoPlayController.swift in Sources */,
+				180AD2802CF716A100A2B901 /* BLEWriteTimeoutHandler.swift in Sources */,
 				B5825E2E26F04D7D00539866 /* VideoFrameView.swift in Sources */,
 				B595A8D427CCB07F007EF16E /* LoggerAssistant.swift in Sources */,
+				180AD28E2CF95B8300A2B901 /* BLEWriteData.swift in Sources */,
 				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
 				B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */,
 				B546BFB527F442D9006EA745 /* ViewReusePool.swift in Sources */,
@@ -980,6 +991,7 @@
 				B5FF3854280EA0B70063BF26 /* MVVM.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
+				180AD28C2CF8720A00A2B901 /* BLEPriorityQueue.swift in Sources */,
 				180AD27E2CF6FDDC00A2B901 /* BLEEnums.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
 				B595A8D727CCB154007EF16E /* StarRateView.swift in Sources */,
@@ -1295,7 +1307,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = YTPNCWF278;
+				DEVELOPMENT_TEAM = YP9F4937J4;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = HBSwiftKit_Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1330,7 +1342,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YTPNCWF278;
+				DEVELOPMENT_TEAM = YP9F4937J4;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = HBSwiftKit_Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

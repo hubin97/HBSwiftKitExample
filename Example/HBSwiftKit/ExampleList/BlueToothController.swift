@@ -16,13 +16,14 @@ class BlueToothController: BaseViewController {
 
     let bleManager: BLEManager = {
         return BLEManager.shared
-            .setDebugMode(true)
-            .setLogTag("[BLEManager]: ")
-            .enableAutoReconnect(true)
-            .setMatchingStrategy(RegexMatchingStrategy(mode: .advertisementData([0xaa, 0x01])))
+            .setDebugMode(true) // 开启调试模式, 打印日志
+            .setLogTag("[BLEManager]: ") // 插入日志标记
+            .enableAutoReconnect(true) // 开启自动重连
+            .setMatchingStrategy(RegexMatchingStrategy(mode: .advertisementData([0xaa, 0x01]))) // 匹配策略
             .setTargetServices([CBUUID(string: "AF00")])  // "AF00": 服务UUID
             .setWriteCharUUID(CBUUID(string: "AF01"))     // "AF01": 写特征UUID
             .setNotifyCharUUID(CBUUID(string: "AF02"))    // "AF02": 通知特征UUID
+            .setOpenWriteTimeout(true) // 开启写入超时处理
     }()
     
     var peripherals = [CBPeripheral]()
@@ -44,6 +45,7 @@ class BlueToothController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "搜索", style: .plain, target: self, action: #selector(scanAction))
         self.view.addSubview(listView)   
         
+        self.dataSetup()
         self.addBleObserver()
     }
     
@@ -61,6 +63,11 @@ class BlueToothController: BaseViewController {
 
 extension BlueToothController {
 
+    func dataSetup() {
+        //var cmdQueue = BLEPriorityQueue<BLEWriteData>()
+        // cmdQueue.enqueue(BLEWriteData(peripheral: CBPeripheral(), data: Data()))
+    }
+    
     func addBleObserver() {
         
         bleManager
@@ -192,6 +199,12 @@ extension BlueToothController {
                     print("收到数据: \(peripheral.name ?? "未知"). \(hex)")
                 }
             }
+            .setCmdComparisonRule { cmdData, ackData in
+                let reqData = cmdData.data
+                let success = reqData[0] == ackData[0] && reqData[1] == ackData[1] && reqData[3] == ackData[3]
+                print("比较: \(success ? "成功" : "失败"), \(success ? "" : "\(reqData[3]) != \(ackData[3])")")
+                return success
+            }
 //            .setOnCharValueUpdateResult { result in
 //                switch result {
 //                case .success(let peripheral, _, let data):
@@ -201,8 +214,32 @@ extension BlueToothController {
 //                    print("特征值更新失败: \(peripheral.name ?? "未知"), Error: \(error.localizedDescription)")
 //                }
 //            }
+            .setWriteTimeoutHandle { data in
+                print("写入超时处理: \(data.uuid). \(data.requestId.uuidString)")
+            }
+    }
+    
+    func cmdWriteTest(for peripheral: CBPeripheral) {
+        let cmd = ["AA", "55", "00", "F0", "04", "AA", "55", "11", "00", "FC"].map { UInt8($0, radix: 16)! }
+        
+        /// 临时测试指令
+        let cmdx = ["AA", "55", "00", "0A", "04", "AA", "55", "11", "00", "FC"].map { UInt8($0, radix: 16)! }
+
+        self.bleManager.wirteData(Data(cmd), for: peripheral)
+
+        if cnt > 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {[weak self] in
+                self?.cmdWriteTest(for: peripheral)
+                
+                if cnt % 3 == 0 {
+                    self?.bleManager.wirteData(Data(cmdx), for: peripheral)
+                }
+                cnt -= 1
+            }
+        }
     }
 }
+var cnt = 40
 
 // MARK: - private mothods
 extension BlueToothController {
@@ -218,6 +255,15 @@ extension BlueToothController {
                 self?.bleManager.wirteData(Data(cmd), for: p)
             }
         }))
+        sheet.addAction(UIAlertAction.init(title: "模拟超时下发指令F0", style: .default, handler: { [weak self] _ in
+//            if let p = self?.peripherals.first {
+//                self?.cmdWriteTest(for: p)
+//            }
+            self?.peripherals.forEach { p in
+                self?.cmdWriteTest(for: p)
+            }
+        }))
+        
         self.present(sheet, animated: true, completion: nil)
     }
     
