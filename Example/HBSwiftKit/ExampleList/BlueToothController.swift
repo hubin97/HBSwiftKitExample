@@ -18,12 +18,19 @@ class BlueToothController: BaseViewController {
         return BLEManager.shared
             .setDebugMode(true) // 开启调试模式, 打印日志
             .setLogTag("[BLEManager]: ") // 插入日志标记
-            .enableAutoReconnect(true) // 开启自动重连
+            .enableAutoReconnect(true)   // 开启自动重连
             .setMatchingStrategy(RegexMatchingStrategy(mode: .advertisementData([0xaa, 0x01]))) // 匹配策略
+            .setAdvertisementParser(MACParser()) // 广播包解析器 (MAC地址解析器, 由外部业务而定)
             .setTargetServices([CBUUID(string: "AF00")])  // "AF00": 服务UUID
             .setWriteCharUUID(CBUUID(string: "AF01"))     // "AF01": 写特征UUID
             .setNotifyCharUUID(CBUUID(string: "AF02"))    // "AF02": 通知特征UUID
             .setOpenWriteTimeout(true) // 开启写入超时处理
+            .setCmdComparisonRule { cmdData, ackData in   // 指令超时使用比较规则
+                let reqData = cmdData.data
+                let success = reqData[0] == ackData[0] && reqData[1] == ackData[1] && reqData[3] == ackData[3]
+                print("比较: \(success ? "成功" : "失败"), \(success ? "" : "\(reqData[3]) != \(ackData[3])")")
+                return success
+            }
     }()
     
     var peripherals = [CBPeripheral]()
@@ -45,14 +52,15 @@ class BlueToothController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "搜索", style: .plain, target: self, action: #selector(scanAction))
         self.view.addSubview(listView)   
         
-        self.dataSetup()
-        self.addBleObserver()
+        self.oberverMethod()
+        //self.chainableMethod()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // 开始扫描
         bleManager.startScanning(timeout: 20)
+      
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -61,14 +69,105 @@ class BlueToothController: BaseViewController {
     }
 }
 
+// MARK: - Rx
 extension BlueToothController {
-
-    func dataSetup() {
-        //var cmdQueue = BLEPriorityQueue<BLEWriteData>()
-        // cmdQueue.enqueue(BLEWriteData(peripheral: CBPeripheral(), data: Data()))
-    }
     
-    func addBleObserver() {
+    func oberverMethod() {
+        
+        bleManager.rx.managerStateUpdate().subscribe(onNext: { state in
+            print("蓝牙状态更新: \(state.rawValue)")
+        }).disposed(by: rx.disposeBag)
+        
+        bleManager.rx.scanStateUpdate().subscribe(onNext: { [weak self] state in
+            guard let self = self else { return }
+            print("扫描状态更新: \(state)")
+            switch state {
+            case .started:
+                break
+            case .stopped:
+                print("扫描完成. 共发现 \(self.peripherals.count) 个外设, 共: \(self.bleManager.discoveredPeripherals.map({ $0.name ?? "未知" }))")
+            }
+        }).disposed(by: rx.disposeBag)
+        
+//        bleManager.rx.peripheralDiscovered().subscribe(onNext: { [weak self] (peripheral, pDataProvider) in
+//            //guard let self = self else { return }
+//            if let manufacturerData = pDataProvider.advertisementData["kCBAdvDataManufacturerData"] as? Data {
+//                let manufacturerBytes = [UInt8](manufacturerData).map({String(format: "%02x", $0).uppercased()})
+//                print("常规发现外设: \(peripheral.name ?? "未知") 广播包: \(manufacturerBytes) 信号: \(pDataProvider.rssi)")
+////                self.peripherals.append(peripheral)
+////                self.listView.reloadData()
+//            }
+//        }).disposed(by: rx.disposeBag)
+        
+        bleManager.rx.peripheralDiscoveredWithParser().subscribe(onNext: { [weak self] (peripheral, pDataProvider, parse: String?) in
+            guard let self = self else { return }
+            if let data = parse, let manufacturerData = pDataProvider.advertisementData["kCBAdvDataManufacturerData"] as? Data {
+                let manufacturerBytes = [UInt8](manufacturerData).map({String(format: "%02x", $0).uppercased()})
+                print("指定发现外设: \(peripheral.name ?? "未知") 广播包: \(manufacturerBytes) 信号: \(pDataProvider.rssi) 解析Mac地址: \(data)")
+                self.peripherals.append(peripheral)
+                self.listView.reloadData()
+            }
+        }).disposed(by: rx.disposeBag)
+        
+        bleManager.rx.connectStateUpdate().subscribe(onNext: { [weak self] state, peripheral in
+            guard let self = self else { return }
+            self.updatePreipherals(with: peripheral)
+            switch state {
+            case .connecting(let peripheral):
+                print("连接中: \(peripheral.name ?? "未知")")
+            case .connected(let peripheral):
+                print("连接成功: \(peripheral.name ?? "未知")")
+            case .failed(let peripheral, let error):
+                print("连接失败: \(peripheral.name ?? "未知")，错误: \(error?.localizedDescription ?? "无")")
+            case .timedOut(let peripheral):
+                print("连接超时: \(peripheral.name ?? "未知")")
+            case .disconnected(let peripheral, let reason):
+                switch reason {
+                case .userInitiated:
+                    print("用户主动断开设备: \(peripheral.name ?? "未知")")
+                case .unexpected(let error):
+                    print("设备异常断开: \(peripheral.name ?? "未知")，错误: \(error.localizedDescription)")
+                }
+            case .onReady(let result):
+                switch result {
+                case .success(let peripheral, _):
+                    print("通道准备就绪: \(peripheral.name ?? "未知")")
+                    
+                    let cmd = ["AA", "55", "00", "F0", "04", "AA", "55", "11", "00", "FC"].map { UInt8($0, radix: 16)! }
+                    bleManager.wirteData(Data(cmd), for: peripheral)
+                case .failure(let peripheral, let error):
+                    print("通道准备失败: \(peripheral.name ?? "未知")，错误: \(error.localizedDescription)")
+                }
+            }
+        }).disposed(by: rx.disposeBag)
+        
+        bleManager.rx.reconnectPhaseUpdate().subscribe(onNext: { peripheral, state in
+            switch state {
+            case .started:
+                print("重连开始: \(peripheral.name ?? "未知")")
+            case .stopped(let result):
+                print("重连停止: \(result == .success ? "成功" : "超时")")
+            }
+        }).disposed(by: rx.disposeBag)
+        
+        bleManager.rx.dataReceived().subscribe(onNext: { result in
+            // 仅有成功的情况
+            if case let .success(peripheral, _, data) = result {
+                let hex = data.map { String(format: "%02X", $0) }
+                print("收到数据: \(peripheral.name ?? "未知"). \(hex)")
+            }
+        }).disposed(by: rx.disposeBag)
+        
+        bleManager.rx.writeTimeout().subscribe(onNext: { data in
+            print("写入超时处理: \(data.uuid). \(data.description)")
+        }).disposed(by: rx.disposeBag)
+    }
+}
+
+// MARK: Chainable
+extension BlueToothController {
+    
+    func chainableMethod() {
         
         bleManager
 //            .setDebugMode(true)
@@ -80,7 +179,6 @@ extension BlueToothController {
             .setOnStateChanged { state in
                 print("蓝牙状态更新: \(state.rawValue)")
             }
-            .setAdvertisementParser(MACParser())
             .setOnPeripheralDiscoveredWithParser {[weak self] (peripheral, pDataProvider, parse: String?) in
                 if let self = self, let data = parse, let manufacturerData = pDataProvider.advertisementData["kCBAdvDataManufacturerData"] as? Data {
                     let manufacturerBytes = [UInt8](manufacturerData).map({String(format: "%02x", $0).uppercased()})
@@ -162,15 +260,17 @@ extension BlueToothController {
 //                    print("用户主动断开连接: \(peripheral.name ?? "未知")")
 //                }
 //            }
-            .onReconnectStarted { peripheral in
-                print("重连开始: \(peripheral.name ?? "未知")")
+            .onReconnectPhase { peripheral, state in
+                switch state {
+                case .started:
+                    print("重连开始: \(peripheral.name ?? "未知")")
+                case .stopped(let result):
+                    print("重连停止: \(result == .success ? "成功" : "超时")")
+                }
             }
-            .onReconnectFinished { peripheral in
-                print("重连结束: \(peripheral.name ?? "未知")")
-            }
-            .onMaxReconnectAttemptsReached { peripheral in
-                print("达到最大重连次数: \(peripheral.name ?? "未知")")
-            }
+//            .onMaxReconnectAttemptsReached { peripheral in
+//                print("达到最大重连次数: \(peripheral.name ?? "未知")")
+//            }
 //            .setOnChannalReadyResult {[weak self] result in
 //                guard let self = self else { return }
 //                switch result {

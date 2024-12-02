@@ -17,7 +17,7 @@ protocol BLEWriteTimeoutHandler where Self: BLEManager {
     
     var writeCmdLock: NSLock { get }
 
-    /// 开启写超时处理
+    /// 开启写超时处理, 注意 是否超时是基于外部定义的比较规则而定的, 及`cmdComparisonRule`闭包
     var openWriteTimeout: Bool { get set }
     /// 指令数据比较规则闭包
     var cmdComparisonRule: ((BLEWriteData, Data) -> Bool)? { get set }
@@ -81,15 +81,6 @@ extension BLEWriteTimeoutHandler {
         let type: CBCharacteristicWriteType = self.withResponse ? .withResponse : .withoutResponse
         writeData.peripheral.writeValue(writeData.data, for: writeData.writeChar, type: type)
 
-//        // 设置超时处理
-//        if openWriteTimeout {
-//            writeData.timer = Timer.scheduledTimer(withTimeInterval: writeData.timeout, repeats: false) { [weak self] _ in
-//                if let queue = self?.peripheralQueues[uuidString], queue.contains(writeData) {
-//                    self?.handleWriteTimeout(writeData)
-//                }
-//            }
-//        }
-        
         if openWriteTimeout {
             // 指令超时处理
             DispatchQueue.main.asyncAfter(deadline: .now() + writeData.timeout) {
@@ -112,13 +103,10 @@ extension BLEWriteTimeoutHandler {
     
     // 更新外设队列数据 跳过忽略超时处理
     func didUpdatePeripheralQueues(peripheral: CBPeripheral, receiveData data: Data) {
-        guard self.openWriteTimeout else { return }
+        guard self.openWriteTimeout, var queue = peripheralQueues[peripheral.identifier.uuidString], let firstWriteData = queue.peek() else { return }
         
-        // 获取当前队列的头部指令
-        if var queue = peripheralQueues[peripheral.identifier.uuidString],
-           let firstWriteData = queue.peek(),
-           let comparisonRule = cmdComparisonRule {
-            
+        // 如果设置了比较规则，则使用比较
+        if let comparisonRule = cmdComparisonRule {
             // 使用外部定义的比较规则进行匹配
             if comparisonRule(firstWriteData, data) {
                 // 匹配成功，移除队列中对应的数据
@@ -130,6 +118,13 @@ extension BLEWriteTimeoutHandler {
             } else {
                 printLog("指令数据不匹配, \(firstWriteData.data[3]) != \(data[3])")
             }
+        } else {
+            // 如果没有设置比较规则，则直接出队; 执行下一条指令
+            queue.dequeue()
+            // 更新队列数据
+            peripheralQueues[peripheral.identifier.uuidString] = queue
+            // 处理下一条指令
+            processNextCommand(for: peripheral)
         }
     }
     

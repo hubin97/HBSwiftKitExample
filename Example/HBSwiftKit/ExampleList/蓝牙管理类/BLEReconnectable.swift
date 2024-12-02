@@ -17,12 +17,8 @@ protocol BLEReconnectable where Self: BLEManager {
     var maxReconnectAttempts: Int { get set }
     /// 重连超时时间
     var reconnectTimeout: TimeInterval { get set }
-    /// 达到最大重连次数的回调
-    var onMaxReconnectAttemptsReached: ((CBPeripheral) -> Void)? { get set }
-    /// 重连开始的回调
-    var onReconnectStarted: ((CBPeripheral) -> Void)? { get set }
-    /// 重连结束的回调 (成功或失败)
-    var onReconnectFinished: ((CBPeripheral) -> Void)? { get set }
+    /// 重连阶段及结果回调 (成功或失败, 达到最大重连次数)
+    var reconnectPhase: ((CBPeripheral, BLEReconnectState) -> Void)? { get set }
     /// 当前重连尝试次数
     var currentReconnectAttempts: [CBPeripheral: Int] { get set }
 
@@ -41,7 +37,7 @@ extension BLEReconnectable {
     // 默认的重连实现
     func startReconnect(for peripheral: CBPeripheral) {
         guard autoReconnect else { return }  // 如果没有启用自动重连，则直接返回
-        onReconnectStarted?(peripheral)
+        reconnectPhase?(peripheral, .started)
         currentReconnectAttempts[peripheral] = 0
         attemptReconnect(for: peripheral)
     }
@@ -52,16 +48,15 @@ extension BLEReconnectable {
         // 如果外设已经连接，停止重连
         if isConnected(to: peripheral) {
             printLog("外设已连接，无需进一步重连: \(peripheral.name ?? "未知")")
-            onReconnectFinished?(peripheral)
+            reconnectPhase?(peripheral, .stopped(.success))
             onConnectionStateChange?(.connected(peripheral), peripheral)
             return
         }
         
         guard let currentAttempts = self.currentReconnectAttempts[peripheral], currentAttempts < maxReconnectAttempts else {
             printLog("达到最大重连次数，停止重连")
-            onMaxReconnectAttemptsReached?(peripheral)
-            onReconnectFinished?(peripheral)
-            
+            reconnectPhase?(peripheral, .stopped(.timeout))
+
             // 超过最大重连次数，触发超时回调
             onConnectionStateChange?(.timedOut(peripheral), peripheral)
             disconnect(peripheral)

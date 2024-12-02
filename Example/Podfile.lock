@@ -41,6 +41,8 @@ PODS:
     - Alamofire (~> 5.0)
   - MqttCocoaAsyncSocket (1.0.8)
   - Nimble (9.2.1)
+  - "NSObject+Rx (5.2.2)":
+    - RxSwift (~> 6.2)
   - ObjectMapper (4.2.0)
   - PromiseKit (6.13.1):
     - PromiseKit/CorePromise (= 6.13.1)
@@ -55,6 +57,12 @@ PODS:
   - R.swift (5.4.0):
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
+  - RxCocoa (6.6.0):
+    - RxRelay (= 6.6.0)
+    - RxSwift (= 6.6.0)
+  - RxRelay (6.6.0):
+    - RxSwift (= 6.6.0)
+  - RxSwift (6.6.0)
   - SnapKit (4.2.0)
   - SVProgressHUD (2.2.5)
   - SwiftAlgorithms (1.0.0)
@@ -71,10 +79,13 @@ DEPENDENCIES:
   - lottie-ios
   - Moya
   - Nimble (~> 9.2.1)
+  - "NSObject+Rx (~> 5.2.2)"
   - ObjectMapper
   - PromiseKit
   - Quick
   - R.swift
+  - RxCocoa (= 6.6.0)
+  - RxSwift (~> 6.6.0)
   - SnapKit
   - SVProgressHUD
   - SwiftLint
@@ -92,11 +103,15 @@ SPEC REPOS:
     - Moya
     - MqttCocoaAsyncSocket
     - Nimble
+    - "NSObject+Rx"
     - ObjectMapper
     - PromiseKit
     - Quick
     - R.swift
     - R.swift.Library
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SnapKit
     - SVProgressHUD
     - SwiftAlgorithms
@@ -119,17 +134,21 @@ SPEC CHECKSUMS:
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   MqttCocoaAsyncSocket: 77d3b74f76228dd5a05d1f9526eab101d415b30c
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
+  "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
   R.swift: c533450b0f7dc494e0993f5f1a1db925d84c3006
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
+  RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
+  RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
+  RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: cbc0d93f2f77de78c47fa8344ad355e7aaec9a85
+PODFILE CHECKSUM: e578af70acbe12ae01d7797b3834fade6e2ae796
 
 COCOAPODS: 1.15.2

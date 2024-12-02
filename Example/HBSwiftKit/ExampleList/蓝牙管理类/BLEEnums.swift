@@ -14,6 +14,13 @@ enum BLEScanState {
     case stopped
 }
 
+/// 重连状态
+enum BLEReconnectResult { case success; case timeout }
+enum BLEReconnectState {
+    case started
+    case stopped(BLEReconnectResult)
+}
+
 /// 断开连接原因
 enum DisconnectReason {
     /// 用户主动断开

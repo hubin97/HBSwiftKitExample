@@ -22,10 +22,11 @@ struct BLEWriteData: Comparable {
     /// 外设UUID
     let uuid: String
 
+    /// 写入数据
     let data: Data
+    /// 写入超时时间
     let timeout: TimeInterval
-//    var timer: Timer?
-
+    /// 请求ID
     let requestId: UUID
     /// 优先级
     var priority: Int
@@ -40,5 +41,12 @@ struct BLEWriteData: Comparable {
         self.data = data
         self.timeout = timeout
         self.priority = priority
+    }
+}
+
+extension BLEWriteData {
+    
+    var description: String {
+        return "BLEWriteData: \(requestId), \(uuid), \(peripheral), \(writeChar), \(data.map { String(format: "%02hhx", $0) })"
     }
 }

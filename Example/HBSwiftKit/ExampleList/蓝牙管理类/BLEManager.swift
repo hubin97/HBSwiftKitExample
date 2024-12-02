@@ -16,10 +16,11 @@
 // 7. 支持设置日志tag
 // 8. 支持自定义外设广播包数据解析器
 // 9. 支持多外设连接, 写入数据
+// 10. 支持写入超时处理
 
-// #2 Rx扩展 (待实现)
+// #2 Rx扩展
 // 1. 消息序列化, 全局可订阅
-// 2. 区分主题, 便于管理
+// 2. 区分主题, 便于管理 x
 
 // #3 问题点
 // 1. 重连协议侵入性较强, 是否可以解耦, 放在外部实现
@@ -44,15 +45,13 @@ class BLEManager: NSObject, BLEReconnectable, BLEWriteTimeoutHandler {
     // 开启debug模式
     private var debugMode = false
     // 插入日志标记
-    private var logTag = "\(Date()) [BLEManager]: "
+    private var logTag = "[BLEManager]: "
     
     // MARK: BLEReconnectable 协议属性
     var autoReconnect = false
     var maxReconnectAttempts = 3  // 最大重连次数
     var reconnectTimeout: TimeInterval = 10  // 重连超时
-    var onMaxReconnectAttemptsReached: ((CBPeripheral) -> Void)?
-    var onReconnectStarted: ((CBPeripheral) -> Void)?
-    var onReconnectFinished: ((CBPeripheral) -> Void)?
+    var reconnectPhase: ((CBPeripheral, BLEReconnectState) -> Void)?
     var currentReconnectAttempts: [CBPeripheral: Int] = [:]
     
     // MARK: BLEWriteTimeoutHandler 协议属性
@@ -564,22 +563,10 @@ extension BLEManager {
 
 // MARK: - Reconnectable 协议方法
 extension BLEManager {
-    
+
     @discardableResult
-    func onReconnectStarted(_ handler: @escaping (CBPeripheral) -> Void) -> Self {
-        self.onReconnectStarted = handler
-        return self
-    }
-    
-    @discardableResult
-    func onReconnectFinished(_ handler: @escaping (CBPeripheral) -> Void) -> Self {
-        self.onReconnectFinished = handler
-        return self
-    }
-    
-    @discardableResult
-    func onMaxReconnectAttemptsReached(_ handler: @escaping (CBPeripheral) -> Void) -> Self {
-        self.onMaxReconnectAttemptsReached = handler
+    func onReconnectPhase(_ handler: @escaping (CBPeripheral, BLEReconnectState) -> Void) -> Self {
+        self.reconnectPhase = handler
         return self
     }
 

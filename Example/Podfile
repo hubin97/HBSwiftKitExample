@@ -32,6 +32,10 @@ target 'HBSwiftKit_Example' do
 
   pod 'lottie-ios' #, '~> 4.4.1'
   
+  pod 'RxSwift', '~> 6.6.0'
+  pod 'RxCocoa', '6.6.0'
+  pod 'NSObject+Rx', '~> 5.2.2'  # https://github.com/RxSwiftCommunity/NSObject-Rx
+
   target 'HBSwiftKit_Tests' do
     inherit! :search_paths
 
