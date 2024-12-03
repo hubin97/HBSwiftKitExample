@@ -12,6 +12,15 @@ import Foundation
 //MARK: - global var and methods
 fileprivate typealias Extension_Image = UIImage
 
+// MARK: - RTL
+extension Extension_Image {
+    
+    /// 适配RTL布局镜像翻转
+    public var adaptRTL: UIImage? {
+        return self.imageFlippedForRightToLeftLayoutDirection()
+    }
+}
+
 //MARK: - main class
 extension Extension_Image {
     

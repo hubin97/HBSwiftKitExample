@@ -12,7 +12,7 @@ import MobileCoreServices
 // MARK: - global var and methods
 
 // MARK: - main class
-class VideoCropController: BaseViewController {
+class VideoCropController: ViewController {
 
     var playTimer: DispatchSourceTimer?
     var autoPlay: Bool = true

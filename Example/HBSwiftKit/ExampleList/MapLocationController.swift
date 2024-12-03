@@ -14,7 +14,7 @@ import CocoaLumberjack
 // MARK: - global var and methods
 
 // MARK: - main class
-class MapLocationController: BaseViewController {
+class MapLocationController: ViewController {
 
     /// 当前位置
     var curLocation: CLLocation?
@@ -26,7 +26,7 @@ class MapLocationController: BaseViewController {
     }()
 
     lazy var mapView: MKMapView = {
-        let _mapView = MKMapView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight))
+        let _mapView = MKMapView(frame: CGRect(x: 0, y: kNavBarAndSafeHeight, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight))
         _mapView.delegate = self
         _mapView.showsUserLocation = true
         _mapView.userTrackingMode = .follow
@@ -56,10 +56,11 @@ class MapLocationController: BaseViewController {
         return _poiBtn
     }()
 
-    override func setupUi() {
-        super.setupUi()
-        self.navigationItem.title = "定位"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: poiBtn)
+    override func setupLayout() {
+        super.setupLayout()
+        self.naviBar.title = "定位"
+        self.naviBar.setRightView(poiBtn)
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: poiBtn)
         view.addSubview(mapView)
         view.addSubview(focusBtn)
     }
@@ -151,10 +152,10 @@ extension MapLocationController: MKMapViewDelegate, AuthStatusLocationDelegate, 
 
 // MARK: - other classes
 // poi检索列表
-class POIRspListController: BaseViewController {
+class POIRspListController: ViewController {
 
-    override func setupUi() {
-        super.setupUi()
+    override func setupLayout() {
+        super.setupLayout()
         self.navigationItem.title = "周边检索列表"
         // self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .done, target: self, action: #selector(qureAction))
 

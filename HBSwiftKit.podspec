@@ -28,27 +28,27 @@ Pod::Spec.new do |s|
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.ios.deployment_target = '10.0'
-  
+  s.ios.deployment_target = '13.0'
+
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.source           = { :git => 'https://github.com/hubin97/HBSwiftKitExample.git', :tag => s.version.to_s }
   
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #s.source_files  = 'HBSwiftKit/**/*.{h,m,swift}'
-  s.subspec 'Global' do |ss|
-      ss.source_files  = 'HBSwiftKit/Global'
-      ss.framework  = "Foundation", "UIKit"
-  end
-  
-  s.subspec 'Extension' do |ss|
-      ss.source_files  = 'HBSwiftKit/Extension'
-      ss.dependency 'HBSwiftKit/Global'
-  end
-  
-  s.subspec 'Base' do |ss|
-      ss.source_files  = 'HBSwiftKit/Base/'
-      ss.dependency 'HBSwiftKit/Extension'
-  end
+#  s.subspec 'Global' do |ss|
+#      ss.source_files  = 'HBSwiftKit/Global'
+#      ss.framework  = "Foundation", "UIKit"
+#  end
+#  
+#  s.subspec 'Extension' do |ss|
+#      ss.source_files  = 'HBSwiftKit/Extension'
+#      ss.dependency 'HBSwiftKit/Global'
+#  end
+#  
+#  s.subspec 'Base' do |ss|
+#      ss.source_files  = 'HBSwiftKit/Base/'
+#      ss.dependency 'HBSwiftKit/Extension'
+#  end
   
   s.subspec 'UIKit' do |ss|
       ss.source_files  = 'HBSwiftKit/UIKit/**/*'
@@ -74,6 +74,43 @@ Pod::Spec.new do |s|
 #  s.subspec 'Assets' do |dd|
 #    dd.source_files  = "HBSwiftKit/Assets/*"
 #  end
+
+    # 子模块：Base
+    s.subspec 'Base' do |base|
+        
+#        base.subspec 'Global' do |ss|
+#            ss.source_files  = 'LuteBase/Base/Global/**/*.swift'
+#            ss.framework  = "Foundation", "UIKit"
+#        end
+#        
+#        base.subspec 'Extension' do |ss|
+#            ss.source_files  = 'LuteBase/Base/Extension/**/*.swift'
+#            ss.dependency 'LuteBase/Base/Global'
+#        end
+
+        # 使用 Ruby 数组简化多个依赖的定义
+        # 扩展自定义Hud;  pod 'ProgressHUD', :git => 'https://github.com/hubin97/ProgressHUD.git'
+        ['SnapKit', 'Hero', 'Kingfisher', 'Toast-Swift', 'ProgressHUD'].each do |dd|
+            base.dependency dd
+        end
+
+        base.subspec 'Global' do |ss|
+            ss.source_files  = 'HBSwiftKit/Base/Global'
+            ss.framework  = "Foundation", "UIKit"
+        end
+ 
+        base.subspec 'Extension' do |ss|
+            ss.source_files  = 'HBSwiftKit/Base/Extension'
+            ss.dependency 'HBSwiftKit/Base/Global'
+        end
+        
+        base.subspec 'Base' do |ss|
+            ss.source_files  = 'HBSwiftKit/Base/Base/'
+            ss.dependency 'HBSwiftKit/Base/Extension'
+        end
+        
+    end
+
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.resource     = 'HBSwiftKit/HBSwiftKit.bundle'

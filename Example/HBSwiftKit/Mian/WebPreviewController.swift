@@ -11,16 +11,17 @@ import WebKit
 // MARK: - global var and methods
 
 // MARK: - main class
-class WebPreviewController: BaseWKWebController {
+class WebPreviewController: WKWebController {
 
-    override func setupUi() {
-        super.setupUi()
-        self.navigationItem.title = "Web Preview"
+    override func setupLayout() {
+        super.setupLayout()
+        self.naviBar.title = "Web Preview"
+        self.naviBar.leftView?.isHidden = true
 
         self.progressViewBackColor = .systemBlue
         self.progressViewTintColor = .red
         self.progressViewHeight = 1
-        self.wkWebView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - kNavBarAndSafeHeight - kBottomSafeHeight)
+        self.wkWebView.frame = CGRect(x: 0, y: kNavBarAndSafeHeight, width: self.view.bounds.width, height: self.view.bounds.height - kNavBarAndSafeHeight - kBottomSafeHeight)
         // self.wkWebView.navigationDelegate = self
         self.addMethod(name: "WINGTO_NATIVE") {[weak self] (methodname, callback) in
             print("scriptName:\(methodname), callback:\(callback)")
@@ -41,7 +42,7 @@ class WebPreviewController: BaseWKWebController {
         super.viewWillAppear(animated)
         // self.localPath = "jstest.html"
         //loadHTML(urlString: "jstest.html", isLocalHtml: true)
-        load(urlPath: "jstest.html", isLocalHtml: true)
+        loadWeb(urlPath: "jstest.html", isLocalHtml: true)
         //load(urlPath: "https://www.baidu.com")
     }
 
@@ -69,28 +70,3 @@ class WebPreviewController: BaseWKWebController {
         }
     }
 }
-
-// MARK: - private mothods
-extension WebPreviewController {
-
-}
-
-// MARK: - call backs
-extension WebPreviewController {
-
-}
-
-// MARK: - delegate or data source
-extension WebPreviewController {
-
-    override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        super.webView(webView, didFinish: navigation)
-
-//        self.evaluateJs(jsCode: "onSwithChange()", completeBlock: { (result, error) in
-//            print("evaluateJs#result:\(result ?? ""), error:\(error?.localizedDescription ?? "")")
-//        })
-
-    }
-}
-
-// MARK: - other classes

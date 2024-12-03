@@ -20,7 +20,15 @@ import Foundation
 //MARK: - global var and methods
 fileprivate typealias Extension_View = UIView
 
-//MARK: - main class
+// MARK: - RTL
+extension Extension_View {
+    
+    /// 布局方式为RTL
+    public var isRTL: Bool {
+        return UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute) == .rightToLeft
+    }
+}
+
 //MARK: 快捷属性操作
 extension Extension_View {
     

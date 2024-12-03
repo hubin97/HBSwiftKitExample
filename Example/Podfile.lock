@@ -14,16 +14,38 @@ PODS:
   - GDPerformanceView-Swift (2.1.1)
   - HBSwiftKit (0.4.1):
     - HBSwiftKit/Base (= 0.4.1)
-    - HBSwiftKit/Extension (= 0.4.1)
-    - HBSwiftKit/Global (= 0.4.1)
     - HBSwiftKit/Network (= 0.4.1)
     - HBSwiftKit/UIKit (= 0.4.1)
     - HBSwiftKit/Utils (= 0.4.1)
   - HBSwiftKit/Base (0.4.1):
-    - HBSwiftKit/Extension
-  - HBSwiftKit/Extension (0.4.1):
-    - HBSwiftKit/Global
-  - HBSwiftKit/Global (0.4.1)
+    - HBSwiftKit/Base/Base (= 0.4.1)
+    - HBSwiftKit/Base/Extension (= 0.4.1)
+    - HBSwiftKit/Base/Global (= 0.4.1)
+    - Hero
+    - Kingfisher
+    - ProgressHUD
+    - SnapKit
+    - Toast-Swift
+  - HBSwiftKit/Base/Base (0.4.1):
+    - HBSwiftKit/Base/Extension
+    - Hero
+    - Kingfisher
+    - ProgressHUD
+    - SnapKit
+    - Toast-Swift
+  - HBSwiftKit/Base/Extension (0.4.1):
+    - HBSwiftKit/Base/Global
+    - Hero
+    - Kingfisher
+    - ProgressHUD
+    - SnapKit
+    - Toast-Swift
+  - HBSwiftKit/Base/Global (0.4.1):
+    - Hero
+    - Kingfisher
+    - ProgressHUD
+    - SnapKit
+    - Toast-Swift
   - HBSwiftKit/Network (0.4.1):
     - HBSwiftKit/UIKit
   - HBSwiftKit/UIKit (0.4.1):
@@ -33,6 +55,7 @@ PODS:
     - HBSwiftKit/Utils/AuthStatus (= 0.4.1)
   - HBSwiftKit/Utils/AuthStatus (0.4.1):
     - HBSwiftKit/UIKit
+  - Hero (1.6.3)
   - Kingfisher (4.10.1)
   - lottie-ios (4.3.4)
   - Moya (15.0.0):
@@ -44,6 +67,7 @@ PODS:
   - "NSObject+Rx (5.2.2)":
     - RxSwift (~> 6.2)
   - ObjectMapper (4.2.0)
+  - ProgressHUD (14.1.3)
   - PromiseKit (6.13.1):
     - PromiseKit/CorePromise (= 6.13.1)
     - PromiseKit/Foundation (= 6.13.1)
@@ -78,9 +102,10 @@ DEPENDENCIES:
   - Kingfisher
   - lottie-ios
   - Moya
-  - Nimble (~> 9.2.1)
+  - Nimble
   - "NSObject+Rx (~> 5.2.2)"
   - ObjectMapper
+  - ProgressHUD (from `https://github.com/hubin97/ProgressHUD.git`)
   - PromiseKit
   - Quick
   - R.swift
@@ -98,6 +123,7 @@ SPEC REPOS:
     - CocoaLumberjack
     - CocoaMQTT
     - GDPerformanceView-Swift
+    - Hero
     - Kingfisher
     - lottie-ios
     - Moya
@@ -121,6 +147,13 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   HBSwiftKit:
     :path: "../"
+  ProgressHUD:
+    :git: https://github.com/hubin97/ProgressHUD.git
+
+CHECKOUT OPTIONS:
+  ProgressHUD:
+    :commit: 93c1a9be33704c7f6a8f55f4a6205b030403005d
+    :git: https://github.com/hubin97/ProgressHUD.git
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
@@ -128,7 +161,8 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   CocoaMQTT: 1f206228b29318eabdacad0c2e4e88575922c27a
   GDPerformanceView-Swift: 22d964fe40b19e3d914dba2586237d064de8fd77
-  HBSwiftKit: 2cb10ef7dc10c8e003dc758a1f7268704f207c04
+  HBSwiftKit: bed29d664f2e3fce6e98625225207b2919868f51
+  Hero: 419d43384355b3168512bd8ac6a33aadd3dc575b
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   lottie-ios: 3d98679b41fa6fd6aff2352b3953dbd3df8a397e
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
@@ -136,6 +170,7 @@ SPEC CHECKSUMS:
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
   "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  ProgressHUD: b736f0c6de97f37f64e847f80689c23a14026adf
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
   R.swift: c533450b0f7dc494e0993f5f1a1db925d84c3006
@@ -149,6 +184,6 @@ SPEC CHECKSUMS:
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: e578af70acbe12ae01d7797b3834fade6e2ae796
+PODFILE CHECKSUM: e3a241f9a31a590d2fee4afcf2565ed76660119b
 
 COCOAPODS: 1.15.2

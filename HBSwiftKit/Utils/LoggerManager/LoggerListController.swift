@@ -7,10 +7,11 @@
 
 import Foundation
 import CocoaLumberjack
+import HBSwiftKit
 //MARK: - global var and methods
 
 //MARK: - main class
-open class LoggerListController: BaseViewController {
+open class LoggerListController: ViewController {
 
     open lazy var logFiles: [DDLogFileInfo] = {
         return LoggerManager.shared.fileLogger.logFileManager.sortedLogFileInfos
@@ -32,8 +33,8 @@ open class LoggerListController: BaseViewController {
         return listView
     }()
     
-    open override func setupUi() {
-        super.setupUi()
+    open override func setupLayout() {
+        super.setupLayout()
         self.navigationItem.title = "日志列表"
         view.addSubview(listView)
         LoggerManager.shared.removeEntrance()
@@ -83,7 +84,7 @@ extension LoggerListController: UITableViewDataSource, UITableViewDelegate {
 
 
 //MARK: - other classes
-open class LoggerDetailController: BaseViewController {
+open class LoggerDetailController: ViewController {
 
     var file: DDLogFileInfo?
     open lazy var logTextView: UITextView = {
@@ -103,8 +104,8 @@ open class LoggerDetailController: BaseViewController {
         return rightItems
     }()
 
-    open override func setupUi() {
-        super.setupUi()
+    open override func setupLayout() {
+        super.setupLayout()
         self.navigationItem.title = "日志详情"
         self.navigationItem.rightBarButtonItems = rightItems
 

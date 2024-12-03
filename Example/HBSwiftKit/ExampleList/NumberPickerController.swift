@@ -18,7 +18,7 @@ private func W_Scale(_ x: CGFloat) -> CGFloat {
 }
 
 // MARK: - main class
-class NumberPickerController: BaseViewController {
+class NumberPickerController: ViewController {
 
     lazy var numberPicker: NumberPicker = {
         let numberPicker = NumberPicker.init(frame: CGRect(x: 20, y: 50, width: W_Scale(145), height: 75 + blurPadding), minValue: 16, maxValue: 30)
@@ -63,8 +63,8 @@ class NumberPickerController: BaseViewController {
         return pickerView
     }()
 
-    override func setupUi() {
-        super.setupUi()
+    override func setupLayout() {
+        super.setupLayout()
 
         self.title = "数字选择器"
 

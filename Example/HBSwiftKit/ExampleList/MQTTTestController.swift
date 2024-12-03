@@ -11,7 +11,7 @@ import CocoaMQTT
 // MARK: - global var and methods
 
 // MARK: - main class
-class MQTTTestController: BaseViewController {
+class MQTTTestController: ViewController {
     
     let topic = "/will"
     let defaultHost = "broker.emqx.io"
@@ -20,7 +20,7 @@ class MQTTTestController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "cocoaMQTT5"
+        self.naviBar.title = "cocoaMQTT5"
         
         let clientID = "CocoaMQTT-" + String(ProcessInfo().processIdentifier)
         let mqtt5 = CocoaMQTT5(clientID: clientID, host: "broker.emqx.io", port: 1883)

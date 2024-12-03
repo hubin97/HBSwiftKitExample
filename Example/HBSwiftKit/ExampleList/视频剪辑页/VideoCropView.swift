@@ -73,12 +73,12 @@ class VideoCropView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
+        setupLayout()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupUI()
+        setupLayout()
     }
 
     deinit {
@@ -93,7 +93,7 @@ class VideoCropView: UIView {
         adjustLayout()
     }
 
-    func setupUI() {
+    func setupLayout() {
 //        scrollView.showsHorizontalScrollIndicator = false
 //        scrollView.showsVerticalScrollIndicator = false
 //        scrollView.delegate = self

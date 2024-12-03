@@ -12,7 +12,7 @@ import HBSwiftKit
 // MARK: - global var and methods
 
 // MARK: - main class
-class BlueToothController: BaseViewController {
+class BlueToothController: ViewController {
 
     let bleManager: BLEManager = {
         return BLEManager.shared
@@ -35,7 +35,7 @@ class BlueToothController: BaseViewController {
     
     var peripherals = [CBPeripheral]()
     lazy var listView: UITableView = {
-        let listView = UITableView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight), style: .plain)
+        let listView = UITableView.init(frame: CGRect(x: 0, y: kNavBarAndSafeHeight, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight), style: .plain)
         listView.backgroundColor = .white
         listView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
         listView.tableFooterView = UIView.init(frame: CGRect.zero)
@@ -44,12 +44,20 @@ class BlueToothController: BaseViewController {
         listView.rowHeight = 50
         return listView
     }()
+    
+    lazy var rightButton: UIButton = {
+        let _button = UIButton(type: .custom)
+        _button.frame = CGRect(x: 0, y: 0, width: 60, height: 44)
+        _button.setTitle("搜索", for: .normal)
+        _button.addTarget(self, action: #selector(scanAction), for: .touchUpInside)
+        return _button
+    }()
 
-    override func setupUi() {
-        super.setupUi()
+    override func setupLayout() {
+        super.setupLayout()
         self.view.backgroundColor = .white
-        self.navigationItem.title = "蓝牙测试页"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "搜索", style: .plain, target: self, action: #selector(scanAction))
+        self.naviBar.title = "蓝牙测试页"
+        self.naviBar.setRightView(rightButton)
         self.view.addSubview(listView)   
         
         self.oberverMethod()

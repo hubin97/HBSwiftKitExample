@@ -12,7 +12,7 @@ import MobileCoreServices
 // MARK: - global var and methods
 
 // MARK: - main class
-class VideoTestController: BaseViewController {
+class VideoTestController: ViewController {
 
     lazy var rightEditBtn: UIButton = {
         let rightEditBtn = UIButton.init(type: .custom)
@@ -22,10 +22,10 @@ class VideoTestController: BaseViewController {
         return rightEditBtn
     }()
 
-    override func setupUi() {
-        super.setupUi()
-        self.navigationItem.title = "视频剪辑测试"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.rightEditBtn)
+    override func setupLayout() {
+        super.setupLayout()
+        self.naviBar.title = "视频剪辑测试"
+        self.naviBar.setRightView(rightEditBtn)
     }
 }
 

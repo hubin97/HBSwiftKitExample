@@ -13,9 +13,9 @@ import CocoaLumberjack
 // MARK: - global var and methods
 
 // MARK: - main class
-class VideoPlayController: BaseViewController {
+class VideoPlayController: ViewController {
 
-    override func setupUi() {
+    override func setupLayout() {
 
         // 构建ui
         let backView = UIView.init(frame: CGRect(x: 0, y: 100, width: 400, height: 400))

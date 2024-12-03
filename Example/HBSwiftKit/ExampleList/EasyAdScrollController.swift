@@ -10,14 +10,14 @@ import Foundation
 // MARK: - global var and methods
 
 // MARK: - main class
-class EasyAdScrollController: BaseViewController {
+class EasyAdScrollController: ViewController {
 
-    override func setupUi() {
-        super.setupUi()
+    override func setupLayout() {
+        super.setupLayout()
 
-        self.title = "标题轮播页"
+        self.naviBar.title = "标题轮播页"
 
-        let ytSegment = YTSegment.init(viewFrame: CGRect(x: 0, y: 50, width: self.view.frame.width, height: 44), showStyle: .all, titles: ["AAA", "BBB", "CCC", "DDD", "EEE"], isShowOutstanding: true)
+        let ytSegment = YTSegment.init(viewFrame: CGRect(x: 0, y: kNavBarAndSafeHeight + 50, width: self.view.frame.width, height: 44), showStyle: .all, titles: ["AAA", "BBB", "CCC", "DDD", "EEE"], isShowOutstanding: true)
         view.addSubview(ytSegment)
         ytSegment.setRoundCorners(borderColor: .brown, borderWidth: 1, isDotted: true, lineDashPattern: [4, 1])
         ytSegment.setTargetIndex(with: 3)
@@ -27,7 +27,7 @@ class EasyAdScrollController: BaseViewController {
 //            print("index:\(index), title:\(title ?? "")")
 //        }
 
-        let segment = YTSegment.init(scrollFrame: CGRect(x: 0, y: 150, width: self.view.frame.width, height: 44), titles: ["用户交互设计", "用户交互", "用设计", "用户交互设计", "设计", "用户交互设计设计设计", "用户交互设计", "设"], normalColor: .gray, selectColor: .black, isShowOutstanding: true)
+        let segment = YTSegment.init(scrollFrame: CGRect(x: 0, y: kNavBarAndSafeHeight + 150, width: self.view.frame.width, height: 44), titles: ["用户交互设计", "用户交互", "用设计", "用户交互设计", "设计", "用户交互设计设计设计", "用户交互设计", "设"], normalColor: .gray, selectColor: .black, isShowOutstanding: true)
 
         view.addSubview(segment)
         // YTSegment.setRoundCorners(borderColor: .brown, borderWidth: 1, isDotted: true, lineDashPattern: [4, 1])
@@ -49,7 +49,7 @@ class EasyAdScrollController: BaseViewController {
                 items.append(model)
             }
         }
-        let adView = EasyAdScrollTool.init(frame: CGRect(x: 50, y: 300, width: 300, height: 44), style: .Page, datas: items)
+        let adView = EasyAdScrollTool.init(frame: CGRect(x: 50, y: kNavBarAndSafeHeight + 300, width: 300, height: 44), style: .Page, datas: items)
         adView.setRoundCorners(borderColor: .systemBlue, borderWidth: 1, isDotted: true, lineDashPattern: [2, 4])
         view.addSubview(adView)
     }

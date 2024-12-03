@@ -15,7 +15,7 @@ import Lottie
 // MARK: - global var and methods
 
 // MARK: - main class
-class UIKitTestController: BaseViewController {
+class UIKitTestController: ViewController {
 
     lazy var filterModels: [AdvancedFilterSecModel] = {
         let path = Bundle.main.path(forResource: "advfilterdata", ofType: "json")
@@ -112,17 +112,15 @@ class UIKitTestController: BaseViewController {
     }()
     
     lazy var waveView: WaveAnimateView = {
-        let _waveView = WaveAnimateView(frame: CGRect(x: 50, y: 50, width: 200, height: 500))
+        let _waveView = WaveAnimateView(frame: CGRect(x: 50, y: 150, width: 200, height: 500))
         return _waveView
     }()
 
-    override func setupUi() {
-        super.setupUi()
-        self.navigationItem.title = "UIKit Test"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "筛选", style: .plain, target: self, action: #selector(filterAction(_:)))
-
-        view.backgroundColor = .white
+    override func setupLayout() {
+        super.setupLayout()
         view.addSubview(waveView)
+        naviBar.title = "UIKit Test"
+        naviBar.leftView?.isHidden = true
         
         //"it's easy to encode strings".urlEncoded -> "it's%20easy%20to%20encode%20strings"
         let string1 = "it's easy to encode strings"

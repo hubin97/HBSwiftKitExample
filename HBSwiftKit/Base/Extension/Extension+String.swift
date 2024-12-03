@@ -111,25 +111,6 @@ extension Extension_String {
         }
         return date
     }
-
-    /// 计算文本段落的尺寸(默认字号17, 行距5)
-    /// - Parameters:
-    ///   - maxSize: 最大尺寸
-    ///   - attributes: 属性
-    ///   - font: 字号. 仅attributes =nil时生效
-    ///   - lineSpacing: 行距. 仅attributes =nil时生效
-    /// - Returns: 预计尺寸
-    public func estimatedSize(maxSize: CGSize, attributes: [NSAttributedString.Key : Any]? = nil, font: UIFont = UIFont.systemFont(ofSize: 17), lineSpacing: CGFloat = 5) -> CGSize {
-        guard let attributes = attributes else {
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = lineSpacing - (font.lineHeight - font.pointSize)
-            paragraphStyle.alignment = .left
-            paragraphStyle.lineBreakMode = .byCharWrapping
-            let attributes_def = [NSAttributedString.Key.font: font, NSAttributedString.Key.paragraphStyle: paragraphStyle]
-            return NSString(string: self).boundingRect(with: maxSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes_def, context: nil).size
-        }
-        return NSString(string: self).boundingRect(with: maxSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes, context: nil).size
-    }
     
     /// SwifterSwift: Check if string contains one or more emojis.
     ///
@@ -285,6 +266,116 @@ extension Extension_String {
     public func predicateMatch(regex: String) -> Bool {
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
         return predicate.evaluate(with: self)
+    }
+}
+
+extension Extension_String {
+
+    /// 计算文本段落的尺寸(默认字号17, 行距5)
+    /// - Parameters:
+    ///   - maxSize: 最大尺寸
+    ///   - attributes: 属性
+    ///   - font: 字号. 仅attributes =nil时生效
+    ///   - lineSpacing: 行距. 仅attributes =nil时生效
+    /// - Returns: 预计尺寸
+    public func estimatedSize(maxSize: CGSize, attributes: [NSAttributedString.Key : Any]? = nil, font: UIFont = UIFont.systemFont(ofSize: 17), lineSpacing: CGFloat = 5) -> CGSize {
+        guard let attributes = attributes else {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = lineSpacing - (font.lineHeight - font.pointSize)
+            paragraphStyle.alignment = .left
+            paragraphStyle.lineBreakMode = .byCharWrapping
+            let attributes_def = [NSAttributedString.Key.font: font, NSAttributedString.Key.paragraphStyle: paragraphStyle]
+            return NSString(string: self).boundingRect(with: maxSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes_def, context: nil).size
+        }
+        return NSString(string: self).boundingRect(with: maxSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes, context: nil).size
+    }
+    
+    // MARK: - 计算文本尺寸
+    private func boundingRect(ofAttributes attributes: [NSAttributedString.Key: Any], size: CGSize) -> CGRect {
+        let boundingBox = boundingRect(
+            with: size,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: attributes,
+            context: nil
+        )
+        return boundingBox
+    }
+    
+    /// 计算文本尺寸
+    /// - Parameters:
+    ///   - attributes: 属性
+    ///   - maxWidth: 最大宽度
+    ///   - maxHeight: 最大高度
+    /// - Returns: 尺寸
+    public func size(ofAttributes attributes: [NSAttributedString.Key: Any], maxWidth: CGFloat, maxHeight: CGFloat) -> CGSize {
+        boundingRect(ofAttributes: attributes, size: .init(width: maxWidth, height: maxHeight)).size
+    }
+    
+    ///  计算文本尺寸
+    /// - Parameters:
+    ///   - font: 字体
+    ///   - maxWidth: 最大宽度
+    ///   - maxHeight: 最大高度
+    /// - Returns: 尺寸
+    public func size(ofFont font: UIFont, maxWidth: CGFloat, maxHeight: CGFloat) -> CGSize {
+        let constraintRect = CGSize(width: maxWidth, height: maxHeight)
+        let boundingBox = boundingRect(
+            with: constraintRect,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: [.font: font],
+            context: nil
+        )
+        return boundingBox.size
+    }
+    
+    /// 计算文本宽度
+    /// - Parameters:
+    ///   - size: 字体大小
+    ///   - maxHeight: 最大高度
+    /// - Returns: 宽度
+    public func width(ofSize size: CGFloat, maxHeight: CGFloat) -> CGFloat {
+        width(
+            ofFont: UIFont.systemFont(ofSize: size),
+            maxHeight: maxHeight
+        )
+    }
+    
+    /// 计算文本宽度
+    /// - Parameters:
+    ///   - font: 字体
+    ///   - maxHeight: 最大高度
+    /// - Returns: 宽度
+    public func width(ofFont font: UIFont, maxHeight: CGFloat) -> CGFloat {
+        size(
+            ofAttributes: [NSAttributedString.Key.font: font],
+            maxWidth: CGFloat(MAXFLOAT),
+            maxHeight: maxHeight
+        ).width
+    }
+    
+    /// 计算文本高度
+    /// - Parameters:
+    ///   - size: 字体大小
+    ///   - maxWidth: 最大宽度
+    /// - Returns: 高度
+    public func height(ofSize size: CGFloat, maxWidth: CGFloat) -> CGFloat {
+        height(
+            ofFont: UIFont.systemFont(ofSize: size),
+            maxWidth: maxWidth
+        )
+    }
+    
+    /// 计算文本高度
+    /// - Parameters:
+    ///   - font: 字体
+    ///   - maxWidth: 最大宽度
+    /// - Returns: 高度
+    public func height(ofFont font: UIFont, maxWidth: CGFloat) -> CGFloat {
+        size(
+            ofAttributes: [NSAttributedString.Key.font: font],
+            maxWidth: maxWidth,
+            maxHeight: CGFloat(MAXFLOAT)
+        ).height
     }
 }
 

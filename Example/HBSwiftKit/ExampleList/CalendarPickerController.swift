@@ -11,14 +11,13 @@ import Foundation
 // MARK: - global var and methods
 
 // MARK: - main class
-class CalendarPickerController: BaseViewController {
+class CalendarPickerController: ViewController {
 
     let calendar = Wto_Calendar.init()
 
-    override func setupUi() {
-        super.setupUi()
-
-        self.title = "日历选择器"
+    override func setupLayout() {
+        super.setupLayout()
+        self.naviBar.title = "日历选择器"
 
         view.addSubview(calendar)
         calendar.layer.borderColor = UIColor.red.cgColor

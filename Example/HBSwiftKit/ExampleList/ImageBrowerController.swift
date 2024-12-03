@@ -23,7 +23,7 @@ private func imagePathToImage(imagePath: String) -> UIImage? {
 }
 
 // MARK: - main class
-class ImageBrowerController: BaseViewController {
+class ImageBrowerController: ViewController {
 
     fileprivate let albumCol = 3  // 3列
     fileprivate let albumMinSpacing: CGFloat = 10
@@ -77,7 +77,7 @@ class ImageBrowerController: BaseViewController {
     }()
 
     lazy var albumCollect: UICollectionView = {
-        let collection = UICollectionView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight), collectionViewLayout: layout)
+        let collection = UICollectionView.init(frame: CGRect(x: 0, y: kNavBarAndSafeHeight, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight), collectionViewLayout: layout)
         collection.backgroundColor = .clear
         collection.register(SnapshotItem.self, forCellWithReuseIdentifier: NSStringFromClass(SnapshotItem.self))
         collection.dataSource = self
@@ -95,11 +95,9 @@ class ImageBrowerController: BaseViewController {
     var isEditable: Bool? // 是否可编辑
     var rightEditBtn = UIButton.init(type: .custom)
 
-    override func setupUi() {
-        super.setupUi()
-
-        self.title = "照片浏览器"
-
+    override func setupLayout() {
+        super.setupLayout()
+        self.naviBar.title = "照片浏览器"
         self.rightEditBtn.setTitle("选择", for: .normal)
         self.rightEditBtn.setTitleColor(.black, for: .normal)
         self.rightEditBtn.addTarget(self, action: #selector(editAction), for: .touchUpInside)

@@ -1,4 +1,4 @@
-platform :ios, '12.0'
+platform :ios, '13.0'
 
 # cdn服务器最近常挂,暂时禁用cdn分发方式; https://github.com/CocoaPods/CocoaPods/issues/11370
 # CDN: trunk URL couldn't be downloaded: https://cdn.jsdelivr.net/cocoa/Specs
@@ -35,13 +35,15 @@ target 'HBSwiftKit_Example' do
   pod 'RxSwift', '~> 6.6.0'
   pod 'RxCocoa', '6.6.0'
   pod 'NSObject+Rx', '~> 5.2.2'  # https://github.com/RxSwiftCommunity/NSObject-Rx
+#  pod 'Hero', '~> 1.6'  # https://github.com/lkzhao/Hero
+  pod 'ProgressHUD', :git => 'https://github.com/hubin97/ProgressHUD.git'
 
   target 'HBSwiftKit_Tests' do
     inherit! :search_paths
 
     pod 'Quick'#, '~> 1.2.0'
     #Nimble Library not found for -libswiftXCTest https://github.com/Quick/Nimble/issues/855
-    pod 'Nimble', '~> 9.2.1'
+    pod 'Nimble'#, '~> 9.2.1'
     #    pod 'FBSnapshotTestCase' , '~> 2.1.4'
 #    pod 'Nimble-Snapshots' , '~> 6.3.0'
   end
@@ -51,7 +53,7 @@ target 'HBSwiftKit_Example' do
           target.build_configurations.each do |config|
               config.build_settings['SWIFT_VERSION'] = '5.0'
               #config.build_settings['COMPILER_INDEX_STORE_ENABLE'] = "NO" # OCLint配置
-              config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+              config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
           end
       end
   end
