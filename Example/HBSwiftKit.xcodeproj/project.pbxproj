@@ -13,6 +13,12 @@
 		184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */; };
 		186750992C05B7DF00A369B5 /* WaveAnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186750982C05B7DF00A369B5 /* WaveAnimateView.swift */; };
 		188692CB2C5743D5007CD12A /* MQTTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188692CA2C5743D5007CD12A /* MQTTClient.swift */; };
+		189C64AC2D000F2200BAE470 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = 189C64A52D000F2200BAE470 /* Appfile */; };
+		189C64AD2D000F2200BAE470 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 189C64A62D000F2200BAE470 /* Fastfile */; };
+		189C64AF2D000F2200BAE470 /* Pluginfile in Resources */ = {isa = PBXBuildFile; fileRef = 189C64A82D000F2200BAE470 /* Pluginfile */; };
+		189C64B02D000F2200BAE470 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 189C64A92D000F2200BAE470 /* README.md */; };
+		189C64B12D000F2200BAE470 /* report.xml in Resources */ = {isa = PBXBuildFile; fileRef = 189C64AA2D000F2200BAE470 /* report.xml */; };
+		189C64B32D0010F400BAE470 /* .env.default in Resources */ = {isa = PBXBuildFile; fileRef = 189C64B22D0010F400BAE470 /* .env.default */; };
 		18A82EEF2CFEF9C7007FCCDA /* AppScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A82EEE2CFEF9C7007FCCDA /* AppScene.swift */; };
 		18A82EF12CFEFA04007FCCDA /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A82EF02CFEFA04007FCCDA /* TabBarItem.swift */; };
 		18A82EF42CFF130B007FCCDA /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A82EF32CFF130B007FCCDA /* ListViewModel.swift */; };
@@ -116,6 +122,12 @@
 		184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTDatePicker.swift; sourceTree = "<group>"; };
 		186750982C05B7DF00A369B5 /* WaveAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimateView.swift; sourceTree = "<group>"; };
 		188692CA2C5743D5007CD12A /* MQTTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTClient.swift; sourceTree = "<group>"; };
+		189C64A52D000F2200BAE470 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
+		189C64A62D000F2200BAE470 /* Fastfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = Fastfile; sourceTree = "<group>"; };
+		189C64A82D000F2200BAE470 /* Pluginfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Pluginfile; sourceTree = "<group>"; };
+		189C64A92D000F2200BAE470 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		189C64AA2D000F2200BAE470 /* report.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = report.xml; sourceTree = "<group>"; };
+		189C64B22D0010F400BAE470 /* .env.default */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .env.default; sourceTree = "<group>"; };
 		18A82EEE2CFEF9C7007FCCDA /* AppScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScene.swift; sourceTree = "<group>"; };
 		18A82EF02CFEFA04007FCCDA /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		18A82EF32CFF130B007FCCDA /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -262,12 +274,25 @@
 			path = CocoaMQTT;
 			sourceTree = "<group>";
 		};
+		189C64AB2D000F2200BAE470 /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				189C64A52D000F2200BAE470 /* Appfile */,
+				189C64A62D000F2200BAE470 /* Fastfile */,
+				189C64A82D000F2200BAE470 /* Pluginfile */,
+				189C64B22D0010F400BAE470 /* .env.default */,
+				189C64A92D000F2200BAE470 /* README.md */,
+				189C64AA2D000F2200BAE470 /* report.xml */,
+			);
+			path = fastlane;
+			sourceTree = SOURCE_ROOT;
+		};
 		18A82EF22CFEFB94007FCCDA /* Mian */ = {
 			isa = PBXGroup;
 			children = (
-				18A82EF02CFEFA04007FCCDA /* TabBarItem.swift */,
 				607FACD71AFB9204008FA782 /* ListViewController.swift */,
 				18A82EF32CFF130B007FCCDA /* ListViewModel.swift */,
+				18A82EF02CFEFA04007FCCDA /* TabBarItem.swift */,
 				B5CC7A3B25E88D2400D263B4 /* UIKitTestController.swift */,
 				B5FB4F26257A365E007F1238 /* WebPreviewController.swift */,
 			);
@@ -296,8 +321,9 @@
 		18C2FDFF2AFC8CFD00AB8450 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				B5BAC85B255A7C0C005A5179 /* HBSwiftKit_Example-Bridging-Header.h */,
+				189C64AB2D000F2200BAE470 /* fastlane */,
 				18C2FE002AFC8D0C00AB8450 /* .swiftlint.yml */,
+				B5BAC85B255A7C0C005A5179 /* HBSwiftKit_Example-Bridging-Header.h */,
 			);
 			path = Configs;
 			sourceTree = "<group>";
@@ -319,8 +345,8 @@
 			isa = PBXGroup;
 			children = (
 				607FACD01AFB9204008FA782 /* HBSwiftKit_Example.app */,
-				B53D570026268EBE001D0BC0 /* HBSwiftKit_UITests.xctest */,
 				B5E0A44526269729005D248D /* HBSwiftKit_Tests.xctest */,
+				B53D570026268EBE001D0BC0 /* HBSwiftKit_UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -328,12 +354,12 @@
 		607FACD21AFB9204008FA782 /* Example for HBSwiftKit */ = {
 			isa = PBXGroup;
 			children = (
-				18A82EFD2D0000CE007FCCDA /* Managers */,
-				18A82EF22CFEFB94007FCCDA /* Mian */,
+				B5E1D8E7256283400093AC4C /* Application */,
 				18C2FDFF2AFC8CFD00AB8450 /* Configs */,
 				B5E1D8E3256282C80093AC4C /* ExampleList */,
 				18B671972B3BBFC600793476 /* Extension */,
-				B5E1D8E7256283400093AC4C /* Application */,
+				18A82EFD2D0000CE007FCCDA /* Managers */,
+				18A82EF22CFEFB94007FCCDA /* Mian */,
 				B5E1D8E62562831C0093AC4C /* Resources */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				B5EA0E0825B67AD6004783C1 /* Vendors */,
@@ -354,9 +380,9 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
+				5CA296E7E757B6B9CCC2CB2F /* LICENSE */,
 				CA78FCF42199CA49DD9F7856 /* HBSwiftKit.podspec */,
 				5217653375CCE7602F1DA3F5 /* README.md */,
-				5CA296E7E757B6B9CCC2CB2F /* LICENSE */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -365,9 +391,9 @@
 			isa = PBXGroup;
 			children = (
 				B5E0A4292626948F005D248D /* HBSwiftKit.framework */,
-				B5E0A41826269421005D248D /* XCTest.framework */,
 				4845C4375F7293ACE69A0714 /* Pods_HBSwiftKit_Example.framework */,
 				12F5E5A4DC30D6A96A4CC4E3 /* Pods_HBSwiftKit_Tests.framework */,
+				B5E0A41826269421005D248D /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -375,11 +401,11 @@
 		B500558027C375A700467E55 /* LightAttrPickerView */ = {
 			isa = PBXGroup;
 			children = (
-				B50055BC27C375CD00467E55 /* src_xy */,
 				B50055BA27C375CD00467E55 /* src_hsv */,
 				B50055BB27C375CD00467E55 /* src_temp */,
-				B500558127C375A700467E55 /* LightAttrPickerView.swift */,
+				B50055BC27C375CD00467E55 /* src_xy */,
 				B500558327C375A700467E55 /* LightAttrPickerView+Views.swift */,
+				B500558127C375A700467E55 /* LightAttrPickerView.swift */,
 			);
 			path = LightAttrPickerView;
 			sourceTree = "<group>";
@@ -388,8 +414,8 @@
 			isa = PBXGroup;
 			children = (
 				B533677226E852550009B60F /* VideoCropController.swift */,
-				B5825E2D26F04D7D00539866 /* VideoFrameView.swift */,
 				B5825E3226F0877C00539866 /* VideoCropView.swift */,
+				B5825E2D26F04D7D00539866 /* VideoFrameView.swift */,
 				B5825E3726F087FA00539866 /* VideoTimeView.swift */,
 				B5825E3C26F0884F00539866 /* VideoToolView.swift */,
 			);
@@ -416,8 +442,8 @@
 		B54DE3B2275EF14C00BBDE0B /* 信号检测器 */ = {
 			isa = PBXGroup;
 			children = (
-				B54DE3B3275EF2C400BBDE0B /* SignalPlateView.swift */,
 				B54DE3B5275F4C4100BBDE0B /* SignalMarkView.swift */,
+				B54DE3B3275EF2C400BBDE0B /* SignalPlateView.swift */,
 			);
 			path = "信号检测器";
 			sourceTree = "<group>";
@@ -452,21 +478,21 @@
 		B595A8CD27CCB00B007EF16E /* 临时验证类 */ = {
 			isa = PBXGroup;
 			children = (
-				184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */,
-				184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */,
-				4207008E2A4D7D1900039415 /* BLEAdapter.swift */,
-				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
-				186750982C05B7DF00A369B5 /* WaveAnimateView.swift */,
-				1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */,
-				B5463259280010410026662F /* DesignMode.swift */,
-				B5FF3853280EA0B70063BF26 /* MVVM.swift */,
 				B546325B2803B7950026662F /* Arithmetic.swift */,
-				B5E8E47A27EEBEAA006CED16 /* NetworkExtension.swift */,
-				B56D8C6B27CF29E90032EA97 /* YTTabController.swift */,
-				B595A8CB27C866EA007EF16E /* RegexHelper.swift */,
-				B595A8D627CCB154007EF16E /* StarRateView.swift */,
-				B546BFB427F442D9006EA745 /* ViewReusePool.swift */,
+				4207008E2A4D7D1900039415 /* BLEAdapter.swift */,
+				B5463259280010410026662F /* DesignMode.swift */,
+				1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */,
 				B546BFB627F455C5006EA745 /* IndexTableView.swift */,
+				184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */,
+				B5FF3853280EA0B70063BF26 /* MVVM.swift */,
+				B5E8E47A27EEBEAA006CED16 /* NetworkExtension.swift */,
+				B595A8CB27C866EA007EF16E /* RegexHelper.swift */,
+				184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */,
+				B595A8D627CCB154007EF16E /* StarRateView.swift */,
+				B557E4DA2631304800C62147 /* ThemeStyle.swift */,
+				B546BFB427F442D9006EA745 /* ViewReusePool.swift */,
+				186750982C05B7DF00A369B5 /* WaveAnimateView.swift */,
+				B56D8C6B27CF29E90032EA97 /* YTTabController.swift */,
 			);
 			path = "临时验证类";
 			sourceTree = "<group>";
@@ -522,9 +548,9 @@
 		B5E0A44626269729005D248D /* HBSwiftKit_Tests */ = {
 			isa = PBXGroup;
 			children = (
-				B518517526269E340013A973 /* Quick+NimbleTest.swift */,
-				B5E8E47E27F18E7E006CED16 /* NetworkRequestTest.swift */,
 				B5E0A44926269729005D248D /* Info.plist */,
+				B5E8E47E27F18E7E006CED16 /* NetworkRequestTest.swift */,
+				B518517526269E340013A973 /* Quick+NimbleTest.swift */,
 			);
 			path = HBSwiftKit_Tests;
 			sourceTree = "<group>";
@@ -532,30 +558,30 @@
 		B5E1D8E3256282C80093AC4C /* ExampleList */ = {
 			isa = PBXGroup;
 			children = (
-				B5BAC828255A7818005A5179 /* ImageBrowerController.swift */,
-				B5BAC829255A7818005A5179 /* NumberPickerController.swift */,
+				188692C92C5743C7007CD12A /* CocoaMQTT */,
+				B595A8CE27CCB031007EF16E /* 三方依赖类 */,
+				B595A8CD27CCB00B007EF16E /* 临时验证类 */,
+				B5C6C5E125ECD1C400C88C1C /* 主题适配器 */,
+				B54DE3B2275EF14C00BBDE0B /* 信号检测器 */,
+				B5C6C5CF25ECD08900C88C1C /* 列表左滑改 */,
+				B5887FA3264CD719003C1896 /* 双列表关联 */,
+				B5389B2725EE1BB900ED67F9 /* 日历选择器 */,
+				B5C6C5C325ECCADF00C88C1C /* 简易刻度尺 */,
+				B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */,
+				B54DF449273E5A7F00F564FB /* 色盘选择器 */,
+				B533677026E84FED0009B60F /* 视频剪辑页 */,
+				B5E4AABE27F5546E00D84C78 /* 遥控方向盘 */,
+				B5C6C5C225ECCA0E00C88C1C /* 高级筛选器 */,
+				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
 				B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */,
 				B5BAC82C255A7818005A5179 /* DatePickerController.swift */,
 				B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */,
+				B5BAC828255A7818005A5179 /* ImageBrowerController.swift */,
 				B541412C268EAF06008CE14B /* MapLocationController.swift */,
-				B5832B1F270FD6EE0084C78E /* VideoTestController.swift */,
-				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
 				18C5037E2C50F82700EB50B4 /* MQTTTestController.swift */,
-				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
-				188692C92C5743C7007CD12A /* CocoaMQTT */,
-				B595A8CD27CCB00B007EF16E /* 临时验证类 */,
-				B5E4AABE27F5546E00D84C78 /* 遥控方向盘 */,
-				B595A8CE27CCB031007EF16E /* 三方依赖类 */,
-				B54DE3B2275EF14C00BBDE0B /* 信号检测器 */,
-				B54DF449273E5A7F00F564FB /* 色盘选择器 */,
-				B533677026E84FED0009B60F /* 视频剪辑页 */,
-				B5887FA3264CD719003C1896 /* 双列表关联 */,
-				B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */,
-				B5C6C5E125ECD1C400C88C1C /* 主题适配器 */,
-				B5389B2725EE1BB900ED67F9 /* 日历选择器 */,
-				B5C6C5C325ECCADF00C88C1C /* 简易刻度尺 */,
-				B5C6C5C225ECCA0E00C88C1C /* 高级筛选器 */,
-				B5C6C5CF25ECD08900C88C1C /* 列表左滑改 */,
+				B5BAC829255A7818005A5179 /* NumberPickerController.swift */,
+				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
+				B5832B1F270FD6EE0084C78E /* VideoTestController.swift */,
 			);
 			path = ExampleList;
 			sourceTree = "<group>";
@@ -563,20 +589,20 @@
 		B5E1D8E62562831C0093AC4C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				18E1CF352B90270F00B5397E /* percentage.json */,
-				B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */,
-				B5557A3426706188007F5B44 /* loading.gif */,
-				B5389B7825EF8FB400ED67F9 /* R.generated.swift */,
+				B5CC7A4925E8989300D263B4 /* advfilterdata.json */,
+				B5DCC71725F3274D007E3237 /* areacode.json */,
+				B5DCC71325F3266D007E3237 /* areacode.plist */,
 				B575D5F825A9900C0068EB19 /* help_cn.html */,
 				B575D5F725A9900C0068EB19 /* help_es.html */,
-				B5D55404261D40AE007A20F5 /* jstest.html */,
-				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				B5BAC834255A7875005A5179 /* images.json */,
-				B5CC7A4925E8989300D263B4 /* advfilterdata.json */,
-				B5DCC71325F3266D007E3237 /* areacode.plist */,
-				B5DCC71725F3274D007E3237 /* areacode.json */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				607FACDC1AFB9204008FA782 /* Images.xcassets */,
+				B5D55404261D40AE007A20F5 /* jstest.html */,
 				B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */,
+				B5557A3426706188007F5B44 /* loading.gif */,
+				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				18E1CF352B90270F00B5397E /* percentage.json */,
+				B5389B7825EF8FB400ED67F9 /* R.generated.swift */,
+				B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -721,23 +747,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
-				B56F68A2264B8AF400FD62CF /* duallist.json in Resources */,
-				B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */,
-				B5BAC835255A7875005A5179 /* images.json in Resources */,
-				18E1CF362B90270F00B5397E /* percentage.json in Resources */,
-				B5DCC71425F3266D007E3237 /* areacode.plist in Resources */,
-				B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */,
-				B5D55405261D40AE007A20F5 /* jstest.html in Resources */,
-				B50055BE27C375CD00467E55 /* src_temp in Resources */,
-				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
-				B5557A3526706188007F5B44 /* loading.gif in Resources */,
-				B50055BD27C375CD00467E55 /* src_hsv in Resources */,
+				189C64B32D0010F400BAE470 /* .env.default in Resources */,
 				B557085027225E5500C22CD4 /* .swiftlint.yml in Resources */,
-				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
-				B5F8390226982D8E0001C484 /* 温柔女声.mp3 in Resources */,
-				B50055BF27C375CD00467E55 /* src_xy in Resources */,
+				B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */,
+				189C64AC2D000F2200BAE470 /* Appfile in Resources */,
+				B5DCC71425F3266D007E3237 /* areacode.plist in Resources */,
+				B56F68A2264B8AF400FD62CF /* duallist.json in Resources */,
+				189C64AD2D000F2200BAE470 /* Fastfile in Resources */,
 				B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */,
+				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
+				B5BAC835255A7875005A5179 /* images.json in Resources */,
+				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				B5D55405261D40AE007A20F5 /* jstest.html in Resources */,
+				B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */,
+				B5557A3526706188007F5B44 /* loading.gif in Resources */,
+				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				18E1CF362B90270F00B5397E /* percentage.json in Resources */,
+				189C64AF2D000F2200BAE470 /* Pluginfile in Resources */,
+				189C64B02D000F2200BAE470 /* README.md in Resources */,
+				189C64B12D000F2200BAE470 /* report.xml in Resources */,
+				B50055BD27C375CD00467E55 /* src_hsv in Resources */,
+				B50055BE27C375CD00467E55 /* src_temp in Resources */,
+				B50055BF27C375CD00467E55 /* src_xy in Resources */,
+				B5F8390226982D8E0001C484 /* 温柔女声.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,67 +968,67 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18A82EEF2CFEF9C7007FCCDA /* AppScene.swift in Sources */,
-				B5F520932704615E00BACB9C /* VideoPlayController.swift in Sources */,
-				180AD2962CFDA75200A2B901 /* Application.swift in Sources */,
-				B5825E2E26F04D7D00539866 /* VideoFrameView.swift in Sources */,
-				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
-				B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */,
-				B546BFB527F442D9006EA745 /* ViewReusePool.swift in Sources */,
-				B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */,
-				607FACD81AFB9204008FA782 /* ListViewController.swift in Sources */,
-				B5825E3326F0877C00539866 /* VideoCropView.swift in Sources */,
-				B50055A427C375A700467E55 /* LightAttrPickerView.swift in Sources */,
-				B56D8C7227CF5FC30032EA97 /* Wto_CombinedChart.swift in Sources */,
-				B5E8E47B27EEBEAB006CED16 /* NetworkExtension.swift in Sources */,
-				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
-				B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */,
-				1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */,
-				186750992C05B7DF00A369B5 /* WaveAnimateView.swift in Sources */,
-				B5E4AAC027F5585300D84C78 /* SteerWheelView.swift in Sources */,
-				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
-				184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */,
-				B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */,
-				184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */,
-				18A82F042D0000CE007FCCDA /* MMKVManager.swift in Sources */,
-				B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */,
-				B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */,
-				B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */,
-				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
-				B5FF3854280EA0B70063BF26 /* MVVM.swift in Sources */,
-				18A82EF42CFF130B007FCCDA /* ListViewModel.swift in Sources */,
+				B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
+				180AD2962CFDA75200A2B901 /* Application.swift in Sources */,
+				18A82EEF2CFEF9C7007FCCDA /* AppScene.swift in Sources */,
+				B546325C2803B7960026662F /* Arithmetic.swift in Sources */,
+				18A82EFE2D0000CE007FCCDA /* AuthManager.swift in Sources */,
+				B56D8C7127CF5FC30032EA97 /* BalloonMarker.swift in Sources */,
+				18A82EFF2D0000CE007FCCDA /* BGTaskManager.swift in Sources */,
+				4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */,
+				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
+				B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */,
+				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,
+				B546325A280010420026662F /* DesignMode.swift in Sources */,
+				B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */,
+				B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */,
+				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
+				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
+				18B671992B3BBFC600793476 /* Extension+TextField.swift in Sources */,
+				1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */,
+				B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */,
+				B546BFB727F455C5006EA745 /* IndexTableView.swift in Sources */,
+				18A82F032D0000CE007FCCDA /* LibsManager.swift in Sources */,
+				B50055A627C375A700467E55 /* LightAttrPickerView+Views.swift in Sources */,
+				B50055A427C375A700467E55 /* LightAttrPickerView.swift in Sources */,
+				607FACD81AFB9204008FA782 /* ListViewController.swift in Sources */,
+				18A82EF42CFF130B007FCCDA /* ListViewModel.swift in Sources */,
+				184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */,
+				B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */,
+				18A82F042D0000CE007FCCDA /* MMKVManager.swift in Sources */,
+				188692CB2C5743D5007CD12A /* MQTTClient.swift in Sources */,
+				18C5037F2C50F82700EB50B4 /* MQTTTestController.swift in Sources */,
+				B5FF3854280EA0B70063BF26 /* MVVM.swift in Sources */,
+				B5E8E47B27EEBEAB006CED16 /* NetworkExtension.swift in Sources */,
+				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
+				B58F80AE273CB51500C778D5 /* OpenCVWrapper.mm in Sources */,
+				B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */,
+				B595A8CC27C866EA007EF16E /* RegexHelper.swift in Sources */,
+				184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */,
+				B54DE3B6275F4C4100BBDE0B /* SignalMarkView.swift in Sources */,
+				B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */,
+				B5FEFA3B27462A6F00DA6999 /* SlidePickerView.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
 				B595A8D727CCB154007EF16E /* StarRateView.swift in Sources */,
-				B58F80AE273CB51500C778D5 /* OpenCVWrapper.mm in Sources */,
-				B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */,
-				B54DE3B6275F4C4100BBDE0B /* SignalMarkView.swift in Sources */,
-				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
-				B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */,
-				B50055A627C375A700467E55 /* LightAttrPickerView+Views.swift in Sources */,
-				4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */,
-				B546BFB727F455C5006EA745 /* IndexTableView.swift in Sources */,
-				188692CB2C5743D5007CD12A /* MQTTClient.swift in Sources */,
-				B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */,
-				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,
-				18C5037F2C50F82700EB50B4 /* MQTTTestController.swift in Sources */,
-				B5FEFA3B27462A6F00DA6999 /* SlidePickerView.swift in Sources */,
-				18A82F032D0000CE007FCCDA /* LibsManager.swift in Sources */,
-				B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */,
-				B5CC7A4625E88F1400D263B4 /* AdvancedFilter.swift in Sources */,
-				B56D8C7127CF5FC30032EA97 /* BalloonMarker.swift in Sources */,
-				18B671992B3BBFC600793476 /* Extension+TextField.swift in Sources */,
-				B56D8C6C27CF29E90032EA97 /* YTTabController.swift in Sources */,
-				18A82EFE2D0000CE007FCCDA /* AuthManager.swift in Sources */,
-				B546325A280010420026662F /* DesignMode.swift in Sources */,
-				18A82EFF2D0000CE007FCCDA /* BGTaskManager.swift in Sources */,
-				B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */,
+				B5E4AAC027F5585300D84C78 /* SteerWheelView.swift in Sources */,
 				18A82EF12CFEFA04007FCCDA /* TabBarItem.swift in Sources */,
-				B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */,
-				B595A8CC27C866EA007EF16E /* RegexHelper.swift in Sources */,
-				B546325C2803B7960026662F /* Arithmetic.swift in Sources */,
+				B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */,
+				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
 				B533677326E852550009B60F /* VideoCropController.swift in Sources */,
+				B5825E3326F0877C00539866 /* VideoCropView.swift in Sources */,
+				B5825E2E26F04D7D00539866 /* VideoFrameView.swift in Sources */,
+				B5F520932704615E00BACB9C /* VideoPlayController.swift in Sources */,
+				B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */,
+				B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */,
+				B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */,
+				B546BFB527F442D9006EA745 /* ViewReusePool.swift in Sources */,
+				186750992C05B7DF00A369B5 /* WaveAnimateView.swift in Sources */,
+				B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */,
+				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
+				B56D8C7227CF5FC30032EA97 /* Wto_CombinedChart.swift in Sources */,
+				B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */,
+				B56D8C6C27CF29E90032EA97 /* YTTabController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

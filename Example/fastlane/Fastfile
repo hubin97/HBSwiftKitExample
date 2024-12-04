@@ -1,0 +1,52 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+#TODO: 网络差时, 把超时时间设置长一点
+# $ export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT=120
+
+default_platform(:ios)
+
+platform :ios do
+
+  before_all do
+    #cocoapods
+#    update_code_signing_settings(
+#       targets: ["HBSwiftKit", "APNSExtension"], # specify which targets to update code signing settings for
+#    )
+    
+  end
+  
+  desc "sort_files"
+  lane :sort_files do
+    # 设置 SRCROOT 环境变量
+    #ENV['SRCROOT'] = Dir.pwd
+    
+    # 获取当前工作目录的上一级目录路径
+    ENV['SRCROOT'] = File.dirname(Dir.pwd)
+    puts "SRCROOT PATH: #{ENV['SRCROOT']}"
+
+    # 定义脚本和项目路径
+    script_path = "#{ENV['SRCROOT']}/scripts/sort-Xcode-project-file.pl"
+    project_path = "#{ENV['SRCROOT']}/HBSwiftKit.xcodeproj"
+
+    # 检查脚本文件是否存在，并执行
+    if File.exist?(script_path)
+      sh "perl '#{script_path}' '#{project_path}'"
+    else
+      UI.error "Script file does not exist: #{script_path}"
+    end
+  end
+  
+end

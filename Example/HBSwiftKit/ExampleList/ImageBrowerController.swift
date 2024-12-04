@@ -77,7 +77,7 @@ class ImageBrowerController: ViewController {
     }()
 
     lazy var albumCollect: UICollectionView = {
-        let collection = UICollectionView.init(frame: CGRect(x: 0, y: kNavBarAndSafeHeight, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight), collectionViewLayout: layout)
+        let collection = UICollectionView.init(frame: CGRect(x: 0, y: kNavBarAndSafeHeight, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight), collectionViewLayout: layout)
         collection.backgroundColor = .clear
         collection.register(SnapshotItem.self, forCellWithReuseIdentifier: NSStringFromClass(SnapshotItem.self))
         collection.dataSource = self
@@ -86,7 +86,7 @@ class ImageBrowerController: ViewController {
     }()
 
     lazy var toolBar: IBToolBar = {
-        let toolBar = IBToolBar(frame: CGRect(x: 0, y: kScreenH - kNavBarAndSafeHeight, width: kScreenW, height: kTabBarAndSafeHeight))
+        let toolBar = IBToolBar(frame: CGRect(x: 0, y: kScreenH - kBottomSafeHeight, width: kScreenW, height: kBottomSafeHeight))
         toolBar.leftBtn.addTarget(self, action: #selector(shareAction), for: .touchUpInside)
         toolBar.rightBtn.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
         return toolBar
@@ -213,7 +213,6 @@ extension ImageBrowerController: UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let model = snapshotModels[indexPath.row]
-        // swiftlint:disable force_cast
         let itemCell: SnapshotItem = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(SnapshotItem.self), for: indexPath) as! SnapshotItem
         itemCell.contentView.backgroundColor = .gray
         itemCell.model = model
