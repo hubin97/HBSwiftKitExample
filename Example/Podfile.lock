@@ -14,7 +14,8 @@ PODS:
   - GDPerformanceView-Swift (2.1.1)
   - HBSwiftKit (0.4.1):
     - HBSwiftKit/Base (= 0.4.1)
-    - HBSwiftKit/Network (= 0.4.1)
+    - HBSwiftKit/BLE (= 0.4.1)
+    - HBSwiftKit/HTTP (= 0.4.1)
     - HBSwiftKit/UIKit (= 0.4.1)
     - HBSwiftKit/Utils (= 0.4.1)
   - HBSwiftKit/Base (0.4.1):
@@ -46,8 +47,33 @@ PODS:
     - ProgressHUD
     - SnapKit
     - Toast-Swift
-  - HBSwiftKit/Network (0.4.1):
-    - HBSwiftKit/UIKit
+  - HBSwiftKit/BLE (0.4.1):
+    - "NSObject+Rx"
+    - RxCocoa
+    - RxSwift
+  - HBSwiftKit/HTTP (0.4.1):
+    - HBSwiftKit/HTTP/Core (= 0.4.1)
+    - HBSwiftKit/HTTP/Utils (= 0.4.1)
+    - Moya
+    - ObjectMapper
+    - ProgressHUD
+    - PromiseKit
+    - RxRelay
+    - RxSwift
+  - HBSwiftKit/HTTP/Core (0.4.1):
+    - Moya
+    - ObjectMapper
+    - ProgressHUD
+    - PromiseKit
+    - RxRelay
+    - RxSwift
+  - HBSwiftKit/HTTP/Utils (0.4.1):
+    - Moya
+    - ObjectMapper
+    - ProgressHUD
+    - PromiseKit
+    - RxRelay
+    - RxSwift
   - HBSwiftKit/UIKit (0.4.1):
     - HBSwiftKit/Base
   - HBSwiftKit/Utils (0.4.1):
@@ -161,7 +187,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   CocoaMQTT: 1f206228b29318eabdacad0c2e4e88575922c27a
   GDPerformanceView-Swift: 22d964fe40b19e3d914dba2586237d064de8fd77
-  HBSwiftKit: bed29d664f2e3fce6e98625225207b2919868f51
+  HBSwiftKit: 4877dfe00f455c9a39afe005228f1c6c4dadeb29
   Hero: 419d43384355b3168512bd8ac6a33aadd3dc575b
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   lottie-ios: 3d98679b41fa6fd6aff2352b3953dbd3df8a397e

@@ -32,15 +32,15 @@ import CoreBluetooth
 // MARK: - global var and methods
 
 /// 外设广播包数据
-struct BLEPeripheraData {
-    var advertisementData: [String : Any]
-    var rssi: NSNumber
+public struct BLEPeripheraData {
+    public var advertisementData: [String : Any]
+    public var rssi: NSNumber
 }
 
 // MARK: - main class
-class BLEManager: NSObject, BLEReconnectable, BLEWriteTimeoutHandler {
+public class BLEManager: NSObject, BLEReconnectable, BLEWriteTimeoutHandler {
 
-    static let shared = BLEManager()
+    public static let shared = BLEManager()
 
     // 开启debug模式
     private var debugMode = false
@@ -115,7 +115,7 @@ class BLEManager: NSObject, BLEReconnectable, BLEWriteTimeoutHandler {
       
     // 已发现的外设数组
     private var _discoveredPeripherals: [CBPeripheral] = []
-    var discoveredPeripherals: [CBPeripheral] {
+    public var discoveredPeripherals: [CBPeripheral] {
         return _discoveredPeripherals
     }
     
@@ -138,8 +138,8 @@ class BLEManager: NSObject, BLEReconnectable, BLEWriteTimeoutHandler {
 // MARK: - Reconnectable 协议方法
 extension BLEManager {
     
-    // 判断是否已连接到指定外设
-    func isConnected(to peripheral: CBPeripheral) -> Bool {
+    /// 判断是否已连接到指定外设
+    public func isConnected(to peripheral: CBPeripheral) -> Bool {
         return connectedPeripherals.contains(peripheral)
     }
 }
@@ -147,12 +147,12 @@ extension BLEManager {
 // MARK: - Central Manager Delegate
 extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         printLog("蓝牙状态更新: \(central.state.rawValue)")
         onStateChanged?(central.state)
     }
     
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+    public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if matchingStrategy.shouldConnect(to: peripheral, advertisementData: advertisementData) {
             if !_discoveredPeripherals.contains(peripheral) {
                 _discoveredPeripherals.append(peripheral)
@@ -175,7 +175,7 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
         }
     }
     
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         // 清除该外设的超时任务
         connectionTimeoutTasks[peripheral]?.cancel()
         connectionTimeoutTasks.removeValue(forKey: peripheral)
@@ -193,7 +193,7 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
         peripheral.discoverServices(targetServices.isEmpty ? nil : targetServices)
     }
     
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         let peripheralName = peripheral.name ?? "未知"
         let errorDescription = error?.localizedDescription ?? "无"
         let disconnectReason = error == nil ? "用户主动断开" : "外设断开连接"
@@ -214,7 +214,7 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
         }
     }
     
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
         printLog("连接失败: \(peripheral.name ?? "未知")，错误: \(error?.localizedDescription ?? "无")")
         onConnectionStateChange?(.failed(peripheral, error), peripheral)
         currentReconnectAttempts[peripheral] = (currentReconnectAttempts[peripheral] ?? 0) + 1
@@ -223,7 +223,7 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     // MARK: Service Discovery
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
         if let error = error {
             printLog("发现服务失败: \(error.localizedDescription)")
             return
@@ -242,7 +242,7 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
         }
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
         if let error = error {
             printLog("发现特征值失败: \(error.localizedDescription)")
             let result = BLEChannalReadyResult.failure(peripheral, error)
@@ -282,7 +282,7 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     // MARK: Descriptor Discovery (Optional) 描述符发现 一般用不上
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: (any Error)?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: (any Error)?) {
         if let error = error {
             printLog("发现描述符失败: \(error.localizedDescription)")
             return
@@ -295,7 +295,7 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     // MARK: Data Handling
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if let error = error {
             printLog("更新特征值失败: \(error.localizedDescription)")
             onCharValueUpdateResult?(.failure(peripheral, characteristic, error))
@@ -310,7 +310,7 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
         }
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         if let error = error {
             printLog("写特征值失败: \(error.localizedDescription)")
             onCharWriteResult?(.failure(peripheral, characteristic, error))
@@ -325,7 +325,7 @@ extension BLEManager {
     
     // MARK: Scanning
     @discardableResult
-    func startScanning(timeout: TimeInterval? = nil) -> Self {
+    public func startScanning(timeout: TimeInterval? = nil) -> Self {
         onScanStateChange?(.started)
         centralManager.scanForPeripherals(withServices: nil, options: nil)
         printLog("开始扫描...")
@@ -343,7 +343,7 @@ extension BLEManager {
         return self
     }
     
-    func stopScanning() {
+    public func stopScanning() {
         onScanStateChange?(.stopped)
         centralManager.stopScan()
         scanTimeoutWorkItem?.cancel()
@@ -353,7 +353,7 @@ extension BLEManager {
     
     // MARK: Connecting
     @discardableResult
-    func connect(to peripheral: CBPeripheral, options: [String: Any]? = nil, timeout: TimeInterval? = nil) -> Self {
+    public func connect(to peripheral: CBPeripheral, options: [String: Any]? = nil, timeout: TimeInterval? = nil) -> Self {
         printLog("开始连接: \(peripheral.name ?? "未知")")
         onConnectionStateChange?(.connecting(peripheral), peripheral)
 
@@ -377,20 +377,20 @@ extension BLEManager {
     }
     
     @discardableResult
-    func connect(to peripherals: [CBPeripheral], options: [String: Any]? = nil, timeout: TimeInterval? = nil) -> Self {
+    public func connect(to peripherals: [CBPeripheral], options: [String: Any]? = nil, timeout: TimeInterval? = nil) -> Self {
         peripherals.forEach { connect(to: $0, options: options, timeout: timeout) }
         return self
     }
     
     @discardableResult
-    func disconnect(_ peripheral: CBPeripheral) -> Self {
+    public func disconnect(_ peripheral: CBPeripheral) -> Self {
         centralManager.cancelPeripheralConnection(peripheral)
         return self
     }
     
     // MARK: Write Data
     @discardableResult
-    func wirteData(_ data: Data, for peripheral: CBPeripheral, type: CBCharacteristicWriteType = .withoutResponse) -> Self {
+    public func wirteData(_ data: Data, for peripheral: CBPeripheral, type: CBCharacteristicWriteType = .withoutResponse) -> Self {
         guard let char = writeChars[peripheral] else {
             printLog("未找到可写特征值")
             return self
@@ -415,61 +415,61 @@ extension BLEManager {
 extension BLEManager {
     
     @discardableResult
-    func setDebugMode(_ isDebug: Bool) -> Self {
+    public func setDebugMode(_ isDebug: Bool) -> Self {
         self.debugMode = isDebug
         return self
     }
     
     @discardableResult
-    func setLogTag(_ tag: String) -> Self {
+    public func setLogTag(_ tag: String) -> Self {
         self.logTag = tag
         return self
     }
     
     @discardableResult
-    func setMatchingStrategy(_ strategy: BLEPeripheralMatching) -> Self {
+    public func setMatchingStrategy(_ strategy: BLEPeripheralMatching) -> Self {
         self.matchingStrategy = strategy
         return self
     }
     
     @discardableResult
-    func setTargetServices(_ services: [CBUUID]) -> Self {
+    public func setTargetServices(_ services: [CBUUID]) -> Self {
         self.targetServices = services
         return self
     }
     
     @discardableResult
-    func setReadCharUUID(_ uuid: CBUUID) -> Self {
+    public func setReadCharUUID(_ uuid: CBUUID) -> Self {
         self.readCharUUID = uuid
         return self
     }
 
     @discardableResult
-    func setWriteCharUUID(_ uuid: CBUUID) -> Self {
+    public func setWriteCharUUID(_ uuid: CBUUID) -> Self {
         self.writeCharUUID = uuid
         return self
     }
     
     @discardableResult
-    func setNotifyCharUUID(_ uuid: CBUUID) -> Self {
+    public func setNotifyCharUUID(_ uuid: CBUUID) -> Self {
         self.notifyCharUUID = uuid
         return self
     }
     
     @discardableResult
-    func setOpenWriteTimeout(_ open: Bool) -> Self {
+    public func setOpenWriteTimeout(_ open: Bool) -> Self {
         self.openWriteTimeout = open
         return self
     }
     
     @discardableResult
-    func setCmdComparisonRule(_ rule: @escaping (BLEWriteData, Data) -> Bool) -> Self {
+    public func setCmdComparisonRule(_ rule: @escaping (BLEWriteData, Data) -> Bool) -> Self {
         self.cmdComparisonRule = rule
         return self
     }
     
     @discardableResult
-    func setWriteTimeoutHandle(_ handler: @escaping (BLEWriteData) -> Void) -> Self {
+    public func setWriteTimeoutHandle(_ handler: @escaping (BLEWriteData) -> Void) -> Self {
         self.writeTimeoutHandle = handler
         return self
     }
@@ -479,19 +479,19 @@ extension BLEManager {
 extension BLEManager {
     
     @discardableResult
-    func setOnChannalReadyResult(_ handler: @escaping (BLEChannalReadyResult) -> Void) -> Self {
+    public func setOnChannalReadyResult(_ handler: @escaping (BLEChannalReadyResult) -> Void) -> Self {
         self.onChannalReadyResult = handler
         return self
     }
     
     @discardableResult
-    func setOnCharValueUpdateResult(_ handler: @escaping (BLECharValueUpdateResult) -> Void) -> Self {
+    public func setOnCharValueUpdateResult(_ handler: @escaping (BLECharValueUpdateResult) -> Void) -> Self {
         self.onCharValueUpdateResult = handler
         return self
     }
     
     @discardableResult
-    func setOnCharWriteResult(_ handler: @escaping (BLECharWriteResult) -> Void) -> Self {
+    public func setOnCharWriteResult(_ handler: @escaping (BLECharWriteResult) -> Void) -> Self {
         self.onCharWriteResult = handler
         return self
     }
@@ -501,61 +501,61 @@ extension BLEManager {
 extension BLEManager {
     
     @discardableResult
-    func setOnStateChanged(_ handler: @escaping (CBManagerState) -> Void) -> Self {
+    public func setOnStateChanged(_ handler: @escaping (CBManagerState) -> Void) -> Self {
         self.onStateChanged = handler
         return self
     }
 
     @discardableResult
-    func setOnScanStateChange(_ handler: @escaping (BLEScanState) -> Void) -> Self {
+    public func setOnScanStateChange(_ handler: @escaping (BLEScanState) -> Void) -> Self {
         self.onScanStateChange = handler
         return self
     }
     
     @discardableResult
-    func setOnConnectionStateChange(_ handler: @escaping (BLEConnectionState, CBPeripheral) -> Void) -> Self {
+    public func setOnConnectionStateChange(_ handler: @escaping (BLEConnectionState, CBPeripheral) -> Void) -> Self {
         self.onConnectionStateChange = handler
         return self
     }
     
     @discardableResult
-    func setOnDataReceived(_ handler: @escaping (BLECharValueUpdateResult) -> Void) -> Self {
+    public func setOnDataReceived(_ handler: @escaping (BLECharValueUpdateResult) -> Void) -> Self {
         self.onDataReceived = handler
         return self
     }
     
     @discardableResult
-    func setOnConnected(_ handler: @escaping (CBPeripheral) -> Void) -> Self {
+    public func setOnConnected(_ handler: @escaping (CBPeripheral) -> Void) -> Self {
         self.onConnected = handler
         return self
     }
     
     @discardableResult
-    func setOnConnectedPeripherals(_ handler: @escaping ([CBPeripheral]) -> Void) -> Self {
+    public func setOnConnectedPeripherals(_ handler: @escaping ([CBPeripheral]) -> Void) -> Self {
         self.onConnectedPeripherals = handler
         return self
     }
     
     @discardableResult
-    func setOnDisconnected(_ handler: @escaping (CBPeripheral, Error?) -> Void) -> Self {
+    public func setOnDisconnected(_ handler: @escaping (CBPeripheral, Error?) -> Void) -> Self {
         self.onDisconnected = handler
         return self
     }
     
     @discardableResult
-    func setOnPeripheralDiscovered(_ handler: @escaping (CBPeripheral, BLEPeripheraData) -> Void) -> Self {
+    public func setOnPeripheralDiscovered(_ handler: @escaping (CBPeripheral, BLEPeripheraData) -> Void) -> Self {
         self.onPeripheralDiscovered = handler
         return self
     }
     
     @discardableResult
-    func setOnScanCompleted(_ handler: @escaping ([CBPeripheral]) -> Void) -> Self {
+    public func setOnScanCompleted(_ handler: @escaping ([CBPeripheral]) -> Void) -> Self {
         self.onScanCompleted = handler
         return self
     }
     
     @discardableResult
-    func setOnConnectionTimeout(_ handler: @escaping (CBPeripheral) -> Void) -> Self {
+    public func setOnConnectionTimeout(_ handler: @escaping (CBPeripheral) -> Void) -> Self {
         self.onConnectionTimeout = handler
         return self
     }
@@ -565,14 +565,14 @@ extension BLEManager {
 extension BLEManager {
 
     @discardableResult
-    func onReconnectPhase(_ handler: @escaping (CBPeripheral, BLEReconnectState) -> Void) -> Self {
+    public func onReconnectPhase(_ handler: @escaping (CBPeripheral, BLEReconnectState) -> Void) -> Self {
         self.reconnectPhase = handler
         return self
     }
 
     // 更新 enableAutoReconnect 方法，支持设置最大重连次数和重连超时
     @discardableResult
-    func enableAutoReconnect(_ enable: Bool, maxAttempts: Int = 3, timeout: TimeInterval = 10) -> Self {
+    public func enableAutoReconnect(_ enable: Bool, maxAttempts: Int = 3, timeout: TimeInterval = 10) -> Self {
         self.autoReconnect = enable
         self.maxReconnectAttempts = maxAttempts
         self.reconnectTimeout = timeout
@@ -584,7 +584,7 @@ extension BLEManager {
 extension BLEManager {
     
     @discardableResult
-    func setAdvertisementParser<P: BLEAdvDataParser>(_ parser: P) -> Self {
+    public func setAdvertisementParser<P: BLEAdvDataParser>(_ parser: P) -> Self {
         self.parser = parser
         return self
     }
@@ -595,7 +595,7 @@ extension BLEManager {
     /// .setOnPeripheralDiscoveredWithParser { (p, pDataProvider, parse: String?) in }
     /// .setOnPeripheralDiscoveredWithParser { (p, pDataProvider, parse: [UInt8]]?) in }
     @discardableResult
-    func setOnPeripheralDiscoveredWithParser<T>(_ handler: @escaping (CBPeripheral, BLEPeripheraData, T?) -> Void) -> Self {
+    public func setOnPeripheralDiscoveredWithParser<T>(_ handler: @escaping (CBPeripheral, BLEPeripheraData, T?) -> Void) -> Self {
         self.onPeripheralDiscoveredWithParser = { peripheral, pdata, data in
             handler(peripheral, pdata, data as? T)
         }

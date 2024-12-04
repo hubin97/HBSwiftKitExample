@@ -9,30 +9,30 @@ import Foundation
 import CoreBluetooth
 
 // 封装每次写入请求的数据包
-struct BLEWriteData: Comparable {
+public struct BLEWriteData: Comparable {
     
-    static func < (lhs: BLEWriteData, rhs: BLEWriteData) -> Bool {
+    public static func < (lhs: BLEWriteData, rhs: BLEWriteData) -> Bool {
         return lhs.priority < rhs.priority
     }
 
     /// 外设
-    let peripheral: CBPeripheral
+    public let peripheral: CBPeripheral
     /// 写入特征
-    let writeChar: CBCharacteristic
+    public let writeChar: CBCharacteristic
     /// 外设UUID
-    let uuid: String
+    public let uuid: String
 
     /// 写入数据
-    let data: Data
+    public let data: Data
     /// 写入超时时间
-    let timeout: TimeInterval
-    /// 请求ID
-    let requestId: UUID
+    public let timeout: TimeInterval
     /// 优先级
-    var priority: Int
-    
+    public var priority: Int
+    /// 请求ID
+    public let requestId: UUID
+
     // 初始化时为每个写入请求生成唯一的UUID
-    init(peripheral: CBPeripheral, writeChar: CBCharacteristic, data: Data, timeout: TimeInterval = 3.0, priority: Int = 0) {
+    public init(peripheral: CBPeripheral, writeChar: CBCharacteristic, data: Data, timeout: TimeInterval = 3.0, priority: Int = 0) {
         self.requestId = UUID()
         self.peripheral = peripheral
         self.writeChar = writeChar
@@ -46,7 +46,7 @@ struct BLEWriteData: Comparable {
 
 extension BLEWriteData {
     
-    var description: String {
+    public var description: String {
         return "BLEWriteData: \(requestId), \(uuid), \(peripheral), \(writeChar), \(data.map { String(format: "%02hhx", $0) })"
     }
 }

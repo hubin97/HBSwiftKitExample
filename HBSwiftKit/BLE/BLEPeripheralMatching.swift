@@ -9,7 +9,7 @@ import Foundation
 import CoreBluetooth
 
 // MARK: - Matching Protocol
-protocol BLEPeripheralMatching {
+public protocol BLEPeripheralMatching {
     /// 判断可以连接到指定外设 (追加匹配规则)
     func shouldConnect(to peripheral: CBPeripheral, advertisementData: [String: Any]) -> Bool
 }
@@ -25,17 +25,17 @@ extension BLEPeripheralMatching {
 
 // MARK: - Strategy
 /// 默认策略：允许所有设备
-struct DefaultMatchingStrategy: BLEPeripheralMatching {
-    func shouldConnect(to peripheral: CBPeripheral, advertisementData: [String: Any]) -> Bool {
+public struct DefaultMatchingStrategy: BLEPeripheralMatching {
+    public func shouldConnect(to peripheral: CBPeripheral, advertisementData: [String: Any]) -> Bool {
         return true
     }
 }
 
 // MARK: - 以下为示例
 /// 字节匹配策略
-struct StartsByteMatchingStrategy: BLEPeripheralMatching {
+public struct StartsByteMatchingStrategy: BLEPeripheralMatching {
     let targetBytes: [UInt8]
-    func shouldConnect(to peripheral: CBPeripheral, advertisementData: [String: Any]) -> Bool {
+    public func shouldConnect(to peripheral: CBPeripheral, advertisementData: [String: Any]) -> Bool {
         if let manufacturerData = advertisementData["kCBAdvDataManufacturerData"] as? Data {
             return matchesByteArray(manufacturerData, byteArray: targetBytes)
         }
@@ -49,8 +49,8 @@ struct StartsByteMatchingStrategy: BLEPeripheralMatching {
 }
 
 /// 正则表达式匹配策略
-struct RegexMatchingStrategy: BLEPeripheralMatching {
-    enum MatchingMode {
+public struct RegexMatchingStrategy: BLEPeripheralMatching {
+    public enum MatchingMode {
         /// 基于外设名称前缀匹配
         case namePrefix(String)
         /// 基于广播包中的字节匹配
@@ -60,11 +60,11 @@ struct RegexMatchingStrategy: BLEPeripheralMatching {
     private var mode: MatchingMode
     
     // 初始化时选择匹配模式
-    init(mode: MatchingMode) {
+    public init(mode: MatchingMode) {
         self.mode = mode
     }
 
-    func shouldConnect(to peripheral: CBPeripheral, advertisementData: [String: Any]) -> Bool {
+    public func shouldConnect(to peripheral: CBPeripheral, advertisementData: [String: Any]) -> Bool {
         switch mode {
         case .namePrefix(let prefix):
             return matchesNamePrefix(peripheral.name ?? "", prefix: prefix)

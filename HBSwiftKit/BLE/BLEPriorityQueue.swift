@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct BLEPriorityQueue<Element: Comparable & Equatable> {
+public struct BLEPriorityQueue<Element: Comparable & Equatable> {
 
     // 排序优先级策略
-    enum Order {
+    public enum Order {
         case ascending
         case descending
     }
@@ -19,27 +19,27 @@ struct BLEPriorityQueue<Element: Comparable & Equatable> {
     private let order: Order?
     
     /// 队列是否为空
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         return elements.isEmpty
     }
     
     /// 当前大小
-    var size: Int {
+    public var size: Int {
         return elements.count
     }
     
     /// 排序优先级策略
-    init(order: Order? = nil) {
+    public init(order: Order? = nil) {
         self.order = order
     }
     
     /// 首元素
-    func peek() -> Element? {
+    public func peek() -> Element? {
         elements.first
     }
     
     /// 入队方法：可指定插入位置
-    mutating func enqueue(_ element: Element, at index: Int? = nil) {
+    public mutating func enqueue(_ element: Element, at index: Int? = nil) {
         // 指定位置插入, 仅在未指定排序策略时有效
         if let index = index, order == nil {
             // 指定位置插入
@@ -62,7 +62,7 @@ struct BLEPriorityQueue<Element: Comparable & Equatable> {
     
     /// 出队
     @discardableResult
-    mutating func dequeue() -> Element? {
+    public mutating func dequeue() -> Element? {
         guard let front = peek() else {
             return nil
         }
@@ -71,12 +71,12 @@ struct BLEPriorityQueue<Element: Comparable & Equatable> {
     }
     
     /// 判断元素是否存在
-    func contains(_ element: Element) -> Bool {
+    public func contains(_ element: Element) -> Bool {
         return elements.contains(element)
     }
     
     /// 移除指定位置的元素
-    mutating func remove(_ element: Element) {
+    public mutating func remove(_ element: Element) {
         for i in 0 ..< elements.count where elements[i] == element {
             remove(at: i)
         }
@@ -84,7 +84,7 @@ struct BLEPriorityQueue<Element: Comparable & Equatable> {
     
     /// 移除指定位置的元素
     @discardableResult
-    mutating func remove(at index: Int) -> Element {
+    public mutating func remove(at index: Int) -> Element {
         return elements.remove(at: index)
     }
     
@@ -107,7 +107,7 @@ struct BLEPriorityQueue<Element: Comparable & Equatable> {
 }
 
 extension BLEPriorityQueue : CustomDebugStringConvertible {
-    var debugDescription: String {
+    public var debugDescription: String {
         elements.debugDescription
     }
 }

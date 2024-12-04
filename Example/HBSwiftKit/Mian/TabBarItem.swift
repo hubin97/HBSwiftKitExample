@@ -56,7 +56,6 @@ enum TabBarItem: TabBarItemDataProvider {
         default:
             return ViewModel()
         }
-        return ViewModel()
     }
 
     // 根据枚举值返回对应的视图控制器

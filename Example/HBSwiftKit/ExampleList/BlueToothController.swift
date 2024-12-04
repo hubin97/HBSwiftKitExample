@@ -49,6 +49,7 @@ class BlueToothController: ViewController {
         let _button = UIButton(type: .custom)
         _button.frame = CGRect(x: 0, y: 0, width: 60, height: 44)
         _button.setTitle("搜索", for: .normal)
+        _button.setTitleColor(.black, for: .normal)
         _button.addTarget(self, action: #selector(scanAction), for: .touchUpInside)
         return _button
     }()
