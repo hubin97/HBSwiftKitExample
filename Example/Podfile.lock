@@ -4,6 +4,8 @@ PODS:
     - Charts/Core (= 4.1.0)
   - Charts/Core (4.1.0):
     - SwiftAlgorithms (~> 1.0)
+  - CocoaLumberjack (3.7.4):
+    - CocoaLumberjack/Core (= 3.7.4)
   - CocoaLumberjack/Core (3.7.4)
   - CocoaLumberjack/Swift (3.7.4):
     - CocoaLumberjack/Core
@@ -11,13 +13,13 @@ PODS:
     - CocoaMQTT/Core (= 2.1.6)
   - CocoaMQTT/Core (2.1.6):
     - MqttCocoaAsyncSocket (~> 1.0.8)
+  - FLEX (5.22.10)
   - GDPerformanceView-Swift (2.1.1)
   - HBSwiftKit (0.4.1):
     - HBSwiftKit/Base (= 0.4.1)
     - HBSwiftKit/BLE (= 0.4.1)
     - HBSwiftKit/HTTP (= 0.4.1)
-    - HBSwiftKit/UIKit (= 0.4.1)
-    - HBSwiftKit/Utils (= 0.4.1)
+    - HBSwiftKit/Other (= 0.4.1)
   - HBSwiftKit/Base (0.4.1):
     - HBSwiftKit/Base/Base (= 0.4.1)
     - HBSwiftKit/Base/Extension (= 0.4.1)
@@ -74,16 +76,27 @@ PODS:
     - PromiseKit
     - RxRelay
     - RxSwift
-  - HBSwiftKit/UIKit (0.4.1):
+  - HBSwiftKit/Other (0.4.1):
+    - CocoaLumberjack
     - HBSwiftKit/Base
-  - HBSwiftKit/Utils (0.4.1):
-    - HBSwiftKit/UIKit
-    - HBSwiftKit/Utils/AuthStatus (= 0.4.1)
-  - HBSwiftKit/Utils/AuthStatus (0.4.1):
-    - HBSwiftKit/UIKit
+    - HBSwiftKit/Other/AuthStatus (= 0.4.1)
+    - HBSwiftKit/Other/LoggerManager (= 0.4.1)
+    - RxSwift
+  - HBSwiftKit/Other/AuthStatus (0.4.1):
+    - CocoaLumberjack
+    - HBSwiftKit/Base
+    - RxSwift
+  - HBSwiftKit/Other/LoggerManager (0.4.1):
+    - CocoaLumberjack
+    - HBSwiftKit/Base
+    - RxSwift
   - Hero (1.6.3)
-  - Kingfisher (4.10.1)
+  - IQKeyboardManagerSwift (6.5.16)
+  - Kingfisher (7.10.2)
   - lottie-ios (4.3.4)
+  - MMKV (2.0.0):
+    - MMKVCore (~> 2.0.0)
+  - MMKVCore (2.0.0)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
@@ -123,10 +136,13 @@ DEPENDENCIES:
   - Charts (~> 4.1.0)
   - CocoaLumberjack/Swift
   - CocoaMQTT
+  - FLEX
   - GDPerformanceView-Swift
   - HBSwiftKit (from `../`)
-  - Kingfisher
+  - IQKeyboardManagerSwift (~> 6.5.7)
+  - Kingfisher (~> 7.10.0)
   - lottie-ios
+  - MMKV
   - Moya
   - Nimble
   - "NSObject+Rx (~> 5.2.2)"
@@ -148,10 +164,14 @@ SPEC REPOS:
     - Charts
     - CocoaLumberjack
     - CocoaMQTT
+    - FLEX
     - GDPerformanceView-Swift
     - Hero
+    - IQKeyboardManagerSwift
     - Kingfisher
     - lottie-ios
+    - MMKV
+    - MMKVCore
     - Moya
     - MqttCocoaAsyncSocket
     - Nimble
@@ -186,11 +206,15 @@ SPEC CHECKSUMS:
   Charts: ce0768268078eee0336f122c3c4ca248e4e204c5
   CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   CocoaMQTT: 1f206228b29318eabdacad0c2e4e88575922c27a
+  FLEX: f21ee4f498eed3f8a1eded66b21939fd3b7a22ce
   GDPerformanceView-Swift: 22d964fe40b19e3d914dba2586237d064de8fd77
-  HBSwiftKit: 4877dfe00f455c9a39afe005228f1c6c4dadeb29
+  HBSwiftKit: 4c6db9436a0e3bb8fc2884744f9ef581ca8df1a5
   Hero: 419d43384355b3168512bd8ac6a33aadd3dc575b
-  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
+  Kingfisher: 99edc495d3b7607e6425f0d6f6847b2abd6d716d
   lottie-ios: 3d98679b41fa6fd6aff2352b3953dbd3df8a397e
+  MMKV: f7d1d5945c8765f97f39c3d121f353d46735d801
+  MMKVCore: c04b296010fcb1d1638f2c69405096aac12f6390
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   MqttCocoaAsyncSocket: 77d3b74f76228dd5a05d1f9526eab101d415b30c
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
@@ -210,6 +234,6 @@ SPEC CHECKSUMS:
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: e3a241f9a31a590d2fee4afcf2565ed76660119b
+PODFILE CHECKSUM: 8aa3bc8b54114958af5401fe51e6668eb351c2c9
 
 COCOAPODS: 1.15.2

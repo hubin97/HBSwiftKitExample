@@ -23,8 +23,7 @@
 // 2. 区分主题, 便于管理 x
 
 // #3 问题点
-// 1. 重连协议侵入性较强, 是否可以解耦, 放在外部实现
-// 2. 日志输出插入的时间不是实时的
+// 1. 日志输出插入的时间不是实时的
 
 import Foundation
 import CoreBluetooth
@@ -111,7 +110,7 @@ public class BLEManager: NSObject, BLEReconnectable, BLEWriteTimeoutHandler {
     // 数据回调
     private var onCharValueUpdateResult: ((BLECharValueUpdateResult) -> Void)?
     // 写入回调 (当写入类型为带响应时, 会有回调, 否则不会有回调)
-    private var onCharWriteResult: ((BLECharWriteResult) -> Void)?
+    private var onWithResponseWriteResult: ((BLECharWriteResult) -> Void)?
       
     // 已发现的外设数组
     private var _discoveredPeripherals: [CBPeripheral] = []
@@ -313,10 +312,10 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         if let error = error {
             printLog("写特征值失败: \(error.localizedDescription)")
-            onCharWriteResult?(.failure(peripheral, characteristic, error))
+            onWithResponseWriteResult?(.failure(peripheral, characteristic, error))
             return
         }
-        onCharWriteResult?(.success(peripheral, characteristic))
+        onWithResponseWriteResult?(.success(peripheral, characteristic))
     }
 }
 
@@ -490,9 +489,10 @@ extension BLEManager {
         return self
     }
     
+    /// 写入数据回调 (仅当写入类型为带响应时, 会有回调)
     @discardableResult
-    public func setOnCharWriteResult(_ handler: @escaping (BLECharWriteResult) -> Void) -> Self {
-        self.onCharWriteResult = handler
+    public func setOnWithResponseWriteResult(_ handler: @escaping (BLECharWriteResult) -> Void) -> Self {
+        self.onWithResponseWriteResult = handler
         return self
     }
 }

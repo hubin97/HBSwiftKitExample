@@ -14,8 +14,12 @@ inhibit_all_warnings!
 target 'HBSwiftKit_Example' do
   pod 'HBSwiftKit', :path => '../'
   
+#  pod 'HBSwiftKit/Base', :path => '../'
+#  pod 'HBSwiftKit/BLE', :path => '../'
+#  pod 'HBSwiftKit/HTTP', :path => '../'
+
   pod 'SnapKit'
-  pod 'Kingfisher'
+  pod 'Kingfisher', '~> 7.10.0'
   pod 'R.swift' #, '~> 5.3.1'
   pod 'ObjectMapper'
   pod 'Moya' #, '~> 15.0.0'
@@ -27,7 +31,7 @@ target 'HBSwiftKit_Example' do
   pod 'SVProgressHUD'
   pod 'GDPerformanceView-Swift', :configurations => ['Debug']
   pod 'SwiftLint', :configurations => ['Debug']
-#  pod 'FLEX'#, :configurations => ['Debug']
+  pod 'FLEX', :configurations => ['Debug']
   pod 'CocoaMQTT'  # https://github.com/emqx/CocoaMQTT
 
   pod 'lottie-ios' #, '~> 4.4.1'
@@ -37,7 +41,9 @@ target 'HBSwiftKit_Example' do
   pod 'NSObject+Rx', '~> 5.2.2'  # https://github.com/RxSwiftCommunity/NSObject-Rx
 #  pod 'Hero', '~> 1.6'  # https://github.com/lkzhao/Hero
   pod 'ProgressHUD', :git => 'https://github.com/hubin97/ProgressHUD.git'
-
+  pod 'MMKV'#, :git => 'https://github.com/Tencent/MMKV.git'
+  pod 'IQKeyboardManagerSwift', '~> 6.5.7'
+  
   target 'HBSwiftKit_Tests' do
     inherit! :search_paths
 
@@ -47,15 +53,37 @@ target 'HBSwiftKit_Example' do
     #    pod 'FBSnapshotTestCase' , '~> 2.1.4'
 #    pod 'Nimble-Snapshots' , '~> 6.3.0'
   end
-  
-  post_install do |installer|
-      installer.pods_project.targets.each do |target|
-          target.build_configurations.each do |config|
-              config.build_settings['SWIFT_VERSION'] = '5.0'
-              #config.build_settings['COMPILER_INDEX_STORE_ENABLE'] = "NO" # OCLint配置
-              config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
-          end
-      end
-  end
 
 end
+
+# 修改依赖库的配置
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        # Enable tracing resources
+        if target.name == 'RxSwift'
+          target.build_configurations.each do |config|
+            if config.name == 'Debug'
+              config.build_settings['OTHER_SWIFT_FLAGS'] ||= ['-D', 'TRACE_RESOURCES']
+            end
+          end
+        end
+        #
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '5.0'
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+        end
+    end
+end
+
+#///注意: 使用logResourcesCount的`RxSwift.Resources.total` 需要在Podfile中启用资源跟踪 (主工程配置)
+#
+# # Enable tracing resources
+# installer.pods_project.targets.each do |target|
+#   if target.name == 'RxSwift'
+#     target.build_configurations.each do |config|
+#       if config.name == 'Debug'
+#         config.build_settings['OTHER_SWIFT_FLAGS'] ||= ['-D', 'TRACE_RESOURCES']
+#       end
+#     end
+#   end
+# end

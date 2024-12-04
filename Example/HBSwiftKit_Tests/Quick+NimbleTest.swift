@@ -204,13 +204,13 @@ class QPathTest: QuickSpec {
     override func spec() {
         fdescribe("QPathTest") {
             it("should print correct test data") {
-                _ = QPath.filePaths(documentPath ?? "")
+                _ = QPath.filePaths(QPath.documentPath ?? "")
                 QPath.removeFile("")
                 //        QPath.createFile(name: "111.txt", fileBaseUrl: URL.init(fileURLWithPath: documentPath ?? ""))
                 //        QPath.createFile(name: "222.txt", fileBaseUrl: URL.init(fileURLWithPath: documentPath ?? ""))
-                QPath.writingToFile(filePath: "\(documentPath ?? "")/222.txt", contents: "啦啦啦啦")
-                QPath.writingToFile(filePath: "\(documentPath ?? "")/222.txt", contents: "\n哦哦哦哦")
-                let dicPath = QPath.createDirectory(basePath: "\(documentPath ?? "")", dicName: "Img")
+                QPath.writingToFile(filePath: "\(QPath.documentPath ?? "")/222.txt", contents: "啦啦啦啦")
+                QPath.writingToFile(filePath: "\(QPath.documentPath ?? "")/222.txt", contents: "\n哦哦哦哦")
+                let dicPath = QPath.createDirectory(basePath: "\(QPath.documentPath ?? "")", dicName: "Img")
                 QPath.createFile(filePath: "\(dicPath)/string", contents: "string")
                 QPath.createFile(filePath: "\(dicPath)/img", contents: R.image.tabBar.home_h()!)
                 if let img = R.image.tabBar.home_h(), let imgdata = img.pngData() {

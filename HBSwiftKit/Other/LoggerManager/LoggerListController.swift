@@ -7,24 +7,23 @@
 
 import Foundation
 import CocoaLumberjack
-import HBSwiftKit
-//MARK: - global var and methods
 
-//MARK: - main class
-open class LoggerListController: ViewController {
+// MARK: - main class
+class LoggerListController: ViewController {
 
     open lazy var logFiles: [DDLogFileInfo] = {
         return LoggerManager.shared.fileLogger.logFileManager.sortedLogFileInfos
     }()
 
-    open lazy var dateFormatter: DateFormatter = {
-        let _dateFormatter = DateFormatter.init()
-        _dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        _dateFormatter.timeZone = TimeZone.current
-        return _dateFormatter
-    }()
+//    open lazy var dateFormatter: DateFormatter = {
+//        let _dateFormatter = DateFormatter.init()
+//        _dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        _dateFormatter.timeZone = TimeZone.current
+//        return _dateFormatter
+//    }()
+    
     open lazy var listView: UITableView = {
-        let listView = UITableView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight), style: .plain)
+        let listView = UITableView.init(frame: CGRect(x: 0, y: kNavBarAndSafeHeight, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight), style: .plain)
         listView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
         listView.tableFooterView = UIView.init(frame: CGRect.zero)
         listView.dataSource = self
@@ -33,9 +32,9 @@ open class LoggerListController: ViewController {
         return listView
     }()
     
-    open override func setupLayout() {
-        super.setupLayout()
-        self.navigationItem.title = "日志列表"
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        self.naviBar.title = "日志列表"
         view.addSubview(listView)
         LoggerManager.shared.removeEntrance()
         // DDLogInfo("LoggerManager LogFiles Count:\(logFiles.count)")
@@ -46,17 +45,17 @@ open class LoggerListController: ViewController {
     }
 }
 
-//MARK: - private mothods
+// MARK: - private mothods
 extension LoggerListController {
     
 }
 
-//MARK: - call backs
+// MARK: - call backs
 extension LoggerListController {
     
 }
 
-//MARK: - delegate or data source
+// MARK: - delegate or data source
 extension LoggerListController: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,7 +65,7 @@ extension LoggerListController: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let file = logFiles[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UITableViewCell.self), for: indexPath)
-        var logdate = dateFormatter.string(from: file.creationDate ?? Date())
+        var logdate = (file.creationDate ?? Date()).format()
         if indexPath.row == 0 {
             logdate = "最新" + logdate
         }
@@ -82,32 +81,45 @@ extension LoggerListController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-
-//MARK: - other classes
-open class LoggerDetailController: ViewController {
+// MARK: - other classes
+class LoggerDetailController: ViewController {
 
     var file: DDLogFileInfo?
     open lazy var logTextView: UITextView = {
-        let _logTextView = UITextView.init(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight))
+        let _logTextView = UITextView.init(frame: CGRect(x: 0, y: kNavBarAndSafeHeight, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight))
         _logTextView.isEditable = false
         return _logTextView
     }()
-
-    lazy var rightItems: [UIBarButtonItem] = {
-        var rightItems = [UIBarButtonItem]()
-        let bottomItem = UIBarButtonItem.init(title: "To底部", style: .plain, target: self, action: #selector(scrollToBottom))
-        rightItems.append(bottomItem)
-        if #available(iOS 11.0, *) {
-            let fileItem = UIBarButtonItem.init(title: "To文件", style: .plain, target: self, action: #selector(saveToFile))
-            rightItems.append(fileItem)
-        }
-        return rightItems
+    
+    lazy var bottomButton: UIButton = {
+        let _bottomItem = UIButton(type: .custom)
+        _bottomItem.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        _bottomItem.setTitle("底部", for: .normal)
+        _bottomItem.setTitleColor(.black, for: .normal)
+        _bottomItem.addTarget(self, action: #selector(scrollToBottom), for: .touchUpInside)
+        return _bottomItem
+    }()
+    
+    lazy var fileButton: UIButton = {
+        let _fileButton = UIButton(type: .custom)
+        _fileButton.frame = CGRect(x: 44 + 12, y: 0, width: 44, height: 44)
+        _fileButton.setTitle("导出", for: .normal)
+        _fileButton.setTitleColor(.black, for: .normal)
+        _fileButton.addTarget(self, action: #selector(saveToFile), for: .touchUpInside)
+        return _fileButton
+    }()
+    
+    lazy var titleView: UIView = {
+        let _titleView = UIView(frame: CGRect(x: 0, y: 0, width: 88 + 12, height: 44))
+        _titleView.addSubview(bottomButton)
+        _titleView.addSubview(fileButton)
+        return _titleView
     }()
 
-    open override func setupLayout() {
-        super.setupLayout()
-        self.navigationItem.title = "日志详情"
-        self.navigationItem.rightBarButtonItems = rightItems
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        self.naviBar.title = "日志详情"
+        self.naviBar.setRightView(titleView)
 
         view.addSubview(logTextView)
         if let fpath = file?.filePath, let fdata = try? Data.init(contentsOf: URL.init(fileURLWithPath: fpath)) {

@@ -1,16 +1,17 @@
 //
 //  TapImpact.swift
-//  HBSwiftKit
+//  LuteBase
 //
-//  Created by Hubin_Huang on 2021/1/20.
-//  Copyright © 2020 Wingto. All rights reserved.
+//  Created by hubin.h on 2023/11/9.
+//  Copyright © 2020 路特创新. All rights reserved.
+//
 
+/// 振动反馈
 import Foundation
 
-//MARK: - global var and methods
+// MARK: - global var and methods
 
-//MARK: - main class
-/// 振动反馈
+// MARK: - main class
 open class TapImpact {
 
     public static func light() {
@@ -42,8 +43,7 @@ open class TapImpact {
     }
 }
 
-//MARK: - other classes
-/// Generates iOS Device vibrations by UIFeedbackGenerator.
+// MARK: - other classes
 class TapticEngine {
     public static let impact: Impact = .init()
     public static let selection: Selection = .init()
@@ -52,11 +52,7 @@ class TapticEngine {
     
     /// Wrapper of `UIImpactFeedbackGenerator`
     class Impact {
-        /// Impact feedback styles
-        ///
-        /// - light: A impact feedback between small, light user interface elements.
-        /// - medium: A impact feedback between moderately sized user interface elements.
-        /// - heavy: A impact feedback between large, heavy user interface elements.
+
         public enum ImpactStyle {
             case light, medium, heavy
         }
@@ -140,11 +136,6 @@ class TapticEngine {
     
     /// Wrapper of `UINotificationFeedbackGenerator`
     class Notification {
-        /// Notification feedback types
-        ///
-        /// - success: A notification feedback, indicating that a task has completed successfully.
-        /// - warning: A notification feedback, indicating that a task has produced a warning.
-        /// - error: A notification feedback, indicating that a task has failed.
         public enum NotificationType {
             case success, warning, error
         }

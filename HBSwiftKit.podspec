@@ -39,38 +39,7 @@ Pod::Spec.new do |s|
 #      ss.source_files  = 'HBSwiftKit/Global'
 #      ss.framework  = "Foundation", "UIKit"
 #  end
-#  
-#  s.subspec 'Extension' do |ss|
-#      ss.source_files  = 'HBSwiftKit/Extension'
-#      ss.dependency 'HBSwiftKit/Global'
-#  end
-#  
-#  s.subspec 'Base' do |ss|
-#      ss.source_files  = 'HBSwiftKit/Base/'
-#      ss.dependency 'HBSwiftKit/Extension'
-#  end
-  
-  s.subspec 'UIKit' do |ss|
-      ss.source_files  = 'HBSwiftKit/UIKit/**/*'
-      ss.dependency 'HBSwiftKit/Base'
-  end
-  
-#  s.subspec 'Network' do |ss|
-#      ss.source_files  = 'HBSwiftKit/Network'
-#      ss.dependency 'HBSwiftKit/UIKit'
-#  end
-  
-  s.subspec 'Utils' do |ss|
-      ss.source_files  = 'HBSwiftKit/Utils'
-      ss.dependency 'HBSwiftKit/UIKit'
-      ss.subspec 'AuthStatus' do |sss|
-          sss.source_files  = 'HBSwiftKit/Utils/AuthStatus'
-      end
-#      ss.subspec 'LoggerManager' do |sss|
-#          sss.source_files  = 'HBSwiftKit/Utils/LoggerManager'
-#      end
-  end
-  
+
 #  s.subspec 'Assets' do |dd|
 #    dd.source_files  = "HBSwiftKit/Assets/*"
 #  end
@@ -78,16 +47,6 @@ Pod::Spec.new do |s|
     # 子模块：Base
     s.subspec 'Base' do |base|
         
-#        base.subspec 'Global' do |ss|
-#            ss.source_files  = 'LuteBase/Base/Global/**/*.swift'
-#            ss.framework  = "Foundation", "UIKit"
-#        end
-#        
-#        base.subspec 'Extension' do |ss|
-#            ss.source_files  = 'LuteBase/Base/Extension/**/*.swift'
-#            ss.dependency 'LuteBase/Base/Global'
-#        end
-
         # 使用 Ruby 数组简化多个依赖的定义
         # 扩展自定义Hud;  pod 'ProgressHUD', :git => 'https://github.com/hubin97/ProgressHUD.git'
         ['SnapKit', 'Hero', 'Kingfisher', 'Toast-Swift', 'ProgressHUD'].each do |dd|
@@ -98,7 +57,7 @@ Pod::Spec.new do |s|
             ss.source_files  = 'HBSwiftKit/Base/Global'
             ss.framework  = "Foundation", "UIKit"
         end
- 
+
         base.subspec 'Extension' do |ss|
             ss.source_files  = 'HBSwiftKit/Base/Extension'
             ss.dependency 'HBSwiftKit/Base/Global'
@@ -113,8 +72,6 @@ Pod::Spec.new do |s|
     
     # 子模块：HTTP
     s.subspec 'HTTP' do |http|
-        
-        # 使用 Ruby 数组简化多个依赖的定义
         ['RxSwift', 'RxRelay', 'Moya', 'ObjectMapper', 'PromiseKit', 'ProgressHUD'].each do |dd|
             http.dependency dd
         end
@@ -132,16 +89,30 @@ Pod::Spec.new do |s|
 
     # 子模块：BLE
     s.subspec 'BLE' do |ble|
-        
-        # 使用 Ruby 数组简化多个依赖的定义
         ['RxSwift', 'RxCocoa', 'NSObject+Rx'].each do |dd|
             ble.dependency dd
         end
         
         ble.source_files  = 'HBSwiftKit/BLE/**/*.{swift,h,m,md}'
-        #ble.dependency 'HBSwiftKit/Base/Extension'
     end
 
+    # 子模块：Other
+    s.subspec 'Other' do |other|
+        ['RxSwift', 'CocoaLumberjack'].each do |dd|
+            other.dependency dd
+        end
+        
+        other.source_files  = 'HBSwiftKit/Other/**/*'
+        other.dependency 'HBSwiftKit/Base'
+        
+        other.subspec 'AuthStatus' do |sss|
+            sss.source_files  = 'HBSwiftKit/Other/AuthStatus'
+        end
+        other.subspec 'LoggerManager' do |sss|
+            sss.source_files  = 'HBSwiftKit/Other/LoggerManager'
+        end
+    end
+    
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.resource     = 'HBSwiftKit/HBSwiftKit.bundle'
 

@@ -179,12 +179,6 @@ extension BlueToothController {
     func chainableMethod() {
         
         bleManager
-//            .setDebugMode(true)
-//            .setLogTag(Date().format(with: "HH:mm:ss") + " [BLEManager]: ")
-//            .enableAutoReconnect(true)
-//            .setMatchingStrategy(RegexMatchingStrategy(mode: .advertisementData([0xaa])))
-//            .setTargetServices([CBUUID(string: "AF00")])  // "AF00": 服务UUID
-//            .startScanning(timeout: 15)
             .setOnStateChanged { state in
                 print("蓝牙状态更新: \(state.rawValue)")
             }
@@ -196,17 +190,6 @@ extension BlueToothController {
                     self.listView.reloadData()
                 }
             }
-//            .setOnPeripheralDiscovered {[weak self] peripheral, pDataProvider in
-//                guard let self = self, let manufacturerData = pDataProvider.advertisementData["kCBAdvDataManufacturerData"] else { return }
-//                print("发现外设: \(peripheral.name ?? "未知"), \(manufacturerData), \(pDataProvider.rssi)")
-//                //print("共: \(self.bleManager.discoveredPeripherals.map({ $0.name ?? "未知" }))")
-//                self.peripherals.append(peripheral)
-//                self.listView.reloadData()
-//            }
-//            .setOnScanCompleted {[weak self] peripherals in
-//                guard let self = self else { return }
-//                print("扫描完成. 共发现 \(peripherals.count) 个外设, 共: \(self.bleManager.discoveredPeripherals.map({ $0.name ?? "未知" }))")
-//            }
             .setOnScanStateChange {[weak self] state in
                 guard let self = self else { return }
                 print("扫描状态更新: \(state)")
@@ -217,18 +200,6 @@ extension BlueToothController {
                     print("扫描完成. 共发现 \(peripherals.count) 个外设, 共: \(self.bleManager.discoveredPeripherals.map({ $0.name ?? "未知" }))")
                 }
             }
-//            .setOnConnected {[weak self] peripheral in
-//                guard let self = self else { return }
-//                print("连接成功: \(peripheral.name ?? "未知")")
-//                self.updatePreipherals(with: peripheral)
-//            }
-//            .setOnConnectedPeripherals { peripherals in
-//                print("已连接的所有外设: \(peripherals.map({ "\($0.name ?? "" + " [" + $0.identifier.uuidString + "]" )" }))")
-//            }
-//            .setOnConnectionTimeout { peripheral in
-//                //#warning("连接超时处理")
-//                print("连接 \(peripheral.name ?? "未知") 超时")
-//            }
             .setOnConnectionStateChange {[weak self] state, peripheral in
                 guard let self = self else { return }
                 self.updatePreipherals(with: peripheral)
@@ -260,15 +231,6 @@ extension BlueToothController {
                     }
                 }
             }
-//            .setOnDisconnected {[weak self] peripheral, error  in
-//                guard let self = self else { return }
-//                self.updatePreipherals(with: peripheral)
-//                if error != nil {
-//                    print("断开连接: \(peripheral.name ?? "未知"), Error: \(error?.localizedDescription ?? "null")")
-//                } else {
-//                    print("用户主动断开连接: \(peripheral.name ?? "未知")")
-//                }
-//            }
             .onReconnectPhase { peripheral, state in
                 switch state {
                 case .started:
@@ -277,30 +239,14 @@ extension BlueToothController {
                     print("重连停止: \(result == .success ? "成功" : "超时")")
                 }
             }
-//            .onMaxReconnectAttemptsReached { peripheral in
-//                print("达到最大重连次数: \(peripheral.name ?? "未知")")
-//            }
-//            .setOnChannalReadyResult {[weak self] result in
-//                guard let self = self else { return }
-//                switch result {
-//                case .success(let peripheral, let service):
-//                    print("通道准备就绪: \(peripheral.name ?? "未知") \(service.characteristics?.count ?? 0) 个")
-//
-//                    //let cmd = [0xAA, 0x55, 0x00]
-//                    let cmd = ["AA", "55", "00", "F0", "04", "AA", "55", "11", "00", "FC"].map { UInt8($0, radix: 16)! }
-//                    bleManager.wirteData(Data(cmd), for: peripheral)
-//                case .failure(let peripheral, let error):
-//                    print("通道准备失败: \(peripheral.name ?? "未知")，错误: \(error.localizedDescription)")
-//                }
-//            }
-//            .setOnCharWriteResult { result in
-//                switch result {
-//                case .success(let peripheral, _):
-//                    print("写入成功: \(peripheral.name ?? "未知")")
-//                case .failure(let peripheral, _, let error):
-//                    print("写入失败: \(peripheral.name ?? "未知"), Error: \(error.localizedDescription)")
-//                }
-//            }
+            .setOnWithResponseWriteResult { result in
+                switch result {
+                case .success(let peripheral, _):
+                    print("写入成功: \(peripheral.name ?? "未知")")
+                case .failure(let peripheral, _, let error):
+                    print("写入失败: \(peripheral.name ?? "未知"), Error: \(error.localizedDescription)")
+                }
+            }
             .setOnDataReceived { result in
                 // 仅有成功的情况
                 if case let .success(peripheral, _, data) = result {
@@ -314,15 +260,6 @@ extension BlueToothController {
                 print("比较: \(success ? "成功" : "失败"), \(success ? "" : "\(reqData[3]) != \(ackData[3])")")
                 return success
             }
-//            .setOnCharValueUpdateResult { result in
-//                switch result {
-//                case .success(let peripheral, _, let data):
-//                    let hex = data.map { String(format: "%02X", $0) }
-//                    print("特征值更新: \(peripheral.name ?? "未知"). \(hex)")
-//                case .failure(let peripheral, _, let error):
-//                    print("特征值更新失败: \(peripheral.name ?? "未知"), Error: \(error.localizedDescription)")
-//                }
-//            }
             .setWriteTimeoutHandle { data in
                 print("写入超时处理: \(data.uuid). \(data.requestId.uuidString)")
             }

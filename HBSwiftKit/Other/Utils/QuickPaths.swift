@@ -8,33 +8,29 @@
 import UIKit
 import Foundation
 
-//MARK: - global var and methods
-/// FileManager.default
-public let fileManager = FileManager.default
-
-/// Home目录  ./
-public let homePath = NSHomeDirectory()
-
-/// Documnets目录 ./Documents
-public let documentPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
-
-/// Library目录   ./Library
-public let libraryPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
-
-/// Library目录   ./Caches
-public let cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
-
-/// tmp目录  ./tmp
-public let tmpPath = NSTemporaryDirectory()
-
-//MARK: -
-
-
-//MARK: - main class
+// MARK: - global var and methods
 public typealias QPath = QuickPaths
 
 /// 快捷路径方法
 public class QuickPaths {
+
+    /// FileManager.default
+    public static let fileManager = FileManager.default
+
+    /// Home目录  ./
+    public static let homePath = NSHomeDirectory()
+
+    /// Documnets目录 ./Documents
+    public static let documentPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
+
+    /// Library目录   ./Library
+    public static let libraryPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
+
+    /// Library目录   ./Caches
+    public static let cachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
+
+    /// tmp目录  ./tmp
+    public static let tmpPath = NSTemporaryDirectory()
 
     /// 获取目标文件夹下所有文件的路径
     /// - Parameter path: 目标文件夹路径
@@ -125,26 +121,35 @@ public class QuickPaths {
             return
         }
         do {
-            try FileManager.default.removeItem(atPath: path)
+            if FileManager.default.fileExists(atPath: path) {
+                try FileManager.default.removeItem(atPath: path)
+                print("Successfully deleted file: \(path)")
+            } else {
+                print("File does not exist: \(path)")
+            }
         } catch {
             print("文件path:\(path)删除失败!")
         }
     }
-}
-
-//MARK: - private mothods
-extension QuickPaths {
     
+    /// 删除文件夹下所有内容, 递归删除
+    public static func deleteFolder(_ path: String) {
+        let fileManager = FileManager.default
+        do {
+            let files = try fileManager.contentsOfDirectory(atPath: path)
+            for file in files {
+                let fullPath = "\(path)/\(file)"
+                if fileManager.fileExists(atPath: fullPath) {
+                    if fileManager.isDeletableFile(atPath: fullPath) {
+                        try fileManager.removeItem(atPath: fullPath)
+                    } else {
+                        deleteFolder(fullPath)
+                    }
+                }
+            }
+            try fileManager.removeItem(atPath: path)
+        } catch {
+            print("Error deleting folder: \(error)")
+        }
+    }
 }
-
-//MARK: - call backs
-extension QuickPaths {
-    
-}
-
-//MARK: - delegate or data source
-extension QuickPaths {
-    
-}
-
-//MARK: - other classes

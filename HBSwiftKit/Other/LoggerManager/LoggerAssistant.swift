@@ -7,15 +7,22 @@
 
 import Foundation
 
-//MARK: - global var and methods
-
-//MARK: - main class
+// MARK: - main class
 open class LoggerAssistant: UIView {
 
     private var icon: UIImage?
-    private var tapEventBlock: (() -> ())?
+    private var tapEventBlock: (() -> Void)?
     private var beginPoint: CGPoint?
     private var movedPoint: CGPoint?
+    
+    /// 获取主窗口
+    let appKeyWindow: UIWindow? = {
+        if #available(iOS 13, *) {
+            return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
+        } else {
+            return UIApplication.shared.keyWindow
+        }
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,11 +32,11 @@ open class LoggerAssistant: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    required convenience public init(size: CGSize? = nil, icon: UIImage? = nil, tapEvent: @escaping (() -> ())) {
+    required convenience public init(size: CGSize? = nil, icon: UIImage? = nil, tapEvent: @escaping (() -> Void)) {
         self.init()
         defer {
-            UIApplication.shared.delegate?.window??.addSubview(self)
-            UIApplication.shared.delegate?.window??.bringSubviewToFront(self)
+            appKeyWindow?.addSubview(self)
+            appKeyWindow?.bringSubviewToFront(self)
         }
         self.icon = icon
         self.tapEventBlock = tapEvent
@@ -43,7 +50,7 @@ open class LoggerAssistant: UIView {
     }
 }
 
-//MARK: - private mothods
+// MARK: - private mothods
 extension LoggerAssistant {
  
     public func show() {
@@ -51,13 +58,13 @@ extension LoggerAssistant {
         opBtn.frame = self.bounds
         if let img = icon {
             opBtn.setImage(img, for: .normal)
-            opBtn.setBackgroundImage(UIImage(color: .groupTableViewBackground), for: .normal)
-            opBtn.setRoundCorners(borderColor: .groupTableViewBackground, borderWidth: 1, raddi: 5, corners: .allCorners)
+            //opBtn.setBackgroundImage(UIImage(color: .systemGroupedBackground), for: .normal)
+            //opBtn.setRoundCorners(borderColor: .systemGroupedBackground, borderWidth: 1, raddi: 5, corners: .allCorners)
         } else {
             opBtn.setTitle("Logger", for: .normal)
             opBtn.setTitleColor(.systemBlue, for: .normal)
-            opBtn.setBackgroundImage(UIImage(color: .groupTableViewBackground), for: .normal)
-            opBtn.setRoundCorners()
+            //opBtn.setBackgroundImage(UIImage(color: .systemGroupedBackground), for: .normal)
+            //opBtn.setRoundCorners()
         }
         opBtn.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
         self.addSubview(opBtn)
@@ -68,7 +75,7 @@ extension LoggerAssistant {
     }
 }
 
-//MARK: - call backs
+// MARK: - call backs
 extension LoggerAssistant {
     
     @objc func tapAction() {

@@ -235,7 +235,7 @@ extension ImageBrowerController: UICollectionViewDataSource, UICollectionViewDel
         rect.origin.y += kNavBarAndSafeHeight
 
         let imagePaths = snapshotModels.map({ $0.photoPath ?? "" })
-        let imageBrower = Wto_ImageBrower.init(loadMode: .imagePath, dataSource: imagePaths)
+        let imageBrower = ImageBrower.init(loadMode: .imagePath, dataSource: imagePaths)
         // imageBrower.backgroundColor = .black
         // imageBrower.loadImagePaths(imagePaths: imagePaths, tapIndex: indexPath.row, originRect: rect)
         imageBrower.show()

@@ -102,10 +102,10 @@ extension Application {
     func initialScreen(in window: UIWindow?) {
         guard let window = window else { return }
         
-//        /// 添加日志入口
-//        defer {
-//            LibsManager.shared.setupLogger()
-//        }
+        /// 添加日志入口
+        defer {
+            LibsManager.shared.setupLogger()
+        }
       
         /// 主页
         self.navigator.show(provider: AppScene.tabs(viewModel: TabBarViewModel(tabBarItems: TabBarItem.allCases)), sender: nil, transition: .root(in: window))
