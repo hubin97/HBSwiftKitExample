@@ -8,42 +8,32 @@
 # SwifterSwift:  over 500 native Swift extensions https://github.com/SwifterSwift/SwifterSwift
 
 Pod::Spec.new do |s|
-  
-  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.name             = 'HBSwiftKit'
-  s.version          = '0.4.1'
-  s.summary          = 'some common components.'
-  s.description      = <<-DESC
-                    仅仅一些个人常用组件.学习工作使用.
-                       DESC
-  s.homepage         = 'https://github.com/hubin97/HBSwiftKitExample'
-  s.swift_versions = ['5.0']
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  
-  # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  
-  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.author           = { 'Hubin_Huang' => '970216474@qq.com' }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-  
-  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.ios.deployment_target = '13.0'
-
-  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.source           = { :git => 'https://github.com/hubin97/HBSwiftKitExample.git', :tag => s.version.to_s }
-  
-  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #s.source_files  = 'HBSwiftKit/**/*.{h,m,swift}'
-#  s.subspec 'Global' do |ss|
-#      ss.source_files  = 'HBSwiftKit/Global'
-#      ss.framework  = "Foundation", "UIKit"
-#  end
-
-#  s.subspec 'Assets' do |dd|
-#    dd.source_files  = "HBSwiftKit/Assets/*"
-#  end
-
+    
+    # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+    s.name             = 'HBSwiftKit'
+    s.version          = '0.5.0'
+    s.summary          = 'some common components.'
+    s.description      = <<-DESC
+    仅仅一些个人常用组件.学习工作使用.
+    DESC
+    s.homepage         = 'https://github.com/hubin97/HBSwiftKitExample'
+    s.swift_versions = ['5.0']
+    # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+    
+    # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    
+    # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+    s.author           = { 'Hubin_Huang' => '970216474@qq.com' }
+    # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+    
+    # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+    s.ios.deployment_target = '13.0'
+    
+    # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+    s.source           = { :git => 'https://github.com/hubin97/HBSwiftKitExample.git', :tag => s.version.to_s }
+    
+    # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     # 子模块：Base
     s.subspec 'Base' do |base|
         
@@ -52,12 +42,12 @@ Pod::Spec.new do |s|
         ['SnapKit', 'Hero', 'Kingfisher', 'Toast-Swift', 'ProgressHUD'].each do |dd|
             base.dependency dd
         end
-
+        
         base.subspec 'Global' do |ss|
             ss.source_files  = 'HBSwiftKit/Base/Global'
             ss.framework  = "Foundation", "UIKit"
         end
-
+        
         base.subspec 'Extension' do |ss|
             ss.source_files  = 'HBSwiftKit/Base/Extension'
             ss.dependency 'HBSwiftKit/Base/Global'
@@ -86,7 +76,7 @@ Pod::Spec.new do |s|
             ss.framework  = "Foundation", "CoreTelephony"
         end
     end
-
+    
     # 子模块：BLE
     s.subspec 'BLE' do |ble|
         ['RxSwift', 'RxCocoa', 'NSObject+Rx'].each do |dd|
@@ -95,7 +85,7 @@ Pod::Spec.new do |s|
         
         ble.source_files  = 'HBSwiftKit/BLE/**/*.{swift,h,m,md}'
     end
-
+    
     # 子模块：Other
     s.subspec 'Other' do |other|
         ['RxSwift', 'CocoaLumberjack'].each do |dd|
@@ -113,10 +103,10 @@ Pod::Spec.new do |s|
         end
     end
     
-  # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.resource     = 'HBSwiftKit/HBSwiftKit.bundle'
-
-  # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.requires_arc = true
-
+    # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+    s.resource     = 'HBSwiftKit/HBSwiftKit.bundle'
+    
+    # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+    s.requires_arc = true
+    
 end

@@ -1,109 +1,102 @@
 <html>
     <title>Js测试</title>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-            <script language="javascript">
-            var ctuapp_share_img="www.baidu.com";
-            function scanClick() {
-                window.webkit.messageHandlers.ScanAction.postMessage(null);
-                android.webSend();
-            }
-                
-            function shareClick() {
-                window.webkit.messageHandlers.WINGTO_NATIVE.postMessage({title:'测试分享的标题',content:'测试分享的内容',url:'http://m.rblcmall.com/share/openShare.htm?share_uuid=shdfxdfdsfsdfs&share_url=http://m.rblcmall.com/store_index_32787.htm&imagePath=http://c.hiphotos.baidu.com/image/pic/item/f3d3572c11dfa9ec78e256df60d0f703908fc12e.jpg'});
-            }
-            
-            function locationClick() {
-                window.webkit.messageHandlers.Location.postMessage(null);
-            }
-            
-            function setLocation(location) {
-                asyncAlert(location);
-                document.getElementById("returnValue").value = location;
-            }
-            
-            function getQRCode(result) {
-                asyncAlert(result);
-                document.getElementById("returnValue").value = result;
-            }
-            
-            function colorClick() {
-                window.webkit.messageHandlers.Color.postMessage([67,205,128,0.5]);
-            }
-            
-            function payClick() {
-                window.webkit.messageHandlers.Pay.postMessage({order_no:'201511120981234',channel:'wx',amount:1,subject:'粉色外套'});
-            }
-            
-            function payResult(str) {
-                asyncAlert(str);
-                document.getElementById("returnValue").value = str;
-            }
-            
-            function shareResult(channel_id,share_channel,share_url) {
-                var content = channel_id+","+share_channel+","+share_url;
-                asyncAlert(content);
-                document.getElementById("returnValue").value = content;
-            }
+    <script language="javascript">
 
-            function shake() {
-                window.webkit.messageHandlers.Shake.postMessage(null);
-            }
-            
-            function goBack() {
-                window.webkit.messageHandlers.GoBack.postMessage(null);
-            }
-            
-            function playSound() {
-                window.webkit.messageHandlers.PlaySound.postMessage('shake_sound_male.wav');
-            }
-            
-            function asyncAlert(content) {
-                setTimeout(function(){
-                           alert(content);
-                           },1);
-            }
-            
-            
-            </script>
+        function nullParamCall() {
+            let message = {
+                method: 'nullParamCall',
+            };
+
+            window.location.href = 'LUTE_NATIVE://' + JSON.stringify(message);
+            window.webkit.messageHandlers.LUTE_NATIVE.postMessage(message)
+        }
+
+        function haveParamCall1() {
+            let message = {
+                method: 'haveParamCall1',
+                params: '测试分享的内容'
+            };
+
+            window.location.href = 'LUTE_NATIVE://' + JSON.stringify(message);
+            window.webkit.messageHandlers.LUTE_NATIVE.postMessage(message);
+        }
+
+        function haveParamCall2() {
+            let message = {
+                method: 'haveParamCall2',
+                params: {
+                    title: '测试分享的标题',
+                    content: '测试分享的内容',
+                    url: 'http://www.baidu.com',
+                    img: 'http://www.baidu.com/img.jpg'
+                }
+            };
+
+            window.location.href = 'LUTE_NATIVE://' + JSON.stringify(message);
+            window.webkit.messageHandlers.LUTE_NATIVE.postMessage(message);
+        }
+
+        function haveParamCall3() {
+            let message = {
+                method: 'haveParamCall3',
+                params: [1, 2, 3, 4, 5]
+            };
+
+            window.location.href = 'LUTE_NATIVE://' + JSON.stringify(message);
+            window.webkit.messageHandlers.LUTE_NATIVE.postMessage(message);
+        }
+
+        // 定义一个接受字符串参数并显示在 textarea 中的函数
+        function receiveNativeMessage(result) {
+            // 获取 textarea 元素
+            var textarea = document.getElementById("returnValue");
+            // 将传入的字符串设置为 textarea 的值
+            textarea.value = result;
+        }
+
+        function asyncAlert(content) {
+            setTimeout(function(){
+                       alert(content);
+                       },1);
+        }
+
+    </script>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0", maximum-scale=1.0, user-scalable=no, http-equiv="Content-Type" content="text/html; charset=utf8">
             </head>
     
     <body>
-        <h1>这是按钮调用</h1>
-        <input type="button" value="扫一扫" onclick="scanClick()" />
-        <input type="button" value="获取定位" onclick="locationClick()" />
-        <input type="button" value="修改背景色" onclick="colorClick()" />
-        <input type="button" value="分享" onclick="shareClick()" />
-        <input type="button" value="支付" onclick="payClick()" />
-        <input type="button" value="摇一摇" onclick="shake()" />
-        <input type="button" value="返回" onclick="goBack()" />
-        <input type="button" value="播放声音" onclick="playSound()" />
-        
-        <h1>这是文件上传</h1>
+        <style>
+            .custom-button {
+                width: 100px; /* 设置宽度 */
+                height: 40px; /* 设置高度 */
+                font-size: auto; /* 设置字体大小 */
+                background-color: #666666; /* 设置背景颜色 */
+                color: white; /* 设置字体颜色 */
+                border: none; /* 去掉边框 */
+                border-radius: 5px; /* 设置圆角 */
+                margin: 10px; /* 设置外边距 */
+                /*cursor: pointer; /* 鼠标悬停时显示为手型 */
+            }
+
+            .custom-button:hover {
+                background-color: #45a049; /* 悬停时改变背景颜色 */
+            }
+        </style>
+        <h3>这是按钮调用</h3>
+        <input class="custom-button" type="button" value="无参调用(null)" onclick="nullParamCall()" />
+        <input class="custom-button" type="button" value="带参调用(string)" onclick="haveParamCall1()" />
+        <input class="custom-button" type="button" value="带参调用(dict)" onclick="haveParamCall2()" />
+        <input class="custom-button" type="button" value="带参调用(array)" onclick="haveParamCall3()" />
+
+        <h3>这是文件上传</h3>
 
         <input type="file" />
         
-        <h1>这是回调结果展示区</h1>
+        <h3>这是回调结果展示区</h3>
         <textarea id ="returnValue" type="value" rows="5" cols="40">
         
         </textarea>
-        
-        <h4>竖直方向的表头：</h4>
-        <table border="1" style="width:90%;height:600px">
-            <tr>
-                <th>姓名</th>
-                <td>Bill Gates</td>
-            </tr>
-            <tr>
-                <th>电话</th>
-                <td>555 77 854</td>
-            </tr>
-            <tr>
-                <th>传真</th>
-                <td>555 77 855</td>
-            </tr>
-        </table>
-        
         
     </body>
 </html>

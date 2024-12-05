@@ -11,7 +11,7 @@ import Foundation
 // MARK: - main class
 class ListViewModel: ViewModel {
     let items: [DemoRowModel] = [DemoRowModel(title: "照片浏览器", dclass: ImageBrowerController()),
-                                 DemoRowModel(title: "日历选择器", dclass: CalendarPickerController()),
+                                 DemoRowModel(title: "日历选择器", dclass: CalendarController()),
                                  DemoRowModel(title: "日期选择器", dclass: DatePickerController()),
                                  DemoRowModel(title: "数字选择器", dclass: NumberPickerController()),
                                  DemoRowModel(title: "蓝牙测试页", dclass: BlueToothController()),

@@ -114,10 +114,18 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.file` struct is generated, and contains static references to 14 files.
+  /// This `R.file` struct is generated, and contains static references to 19 files.
   struct file {
-    /// Resource file `.swiftlint.yml`.
-    static let swiftlintYml = Rswift.FileResource(bundle: R.hostingBundle, name: ".swiftlint", pathExtension: "yml")
+    /// Resource file `.env.default`.
+    static let envDefault = Rswift.FileResource(bundle: R.hostingBundle, name: ".env", pathExtension: "default")
+    /// Resource file `Appfile`.
+    static let appfile = Rswift.FileResource(bundle: R.hostingBundle, name: "Appfile", pathExtension: "")
+    /// Resource file `Fastfile`.
+    static let fastfile = Rswift.FileResource(bundle: R.hostingBundle, name: "Fastfile", pathExtension: "")
+    /// Resource file `Pluginfile`.
+    static let pluginfile = Rswift.FileResource(bundle: R.hostingBundle, name: "Pluginfile", pathExtension: "")
+    /// Resource file `README.md`.
+    static let readmeMd = Rswift.FileResource(bundle: R.hostingBundle, name: "README", pathExtension: "md")
     /// Resource file `advfilterdata.json`.
     static let advfilterdataJson = Rswift.FileResource(bundle: R.hostingBundle, name: "advfilterdata", pathExtension: "json")
     /// Resource file `areacode.plist`.
@@ -136,6 +144,8 @@ struct R: Rswift.Validatable {
     static let loadingGif = Rswift.FileResource(bundle: R.hostingBundle, name: "loading", pathExtension: "gif")
     /// Resource file `percentage.json`.
     static let percentageJson = Rswift.FileResource(bundle: R.hostingBundle, name: "percentage", pathExtension: "json")
+    /// Resource file `report.xml`.
+    static let reportXml = Rswift.FileResource(bundle: R.hostingBundle, name: "report", pathExtension: "xml")
     /// Resource file `src_hsv`.
     static let src_hsv = Rswift.FileResource(bundle: R.hostingBundle, name: "src_hsv", pathExtension: "")
     /// Resource file `src_temp`.
@@ -145,9 +155,33 @@ struct R: Rswift.Validatable {
     /// Resource file `温柔女声.mp3`.
     static let 温柔女声Mp3 = Rswift.FileResource(bundle: R.hostingBundle, name: "温柔女声", pathExtension: "mp3")
 
-    /// `bundle.url(forResource: ".swiftlint", withExtension: "yml")`
-    static func swiftlintYml(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.swiftlintYml
+    /// `bundle.url(forResource: ".env", withExtension: "default")`
+    static func envDefault(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.envDefault
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "Appfile", withExtension: "")`
+    static func appfile(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.appfile
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "Fastfile", withExtension: "")`
+    static func fastfile(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.fastfile
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "Pluginfile", withExtension: "")`
+    static func pluginfile(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.pluginfile
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "README", withExtension: "md")`
+    static func readmeMd(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.readmeMd
       return fileResource.bundle.url(forResource: fileResource)
     }
 
@@ -205,6 +239,12 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
 
+    /// `bundle.url(forResource: "report", withExtension: "xml")`
+    static func reportXml(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.reportXml
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
     /// `bundle.url(forResource: "src_hsv", withExtension: "")`
     static func src_hsv(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.src_hsv
@@ -232,7 +272,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 37 images.
+  /// This `R.image` struct is generated, and contains static references to 38 images.
   struct image {
     /// Image `ib_back`.
     static let ib_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "ib_back")
@@ -246,6 +286,8 @@ struct R: Rswift.Validatable {
     static let ib_share = Rswift.ImageResource(bundle: R.hostingBundle, name: "ib_share")
     /// Image `ib_unselect`.
     static let ib_unselect = Rswift.ImageResource(bundle: R.hostingBundle, name: "ib_unselect")
+    /// Image `icon_calendar_arrow_down`.
+    static let icon_calendar_arrow_down = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon_calendar_arrow_down")
     /// Image `image`.
     static let image = Rswift.ImageResource(bundle: R.hostingBundle, name: "image")
     /// Image `last_month_enabled`.
@@ -348,6 +390,13 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "ib_unselect", bundle: ..., traitCollection: ...)`
     static func ib_unselect(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.ib_unselect, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icon_calendar_arrow_down", bundle: ..., traitCollection: ...)`
+    static func icon_calendar_arrow_down(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icon_calendar_arrow_down, compatibleWith: traitCollection)
     }
     #endif
 

@@ -180,11 +180,11 @@ open class LocalizedUtils {
 // MARK: - Date Format
 extension LocalizedUtils {
     
-//    /// 默认时间格式(云端支持格式) `"yyyy-MM-dd"`
-//    static var dateFormat_Cloud: String {
-//        return "yyyy-MM-dd"
-//    }
-//    
+    /// 默认时间格式(云端支持格式) `"yyyy-MM-dd"`
+    public static var dateFormat_standard: String {
+        return "yyyy-MM-dd"
+    }
+    
 //    /// 默认时间格式(云端支持格式) `"yyyy-MM-dd HH:mm"`
 //    static var dateFormat_Cloud2: String {
 //        return "yyyy-MM-dd HH:mm"

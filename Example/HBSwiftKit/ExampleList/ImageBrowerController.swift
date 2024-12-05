@@ -29,34 +29,11 @@ class ImageBrowerController: ViewController {
     fileprivate let albumMinSpacing: CGFloat = 10
 
     lazy var snapshotModels: [SnapshotModel] = {
-//        let path = Bundle.main.path(forResource: "images", ofType: "json")
-//        let url = URL(fileURLWithPath: path ?? "")
-//
-//        do {
-//            let json = try JSONSerialization.jsonObject(with: Data.init(contentsOf: url), options: .mutableContainers)
-//            if let dic = json as? [String: Any], let datas = dic["data"] as? [[String: Any]] {
-//                var models = [SnapshotModel]()
-//                for meta in datas {
-//                    let model = SnapshotModel.init()
-//                    model.id = meta["id"] as? Int
-//                    model.createTimeMs = meta["createTimeMs"] as? Int
-//                    model.thumbnailPath = meta["thumbnailPath"] as? String
-//                    model.photoPath = meta["photoPath"] as? String
-//                    models.append(model)
-//                }
-//                return models
-//            }
-//        } catch {
-//            print("tojsonErro: \(error)")
-//        }
-//        return []
-
-        //
         let count = 17
         let path = "https://wt-oss-test.oss-cn-shenzhen.aliyuncs.com/pic/scene03.png"
         var models = [SnapshotModel]()
         for idx in 0..<count {
-            let model = SnapshotModel.init()
+            let model = SnapshotModel()
             model.id = idx
             model.createTimeMs = Int(Date().timeIntervalSince1970)/10 + idx
             model.thumbnailPath = path
@@ -77,7 +54,7 @@ class ImageBrowerController: ViewController {
     }()
 
     lazy var albumCollect: UICollectionView = {
-        let collection = UICollectionView.init(frame: CGRect(x: 0, y: kNavBarAndSafeHeight, width: kScreenW, height: kScreenH - kNavBarAndSafeHeight - kBottomSafeHeight), collectionViewLayout: layout)
+        let collection = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
         collection.backgroundColor = .clear
         collection.register(SnapshotItem.self, forCellWithReuseIdentifier: NSStringFromClass(SnapshotItem.self))
         collection.dataSource = self
@@ -86,26 +63,41 @@ class ImageBrowerController: ViewController {
     }()
 
     lazy var toolBar: IBToolBar = {
-        let toolBar = IBToolBar(frame: CGRect(x: 0, y: kScreenH - kBottomSafeHeight, width: kScreenW, height: kBottomSafeHeight))
+        let toolBar = IBToolBar(frame: CGRect.zero)
         toolBar.leftBtn.addTarget(self, action: #selector(shareAction), for: .touchUpInside)
         toolBar.rightBtn.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
         return toolBar
     }()
 
     var isEditable: Bool? // 是否可编辑
-    var rightEditBtn = UIButton.init(type: .custom)
-
+    lazy var rightEditBtn: UIButton = {
+        let _rightEditBtn = UIButton.init(type: .custom)
+        _rightEditBtn.frame = CGRect(x: 0, y: 0, width: 60, height: 40)
+        _rightEditBtn.setTitle("选择", for: .normal)
+        _rightEditBtn.setTitleColor(.black, for: .normal)
+        _rightEditBtn.addTarget(self, action: #selector(editAction), for: .touchUpInside)
+        return _rightEditBtn
+    }()
+    
     override func setupLayout() {
         super.setupLayout()
         self.naviBar.title = "照片浏览器"
-        self.rightEditBtn.setTitle("选择", for: .normal)
-        self.rightEditBtn.setTitleColor(.black, for: .normal)
-        self.rightEditBtn.addTarget(self, action: #selector(editAction), for: .touchUpInside)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.rightEditBtn)
-
-        view.addSubview(albumCollect)
-        view.addSubview(toolBar)
-        albumCollect.reloadData()
+        self.naviBar.setRightView(rightEditBtn)
+        self.view.addSubview(toolBar)
+        self.view.addSubview(albumCollect)
+        //self.albumCollect.reloadData()
+        
+        self.toolBar.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(kTabBarAndSafeHeight)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(kTabBarAndSafeHeight)
+        }
+        
+        self.albumCollect.snp.makeConstraints { make in
+            make.top.equalTo(naviBar.snp.bottom)
+            make.bottom.equalTo(toolBar.snp.top)
+            make.leading.trailing.equalToSuperview()
+        }
     }
 }
 
@@ -118,19 +110,22 @@ extension ImageBrowerController {
 extension ImageBrowerController {
 
     @objc func editAction() {
-
         self.isEditable = (self.isEditable == true) ? false: true
         self.rightEditBtn.setTitle((self.isEditable == true) ? "取消" :"选择", for: .normal)
 
         if self.isEditable == true { // 可编辑
-            UIView.animate(withDuration: 0.5) {
-                self.albumCollect.frame.size.height -= kTabBarAndSafeHeight
-                self.toolBar.frame.origin.y -= kTabBarAndSafeHeight
+            UIView.animate(withDuration: 0.3) {
+                self.toolBar.snp.updateConstraints { make in
+                    make.bottom.equalToSuperview()//.offset(kTabBarAndSafeHeight)
+                }
+                self.view.layoutIfNeeded()
             }
         } else {
-            UIView.animate(withDuration: 0.5) {
-                self.albumCollect.frame.size.height += kTabBarAndSafeHeight
-                self.toolBar.frame.origin.y += kTabBarAndSafeHeight
+            UIView.animate(withDuration: 0.3) {
+                self.toolBar.snp.updateConstraints { make in
+                    make.bottom.equalToSuperview().offset(kTabBarAndSafeHeight)
+                }
+                self.view.layoutIfNeeded()
             }
 
             // 取消后清空选中项
@@ -283,6 +278,7 @@ class SnapshotItem: UICollectionViewCell {
  
     lazy var iconView: UIImageView = {
         let _iconView = UIImageView()
+        _iconView.contentMode = .scaleAspectFill
         _iconView.frame = self.bounds
         return _iconView
     }()
@@ -298,8 +294,8 @@ class SnapshotItem: UICollectionViewCell {
     lazy var markIconBtn: UIButton = {
         var _markIconBtn = UIButton(type: .custom)
         _markIconBtn.frame = self.bounds//CGRect(x: self.bounds.size.width - kScaleW(45), y: self.bounds.size.height - kScaleW(45), width: kScaleW(40), height: kScaleW(40))
-        _markIconBtn.setImage(UIImage(named: "ib_unselect"), for: .normal)
-        _markIconBtn.setImage(UIImage(named: "ib_select"), for: .selected)
+        _markIconBtn.setImage(R.image.ib_unselect(), for: .normal)
+        _markIconBtn.setImage(R.image.ib_select(), for: .selected)
 //        markIconBtn.setBackgroundImage(UIImage(color: UIColor.init(white: 0, alpha: 0)), for: .normal)
 //        markIconBtn.setBackgroundImage(UIImage(color: UIColor.init(white: 0, alpha: 0.3)), for: .selected)
         _markIconBtn.imageEdgeInsets = UIEdgeInsets(top: self.bounds.size.height - 25, left: self.bounds.size.width - 25, bottom: 0, right: 0)

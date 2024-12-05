@@ -10,7 +10,7 @@
 //
 
 import Foundation
-import Charts
+import DGCharts
 #if canImport(UIKit)
     import UIKit
 #endif
@@ -22,23 +22,23 @@ open class BalloonMarker: MarkerImage {
     @objc open var textColor: UIColor
     @objc open var insets: UIEdgeInsets
     @objc open var minimumSize = CGSize()
-
+    
     fileprivate var label: String?
     fileprivate var _labelSize: CGSize = CGSize()
     fileprivate var _paragraphStyle: NSMutableParagraphStyle?
     fileprivate var _drawAttributes = [NSAttributedString.Key: Any]()
-
+    
     @objc public init(color: UIColor, font: UIFont, textColor: UIColor, insets: UIEdgeInsets) {
         self.color = color
         self.font = font
         self.textColor = textColor
         self.insets = insets
-
+        
         _paragraphStyle = NSParagraphStyle.default.mutableCopy() as? NSMutableParagraphStyle
         _paragraphStyle?.alignment = .center
         super.init()
     }
-
+    
     open override func offsetForDrawing(atPoint point: CGPoint) -> CGPoint {
         var offset = self.offset
         var size = self.size
@@ -71,14 +71,16 @@ open class BalloonMarker: MarkerImage {
             origin.y + height + offset.y > chart.bounds.size.height {
             offset.y = chart.bounds.size.height - origin.y - height - padding
         }
+
         return offset
     }
-
-    //swiftlint:disable function_body_length
+    
     open override func draw(context: CGContext, point: CGPoint) {
         guard let label = label else { return }
+        
         let offset = self.offsetForDrawing(atPoint: point)
         let size = self.size
+        
         var rect = CGRect(
             origin: CGPoint(
                 x: point.x + offset.x,
@@ -86,6 +88,7 @@ open class BalloonMarker: MarkerImage {
             size: size)
         rect.origin.x -= size.width / 2.0
         rect.origin.y -= size.height
+        
         context.saveGState()
 
         context.setFillColor(color.cgColor)
@@ -147,7 +150,7 @@ open class BalloonMarker: MarkerImage {
                 y: rect.origin.y))
             context.fillPath()
         }
-
+        
         if offset.y > 0 {
             rect.origin.y += self.insets.top + arrowSize.height
         } else {
@@ -155,29 +158,36 @@ open class BalloonMarker: MarkerImage {
         }
 
         rect.size.height -= self.insets.top + self.insets.bottom
+        
         UIGraphicsPushContext(context)
+        
         label.draw(in: rect, withAttributes: _drawAttributes)
+        
         UIGraphicsPopContext()
+        
         context.restoreGState()
     }
-
+    
     // 禁用重写方法, 由外部调用setLabel设置
 //    open override func refreshContent(entry: ChartDataEntry, highlight: Highlight)
 //    {
 //        setLabel(String(entry.y))
 //    }
-
+    
     func clear() {
         setLabel(nil)
     }
+    
     @objc open func setLabel(_ newLabel: String?) {
         label = newLabel
+        
         _drawAttributes.removeAll()
         _drawAttributes[.font] = self.font
         _drawAttributes[.paragraphStyle] = _paragraphStyle
         _drawAttributes[.foregroundColor] = self.textColor
+        
         _labelSize = label?.size(withAttributes: _drawAttributes) ?? CGSize.zero
-
+        
         var size = CGSize()
         size.width = _labelSize.width + self.insets.left + self.insets.right
         size.height = _labelSize.height + self.insets.top + self.insets.bottom
@@ -185,4 +195,27 @@ open class BalloonMarker: MarkerImage {
         size.height = max(minimumSize.height, size.height)
         self.size = size
     }
+    
+    // ???: 设置四周圆角
+//    func drawRadius(in frame: CGRect ,_ context: CGContext) {
+//        let width = max(_labelSize.width, minimumSize.width)
+//        let height = max(_labelSize.height, minimumSize.height)
+//        let frame = CGRect(x: 0, y: 0, width: width, height: height)
+//        
+//        let path = UIBezierPath(roundedRect: frame, cornerRadius: 4)
+//        context.addPath(path.cgPath)
+//
+//        // 设置裁剪路径
+//        context.clip()
+//
+//        // 绘制你的形状（这里示例为绘制一个红色填充矩形）
+//        context.setFillColor(UIColor.red.cgColor)
+//        context.fill(frame)
+//
+//        // 获取图形上下文中的图像
+//        let image = UIGraphicsGetImageFromCurrentImageContext()
+//
+//        // 结束图形上下文
+//        UIGraphicsEndImageContext()
+//    }
 }

@@ -50,6 +50,7 @@ class BlueToothController: ViewController {
         _button.frame = CGRect(x: 0, y: 0, width: 60, height: 44)
         _button.setTitle("搜索", for: .normal)
         _button.setTitleColor(.black, for: .normal)
+        _button.setTitleColor(.lightGray, for: .disabled)
         _button.addTarget(self, action: #selector(scanAction), for: .touchUpInside)
         return _button
     }()
@@ -92,8 +93,9 @@ extension BlueToothController {
             print("扫描状态更新: \(state)")
             switch state {
             case .started:
-                break
+                self.rightButton.isEnabled = false
             case .stopped:
+                self.rightButton.isEnabled = true
                 print("扫描完成. 共发现 \(self.peripherals.count) 个外设, 共: \(self.bleManager.discoveredPeripherals.map({ $0.name ?? "未知" }))")
             }
         }).disposed(by: rx.disposeBag)

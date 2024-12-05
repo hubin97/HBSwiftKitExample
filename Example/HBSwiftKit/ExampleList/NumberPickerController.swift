@@ -21,19 +21,19 @@ private func W_Scale(_ x: CGFloat) -> CGFloat {
 class NumberPickerController: ViewController {
 
     lazy var numberPicker: NumberPicker = {
-        let numberPicker = NumberPicker.init(frame: CGRect(x: 20, y: 50, width: W_Scale(145), height: 75 + blurPadding), minValue: 16, maxValue: 30)
+        let numberPicker = NumberPicker.init(frame: CGRect(x: 20, y: kNavBarAndSafeHeight + 50, width: W_Scale(145), height: 75 + blurPadding), minValue: 16, maxValue: 30)
         return numberPicker
     }()
 
     lazy var numTextField: UITextField = {
-        let textField = UITextField.init(frame: CGRect(x: 200, y: 50, width: 60, height: 30))
+        let textField = UITextField.init(frame: CGRect(x: 200, y: kNavBarAndSafeHeight + 50, width: 60, height: 30))
         textField.placeholder = "\(self.numberPicker.minValue)~\(self.numberPicker.maxValue)"
         return textField
     }()
 
     lazy var qureBtn: UIButton = {
         let qureBtn = UIButton.init(type: .system)
-        qureBtn.frame = CGRect(x: 280, y: 50, width: 40, height: 30)
+        qureBtn.frame = CGRect(x: 280, y: kNavBarAndSafeHeight + 50, width: 40, height: 30)
         qureBtn.setTitle("确定", for: .normal)
         qureBtn.addTarget(self, action: #selector(qureAction), for: .touchUpInside)
         return qureBtn
@@ -41,7 +41,7 @@ class NumberPickerController: ViewController {
 
     lazy var addBtn: UIButton = {
         let addBtn = UIButton.init(type: .system)
-        addBtn.frame = CGRect(x: 200, y: 145, width: 40, height: 30)
+        addBtn.frame = CGRect(x: 200, y: kNavBarAndSafeHeight + 145, width: 40, height: 30)
         addBtn.setTitle("+", for: .normal)
         addBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         addBtn.addTarget(self, action: #selector(addAction), for: .touchUpInside)
@@ -50,7 +50,7 @@ class NumberPickerController: ViewController {
 
     lazy var divBtn: UIButton = {
         let divBtn = UIButton.init(type: .system)
-        divBtn.frame = CGRect(x: 280, y: 145, width: 40, height: 30)
+        divBtn.frame = CGRect(x: 280, y: kNavBarAndSafeHeight + 145, width: 40, height: 30)
         divBtn.setTitle("-", for: .normal)
         divBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         divBtn.addTarget(self, action: #selector(divAction), for: .touchUpInside)
@@ -66,7 +66,7 @@ class NumberPickerController: ViewController {
     override func setupLayout() {
         super.setupLayout()
 
-        self.title = "数字选择器"
+        self.naviBar.title = "数字选择器"
 
         view.addSubview(numberPicker)
         view.addSubview(numTextField)

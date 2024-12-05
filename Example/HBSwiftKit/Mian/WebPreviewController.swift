@@ -16,7 +16,6 @@ class WebPreviewController: WKWebController {
     override func setupLayout() {
         super.setupLayout()
         self.naviBar.title = "Web Preview"
-        self.naviBar.leftView?.isHidden = true
 
         self.progressViewBackColor = .systemBlue
         self.progressViewTintColor = .red
@@ -40,6 +39,8 @@ class WebPreviewController: WKWebController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.naviBar.leftView?.isHidden = true
+
         // self.localPath = "jstest.html"
         //loadHTML(urlString: "jstest.html", isLocalHtml: true)
         loadWeb(urlPath: "jstest.html", isLocalHtml: true)

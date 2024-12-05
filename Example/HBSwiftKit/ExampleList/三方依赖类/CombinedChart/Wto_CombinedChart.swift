@@ -6,7 +6,7 @@
 //  Copyright © 2020 WingTo. All rights reserved.
 
 import Foundation
-import Charts
+import DGCharts
 
 /**
   https://www.cnblogs.com/qqcc1388/tag/charts/

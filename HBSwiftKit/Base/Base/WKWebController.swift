@@ -102,7 +102,7 @@ open class WKWebController: ViewController, WKWebScriptMsgHandleAble {
 
     lazy var backButton: UIButton = {
         let _backButton = UIButton(type: .custom)
-        _backButton.frame = CGRect(x: view.isRTL ? 44: 0, y: 0, width: 44, height: 44)
+        _backButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         _backButton.setImage(UIImage.bundleImage(named: "icon_back")?.adaptRTL, for: .normal)
         _backButton.addTarget(self, action: #selector(backAction(_:)), for: .touchUpInside)
         return _backButton
@@ -114,7 +114,6 @@ open class WKWebController: ViewController, WKWebScriptMsgHandleAble {
         _closeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: view.isRTL ? 0: -10, bottom: 0, right: view.isRTL ? -10: 0)
         _closeButton.setImage(UIImage.bundleImage(named: "icon_close")?.adaptRTL, for: .normal)
         _closeButton.addTarget(self, action: #selector(closeAction(_:)), for: .touchUpInside)
-        _closeButton.isHidden = true
         return _closeButton
     }()
   
@@ -127,7 +126,7 @@ open class WKWebController: ViewController, WKWebScriptMsgHandleAble {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        self.naviBar.setLeftView(self.naviLeftView)
+        self.naviBar.setLeftView(self.backButton)
         self.view.addSubview(self.wkWebView)
         self.view.addSubview(self.progressView)
         
@@ -186,7 +185,10 @@ open class WKWebController: ViewController, WKWebScriptMsgHandleAble {
     // 如果返回历史记录不为空, 则显示关闭按钮
     // https://www.facebook.com/groups/momcozyusercenter?utm_source=user+center&utm_medium=app&utm_campaign=app-banner&Language=zh-CN
     func updateBackForwardState() {
-        self.closeButton.isHidden = self.wkWebView.backForwardList.backList.isEmpty
+        let isLast = self.wkWebView.backForwardList.backList.isEmpty
+        if !view.isRTL {
+            self.naviBar.setLeftView(isLast ? self.backButton: self.naviLeftView)
+        }
     }
 }
 

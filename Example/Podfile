@@ -17,6 +17,7 @@ target 'HBSwiftKit_Example' do
 #  pod 'HBSwiftKit/Base', :path => '../'
 #  pod 'HBSwiftKit/BLE', :path => '../'
 #  pod 'HBSwiftKit/HTTP', :path => '../'
+#  pod 'HBSwiftKit/Other', :path => '../'
 
   pod 'SnapKit'
   pod 'Kingfisher', '~> 7.10.0'
@@ -26,7 +27,7 @@ target 'HBSwiftKit_Example' do
   pod 'PromiseKit' #, '~> 6.8.0'
   #pod 'OpenCV', '~> 4.3.0'
   pod 'CocoaLumberjack/Swift'
-  pod 'Charts', '~> 4.1.0'
+  pod 'DGCharts', '~> 5.0.0' # 即 pod 'Charts', '~> 4.1.0'
   pod 'Toast-Swift'
   pod 'SVProgressHUD'
   pod 'GDPerformanceView-Swift', :configurations => ['Debug']

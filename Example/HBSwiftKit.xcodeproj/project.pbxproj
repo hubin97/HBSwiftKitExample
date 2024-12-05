@@ -12,6 +12,14 @@
 		184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */; };
 		184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */; };
 		186750992C05B7DF00A369B5 /* WaveAnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186750982C05B7DF00A369B5 /* WaveAnimateView.swift */; };
+		1876E3E32D01921700CE4871 /* LTCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876E3E02D01921700CE4871 /* LTCalendarView.swift */; };
+		1876E3E42D01921700CE4871 /* LTCalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876E3DF2D01921700CE4871 /* LTCalendarItem.swift */; };
+		1876E3E52D01921700CE4871 /* LTCalendarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876E3DE2D01921700CE4871 /* LTCalendarData.swift */; };
+		1876E3E62D01921700CE4871 /* LTCalendarWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876E3E12D01921700CE4871 /* LTCalendarWeek.swift */; };
+		1876E3E72D01921700CE4871 /* LTCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876E3DD2D01921700CE4871 /* LTCalendar.swift */; };
+		1876E3E92D01951100CE4871 /* LTMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876E3E82D01951100CE4871 /* LTMarker.swift */; };
+		1876E3F12D01959100CE4871 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876E3F02D01959100CE4871 /* BalloonMarker.swift */; };
+		1876E3F32D0199E500CE4871 /* LTSheetPanGesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876E3F22D0199E500CE4871 /* LTSheetPanGesView.swift */; };
 		188692CB2C5743D5007CD12A /* MQTTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188692CA2C5743D5007CD12A /* MQTTClient.swift */; };
 		189C64AC2D000F2200BAE470 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = 189C64A52D000F2200BAE470 /* Appfile */; };
 		189C64AD2D000F2200BAE470 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 189C64A62D000F2200BAE470 /* Fastfile */; };
@@ -54,10 +62,8 @@
 		B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DE3B3275EF2C400BBDE0B /* SignalPlateView.swift */; };
 		B54DE3B6275F4C4100BBDE0B /* SignalMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DE3B5275F4C4100BBDE0B /* SignalMarkView.swift */; };
 		B5557A3526706188007F5B44 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = B5557A3426706188007F5B44 /* loading.gif */; };
-		B557085027225E5500C22CD4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B557084F27225E5500C22CD4 /* .swiftlint.yml */; };
 		B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557E4DA2631304800C62147 /* ThemeStyle.swift */; };
 		B56D8C6C27CF29E90032EA97 /* YTTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D8C6B27CF29E90032EA97 /* YTTabController.swift */; };
-		B56D8C7127CF5FC30032EA97 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D8C6F27CF5FC30032EA97 /* BalloonMarker.swift */; };
 		B56D8C7227CF5FC30032EA97 /* Wto_CombinedChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56D8C7027CF5FC30032EA97 /* Wto_CombinedChart.swift */; };
 		B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F689C264B8AB300FD62CF /* DualListView.swift */; };
 		B56F68A2264B8AF400FD62CF /* duallist.json in Resources */ = {isa = PBXBuildFile; fileRef = B56F68A1264B8AF400FD62CF /* duallist.json */; };
@@ -73,7 +79,7 @@
 		B595A8D727CCB154007EF16E /* StarRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595A8D627CCB154007EF16E /* StarRateView.swift */; };
 		B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC828255A7818005A5179 /* ImageBrowerController.swift */; };
 		B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC829255A7818005A5179 /* NumberPickerController.swift */; };
-		B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */; };
+		B5BAC82F255A7818005A5179 /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82A255A7818005A5179 /* CalendarController.swift */; };
 		B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82B255A7818005A5179 /* BlueToothController.swift */; };
 		B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BAC82C255A7818005A5179 /* DatePickerController.swift */; };
 		B5BAC835255A7875005A5179 /* images.json in Resources */ = {isa = PBXBuildFile; fileRef = B5BAC834255A7875005A5179 /* images.json */; };
@@ -121,6 +127,17 @@
 		184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCDataPicker.swift; sourceTree = "<group>"; };
 		184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTDatePicker.swift; sourceTree = "<group>"; };
 		186750982C05B7DF00A369B5 /* WaveAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimateView.swift; sourceTree = "<group>"; };
+		1876E3DD2D01921700CE4871 /* LTCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTCalendar.swift; sourceTree = "<group>"; };
+		1876E3DE2D01921700CE4871 /* LTCalendarData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTCalendarData.swift; sourceTree = "<group>"; };
+		1876E3DF2D01921700CE4871 /* LTCalendarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTCalendarItem.swift; sourceTree = "<group>"; };
+		1876E3E02D01921700CE4871 /* LTCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTCalendarView.swift; sourceTree = "<group>"; };
+		1876E3E12D01921700CE4871 /* LTCalendarWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTCalendarWeek.swift; sourceTree = "<group>"; };
+		1876E3E82D01951100CE4871 /* LTMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTMarker.swift; sourceTree = "<group>"; };
+		1876E3EA2D01952500CE4871 /* BarChartWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartWrapper.swift; sourceTree = "<group>"; };
+		1876E3EB2D01952500CE4871 /* CombinedChartWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedChartWrapper.swift; sourceTree = "<group>"; };
+		1876E3EC2D01952500CE4871 /* LineChartWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartWrapper.swift; sourceTree = "<group>"; };
+		1876E3F02D01959100CE4871 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
+		1876E3F22D0199E500CE4871 /* LTSheetPanGesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTSheetPanGesView.swift; sourceTree = "<group>"; };
 		188692CA2C5743D5007CD12A /* MQTTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTClient.swift; sourceTree = "<group>"; };
 		189C64A52D000F2200BAE470 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		189C64A62D000F2200BAE470 /* Fastfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = Fastfile; sourceTree = "<group>"; };
@@ -173,10 +190,8 @@
 		B54DE3B3275EF2C400BBDE0B /* SignalPlateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalPlateView.swift; sourceTree = "<group>"; };
 		B54DE3B5275F4C4100BBDE0B /* SignalMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalMarkView.swift; sourceTree = "<group>"; };
 		B5557A3426706188007F5B44 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
-		B557084F27225E5500C22CD4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		B557E4DA2631304800C62147 /* ThemeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStyle.swift; sourceTree = "<group>"; };
 		B56D8C6B27CF29E90032EA97 /* YTTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YTTabController.swift; sourceTree = "<group>"; };
-		B56D8C6F27CF5FC30032EA97 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		B56D8C7027CF5FC30032EA97 /* Wto_CombinedChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wto_CombinedChart.swift; sourceTree = "<group>"; };
 		B56F689C264B8AB300FD62CF /* DualListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualListView.swift; sourceTree = "<group>"; };
 		B56F68A1264B8AF400FD62CF /* duallist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = duallist.json; sourceTree = "<group>"; };
@@ -194,7 +209,7 @@
 		B595A8D627CCB154007EF16E /* StarRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRateView.swift; sourceTree = "<group>"; };
 		B5BAC828255A7818005A5179 /* ImageBrowerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrowerController.swift; sourceTree = "<group>"; };
 		B5BAC829255A7818005A5179 /* NumberPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberPickerController.swift; sourceTree = "<group>"; };
-		B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerController.swift; sourceTree = "<group>"; };
+		B5BAC82A255A7818005A5179 /* CalendarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
 		B5BAC82B255A7818005A5179 /* BlueToothController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueToothController.swift; sourceTree = "<group>"; };
 		B5BAC82C255A7818005A5179 /* DatePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		B5BAC834255A7875005A5179 /* images.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = images.json; sourceTree = "<group>"; };
@@ -264,6 +279,18 @@
 				9A8871220770A8D795C87930 /* Pods-HBSwiftKit_Tests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		1876E3E22D01921700CE4871 /* LTCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				1876E3DD2D01921700CE4871 /* LTCalendar.swift */,
+				1876E3DE2D01921700CE4871 /* LTCalendarData.swift */,
+				1876E3DF2D01921700CE4871 /* LTCalendarItem.swift */,
+				1876E3E02D01921700CE4871 /* LTCalendarView.swift */,
+				1876E3E12D01921700CE4871 /* LTCalendarWeek.swift */,
+			);
+			path = LTCalendar;
 			sourceTree = "<group>";
 		};
 		188692C92C5743C7007CD12A /* CocoaMQTT */ = {
@@ -371,7 +398,6 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B557084F27225E5500C22CD4 /* .swiftlint.yml */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -460,7 +486,11 @@
 		B56D8C6D27CF5FC30032EA97 /* CombinedChart */ = {
 			isa = PBXGroup;
 			children = (
-				B56D8C6F27CF5FC30032EA97 /* BalloonMarker.swift */,
+				1876E3F02D01959100CE4871 /* BalloonMarker.swift */,
+				1876E3EA2D01952500CE4871 /* BarChartWrapper.swift */,
+				1876E3EB2D01952500CE4871 /* CombinedChartWrapper.swift */,
+				1876E3EC2D01952500CE4871 /* LineChartWrapper.swift */,
+				1876E3E82D01951100CE4871 /* LTMarker.swift */,
 				B56D8C7027CF5FC30032EA97 /* Wto_CombinedChart.swift */,
 			);
 			path = CombinedChart;
@@ -484,6 +514,7 @@
 				1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */,
 				B546BFB627F455C5006EA745 /* IndexTableView.swift */,
 				184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */,
+				1876E3F22D0199E500CE4871 /* LTSheetPanGesView.swift */,
 				B5FF3853280EA0B70063BF26 /* MVVM.swift */,
 				B5E8E47A27EEBEAA006CED16 /* NetworkExtension.swift */,
 				B595A8CB27C866EA007EF16E /* RegexHelper.swift */,
@@ -501,6 +532,7 @@
 			isa = PBXGroup;
 			children = (
 				B56D8C6D27CF5FC30032EA97 /* CombinedChart */,
+				1876E3E22D01921700CE4871 /* LTCalendar */,
 			);
 			path = "三方依赖类";
 			sourceTree = "<group>";
@@ -573,7 +605,7 @@
 				B5E4AABE27F5546E00D84C78 /* 遥控方向盘 */,
 				B5C6C5C225ECCA0E00C88C1C /* 高级筛选器 */,
 				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
-				B5BAC82A255A7818005A5179 /* CalendarPickerController.swift */,
+				B5BAC82A255A7818005A5179 /* CalendarController.swift */,
 				B5BAC82C255A7818005A5179 /* DatePickerController.swift */,
 				B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */,
 				B5BAC828255A7818005A5179 /* ImageBrowerController.swift */,
@@ -729,6 +761,10 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				fr,
+				de,
+				it,
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
@@ -748,7 +784,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				189C64B32D0010F400BAE470 /* .env.default in Resources */,
-				B557085027225E5500C22CD4 /* .swiftlint.yml in Resources */,
 				B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */,
 				189C64AC2D000F2200BAE470 /* Appfile in Resources */,
 				B5DCC71425F3266D007E3237 /* areacode.plist in Resources */,
@@ -798,9 +833,9 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HBSwiftKit_Example/Pods-HBSwiftKit_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaMQTT/CocoaMQTT.framework",
+				"${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
 				"${BUILT_PRODUCTS_DIR}/GDPerformanceView-Swift/GDPerformanceView_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/HBSwiftKit/HBSwiftKit.framework",
@@ -821,16 +856,15 @@
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftAlgorithms/Algorithms.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaMQTT.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGCharts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GDPerformanceView_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HBSwiftKit.framework",
@@ -851,7 +885,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Algorithms.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
@@ -974,11 +1007,11 @@
 				18A82EEF2CFEF9C7007FCCDA /* AppScene.swift in Sources */,
 				B546325C2803B7960026662F /* Arithmetic.swift in Sources */,
 				18A82EFE2D0000CE007FCCDA /* AuthManager.swift in Sources */,
-				B56D8C7127CF5FC30032EA97 /* BalloonMarker.swift in Sources */,
+				1876E3F12D01959100CE4871 /* BalloonMarker.swift in Sources */,
 				18A82EFF2D0000CE007FCCDA /* BGTaskManager.swift in Sources */,
 				4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */,
 				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
-				B5BAC82F255A7818005A5179 /* CalendarPickerController.swift in Sources */,
+				B5BAC82F255A7818005A5179 /* CalendarController.swift in Sources */,
 				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,
 				B546325A280010420026662F /* DesignMode.swift in Sources */,
 				B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */,
@@ -994,7 +1027,14 @@
 				B50055A427C375A700467E55 /* LightAttrPickerView.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ListViewController.swift in Sources */,
 				18A82EF42CFF130B007FCCDA /* ListViewModel.swift in Sources */,
+				1876E3E72D01921700CE4871 /* LTCalendar.swift in Sources */,
+				1876E3E52D01921700CE4871 /* LTCalendarData.swift in Sources */,
+				1876E3E42D01921700CE4871 /* LTCalendarItem.swift in Sources */,
+				1876E3E32D01921700CE4871 /* LTCalendarView.swift in Sources */,
+				1876E3E62D01921700CE4871 /* LTCalendarWeek.swift in Sources */,
 				184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */,
+				1876E3E92D01951100CE4871 /* LTMarker.swift in Sources */,
+				1876E3F32D0199E500CE4871 /* LTSheetPanGesView.swift in Sources */,
 				B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */,
 				18A82F042D0000CE007FCCDA /* MMKVManager.swift in Sources */,
 				188692CB2C5743D5007CD12A /* MQTTClient.swift in Sources */,
@@ -1125,6 +1165,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1171,6 +1212,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};

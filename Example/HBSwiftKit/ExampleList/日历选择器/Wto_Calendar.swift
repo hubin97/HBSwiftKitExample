@@ -143,7 +143,7 @@ open class Wto_Calendar: UIView {
     }
 
     convenience init() {
-        self.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: W_Scale(330)))
+        self.init(frame: CGRect(x: 0, y:kNavBarAndSafeHeight, width: kScreenW, height: W_Scale(330)))
     }
 
     required public init?(coder: NSCoder) {

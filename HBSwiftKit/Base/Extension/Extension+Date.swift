@@ -13,22 +13,57 @@ fileprivate typealias Extension_Date = Date
 //MARK: - main class
 extension Extension_Date {
     
-    //static let components: Set<Calendar.Component> = Calendar.Component.year, Calendar.Component.month, Calendar.Component.day
-    //(Calendar.Component.year | Calendar.Component.month | Calendar.Component.day | Calendar.Component.weekOfMonth |  Calendar.Component.hour | Calendar.Component.minute | Calendar.Component.second | Calendar.Component.weekday)
-
     // 跟随用户所选日历变动
-    public static let calendar = Calendar.autoupdatingCurrent
+    //public static let calendar = Calendar.autoupdatingCurrent
 
+    /// 当前是哪年
     public var year: Int {
-        Extension_Date.calendar.component(.year, from: self)
+        Calendar.autoupdatingCurrent.component(.year, from: self)
     }
     
+    /// 当前是几月
     public var month: Int {
-        Extension_Date.calendar.component(.month, from: self)
+        Calendar.autoupdatingCurrent.component(.month, from: self)
     }
 
+    /// 当前是几号
     public var day: Int {
-        Extension_Date.calendar.component(.day, from: self)
+        Calendar.autoupdatingCurrent.component(.day, from: self)
+    }
+    
+    /// 当前是星期几, 从周日开始
+    public var week: Int {
+        return Calendar.autoupdatingCurrent.dateComponents([.year, .month, .day, .weekday], from: self).weekday! - 1
+    }
+    
+    /// 上个月
+    public var lastMonth: Date {
+        return Calendar.autoupdatingCurrent.date(byAdding: .month, value: -1, to: self)!
+    }
+    
+    /// 下个月
+    public var nextMonth: Date {
+        return Calendar.autoupdatingCurrent.date(byAdding: .month, value: 1, to: self)!
+    }
+    
+    /// 上一周
+    public var lastWeek: Date {
+        return Calendar.autoupdatingCurrent.date(byAdding: .day, value: -7, to: self)!
+    }
+    
+    /// 下一周
+    public var nextWeek: Date {
+        return Calendar.autoupdatingCurrent.date(byAdding: .day, value: 7, to: self)!
+    }
+    
+    /// 后一天
+    public var nextDay: Date {
+        return Calendar.autoupdatingCurrent.date(byAdding: .day, value: 1, to: self)!
+    }
+    
+    /// 前一天
+    public var lastDay: Date {
+        return Calendar.autoupdatingCurrent.date(byAdding: .day, value: -1, to: self)!
     }
 }
 
