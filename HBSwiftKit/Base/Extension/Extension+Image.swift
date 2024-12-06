@@ -128,22 +128,22 @@ extension Extension_Image {
         return nil
     }
     
-    public static func systemShare(activityItems: [UIImage], excludedTypes: [UIActivity.ActivityType]? = nil, completeHandle:((_ isFinish: Bool) -> Void)? = nil) {
-        let activityVc = UIActivityViewController.init(activityItems: activityItems as [Any], applicationActivities: nil)
-        if let excludedTypes = excludedTypes {
-            //activityVc.excludedActivityTypes = [.postToFacebook, .postToTwitter, .postToWeibo, .message, .mail, .print, .copyToPasteboard, .assignToContact, .saveToCameraRoll, .addToReadingList, .postToFlickr, .postToVimeo, .postToTencentWeibo, .airDrop, .openInIBooks]
-            activityVc.excludedActivityTypes = excludedTypes
-        }
-        stackTopViewController()?.present(activityVc, animated: true, completion: nil)
-        activityVc.completionWithItemsHandler = {(activityType, completed, items, error) -> Void in
-            if completed == true {
-                print("分享成功")
-                completeHandle?(true)
-            }
-            // 不能少
-            activityVc.completionWithItemsHandler = nil
-        }
-    }
+//    public static func systemShare(activityItems: [UIImage], excludedTypes: [UIActivity.ActivityType]? = nil, completeHandle:((_ isFinish: Bool) -> Void)? = nil) {
+//        let activityVc = UIActivityViewController.init(activityItems: activityItems as [Any], applicationActivities: nil)
+//        if let excludedTypes = excludedTypes {
+//            //activityVc.excludedActivityTypes = [.postToFacebook, .postToTwitter, .postToWeibo, .message, .mail, .print, .copyToPasteboard, .assignToContact, .saveToCameraRoll, .addToReadingList, .postToFlickr, .postToVimeo, .postToTencentWeibo, .airDrop, .openInIBooks]
+//            activityVc.excludedActivityTypes = excludedTypes
+//        }
+//        stackTopViewController()?.present(activityVc, animated: true, completion: nil)
+//        activityVc.completionWithItemsHandler = {(activityType, completed, items, error) -> Void in
+//            if completed == true {
+//                print("分享成功")
+//                completeHandle?(true)
+//            }
+//            // 不能少
+//            activityVc.completionWithItemsHandler = nil
+//        }
+//    }
 }
 
 //MARK: - 图片压缩处理

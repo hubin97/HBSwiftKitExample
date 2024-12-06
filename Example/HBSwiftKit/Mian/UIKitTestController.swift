@@ -47,23 +47,6 @@ class UIKitTestController: ViewController {
         return []
     }()
 
-    lazy var tagsView: YTTagsView = {
-        let tags = ["标签", "标签", "标签", "标签", "标签签", "标签", "标签", "标签", "标签标签", "标签标签标签签", "标签标签标签标签标签标签标签", "标签"]
-        var ops = [TagsMeta]()
-        for idx in 0..<tags.count {
-            let title = tags[idx]
-            let isSel = idx == 2 ? true: false
-            ops.append(TagsMeta(title: title, param: ["\(idx)": title], isSelected: isSel))
-        }
-        // swiftlint:disable line_length
-        let _tagsView = YTTagsView(title: "标题", isMultiple: true, options: ops, optionNormalBgColor: UIColor(hexStr: "#F1F1F3"), optionSelectBgColor: UIColor(hexStr: "#6165C5"), optionNormalTextColor: UIColor(hexStr: "#5E5E83"), optionSelectTextColor: .white, optionFont: UIFont.systemFont(ofSize: 15), optionMaxHeight: 40, actionTitle: "我知道了", actionTitleColor: .orange, tapAction: {[weak self] (tags) in
-            self?.opPrint(ops: tags)
-        })
-        _tagsView.contentView.backgroundColor = .white
-        _tagsView.titleLabel.textAlignment = .left
-        return _tagsView
-    }()
-
     var avPlayer: AVAudioPlayer?
 
     var allBrightList: [Int] {
@@ -399,22 +382,6 @@ extension UIKitTestController {
         } catch {
             print("播放失败")
         }
-    }
-
-    /// 标签 瀑布流
-    func showTagsView(_ sender: UIView?) {
-        if let view = sender {
-            let ff = view.convert(view.bounds, to: UIApplication.shared.keyWindow)
-            tagsView.show(originFrame: ff)
-        } else {
-            tagsView.show()
-        }
-    }
-    func opPrint(ops: [TagsMeta]?) {
-        ops?.forEach({ (meta) in
-            print("op_title:\(meta.title ?? "")")
-            print("op_param:\(meta.param ?? 0)")
-        })
     }
 
     /// 简易标尺

@@ -23,7 +23,7 @@ public enum NetworkError: Error {
 }
 
 extension NetworkError: LocalizedError {
-    #warning("自定义错误提示")
+    // 自定义错误提示
     public var errorDescription: String? {
         switch self {
         case .objectMapperError(let mapType):

@@ -13,14 +13,14 @@ import Nimble
 
 // MARK: - global var and methods
 
-class ApiTest: QuickSpec {
-    override func spec() {
-        fdescribe("ApiTest") {
-//            fetchBase(targetType: NetworkApi.self, target: .in_theaters, plugins: []).done { data in
-//                print(data)
-//            }.catch { error in
-//                print(error.localizedDescription)
-//            }
-        }
-    }
-}
+//class ApiTest: QuickSpec {
+//    override func spec() {
+//        ApiTest.fdescribe("ApiTest") {
+////            fetchBase(targetType: NetworkApi.self, target: .in_theaters, plugins: []).done { data in
+////                print(data)
+////            }.catch { error in
+////                print(error.localizedDescription)
+////            }
+//        }
+//    }
+//}

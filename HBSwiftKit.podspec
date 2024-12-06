@@ -7,6 +7,10 @@
 #
 # SwifterSwift:  over 500 native Swift extensions https://github.com/SwifterSwift/SwifterSwift
 
+#➜  HBSwiftKitExample (main) ✗ xcodebuild clean
+#➜  HBSwiftKitExample (main) ✗ pod cache clean --all
+#➜  HBSwiftKitExample (main) ✗ pod spec lint HBSwiftKit.podspec --allow-warnings --verbose
+
 Pod::Spec.new do |s|
     
     # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -45,20 +49,15 @@ Pod::Spec.new do |s|
             base.dependency dd
         end
         #base.dependency 'Hero', '~> 1.6.3' # 确保使用支持 iOS 13 的版本
-
-        base.subspec 'Global' do |ss|
-            ss.source_files  = 'HBSwiftKit/Base/Global'
-            ss.framework  = "Foundation", "UIKit"
+        
+        base.subspec 'Core' do |ss|
+            ss.framework = "Foundation", "UIKit"
+            ss.source_files = 'HBSwiftKit/Base/Core/**/*.swift'
         end
         
         base.subspec 'Extension' do |ss|
-            ss.source_files  = 'HBSwiftKit/Base/Extension'
-            ss.dependency 'HBSwiftKit/Base/Global'
-        end
-        
-        base.subspec 'Base' do |ss|
-            ss.source_files  = 'HBSwiftKit/Base/Base/'
-            ss.dependency 'HBSwiftKit/Base/Extension'
+            ss.source_files = 'HBSwiftKit/Base/Extension/*.swift'
+            ss.dependency 'HBSwiftKit/Base/Core'
         end
         
     end
@@ -70,12 +69,11 @@ Pod::Spec.new do |s|
         end
         
         http.subspec 'Core' do |ss|
-            ss.source_files  = 'HBSwiftKit/HTTP/Core/**/*.{swift,h,m,md}'
-            ss.framework  = "Foundation"
+            ss.source_files  = 'HBSwiftKit/HTTP/Core/*.{swift,h,m,md}'
         end
         
         http.subspec 'Utils' do |ss|
-            ss.source_files  = 'HBSwiftKit/HTTP/Utils/**/*.swift'
+            ss.source_files  = 'HBSwiftKit/HTTP/Utils/*.swift'
             ss.framework  = "Foundation", "CoreTelephony"
         end
     end
@@ -91,19 +89,21 @@ Pod::Spec.new do |s|
     
     # 子模块：Other
     s.subspec 'Other' do |other|
-        ['RxSwift', 'CocoaLumberjack'].each do |dd|
-            other.dependency dd
-        end
-        
-        other.source_files  = 'HBSwiftKit/Other/**/*'
-        other.dependency 'HBSwiftKit/Base'
-        
+        #other.source_files  = 'HBSwiftKit/Other/**/*'
         other.subspec 'AuthStatus' do |sss|
             sss.source_files  = 'HBSwiftKit/Other/AuthStatus'
+            sss.dependency 'HBSwiftKit/Base/Core'
         end
-        other.subspec 'LoggerManager' do |sss|
-            sss.source_files  = 'HBSwiftKit/Other/LoggerManager'
+        
+        other.subspec 'Utils' do |sss|
+            sss.source_files  = 'HBSwiftKit/Other/Utils'
+            sss.dependency 'HBSwiftKit/Base/Core'
+            sss.dependency 'Toast-Swift'
         end
+        
+#        other.subspec 'LoggerManager' do |sss|
+#            sss.source_files  = 'HBSwiftKit/Other/LoggerManager'
+#        end
     end
     
     # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

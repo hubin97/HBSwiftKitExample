@@ -3,7 +3,7 @@
 //
 
 #import <HBSwiftKit/HBSwiftKit-Swift.h>
-#import <Rswift/Rswift-Swift.h>
+#import <RswiftResources/RswiftResources-Swift.h>
 //#import <CocoaLumberjack/CocoaLumberjack-Swift.h>
 //#import "OpenCVWrapper.h"
 

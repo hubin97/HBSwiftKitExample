@@ -360,17 +360,17 @@ extension AuthorizationStatus: CBCentralManagerDelegate {
         }
     }
 
-    func authorizedACK() {
-        if let productName = kInfoPlist.value(forKey: "CFBundleName") as? String,
-           let message = kInfoPlist.value(forKey: "NSBluetoothPeripheralUsageDescription") as? String {
-            let alert = AlertBlockView.init(title: "\"\(productName)\"想要使用蓝牙", message: message)
-            alert.addAction("忽略", .cancel, tapAction: nil)
-            alert.addAction("去设置") { [weak self] _ in
-                self?.openSettings()
-            }
-            alert.show()
-        }
-    }
+//    func authorizedACK() {
+//        if let productName = kInfoPlist.value(forKey: "CFBundleName") as? String,
+//           let message = kInfoPlist.value(forKey: "NSBluetoothPeripheralUsageDescription") as? String {
+//            let alert = AlertBlockView.init(title: "\"\(productName)\"想要使用蓝牙", message: message)
+//            alert.addAction("忽略", .cancel, tapAction: nil)
+//            alert.addAction("去设置") { [weak self] _ in
+//                self?.openSettings()
+//            }
+//            alert.show()
+//        }
+//    }
 
 }
 
