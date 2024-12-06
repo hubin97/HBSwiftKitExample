@@ -23,27 +23,23 @@ PODS:
     - HBSwiftKit/Base/Base (= 0.5.0)
     - HBSwiftKit/Base/Extension (= 0.5.0)
     - HBSwiftKit/Base/Global (= 0.5.0)
-    - Hero
     - Kingfisher
     - ProgressHUD
     - SnapKit
     - Toast-Swift
   - HBSwiftKit/Base/Base (0.5.0):
     - HBSwiftKit/Base/Extension
-    - Hero
     - Kingfisher
     - ProgressHUD
     - SnapKit
     - Toast-Swift
   - HBSwiftKit/Base/Extension (0.5.0):
     - HBSwiftKit/Base/Global
-    - Hero
     - Kingfisher
     - ProgressHUD
     - SnapKit
     - Toast-Swift
   - HBSwiftKit/Base/Global (0.5.0):
-    - Hero
     - Kingfisher
     - ProgressHUD
     - SnapKit
@@ -89,7 +85,6 @@ PODS:
     - CocoaLumberjack
     - HBSwiftKit/Base
     - RxSwift
-  - Hero (1.6.3)
   - IQKeyboardManagerSwift (6.5.16)
   - Kingfisher (7.10.2)
   - lottie-ios (4.3.4)
@@ -164,7 +159,6 @@ SPEC REPOS:
     - DGCharts
     - FLEX
     - GDPerformanceView-Swift
-    - Hero
     - IQKeyboardManagerSwift
     - Kingfisher
     - lottie-ios
@@ -205,8 +199,7 @@ SPEC CHECKSUMS:
   DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
   FLEX: f21ee4f498eed3f8a1eded66b21939fd3b7a22ce
   GDPerformanceView-Swift: 22d964fe40b19e3d914dba2586237d064de8fd77
-  HBSwiftKit: de82fa55c86a560383ba36f14e33267952ec447d
-  Hero: 419d43384355b3168512bd8ac6a33aadd3dc575b
+  HBSwiftKit: 770c1d0d1af6fbccf5d014c8a2a761b8df5302fd
   IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
   Kingfisher: 99edc495d3b7607e6425f0d6f6847b2abd6d716d
   lottie-ios: 3d98679b41fa6fd6aff2352b3953dbd3df8a397e
@@ -230,6 +223,6 @@ SPEC CHECKSUMS:
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: d81243cbbcb53b3c777fc117ffbf05799b95aa50
+PODFILE CHECKSUM: e7b8559505e1e47310d29109dd74c08eabb71438
 
 COCOAPODS: 1.15.2

@@ -6,7 +6,6 @@
 //  Copyright © 2020 路特创新. All rights reserved.
 
 import Foundation
-import Hero
 import AVKit
 
 /// 用于视图控制器导航
@@ -30,8 +29,7 @@ extension Navigator {
     
     public enum Transition {
         case root(in: UIWindow)
-        case navigation(type: HeroDefaultAnimationType)
-        case customModal(type: HeroDefaultAnimationType)
+        case navigation
         case modal(type: UIModalPresentationStyle)
         case detail
         case alert
@@ -51,7 +49,7 @@ extension Navigator {
     }
     
     @discardableResult
-    public func show(provider: SceneProvider, sender: UIViewController?, transition: Transition = .navigation(type: .cover(direction: .leading))) -> UIViewController? {
+    public func show(provider: SceneProvider, sender: UIViewController?, transition: Transition = .navigation) -> UIViewController? {
         guard let target = provider.getSegue else { return nil }
         self.show(target: target, sender: sender, transition: transition)
         return target
@@ -76,16 +74,9 @@ extension Navigator {
         }
         
         switch transition {
-        case .navigation(let type):
+        case .navigation:
             if let nav = sender.navigationController {
-                nav.hero.navigationAnimationType = .autoReverse(presenting: type)
                 nav.pushViewController(target, animated: true)
-            }
-        case .customModal(let type):
-            DispatchQueue.main.async {
-                let nav = NavigationController(rootViewController: target)
-                nav.hero.modalAnimationType = .autoReverse(presenting: type)
-                sender.present(nav, animated: true, completion: nil)
             }
         case .modal(let type):
             DispatchQueue.main.async {

@@ -40,7 +40,7 @@ target 'HBSwiftKit_Example' do
   pod 'RxSwift', '~> 6.6.0'
   pod 'RxCocoa', '6.6.0'
   pod 'NSObject+Rx', '~> 5.2.2'  # https://github.com/RxSwiftCommunity/NSObject-Rx
-#  pod 'Hero', '~> 1.6'  # https://github.com/lkzhao/Hero
+#  pod 'Hero' # https://github.com/lkzhao/Hero
   pod 'ProgressHUD', :git => 'https://github.com/hubin97/ProgressHUD.git'
   pod 'MMKV'#, :git => 'https://github.com/Tencent/MMKV.git'
   pod 'IQKeyboardManagerSwift', '~> 6.5.7'

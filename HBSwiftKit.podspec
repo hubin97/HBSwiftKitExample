@@ -29,7 +29,9 @@ Pod::Spec.new do |s|
     
     # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     s.ios.deployment_target = '13.0'
-    
+    #s.pod_target_xcconfig = { 'IPHONEOS_DEPLOYMENT_TARGET' => '13.0' }
+    #s.user_target_xcconfig = { 'IPHONEOS_DEPLOYMENT_TARGET' => '13.0' }
+
     # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     s.source           = { :git => 'https://github.com/hubin97/HBSwiftKitExample.git', :tag => s.version.to_s }
     
@@ -39,10 +41,11 @@ Pod::Spec.new do |s|
         
         # 使用 Ruby 数组简化多个依赖的定义
         # 扩展自定义Hud;  pod 'ProgressHUD', :git => 'https://github.com/hubin97/ProgressHUD.git'
-        ['SnapKit', 'Hero', 'Kingfisher', 'Toast-Swift', 'ProgressHUD'].each do |dd|
+        ['SnapKit', 'Kingfisher', 'Toast-Swift', 'ProgressHUD'].each do |dd|
             base.dependency dd
         end
-        
+        #base.dependency 'Hero', '~> 1.6.3' # 确保使用支持 iOS 13 的版本
+
         base.subspec 'Global' do |ss|
             ss.source_files  = 'HBSwiftKit/Base/Global'
             ss.framework  = "Foundation", "UIKit"
