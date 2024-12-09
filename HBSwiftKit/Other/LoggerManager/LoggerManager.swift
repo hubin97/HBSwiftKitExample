@@ -54,7 +54,7 @@ open class LoggerManager {
     
     /// 初始化日志入口
     public func entrance() {
-        LoggerAssistant(icon: UIImage(named: "logger")) {
+        LoggerAssistant(icon: UIImage.bundleImage(named: "logger")) {
             stackTopViewController()?.navigationController?.pushViewController(LoggerListController(), animated: true)
         }.show()
     }

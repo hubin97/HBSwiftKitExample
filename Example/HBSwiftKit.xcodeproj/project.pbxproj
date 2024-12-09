@@ -14,9 +14,6 @@
 		18476FA22D02DE9F00B3C901 /* YTSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18476F9C2D02DE9F00B3C901 /* YTSegment.swift */; };
 		18476FA32D02DE9F00B3C901 /* MTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18476F992D02DE9F00B3C901 /* MTDatePicker.swift */; };
 		18476FA52D02DE9F00B3C901 /* YTTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18476F9D2D02DE9F00B3C901 /* YTTabBar.swift */; };
-		18476FAA2D02DED600B3C901 /* LoggerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18476FA72D02DED600B3C901 /* LoggerListController.swift */; };
-		18476FAB2D02DED600B3C901 /* LoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18476FA82D02DED600B3C901 /* LoggerManager.swift */; };
-		18476FAC2D02DED600B3C901 /* LoggerAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18476FA62D02DED600B3C901 /* LoggerAssistant.swift */; };
 		184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */; };
 		184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */; };
 		186750992C05B7DF00A369B5 /* WaveAnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186750982C05B7DF00A369B5 /* WaveAnimateView.swift */; };
@@ -136,9 +133,6 @@
 		18476F9B2D02DE9F00B3C901 /* YTHitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTHitView.swift; sourceTree = "<group>"; };
 		18476F9C2D02DE9F00B3C901 /* YTSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTSegment.swift; sourceTree = "<group>"; };
 		18476F9D2D02DE9F00B3C901 /* YTTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTTabBar.swift; sourceTree = "<group>"; };
-		18476FA62D02DED600B3C901 /* LoggerAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerAssistant.swift; sourceTree = "<group>"; };
-		18476FA72D02DED600B3C901 /* LoggerListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerListController.swift; sourceTree = "<group>"; };
-		18476FA82D02DED600B3C901 /* LoggerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerManager.swift; sourceTree = "<group>"; };
 		184A4E7F2B1D656D00CECCD6 /* SCDataPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCDataPicker.swift; sourceTree = "<group>"; };
 		184A4E802B1D656D00CECCD6 /* LTDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTDatePicker.swift; sourceTree = "<group>"; };
 		186750982C05B7DF00A369B5 /* WaveAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimateView.swift; sourceTree = "<group>"; };
@@ -305,16 +299,6 @@
 				18476F9D2D02DE9F00B3C901 /* YTTabBar.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		18476FA92D02DED600B3C901 /* LoggerManager */ = {
-			isa = PBXGroup;
-			children = (
-				18476FA62D02DED600B3C901 /* LoggerAssistant.swift */,
-				18476FA72D02DED600B3C901 /* LoggerListController.swift */,
-				18476FA82D02DED600B3C901 /* LoggerManager.swift */,
-			);
-			path = LoggerManager;
 			sourceTree = "<group>";
 		};
 		1876E3E22D01921700CE4871 /* LTCalendar */ = {
@@ -544,7 +528,6 @@
 		B595A8CD27CCB00B007EF16E /* 临时验证类 */ = {
 			isa = PBXGroup;
 			children = (
-				18476FA92D02DED600B3C901 /* LoggerManager */,
 				18476F9F2D02DE9F00B3C901 /* View */,
 				B546325B2803B7950026662F /* Arithmetic.swift */,
 				4207008E2A4D7D1900039415 /* BLEAdapter.swift */,
@@ -1016,7 +999,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/HBSwiftKit/Resources/R.generated.swift",
+				$SRCROOT/HBSwiftKit/Resources/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1072,9 +1055,6 @@
 				B50055A427C375A700467E55 /* LightAttrPickerView.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ListViewController.swift in Sources */,
 				18A82EF42CFF130B007FCCDA /* ListViewModel.swift in Sources */,
-				18476FAC2D02DED600B3C901 /* LoggerAssistant.swift in Sources */,
-				18476FAA2D02DED600B3C901 /* LoggerListController.swift in Sources */,
-				18476FAB2D02DED600B3C901 /* LoggerManager.swift in Sources */,
 				1876E3E72D01921700CE4871 /* LTCalendar.swift in Sources */,
 				1876E3E52D01921700CE4871 /* LTCalendarData.swift in Sources */,
 				1876E3E42D01921700CE4871 /* LTCalendarItem.swift in Sources */,

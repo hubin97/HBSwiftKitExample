@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (5.10.2)
+  - CocoaLumberjack (3.8.5):
+    - CocoaLumberjack/Core (= 3.8.5)
   - CocoaLumberjack/Core (3.8.5)
   - CocoaLumberjack/Swift (3.8.5):
     - CocoaLumberjack/Core
@@ -21,62 +23,70 @@ PODS:
   - DGCharts/Core (5.0.0)
   - FLEX (5.22.10)
   - GDPerformanceView-Swift (2.1.1)
-  - HBSwiftKit (0.5.0):
-    - HBSwiftKit/Base (= 0.5.0)
-    - HBSwiftKit/BLE (= 0.5.0)
-    - HBSwiftKit/HTTP (= 0.5.0)
-    - HBSwiftKit/Other (= 0.5.0)
-  - HBSwiftKit/Base (0.5.0):
-    - HBSwiftKit/Base/Core (= 0.5.0)
-    - HBSwiftKit/Base/Extension (= 0.5.0)
+  - HBSwiftKit (0.5.1):
+    - HBSwiftKit/Base (= 0.5.1)
+    - HBSwiftKit/BLE (= 0.5.1)
+    - HBSwiftKit/HTTP (= 0.5.1)
+    - HBSwiftKit/Other (= 0.5.1)
+  - HBSwiftKit/Base (0.5.1):
+    - HBSwiftKit/Base/Core (= 0.5.1)
+    - HBSwiftKit/Base/Extension (= 0.5.1)
     - Kingfisher
     - ProgressHUD
     - SnapKit
     - Toast-Swift
-  - HBSwiftKit/Base/Core (0.5.0):
+  - HBSwiftKit/Base/Core (0.5.1):
+    - HBSwiftKit/Base/Extension
     - Kingfisher
     - ProgressHUD
     - SnapKit
     - Toast-Swift
-  - HBSwiftKit/Base/Extension (0.5.0):
-    - HBSwiftKit/Base/Core
+  - HBSwiftKit/Base/Extension (0.5.1):
     - Kingfisher
     - ProgressHUD
     - SnapKit
     - Toast-Swift
-  - HBSwiftKit/BLE (0.5.0):
+  - HBSwiftKit/BLE (0.5.1):
     - "NSObject+Rx"
     - RxCocoa
     - RxSwift
-  - HBSwiftKit/HTTP (0.5.0):
-    - HBSwiftKit/HTTP/Core (= 0.5.0)
-    - HBSwiftKit/HTTP/Utils (= 0.5.0)
+  - HBSwiftKit/HTTP (0.5.1):
+    - HBSwiftKit/HTTP/Core (= 0.5.1)
+    - HBSwiftKit/HTTP/Utils (= 0.5.1)
     - Moya
     - ObjectMapper
     - ProgressHUD
     - PromiseKit
     - RxRelay
     - RxSwift
-  - HBSwiftKit/HTTP/Core (0.5.0):
+  - HBSwiftKit/HTTP/Core (0.5.1):
     - Moya
     - ObjectMapper
     - ProgressHUD
     - PromiseKit
     - RxRelay
     - RxSwift
-  - HBSwiftKit/HTTP/Utils (0.5.0):
+  - HBSwiftKit/HTTP/Utils (0.5.1):
     - Moya
     - ObjectMapper
     - ProgressHUD
     - PromiseKit
     - RxRelay
     - RxSwift
-  - HBSwiftKit/Other (0.5.0):
-    - HBSwiftKit/Other/AuthStatus (= 0.5.0)
-    - HBSwiftKit/Other/Utils (= 0.5.0)
-  - HBSwiftKit/Other/AuthStatus (0.5.0):
+  - HBSwiftKit/Other (0.5.1):
+    - CocoaLumberjack
+    - HBSwiftKit/Other/AuthStatus (= 0.5.1)
+    - HBSwiftKit/Other/LoggerManager (= 0.5.1)
+    - HBSwiftKit/Other/Utils (= 0.5.1)
+  - HBSwiftKit/Other/AuthStatus (0.5.1):
+    - CocoaLumberjack
     - HBSwiftKit/Base/Core
-  - HBSwiftKit/Other/Utils (0.5.0):
+  - HBSwiftKit/Other/LoggerManager (0.5.1):
+    - CocoaLumberjack
+    - HBSwiftKit/Base/Core
+    - HBSwiftKit/Base/Extension
+  - HBSwiftKit/Other/Utils (0.5.1):
+    - CocoaLumberjack
     - HBSwiftKit/Base/Core
     - Toast-Swift
   - IQKeyboardManagerSwift (6.5.16)
@@ -203,7 +213,7 @@ SPEC CHECKSUMS:
   DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
   FLEX: f21ee4f498eed3f8a1eded66b21939fd3b7a22ce
   GDPerformanceView-Swift: 22d964fe40b19e3d914dba2586237d064de8fd77
-  HBSwiftKit: dabe4b04f3ad70d523b196fab2c13fefab3e8dbe
+  HBSwiftKit: 6c22f714577339c8da08aebc8f99f392dcb4d1cd
   IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
   Kingfisher: 99edc495d3b7607e6425f0d6f6847b2abd6d716d
   lottie-ios: a881093fab623c467d3bce374367755c272bdd59

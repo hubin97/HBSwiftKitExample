@@ -93,11 +93,11 @@ extension LibsManager {
     // 开启日志管理
     func setupLogger() {
         let logLevel = DDLogLevel.debug
-#if DEBUG
+//#if DEBUG
         LogM.shared.launch(logLevel).entrance()
-#else
-        LogM.shared.launch(logLevel)
-#endif
+//#else
+//        LogM.shared.launch(logLevel)
+//#endif
     }
 }
 

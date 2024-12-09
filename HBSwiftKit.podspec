@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     
     # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     s.name             = 'HBSwiftKit'
-    s.version          = '0.5.0'
+    s.version          = '0.5.1'
     s.summary          = 'some common components.'
     s.description      = <<-DESC
     仅仅一些个人常用组件.学习工作使用.
@@ -29,12 +29,10 @@ Pod::Spec.new do |s|
     
     # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     s.author           = { 'Hubin_Huang' => '970216474@qq.com' }
-    # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+    s.social_media_url = 'https://hubin97.github.io'
     
     # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     s.ios.deployment_target = '13.0'
-    #s.pod_target_xcconfig = { 'IPHONEOS_DEPLOYMENT_TARGET' => '13.0' }
-    #s.user_target_xcconfig = { 'IPHONEOS_DEPLOYMENT_TARGET' => '13.0' }
 
     # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     s.source           = { :git => 'https://github.com/hubin97/HBSwiftKitExample.git', :tag => s.version.to_s }
@@ -42,7 +40,6 @@ Pod::Spec.new do |s|
     # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     # 子模块：Base
     s.subspec 'Base' do |base|
-        
         # 使用 Ruby 数组简化多个依赖的定义
         # 扩展自定义Hud;  pod 'ProgressHUD', :git => 'https://github.com/hubin97/ProgressHUD.git'
         ['SnapKit', 'Kingfisher', 'Toast-Swift', 'ProgressHUD'].each do |dd|
@@ -89,21 +86,26 @@ Pod::Spec.new do |s|
     
     # 子模块：Other
     s.subspec 'Other' do |other|
-        #other.source_files  = 'HBSwiftKit/Other/**/*'
-        other.subspec 'AuthStatus' do |sss|
-            sss.source_files  = 'HBSwiftKit/Other/AuthStatus'
-            sss.dependency 'HBSwiftKit/Base/Core'
+        ['Toast-Swift', 'Kingfisher', 'CocoaLumberjack'].each do |dd|
+            other.dependency dd
         end
         
-        other.subspec 'Utils' do |sss|
-            sss.source_files  = 'HBSwiftKit/Other/Utils'
-            sss.dependency 'HBSwiftKit/Base/Core'
-            sss.dependency 'Toast-Swift'
+        other.subspec 'AuthStatus' do |auth|
+            auth.source_files  = 'HBSwiftKit/Other/AuthStatus'
+            auth.dependency 'HBSwiftKit/Base/Core'
         end
         
-#        other.subspec 'LoggerManager' do |sss|
-#            sss.source_files  = 'HBSwiftKit/Other/LoggerManager'
-#        end
+        other.subspec 'Utils' do |utils|
+            utils.source_files  = 'HBSwiftKit/Other/Utils'
+            utils.dependency 'HBSwiftKit/Base/Core'
+        end
+        
+        other.subspec 'LoggerManager' do |log|
+            log.source_files  = 'HBSwiftKit/Other/LoggerManager'
+            log.dependency 'HBSwiftKit/Base/Core'
+            log.dependency 'HBSwiftKit/Base/Extension'
+            log.dependency 'HBSwiftKit/Other/Utils'
+        end
     end
     
     # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
