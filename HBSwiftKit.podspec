@@ -48,15 +48,15 @@ Pod::Spec.new do |s|
         ['SnapKit', 'Kingfisher', 'Toast-Swift', 'ProgressHUD'].each do |dd|
             base.dependency dd
         end
+        
         #base.dependency 'Hero', '~> 1.6.3' # 确保使用支持 iOS 13 的版本
+        base.subspec 'Extension' do |ss|
+            ss.source_files = 'HBSwiftKit/Base/Extension/*.swift'
+        end
         
         base.subspec 'Core' do |ss|
             ss.framework = "Foundation", "UIKit"
             ss.source_files = 'HBSwiftKit/Base/Core/**/*.swift'
-        end
-        
-        base.subspec 'Extension' do |ss|
-            ss.source_files = 'HBSwiftKit/Base/Extension/*.swift'
             ss.dependency 'HBSwiftKit/Base/Core'
         end
         
