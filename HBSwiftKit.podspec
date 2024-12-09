@@ -57,7 +57,7 @@ Pod::Spec.new do |s|
         base.subspec 'Core' do |ss|
             ss.framework = "Foundation", "UIKit"
             ss.source_files = 'HBSwiftKit/Base/Core/**/*.swift'
-            ss.dependency 'HBSwiftKit/Base/Core'
+            ss.dependency 'HBSwiftKit/Base/Extension'
         end
         
     end
