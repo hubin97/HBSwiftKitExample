@@ -19,7 +19,9 @@ class ListViewModel: ViewModel {
                                  DemoRowModel(title: "地图定位页", dclass: MapLocationController()),
                                  DemoRowModel(title: "视频剪辑页", dclass: VideoTestController()),
                                  DemoRowModel(title: "视频播放页", dclass: VideoPlayController()),
-                                 DemoRowModel(title: "MQTT", dclass: MQTTTestController())]
+                                 DemoRowModel(title: "MQTT", dclass: MQTTTestController()),
+                                 DemoRowModel(title: "Podcast", dclass: PodCastListController()),
+                                ]
     
 }
 

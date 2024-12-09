@@ -42,6 +42,14 @@
 		18B671992B3BBFC600793476 /* Extension+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B671982B3BBFC600793476 /* Extension+TextField.swift */; };
 		18C5037F2C50F82700EB50B4 /* MQTTTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5037E2C50F82700EB50B4 /* MQTTTestController.swift */; };
 		18E1CF362B90270F00B5397E /* percentage.json in Resources */ = {isa = PBXBuildFile; fileRef = 18E1CF352B90270F00B5397E /* percentage.json */; };
+		18F9EF452D0699E100CE0471 /* AudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF442D0699E100CE0471 /* AudioPlayerManager.swift */; };
+		18F9EF472D069BFC00CE0471 /* 五音Jw-明月天涯.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18F9EF462D069BFC00CE0471 /* 五音Jw-明月天涯.mp3 */; };
+		18F9EF492D069C2000CE0471 /* PodCastListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF482D069C1F00CE0471 /* PodCastListController.swift */; };
+		18F9EF4B2D069D3F00CE0471 /* podcast.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F9EF4A2D069D3F00CE0471 /* podcast.jpg */; };
+		18F9EF4E2D06C65100CE0471 /* 萧忆情Alex - 不谓侠.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18F9EF4D2D06C65100CE0471 /* 萧忆情Alex - 不谓侠.mp3 */; };
+		18F9EF4F2D06C65100CE0471 /* 李荣浩 - 老街.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18F9EF4C2D06C65100CE0471 /* 李荣浩 - 老街.mp3 */; };
+		18F9EF5E2D06E1F500CE0471 /* PodCastListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF5D2D06E1F500CE0471 /* PodCastListViewModel.swift */; };
+		18F9EF602D06E64E00CE0471 /* PodCastListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF5F2D06E64E00CE0471 /* PodCastListView.swift */; };
 		1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */; };
 		4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207008E2A4D7D1900039415 /* BLEAdapter.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -165,6 +173,14 @@
 		18C2FE002AFC8D0C00AB8450 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		18C5037E2C50F82700EB50B4 /* MQTTTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTTestController.swift; sourceTree = "<group>"; };
 		18E1CF352B90270F00B5397E /* percentage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = percentage.json; sourceTree = "<group>"; };
+		18F9EF442D0699E100CE0471 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
+		18F9EF462D069BFC00CE0471 /* 五音Jw-明月天涯.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "五音Jw-明月天涯.mp3"; sourceTree = "<group>"; };
+		18F9EF482D069C1F00CE0471 /* PodCastListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodCastListController.swift; sourceTree = "<group>"; };
+		18F9EF4A2D069D3F00CE0471 /* podcast.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = podcast.jpg; sourceTree = "<group>"; };
+		18F9EF4C2D06C65100CE0471 /* 李荣浩 - 老街.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "李荣浩 - 老街.mp3"; sourceTree = "<group>"; };
+		18F9EF4D2D06C65100CE0471 /* 萧忆情Alex - 不谓侠.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "萧忆情Alex - 不谓侠.mp3"; sourceTree = "<group>"; };
+		18F9EF5D2D06E1F500CE0471 /* PodCastListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodCastListViewModel.swift; sourceTree = "<group>"; };
+		18F9EF5F2D06E64E00CE0471 /* PodCastListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodCastListView.swift; sourceTree = "<group>"; };
 		1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNoti.swift; sourceTree = "<group>"; };
 		4207008E2A4D7D1900039415 /* BLEAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAdapter.swift; sourceTree = "<group>"; };
 		4845C4375F7293ACE69A0714 /* Pods_HBSwiftKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBSwiftKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -373,6 +389,28 @@
 				B5BAC85B255A7C0C005A5179 /* HBSwiftKit_Example-Bridging-Header.h */,
 			);
 			path = Configs;
+			sourceTree = "<group>";
+		};
+		18F9EF432D06999700CE0471 /* 自定义播客 */ = {
+			isa = PBXGroup;
+			children = (
+				18F9EF502D06C65600CE0471 /* mp3 */,
+				18F9EF442D0699E100CE0471 /* AudioPlayerManager.swift */,
+				18F9EF482D069C1F00CE0471 /* PodCastListController.swift */,
+				18F9EF5D2D06E1F500CE0471 /* PodCastListViewModel.swift */,
+				18F9EF5F2D06E64E00CE0471 /* PodCastListView.swift */,
+			);
+			path = "自定义播客";
+			sourceTree = "<group>";
+		};
+		18F9EF502D06C65600CE0471 /* mp3 */ = {
+			isa = PBXGroup;
+			children = (
+				18F9EF4C2D06C65100CE0471 /* 李荣浩 - 老街.mp3 */,
+				18F9EF4D2D06C65100CE0471 /* 萧忆情Alex - 不谓侠.mp3 */,
+				18F9EF462D069BFC00CE0471 /* 五音Jw-明月天涯.mp3 */,
+			);
+			path = mp3;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -617,6 +655,7 @@
 				B54DE3B2275EF14C00BBDE0B /* 信号检测器 */,
 				B5C6C5CF25ECD08900C88C1C /* 列表左滑改 */,
 				B5887FA3264CD719003C1896 /* 双列表关联 */,
+				18F9EF432D06999700CE0471 /* 自定义播客 */,
 				B5389B2725EE1BB900ED67F9 /* 日历选择器 */,
 				B5C6C5C325ECCADF00C88C1C /* 简易刻度尺 */,
 				B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */,
@@ -647,6 +686,7 @@
 				B575D5F825A9900C0068EB19 /* help_cn.html */,
 				B575D5F725A9900C0068EB19 /* help_es.html */,
 				B5BAC834255A7875005A5179 /* images.json */,
+				18F9EF4A2D069D3F00CE0471 /* podcast.jpg */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				B5D55404261D40AE007A20F5 /* jstest.html */,
 				B5389B8825EF913E00ED67F9 /* LaunchScreen.storyboard */,
@@ -809,15 +849,19 @@
 				B5DCC71425F3266D007E3237 /* areacode.plist in Resources */,
 				B56F68A2264B8AF400FD62CF /* duallist.json in Resources */,
 				189C64AD2D000F2200BAE470 /* Fastfile in Resources */,
+				18F9EF4B2D069D3F00CE0471 /* podcast.jpg in Resources */,
 				B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */,
 				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
 				B5BAC835255A7875005A5179 /* images.json in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				B5D55405261D40AE007A20F5 /* jstest.html in Resources */,
+				18F9EF472D069BFC00CE0471 /* 五音Jw-明月天涯.mp3 in Resources */,
 				B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */,
 				B5557A3526706188007F5B44 /* loading.gif in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				18E1CF362B90270F00B5397E /* percentage.json in Resources */,
+				18F9EF4E2D06C65100CE0471 /* 萧忆情Alex - 不谓侠.mp3 in Resources */,
+				18F9EF4F2D06C65100CE0471 /* 李荣浩 - 老街.mp3 in Resources */,
 				189C64AF2D000F2200BAE470 /* Pluginfile in Resources */,
 				189C64B02D000F2200BAE470 /* README.md in Resources */,
 				189C64B12D000F2200BAE470 /* report.xml in Resources */,
@@ -1038,6 +1082,7 @@
 				1876E3F12D01959100CE4871 /* BalloonMarker.swift in Sources */,
 				18A82EFF2D0000CE007FCCDA /* BGTaskManager.swift in Sources */,
 				4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */,
+				18F9EF602D06E64E00CE0471 /* PodCastListView.swift in Sources */,
 				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
 				B5BAC82F255A7818005A5179 /* CalendarController.swift in Sources */,
 				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,
@@ -1047,6 +1092,7 @@
 				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
 				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
 				18B671992B3BBFC600793476 /* Extension+TextField.swift in Sources */,
+				18F9EF452D0699E100CE0471 /* AudioPlayerManager.swift in Sources */,
 				1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */,
 				B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */,
 				B546BFB727F455C5006EA745 /* IndexTableView.swift in Sources */,
@@ -1062,6 +1108,7 @@
 				1876E3E62D01921700CE4871 /* LTCalendarWeek.swift in Sources */,
 				184A4E822B1D656D00CECCD6 /* LTDatePicker.swift in Sources */,
 				1876E3E92D01951100CE4871 /* LTMarker.swift in Sources */,
+				18F9EF492D069C2000CE0471 /* PodCastListController.swift in Sources */,
 				1876E3F32D0199E500CE4871 /* LTSheetPanGesView.swift in Sources */,
 				B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */,
 				18A82F042D0000CE007FCCDA /* MMKVManager.swift in Sources */,
@@ -1084,6 +1131,7 @@
 				18A82EF12CFEFA04007FCCDA /* TabBarItem.swift in Sources */,
 				B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */,
 				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
+				18F9EF5E2D06E1F500CE0471 /* PodCastListViewModel.swift in Sources */,
 				B533677326E852550009B60F /* VideoCropController.swift in Sources */,
 				B5825E3326F0877C00539866 /* VideoCropView.swift in Sources */,
 				B5825E2E26F04D7D00539866 /* VideoFrameView.swift in Sources */,

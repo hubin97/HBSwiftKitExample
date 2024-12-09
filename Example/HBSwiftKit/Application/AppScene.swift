@@ -15,6 +15,7 @@ enum AppScene: SceneProvider {
     case safari(URL)
     case videoPlayController(url: String, autoPlay: Bool = true)
     case tabs(viewModel: TabBarViewModel)
+    case podcast
     
     // MARK: -
     var getSegue: UIViewController? {
@@ -36,6 +37,8 @@ enum AppScene: SceneProvider {
             let tabBarVc = TabBarController(viewModel: viewModel)
             tabBarVc.setAppearance(normalColor: UIColor.lightGray, selectColor: UIColor.black)
             return tabBarVc
+        case .podcast:
+            return PodCastListController(viewModel: ViewModel(), navigator: Navigator.default)
         }
     }
 }

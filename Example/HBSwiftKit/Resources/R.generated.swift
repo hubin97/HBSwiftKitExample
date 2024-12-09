@@ -33,7 +33,7 @@ struct _R {
     let developmentRegion = "en"
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 38 images, and 1 namespaces.
+  /// This `_R.image` struct is generated, and contains static references to 39 images, and 1 namespaces.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -84,6 +84,9 @@ struct _R {
 
     /// Image `play`.
     var play: RswiftResources.ImageResource { .init(name: "play", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `podcast.jpg`.
+    var podcastJpg: RswiftResources.ImageResource { .init(name: "podcast.jpg", path: [], bundle: bundle, locale: LocaleReference.none, onDemandResourceTags: nil) }
 
     /// Image `redWarning`.
     var redWarning: RswiftResources.ImageResource { .init(name: "redWarning", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -181,7 +184,7 @@ struct _R {
     }
   }
 
-  /// This `_R.file` struct is generated, and contains static references to 19 resource files.
+  /// This `_R.file` struct is generated, and contains static references to 23 resource files.
   struct file {
     let bundle: Foundation.Bundle
 
@@ -227,6 +230,9 @@ struct _R {
     /// Resource file `percentage.json`.
     var percentageJson: RswiftResources.FileResource { .init(name: "percentage", pathExtension: "json", bundle: bundle, locale: LocaleReference.none) }
 
+    /// Resource file `podcast.jpg`.
+    var podcastJpg: RswiftResources.FileResource { .init(name: "podcast", pathExtension: "jpg", bundle: bundle, locale: LocaleReference.none) }
+
     /// Resource file `report.xml`.
     var reportXml: RswiftResources.FileResource { .init(name: "report", pathExtension: "xml", bundle: bundle, locale: LocaleReference.none) }
 
@@ -239,8 +245,17 @@ struct _R {
     /// Resource file `src_xy`.
     var src_xy: RswiftResources.FileResource { .init(name: "src_xy", pathExtension: "", bundle: bundle, locale: LocaleReference.none) }
 
+    /// Resource file `五音Jw-明月天涯.mp3`.
+    var 五音Jw明月天涯Mp3: RswiftResources.FileResource { .init(name: "五音Jw-明月天涯", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }
+
+    /// Resource file `李荣浩 - 老街.mp3`.
+    var 李荣浩老街Mp3: RswiftResources.FileResource { .init(name: "李荣浩 - 老街", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }
+
     /// Resource file `温柔女声.mp3`.
     var 温柔女声Mp3: RswiftResources.FileResource { .init(name: "温柔女声", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }
+
+    /// Resource file `萧忆情Alex - 不谓侠.mp3`.
+    var 萧忆情Alex不谓侠Mp3: RswiftResources.FileResource { .init(name: "萧忆情Alex - 不谓侠", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }
   }
 
   /// This `_R.storyboard` struct is generated, and contains static references to 2 storyboards.
