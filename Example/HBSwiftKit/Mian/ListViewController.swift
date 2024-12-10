@@ -67,10 +67,13 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let model = vm.items[indexPath.row]
-        if let tclass = model.class {
+        guard let tclass = model.class else { return }
+        if model.title == "Podcast" {
+            self.navigator.show(provider: AppScene.podcastList(viewModel: PodCastListViewModel()), sender: self)
+        } else {
             self.navigationController?.pushViewController(tclass, animated: true)
         }
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

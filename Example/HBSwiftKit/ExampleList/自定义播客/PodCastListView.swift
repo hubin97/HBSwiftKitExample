@@ -5,8 +5,7 @@
 //  Created by hubin.h on 2024/12/9.
 
 import Foundation
-import Kingfisher
-// MARK: - global var and methods
+import RxSwift
 
 class PodCastPosterView: UIView {
     
@@ -114,13 +113,15 @@ extension PodCastPosterView {
 }
 
 // MARK: PodCastListCell
-class PodCastListCell: UITableViewCell {
+class PodCastListCell: TableViewCell {
     
     // 歌曲封面图标
     lazy var iconView: UIImageView = {
         let _imgView = UIImageView()
         _imgView.contentMode = .scaleAspectFill
         _imgView.setBorder(cornerRadius: 8, makeToBounds: true)
+        _imgView.isUserInteractionEnabled = true
+        _imgView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapIconView)))
         return _imgView
     }()
     
@@ -150,29 +151,30 @@ class PodCastListCell: UITableViewCell {
     // 播放量
     lazy var playCountLabel: UILabel = {
         let _label = UILabel()
-        _label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        _label.textColor = .black
+        _label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        _label.textColor = .gray
         return _label
     }()
     
     // 播放时长
     lazy var durationLabel: UILabel = {
         let _label = UILabel()
-        _label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        _label.textColor = .black
+        _label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        _label.textColor = .gray
         return _label
     }()
     
     // 更新时间
     lazy var updateTimeLabel: UILabel = {
         let _label = UILabel()
-        _label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        _label.textColor = .black
+        _label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        _label.textColor = .gray
         return _label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.accessoryView = nil
         setupLayout()
     }
     
@@ -214,8 +216,9 @@ class PodCastListCell: UITableViewCell {
         }
         
         playCountLabel.snp.makeConstraints { make in
-            make.top.equalTo(descLabel.snp.bottom).offset(5)
-            make.leading.equalTo(titleLabel.snp.trailing).offset(10)
+            make.top.greaterThanOrEqualTo(descLabel.snp.bottom).offset(5)
+            make.bottom.equalTo(iconView.snp.bottom)
+            make.leading.equalTo(titleLabel.snp.leading)
         }
         
         durationLabel.snp.makeConstraints { make in
@@ -225,19 +228,26 @@ class PodCastListCell: UITableViewCell {
         
         updateTimeLabel.snp.makeConstraints { make in
             make.centerY.equalTo(playCountLabel.snp.centerY)
-            make.leading.equalTo(durationLabel.snp.leading)
+            make.leading.equalTo(durationLabel.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().offset(-10)
         }
     }
-}
-
-extension PodCastListCell {
+  
+    var viewModel: PodCastListCellViewModel?
+    override func bind(to viewModel: TableViewCellViewModel) {
+        super.bind(to: viewModel)
+        guard let viewModel = viewModel as? PodCastListCellViewModel else { return }
+        self.viewModel = viewModel
+        
+        viewModel.titleRelay.bind(to: titleLabel.rx.text).disposed(by: rx.disposeBag)
+        viewModel.descRelay.bind(to: descLabel.rx.text).disposed(by: rx.disposeBag)
+        viewModel.playCountRelay.bind(to: playCountLabel.rx.text).disposed(by: rx.disposeBag)
+        viewModel.durationRelay.bind(to: durationLabel.rx.text).disposed(by: rx.disposeBag)
+        viewModel.updateTimeRelay.bind(to: updateTimeLabel.rx.text).disposed(by: rx.disposeBag)
+        viewModel.artworkRelay.bind(to: iconView.rx.image).disposed(by: rx.disposeBag)
+    }
     
-    func configure(with model: PodCastItem) {
-        iconView.kf.setImage(with: URL(string: model.artwork))
-        titleLabel.text = model.title
-        descLabel.text = model.desc
-        playCountLabel.text = "播放量: \(model.playCount)"
-        durationLabel.text = "时长: 30分钟"
-        updateTimeLabel.text = "更新时间: \(model.updateTime)"
+    @objc func tapIconView() {
+        viewModel?.tapIconView()
     }
 }

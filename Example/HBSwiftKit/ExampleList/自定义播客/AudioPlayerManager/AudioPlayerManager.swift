@@ -7,7 +7,6 @@
 import UIKit
 import AVFoundation
 import MediaPlayer
-import Kingfisher
 
 // MARK: - main class
 class AudioPlayerManager: NSObject {
@@ -16,12 +15,10 @@ class AudioPlayerManager: NSObject {
     private var isPlaying = false
     /// 音频播放器
     private var audioPlayer: AVPlayer?
-    /// 音频名称
-    private var currentAudioTitle: String?
-    /// 作者/艺术人
-    private var currentAudioArtist: String?
-    /// 音频封面 图片大小最好适合控制面板显示（建议不超过 512x512 像素）。
-    private var currentAudioAvatar: UIImage?
+    /// 当前播放曲目索引
+    private var currentTrackIndex = 0
+    /// 播放列表
+    private var playlist: [AudioTrack] = []
     /// 面板同步定时器
     private var timeObserver: Any?
 
@@ -47,34 +44,52 @@ class AudioPlayerManager: NSObject {
 extension AudioPlayerManager {
     
     // MARK: - Play Audio
-    /// 播放音频（支持动态更新标题、封面）
-    func playAudio(with url: URL?, title: String? = nil, artist: String? = nil, artwork: UIImage? = nil) {
+    func playTrackList(playlist: [AudioTrack]) {
+        self.playlist = playlist
+        currentTrackIndex = 0
+        playCurrentTrack()
+    }
+    
+    // MARK: - Play Specific Track
+    func playTrack(at index: Int) {
+        guard !playlist.isEmpty, index >= 0, index < playlist.count else {
+            print("Invalid track index")
+            return
+        }
+        
+        currentTrackIndex = index
+        playCurrentTrack()
+    }
+    
+    func playTrack(_ track: AudioTrack) {
+        guard let index = playlist.firstIndex(where: { $0.audioUrl == track.audioUrl }) else {
+            print("Track not found in the playlist")
+            return
+        }
+        
+        playTrack(at: index)
+    }
+
+    private func playCurrentTrack() {
+        guard !playlist.isEmpty else { return }
+        let track = playlist[currentTrackIndex]
+        guard let audioUrl = track.audioUrl else {
+            print("Invalid audio URL")
+            return
+        }
+     
         // 停止当前播放
         stopAudio()
         
-        // 播放音频
-        if let url = url {
-            // 初始化 AVPlayer
-            audioPlayer = AVPlayer(url: url)
-            audioPlayer?.play()
-            isPlaying = true
-        }
-        
-        // 设置当前播放信息
-        if let title = title {
-            setAudioTitle(with: title)
-        }
-        if let artist = artist {
-            setAudioArtist(with: artist)
-        }
-        if let artwork = artwork {
-            setAudioAvatar(with: artwork)
-        }
+        // 设置新的播放源
+        audioPlayer = AVPlayer(url: audioUrl)
+        audioPlayer?.play()
+        isPlaying = true
         
         updateNowPlayingInfo()
         observePlayerProgress()
     }
-    
+        
     // 停止音频
     func stopAudio() {
         if let observer = timeObserver {
@@ -100,6 +115,30 @@ extension AudioPlayerManager {
         isPlaying = true
         updateNowPlayingInfo()
     }
+    
+    // 下一曲
+    func nextTrack() {
+        guard !playlist.isEmpty else { return }
+        currentTrackIndex = (currentTrackIndex + 1) % playlist.count
+        playCurrentTrack()
+    }
+    
+    // 上一曲
+    func previousTrack() {
+        guard !playlist.isEmpty else { return }
+        currentTrackIndex = (currentTrackIndex - 1 + playlist.count) % playlist.count
+        playCurrentTrack()
+    }
+    
+    // 进度条设置
+    func seekToPosition(_ position: TimeInterval) {
+        // 创建 CMTime
+        let time = CMTime(seconds: position, preferredTimescale: 600)
+        // 调整播放位置
+        audioPlayer?.seek(to: time)
+        // 更新 Now Playing 信息
+        updateNowPlayingInfo()
+    }
 }
 
 // MARK: - Now Playing Info
@@ -107,26 +146,24 @@ extension AudioPlayerManager {
     
     /// 更新控制面板和锁屏信息
     private func updateNowPlayingInfo() {
-        guard let player = audioPlayer else { return }
+        guard let player = audioPlayer, !playlist.isEmpty else { return }
+        let track = playlist[currentTrackIndex]
+
         // 更新 Now Playing
         var nowPlayingInfo = [String: Any]()
-        // 音频标题
-        nowPlayingInfo[MPMediaItemPropertyTitle] = currentAudioTitle ?? "Unknown Title"
-        // 作者（可自定义）
-        nowPlayingInfo[MPMediaItemPropertyArtist] = currentAudioArtist ?? "Unknown Artist"
-        
+        nowPlayingInfo[MPMediaItemPropertyTitle] = track.title ?? track.metaData?.title
+        nowPlayingInfo[MPMediaItemPropertyArtist] = track.artist ?? track.metaData?.artist
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = track.duration ?? track.metaData?.duration
+
         // 播放进度和时长
         if let currentItem = player.currentItem {
             nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = currentItem.currentTime().seconds
-            nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = currentItem.asset.duration.seconds
+            nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = track.duration ?? track.metaData?.duration ?? currentItem.asset.duration.seconds
             nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = isPlaying ? 1.0 : 0.0
         }
         
         // 封面图片
-        if let artwork = currentAudioAvatar {
-            let mediaArtwork = MPMediaItemArtwork(boundsSize: artwork.size) { _ in
-                return artwork
-            }
+        if let mediaArtwork = track.cachedMediaArtwork {
             nowPlayingInfo[MPMediaItemPropertyArtwork] = mediaArtwork
         }
         
@@ -190,54 +227,36 @@ extension AudioPlayerManager {
     }
 }
 
-// MARK: - Helper Methods
-extension AudioPlayerManager {
-    
-    // 进度条设置
-    func seekToPosition(_ position: TimeInterval) {
-        let time = CMTime(seconds: position, preferredTimescale: 600) // 创建 CMTime
-        // 调整播放位置
-        audioPlayer?.seek(to: time)
-        // 更新 Now Playing 信息
-        updateNowPlayingInfo()
-    }
-    
-    // 下一曲
-    func nextTrack() {
-        // 播放下一首音频
-        // playAudio(with: nextAudioURL)
-    }
-    
-    // 上一曲
-    func previousTrack() {
-        // 播放上一首音频
-        // playAudio(with: previousAudioURL)
-    }
-}
-
 // MARK: - call backs
 extension AudioPlayerManager {
     
+    /// 播放音频列表
+    @discardableResult
+    func setPlaylist(with list: [AudioTrack]) -> Self {
+        self.playlist = list
+        return self
+    }
+    
     /// 设置音频展示标题
-    @discardableResult
-    func setAudioTitle(with title: String) -> Self {
-        self.currentAudioTitle = title
-        return self
-    }
-    
-    /// 设置音频艺术家
-    @discardableResult
-    func setAudioArtist(with name: String) -> Self {
-        self.currentAudioArtist = name
-        return self
-    }
-    
-    /// 设置音频封面图片
-    @discardableResult
-    func setAudioAvatar(with image: UIImage?) -> Self {
-        self.currentAudioAvatar = image
-        return self
-    }
+//    @discardableResult
+//    func setAudioTitle(with title: String) -> Self {
+//        self.currentAudioTitle = title
+//        return self
+//    }
+//    
+//    /// 设置音频艺术家
+//    @discardableResult
+//    func setAudioArtist(with name: String) -> Self {
+//        self.currentAudioArtist = name
+//        return self
+//    }
+//    
+//    /// 设置音频封面图片
+//    @discardableResult
+//    func setAudioAvatar(with image: UIImage?) -> Self {
+//        self.currentAudioAvatar = image
+//        return self
+//    }
     
     /// 更新控制面板和锁屏页信息
     /// 如果是设置标题, 作者, 封面, 音频资源路径, 请调用此方法
@@ -247,20 +266,26 @@ extension AudioPlayerManager {
     }
     
     /// 设置音频资源路径(网络图片)
-    func setAsyncAvatar(with imgPath: String?) -> Self {
-        guard let imgPath = imgPath?.urlEncoded, let url = URL(string: imgPath) else { return self }
-        ImageDownloader.default.downloadImage(with: url, options: [.transition(.fade(0.3))]) { result in
-            switch result {
-            case .success(let value):
-                self.currentAudioAvatar = value.image
-                self.updateNowPlayingInfo()
-            case .failure(let error):
-                print("Failed to download image: \(error)")
-                iToast.makeToast(error.localizedDescription)
-            }
-        }
-        return self
-    }
+//    @discardableResult
+//    func setAsyncAvatar(with imgPath: String?) -> Self {
+//        guard !playlist.isEmpty else { return self }
+//        var track = playlist[currentTrackIndex]
+//        
+//        guard let imgPath = imgPath?.urlEncoded, let url = URL(string: imgPath) else { return self }
+//        ImageDownloader.default.downloadImage(with: url, options: [.transition(.fade(0.3))]) {[weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let value):
+//                track.artworkIcon = value.image
+//                self.playlist[currentTrackIndex] = track
+//                self.updateNowPlayingInfo()
+//            case .failure(let error):
+//                print("Failed to download image: \(error)")
+//                iToast.makeToast(error.localizedDescription)
+//            }
+//        }
+//        return self
+//    }
 }
 
 // MARK: - delegate or data source

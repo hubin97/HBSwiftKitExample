@@ -83,7 +83,7 @@ class PodCastListController: ViewController, ViewModelProvider {
             make.leading.equalToSuperview()
             make.centerX.equalToSuperview()
             //make.bottom.equalToSuperview()
-            make.height.equalTo(vm.rowHeight * CGFloat(vm.podCastList.count))
+            make.height.equalTo(vm.rowHeight * CGFloat(vm.trackListRelay.value.count))
             make.bottom.equalTo(listScroll.snp.bottom)
         }
     }
@@ -91,22 +91,8 @@ class PodCastListController: ViewController, ViewModelProvider {
     override func bindViewModel() {
         super.bindViewModel()
         self.listScroll.contentSize = vm.contentSize
+        self.audioPlayer.setPlaylist(with: vm.trackListRelay.value)
         self.posterView.configure(with: PodCastModel(artwork: "https://i.kfs.io/album/global/121624025,0v1/fit/500x500.jpg",title: "我的收藏", desc: "一张褪色的照片,好像带给我一点点怀念,巷尾老爷爷卖的热汤面,味道弥漫过旧旧的后院,流浪猫睡熟在摇晃秋千,夕阳照了一遍他眯着眼,那张同桌寄的明信片", playCount: "13400", updateTime: "2024-12-09"))
-        
-       //        let newworkImgUrl = "https://cozy-static-dev.cozyinnov.com/public/970040/C00000001/iot/product/6694de7422dea649b06455bd.jpg"
-       //        let audioTitle = "五音Jw-明月天涯"
-       //        let audioArtwork = UIImage(named: "podcast.jpg") // 替换为您的封面图
-       //        if let localURL = Bundle.main.url(forResource: audioTitle, withExtension: "mp3") {
-       //            //AudioPlayerManager.shared.playAudio(with: localURL, title: audioTitle, artwork: audioArtwork)
-       //            audioPlayer
-       //                .setAudioTitle(with: audioTitle)
-       //                .setAudioArtist(with: "五音Jw")
-       //                //.setAudioAvatar(with: audioArtwork)
-       //                .setAsyncAvatar(with: newworkImgUrl)
-       //                .setUpdateNowPlayingInfoCenter()
-       //                .playAudio(with: localURL)
-       //        }
-
     }
 }
 
@@ -141,13 +127,13 @@ extension PodCastListController {
 extension PodCastListController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return vm.podCastList.count
+        return vm.trackListRelay.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = vm.podCastList[indexPath.row]
+        let item = vm.trackListRelay.value[indexPath.row]
         let cell = tableView.getReusableCell(PodCastListCell.self)
-        cell.configure(with: item)
+        cell.bind(to: PodCastListCellViewModel(item: item))
         return cell
     }
     
@@ -157,15 +143,8 @@ extension PodCastListController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let item = vm.podCastList[indexPath.row]
-        
-        audioPlayer
-            .setAudioTitle(with: item.title)
-            .setAudioArtist(with: item.artist)
-            .setAsyncAvatar(with: item.artwork)
-            .setUpdateNowPlayingInfoCenter()
-            .playAudio(with: item.audioUrl)
+//        let item = vm.trackListRelay.value[indexPath.row]
+//        audioPlayer.playTrack(item)
+        self.navigator.show(provider: AppScene.podcastDetail(viewModel: PodCastDetailViewModel()), sender: self)
     }
 }
-
-// MARK: - other classes
