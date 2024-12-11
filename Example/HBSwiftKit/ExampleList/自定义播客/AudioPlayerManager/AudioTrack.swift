@@ -24,7 +24,12 @@ struct MP3MetaData {
 }
 
 // 音频轨道
-class AudioTrack {
+class AudioTrack: Equatable {
+    
+    // 比较音频轨道是否相等, 来源一致即相等
+    static func == (lhs: AudioTrack, rhs: AudioTrack) -> Bool {
+        return lhs.audioUrl == rhs.audioUrl
+    }
     
     enum Artwork {
         case local(UIImage)  // 本地图片

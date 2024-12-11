@@ -57,6 +57,7 @@
 		18F9EF732D08156C00CE0471 /* CollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF6D2D08156C00CE0471 /* CollectionItem.swift */; };
 		18F9EF762D082C7C00CE0471 /* PodCastDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF752D082C7C00CE0471 /* PodCastDetailController.swift */; };
 		18F9EF782D082CF800CE0471 /* PodCastDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF772D082CF800CE0471 /* PodCastDetailViewModel.swift */; };
+		18F9EF7A2D08317800CE0471 /* AudioPlayToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF792D08317800CE0471 /* AudioPlayToolBar.swift */; };
 		1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */; };
 		4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207008E2A4D7D1900039415 /* BLEAdapter.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -195,6 +196,7 @@
 		18F9EF6F2D08156C00CE0471 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		18F9EF752D082C7C00CE0471 /* PodCastDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodCastDetailController.swift; sourceTree = "<group>"; };
 		18F9EF772D082CF800CE0471 /* PodCastDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodCastDetailViewModel.swift; sourceTree = "<group>"; };
+		18F9EF792D08317800CE0471 /* AudioPlayToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayToolBar.swift; sourceTree = "<group>"; };
 		1FF02B7726F22DF100A3A341 /* GlobalNoti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNoti.swift; sourceTree = "<group>"; };
 		4207008E2A4D7D1900039415 /* BLEAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAdapter.swift; sourceTree = "<group>"; };
 		4845C4375F7293ACE69A0714 /* Pods_HBSwiftKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBSwiftKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -444,6 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				18F9EF442D0699E100CE0471 /* AudioPlayerManager.swift */,
+				18F9EF792D08317800CE0471 /* AudioPlayToolBar.swift */,
 				18F9EF672D07D32B00CE0471 /* AudioTrack.swift */,
 			);
 			path = AudioPlayerManager;
@@ -1174,6 +1177,7 @@
 				B5E4AAC027F5585300D84C78 /* SteerWheelView.swift in Sources */,
 				18A82EF12CFEFA04007FCCDA /* TabBarItem.swift in Sources */,
 				18F9EF702D08156C00CE0471 /* TableViewCell.swift in Sources */,
+				18F9EF7A2D08317800CE0471 /* AudioPlayToolBar.swift in Sources */,
 				B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */,
 				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
 				B533677326E852550009B60F /* VideoCropController.swift in Sources */,

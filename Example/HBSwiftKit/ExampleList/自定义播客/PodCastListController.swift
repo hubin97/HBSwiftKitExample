@@ -15,7 +15,7 @@ class PodCastListController: ViewController, ViewModelProvider {
     typealias ViewModelType = PodCastListViewModel
     
     // 五音Jw-明月天涯.mp3
-    let audioPlayer: AudioPlayerManager = {
+    let audioPlayerManager: AudioPlayerManager = {
         return AudioPlayerManager.shared
     }()
     
@@ -91,7 +91,7 @@ class PodCastListController: ViewController, ViewModelProvider {
     override func bindViewModel() {
         super.bindViewModel()
         self.listScroll.contentSize = vm.contentSize
-        self.audioPlayer.setPlaylist(with: vm.trackListRelay.value)
+        self.audioPlayerManager.setPlaylistList(with: vm.trackListRelay.value)
         self.posterView.configure(with: PodCastModel(artwork: "https://i.kfs.io/album/global/121624025,0v1/fit/500x500.jpg",title: "我的收藏", desc: "一张褪色的照片,好像带给我一点点怀念,巷尾老爷爷卖的热汤面,味道弥漫过旧旧的后院,流浪猫睡熟在摇晃秋千,夕阳照了一遍他眯着眼,那张同桌寄的明信片", playCount: "13400", updateTime: "2024-12-09"))
     }
 }
@@ -143,8 +143,7 @@ extension PodCastListController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        let item = vm.trackListRelay.value[indexPath.row]
-//        audioPlayer.playTrack(item)
-        self.navigator.show(provider: AppScene.podcastDetail(viewModel: PodCastDetailViewModel()), sender: self)
+        let item = vm.trackListRelay.value[indexPath.row]
+        self.navigator.show(provider: AppScene.podcastDetail(viewModel: PodCastDetailViewModel(with: item)), sender: self)
     }
 }

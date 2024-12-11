@@ -8,23 +8,44 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 
+/// 播放模式
+enum PlaybackMode {
+    /// 顺序播放
+    case sequential
+    /// 循环播放
+    case shuffle
+    /// 单曲循环
+    case repeatOne
+}
+
 // MARK: - main class
 class AudioPlayerManager: NSObject {
     static let shared = AudioPlayerManager()
     
+    /// 音频播放切换
+    private var audioTrackSwitchCallBack: ((AudioTrack) -> Void)?
+    /// 音频播放进度回调
+    private var playerProgressCallBack: ((AudioTrack, TimeInterval) -> Void)?
+    
+    // private properties
+    /// 播放模式
+    private var playbackMode: PlaybackMode = .sequential
+    /// 音频播放状态
     private var isPlaying = false
     /// 音频播放器
-    private var audioPlayer: AVPlayer?
+    private(set) var audioPlayer: AVPlayer?
     /// 当前播放曲目索引
     private var currentTrackIndex = 0
     /// 播放列表
     private var playlist: [AudioTrack] = []
+
     /// 面板同步定时器
     private var timeObserver: Any?
 
     private override init() {
         super.init()
         setupAudioSession()
+        setupNotification()
         setupRemoteCommandCenter()
     }
     
@@ -38,17 +59,15 @@ class AudioPlayerManager: NSObject {
             print("Failed to set up AVAudioSession: \(error)")
         }
     }
+    
+    // 监听播放完成通知
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self,selector: #selector(handlePlaybackDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+    }
 }
 
 // MARK: - private mothods
 extension AudioPlayerManager {
-    
-    // MARK: - Play Audio
-    func playTrackList(playlist: [AudioTrack]) {
-        self.playlist = playlist
-        currentTrackIndex = 0
-        playCurrentTrack()
-    }
     
     // MARK: - Play Specific Track
     func playTrack(at index: Int) {
@@ -68,26 +87,6 @@ extension AudioPlayerManager {
         }
         
         playTrack(at: index)
-    }
-
-    private func playCurrentTrack() {
-        guard !playlist.isEmpty else { return }
-        let track = playlist[currentTrackIndex]
-        guard let audioUrl = track.audioUrl else {
-            print("Invalid audio URL")
-            return
-        }
-     
-        // 停止当前播放
-        stopAudio()
-        
-        // 设置新的播放源
-        audioPlayer = AVPlayer(url: audioUrl)
-        audioPlayer?.play()
-        isPlaying = true
-        
-        updateNowPlayingInfo()
-        observePlayerProgress()
     }
         
     // 停止音频
@@ -119,14 +118,32 @@ extension AudioPlayerManager {
     // 下一曲
     func nextTrack() {
         guard !playlist.isEmpty else { return }
-        currentTrackIndex = (currentTrackIndex + 1) % playlist.count
+        
+        switch playbackMode {
+        case .sequential:
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.count
+        case .shuffle:
+            currentTrackIndex = Int.random(in: 0..<playlist.count)
+        case .repeatOne:
+            // 保持 currentTrackIndex 不变
+            break
+        }
+        
         playCurrentTrack()
     }
-    
-    // 上一曲
+
+    /// 在随机模式下，上一个曲目可能需要额外维护一个播放历史栈（historyStack），以便用户可以返回到之前播放的曲目。
     func previousTrack() {
         guard !playlist.isEmpty else { return }
-        currentTrackIndex = (currentTrackIndex - 1 + playlist.count) % playlist.count
+        
+        if playbackMode == .shuffle {
+            // 随机模式：重新随机选择
+            currentTrackIndex = Int.random(in: 0..<playlist.count)
+        } else {
+            // 顺序播放
+            currentTrackIndex = (currentTrackIndex - 1 + playlist.count) % playlist.count
+        }
+        
         playCurrentTrack()
     }
     
@@ -138,6 +155,51 @@ extension AudioPlayerManager {
         audioPlayer?.seek(to: time)
         // 更新 Now Playing 信息
         updateNowPlayingInfo()
+    }
+    
+    func togglePlaybackMode() {
+        switch playbackMode {
+        case .sequential:
+            playbackMode = .shuffle
+        case .shuffle:
+            playbackMode = .repeatOne
+        case .repeatOne:
+            playbackMode = .sequential
+        }
+        
+        print("Playback mode changed to: \(playbackMode)")
+    }
+}
+
+extension AudioPlayerManager {
+    
+    @objc private func handlePlaybackDidFinish() {
+        if playbackMode == .repeatOne {
+            playCurrentTrack() // 单曲循环
+        } else if playbackMode == .shuffle || playbackMode == .sequential {
+            nextTrack() // 顺序播放或随机播放
+        }
+    }
+    
+    private func playCurrentTrack() {
+        guard !playlist.isEmpty else { return }
+        let track = playlist[currentTrackIndex]
+        guard let audioUrl = track.audioUrl else {
+            print("Invalid audio URL")
+            return
+        }
+     
+        // 停止当前播放
+        stopAudio()
+        
+        // 设置新的播放源
+        audioPlayer = AVPlayer(url: audioUrl)
+        audioPlayer?.play()
+        isPlaying = true
+        
+        audioTrackSwitchCallBack?(track)
+        updateNowPlayingInfo()
+        observePlayerProgress()
     }
 }
 
@@ -222,6 +284,10 @@ extension AudioPlayerManager {
     private func observePlayerProgress() {
         guard let player = audioPlayer else { return }
         timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: .main) { [weak self] _ in
+            if let self = self, let duration = self.audioPlayer?.currentItem?.currentTime().seconds {
+                let track = self.playlist[currentTrackIndex]
+                self.playerProgressCallBack?(track, duration)
+            }
             self?.updateNowPlayingInfo()
         }
     }
@@ -232,31 +298,16 @@ extension AudioPlayerManager {
     
     /// 播放音频列表
     @discardableResult
-    func setPlaylist(with list: [AudioTrack]) -> Self {
-        self.playlist = list
+    func setPlaylistList(with playlist: [AudioTrack]) -> Self {
+        self.playlist = playlist
         return self
     }
-    
-    /// 设置音频展示标题
-//    @discardableResult
-//    func setAudioTitle(with title: String) -> Self {
-//        self.currentAudioTitle = title
-//        return self
-//    }
-//    
-//    /// 设置音频艺术家
-//    @discardableResult
-//    func setAudioArtist(with name: String) -> Self {
-//        self.currentAudioArtist = name
-//        return self
-//    }
-//    
-//    /// 设置音频封面图片
-//    @discardableResult
-//    func setAudioAvatar(with image: UIImage?) -> Self {
-//        self.currentAudioAvatar = image
-//        return self
-//    }
+
+    /// 设置播放模式
+    func setPlaybackMode(with mode: PlaybackMode) -> Self {
+        self.playbackMode = mode
+        return self
+    }
     
     /// 更新控制面板和锁屏页信息
     /// 如果是设置标题, 作者, 封面, 音频资源路径, 请调用此方法
@@ -289,7 +340,21 @@ extension AudioPlayerManager {
 }
 
 // MARK: - delegate or data source
-extension AudioPlayerManager { 
+extension AudioPlayerManager {
+    
+    // MARK: 状态监听
+    
+    /// 音频切换监听
+    @discardableResult
+    func onAudioTrackSwitch(_ callback: @escaping ((AudioTrack) -> Void)) -> Self {
+        self.audioTrackSwitchCallBack = callback
+        return self
+    }
+    
+    /// 音频播放进度监听
+    @discardableResult
+    func onAudioPlayerProgressValueChange(_ callback: @escaping ((AudioTrack, TimeInterval) -> Void)) -> Self {
+        self.playerProgressCallBack = callback
+        return self
+    }
 }
-
-// MARK: - other classes
