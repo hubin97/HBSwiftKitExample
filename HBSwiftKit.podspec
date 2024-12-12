@@ -66,12 +66,12 @@ Pod::Spec.new do |s|
         end
         
         http.subspec 'Core' do |ss|
-            ss.source_files  = 'HBSwiftKit/HTTP/Core/*.{swift,h,m,md}'
+            ss.source_files = 'HBSwiftKit/HTTP/Core/*.{swift,h,m,md}'
         end
         
         http.subspec 'Utils' do |ss|
-            ss.source_files  = 'HBSwiftKit/HTTP/Utils/*.swift'
-            ss.framework  = "Foundation", "CoreTelephony"
+            ss.source_files = 'HBSwiftKit/HTTP/Utils/*.swift'
+            ss.framework = "Foundation", "CoreTelephony"
         end
     end
     
@@ -81,7 +81,7 @@ Pod::Spec.new do |s|
             ble.dependency dd
         end
         
-        ble.source_files  = 'HBSwiftKit/BLE/**/*.{swift,h,m,md}'
+        ble.source_files = 'HBSwiftKit/BLE/**/*.{swift,h,m,md}'
     end
     
     # 子模块：Other
@@ -91,17 +91,17 @@ Pod::Spec.new do |s|
         end
         
         other.subspec 'AuthStatus' do |auth|
-            auth.source_files  = 'HBSwiftKit/Other/AuthStatus'
+            auth.source_files = 'HBSwiftKit/Other/AuthStatus'
             auth.dependency 'HBSwiftKit/Base/Core'
         end
         
         other.subspec 'Utils' do |utils|
-            utils.source_files  = 'HBSwiftKit/Other/Utils'
+            utils.source_files = 'HBSwiftKit/Other/Utils'
             utils.dependency 'HBSwiftKit/Base/Core'
         end
         
         other.subspec 'LoggerManager' do |log|
-            log.source_files  = 'HBSwiftKit/Other/LoggerManager'
+            log.source_files = 'HBSwiftKit/Other/LoggerManager'
             log.dependency 'HBSwiftKit/Base/Core'
             log.dependency 'HBSwiftKit/Base/Extension'
             log.dependency 'HBSwiftKit/Other/Utils'

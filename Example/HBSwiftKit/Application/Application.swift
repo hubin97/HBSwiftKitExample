@@ -18,12 +18,12 @@ final class Application: NSObject {
     /// 埋点会话Id
     let sessionId = UUID().uuidString
     /// 路由
-    let navigator: Navigator
+    let navigator = Navigator.default
     /// 协议版本号, 注意, 服务器默认`最小版本是1`
     var pVersionNum: Int?
  
     private override init() {
-        navigator = Navigator.default
+        // navigator = Navigator.default
         super.init()
         
         // 设置监听

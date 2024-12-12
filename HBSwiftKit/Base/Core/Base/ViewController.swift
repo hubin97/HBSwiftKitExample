@@ -16,7 +16,7 @@ open class ViewController: UIViewController, Navigatable, NaviBarDelegate {
     public var viewModel: ViewModel?
     public var navigator: Navigator!
 
-    public init(viewModel: ViewModel?, navigator: Navigator) {
+    public init(viewModel: ViewModel?, navigator: Navigator = Navigator.default) {
         self.viewModel = viewModel
         self.navigator = navigator
         super.init(nibName: nil, bundle: nil)

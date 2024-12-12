@@ -17,9 +17,9 @@ open class TabBarController: UITabBarController, UITabBarControllerDelegate, Nav
     public var navigator: Navigator!
 
     // 自定义初始化方法
-    public init(viewModel: ViewModel?, navigator: Navigator? = nil) {
+    public init(viewModel: ViewModel?, navigator: Navigator = Navigator.default) {
         self.viewModel = viewModel
-        self.navigator = navigator ?? Navigator.default
+        self.navigator = navigator
         super.init(nibName: nil, bundle: nil)
     }
     

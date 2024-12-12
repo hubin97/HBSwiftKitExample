@@ -39,9 +39,9 @@ enum AppScene: SceneProvider {
             tabBarVc.setAppearance(normalColor: UIColor.lightGray, selectColor: UIColor.black)
             return tabBarVc
         case .podcastList(let viewModel):
-            return PodCastListController(viewModel: viewModel, navigator: Navigator.default)
+            return PodCastListController(viewModel: viewModel)
         case .podcastDetail(let viewModel):
-            return PodCastDetailController(viewModel: viewModel, navigator: Navigator.default)
+            return PodCastDetailController(viewModel: viewModel)
         }
     }
 }
