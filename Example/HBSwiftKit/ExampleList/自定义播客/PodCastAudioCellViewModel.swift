@@ -28,6 +28,27 @@ class PodCastAudioCellViewModel: TableViewCellViewModel {
         self.audioTrack = item
         self.showDefaultData(with: item)
         self.updateMetaData()
+        //self.showAudioData()
+    }
+    
+    func showAudioData() {
+        titleRelay.accept(audioTrack?.metaData?.title ?? audioTrack?.title)
+        descRelay.accept(audioTrack?.metaData?.artist ?? audioTrack?.desc)
+        
+        let duration = audioTrack?.metaData?.duration ?? 0
+        let minute = String(format: "%.1f", duration/60)
+        durationRelay.accept("时长: \(minute)分钟")
+
+        updateTimeRelay.accept("更新时间: \(audioTrack?.updateTime ?? "")")
+        
+        if let playCount = audioTrack?.playCount {
+            let value = String(format: "%.1f", playCount/1000)
+            playCountRelay.accept("播放量: \(value)k")
+        }
+
+        if let coverImage = audioTrack?.coverImage {
+            self.artworkRelay.accept(coverImage)
+        }
     }
     
     // 默认数据

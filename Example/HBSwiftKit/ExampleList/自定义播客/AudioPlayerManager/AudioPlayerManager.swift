@@ -26,6 +26,8 @@ class AudioPlayerManager: NSObject {
     private var audioTrackSwitchCallBack: ((AudioTrack) -> Void)?
     /// 音频播放进度回调
     private var playerProgressCallBack: ((AudioTrack, TimeInterval) -> Void)?
+    /// 音频缓存进度回调
+    private var bufferProgressCallBack: ((AudioTrack, Float) -> Void)?
     
     // private properties
     /// 播放模式
@@ -47,6 +49,9 @@ class AudioPlayerManager: NSObject {
         setupAudioSession()
         setupNotification()
         setupRemoteCommandCenter()
+        
+        // 缓存区
+        //audioPlayer?.automaticallyWaitsToMinimizeStalling = false
     }
     
     // MARK: - Audio Session Setup
@@ -62,7 +67,43 @@ class AudioPlayerManager: NSObject {
     
     // 监听播放完成通知
     private func setupNotification() {
-        NotificationCenter.default.addObserver(self,selector: #selector(handlePlaybackDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePlaybackDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePlaybackError), name: .AVPlayerItemFailedToPlayToEndTime, object: nil)
+        
+        if let reason = audioPlayer?.reasonForWaitingToPlay {
+            print("@1播放失败")
+            switch reason {
+            case .toMinimizeStalls:
+                print("正在缓冲以避免播放卡顿")
+            case .noItemToPlay:
+                print("没有可播放的音频项，请检查播放队列")
+            case .evaluatingBufferingRate:
+                print("正在评估缓冲速率")
+            default:
+                print("未知原因导致播放暂停")
+            }
+        } else {
+            print("播放器就绪/播放状态")
+        }
+        
+        if let error = audioPlayer?.currentItem?.error as NSError? {
+            print("@2播放失败: \(error.localizedDescription)")
+            switch error.domain {
+            case NSURLErrorDomain:
+                print("网络问题: \(error.localizedDescription)")
+                print("音频资源加载失败，请检查网络连接")
+            case AVFoundationErrorDomain:
+                print("音频资源无效: \(error.localizedDescription)")
+                print("音频资源已失效，请更换音频")
+            default:
+                print("未知错误: \(error.localizedDescription)")
+                print("播放失败，请稍后再试")
+            }
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -181,6 +222,14 @@ extension AudioPlayerManager {
         }
     }
     
+    @objc private func handlePlaybackError(notification: Notification) {
+        if let failedItem = notification.object as? AVPlayerItem,
+           let error = notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? Error {
+            print("播放失败: \(error.localizedDescription)")
+            print("失败的音频项: \(failedItem)")
+        }
+    }
+    
     private func playCurrentTrack() {
         guard !playlist.isEmpty else { return }
         let track = playlist[currentTrackIndex]
@@ -285,11 +334,25 @@ extension AudioPlayerManager {
     private func observePlayerProgress() {
         guard let player = audioPlayer else { return }
         timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: .main) { [weak self] _ in
-            if let self = self, let duration = self.audioPlayer?.currentItem?.currentTime().seconds {
+            guard let self = self else { return }
+            
+            // 播放进度
+            if let duration = self.audioPlayer?.currentItem?.currentTime().seconds {
                 let track = self.playlist[currentTrackIndex]
                 self.playerProgressCallBack?(track, duration)
             }
-            self?.updateNowPlayingInfo()
+            
+            // 缓冲进度
+            if let timeRanges = self.audioPlayer?.currentItem?.loadedTimeRanges, let timeRange = timeRanges.first?.timeRangeValue {
+                let bufferedTime = CMTimeGetSeconds(timeRange.start) + CMTimeGetSeconds(timeRange.duration)
+                let totalDuration = self.audioPlayer?.currentItem?.duration.seconds ?? 0
+                let progress = bufferedTime / totalDuration
+                print("缓冲进度：\(progress * 100)%")
+                let track = self.playlist[currentTrackIndex]
+                self.bufferProgressCallBack?(track, Float(progress))
+            }
+            
+            self.updateNowPlayingInfo()
         }
     }
 }
@@ -356,6 +419,13 @@ extension AudioPlayerManager {
     @discardableResult
     func onAudioPlayerProgressValueChange(_ callback: @escaping ((AudioTrack, TimeInterval) -> Void)) -> Self {
         self.playerProgressCallBack = callback
+        return self
+    }
+    
+    /// 音频缓存进度监听
+    @discardableResult
+    func onAudioBufferProgressValueChange(_ callback: @escaping ((AudioTrack, Float) -> Void)) -> Self {
+        self.bufferProgressCallBack = callback
         return self
     }
 }

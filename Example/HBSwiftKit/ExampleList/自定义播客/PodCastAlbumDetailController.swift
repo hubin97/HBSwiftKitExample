@@ -90,7 +90,7 @@ class PodCastAlbumDetailController: ViewController, ViewModelProvider {
         self.posterView.configure(with: vm.albumMeta)
 
         self.vm.trackListRelay
-            .distinctUntilChanged()
+            //.distinctUntilChanged()
             .asDriver(onErrorJustReturn: []).drive(onNext: {[weak self] list in
                 guard let self = self else { return }
                 self.audioPlayerManager.setPlaylistList(with: list)

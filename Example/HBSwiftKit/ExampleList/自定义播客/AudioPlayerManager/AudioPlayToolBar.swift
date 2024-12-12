@@ -146,6 +146,11 @@ extension AudioPlayToolBar {
     
     /// 初始化音频播放进度信息
     func setupAudioInfo(with audioPlayer: AVPlayer?, audioTrack: AudioTrack) {
+        /**
+         po audioPlayer?.currentItem?.duration.seconds
+        ▿ Optional<Double>
+          - some : nan
+         */
         let duration = audioPlayer?.currentItem?.duration.seconds ?? 0
         let total = Int(audioTrack.metaData?.duration ?? duration)
         
