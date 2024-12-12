@@ -196,6 +196,7 @@ extension AudioPlayerManager {
         audioPlayer = AVPlayer(url: audioUrl)
         audioPlayer?.play()
         isPlaying = true
+        playlist.forEach { $0.isPlaying = $0 == track }
         
         audioTrackSwitchCallBack?(track)
         updateNowPlayingInfo()
@@ -213,14 +214,14 @@ extension AudioPlayerManager {
 
         // 更新 Now Playing
         var nowPlayingInfo = [String: Any]()
-        nowPlayingInfo[MPMediaItemPropertyTitle] = track.title ?? track.metaData?.title
-        nowPlayingInfo[MPMediaItemPropertyArtist] = track.artist ?? track.metaData?.artist
-        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = track.duration ?? track.metaData?.duration
+        nowPlayingInfo[MPMediaItemPropertyTitle] = track.metaData?.title ?? track.title ?? "Unknown Title"
+        nowPlayingInfo[MPMediaItemPropertyArtist] = track.metaData?.artist ?? track.artist ?? "Unknown Artist"
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = track.metaData?.duration ?? track.duration
 
         // 播放进度和时长
         if let currentItem = player.currentItem {
             nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = currentItem.currentTime().seconds
-            nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = track.duration ?? track.metaData?.duration ?? currentItem.asset.duration.seconds
+            nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = track.metaData?.duration ?? track.duration ?? currentItem.asset.duration.seconds
             nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = isPlaying ? 1.0 : 0.0
         }
         

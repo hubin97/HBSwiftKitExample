@@ -6,13 +6,12 @@
 
 import Foundation
 import Kingfisher
-import HBSwiftKit
 
 // MARK: - global var and methods
 
 // MARK: - main class
-class PodCastListController: ViewController, ViewModelProvider {
-    typealias ViewModelType = PodCastListViewModel
+class PodCastAlbumDetailController: ViewController, ViewModelProvider {
+    typealias ViewModelType = PodCastAlbumDetailViewModel
     
     // 五音Jw-明月天涯.mp3
     let audioPlayerManager: AudioPlayerManager = {
@@ -46,7 +45,7 @@ class PodCastListController: ViewController, ViewModelProvider {
         _tableView.dataSource = self
         _tableView.rowHeight = vm.rowHeight
         _tableView.isScrollEnabled = false
-        _tableView.registerCell(PodCastListCell.self)
+        _tableView.registerCell(PodCastAudioCell.self)
         return _tableView
     }()
     
@@ -59,20 +58,17 @@ class PodCastListController: ViewController, ViewModelProvider {
         listScroll.addSubview(tableView)
         
         backButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.left.equalTo(view).offset(10)
             make.width.height.equalTo(44)
         }
         
         listScroll.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-//            make.top.leading.equalToSuperview()
-//            make.centerX.equalToSuperview()
-//            make.bottom.equalTo(tableView.snp.bottom)
         }
         
         posterView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview()//.offset(-kStatusBarHeight)
             make.leading.equalToSuperview()
             make.centerX.equalToSuperview()
             make.height.equalTo(vm.posterViewHeight)
@@ -91,32 +87,53 @@ class PodCastListController: ViewController, ViewModelProvider {
     override func bindViewModel() {
         super.bindViewModel()
         self.listScroll.contentSize = vm.contentSize
-        self.audioPlayerManager.setPlaylistList(with: vm.trackListRelay.value)
-        self.posterView.configure(with: PodCastModel(artwork: "https://i.kfs.io/album/global/121624025,0v1/fit/500x500.jpg",title: "我的收藏", desc: "一张褪色的照片,好像带给我一点点怀念,巷尾老爷爷卖的热汤面,味道弥漫过旧旧的后院,流浪猫睡熟在摇晃秋千,夕阳照了一遍他眯着眼,那张同桌寄的明信片", playCount: "13400", updateTime: "2024-12-09"))
+        self.posterView.configure(with: vm.albumMeta)
+
+        self.vm.trackListRelay
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: []).drive(onNext: {[weak self] list in
+                guard let self = self else { return }
+                self.audioPlayerManager.setPlaylistList(with: list)
+                
+                self.tableView.reloadData()
+                self.listScroll.contentSize = self.vm.contentSize
+                self.tableView.snp.updateConstraints { make in
+                    make.height.equalTo(self.vm.rowHeight * CGFloat(list.count))
+                }
+            }).disposed(by: rx.disposeBag)
+        
+//        self.vm.audioListRelay.asDriver().drive(onNext: {[weak self] list in
+//            guard let self = self else { return }
+//            self.tableView.reloadData()
+//            self.listScroll.contentSize = self.vm.contentSize
+//            self.tableView.snp.updateConstraints { make in
+//                make.height.equalTo(self.vm.rowHeight * CGFloat(list.count))
+//            }
+//        }).disposed(by: rx.disposeBag)
     }
 }
 
 // MARK: - private mothods
-extension PodCastListController { 
+extension PodCastAlbumDetailController {
 }
 
-extension PodCastListController: UIScrollViewDelegate {
+extension PodCastAlbumDetailController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y + kStatusBarHeight
-        //print("offsetY: \(offsetY)")
-        if -offsetY > 0 {
-            let height = vm.posterViewHeight - offsetY
-            //self.listScroll.contentSize = CGSize(width: 0, height: CGFloat(vm.podCastList.count) * vm.rowHeight + height)
-            posterView.snp.updateConstraints { make in
-                make.height.equalTo(height)
-            }
-        }
+//        let offsetY = scrollView.contentOffset.y + kStatusBarHeight
+//        //print("offsetY: \(offsetY)")
+//        if -offsetY > 0 {
+//            let height = vm.posterViewHeight - offsetY
+//            //self.listScroll.contentSize = CGSize(width: 0, height: CGFloat(vm.podCastList.count) * vm.rowHeight + height)
+//            posterView.snp.updateConstraints { make in
+//                make.height.equalTo(height)
+//            }
+//        }
     }
 }
 
 // MARK: - call backs
-extension PodCastListController {
+extension PodCastAlbumDetailController {
     
     @objc func tapBackAction() {
         backAction()
@@ -124,7 +141,7 @@ extension PodCastListController {
 }
 
 // MARK: - delegate or data source
-extension PodCastListController: UITableViewDataSource, UITableViewDelegate {
+extension PodCastAlbumDetailController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return vm.trackListRelay.value.count
@@ -132,8 +149,9 @@ extension PodCastListController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = vm.trackListRelay.value[indexPath.row]
-        let cell = tableView.getReusableCell(PodCastListCell.self)
-        cell.bind(to: PodCastListCellViewModel(item: item))
+        let cell = tableView.getReusableCell(PodCastAudioCell.self)
+        cell.bind(to: PodCastAudioCellViewModel(item: item))
+        //cell.configure(with: item)
         return cell
     }
     
@@ -144,6 +162,6 @@ extension PodCastListController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let item = vm.trackListRelay.value[indexPath.row]
-        self.navigator.show(provider: AppScene.podcastDetail(viewModel: PodCastDetailViewModel(with: item)), sender: self)
+        self.navigator.show(provider: AppScene.PodCastAudioDetail(viewModel: PodCastAudioDetailViewModel(with: item)), sender: self)
     }
 }

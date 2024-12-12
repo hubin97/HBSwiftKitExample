@@ -1,17 +1,16 @@
 //
-//  PodCastDetailController.swift
+//  PodCastAudioDetailController.swift
 //  HBSwiftKit_Example
 //
 //  Created by hubin.h on 2024/12/10.
 
 import Foundation
-import HBSwiftKit
 
 // MARK: - global var and methods
 
 // MARK: - main class
-class PodCastDetailController: ViewController, ViewModelProvider {
-    typealias ViewModelType = PodCastDetailViewModel
+class PodCastAudioDetailController: ViewController, ViewModelProvider {
+    typealias ViewModelType = PodCastAudioDetailViewModel
     
     // 是否正在拖动进度条
     private var isDragging: Bool = false
@@ -64,7 +63,7 @@ class PodCastDetailController: ViewController, ViewModelProvider {
             $0.edges.equalToSuperview()
         }
         backButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.equalTo(10)
             $0.size.equalTo(CGSize(width: 40, height: 40))
         }
@@ -93,18 +92,18 @@ class PodCastDetailController: ViewController, ViewModelProvider {
         audioPlayerManager.onAudioPlayerProgressValueChange {[weak self] track, duration in
             print("onAudioPlayerProgressValueChange: \(track.title ?? ""), duration: \(duration)")
             // 拖动进度条时, 不更新进度
-            guard let self = self, let audioPlayer = audioPlayerManager.audioPlayer, track == self.vm.audioTrack, self.isDragging == false else { return }
+            guard let self = self, let audioPlayer = audioPlayerManager.audioPlayer, track == self.vm.currentTrack, self.isDragging == false else { return }
             self.toolBar.updatePlayInfo(with: audioPlayer, audioTrack: track)
         }
     }
 }
 
 // MARK: - private mothods
-extension PodCastDetailController { 
+extension PodCastAudioDetailController { 
 }
 
 // MARK: - call backs
-extension PodCastDetailController {
+extension PodCastAudioDetailController {
     
     @objc func tapBackAction() {
         backAction()
@@ -112,7 +111,7 @@ extension PodCastDetailController {
 }
 
 // MARK: - delegate or data source
-extension PodCastDetailController: AudioPlayToolBarDelegate {
+extension PodCastAudioDetailController: AudioPlayToolBarDelegate {
     
     func playToolBar(_ toolBar: AudioPlayToolBar, isPlaying: Bool) {
         if isPlaying {

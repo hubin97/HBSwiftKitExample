@@ -147,7 +147,7 @@ extension AudioPlayToolBar {
     /// 初始化音频播放进度信息
     func setupAudioInfo(with audioPlayer: AVPlayer?, audioTrack: AudioTrack) {
         let duration = audioPlayer?.currentItem?.duration.seconds ?? 0
-        let total = Int(audioTrack.duration ?? duration)
+        let total = Int(audioTrack.metaData?.duration ?? duration)
         
         slider.value = 0
         currentTimeLabel.text = String(format: "%02d:%02d", 0, 0)
@@ -158,12 +158,13 @@ extension AudioPlayToolBar {
     func updatePlayInfo(with audioPlayer: AVPlayer, audioTrack: AudioTrack) {
         let duration = audioPlayer.currentItem?.duration.seconds ?? 0
         let currentTime = audioPlayer.currentTime().seconds
-        let total = Int(audioTrack.duration ?? duration)
+        let total = Int(audioTrack.metaData?.duration ?? duration)
 
         let current = Int(currentTime)
         slider.value = Float(current)/Float(total)
         currentTimeLabel.text = String(format: "%02d:%02d", current / 60, current % 60)
         totalTimeLabel.text = String(format: "%02d:%02d", total / 60, total % 60)
+        playButton.isSelected = audioTrack.isPlaying
     }
 }
 

@@ -31,36 +31,44 @@ class AudioTrack: Equatable {
         return lhs.audioUrl == rhs.audioUrl
     }
     
-    enum Artwork {
-        case local(UIImage)  // 本地图片
-        case remote(URL)     // 网络图片 URL
-    }
+//    enum Artwork {
+//        // 本地图片
+//        case local(UIImage)
+//        // 网络图片 URL
+//        case remote(URL)
+//    }
     
-    let audioUrl: URL?       // 音频资源 URL
-    let artwork: Artwork?    // 封面图片（支持本地和网络）
+    // 音频资源 URL
+    var audioUrl: URL?
     
-    var metaData: MP3MetaData? // MP3 元数据
+    // MP3 元数据 (真实数据)
+    var metaData: MP3MetaData?
     
-    // 基本信息 (mp3 可解析参数字段)
+    // 基本信息 (可由外部定义) (mp3 可解析参数字段)
     var title: String?        // 曲目标题
     var album: String?        // 专辑名称
     var artist: String?       // 艺术家名称
     var duration: TimeInterval? // 音频时长（可选）
-        
+    //var artwork: Artwork?     // 封面图片（支持本地和网络）
+    var artworkUrl: String?     // 封面图片
+
     // 其他信息 (可选)
     let desc: String?
     let playCount: Int?
     let updateTime: String?
     
+    // 播放状态
+    var isPlaying: Bool = false
+    
     // 缓存属性
     private(set) var coverImage: UIImage?
     private(set) var cachedMediaArtwork: MPMediaItemArtwork?
 
-    init(audioUrl: URL?, artwork: Artwork? = nil, title: String? = nil, album: String? = nil, artist: String? = nil, duration: TimeInterval? = nil, placeholder: UIImage? = nil, desc: String? = nil, playCount: Int? = nil, updateTime: String? = nil) {
+    init(audioUrl: URL?, artworkUrl: String? = nil, title: String? = nil, album: String? = nil, artist: String? = nil, duration: TimeInterval? = nil, placeholder: UIImage? = nil, desc: String? = nil, playCount: Int? = nil, updateTime: String? = nil) {
         self.title = title
         self.artist = artist
         self.audioUrl = audioUrl
-        self.artwork = artwork
+        self.artworkUrl = artworkUrl
         self.duration = duration
         self.desc = desc
         self.playCount = playCount
@@ -76,13 +84,13 @@ extension AudioTrack {
     func preloadArtwork(placeholder: UIImage? = nil, completion: @escaping (MP3MetaData?, UIImage?) -> Void) {
         guard let audioUrl = audioUrl else { return }
         
-        extractMP3Metadata(from: audioUrl) { [weak self] metaData in
+        loadAudioMetadata(from: audioUrl) { [weak self] metaData in
             guard let self = self else { return }
-            self.title = metaData?.title
-            self.artist = metaData?.artist
-            self.duration = metaData?.duration
+            //            self.title = metaData?.title
+            //            self.artist = metaData?.artist
+            //            self.duration = metaData?.duration
             self.metaData = metaData
-
+            
             // 使用音频文件中提取到的封面图片
             if let artworkImage = metaData?.artwork {
                 self.coverImage = artworkImage
@@ -105,63 +113,30 @@ extension AudioTrack {
         }
     }
     
-    /// 从音频文件中提取元数据
-    private func extractMP3Metadata(from url: URL?, completion: @escaping (MP3MetaData?) -> Void) {
-        guard let url = url else { return }
-        
+    /// 从音频文件中加载元数据
+    func loadAudioMetadata(from url: URL, completion: @escaping (MP3MetaData?) -> Void) {
         DispatchQueue.global().async {
+            
             let asset = AVAsset(url: url)
-            var title: String?
-            var artist: String?
-            var album: String?
-            var duration: TimeInterval?
-            var artwork: UIImage? // 封面图片, 不是所有 mp3 都有封面
+            let metadata = asset.commonMetadata
             
             // 获取时长
-            duration = CMTimeGetSeconds(asset.duration)
+            let duration = CMTimeGetSeconds(asset.duration)
             
-            // 提取 ID3 元数据（包括封面）
-            for format in asset.metadata where format.keySpace == AVMetadataKeySpace.id3 {
-                if let key = format.key as? String {
-                    switch key {
-                    case "TIT2": // 标题
-                        title = format.stringValue
-                    case "TPE1": // 艺术家
-                        artist = format.stringValue
-                    case "TALB": // 专辑
-                        album = format.stringValue
-                    case "APIC": // 封面图片
-                        if let data = format.dataValue {
-                            artwork = UIImage(data: data)
-                        }
-                    default:
-                        break
-                    }
-                }
+            // 提取元数据
+            let title = AVMetadataItem.metadataItems(from: metadata, withKey: AVMetadataKey.commonKeyTitle, keySpace: .common).first?.stringValue
+            let artist = AVMetadataItem.metadataItems(from: metadata, withKey: AVMetadataKey.commonKeyArtist, keySpace: .common).first?.stringValue
+            let album = AVMetadataItem.metadataItems(from: metadata, withKey: AVMetadataKey.commonKeyAlbumName, keySpace: .common).first?.stringValue
+            
+            // 获取封面
+            var artworkImage: UIImage?
+            if let artworkData = AVMetadataItem.metadataItems(from: metadata, withKey: AVMetadataKey.commonKeyArtwork, keySpace: .common).first?.dataValue {
+                artworkImage = UIImage(data: artworkData)
             }
             
-            // 如果从音频文件中提取到封面图，直接设置封面图
-            if let artworkImage = artwork {
-                self.coverImage = artworkImage
-                self.cachedMediaArtwork = MPMediaItemArtwork(boundsSize: artworkImage.size, requestHandler: { _ in artworkImage })
-            }
-            
-            let metaData = MP3MetaData(title: title, artist: artist, album: album, duration: duration, artwork: artwork)
-            self.metaData = metaData
-            
-            DispatchQueue.main.async {
-                completion(metaData)
-            }
+            completion(MP3MetaData(title: title, artist: artist, album: album, duration: duration, artwork: artworkImage))
         }
     }
-    
-//    /// 异步预加载封面图片和 MPMediaItemArtwork
-//    private func preloadArtwork(placeholder: UIImage? = nil) {
-//        fetchArtwork(placeholder: placeholder) { [weak self] image, mediaArtwork in
-//            self?.coverImage = image
-//            self?.cachedMediaArtwork = mediaArtwork
-//        }
-//    }
     
     /// 异步获取封面图片和 MPMediaItemArtwork，并缓存结果
     /// - Parameters:
@@ -175,27 +150,20 @@ extension AudioTrack {
         }
         
         // 如果从音频文件中没有解析到封面图片，使用传入的 artwork
-        if let artworkImage = artwork {
-            switch artworkImage {
-            case .local(let image):
-                let mediaArtwork = MPMediaItemArtwork(boundsSize: image.size) { _ in image }
-                completion(image, mediaArtwork)
-                
-            case .remote(let url):
-                // 网络封面图片，使用 URL 加载远程封面
-                KingfisherManager.shared.retrieveImage(with: url) { result in
-                    switch result {
-                    case .success(let value):
-                        let mediaArtwork = MPMediaItemArtwork(boundsSize: value.image.size) { _ in value.image }
-                        completion(value.image, mediaArtwork)
-                    case .failure:
-                        // 加载失败使用占位图
-                        if let placeholder = placeholder {
-                            let mediaArtwork = MPMediaItemArtwork(boundsSize: placeholder.size) { _ in placeholder }
-                            completion(placeholder, mediaArtwork)
-                        } else {
-                            completion(nil, nil)
-                        }
+        if let artworkUrl = URL(string: artworkUrl?.urlEncoded ?? "") {
+            // 网络封面图片，使用 URL 加载远程封面
+            KingfisherManager.shared.retrieveImage(with: artworkUrl) { result in
+                switch result {
+                case .success(let value):
+                    let mediaArtwork = MPMediaItemArtwork(boundsSize: value.image.size) { _ in value.image }
+                    completion(value.image, mediaArtwork)
+                case .failure:
+                    // 加载失败使用占位图
+                    if let placeholder = placeholder {
+                        let mediaArtwork = MPMediaItemArtwork(boundsSize: placeholder.size) { _ in placeholder }
+                        completion(placeholder, mediaArtwork)
+                    } else {
+                        completion(nil, nil)
                     }
                 }
             }
