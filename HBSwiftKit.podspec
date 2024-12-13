@@ -97,11 +97,15 @@ Pod::Spec.new do |s|
         
         other.subspec 'Utils' do |utils|
             utils.source_files = 'HBSwiftKit/Other/Utils'
+            utils.dependency 'Toast-Swift'
+            utils.dependency 'Kingfisher'
             utils.dependency 'HBSwiftKit/Base/Core'
         end
         
         other.subspec 'LoggerManager' do |log|
             log.source_files = 'HBSwiftKit/Other/LoggerManager'
+            log.dependency 'RxSwift'
+            log.dependency 'CocoaLumberjack'
             log.dependency 'HBSwiftKit/Base/Core'
             log.dependency 'HBSwiftKit/Base/Extension'
             log.dependency 'HBSwiftKit/Other/Utils'
