@@ -117,7 +117,14 @@ extension LoggerManager {
 //        DDLogVerbose("\(message)", file: file, function: function, line: line)
 //    }
     
-    public static func log(_ message: String, level: DDLogLevel = DDDefaultLogLevel, flag: DDLogFlag) {
+    // MARK: - 修复宏定义不支持问题
+//    CocoaLumberjack/Sources/CocoaLumberjack/include/CocoaLumberjack/DDLogMacros.h:91:9: note: macro 'DDLogError' unavailable: function like macros not supported
+//    CocoaLumberjack/Sources/CocoaLumberjack/include/CocoaLumberjack/DDLogMacros.h:92:9: note: macro 'DDLogWarn' unavailable: function like macros not supported
+//    CocoaLumberjack/Sources/CocoaLumberjack/include/CocoaLumberjack/DDLogMacros.h:93:9: note: macro 'DDLogInfo' unavailable: function like macros not supported
+//    CocoaLumberjack/Sources/CocoaLumberjack/include/CocoaLumberjack/DDLogMacros.h:94:9: note: macro 'DDLogDebug' unavailable: function like macros not supported
+
+    // 通用log方法
+    public static func log(_ message: String, level: DDLogLevel, flag: DDLogFlag) {
         DDLog.log(asynchronous: true, level: level, flag: flag, context: 0, file: #file, function: #function, line: #line, tag: nil, format: message, arguments: getVaList([]))
     }
     
