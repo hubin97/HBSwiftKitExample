@@ -82,39 +82,63 @@ open class LoggerManager {
 
 extension LoggerManager {
     
-    public static func error(_ message: String,
-                             file: StaticString = #file,
-                             function: StaticString = #function,
-                             line: UInt = #line) {
-        DDLogError("\(message)", file: file, function: function, line: line)
+//    public static func error(_ message: String,
+//                             file: StaticString = #file,
+//                             function: StaticString = #function,
+//                             line: UInt = #line) {
+//        DDLogError("\(message)", file: file, function: function, line: line)
+//    }
+//    
+//    public static func warn(_ message: String,
+//                            file: StaticString = #file,
+//                            function: StaticString = #function,
+//                            line: UInt = #line) {
+//        DDLogWarn("\(message)", file: file, function: function, line: line)
+//    }
+//    
+//    public static func info(_ message: String,
+//                            file: StaticString = #file,
+//                            function: StaticString = #function,
+//                            line: UInt = #line) {
+//        DDLogInfo("\(message)", file: file, function: function, line: line)
+//    }
+//    
+//    public static func debug(_ message: String,
+//                             file: StaticString = #file,
+//                             function: StaticString = #function,
+//                             line: UInt = #line) {
+//        DDLogDebug("\(message)", file: file, function: function, line: line)
+//    }
+//    
+//    public static func verbose(_ message: String,
+//                               file: StaticString = #file,
+//                               function: StaticString = #function,
+//                               line: UInt = #line) {
+//        DDLogVerbose("\(message)", file: file, function: function, line: line)
+//    }
+    
+    public static func log(_ message: String, level: DDLogLevel = DDDefaultLogLevel, flag: DDLogFlag) {
+        DDLog.log(asynchronous: true, level: level, flag: flag, context: 0, file: #file, function: #function, line: #line, tag: nil, format: message, arguments: getVaList([]))
     }
     
-    public static func warn(_ message: String,
-                            file: StaticString = #file,
-                            function: StaticString = #function,
-                            line: UInt = #line) {
-        DDLogWarn("\(message)", file: file, function: function, line: line)
+    public static func error(_ message: String) {
+        log(message, level: .error, flag: .error)
     }
     
-    public static func info(_ message: String,
-                            file: StaticString = #file,
-                            function: StaticString = #function,
-                            line: UInt = #line) {
-        DDLogInfo("\(message)", file: file, function: function, line: line)
+    public static func warn(_ message: String) {
+        log(message, level: .warning, flag: .warning)
     }
     
-    public static func debug(_ message: String,
-                             file: StaticString = #file,
-                             function: StaticString = #function,
-                             line: UInt = #line) {
-        DDLogDebug("\(message)", file: file, function: function, line: line)
+    public static func info(_ message: String) {
+        log(message, level: .info, flag: .info)
     }
     
-    public static func verbose(_ message: String,
-                               file: StaticString = #file,
-                               function: StaticString = #function,
-                               line: UInt = #line) {
-        DDLogVerbose("\(message)", file: file, function: function, line: line)
+    public static func debug(_ message: String) {
+        log(message, level: .debug, flag: .debug)
+    }
+    
+    public static func verbose(_ message: String) {
+        log(message, level: .verbose, flag: .verbose)
     }
 }
 
