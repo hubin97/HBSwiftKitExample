@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "icon_audio_tool_next.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -15,9 +15,9 @@ enum AppScene: SceneProvider {
     case safari(URL)
     case videoPlayController(url: String, autoPlay: Bool = true)
     case tabs(viewModel: TabBarViewModel)
-    case podcaseAlbumList(viewModel: PodCastAlbumListViewModel)
-    case podcastAlbumDetail(viewModel: PodCastAlbumDetailViewModel)
-    case PodCastAudioDetail(viewModel: PodCastAudioDetailViewModel)
+//    case podcaseAlbumList(viewModel: PodCastAlbumListViewModel)
+//    case podcastAlbumDetail(viewModel: PodCastAlbumDetailViewModel)
+//    case PodCastAudioDetail(viewModel: PodCastAudioDetailViewModel)
     
     // MARK: -
     var getSegue: UIViewController? {
@@ -39,12 +39,12 @@ enum AppScene: SceneProvider {
             let tabBarVc = TabBarController(viewModel: viewModel)
             tabBarVc.setAppearance(normalColor: UIColor.lightGray, selectColor: UIColor.black)
             return tabBarVc
-        case .podcaseAlbumList(let viewModel):
-            return PodCastAlbumListController(viewModel: viewModel)
-        case .podcastAlbumDetail(let viewModel):
-            return PodCastAlbumDetailController(viewModel: viewModel)
-        case .PodCastAudioDetail(let viewModel):
-            return PodCastAudioDetailController(viewModel: viewModel)
+//        case .podcaseAlbumList(let viewModel):
+//            return PodCastAlbumListController(viewModel: viewModel)
+//        case .podcastAlbumDetail(let viewModel):
+//            return PodCastAlbumDetailController(viewModel: viewModel)
+//        case .PodCastAudioDetail(let viewModel):
+//            return PodCastAudioDetailController(viewModel: viewModel)
         }
     }
 }

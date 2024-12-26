@@ -8,8 +8,29 @@ import Foundation
 import Moya
 import ObjectMapper
 import ProgressHUD
+import HBSwiftKit
 
 // MARK: - global var and methods
+struct LTBaseRsp: Mappable {
+    
+    init?(map: ObjectMapper.Map) {}
+    
+    mutating func mapping(map: ObjectMapper.Map) {
+        code <- map["code"]
+        message <- map["message"]
+        traceId <- map["traceId"]
+        result <- map["result"]
+    }
+    var code: String?
+    var message: String?
+    var traceId: Int?
+    var result: [String: Any]?
+    
+    var isOK: Bool {
+        return code == "200"
+    }
+}
+
 /// 全局网络处理
 class NetworkResponseHandler: NetworkHandleProvider {
 

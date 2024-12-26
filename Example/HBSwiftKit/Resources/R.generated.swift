@@ -33,7 +33,7 @@ struct _R {
     let developmentRegion = "en"
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 43 images, and 1 namespaces.
+  /// This `_R.image` struct is generated, and contains static references to 44 images, and 1 namespaces.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -55,20 +55,23 @@ struct _R {
     /// Image `ib_unselect`.
     var ib_unselect: RswiftResources.ImageResource { .init(name: "ib_unselect", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `icon_audio_tool_last`.
+    var icon_audio_tool_last: RswiftResources.ImageResource { .init(name: "icon_audio_tool_last", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `icon_audio_tool_next`.
+    var icon_audio_tool_next: RswiftResources.ImageResource { .init(name: "icon_audio_tool_next", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `icon_audio_tool_play`.
+    var icon_audio_tool_play: RswiftResources.ImageResource { .init(name: "icon_audio_tool_play", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `icon_audio_tool_stop`.
+    var icon_audio_tool_stop: RswiftResources.ImageResource { .init(name: "icon_audio_tool_stop", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `icon_audio_tool_wait`.
+    var icon_audio_tool_wait: RswiftResources.ImageResource { .init(name: "icon_audio_tool_wait", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `icon_calendar_arrow_down`.
     var icon_calendar_arrow_down: RswiftResources.ImageResource { .init(name: "icon_calendar_arrow_down", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `icon_track_last`.
-    var icon_track_last: RswiftResources.ImageResource { .init(name: "icon_track_last", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `icon_track_next`.
-    var icon_track_next: RswiftResources.ImageResource { .init(name: "icon_track_next", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `icon_track_pause`.
-    var icon_track_pause: RswiftResources.ImageResource { .init(name: "icon_track_pause", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `icon_track_play`.
-    var icon_track_play: RswiftResources.ImageResource { .init(name: "icon_track_play", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `image`.
     var image: RswiftResources.ImageResource { .init(name: "image", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }

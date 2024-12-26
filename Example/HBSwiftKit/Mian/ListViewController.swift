@@ -70,10 +70,6 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = vm.items[indexPath.row]
         guard let tclass = model.class else { return }
-        if model.title == "Podcast" {
-            self.navigator.show(provider: AppScene.podcaseAlbumList(viewModel: PodCastAlbumListViewModel()), sender: self)
-        } else {
-            self.navigationController?.pushViewController(tclass, animated: true)
-        }
+        self.navigationController?.pushViewController(tclass, animated: true)
     }
 }
