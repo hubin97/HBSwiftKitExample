@@ -88,7 +88,7 @@ extension AVPlayerObserver {
     private func observePlayerProgress() {
         playTimeObserver = playerManager.getPlayer()?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] time in
             
-            guard let self = self, let playerItem = self.playerManager?.getPlayer()?.currentItem, let item = self.playerManager.getPlaylist().getCurrentItem() else { return }
+            guard let self = self, let playerItem = self.playerManager?.getPlayer()?.currentItem, let item = self.playerManager.getPlaylist()?.getCurrentItem() else { return }
    
             // 检查音频资源是否有效
             let isValideDuration = playerItem.duration.isValid && !playerItem.duration.seconds.isNaN
@@ -116,7 +116,7 @@ extension AVPlayerObserver {
     /// 监听播放状态
     private func observerTimeControlStatus() {
         playStateObserver = playerManager.getPlayer()?.observe(\.timeControlStatus, options: [.new, .old]) { [weak self] player, change in
-            guard let self = self, let item = self.playerManager.getPlaylist().getCurrentItem() else { return }
+            guard let self = self, let item = self.playerManager.getPlaylist()?.getCurrentItem() else { return }
             switch player.timeControlStatus {
             case .paused:
                 LogM.debug("timeControlStatus_paused")
@@ -132,7 +132,6 @@ extension AVPlayerObserver {
                 self.playerManager.delegate?.avPlayerManager(self.playerManager, item: item, didUpdateStatusTo: .waiting)
             @unknown default:
                 LogM.debug("timeControlStatus_xx")
-                break
             }
 
             self.playerManager.updateNowPlayingInfo()
@@ -160,17 +159,16 @@ extension AVPlayerObserver {
     /// 监听多媒体播放状态
     private func observerItemStatus() {
         itemStatusObserve = playerManager.getPlayer()?.currentItem?.observe(\.status, options: [.new, .old]) { [weak self] playerItem, change in
-            guard let self = self, let item = self.playerManager.getPlaylist().getCurrentItem() else { return }
+            guard let self = self, let item = self.playerManager.getPlaylist()?.getCurrentItem() else { return }
             switch playerItem.status {
             case .readyToPlay:
                 LogM.debug("playerItem_status_readyToPlay")
                 self.playerManager.delegate?.avPlayerManager(self.playerManager, item: item, didUpdateStatusTo: .waiting)
             case .failed:
-                LogM.debug("playerItem_status_failed")
-                self.playerManager.delegate?.avPlayerManager(self.playerManager, item: item, didUpdateStatusTo: .paused)
+                LogM.debug("playerItem_status_failed: \(playerItem.error?.localizedDescription ?? "")")
+                //self.playerManager.delegate?.avPlayerManager(self.playerManager, item: item, didUpdateStatusTo: .paused)
             default:
                 LogM.debug("playerItem_status_default")
-                break
             }
             self.playerManager.updateNowPlayingInfo()
         }

@@ -199,7 +199,7 @@ struct _R {
     }
   }
 
-  /// This `_R.file` struct is generated, and contains static references to 24 resource files.
+  /// This `_R.file` struct is generated, and contains static references to 25 resource files.
   struct file {
     let bundle: Foundation.Bundle
 
@@ -265,6 +265,9 @@ struct _R {
 
     /// Resource file `五音Jw-明月天涯.mp3`.
     var 五音Jw明月天涯Mp3: RswiftResources.FileResource { .init(name: "五音Jw-明月天涯", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }
+
+    /// Resource file `友情的决裂.mp4`.
+    var 友情的决裂Mp4: RswiftResources.FileResource { .init(name: "友情的决裂", pathExtension: "mp4", bundle: bundle, locale: LocaleReference.none) }
 
     /// Resource file `李荣浩 - 老街.mp3`.
     var 李荣浩老街Mp3: RswiftResources.FileResource { .init(name: "李荣浩 - 老街", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }

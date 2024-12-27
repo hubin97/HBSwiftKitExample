@@ -63,11 +63,9 @@ extension MediaListController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let vc = AudioListController()
-            navigationController?.pushViewController(vc, animated: true)
+            navigator.show(provider: AppScene.audioList(viewModel: AudioListViewModel()), sender: self)
         case 1:
-            let vc = VideoListController()
-            navigationController?.pushViewController(vc, animated: true)
+            navigator.show(provider: AppScene.videoList(viewModel: VideoListViewModel()), sender: self)
 //        case 2:
 //            let vc = LivePlayerController()
 //            navigationController?.pushViewController(vc, animated: true)

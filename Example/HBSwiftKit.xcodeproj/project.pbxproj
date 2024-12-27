@@ -47,6 +47,9 @@
 		188CEA2A2D1E45CD00667E40 /* VideoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CEA292D1E45CD00667E40 /* VideoListViewModel.swift */; };
 		188CEA2C2D1E461900667E40 /* AudioPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CEA2B2D1E461900667E40 /* AudioPlayerViewModel.swift */; };
 		188CEA2E2D1E464900667E40 /* VideoPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CEA2D2D1E464900667E40 /* VideoPlayerViewModel.swift */; };
+		188CEA302D1E89A100667E40 /* 友情的决裂.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 188CEA2F2D1E89A100667E40 /* 友情的决裂.mp4 */; };
+		188CEA342D1E988F00667E40 /* AVPlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CEA332D1E988F00667E40 /* AVPlaylistItem.swift */; };
+		188CEA362D1EA38500667E40 /* AudioListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CEA352D1EA38500667E40 /* AudioListView.swift */; };
 		189C64AC2D000F2200BAE470 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = 189C64A52D000F2200BAE470 /* Appfile */; };
 		189C64AD2D000F2200BAE470 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 189C64A62D000F2200BAE470 /* Fastfile */; };
 		189C64AF2D000F2200BAE470 /* Pluginfile in Resources */ = {isa = PBXBuildFile; fileRef = 189C64A82D000F2200BAE470 /* Pluginfile */; };
@@ -201,6 +204,9 @@
 		188CEA292D1E45CD00667E40 /* VideoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewModel.swift; sourceTree = "<group>"; };
 		188CEA2B2D1E461900667E40 /* AudioPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewModel.swift; sourceTree = "<group>"; };
 		188CEA2D2D1E464900667E40 /* VideoPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewModel.swift; sourceTree = "<group>"; };
+		188CEA2F2D1E89A100667E40 /* 友情的决裂.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "友情的决裂.mp4"; sourceTree = "<group>"; };
+		188CEA332D1E988F00667E40 /* AVPlaylistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlaylistItem.swift; sourceTree = "<group>"; };
+		188CEA352D1EA38500667E40 /* AudioListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListView.swift; sourceTree = "<group>"; };
 		189C64A52D000F2200BAE470 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		189C64A62D000F2200BAE470 /* Fastfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = Fastfile; sourceTree = "<group>"; };
 		189C64A82D000F2200BAE470 /* Pluginfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Pluginfile; sourceTree = "<group>"; };
@@ -397,11 +403,12 @@
 		188CEA082D1CEE8400667E40 /* AVHelper */ = {
 			isa = PBXGroup;
 			children = (
-				188CEA092D1CEEA800667E40 /* AVPlayerManager.swift */,
-				188CEA0C2D1CFA8400667E40 /* AVPlaylist.swift */,
 				188CEA162D1D3AF800667E40 /* AVAssetValidator.swift */,
-				188CEA122D1D2D3200667E40 /* AVPlayerObserver.swift */,
+				188CEA092D1CEEA800667E40 /* AVPlayerManager.swift */,
 				188CEA142D1D309D00667E40 /* AVPlayerNotification.swift */,
+				188CEA122D1D2D3200667E40 /* AVPlayerObserver.swift */,
+				188CEA0C2D1CFA8400667E40 /* AVPlaylist.swift */,
+				188CEA332D1E988F00667E40 /* AVPlaylistItem.swift */,
 				188CEA0E2D1D10CC00667E40 /* NowPlayingUpdater.swift */,
 				188CEA102D1D110800667E40 /* RemoteCommandHandler.swift */,
 			);
@@ -418,11 +425,13 @@
 		188CEA182D1E40C200667E40 /* AudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				18F9EF502D06C65600CE0471 /* Resources */,
 				188CEA1B2D1E417100667E40 /* AudioAssets.bundle */,
+				188CEA232D1E431E00667E40 /* AudioListController.swift */,
+				188CEA352D1EA38500667E40 /* AudioListView.swift */,
+				188CEA272D1E45BB00667E40 /* AudioListViewModel.swift */,
 				188CEA1F2D1E42D300667E40 /* AudioPlayerController.swift */,
 				188CEA2B2D1E461900667E40 /* AudioPlayerViewModel.swift */,
-				188CEA232D1E431E00667E40 /* AudioListController.swift */,
-				188CEA272D1E45BB00667E40 /* AudioListViewModel.swift */,
 			);
 			path = AudioPlayer;
 			sourceTree = "<group>";
@@ -430,10 +439,11 @@
 		188CEA192D1E40F900667E40 /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				188CEA212D1E42DB00667E40 /* VideoPlayerController.swift */,
-				188CEA2D2D1E464900667E40 /* VideoPlayerViewModel.swift */,
+				188CEA312D1E89B100667E40 /* Resource */,
 				188CEA252D1E433100667E40 /* VideoListController.swift */,
 				188CEA292D1E45CD00667E40 /* VideoListViewModel.swift */,
+				188CEA212D1E42DB00667E40 /* VideoPlayerController.swift */,
+				188CEA2D2D1E464900667E40 /* VideoPlayerViewModel.swift */,
 			);
 			path = VideoPlayer;
 			sourceTree = "<group>";
@@ -445,6 +455,14 @@
 				188CEA012D1CED2C00667E40 /* Views */,
 			);
 			path = Deprecated;
+			sourceTree = "<group>";
+		};
+		188CEA312D1E89B100667E40 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				188CEA2F2D1E89A100667E40 /* 友情的决裂.mp4 */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		189C64AB2D000F2200BAE470 /* fastlane */ = {
@@ -528,11 +546,9 @@
 		18F9EF432D06999700CE0471 /* 多媒体播放 */ = {
 			isa = PBXGroup;
 			children = (
-				188CEA1A2D1E411F00667E40 /* Deprecated */,
 				188CEA182D1E40C200667E40 /* AudioPlayer */,
-				188CEA192D1E40F900667E40 /* VideoPlayer */,
 				188CEA082D1CEE8400667E40 /* AVHelper */,
-				18F9EF502D06C65600CE0471 /* Resources */,
+				188CEA192D1E40F900667E40 /* VideoPlayer */,
 				188CEA1D2D1E41E300667E40 /* MediaListController.swift */,
 			);
 			path = "多媒体播放";
@@ -598,6 +614,7 @@
 			children = (
 				B5E1D8E7256283400093AC4C /* Application */,
 				18C2FDFF2AFC8CFD00AB8450 /* Configs */,
+				188CEA1A2D1E411F00667E40 /* Deprecated */,
 				B5E1D8E3256282C80093AC4C /* ExampleList */,
 				18B671972B3BBFC600793476 /* Extension */,
 				18A82EFD2D0000CE007FCCDA /* Managers */,
@@ -815,10 +832,10 @@
 				B54DE3B2275EF14C00BBDE0B /* 信号检测器 */,
 				B5C6C5CF25ECD08900C88C1C /* 列表左滑改 */,
 				B5887FA3264CD719003C1896 /* 双列表关联 */,
+				18F9EF432D06999700CE0471 /* 多媒体播放 */,
 				B5389B2725EE1BB900ED67F9 /* 日历选择器 */,
 				B5C6C5C325ECCADF00C88C1C /* 简易刻度尺 */,
 				B5C6C5DA25ECD19A00C88C1C /* 简易轮播页 */,
-				18F9EF432D06999700CE0471 /* 多媒体播放 */,
 				B54DF449273E5A7F00F564FB /* 色盘选择器 */,
 				B533677026E84FED0009B60F /* 视频剪辑页 */,
 				B5E4AABE27F5546E00D84C78 /* 遥控方向盘 */,
@@ -1007,12 +1024,12 @@
 				B5CC7A4A25E8989300D263B4 /* advfilterdata.json in Resources */,
 				189C64AC2D000F2200BAE470 /* Appfile in Resources */,
 				B5DCC71425F3266D007E3237 /* areacode.plist in Resources */,
+				188CEA1C2D1E417100667E40 /* AudioAssets.bundle in Resources */,
 				B56F68A2264B8AF400FD62CF /* duallist.json in Resources */,
 				189C64AD2D000F2200BAE470 /* Fastfile in Resources */,
 				B575D5FA25A9900C0068EB19 /* help_cn.html in Resources */,
 				B575D5F925A9900C0068EB19 /* help_es.html in Resources */,
 				B5BAC835255A7875005A5179 /* images.json in Resources */,
-				188CEA1C2D1E417100667E40 /* AudioAssets.bundle in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				B5D55405261D40AE007A20F5 /* jstest.html in Resources */,
 				B5389B8925EF913E00ED67F9 /* LaunchScreen.storyboard in Resources */,
@@ -1027,6 +1044,7 @@
 				B50055BE27C375CD00467E55 /* src_temp in Resources */,
 				B50055BF27C375CD00467E55 /* src_xy in Resources */,
 				18F9EF472D069BFC00CE0471 /* 五音Jw-明月天涯.mp3 in Resources */,
+				188CEA302D1E89A100667E40 /* 友情的决裂.mp4 in Resources */,
 				18F9EF4F2D06C65100CE0471 /* 李荣浩 - 老街.mp3 in Resources */,
 				B5F8390226982D8E0001C484 /* 温柔女声.mp3 in Resources */,
 				18F9EF4E2D06C65100CE0471 /* 萧忆情Alex - 不谓侠.mp3 in Resources */,
@@ -1239,26 +1257,31 @@
 				180AD2962CFDA75200A2B901 /* Application.swift in Sources */,
 				18A82EEF2CFEF9C7007FCCDA /* AppScene.swift in Sources */,
 				B546325C2803B7960026662F /* Arithmetic.swift in Sources */,
+				188CEA242D1E431E00667E40 /* AudioListController.swift in Sources */,
+				188CEA282D1E45BB00667E40 /* AudioListViewModel.swift in Sources */,
+				188CEA202D1E42D300667E40 /* AudioPlayerController.swift in Sources */,
 				18F9EF452D0699E100CE0471 /* AudioPlayerManager.swift in Sources */,
+				188CEA2C2D1E461900667E40 /* AudioPlayerViewModel.swift in Sources */,
 				188CE9FE2D1CEC0B00667E40 /* AudioPlayProgress.swift in Sources */,
 				18F9EF7A2D08317800CE0471 /* AudioPlayToolBar.swift in Sources */,
 				18F9EF682D07D32B00CE0471 /* AudioTrack.swift in Sources */,
 				18A82EFE2D0000CE007FCCDA /* AuthManager.swift in Sources */,
+				188CEA172D1D3AF800667E40 /* AVAssetValidator.swift in Sources */,
 				188CEA0A2D1CEEA800667E40 /* AVPlayerManager.swift in Sources */,
+				188CEA152D1D309D00667E40 /* AVPlayerNotification.swift in Sources */,
+				188CEA132D1D2D3200667E40 /* AVPlayerObserver.swift in Sources */,
+				188CEA0D2D1CFA8400667E40 /* AVPlaylist.swift in Sources */,
 				1876E3F12D01959100CE4871 /* BalloonMarker.swift in Sources */,
 				18A82EFF2D0000CE007FCCDA /* BGTaskManager.swift in Sources */,
-				188CEA132D1D2D3200667E40 /* AVPlayerObserver.swift in Sources */,
 				4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */,
 				B5BAC830255A7818005A5179 /* BlueToothController.swift in Sources */,
 				18F9EF722D08156C00CE0471 /* Button.swift in Sources */,
 				B5BAC82F255A7818005A5179 /* CalendarController.swift in Sources */,
 				18F9EF732D08156C00CE0471 /* CollectionItem.swift in Sources */,
 				B5BAC831255A7818005A5179 /* DatePickerController.swift in Sources */,
-				188CEA0F2D1D10CC00667E40 /* NowPlayingUpdater.swift in Sources */,
 				B546325A280010420026662F /* DesignMode.swift in Sources */,
 				B56F689D264B8AB300FD62CF /* DualListView.swift in Sources */,
 				B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */,
-				188CEA152D1D309D00667E40 /* AVPlayerNotification.swift in Sources */,
 				B5C6C5FD25ECD4F100C88C1C /* EasyAdScrollTool.swift in Sources */,
 				B5C6C5F925ECD3A000C88C1C /* EditTableView.swift in Sources */,
 				188CEA032D1CED2C00667E40 /* EllipsisLabel.swift in Sources */,
@@ -1268,17 +1291,13 @@
 				1FF02B7826F22DF100A3A341 /* GlobalNoti.swift in Sources */,
 				B5BAC82D255A7818005A5179 /* ImageBrowerController.swift in Sources */,
 				B546BFB727F455C5006EA745 /* IndexTableView.swift in Sources */,
-				188CEA0D2D1CFA8400667E40 /* AVPlaylist.swift in Sources */,
 				18A82F032D0000CE007FCCDA /* LibsManager.swift in Sources */,
-				188CEA112D1D110800667E40 /* RemoteCommandHandler.swift in Sources */,
 				B50055A627C375A700467E55 /* LightAttrPickerView+Views.swift in Sources */,
 				B50055A427C375A700467E55 /* LightAttrPickerView.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ListViewController.swift in Sources */,
 				18A82EF42CFF130B007FCCDA /* ListViewModel.swift in Sources */,
-				188CEA2A2D1E45CD00667E40 /* VideoListViewModel.swift in Sources */,
 				1876E3E72D01921700CE4871 /* LTCalendar.swift in Sources */,
 				1876E3E52D01921700CE4871 /* LTCalendarData.swift in Sources */,
-				188CEA2C2D1E461900667E40 /* AudioPlayerViewModel.swift in Sources */,
 				1876E3E42D01921700CE4871 /* LTCalendarItem.swift in Sources */,
 				1876E3E32D01921700CE4871 /* LTCalendarView.swift in Sources */,
 				1876E3E62D01921700CE4871 /* LTCalendarWeek.swift in Sources */,
@@ -1287,23 +1306,22 @@
 				1876E3F32D0199E500CE4871 /* LTSheetPanGesView.swift in Sources */,
 				B541412D268EAF06008CE14B /* MapLocationController.swift in Sources */,
 				188CEA022D1CED2C00667E40 /* MarqueeLabel.swift in Sources */,
+				188CEA1E2D1E41E300667E40 /* MediaListController.swift in Sources */,
 				18A82F042D0000CE007FCCDA /* MMKVManager.swift in Sources */,
 				188692CB2C5743D5007CD12A /* MQTTClient.swift in Sources */,
 				18C5037F2C50F82700EB50B4 /* MQTTTestController.swift in Sources */,
-				188CEA242D1E431E00667E40 /* AudioListController.swift in Sources */,
 				18476FA32D02DE9F00B3C901 /* MTDatePicker.swift in Sources */,
 				B5FF3854280EA0B70063BF26 /* MVVM.swift in Sources */,
 				B5E8E47B27EEBEAB006CED16 /* NetworkExtension.swift in Sources */,
+				188CEA0F2D1D10CC00667E40 /* NowPlayingUpdater.swift in Sources */,
 				B5BAC82E255A7818005A5179 /* NumberPickerController.swift in Sources */,
 				B58F80AE273CB51500C778D5 /* OpenCVWrapper.mm in Sources */,
 				B5389B7925EF8FB400ED67F9 /* R.generated.swift in Sources */,
-				188CEA222D1E42DB00667E40 /* VideoPlayerController.swift in Sources */,
 				B595A8CC27C866EA007EF16E /* RegexHelper.swift in Sources */,
+				188CEA112D1D110800667E40 /* RemoteCommandHandler.swift in Sources */,
 				184A4E812B1D656D00CECCD6 /* SCDataPicker.swift in Sources */,
 				B54DE3B6275F4C4100BBDE0B /* SignalMarkView.swift in Sources */,
 				B54DE3B4275EF2C400BBDE0B /* SignalPlateView.swift in Sources */,
-				188CEA172D1D3AF800667E40 /* AVAssetValidator.swift in Sources */,
-				188CEA262D1E433100667E40 /* VideoListController.swift in Sources */,
 				B5FEFA3B27462A6F00DA6999 /* SlidePickerView.swift in Sources */,
 				B5C6C5C725ECCE7700C88C1C /* SliderRuler.swift in Sources */,
 				B595A8D727CCB154007EF16E /* StarRateView.swift in Sources */,
@@ -1313,24 +1331,26 @@
 				B557E4DB2631304900C62147 /* ThemeStyle.swift in Sources */,
 				B5CC7A3C25E88D2400D263B4 /* UIKitTestController.swift in Sources */,
 				B533677326E852550009B60F /* VideoCropController.swift in Sources */,
-				188CEA282D1E45BB00667E40 /* AudioListViewModel.swift in Sources */,
 				B5825E3326F0877C00539866 /* VideoCropView.swift in Sources */,
 				B5825E2E26F04D7D00539866 /* VideoFrameView.swift in Sources */,
+				188CEA262D1E433100667E40 /* VideoListController.swift in Sources */,
+				188CEA2A2D1E45CD00667E40 /* VideoListViewModel.swift in Sources */,
 				B5F520932704615E00BACB9C /* VideoPlayController.swift in Sources */,
+				188CEA222D1E42DB00667E40 /* VideoPlayerController.swift in Sources */,
+				188CEA2E2D1E464900667E40 /* VideoPlayerViewModel.swift in Sources */,
 				B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */,
+				188CEA362D1EA38500667E40 /* AudioListView.swift in Sources */,
+				188CEA342D1E988F00667E40 /* AVPlaylistItem.swift in Sources */,
 				B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */,
 				B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */,
 				B546BFB527F442D9006EA745 /* ViewReusePool.swift in Sources */,
 				186750992C05B7DF00A369B5 /* WaveAnimateView.swift in Sources */,
 				B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */,
 				B5389B3225EE1D7100ED67F9 /* Wto_Calendar.swift in Sources */,
-				188CEA2E2D1E464900667E40 /* VideoPlayerViewModel.swift in Sources */,
 				B56D8C7227CF5FC30032EA97 /* Wto_CombinedChart.swift in Sources */,
 				B5C6C5F325ECD39600C88C1C /* Wto_ThemeMode.swift in Sources */,
 				18476FA02D02DE9F00B3C901 /* YTAlertView.swift in Sources */,
 				18476FA12D02DE9F00B3C901 /* YTHitView.swift in Sources */,
-				188CEA1E2D1E41E300667E40 /* MediaListController.swift in Sources */,
-				188CEA202D1E42D300667E40 /* AudioPlayerController.swift in Sources */,
 				18476FA22D02DE9F00B3C901 /* YTSegment.swift in Sources */,
 				18476FA52D02DE9F00B3C901 /* YTTabBar.swift in Sources */,
 			);

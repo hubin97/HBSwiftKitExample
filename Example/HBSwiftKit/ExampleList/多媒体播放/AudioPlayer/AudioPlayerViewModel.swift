@@ -10,6 +10,17 @@ import Foundation
 
 // MARK: - main class
 class AudioPlayerViewModel: ViewModel {
+    
+    var playItem: AVPlaylistItem?
+    convenience init(item: AVPlaylistItem) {
+        self.init()
+        self.playItem = item
+    }
+    
+    convenience init(index: Int) {
+        self.init()
+        self.playItem = AVPlayerManager.shared.getPlaylist()?.getPlayItem(at: index)
+    }
 }
 
 // MARK: - private mothods

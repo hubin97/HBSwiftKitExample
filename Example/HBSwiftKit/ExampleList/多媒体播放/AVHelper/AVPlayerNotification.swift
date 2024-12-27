@@ -20,10 +20,10 @@ class AVPlayerNotification {
     }
     
     func setupNoti() {
-        NotificationCenter.default.addObserver(playerManager, selector: #selector(handleAudioSessionInterruption(_:)), name: AVAudioSession.interruptionNotification, object: nil)
-        NotificationCenter.default.addObserver(playerManager, selector: #selector(handlePlaybackDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: nil)
-        NotificationCenter.default.addObserver(playerManager, selector: #selector(handlePlaybackError), name: .AVPlayerItemFailedToPlayToEndTime, object: nil)
-        NotificationCenter.default.addObserver(playerManager, selector: #selector(handleRouteChange), name: AVAudioSession.routeChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAudioSessionInterruption(_:)), name: AVAudioSession.interruptionNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePlaybackDidFinish), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePlaybackError), name: .AVPlayerItemFailedToPlayToEndTime, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRouteChange), name: AVAudioSession.routeChangeNotification, object: nil)
     }
     
 }
@@ -78,7 +78,7 @@ extension AVPlayerNotification {
 
     /// 播放结束处理
     @objc private func handlePlaybackDidFinish() {
-        let playbackMode = playerManager.getPlaylist().playbackMode
+        let playbackMode = playerManager.getPlaylist()?.playbackMode ?? .none
         if playbackMode == .none {
             playerManager.stop()
             return

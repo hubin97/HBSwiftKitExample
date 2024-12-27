@@ -27,22 +27,22 @@ extension AVPlayerManagerDelegate {
 // MARK: - AVPlayerManager
 class AVPlayerManager {
     
+    static let shared = AVPlayerManager()
+
     weak var delegate: AVPlayerManagerDelegate?
     
     // MARK: Properties
     private var player: AVPlayer?
-    private var playlist: AVPlaylist
-    
-    private var nowPlayingController: NowPlayingUpdater?
+    private var playlist: AVPlaylist?
+    private var playerLayer: AVPlayerLayer?
+
+    private var nowPlayingUpdater: NowPlayingUpdater?
     private var remoteCommandHandler: RemoteCommandHandler?
     
     private var avPlayerNotification: AVPlayerNotification?
     private var avPlayerObserver: AVPlayerObserver?
    
-    // 初始化时传入 Playlist
-    init(playlist: AVPlaylist) {
-        self.playlist = playlist
-        
+    private init() {
         self.setupAudioSession()
         self.setupRemoteCommand()
         self.setupNotiAndObserver()
@@ -53,7 +53,7 @@ class AVPlayerManager {
 
     // 设置播放模式
     func setPlaybackMode(_ mode: AVPlaybackMode) {
-        playlist.setPlaybackMode(mode)
+        playlist?.setPlaybackMode(mode)
     }
 
     // 返回 AVPlayer 实例以便 ViewController 使用
@@ -61,8 +61,13 @@ class AVPlayerManager {
         return player
     }
     
+    // 设置播放列表
+    func setPlaylist(_ playlist: AVPlaylist) {
+        self.playlist = playlist
+    }
+    
     /// 返回 Playlist
-    func getPlaylist() -> AVPlaylist {
+    func getPlaylist() -> AVPlaylist? {
         return playlist
     }
     
@@ -81,6 +86,18 @@ class AVPlayerManager {
     func getCurrentProgress() -> Float {
         guard let duration = player?.currentItem?.duration else { return 0 }
         return Float(CMTimeGetSeconds(getCurrentTime() ?? CMTime.zero) / CMTimeGetSeconds(duration))
+    }
+    
+    //
+    
+    // 创建并返回 AVPlayerLayer
+    func getPlayerLayer() -> AVPlayerLayer? {
+        return playerLayer
+    }
+    
+    // 返回 NowPlayingUpdater
+    func getNowPlayingUpdater() -> NowPlayingUpdater? {
+        return nowPlayingUpdater
     }
     
     deinit {
@@ -107,7 +124,8 @@ extension AVPlayerManager {
         self.remoteCommandHandler = RemoteCommandHandler(playerManager: self)
         self.remoteCommandHandler?.setupRemoteCommandCenter()
         
-        self.nowPlayingController = NowPlayingUpdater(player: player, playlist: playlist)
+        //self.nowPlayingController = NowPlayingUpdater(player: player, playlist: playlist)
+        self.nowPlayingUpdater = NowPlayingUpdater(useMetadata: true)
     }
     
     // 监听播放完成通知
@@ -128,7 +146,7 @@ extension AVPlayerManager {
     
     // MARK: -
     func updateNowPlayingInfo() {
-        self.nowPlayingController?.updateNowPlayingInfo()
+        self.nowPlayingUpdater?.updateNowPlayingInfo()
     }
 }
 
@@ -137,11 +155,22 @@ extension AVPlayerManager {
     
     // 播放指定媒体
     func play(url: URL) {
+        // 播放前先停止
+        self.stop()
+        
         self.player = AVPlayer(playerItem: AVPlayerItem(url: url))
         self.player?.play()
         
+        // 创建 AVPlayerLayer
+        if self.playerLayer == nil {
+            self.playerLayer = AVPlayerLayer(player: player)
+            self.playerLayer?.videoGravity = .resizeAspect
+        }
+        
         // 设置监听
         self.setupPlayerObservers()
+        // 更新播放信息
+        self.updateNowPlayingInfo()
     }
     
     // 播放指定媒体(是否进行URL校验)
@@ -167,21 +196,23 @@ extension AVPlayerManager {
     
     // 播放指定媒体
     func play(item: AVPlaylistItem) {
+        self.playlist?.setPlayIndex(with: item)
         self.play(url: item.url)
     }
     
     // 播放指定媒体(索引的)
     func play(at index: Int) {
-        guard let item = playlist.getItem(at: index) else {
+        guard let item = playlist?.getPlayItem(at: index) else {
             LogM.debug("No media available to play.")
             return
         }
+        self.playlist?.setPlayIndex(with: index)
         self.play(url: item.url)
     }
     
     // 播放当前媒体
     func play() {
-        guard let item = playlist.getCurrentItem() else {
+        guard let item = playlist?.getCurrentItem() else {
             LogM.debug("No media available to play.")
             return
         }
@@ -190,13 +221,13 @@ extension AVPlayerManager {
     
     // 播放下一个媒体
     func playNext() {
-        guard let nextItem = playlist.getNextItem() else { return }
+        guard let nextItem = playlist?.getNextItem() else { return }
         self.play(url: nextItem.url)
     }
 
     // 播放上一个媒体
     func playPrevious() {
-        guard let previousItem = playlist.getPreviousItem() else { return }
+        guard let previousItem = playlist?.getPreviousItem() else { return }
         self.play(url: previousItem.url)
     }
     
@@ -214,6 +245,9 @@ extension AVPlayerManager {
     func stop() {
         player?.pause()
         player = nil
+        
+        playerLayer?.removeFromSuperlayer()
+        playerLayer = nil
     }
 
     // 播放/暂停

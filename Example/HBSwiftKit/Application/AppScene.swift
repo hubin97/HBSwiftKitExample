@@ -44,7 +44,7 @@ enum AppScene: SceneProvider {
             tabBarVc.setAppearance(normalColor: UIColor.lightGray, selectColor: UIColor.black)
             return tabBarVc
         case .mediaList:
-            return MediaListController()
+            return MediaListController(viewModel: ViewModel())
         case .audioList(viewModel: let viewModel):
             return AudioListController(viewModel: viewModel)
         case .audioPlayer(viewModel: let viewModel):

@@ -6,15 +6,6 @@
 
 import Foundation
 
-// 播放列表中的单个媒体项
-struct AVPlaylistItem {
-    let id: Int
-    let url: URL
-    let title: String?
-    let artist: String?
-    let duration: TimeInterval?
-}
-
 /// 播放模式
 enum AVPlaybackMode {
     /// 无 (none相比`sequential`, 只是不会自动播放下一曲)
@@ -38,6 +29,11 @@ class AVPlaylist {
     /// 播放模式
     var playbackMode: AVPlaybackMode = .none
 
+    init(playlist: [AVPlaylistItem], playbackMode: AVPlaybackMode) {
+        self.playlist = playlist
+        self.playbackMode = playbackMode
+    }
+    
     // 设置播放模式
     func setPlaybackMode(_ mode: AVPlaybackMode) {
         playbackMode = mode
@@ -71,13 +67,11 @@ extension AVPlaylist {
     // 获取下一个媒体项
     func getNextItem() -> AVPlaylistItem? {
         switch playbackMode {
-        case .sequential:
+        case .none, .repeatOne, .sequential:
             currentItemIndex = (currentItemIndex + 1) % playlist.count
         case .random:
             // 随机模式, 应该要排除当前项
             currentItemIndex = Int.random(in: 0..<playlist.count)
-        case .none, .repeatOne:
-            break // 在循环模式下不改变索引，保持当前项
         }
         return getCurrentItem()
     }
@@ -95,9 +89,18 @@ extension AVPlaylist {
     }
     
     // 获取指定索引的媒体项
-    func getItem(at index: Int) -> AVPlaylistItem? {
+    func getPlayItem(at index: Int) -> AVPlaylistItem? {
         guard playlist.indices.contains(index) else { return nil }
         currentItemIndex = index
         return playlist[index]
+    }
+    
+    func setPlayIndex(with item: AVPlaylistItem) {
+        guard let index = playlist.firstIndex(where: { $0.id == item.id }) else { return }
+        currentItemIndex = index
+    }
+    
+    func setPlayIndex(with index: Int) {
+        currentItemIndex = index
     }
 }
