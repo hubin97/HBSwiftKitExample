@@ -68,8 +68,40 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let model = vm.items[indexPath.row]
-        guard let tclass = model.class else { return }
-        self.navigationController?.pushViewController(tclass, animated: true)
+        let item = vm.items[indexPath.row]
+        switch item {
+        case .imageBrower:
+            let vc = ImageBrowerController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .calendar:
+            let vc = CalendarController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .datePicker:
+            let vc = DatePickerController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .numberPicker:
+            let vc = NumberPickerController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .blueTooth:
+            let vc = BlueToothController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .easyAdScroll:
+            let vc = EasyAdScrollController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .mapLocation:
+            let vc = MapLocationController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .videoTest:
+            let vc = VideoTestController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .videoPlay:
+            let vc = VideoPlayController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .mqtt:
+            let vc = MQTTTestController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .mediaList:
+            navigator.show(provider: AppScene.mediaList, sender: self)
+        }
     }
 }

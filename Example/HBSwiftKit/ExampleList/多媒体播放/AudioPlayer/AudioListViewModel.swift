@@ -1,28 +1,27 @@
 //
-//  AVPlayerManager.swift
+//  AudioListViewModel.swift
 //  HBSwiftKit_Example
 //
-//  Created by hubin.h on 2024/12/26.
+//  Created by hubin.h on 2024/12/27.
 
 import Foundation
 
 // MARK: - global var and methods
 
-
 // MARK: - main class
-class AVPlayerManager {
+class AudioListViewModel: ViewModel {
 }
 
 // MARK: - private mothods
-extension AVPlayerManager { 
+extension AudioListViewModel { 
 }
 
 // MARK: - call backs
-extension AVPlayerManager { 
+extension AudioListViewModel { 
 }
 
 // MARK: - delegate or data source
-extension AVPlayerManager { 
+extension AudioListViewModel { 
 }
 
 // MARK: - other classes

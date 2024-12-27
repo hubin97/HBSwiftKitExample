@@ -10,32 +10,47 @@ import Foundation
 
 // MARK: - main class
 class ListViewModel: ViewModel {
-    let items: [DemoRowModel] = [DemoRowModel(title: "照片浏览器", dclass: ImageBrowerController()),
-                                 DemoRowModel(title: "日历选择器", dclass: CalendarController()),
-                                 DemoRowModel(title: "日期选择器", dclass: DatePickerController()),
-                                 DemoRowModel(title: "数字选择器", dclass: NumberPickerController()),
-                                 DemoRowModel(title: "蓝牙测试页", dclass: BlueToothController()),
-                                 DemoRowModel(title: "标题轮播页", dclass: EasyAdScrollController()),
-                                 DemoRowModel(title: "地图定位页", dclass: MapLocationController()),
-                                 DemoRowModel(title: "视频剪辑页", dclass: VideoTestController()),
-                                 DemoRowModel(title: "视频播放页", dclass: VideoPlayController()),
-                                 DemoRowModel(title: "MQTT", dclass: MQTTTestController()),
-                                ]
     
-}
-
-// MARK: - other classes
-class DemoRowModel {
-
-    var title: String?
-    var `class`: ViewController?
-
-    init() {
+    enum RowType: Int, CaseIterable {
+        case imageBrower = 0
+        case calendar
+        case datePicker
+        case numberPicker
+        case blueTooth
+        case easyAdScroll
+        case mapLocation
+        case videoTest
+        case videoPlay
+        case mediaList
+        case mqtt
+        
+        var title: String {
+            switch self {
+            case .imageBrower:
+                return "图片浏览器"
+            case .calendar:
+                return "日历"
+            case .datePicker:
+                return "日期选择器"
+            case .numberPicker:
+                return "数字选择器"
+            case .blueTooth:
+                return "蓝牙"
+            case .easyAdScroll:
+                return "广告轮播"
+            case .mapLocation:
+                return "地图定位"
+            case .videoTest:
+                return "视频测试"
+            case .videoPlay:
+                return "视频播放"
+            case .mediaList:
+                return "媒体列表"
+            case .mqtt:
+                return "MQTT"
+            }
+        }
     }
-
-    convenience init(title: String?, dclass: ViewController?) {
-        self.init()
-        self.title = title
-        self.class = dclass
-    }
+    
+    let items: [RowType] = RowType.allCases
 }

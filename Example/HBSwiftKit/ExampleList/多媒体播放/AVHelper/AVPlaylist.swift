@@ -9,9 +9,10 @@ import Foundation
 // 播放列表中的单个媒体项
 struct AVPlaylistItem {
     let id: Int
-    let title: String
     let url: URL
-    let duration: TimeInterval
+    let title: String?
+    let artist: String?
+    let duration: TimeInterval?
 }
 
 /// 播放模式
@@ -27,7 +28,7 @@ enum AVPlaybackMode {
 }
 
 // 播放列表
-class AVPlayList {
+class AVPlaylist {
     /// 播放列表
     private(set) var playlist: [AVPlaylistItem] = []
     /// 当前播放的媒体项索引
@@ -35,8 +36,16 @@ class AVPlayList {
     /// 存储播放历史
     //private var historyStack: [AVPlaylistItem] = []
     /// 播放模式
-    var playbackMode: AVPlaybackMode = .sequential
+    var playbackMode: AVPlaybackMode = .none
 
+    // 设置播放模式
+    func setPlaybackMode(_ mode: AVPlaybackMode) {
+        playbackMode = mode
+    }
+}
+
+extension AVPlaylist {
+    
     // 增加一个媒体项
     func addItem(_ item: AVPlaylistItem) {
         playlist.append(item)
@@ -48,6 +57,11 @@ class AVPlayList {
         playlist.remove(at: index)
     }
 
+    // 清空播放列表
+    func clearPlaylist() {
+        playlist.removeAll()
+    }
+    
     // 获取当前媒体项
     func getCurrentItem() -> AVPlaylistItem? {
         guard playlist.indices.contains(currentItemIndex) else { return nil }
@@ -79,14 +93,11 @@ class AVPlayList {
         }
         return getCurrentItem()
     }
-
-    // 设置播放模式
-    func setPlaybackMode(_ mode: AVPlaybackMode) {
-        playbackMode = mode
-    }
-
-    // 清空播放列表
-    func clearPlaylist() {
-        playlist.removeAll()
+    
+    // 获取指定索引的媒体项
+    func getItem(at index: Int) -> AVPlaylistItem? {
+        guard playlist.indices.contains(index) else { return nil }
+        currentItemIndex = index
+        return playlist[index]
     }
 }
