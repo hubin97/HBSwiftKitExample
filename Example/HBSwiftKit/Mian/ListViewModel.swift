@@ -20,7 +20,6 @@ class ListViewModel: ViewModel {
         case easyAdScroll
         case mapLocation
         case videoTest
-        case videoPlay
         case mediaList
         case mqtt
         
@@ -42,8 +41,6 @@ class ListViewModel: ViewModel {
                 return "地图定位"
             case .videoTest:
                 return "视频测试"
-            case .videoPlay:
-                return "视频播放"
             case .mediaList:
                 return "媒体列表"
             case .mqtt:

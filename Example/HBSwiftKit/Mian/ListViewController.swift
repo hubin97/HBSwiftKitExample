@@ -94,9 +94,6 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         case .videoTest:
             let vc = VideoTestController()
             navigationController?.pushViewController(vc, animated: true)
-        case .videoPlay:
-            let vc = VideoPlayController()
-            navigationController?.pushViewController(vc, animated: true)
         case .mqtt:
             let vc = MQTTTestController()
             navigationController?.pushViewController(vc, animated: true)

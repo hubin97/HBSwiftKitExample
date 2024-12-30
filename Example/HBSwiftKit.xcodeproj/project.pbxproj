@@ -132,7 +132,6 @@
 		B5E4AAC027F5585300D84C78 /* SteerWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4AABF27F5585300D84C78 /* SteerWheelView.swift */; };
 		B5E8E47B27EEBEAB006CED16 /* NetworkExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E8E47A27EEBEAA006CED16 /* NetworkExtension.swift */; };
 		B5E8E47F27F18E7E006CED16 /* NetworkRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E8E47E27F18E7E006CED16 /* NetworkRequestTest.swift */; };
-		B5F520932704615E00BACB9C /* VideoPlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F520922704615E00BACB9C /* VideoPlayController.swift */; };
 		B5F8390226982D8E0001C484 /* 温柔女声.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */; };
 		B5FB4F27257A365E007F1238 /* WebPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4F26257A365E007F1238 /* WebPreviewController.swift */; };
 		B5FB4FBD257DC20A007F1238 /* EasyAdScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */; };
@@ -307,7 +306,6 @@
 		B5E8E47A27EEBEAA006CED16 /* NetworkExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkExtension.swift; sourceTree = "<group>"; };
 		B5E8E47E27F18E7E006CED16 /* NetworkRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestTest.swift; sourceTree = "<group>"; };
 		B5EA0E1125B67C38004783C1 /* AppSandBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSandBox.swift; sourceTree = "<group>"; };
-		B5F520922704615E00BACB9C /* VideoPlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayController.swift; sourceTree = "<group>"; };
 		B5F838FE26982D8E0001C484 /* 温柔女声.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "温柔女声.mp3"; sourceTree = "<group>"; };
 		B5FB4F26257A365E007F1238 /* WebPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPreviewController.swift; sourceTree = "<group>"; };
 		B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAdScrollController.swift; sourceTree = "<group>"; };
@@ -453,6 +451,21 @@
 				18F9EF792D08317800CE0471 /* AudioPlayToolBar.swift */,
 			);
 			path = Audio;
+			sourceTree = "<group>";
+		};
+		188CEA382D2251B800667E40 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
+				B5BAC82C255A7818005A5179 /* DatePickerController.swift */,
+				B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */,
+				B5BAC828255A7818005A5179 /* ImageBrowerController.swift */,
+				B541412C268EAF06008CE14B /* MapLocationController.swift */,
+				18C5037E2C50F82700EB50B4 /* MQTTTestController.swift */,
+				B5BAC829255A7818005A5179 /* NumberPickerController.swift */,
+				B5832B1F270FD6EE0084C78E /* VideoTestController.swift */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 		189C64AB2D000F2200BAE470 /* fastlane */ = {
@@ -663,6 +676,7 @@
 		B5389B2725EE1BB900ED67F9 /* 日历选择器 */ = {
 			isa = PBXGroup;
 			children = (
+				B5BAC82A255A7818005A5179 /* CalendarController.swift */,
 				B5389B2625EE1BB900ED67F9 /* Wto_Calendar.swift */,
 			);
 			path = "日历选择器";
@@ -804,6 +818,7 @@
 			isa = PBXGroup;
 			children = (
 				188692C92C5743C7007CD12A /* CocoaMQTT */,
+				188CEA382D2251B800667E40 /* Others */,
 				B595A8CE27CCB031007EF16E /* 三方依赖类 */,
 				B595A8CD27CCB00B007EF16E /* 临时验证类 */,
 				B5C6C5E125ECD1C400C88C1C /* 主题适配器 */,
@@ -818,16 +833,6 @@
 				B533677026E84FED0009B60F /* 视频剪辑页 */,
 				B5E4AABE27F5546E00D84C78 /* 遥控方向盘 */,
 				B5C6C5C225ECCA0E00C88C1C /* 高级筛选器 */,
-				B5BAC82B255A7818005A5179 /* BlueToothController.swift */,
-				B5BAC82A255A7818005A5179 /* CalendarController.swift */,
-				B5BAC82C255A7818005A5179 /* DatePickerController.swift */,
-				B5FB4FBC257DC20A007F1238 /* EasyAdScrollController.swift */,
-				B5BAC828255A7818005A5179 /* ImageBrowerController.swift */,
-				B541412C268EAF06008CE14B /* MapLocationController.swift */,
-				18C5037E2C50F82700EB50B4 /* MQTTTestController.swift */,
-				B5BAC829255A7818005A5179 /* NumberPickerController.swift */,
-				B5F520922704615E00BACB9C /* VideoPlayController.swift */,
-				B5832B1F270FD6EE0084C78E /* VideoTestController.swift */,
 			);
 			path = ExampleList;
 			sourceTree = "<group>";
@@ -1236,6 +1241,7 @@
 				18A82EEF2CFEF9C7007FCCDA /* AppScene.swift in Sources */,
 				B546325C2803B7960026662F /* Arithmetic.swift in Sources */,
 				188CEA242D1E431E00667E40 /* AudioListController.swift in Sources */,
+				188CEA362D1EA38500667E40 /* AudioListView.swift in Sources */,
 				188CEA282D1E45BB00667E40 /* AudioListViewModel.swift in Sources */,
 				188CEA202D1E42D300667E40 /* AudioPlayerController.swift in Sources */,
 				188CEA2C2D1E461900667E40 /* AudioPlayerViewModel.swift in Sources */,
@@ -1247,6 +1253,7 @@
 				188CEA152D1D309D00667E40 /* AVPlayerNotification.swift in Sources */,
 				188CEA132D1D2D3200667E40 /* AVPlayerObserver.swift in Sources */,
 				188CEA0D2D1CFA8400667E40 /* AVPlaylist.swift in Sources */,
+				188CEA342D1E988F00667E40 /* AVPlaylistItem.swift in Sources */,
 				1876E3F12D01959100CE4871 /* BalloonMarker.swift in Sources */,
 				18A82EFF2D0000CE007FCCDA /* BGTaskManager.swift in Sources */,
 				4207008F2A4D7D1900039415 /* BLEAdapter.swift in Sources */,
@@ -1311,12 +1318,9 @@
 				B5825E2E26F04D7D00539866 /* VideoFrameView.swift in Sources */,
 				188CEA262D1E433100667E40 /* VideoListController.swift in Sources */,
 				188CEA2A2D1E45CD00667E40 /* VideoListViewModel.swift in Sources */,
-				B5F520932704615E00BACB9C /* VideoPlayController.swift in Sources */,
 				188CEA222D1E42DB00667E40 /* VideoPlayerController.swift in Sources */,
 				188CEA2E2D1E464900667E40 /* VideoPlayerViewModel.swift in Sources */,
 				B5832B20270FD6EE0084C78E /* VideoTestController.swift in Sources */,
-				188CEA362D1EA38500667E40 /* AudioListView.swift in Sources */,
-				188CEA342D1E988F00667E40 /* AVPlaylistItem.swift in Sources */,
 				B5825E3826F087FA00539866 /* VideoTimeView.swift in Sources */,
 				B5825E3D26F0884F00539866 /* VideoToolView.swift in Sources */,
 				B546BFB527F442D9006EA745 /* ViewReusePool.swift in Sources */,
