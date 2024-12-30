@@ -35,10 +35,10 @@ class AudioListViewModel: ViewModel {
     //swiftlint:disable line_length
     var sections: [AudioMeta] = [
         AudioMeta(type: .local, playList: [
-            AVPlaylistItem(id: 0, title: "五音Jw-明月天涯", source: "五音Jw-明月天涯.mp3", artist: "五音Jw"),
-            AVPlaylistItem(id: 1, title: "李荣浩 - 老街", source: "李荣浩 - 老街.mp3", artist: "李荣浩"),
-            AVPlaylistItem(id: 2, title: "萧忆情Alex - 不谓侠", source: "萧忆情Alex - 不谓侠.mp3", artist: "萧忆情Alex"),
-            AVPlaylistItem(id: 3, title: "友情的决裂", source: "友情的决裂.mp4")
+            AVPlaylistItem(id: 100, title: "五音Jw-明月天涯", source: "五音Jw-明月天涯.mp3", artist: "五音Jw"),
+            AVPlaylistItem(id: 101, title: "李荣浩 - 老街", source: "李荣浩 - 老街.mp3", artist: "李荣浩"),
+            AVPlaylistItem(id: 102, title: "萧忆情Alex - 不谓侠", source: "萧忆情Alex - 不谓侠.mp3", artist: "萧忆情Alex"),
+            AVPlaylistItem(id: 103, title: "友情的决裂", source: "友情的决裂.mp4")
         ]),
         AudioMeta(type: .remote, playList: [
             AVPlaylistItem(id: 0, title: "Dưới Những Cơn Mưa", url: "https://firebasestorage.googleapis.com/v0/b/music-compose.appspot.com/o/Audio%2FDuoi-Nhung-Con-Mua-Mr-Siro.mp3?alt=media&token=000e1b74-9b02-426b-82b7-771d12460e21", artist: "Mr.Siro", imageUrl: "https://firebasestorage.googleapis.com/v0/b/music-compose.appspot.com/o/Image%2FDuoi-Nhung-Con-Mua-Mr-Siro.jpg?alt=media&token=ef8a993d-9b6b-4d46-aed5-0e8545783ea5"),

@@ -105,7 +105,7 @@ extension AVPlayerObserver {
                 let totalDuration = playerItem.duration.isValid ? playerItem.duration.seconds: 0
                 let progress = bufferedTime / totalDuration
                 //print("缓冲进度：\(progress * 100)%")
-                self.playerManager.delegate?.avPlayerManager(self.playerManager, item: item, didUpdateBufferProgressTo: progress)
+                self.playerManager.delegate?.avPlayerManager(self.playerManager, item: item, didUpdateBufferProgressTo: Float(progress))
             }
             
             // 更新播放信息

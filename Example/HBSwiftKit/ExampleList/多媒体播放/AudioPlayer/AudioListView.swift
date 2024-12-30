@@ -56,5 +56,13 @@ class AudioListCell: TableViewCell {
     func configure(with item: AVPlaylistItem) {
         titleLabel.text = item.title
         artistLabel.text = item.artist
+        
+        if AVPlayerManager.shared.getPlaylist()?.getCurrentItem() == item {
+            titleLabel.textColor = .systemBlue
+            artistLabel.textColor = .systemBlue
+        } else {
+            titleLabel.textColor = .black
+            artistLabel.textColor = .gray
+        }
     }
 }

@@ -67,12 +67,10 @@
 		18B671992B3BBFC600793476 /* Extension+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B671982B3BBFC600793476 /* Extension+TextField.swift */; };
 		18C5037F2C50F82700EB50B4 /* MQTTTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5037E2C50F82700EB50B4 /* MQTTTestController.swift */; };
 		18E1CF362B90270F00B5397E /* percentage.json in Resources */ = {isa = PBXBuildFile; fileRef = 18E1CF352B90270F00B5397E /* percentage.json */; };
-		18F9EF452D0699E100CE0471 /* AudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF442D0699E100CE0471 /* AudioPlayerManager.swift */; };
 		18F9EF472D069BFC00CE0471 /* 五音Jw-明月天涯.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18F9EF462D069BFC00CE0471 /* 五音Jw-明月天涯.mp3 */; };
 		18F9EF4B2D069D3F00CE0471 /* podcast.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F9EF4A2D069D3F00CE0471 /* podcast.jpg */; };
 		18F9EF4E2D06C65100CE0471 /* 萧忆情Alex - 不谓侠.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18F9EF4D2D06C65100CE0471 /* 萧忆情Alex - 不谓侠.mp3 */; };
 		18F9EF4F2D06C65100CE0471 /* 李荣浩 - 老街.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 18F9EF4C2D06C65100CE0471 /* 李荣浩 - 老街.mp3 */; };
-		18F9EF682D07D32B00CE0471 /* AudioTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF672D07D32B00CE0471 /* AudioTrack.swift */; };
 		18F9EF702D08156C00CE0471 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF6F2D08156C00CE0471 /* TableViewCell.swift */; };
 		18F9EF722D08156C00CE0471 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF6C2D08156C00CE0471 /* Button.swift */; };
 		18F9EF732D08156C00CE0471 /* CollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F9EF6D2D08156C00CE0471 /* CollectionItem.swift */; };
@@ -225,12 +223,10 @@
 		18C2FE002AFC8D0C00AB8450 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		18C5037E2C50F82700EB50B4 /* MQTTTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTTestController.swift; sourceTree = "<group>"; };
 		18E1CF352B90270F00B5397E /* percentage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = percentage.json; sourceTree = "<group>"; };
-		18F9EF442D0699E100CE0471 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
 		18F9EF462D069BFC00CE0471 /* 五音Jw-明月天涯.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "五音Jw-明月天涯.mp3"; sourceTree = "<group>"; };
 		18F9EF4A2D069D3F00CE0471 /* podcast.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = podcast.jpg; sourceTree = "<group>"; };
 		18F9EF4C2D06C65100CE0471 /* 李荣浩 - 老街.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "李荣浩 - 老街.mp3"; sourceTree = "<group>"; };
 		18F9EF4D2D06C65100CE0471 /* 萧忆情Alex - 不谓侠.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "萧忆情Alex - 不谓侠.mp3"; sourceTree = "<group>"; };
-		18F9EF672D07D32B00CE0471 /* AudioTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTrack.swift; sourceTree = "<group>"; };
 		18F9EF6C2D08156C00CE0471 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		18F9EF6D2D08156C00CE0471 /* CollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionItem.swift; sourceTree = "<group>"; };
 		18F9EF6F2D08156C00CE0471 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -403,6 +399,7 @@
 		188CEA082D1CEE8400667E40 /* AVHelper */ = {
 			isa = PBXGroup;
 			children = (
+				188CEA372D22323800667E40 /* Audio */,
 				188CEA162D1D3AF800667E40 /* AVAssetValidator.swift */,
 				188CEA092D1CEEA800667E40 /* AVPlayerManager.swift */,
 				188CEA142D1D309D00667E40 /* AVPlayerNotification.swift */,
@@ -413,13 +410,6 @@
 				188CEA102D1D110800667E40 /* RemoteCommandHandler.swift */,
 			);
 			path = AVHelper;
-			sourceTree = "<group>";
-		};
-		188CEA0B2D1CF0AF00667E40 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 		188CEA182D1E40C200667E40 /* AudioPlayer */ = {
@@ -448,21 +438,21 @@
 			path = VideoPlayer;
 			sourceTree = "<group>";
 		};
-		188CEA1A2D1E411F00667E40 /* Deprecated */ = {
-			isa = PBXGroup;
-			children = (
-				18F9EF742D081F0F00CE0471 /* AudioPlayerManager */,
-				188CEA012D1CED2C00667E40 /* Views */,
-			);
-			path = Deprecated;
-			sourceTree = "<group>";
-		};
 		188CEA312D1E89B100667E40 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
 				188CEA2F2D1E89A100667E40 /* 友情的决裂.mp4 */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		188CEA372D22323800667E40 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				188CE9FD2D1CEC0B00667E40 /* AudioPlayProgress.swift */,
+				18F9EF792D08317800CE0471 /* AudioPlayToolBar.swift */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 		189C64AB2D000F2200BAE470 /* fastlane */ = {
@@ -567,23 +557,12 @@
 		18F9EF6B2D08156200CE0471 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				188CEA012D1CED2C00667E40 /* Views */,
 				18F9EF6C2D08156C00CE0471 /* Button.swift */,
 				18F9EF6D2D08156C00CE0471 /* CollectionItem.swift */,
 				18F9EF6F2D08156C00CE0471 /* TableViewCell.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		18F9EF742D081F0F00CE0471 /* AudioPlayerManager */ = {
-			isa = PBXGroup;
-			children = (
-				188CEA0B2D1CF0AF00667E40 /* Assets */,
-				18F9EF442D0699E100CE0471 /* AudioPlayerManager.swift */,
-				188CE9FD2D1CEC0B00667E40 /* AudioPlayProgress.swift */,
-				18F9EF792D08317800CE0471 /* AudioPlayToolBar.swift */,
-				18F9EF672D07D32B00CE0471 /* AudioTrack.swift */,
-			);
-			path = AudioPlayerManager;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -614,7 +593,6 @@
 			children = (
 				B5E1D8E7256283400093AC4C /* Application */,
 				18C2FDFF2AFC8CFD00AB8450 /* Configs */,
-				188CEA1A2D1E411F00667E40 /* Deprecated */,
 				B5E1D8E3256282C80093AC4C /* ExampleList */,
 				18B671972B3BBFC600793476 /* Extension */,
 				18A82EFD2D0000CE007FCCDA /* Managers */,
@@ -1260,11 +1238,9 @@
 				188CEA242D1E431E00667E40 /* AudioListController.swift in Sources */,
 				188CEA282D1E45BB00667E40 /* AudioListViewModel.swift in Sources */,
 				188CEA202D1E42D300667E40 /* AudioPlayerController.swift in Sources */,
-				18F9EF452D0699E100CE0471 /* AudioPlayerManager.swift in Sources */,
 				188CEA2C2D1E461900667E40 /* AudioPlayerViewModel.swift in Sources */,
 				188CE9FE2D1CEC0B00667E40 /* AudioPlayProgress.swift in Sources */,
 				18F9EF7A2D08317800CE0471 /* AudioPlayToolBar.swift in Sources */,
-				18F9EF682D07D32B00CE0471 /* AudioTrack.swift in Sources */,
 				18A82EFE2D0000CE007FCCDA /* AuthManager.swift in Sources */,
 				188CEA172D1D3AF800667E40 /* AVAssetValidator.swift in Sources */,
 				188CEA0A2D1CEEA800667E40 /* AVPlayerManager.swift in Sources */,

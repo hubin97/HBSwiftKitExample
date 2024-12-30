@@ -11,7 +11,7 @@ import UIKit
 struct AudioPlayProgressConfig {
     var trackTintColor: UIColor = .lightGray
     var bufferTintColor: UIColor = .darkGray
-    var progressTintColor: UIColor = .gray
+    var progressTintColor: UIColor = .white
     var progressHeight: CGFloat = 6
     var cornerRadius: CGFloat = 3
 }

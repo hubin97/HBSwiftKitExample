@@ -62,7 +62,7 @@ extension AudioListController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let playList = vm.sections[indexPath.section].playList
         AVPlayerManager.shared.setPlaylist(AVPlaylist(playlist: playList, playbackMode: .none))
-        navigator.show(provider: AppScene.audioPlayer(viewModel: AudioPlayerViewModel(index: indexPath.row)), sender: self/*, transition: .modal(type: .fullScreen)*/)
+        navigator.show(provider: AppScene.audioPlayer(viewModel: AudioPlayerViewModel(index: indexPath.row)), sender: self, transition: .modal(type: .fullScreen))
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

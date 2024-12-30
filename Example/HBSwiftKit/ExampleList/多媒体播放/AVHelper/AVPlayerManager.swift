@@ -12,14 +12,14 @@ import MediaPlayer
 protocol AVPlayerManagerDelegate: AnyObject {
     //func AVPlayerManager(_ manager: AVPlayerManager, item: AVPlaylistItem, didSwitchTo step: AudioSwitchStep)
     func avPlayerManager(_ manager: AVPlayerManager, item: AVPlaylistItem, didUpdateProgressTo time: TimeInterval)
-    func avPlayerManager(_ manager: AVPlayerManager, item: AVPlaylistItem, didUpdateBufferProgressTo progress: Double)
+    func avPlayerManager(_ manager: AVPlayerManager, item: AVPlaylistItem, didUpdateBufferProgressTo progress: Float)
     func avPlayerManager(_ manager: AVPlayerManager, item: AVPlaylistItem, didUpdateStatusTo status: AVPlayer.TimeControlStatus)
     func avPlayerManager(_ manager: AVPlayerManager, previous item: AVPlaylistItem)
     func avPlayerManager(_ manager: AVPlayerManager, next item: AVPlaylistItem)
 }
 
 extension AVPlayerManagerDelegate {
-    func avPlayerManager(_ manager: AVPlayerManager, item: AVPlaylistItem, didUpdateBufferProgressTo progress: Double) {}
+    func avPlayerManager(_ manager: AVPlayerManager, item: AVPlaylistItem, didUpdateBufferProgressTo progress: Float) {}
     func avPlayerManager(_ manager: AVPlayerManager, previous item: AVPlaylistItem) {}
     func avPlayerManager(_ manager: AVPlayerManager, next item: AVPlaylistItem) {}
 }
@@ -223,12 +223,14 @@ extension AVPlayerManager {
     func playNext() {
         guard let nextItem = playlist?.getNextItem() else { return }
         self.play(url: nextItem.url)
+        self.delegate?.avPlayerManager(self, next: nextItem)
     }
 
     // 播放上一个媒体
     func playPrevious() {
         guard let previousItem = playlist?.getPreviousItem() else { return }
         self.play(url: previousItem.url)
+        self.delegate?.avPlayerManager(self, previous: previousItem)
     }
     
     // 暂停当前播放

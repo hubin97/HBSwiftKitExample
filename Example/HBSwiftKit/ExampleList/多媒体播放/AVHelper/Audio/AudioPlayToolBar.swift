@@ -10,7 +10,7 @@ import AVFoundation
 
 // MARK: - global var and methods
 protocol AudioPlayToolBarDelegate: AnyObject {
-    func playToolBar(_ toolBar: AudioPlayToolBar, isPlaying: Bool)
+    func playToolBar(_ toolBar: AudioPlayToolBar, playAction: Bool)
     func playToolBar(_ toolBar: AudioPlayToolBar, previousAction: Bool)
     func playToolBar(_ toolBar: AudioPlayToolBar, nextAction: Bool)
     
@@ -26,23 +26,7 @@ class AudioPlayToolBar: UIView {
     
     // 是否正在播放
     private var isPlaying: Bool = false
-    // 进度条 UISlider
-//    private lazy var slider: UISlider = {
-//        let _slider = UISlider()
-//        _slider.minimumValue = 0
-//        _slider.maximumValue = 1
-//        _slider.value = 0
-//        _slider.minimumTrackTintColor = Colors.gray
-//        _slider.maximumTrackTintColor = Colors.gray4
-//        _slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
-//        // 添加触摸事件监听
-//        _slider.addTarget(self, action: #selector(sliderTouchDown), for: .touchDown)
-//        _slider.addTarget(self, action: #selector(sliderTouchUp), for: [.touchUpInside, .touchUpOutside])
-//        // 添加点击手势 用于点击滑动
-//        _slider.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sliderTapped(_:))))
-//        return _slider
-//    }()
-    
+
     var config: AudioPlayProgressConfig = AudioPlayProgressConfig() {
         didSet {
             slider.config = config
@@ -62,7 +46,7 @@ class AudioPlayToolBar: UIView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textAlignment = .left
-        label.textColor = .lightGray
+        label.textColor = .white
         label.text = "00:00"
         return label
     }()
@@ -72,7 +56,7 @@ class AudioPlayToolBar: UIView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textAlignment = .right
-        label.textColor = .lightGray
+        label.textColor = .white
         label.text = "00:00"
         return label
     }()
@@ -186,69 +170,57 @@ class AudioPlayToolBar: UIView {
             self?.nextAction()
         }).disposed(by: rx.disposeBag)
     }
+    
+    /// 更新缓冲进度
+    func updateBufferValue(_ bufferValue: Float) {
+        slider.bufferedValue = bufferValue
+    }
 }
 
 // MARK: - private mothods
 extension AudioPlayToolBar {
-    
-    /// 播放状态更新
-//    func playStateUpdate() {
-//        AudioPlayerManager.shared.onAudioPlayerPlayStatusChange({[weak self] _, status in
-//            self?.updatePlayStatus(status)
-//        })
-//    }
-    
-    /// 初始化音频播放进度信息
-    func setupAudioInfo(audioTrack: AudioTrack) {
-        // 1.已有音频信息 2.且初始化音频信息即当前的音频信息
-        if let audioPlayer = AudioPlayerManager.shared.audioPlayer, audioPlayer.currentItem != nil, AudioPlayerManager.shared.currentTrack == audioTrack {
-            // 同步进度
-            self.updatePlayInfo(with: audioPlayer, audioTrack: audioTrack)
-        } else {
+        
+    /// 更新音频播放进度信息
+    func updateToolBar(with audioPlayer: AVPlayer?, item: AVPlaylistItem) {
+        guard let player = AVPlayerManager.shared.getPlayer(),  let playerItem = player.currentItem else {
             // 未初始化音频信息
-            guard let duration = audioTrack.metaData?.duration else { return }
+            let duration = item.mediaMeta?.duration ?? 0
             let total = Int(duration/1000)
             slider.value = 0
             currentTimeLabel.text = String(format: "%02d:%02d", 0, 0)
             totalTimeLabel.text = String(format: "%02d:%02d", total / 60, total % 60)
+            return
         }
-    }
-    
-    /// 更新音频播放进度信息
-    func updatePlayInfo(with audioPlayer: AVPlayer, audioTrack: AudioTrack) {
-        guard let currentItem = audioPlayer.currentItem else { return }
-        let isValideDuration = currentItem.duration.isValid && !currentItem.duration.seconds.isNaN
+
+        // 校验有效
+        let isValideDuration = playerItem.duration.isValid && !playerItem.duration.seconds.isNaN
         guard isValideDuration else { return }
 
-        let duration = currentItem.duration.seconds
-        let currentTime = audioPlayer.currentTime().seconds
-        let total = Int(audioTrack.metaData?.duration ?? duration)
+        let duration = playerItem.duration.seconds
+        let currentTime = player.currentTime().seconds
+        let total = Int(item.mediaMeta?.duration ?? duration)
 
         let current = Int(currentTime)
         slider.value = Float(current)/Float(total)
         currentTimeLabel.text = String(format: "%02d:%02d", current / 60, current % 60)
         totalTimeLabel.text = String(format: "%02d:%02d", total / 60, total % 60)
-        //playButton.isSelected = audioTrack.playState == .playing
     }
     
     /// 拖拽时更新进度
-    func updatePlayInfo(with sliderValue: Float, audioTrack: AudioTrack) {
-        guard let duration = audioTrack.metaData?.duration else { return }
+    func updatePlayPregress(with sliderValue: Float) {
+        guard let currentItem = AVPlayerManager.shared.getPlaylist()?.getCurrentItem() else { return }
+        let duration = currentItem.mediaMeta?.duration ?? 0
         let total = Int(duration)
         let current = Int(Float(total) * sliderValue)
         slider.value = sliderValue
         currentTimeLabel.text = String(format: "%02d:%02d", current / 60, current % 60)
     }
     
-    /// 更新缓冲进度
-    func updateBufferValue(_ bufferValue: Float) {
-        slider.bufferedValue = bufferValue
-    }
-    
     /// 更新播放状态
-    func updatePlayStatus(_ status: AudioTrack.PlayState) {
-        switch status {
-        case .loading:
+    func updatePlayStatus() {
+        guard let player = AVPlayerManager.shared.getPlayer() else { return }
+        switch player.timeControlStatus {
+        case .waitingToPlayAtSpecifiedRate:
             playButton.isHidden = true
             waitAnimation.isHidden = false
             startRotationAnimation()
@@ -259,6 +231,12 @@ extension AudioPlayToolBar {
             playButton.isHidden = false
             playButton.isSelected = true
         case .paused:
+            isPlaying = false
+            stopRotationAnimation()
+            waitAnimation.isHidden = true
+            playButton.isHidden = false
+            playButton.isSelected = false
+        default:
             isPlaying = false
             stopRotationAnimation()
             waitAnimation.isHidden = true
@@ -298,7 +276,7 @@ extension AudioPlayToolBar {
     @objc func playAction() {
         isPlaying.toggle()
         playButton.isSelected = isPlaying
-        delegate?.playToolBar(self, isPlaying: isPlaying)
+        delegate?.playToolBar(self, playAction: isPlaying)
     }
     
     @objc func previousAction() {
