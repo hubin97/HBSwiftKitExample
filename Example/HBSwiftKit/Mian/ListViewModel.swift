@@ -20,9 +20,9 @@ class ListViewModel: ViewModel {
         case easyAdScroll
         case mapLocation
         case videoTest
-        case mediaList
         case mqtt
-        
+        case mediaList
+
         var title: String {
             switch self {
             case .imageBrower:

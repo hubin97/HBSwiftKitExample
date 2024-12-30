@@ -245,11 +245,23 @@ extension AVPlayerManager {
     
     // 停止播放
     func stop() {
+        // 清空进度
+        //seek(to: TimeInterval(0))
+        
+        // 停止播放
         player?.pause()
         player = nil
         
+        if let currentItem = playlist?.getCurrentItem() {
+            delegate?.avPlayerManager(self, item: currentItem, didUpdateProgressTo: 0)
+        }
+        
+        // 移除视频播放层
         playerLayer?.removeFromSuperlayer()
         playerLayer = nil
+        
+        // 更新面板播放信息
+        updateNowPlayingInfo()
     }
 
     // 播放/暂停

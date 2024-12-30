@@ -10,6 +10,8 @@ import Foundation
 
 // MARK: - main class
 class AudioPlayerViewModel: ViewModel {
+
+    let operateItems = ["收藏", "评论", "分享", "更多"]
     
     var playItem: AVPlaylistItem?
     convenience init(item: AVPlaylistItem) {

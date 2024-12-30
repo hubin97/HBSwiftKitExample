@@ -32,7 +32,7 @@ class AudioListViewModel: ViewModel {
         let playList: [AVPlaylistItem]
     }
   
-    //swiftlint:disable line_length
+    // swiftlint:disable line_length
     var sections: [AudioMeta] = [
         AudioMeta(type: .local, playList: [
             AVPlaylistItem(id: 100, title: "五音Jw-明月天涯", source: "五音Jw-明月天涯.mp3", artist: "五音Jw"),

@@ -6,6 +6,9 @@
 
 import Foundation
 
+/// 资源包
+let assetsBundle = Bundle(url: R.file.audioAssetsBundle()!)
+
 /// 播放模式
 enum AVPlaybackMode {
     /// 无 (none相比`sequential`, 只是不会自动播放下一曲)
@@ -16,6 +19,19 @@ enum AVPlaybackMode {
     case random
     /// 单曲循环
     case repeatOne
+    
+    var icon: UIImage? {
+        switch self {
+        case .none:
+            return UIImage(named: "icon_play_mode_none", in: assetsBundle, compatibleWith: nil)
+        case .sequential:
+            return UIImage(named: "icon_play_mode_sequential", in: assetsBundle, compatibleWith: nil)
+        case .random:
+            return UIImage(named: "icon_play_mode_random", in: assetsBundle, compatibleWith: nil)
+        case .repeatOne:
+            return UIImage(named: "icon_play_mode_repeat_one", in: assetsBundle, compatibleWith: nil)
+        }
+    }
 }
 
 // 播放列表
