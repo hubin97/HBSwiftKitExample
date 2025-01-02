@@ -35,7 +35,7 @@ class AudioPlayToolBar: UIView {
     // 是否正在拖拽
     var isDraging: Bool = false
     
-    var config: AudioPlayProgressConfig = AudioPlayProgressConfig() {
+    var config: MediaPlayProgressConfig = MediaPlayProgressConfig() {
         didSet {
             slider.config = config
         }
@@ -55,8 +55,8 @@ class AudioPlayToolBar: UIView {
     // 是否展开播放列表
     private var isPlayListExpand: Bool = false
     
-    private lazy var slider: AudioPlayProgress = {
-        let _slider = AudioPlayProgress()
+    private lazy var slider: MediaPlayProgress = {
+        let _slider = MediaPlayProgress()
         _slider.value = 0
         _slider.bufferedValue = 0
         _slider.delegate = self
@@ -359,21 +359,21 @@ extension AudioPlayToolBar {
 }
 
 // MARK: - delegate or data source
-extension AudioPlayToolBar: AudioPlayProgressDelegate {
+extension AudioPlayToolBar: MediaPlayProgressDelegate {
     
-    func audioPlayProgress(_ progress: AudioPlayProgress, touchesBegan value: Float) {
+    func playProgress(_ progress: MediaPlayProgress, touchesBegan value: Float) {
         isDraging = true
         slider.transform = CGAffineTransform(scaleX: 1, y: 1.5)
         slider.config.cornerRadius = slider.config.progressHeight * 1.5/2
         delegate?.playToolBar(self, touchesBegan: value)
     }
     
-    func audioPlayProgress(_ progress: AudioPlayProgress, touchesMoved value: Float) {
+    func playProgress(_ progress: MediaPlayProgress, touchesMoved value: Float) {
         isDraging = true
         delegate?.playToolBar(self, touchesMoved: value)
     }
     
-    func audioPlayProgress(_ progress: AudioPlayProgress, touchesEnded value: Float) {
+    func playProgress(_ progress: MediaPlayProgress, touchesEnded value: Float) {
         isDraging = false
         slider.transform = CGAffineTransform.identity
         slider.config.cornerRadius = slider.config.progressHeight/2

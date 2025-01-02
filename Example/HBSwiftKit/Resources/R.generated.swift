@@ -199,7 +199,7 @@ struct _R {
     }
   }
 
-  /// This `_R.file` struct is generated, and contains static references to 25 resource files.
+  /// This `_R.file` struct is generated, and contains static references to 26 resource files.
   struct file {
     let bundle: Foundation.Bundle
 
@@ -209,11 +209,11 @@ struct _R {
     /// Resource file `Appfile`.
     var appfile: RswiftResources.FileResource { .init(name: "Appfile", pathExtension: "", bundle: bundle, locale: LocaleReference.none) }
 
-    /// Resource file `AudioAssets.bundle`.
-    var audioAssetsBundle: RswiftResources.FileResource { .init(name: "AudioAssets", pathExtension: "bundle", bundle: bundle, locale: LocaleReference.none) }
-
     /// Resource file `Fastfile`.
     var fastfile: RswiftResources.FileResource { .init(name: "Fastfile", pathExtension: "", bundle: bundle, locale: LocaleReference.none) }
+
+    /// Resource file `MediaAssets.bundle`.
+    var mediaAssetsBundle: RswiftResources.FileResource { .init(name: "MediaAssets", pathExtension: "bundle", bundle: bundle, locale: LocaleReference.none) }
 
     /// Resource file `Pluginfile`.
     var pluginfile: RswiftResources.FileResource { .init(name: "Pluginfile", pathExtension: "", bundle: bundle, locale: LocaleReference.none) }
@@ -268,6 +268,9 @@ struct _R {
 
     /// Resource file `友情的决裂.mp4`.
     var 友情的决裂Mp4: RswiftResources.FileResource { .init(name: "友情的决裂", pathExtension: "mp4", bundle: bundle, locale: LocaleReference.none) }
+
+    /// Resource file `友情的决裂intro.mp4`.
+    var 友情的决裂introMp4: RswiftResources.FileResource { .init(name: "友情的决裂intro", pathExtension: "mp4", bundle: bundle, locale: LocaleReference.none) }
 
     /// Resource file `李荣浩 - 老街.mp3`.
     var 李荣浩老街Mp3: RswiftResources.FileResource { .init(name: "李荣浩 - 老街", pathExtension: "mp3", bundle: bundle, locale: LocaleReference.none) }

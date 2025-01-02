@@ -11,18 +11,29 @@ import Foundation
 // MARK: - global var and methods
 private typealias Extension_TextField = UITextField
 
+//private var placeholderKey = "placeholderKey"
+
+//private struct AssociatedKeys {
+//    static var placeholderKey = "placeholderKey"
+//}
+
+// FIXME: 使用此方式无警告
+private struct AssociatedKeys {
+    static var placeholderKey = UnsafeRawPointer(bitPattern: "placeholderKey".hashValue)!
+}
+
 // MARK: - main class
-extension Extension_TextField {
-    
-    private static var placeholderKey = "placeholderKey"
+extension Extension_TextField: AssociatedObjectStore {
     
     // 重写系统属性, 进行属性监听
     public var placeholder: String? {
         get {
-            return objc_getAssociatedObject(self, &UITextField.placeholderKey) as? String
+            return associatedObject(forKey: &AssociatedKeys.placeholderKey)
+            //return objc_getAssociatedObject(self, &UITextField.placeholderKey) as? String
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &UITextField.placeholderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            //objc_setAssociatedObject(self, &UITextField.placeholderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            setAssociatedObject(newValue, forKey: &AssociatedKeys.placeholderKey)
             
             // 当placeholder属性被设置时执行的逻辑
             let attrs = NSMutableAttributedString(string: newValue ?? "")

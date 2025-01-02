@@ -7,7 +7,7 @@
 import Foundation
 
 /// 资源包
-let assetsBundle = Bundle(url: R.file.audioAssetsBundle()!)
+let assetsBundle = Bundle(url: R.file.mediaAssetsBundle()!)
 
 /// 播放模式
 enum AVPlaybackMode {

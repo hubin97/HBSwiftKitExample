@@ -89,7 +89,7 @@ class AudioPlayerController: ViewController, ViewModelProvider {
     lazy var toolBar: AudioPlayToolBar = {
         let _toolBar = AudioPlayToolBar()
         _toolBar.backgroundColor = .clear
-        _toolBar.config = AudioPlayProgressConfig()
+        _toolBar.config = MediaPlayProgressConfig()
         _toolBar.delegate = self
         return _toolBar
     }()
