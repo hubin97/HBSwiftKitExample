@@ -168,7 +168,9 @@ extension MediaPlayProgress {
     override func layoutSubviews() {
         super.layoutSubviews()
         // 更新滑块位置
-        updateThumbPosition()
+        DispatchQueue.main.async {
+            self.updateThumbPosition()
+        }
     }
     
     // 更新滑块位置

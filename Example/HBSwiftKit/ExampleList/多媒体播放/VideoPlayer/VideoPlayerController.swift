@@ -10,9 +10,13 @@ import AVFoundation
 // MARK: - global var and methods
 
 // MARK: - main class
-class VideoPlayerController: ViewController, ViewModelProvider {
+class VideoPlayerController: ViewController, ViewModelProvider, ScreenOrientationHandler {
     typealias ViewModelType = VideoPlayerViewModel
 
+    var currentOrientation: UIInterfaceOrientation = .portrait
+    var isOrientationLocked: Bool = false
+    var isFullScreen: Bool = false
+    
     lazy var avPlayerManager: AVPlayerManager = {
         return AVPlayerManager.shared
     }()
@@ -35,67 +39,69 @@ class VideoPlayerController: ViewController, ViewModelProvider {
     // 返回按钮
     lazy var backButton: UIButton = {
         let _backButton = UIButton(type: .custom)
+        _backButton.frame = CGRect(x: 10, y: kStatusBarHeight, width: 44, height: 44)
         _backButton.setImage(R.image.ib_back()?.adaptRTL, for: .normal)
         _backButton.addTarget(self, action: #selector(tapBackAction), for: .touchUpInside)
         return _backButton
     }()
    
-    lazy var verticalToolBar: VideoPlayVerticalToolBar = {
-        let _verticalToolBar = VideoPlayVerticalToolBar()
-        _verticalToolBar.backgroundColor = .clear
-        _verticalToolBar.config = MediaPlayProgressConfig()
-        _verticalToolBar.delegate = self
-        return _verticalToolBar
+    lazy var halfVerticalToolBar: HalfVerticalToolBar = {
+        let originY = kStatusBarHeight + kScreenW / (16/9) - 44
+        let _toolBar = HalfVerticalToolBar(frame: CGRect(x: 0, y: originY, width: kScreenW, height: 44))
+        _toolBar.backgroundColor = .clear
+        _toolBar.config = MediaPlayProgressConfig()
+        _toolBar.delegate = self
+        _toolBar.isHidden = true
+        return _toolBar
     }()
     
+    lazy var fullVerticalToolBar: FullVerticalToolBar = {
+        let _toolBar = FullVerticalToolBar(frame: CGRect(x: 0, y: kScreenH - kBottomSafeHeight - 70, width: kScreenW, height: kBottomSafeHeight + 70))
+        _toolBar.backgroundColor = .clear
+        _toolBar.config = MediaPlayProgressConfig()
+        _toolBar.delegate = self
+        return _toolBar
+    }()
+        
     lazy var horizontalToolBar: VideoPlayHorizontalToolBar = {
-        let _horizontalToolBar = VideoPlayHorizontalToolBar()
-        _horizontalToolBar.backgroundColor = .clear
-        _horizontalToolBar.config = MediaPlayProgressConfig()
-        _horizontalToolBar.delegate = self
-        _horizontalToolBar.isHidden = true
-        return _horizontalToolBar
+        let _toolBar = VideoPlayHorizontalToolBar(frame: CGRect(x: 0, y: kScreenW - 70, width: kScreenH, height: 70))
+        _toolBar.backgroundColor = .clear
+        _toolBar.config = MediaPlayProgressConfig()
+        _toolBar.delegate = self
+        _toolBar.isHidden = true
+        return _toolBar
     }()
-    
+
     override func setupLayout() {
         super.setupLayout()
         // self.naviBar.title = "Video Player"
         self.naviBar.isHidden = true
         view.addSubview(playerPreview)
-        view.addSubview(verticalToolBar)
+        view.addSubview(halfVerticalToolBar)
+        view.addSubview(fullVerticalToolBar)
         view.addSubview(horizontalToolBar)
         view.addSubview(backButton)
-        
-//        playerPreview.snp.makeConstraints { make in
-//            make.edges.equalToSuperview()
-//        }
-        verticalToolBar.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-kBottomSafeHeight)
-            make.height.equalTo(60)
-        }
-        horizontalToolBar.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-kBottomSafeHeight)
-            make.height.equalTo(60)
-        }
-        backButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.leading.equalToSuperview().offset(10)
-            $0.size.equalTo(CGSize(width: 44, height: 44))
-        }
     }
     
     override func bindViewModel() {
         super.bindViewModel()
         
+        var date = Date()
         if let playItem = vm.playItem {
-            avPlayerManager.play(item: playItem)
-            
-            if let playerLayer = avPlayerManager.getPlayerLayer() {
-                playerPreview.layer.insertSublayer(playerLayer, at: 0)
-                playerLayer.frame = playerPreview.bounds
-                self.playerLayer = playerLayer
+            DispatchQueue.global().async {
+                self.avPlayerManager.play(item: playItem)
+                LogM.debug("耗时1: \(Date().timeIntervalSince(date))")
+                
+                date = Date()
+                if let playerLayer = self.avPlayerManager.getPlayerLayer() {
+                    playerLayer.frame = self.playerPreview.bounds
+                    self.playerLayer = playerLayer
+                    LogM.debug("耗时2: \(Date().timeIntervalSince(date))")
+                    
+                    DispatchQueue.main.async {
+                        self.playerPreview.layer.insertSublayer(playerLayer, at: 0)
+                    }
+                }
             }
         }
     }
@@ -103,6 +109,7 @@ class VideoPlayerController: ViewController, ViewModelProvider {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.avPlayerManager.delegate = self
+        self.setupOrientationListener()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -114,13 +121,54 @@ class VideoPlayerController: ViewController, ViewModelProvider {
         super.viewDidDisappear(animated)
         self.avPlayerManager.stop()
     }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .allButUpsideDown
+    }
 }
 
 // MARK: - private mothods
 extension VideoPlayerController {
     
     @objc func tapBackAction() {
+        if currentOrientation.isLandscape {
+            self.toggleOrientation()
+            return
+        }
         backAction()
+    }
+    
+    // 预览图层 横竖屏切换
+    func adjustLayout(for orientation: UIInterfaceOrientation) {
+        self.halfVerticalToolBar.scaleButton.isHidden = orientation.isLandscape
+        self.fullVerticalToolBar.scaleButton.isHidden = orientation.isLandscape
+        //self.horizontalToolBar.scaleButton.isHidden = orientation.isPortrait
+        self.updateConfig()
+
+        let videoFrame = orientation.isLandscape ? CGRect(x: 0, y: 0, width: kScreenH, height: kScreenW): CGRect(x: 0, y: 0, width: kScreenW, height: isFullScreen ? kScreenH: kScreenW / (16/9))
+        UIView.animate(withDuration: 0.25) {
+            self.playerPreview.frame = videoFrame
+        } completion: { _ in
+            self.playerLayer?.frame = self.playerPreview.bounds
+        }
+    }
+    
+    // 竖屏 16:9  1  back 40 toolbar 44  / toolbar 70 / 全屏也是 70
+    func adjustLayoutForIsFullScreen() {
+        self.updateConfig()
+        
+        let videoFrame = CGRect(x: 0, y: 0, width: kScreenW, height: isFullScreen ? kScreenH: kScreenW / (16/9) + kStatusBarHeight)
+        UIView.animate(withDuration: 0.25) {
+            self.playerPreview.frame = videoFrame
+        } completion: { _ in
+            self.playerLayer?.frame = self.playerPreview.bounds
+        }
+    }
+    
+    func updateConfig() {
+        self.halfVerticalToolBar.isHidden = isFullScreen
+        self.fullVerticalToolBar.isHidden = (!isFullScreen || (isFullScreen && currentOrientation.isLandscape))
+        self.horizontalToolBar.isHidden = currentOrientation.isPortrait
     }
 }
 
@@ -150,19 +198,14 @@ extension VideoPlayerController: VideoPlayToolBarDelegate {
     
     func playToolBar(_ toolBar: VideoPlayToolBar, scaleAction: Bool) {
         LogM.debug("半屏/全屏切换")
+        if currentOrientation == .portrait {
+            isFullScreen.toggle()
+            adjustLayoutForIsFullScreen()
+        }
     }
     func playToolBar(_ toolBar: VideoPlayToolBar, rotateAction: Bool) {
         LogM.debug("旋转")
-//        verticalToolBar.isHidden = true
-//        horizontalToolBar.isHidden = false
-        // 预览图层 横竖屏切换
-        UIView.animate(withDuration: 0.25) {
-            self.playerPreview.frame = CGRect(x: 0, y: 0, width: kScreenH, height: kScreenW)
-            self.playerPreview.center = self.view.center
-            self.playerPreview.transform = CGAffineTransform(rotationAngle: .pi/2)
-        } completion: { _ in
-            self.playerLayer?.frame = self.playerPreview.bounds
-        }
+        self.toggleOrientation()
     }
 
     //
@@ -190,16 +233,22 @@ extension VideoPlayerController: AVPlayerManagerDelegate {
     
     func avPlayerManager(_ manager: AVPlayerManager, item: AVPlaylistItem, didUpdateProgressTo time: TimeInterval) {
         // 规避拖拽
-        guard !verticalToolBar.isDraging else { return }
-        verticalToolBar.updateToolBar(with: item)
+        guard !halfVerticalToolBar.isDraging && !fullVerticalToolBar.isDraging && !horizontalToolBar.isDraging else { return }
+        halfVerticalToolBar.updateToolBar(with: item)
+        fullVerticalToolBar.updateToolBar(with: item)
+        horizontalToolBar.updateToolBar(with: item)
     }
     
     func avPlayerManager(_ manager: AVPlayerManager, item: AVPlaylistItem, didUpdateBufferProgressTo progress: Float) {
-        verticalToolBar.updateBufferValue(progress)
+        halfVerticalToolBar.updateBufferValue(progress)
+        fullVerticalToolBar.updateBufferValue(progress)
+        horizontalToolBar.updateBufferValue(progress)
     }
     
     func avPlayerManager(_ manager: AVPlayerManager, item: AVPlaylistItem, didUpdateStatusTo status: AVPlayer.TimeControlStatus) {
-        verticalToolBar.updatePlayStatus()
+        halfVerticalToolBar.updatePlayStatus()
+        fullVerticalToolBar.updatePlayStatus()
+        horizontalToolBar.updatePlayStatus()
     }
     
     func avPlayerManager(_ manager: AVPlayerManager, previous item: AVPlaylistItem) {

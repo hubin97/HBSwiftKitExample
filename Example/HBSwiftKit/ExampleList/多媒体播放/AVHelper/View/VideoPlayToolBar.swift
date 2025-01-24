@@ -91,8 +91,8 @@ class VideoPlayToolBar: UIView {
         return button
     }()
     
-    init() {
-        super.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupLayout()
         //bindData()
         //playStateUpdate()
@@ -238,30 +238,6 @@ class VideoPlayVerticalToolBar: VideoPlayToolBar {
         return _rotateButton
     }()
     
-    override func setupLayout() {
-        addSubview(slider)
-        addSubview(scaleButton)
-        addSubview(rotateButton)
-         
-        slider.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()//.inset(35)
-            make.top.equalToSuperview()//.offset(10)
-            make.height.equalTo(30)
-        }
- 
-        rotateButton.snp.makeConstraints { (make) in
-            make.top.equalTo(slider.snp.bottom)
-            make.leading.equalTo(scaleButton.snp.trailing).offset(20)
-            make.trailing.equalToSuperview().inset(20)
-            make.width.height.equalTo(30)
-        }
-        
-        scaleButton.snp.makeConstraints { (make) in
-            make.width.height.equalTo(30)
-            make.centerY.equalTo(rotateButton)
-        }
-    }
-    
     @objc func scaleAction() {
         delegate?.playToolBar(self, scaleAction: true)
     }
@@ -271,30 +247,81 @@ class VideoPlayVerticalToolBar: VideoPlayToolBar {
     }
 }
 
+// 竖屏 16:9  1  back 40 toolbar 44  / toolbar 70 / 全屏也是 70
+class HalfVerticalToolBar: VideoPlayVerticalToolBar {
+    
+    override func setupLayout() {
+        addSubview(playButton)
+        addSubview(slider)
+        addSubview(scaleButton)
+        addSubview(rotateButton)
+         
+        playButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.top.bottom.equalToSuperview()
+            make.width.height.equalTo(44)
+        }
+        rotateButton.snp.makeConstraints { (make) in
+            make.trailing.equalToSuperview().inset(20)
+            make.top.bottom.equalToSuperview()
+            make.width.height.equalTo(44)
+        }
+        scaleButton.snp.makeConstraints { (make) in
+            make.trailing.equalTo(rotateButton.snp.leading).offset(-10)
+            make.width.height.equalTo(44)
+            make.centerY.equalTo(rotateButton)
+        }
+        slider.snp.makeConstraints { (make) in
+            make.leading.equalTo(playButton.snp.trailing).offset(20)
+            make.trailing.equalTo(scaleButton.snp.leading).offset(-20)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(20)
+        }
+    }
+}
+
+class FullVerticalToolBar: VideoPlayVerticalToolBar {
+ 
+    override func setupLayout() {
+        addSubview(slider)
+        addSubview(scaleButton)
+        addSubview(rotateButton)
+         
+        slider.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(10)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(20)
+        }
+        rotateButton.snp.makeConstraints { (make) in
+            make.top.equalTo(slider.snp.bottom)
+            make.trailing.equalToSuperview().inset(20)
+            make.width.height.equalTo(44)
+        }
+        scaleButton.snp.makeConstraints { (make) in
+            make.trailing.equalTo(rotateButton.snp.leading).offset(-10)
+            make.width.height.equalTo(44)
+            make.centerY.equalTo(rotateButton)
+        }
+    }
+}
+
 // MARK: - 水平工具栏
 class VideoPlayHorizontalToolBar: VideoPlayToolBar {
  
     override func setupLayout() {
+        addSubview(playButton)
         addSubview(slider)
-//        addSubview(scaleButton)
-//        addSubview(rotateButton)
-         
+        
         slider.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()//.inset(35)
-            make.top.equalToSuperview()//.offset(10)
-            make.height.equalTo(30)
+            make.top.equalToSuperview().offset(10)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(20)
         }
- 
-//        rotateButton.snp.makeConstraints { (make) in
-//            make.top.equalTo(slider.snp.bottom)
-//            make.leading.equalTo(scaleButton.snp.trailing).offset(20)
-//            make.trailing.equalToSuperview().inset(20)
-//            make.width.height.equalTo(30)
-//        }
-//        
-//        scaleButton.snp.makeConstraints { (make) in
-//            make.width.height.equalTo(30)
-//            make.centerY.equalTo(rotateButton)
-//        }
+        
+        playButton.snp.makeConstraints { make in
+            make.top.equalTo(slider.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(10)
+            make.width.height.equalTo(44)
+        }
     }
 }

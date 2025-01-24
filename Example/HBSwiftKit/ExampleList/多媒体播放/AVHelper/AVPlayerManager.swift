@@ -159,13 +159,14 @@ extension AVPlayerManager {
         self.stop()
         
         self.player = AVPlayer(playerItem: AVPlayerItem(url: url))
-        self.player?.play()
         
         // 创建 AVPlayerLayer
         if self.playerLayer == nil {
             self.playerLayer = AVPlayerLayer(player: player)
             self.playerLayer?.videoGravity = .resizeAspect
         }
+        
+        self.player?.play()
         
         // 设置监听
         self.setupPlayerObservers()
