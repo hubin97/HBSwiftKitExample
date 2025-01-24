@@ -78,16 +78,25 @@ PODS:
     - HBSwiftKit/Other/AuthStatus (= 0.5.1)
     - HBSwiftKit/Other/LoggerManager (= 0.5.1)
     - HBSwiftKit/Other/Utils (= 0.5.1)
+    - Kingfisher
+    - Toast-Swift
   - HBSwiftKit/Other/AuthStatus (0.5.1):
     - CocoaLumberjack
     - HBSwiftKit/Base/Core
+    - Kingfisher
+    - Toast-Swift
   - HBSwiftKit/Other/LoggerManager (0.5.1):
     - CocoaLumberjack
     - HBSwiftKit/Base/Core
     - HBSwiftKit/Base/Extension
+    - HBSwiftKit/Other/Utils
+    - Kingfisher
+    - RxSwift
+    - Toast-Swift
   - HBSwiftKit/Other/Utils (0.5.1):
     - CocoaLumberjack
     - HBSwiftKit/Base/Core
+    - Kingfisher
     - Toast-Swift
   - IQKeyboardManagerSwift (6.5.16)
   - Kingfisher (7.10.2)
@@ -213,7 +222,7 @@ SPEC CHECKSUMS:
   DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
   FLEX: f21ee4f498eed3f8a1eded66b21939fd3b7a22ce
   GDPerformanceView-Swift: 22d964fe40b19e3d914dba2586237d064de8fd77
-  HBSwiftKit: 6c22f714577339c8da08aebc8f99f392dcb4d1cd
+  HBSwiftKit: a2d295756467f7a57c6ae56f407b503c3f061cbe
   IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
   Kingfisher: 99edc495d3b7607e6425f0d6f6847b2abd6d716d
   lottie-ios: a881093fab623c467d3bce374367755c272bdd59
@@ -238,4 +247,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e7b8559505e1e47310d29109dd74c08eabb71438
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

@@ -118,4 +118,20 @@ Pod::Spec.new do |s|
     # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     s.requires_arc = true
     
+    # xcframework 生成配置
+    # 开启之后才会生成 arm64-apple-ios.swiftinterface 等5个文件
+#    s.static_framework = true
+#    
+#    # CocoaPods Target 的编译设置
+#    s.pod_target_xcconfig = {
+#      'DEFINES_MODULE' => 'YES',                        # 开启模块化支持
+#      'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES'         # 支持 Swift 模块的分发和跨版本兼容
+#    }
+#    
+#    # 全局编译设置
+#    s.xcconfig = {
+#      'SKIP_INSTALL' => 'NO',                           # 确保不会跳过安装步骤
+#      'INSTALL_PATH' => '$(LOCAL_LIBRARY_DIR)/Frameworks' # 指定 Framework 的安装路径
+#    }
+    
 end
