@@ -52,7 +52,8 @@ class VideoPlayToolBar: UIView {
     
     lazy var slider: MediaPlayProgress = {
         let _slider = MediaPlayProgress()
-        _slider.thumbImage = R.image.star_select()
+        //_slider.thumbImage = UIImage(named: "icon_media_tablet", in: assetsBundle, compatibleWith: nil)
+        _slider.thumbImage = UIImage(named: "icon_media_tv", in: assetsBundle, compatibleWith: nil)
         _slider.value = 0
         _slider.bufferedValue = 0
         _slider.delegate = self
@@ -74,6 +75,7 @@ class VideoPlayToolBar: UIView {
         let button = Button(type: .custom)
         button.setImage(UIImage(named: "icon_media_play", in: assetsBundle, compatibleWith: nil), for: .normal)
         button.setImage(UIImage(named: "icon_media_stop", in: assetsBundle, compatibleWith: nil), for: .selected)
+        button.addTarget(self, action: #selector(playAction), for: .touchUpInside)
         return button
     }()
     
@@ -81,13 +83,15 @@ class VideoPlayToolBar: UIView {
     lazy var previousButton: Button = {
         let button = Button(type: .custom)
         button.setImage(UIImage(named: "icon_media_last", in: assetsBundle, compatibleWith: nil), for: .normal)
+        button.addTarget(self, action: #selector(playPreviousAction), for: .touchUpInside)
         return button
     }()
     
     // 下一首
     lazy var nextButton: Button = {
         let button = Button(type: .custom)
-        button.setImage(UIImage(named: "icon_media_next", in: assetsBundle, compatibleWith: nil), for: .normal)
+        button.setImage(UIImage(named: "icon_play_next_white", in: assetsBundle, compatibleWith: nil), for: .normal)
+        button.addTarget(self, action: #selector(playNextAction), for: .touchUpInside)
         return button
     }()
     
@@ -107,28 +111,18 @@ class VideoPlayToolBar: UIView {
         addSubview(timeLabel)
         addSubview(playButton)
         addSubview(nextButton)
-        
-        playButton.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-            make.width.height.equalTo(48)
-        }
-        
-        slider.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().offset(-15)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(30)
-        }
     }
     
-//    func bindData() {
-//        playButton.rx_throttledTap().subscribe(onNext: { [weak self] in
-//            //self?.playAction()
-//        }).disposed(by: rx.disposeBag)
-//        
-//        nextButton.rx_throttledTap().subscribe(onNext: { [weak self] in
-//            //self?.nextAction()
-//        }).disposed(by: rx.disposeBag)
-//    }
+    @objc func playAction() {
+        playButton.isSelected.toggle()
+        delegate?.playToolBar(self, playAction: playButton.isSelected)
+    }
+    @objc func playPreviousAction() {
+        delegate?.playToolBar(self, previousAction: true)
+    }
+    @objc func playNextAction() {
+        delegate?.playToolBar(self, nextAction: true)
+    }
     
     /// 更新缓冲进度
     func updateBufferValue(_ bufferValue: Float) {
@@ -172,30 +166,16 @@ class VideoPlayToolBar: UIView {
     /// 更新播放状态
     func updatePlayStatus() {
         guard let player = AVPlayerManager.shared.getPlayer() else { return }
-//        switch player.timeControlStatus {
-//        case .waitingToPlayAtSpecifiedRate:
-//            playButton.isHidden = true
-//            waitAnimation.isHidden = false
-//            startRotationAnimation()
-//        case .playing:
-//            stopRotationAnimation()
-//            isPlaying = true
-//            waitAnimation.isHidden = true
-//            playButton.isHidden = false
-//            playButton.isSelected = true
-//        case .paused:
-//            isPlaying = false
-//            stopRotationAnimation()
-//            waitAnimation.isHidden = true
-//            playButton.isHidden = false
-//            playButton.isSelected = false
-//        default:
-//            isPlaying = false
-//            stopRotationAnimation()
-//            waitAnimation.isHidden = true
-//            playButton.isHidden = false
-//            playButton.isSelected = false
-//        }
+        switch player.timeControlStatus {
+        case .waitingToPlayAtSpecifiedRate:
+            LogM.debug("wait...")
+        case .playing:
+            playButton.isSelected = true
+        case .paused:
+            playButton.isSelected = false
+        default:
+            playButton.isSelected = false
+        }
     }
 }
 
@@ -226,14 +206,15 @@ class VideoPlayVerticalToolBar: VideoPlayToolBar {
     
     lazy var scaleButton: UIButton = {
         let _scaleButton = UIButton(type: .custom)
-        _scaleButton.setImage(UIImage(named: "icon_screen_small", in: assetsBundle, compatibleWith: nil), for: .normal)
+        _scaleButton.setImage(UIImage(named: "icon_maxmize", in: assetsBundle, compatibleWith: nil), for: .normal)
+        _scaleButton.setImage(UIImage(named: "icon_minmize", in: assetsBundle, compatibleWith: nil), for: .selected)
         _scaleButton.addTarget(self, action: #selector(scaleAction), for: .touchUpInside)
         return _scaleButton
     }()
     
     lazy var rotateButton: UIButton = {
         let _rotateButton = UIButton(type: .custom)
-        _rotateButton.setImage(UIImage(named: "icon_screen_rotate", in: assetsBundle, compatibleWith: nil), for: .normal)
+        _rotateButton.setImage(UIImage(named: "icon_video_rotate", in: assetsBundle, compatibleWith: nil), for: .normal)
         _rotateButton.addTarget(self, action: #selector(rotateAction), for: .touchUpInside)
         return _rotateButton
     }()
@@ -256,6 +237,7 @@ class HalfVerticalToolBar: VideoPlayVerticalToolBar {
         addSubview(scaleButton)
         addSubview(rotateButton)
          
+        scaleButton.isSelected = false
         playButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
             make.top.bottom.equalToSuperview()
@@ -287,6 +269,7 @@ class FullVerticalToolBar: VideoPlayVerticalToolBar {
         addSubview(scaleButton)
         addSubview(rotateButton)
          
+        scaleButton.isSelected = true
         slider.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(10)
             make.leading.trailing.equalToSuperview()
@@ -313,13 +296,13 @@ class VideoPlayHorizontalToolBar: VideoPlayToolBar {
         addSubview(slider)
         
         slider.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview()//.offset(10)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(20)
         }
         
         playButton.snp.makeConstraints { make in
-            make.top.equalTo(slider.snp.bottom).offset(10)
+            make.top.equalTo(slider.snp.bottom)//.offset(6)
             make.leading.equalToSuperview().offset(10)
             make.width.height.equalTo(44)
         }

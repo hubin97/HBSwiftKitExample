@@ -24,7 +24,7 @@ class AudioPlayerController: ViewController, ViewModelProvider {
     // 返回按钮
     lazy var backButton: UIButton = {
         let _backButton = UIButton(type: .custom)
-        _backButton.setImage(R.image.ib_back()?.adaptRTL, for: .normal)
+        _backButton.setImage(UIImage(named: "icon_back_white", in: assetsBundle, compatibleWith: nil)?.adaptRTL, for: .normal)
         _backButton.addTarget(self, action: #selector(tapBackAction), for: .touchUpInside)
         return _backButton
     }()

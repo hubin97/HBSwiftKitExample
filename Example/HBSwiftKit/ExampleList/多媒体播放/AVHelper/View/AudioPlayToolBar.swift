@@ -86,7 +86,7 @@ class AudioPlayToolBar: UIView {
     // 播放模式
     private lazy var playModeButton: Button = {
         let button = Button(type: .custom)
-        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        //button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         button.setImage(playMode.icon, for: .normal)
         button.addTarget(self, action: #selector(exchangePlayMode), for: .touchUpInside)
         return button
@@ -95,8 +95,7 @@ class AudioPlayToolBar: UIView {
     // 播放列表
     private lazy var playListButton: Button = {
         let button = Button(type: .custom)
-        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        button.setImage(UIImage(named: "icon_playlist", in: assetsBundle, compatibleWith: nil), for: .normal)
+        button.setImage(UIImage(named: "icon_media_list", in: assetsBundle, compatibleWith: nil), for: .normal)
         button.addTarget(self, action: #selector(expandPlayList), for: .touchUpInside)
         return button
     }()
@@ -179,7 +178,7 @@ class AudioPlayToolBar: UIView {
         
         waitAnimation.snp.makeConstraints { (make) in
             make.center.equalTo(playButton)
-            make.width.height.equalTo(24)
+            make.width.height.equalTo(48)
         }
         
         previousButton.snp.makeConstraints { (make) in

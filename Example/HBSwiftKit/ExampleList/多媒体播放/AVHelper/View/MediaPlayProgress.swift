@@ -14,6 +14,7 @@ struct MediaPlayProgressConfig {
     var progressTintColor: UIColor = .white
     var progressHeight: CGFloat = 6
     var cornerRadius: CGFloat = 3
+    var thumbImageSize: CGSize? = CGSize(width: 36, height: 36)
 }
 
 protocol MediaPlayProgressDelegate: AnyObject {
@@ -177,14 +178,17 @@ extension MediaPlayProgress {
     private func updateThumbPosition() {
         guard let thumbImage = thumbImage else { return }
         
+        let thumbSize = thumbImage.size
+        let thumbW = config.thumbImageSize?.width ?? thumbSize.width
+        let thumbH = config.thumbImageSize?.height ?? thumbSize.height
+
         // 计算滑块位置
         let progressWidth = CGFloat((value - minimumValue) / (maximumValue - minimumValue)) * bounds.width
-        let thumbSize = thumbImage.size
-        let thumbX = progressWidth - thumbSize.width / 2
-        let thumbY = (bounds.height - thumbSize.height) / 2
+        let thumbX = progressWidth - thumbW / 2
+        let thumbY = (bounds.height - thumbH) / 2
         
         // 更新滑块视图
-        thumbImageView.frame = CGRect(x: thumbX, y: thumbY, width: thumbSize.width, height: thumbSize.height)
+        thumbImageView.frame = CGRect(x: thumbX, y: thumbY, width: thumbW, height: thumbH)
     }
 }
 

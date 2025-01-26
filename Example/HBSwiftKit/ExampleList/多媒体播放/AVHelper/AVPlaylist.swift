@@ -27,7 +27,7 @@ enum AVPlaybackMode {
         case .sequential:
             return UIImage(named: "icon_play_mode_sequential", in: assetsBundle, compatibleWith: nil)
         case .random:
-            return UIImage(named: "icon_play_mode_random", in: assetsBundle, compatibleWith: nil)
+            return UIImage(named: "icon_play_mode_shuffle", in: assetsBundle, compatibleWith: nil)
         case .repeatOne:
             return UIImage(named: "icon_play_mode_repeat_one", in: assetsBundle, compatibleWith: nil)
         }

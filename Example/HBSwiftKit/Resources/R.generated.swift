@@ -33,7 +33,7 @@ struct _R {
     let developmentRegion = "en"
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 44 images, and 1 namespaces.
+  /// This `_R.image` struct is generated, and contains static references to 47 images, and 1 namespaces.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -72,6 +72,15 @@ struct _R {
 
     /// Image `icon_calendar_arrow_down`.
     var icon_calendar_arrow_down: RswiftResources.ImageResource { .init(name: "icon_calendar_arrow_down", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `icon_pause_white`.
+    var icon_pause_white: RswiftResources.ImageResource { .init(name: "icon_pause_white", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `icon_play_next_white`.
+    var icon_play_next_white: RswiftResources.ImageResource { .init(name: "icon_play_next_white", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `icon_play_white`.
+    var icon_play_white: RswiftResources.ImageResource { .init(name: "icon_play_white", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `image`.
     var image: RswiftResources.ImageResource { .init(name: "image", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
