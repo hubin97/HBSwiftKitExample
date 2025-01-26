@@ -57,8 +57,9 @@ class VideoListViewModel: ViewModel {
         ]),
         VideoMeta(type: .remote, playList: [
             AVPlaylistItem(id: 2000, title: "【720P/TVRip】三十年前的老动画至今秒杀一片-哔哩哔哩", url: "https://cozy-static-dev.cozyinnov.com/public/970040/C00000001/app/feedback/67877ca3e4b0604661da5888.mp4", artist: "bilibili"),
-            AVPlaylistItem(id: 2001, title: "【最强对决】 友情的决裂intro-哔哩哔哩", url: "https://cozy-static-dev.cozyinnov.com/public/970040/C00000001/app/feedback/67877d72e4b0604661da588a.mp4",  artist: "bilibili", imageUrl: "http://i2.hdslb.com/bfs/archive/4ab4d91063eec2c0399eae9acf54f37cd86d1ea5.jpg"),
-            AVPlaylistItem(id: 2002, title: "【最强对决】 友情的决裂：宇智波风间VS千手新之助-哔哩哔哩", url: "https://cozy-static-dev.cozyinnov.com/public/970040/C00000001/app/feedback/67877d72e4b0604661da588b.mp4",  artist: "bilibili", imageUrl: "http://i2.hdslb.com/bfs/archive/4ab4d91063eec2c0399eae9acf54f37cd86d1ea5.jpg")])
+            AVPlaylistItem(id: 2001, title: "【哔哩哔哩】一段动漫打戏，竟然全是中国功夫的杀人技！", url: "https://cozy-static-dev.cozyinnov.com/public/970040/C00000001/app/feedback/67958ef8e4b0054dc8430e03.mp4", artist: "bilibili"),
+            AVPlaylistItem(id: 2002, title: "【最强对决】 友情的决裂intro-哔哩哔哩", url: "https://cozy-static-dev.cozyinnov.com/public/970040/C00000001/app/feedback/67877d72e4b0604661da588a.mp4",  artist: "bilibili", imageUrl: "http://i2.hdslb.com/bfs/archive/4ab4d91063eec2c0399eae9acf54f37cd86d1ea5.jpg"),
+            AVPlaylistItem(id: 2003, title: "【最强对决】 友情的决裂：宇智波风间VS千手新之助-哔哩哔哩", url: "https://cozy-static-dev.cozyinnov.com/public/970040/C00000001/app/feedback/67877d72e4b0604661da588b.mp4",  artist: "bilibili", imageUrl: "http://i2.hdslb.com/bfs/archive/4ab4d91063eec2c0399eae9acf54f37cd86d1ea5.jpg")])
     ]
     
 //    lazy var avPlayerManager: AVPlayerManager = {

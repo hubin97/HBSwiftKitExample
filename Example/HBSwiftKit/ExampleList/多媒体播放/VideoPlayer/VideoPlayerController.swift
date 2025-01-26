@@ -45,6 +45,7 @@ class VideoPlayerController: ViewController, ViewModelProvider, ScreenOrientatio
         return _backButton
     }()
    
+    private let halfVerticalViewH = kScreenW / (16/9) + kStatusBarHeight
     lazy var halfVerticalToolBar: HalfVerticalToolBar = {
         let originY = kStatusBarHeight + kScreenW / (16/9) - 44
         let _toolBar = HalfVerticalToolBar(frame: CGRect(x: 0, y: originY, width: kScreenW, height: 44))
@@ -104,6 +105,8 @@ class VideoPlayerController: ViewController, ViewModelProvider, ScreenOrientatio
                 }
             }
         }
+        
+        self.adjustLayoutForIsFullScreen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -140,12 +143,9 @@ extension VideoPlayerController {
     
     // 预览图层 横竖屏切换
     func adjustLayout(for orientation: UIInterfaceOrientation) {
-        self.halfVerticalToolBar.scaleButton.isHidden = orientation.isLandscape
-        self.fullVerticalToolBar.scaleButton.isHidden = orientation.isLandscape
-        //self.horizontalToolBar.scaleButton.isHidden = orientation.isPortrait
         self.updateConfig()
 
-        let videoFrame = orientation.isLandscape ? CGRect(x: 0, y: 0, width: kScreenH, height: kScreenW): CGRect(x: 0, y: 0, width: kScreenW, height: isFullScreen ? kScreenH: kScreenW / (16/9))
+        let videoFrame = orientation.isLandscape ? CGRect(x: 0, y: 0, width: kScreenH, height: kScreenW): CGRect(x: 0, y: 0, width: kScreenW, height: isFullScreen ? kScreenH: halfVerticalViewH)
         UIView.animate(withDuration: 0.25) {
             self.playerPreview.frame = videoFrame
         } completion: { _ in
@@ -157,7 +157,7 @@ extension VideoPlayerController {
     func adjustLayoutForIsFullScreen() {
         self.updateConfig()
         
-        let videoFrame = CGRect(x: 0, y: 0, width: kScreenW, height: isFullScreen ? kScreenH: kScreenW / (16/9) + kStatusBarHeight)
+        let videoFrame = CGRect(x: 0, y: 0, width: kScreenW, height: isFullScreen ? kScreenH: halfVerticalViewH)
         UIView.animate(withDuration: 0.25) {
             self.playerPreview.frame = videoFrame
         } completion: { _ in
@@ -166,9 +166,19 @@ extension VideoPlayerController {
     }
     
     func updateConfig() {
-        self.halfVerticalToolBar.isHidden = isFullScreen
-        self.fullVerticalToolBar.isHidden = (!isFullScreen || (isFullScreen && currentOrientation.isLandscape))
-        self.horizontalToolBar.isHidden = currentOrientation.isPortrait
+        if currentOrientation.isPortrait {
+            self.halfVerticalToolBar.isHidden = isFullScreen
+            self.fullVerticalToolBar.isHidden = !isFullScreen
+            self.horizontalToolBar.isHidden = true
+            self.halfVerticalToolBar.scaleButton.isHidden = false
+            self.fullVerticalToolBar.scaleButton.isHidden = false
+        } else {
+            self.horizontalToolBar.isHidden = false
+            self.halfVerticalToolBar.isHidden = true
+            self.fullVerticalToolBar.isHidden = true
+            self.halfVerticalToolBar.scaleButton.isHidden = true
+            self.fullVerticalToolBar.scaleButton.isHidden = true
+        }
     }
 }
 
