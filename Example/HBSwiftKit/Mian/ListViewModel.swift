@@ -22,6 +22,7 @@ class ListViewModel: ViewModel {
         case videoTest
         case mqtt
         case mediaList
+        case routerTest
 
         var title: String {
             switch self {
@@ -45,6 +46,8 @@ class ListViewModel: ViewModel {
                 return "媒体列表"
             case .mqtt:
                 return "MQTT"
+            case .routerTest:
+                return "路由测试"
             }
         }
     }

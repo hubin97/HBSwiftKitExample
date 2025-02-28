@@ -161,7 +161,7 @@ extension VideoPlayerController {
     func adjustLayout(for orientation: UIInterfaceOrientation) {
         self.updateConfig()
 
-        self.backButton.frame = CGRect(x: orientation.isPortrait ? 0: kStatusBarHeight, y: orientation.isPortrait ? kStatusBarHeight: 20, width: 44, height: 44)
+        self.backButton.frame = CGRect(x: orientation.isPortrait ? 0: kTopSafeHeight, y: orientation.isPortrait ? kStatusBarHeight: 20, width: 44, height: 44)
         
         let videoFrame = orientation.isLandscape ? CGRect(x: kTopSafeHeight, y: 0, width: kScreenH - kTopSafeHeight - kBottomSafeHeight, height: kScreenW): CGRect(x: 0, y: 0, width: kScreenW, height: isFullScreen ? kScreenH: halfVerticalViewH)
         UIView.animate(withDuration: 0.25) {

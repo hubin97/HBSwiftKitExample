@@ -8,6 +8,7 @@
 import UIKit
 import GDPerformanceView_Swift
 import HBSwiftKit
+import Router
 
 // MARK: - main class
 class ListViewController: ViewController, ViewModelProvider {
@@ -99,6 +100,8 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
             navigationController?.pushViewController(vc, animated: true)
         case .mediaList:
             navigator.show(provider: AppScene.mediaList, sender: self)
+        case .routerTest:
+            navigator.show(provider: TestScene.testList, sender: self)
         }
     }
 }

@@ -126,6 +126,8 @@ PODS:
     - PromiseKit/CorePromise
   - Quick (7.6.2)
   - R.swift (7.8.0)
+  - Router (0.0.1):
+    - HBSwiftKit
   - RxCocoa (6.6.0):
     - RxRelay (= 6.6.0)
     - RxSwift (= 6.6.0)
@@ -158,6 +160,7 @@ DEPENDENCIES:
   - PromiseKit
   - Quick
   - R.swift
+  - Router (from `../`)
   - RxCocoa (= 6.6.0)
   - RxSwift (~> 6.6.0)
   - SnapKit
@@ -204,6 +207,8 @@ EXTERNAL SOURCES:
     :path: "../"
   ProgressHUD:
     :git: https://github.com/hubin97/ProgressHUD.git
+  Router:
+    :path: "../"
 
 CHECKOUT OPTIONS:
   ProgressHUD:
@@ -237,6 +242,7 @@ SPEC CHECKSUMS:
   PromiseKit: e057b5b3c0ce9a0145674d633930924234104ee3
   Quick: b8bec97cd4b9f21da0472d45580f763b801fc353
   R.swift: f573269ca45b2ab066c082e363dd4c2b297b0d71
+  Router: 056c90df51b826f81dd5831d7746ea6b3f3070b9
   RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
   RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
@@ -245,6 +251,6 @@ SPEC CHECKSUMS:
   SwiftLint: 92196976e597b9afec5dbe374810103e6c1d9d7c
   Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
 
-PODFILE CHECKSUM: e7b8559505e1e47310d29109dd74c08eabb71438
+PODFILE CHECKSUM: d3634d68f9bd80fd74c30b9a4d1128d064018364
 
 COCOAPODS: 1.16.2

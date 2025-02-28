@@ -19,6 +19,8 @@ target 'HBSwiftKit_Example' do
 #  pod 'HBSwiftKit/HTTP', :path => '../'
 #  pod 'HBSwiftKit/Other', :path => '../'
 
+  pod 'Router', :path => '../'
+
   pod 'SnapKit'
   pod 'Kingfisher', '~> 7.10.0'
   pod 'R.swift' #, '~> 5.3.1'

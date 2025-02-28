@@ -49,13 +49,13 @@ extension Navigator {
     }
     
     @discardableResult
-    public func show(provider: SceneProvider, sender: UIViewController?, transition: Transition = .navigation) -> UIViewController? {
+    public func show(provider: SceneProvider, sender: UIViewController?, transition: Transition = .navigation, animated: Bool = true) -> UIViewController? {
         guard let target = provider.getSegue else { return nil }
-        self.show(target: target, sender: sender, transition: transition)
+        self.show(target: target, sender: sender, transition: transition, animated: animated)
         return target
     }
     
-    private func show(target: UIViewController, sender: UIViewController?, transition: Transition) {
+    private func show(target: UIViewController, sender: UIViewController?, transition: Transition, animated: Bool = true) {
         switch transition {
         case .root(in: let window):
             window.rootViewController = target
@@ -69,20 +69,20 @@ extension Navigator {
         }
         
         if let nav = sender as? UINavigationController {
-            nav.pushViewController(target, animated: false)
+            nav.pushViewController(target, animated: animated)
             return
         }
         
         switch transition {
         case .navigation:
             if let nav = sender.navigationController {
-                nav.pushViewController(target, animated: true)
+                nav.pushViewController(target, animated: animated)
             }
         case .modal(let type):
             DispatchQueue.main.async {
                 let nav = NavigationController(rootViewController: target)
                 nav.modalPresentationStyle = type
-                sender.present(nav, animated: true, completion: nil)
+                sender.present(nav, animated: animated, completion: nil)
             }
         case .detail:
             DispatchQueue.main.async {
@@ -91,7 +91,7 @@ extension Navigator {
             }
         case .alert:
             DispatchQueue.main.async {
-                sender.present(target, animated: true, completion: nil)
+                sender.present(target, animated: animated, completion: nil)
             }
         default: break
         }
