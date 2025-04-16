@@ -25,7 +25,7 @@ public protocol TabBarItemDataProvider where Self: CaseIterable {
 extension TabBarItemDataProvider {
     
     // 创建并返回对应的视图控制器，同时配置 TabBarItem
-    func getController(with viewModel: ViewModel, navigator: Navigator) -> UIViewController {
+    public func getController(with viewModel: ViewModel, navigator: Navigator) -> UIViewController {
         let vc = controller(with: viewModel, navigator: navigator)
         vc.tabBarItem = UITabBarItem(title: title, image: image_n?.withRenderingMode(.alwaysOriginal), selectedImage: image_h?.withRenderingMode(.alwaysOriginal))
         vc.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], for: .normal)
@@ -34,14 +34,14 @@ extension TabBarItemDataProvider {
 }
 
 // MARK: - main class
-public class TabBarViewModel: ViewModel {
+open class TabBarViewModel: ViewModel {
 
-    var tabBarItems: [any TabBarItemDataProvider] = []
-    public init(tabBarItems: [any TabBarItemDataProvider]) {
+    public private(set) var tabBarItems: [any TabBarItemDataProvider] = []
+    public required init(tabBarItems: [any TabBarItemDataProvider]) {
         self.tabBarItems = tabBarItems
     }
     
-    required public override init() {
+    required public init() {
         fatalError("init() has not been implemented")
     }
 }

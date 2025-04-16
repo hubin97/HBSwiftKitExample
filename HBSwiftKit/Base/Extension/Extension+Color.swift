@@ -11,22 +11,22 @@ import Foundation
 //MARK: - global var and methods
 fileprivate typealias Extension_Color = UIColor
 
-public func RGBA(r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat) -> UIColor {
-    return UIColor(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
-}
-
-public func RGB(_ r:CGFloat, g:CGFloat, b:CGFloat) -> UIColor {
-    return RGBA(r: r, g: g, b: b, a: 1)
-}
-
-/// 不推荐此方式, 建议使用扩展中的便捷初始化方法
-public func HEXA(hexValue: Int, a: CGFloat) -> UIColor {
-    return UIColor(red: ((CGFloat)((hexValue & 0xFF0000) >> 16)) / 255.0,green: ((CGFloat)((hexValue & 0xFF00) >> 8)) / 255.0, blue: ((CGFloat)(hexValue & 0xFF)) / 255.0,alpha: a)
-}
-
-public func HEX(hexValue: Int) -> UIColor {
-    return HEXA(hexValue: hexValue, a: 1.0)
-}
+//public func RGBA(r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat) -> UIColor {
+//    return UIColor(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
+//}
+//
+//public func RGB(_ r:CGFloat, g:CGFloat, b:CGFloat) -> UIColor {
+//    return RGBA(r: r, g: g, b: b, a: 1)
+//}
+//
+///// 不推荐此方式, 建议使用扩展中的便捷初始化方法
+//public func HEXA(hexValue: Int, a: CGFloat) -> UIColor {
+//    return UIColor(red: ((CGFloat)((hexValue & 0xFF0000) >> 16)) / 255.0,green: ((CGFloat)((hexValue & 0xFF00) >> 8)) / 255.0, blue: ((CGFloat)(hexValue & 0xFF)) / 255.0,alpha: a)
+//}
+//
+//public func HEX(hexValue: Int) -> UIColor {
+//    return HEXA(hexValue: hexValue, a: 1.0)
+//}
 
 //MARK: - main class
 

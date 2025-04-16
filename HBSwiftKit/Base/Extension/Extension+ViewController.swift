@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 
 // MARK: - global var and methods
-fileprivate typealias Extension_ViewController = UIViewController
+private typealias Extension_ViewController = UIViewController
 
 // MARK: - main class
 extension Extension_ViewController {
     
     struct VcKeys {
-        static var keyboardShow = "keyboardShow"
-        static var keyboardHide = "keyboardHide"
+        static var keyboardShow = UnsafeRawPointer(bitPattern: "keyboardShow".hashValue)
+        static var keyboardHide = UnsafeRawPointer(bitPattern: "keyboardHide".hashValue)
     }
     
     var keyboardShowBlock: ((Notification) -> Void)? {
@@ -46,6 +46,11 @@ extension Extension_ViewController {
         self.keyboardHideBlock = willHide
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    public func removeKeyboardListener() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func keyBoardWillShow(notification: Notification) {

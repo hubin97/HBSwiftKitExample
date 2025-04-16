@@ -119,7 +119,7 @@ extension Extension_AttributedString {
     ///   - range: range 默认NSMakeRange(0, length)
     /// - Returns: attributes
     @discardableResult
-    public func addAttr_lineSpacing(_ lineSpacing: CGFloat, referFont: UIFont? = nil, lineBreakMode: NSLineBreakMode = .byWordWrapping, textAlignment: NSTextAlignment = .left, range: NSRange? = nil) -> NSMutableAttributedString {
+    public func addAttr_lineSpacing(_ lineSpacing: CGFloat, referFont: UIFont? = nil, lineBreakMode: NSLineBreakMode = .byWordWrapping, textAlignment: NSTextAlignment = .natural, range: NSRange? = nil) -> NSMutableAttributedString {
         let style = NSMutableParagraphStyle()
         style.lineBreakMode = lineBreakMode
         style.alignment = textAlignment

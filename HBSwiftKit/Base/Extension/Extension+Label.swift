@@ -1,9 +1,10 @@
 //
 //  Extension+Label.swift
-//  HBSwiftKit
+//  LuteBase
 //
-//  Created by Hubin_Huang on 2021/1/20.
-//  Copyright © 2020 Wingto. All rights reserved.
+//  Created by hubin.h on 2023/11/9.
+//  Copyright © 2020 路特创新. All rights reserved.
+//
 
 //单元测试 ✅
 // label代码自适应高度宽度几种方法
@@ -26,7 +27,7 @@ extension Extension_Label {
     ///   - lineBreakMode: 文字换行方式
     ///   - numberLines: 文字占用行数
     ///   - lineSpacing: 文字行间距
-    public convenience init(text: String?, textColor: UIColor = .black, textFont: UIFont = UIFont.systemFont(ofSize: 17.0), textAlignment: NSTextAlignment = .left, lineBreakMode: NSLineBreakMode = .byWordWrapping, numberLines: Int = 1, lineSpacing: CGFloat? = nil) {
+    public convenience init(text: String?, textColor: UIColor = .black, textFont: UIFont = UIFont.systemFont(ofSize: 17.0), textAlignment: NSTextAlignment = .natural, lineBreakMode: NSLineBreakMode = .byWordWrapping, numberLines: Int = 1, lineSpacing: CGFloat? = nil) {
         self.init()
         self.textColor = textColor
         self.font = textFont
@@ -40,6 +41,36 @@ extension Extension_Label {
             self.lineBreakMode = lineBreakMode
         }
     }
+    
+    /// 计算多少行 (根据Font)
+    /// - Parameter width: 默认屏幕宽度
+    /// - Returns: 行数
+    public func numberOfLinesNeeded(with width: CGFloat? = nil) -> Int {
+        guard let text = self.text, let font = self.font else { return 0 }
+        let maxSize = CGSize(width: width ?? kScreenW, height: CGFloat.greatestFiniteMagnitude)
+        let textSize = (text as NSString).boundingRect(
+            with: maxSize,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: [.font: font],
+            context: nil
+        )
+        return Int(ceil(textSize.height / font.lineHeight))
+    }
+    
+    /// 计算多少行 (根据 attributes: [NSAttributedString.Key: Any])
+    /// - Parameter width: 默认屏幕宽度
+    /// - Returns: 行数
+    public func numberOfLinesNeeded(with width: CGFloat? = nil, attributes: [NSAttributedString.Key: Any]) -> Int {
+        guard let text = self.text else { return 0 }
+        let maxSize = CGSize(width: width ?? kScreenW, height: CGFloat.greatestFiniteMagnitude)
+        let textSize = (text as NSString).boundingRect(
+            with: maxSize,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: attributes,
+            context: nil
+        )
+        return Int(ceil(textSize.height / font.lineHeight))
+    }
 
     /// 设置标签行间距 默认 7
     /// - Parameters:
@@ -47,7 +78,7 @@ extension Extension_Label {
     ///   - lineBreakMode: 文字换行方式
     ///   - textAlignment: 文字对齐方式
     /// - Returns: 富文本段属性字典
-    public func setLabelLineSpacing(lineSpacing: CGFloat = 7, lineBreakMode: NSLineBreakMode = .byWordWrapping, textAlignment: NSTextAlignment = .left) -> [NSAttributedString.Key : Any]? {
+    public func setLabelLineSpacing(lineSpacing: CGFloat = 7, lineBreakMode: NSLineBreakMode = .byWordWrapping, textAlignment: NSTextAlignment = .natural) -> [NSAttributedString.Key : Any]? {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing - (self.font.lineHeight - self.font.pointSize)
         paragraphStyle.alignment = textAlignment
@@ -96,6 +127,14 @@ extension Extension_Label {
 }
 
 extension Extension_Label {
+    
+    /// 设置加粗斜体
+    /// - Parameter fontSize: 字号
+    public func setBoldItalic(_ fontSize: CGFloat) {
+        let descriptor = UIFont.systemFont(ofSize: fontSize).fontDescriptor.withSymbolicTraits([.traitBold, .traitItalic])
+        self.font = UIFont(descriptor: descriptor!, size: fontSize)
+    }
+    
     /// 为 UILabel 文本设置渐变颜色
     /// - Parameters:
     ///   - colors: 渐变的颜色数组

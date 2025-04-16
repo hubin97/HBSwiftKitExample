@@ -58,9 +58,6 @@ extension Extension_Image {
         let data = self.pngData()
         return data?.base64EncodedString()
     }
-    
-    
-   
 }
 
 extension Extension_Image {
@@ -113,6 +110,21 @@ extension Extension_Image {
         print(r, g, b, a)
         let corlor = UIColor.init(red: r, green: g, blue: b, alpha: a)
         return corlor
+    }
+    
+    /// 灰度滤镜
+    /// 转换为黑白图片, 将图像转换为灰度。
+    public func grayscale() -> UIImage? {
+        // 创建黑白滤镜
+        guard let ciImage = CIImage(image: self) else { return nil }
+        
+        let blackAndWhiteFilter = CIFilter(name: "CIPhotoEffectMono")
+        blackAndWhiteFilter?.setValue(ciImage, forKey: kCIInputImageKey)
+        guard let outputImage = blackAndWhiteFilter?.outputImage else { return nil }
+        
+        let context = CIContext()
+        guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else { return nil }
+        return UIImage(cgImage: cgImage, scale: self.scale, orientation: self.imageOrientation)
     }
     
     ///MARK: 人脸检测, 识别人脸数统计

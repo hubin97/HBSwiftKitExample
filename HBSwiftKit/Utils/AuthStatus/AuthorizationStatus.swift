@@ -97,6 +97,12 @@ extension AuthStatusLocationDelegate {
 public class AuthorizationStatus: NSObject {
 
     public static let shared = AuthStatus()
+    
+    override init() {
+        super.init()
+        // 调用self.centralManager，触发初始化
+        _ = self.centralManager
+    }
         
     /// 获取系统蓝牙状态回调,
     var systemBTStateBlock: ((_ state: CBManagerState) -> Void)?
@@ -118,24 +124,14 @@ public class AuthorizationStatus: NSObject {
     
     /// APNs服务
     public static func apnsServices(authsBlock: @escaping AuthsBlock) {
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-                if settings.authorizationStatus == .authorized {
-                    return authsBlock(true)
-                }
-                UNUserNotificationCenter.current().requestAuthorization(options: UNAuthorizationOptions.init(rawValue: UNAuthorizationOptions.alert.rawValue | UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.sound.rawValue)) { (granted, _) in
-                    //print("APNs授权\(granted ? "成功": "失败")")
-                    return authsBlock(granted)
-                }
-            }
-        } else {
-            // Fallback on earlier versions
-            if let notiSettings = UIApplication.shared.currentUserNotificationSettings, notiSettings.types != UIUserNotificationType() {
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized {
                 return authsBlock(true)
             }
-            let notiSettings = UIUserNotificationSettings.init(types: UIUserNotificationType(rawValue: (UIUserNotificationType.alert.rawValue | UIUserNotificationType.sound.rawValue | UIUserNotificationType.badge.rawValue)), categories: nil)
-            UIApplication.shared.registerUserNotificationSettings(notiSettings)
-            return authsBlock(false)
+            UNUserNotificationCenter.current().requestAuthorization(options: UNAuthorizationOptions(rawValue: UNAuthorizationOptions.alert.rawValue | UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.sound.rawValue)) { (granted, _) in
+                //print("APNs授权\(granted ? "成功": "失败")")
+                return authsBlock(granted)
+            }
         }
     }
     
@@ -331,16 +327,13 @@ extension AuthorizationStatus: CBCentralManagerDelegate {
     }
     
     /// 使用此方法, 后续直接取AuthStatus.shared.centralManager.state去判断
-    /// - Parameter showHUD:  unkown 时间比较短暂, 提前调用即可
-    @available(iOS, deprecated: 13.0, message: "unkown 时间比较短暂, 提前调用即可, 使用此方法, 后续直接取AuthStatus.shared.centralManager.state去判断")
-    public static func systemBleStateUpdate(_ showHUD: Bool = false) {
-        let central = AuthStatus.shared.centralManager
-        if showHUD && central.state == .unknown {
-            //SVProgressHUD.show(withStatus: "请稍后...")
-            //TODO:
-            // AuthStatus.shared.systemBTStateBlock?(central.state)
-        }
-    }
+    /// - Parameter showHUD:
+//    public static func systemBleStateUpdate(_ showHUD: Bool = false) {
+//        let central = AuthStatus.shared.centralManager
+//        if showHUD && central.state == .unknown {
+//            ProgressHUD.show(withStatus: "请稍后...")
+//        }
+//    }
     
     //!!!: 必要时 使用 systemBleState 方法 可全替代
     //!!!: 此方法只能判断当前应用内是否授权, 打开蓝牙服务, 需要进一步判断手机是否打开蓝牙(此时必须使用代理方式获取)
@@ -359,19 +352,6 @@ extension AuthorizationStatus: CBCentralManagerDelegate {
             return authsBlock(false)
         }
     }
-
-//    func authorizedACK() {
-//        if let productName = kInfoPlist.value(forKey: "CFBundleName") as? String,
-//           let message = kInfoPlist.value(forKey: "NSBluetoothPeripheralUsageDescription") as? String {
-//            let alert = AlertBlockView.init(title: "\"\(productName)\"想要使用蓝牙", message: message)
-//            alert.addAction("忽略", .cancel, tapAction: nil)
-//            alert.addAction("去设置") { [weak self] _ in
-//                self?.openSettings()
-//            }
-//            alert.show()
-//        }
-//    }
-
 }
 
 // MARK: - other Utils

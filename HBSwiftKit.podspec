@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     
     # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     s.name             = 'HBSwiftKit'
-    s.version          = '0.5.1'
+    s.version          = '0.5.2'
     s.summary          = 'some common components.'
     s.description      = <<-DESC
     仅仅一些个人常用组件.学习工作使用.
@@ -59,18 +59,18 @@ Pod::Spec.new do |s|
         
     end
     
-    # 子模块：HTTP
-    s.subspec 'HTTP' do |http|
+    # 子模块：Network
+    s.subspec 'Network' do |http|
         ['RxSwift', 'RxRelay', 'Moya', 'ObjectMapper', 'PromiseKit', 'ProgressHUD'].each do |dd|
             http.dependency dd
         end
         
         http.subspec 'Core' do |ss|
-            ss.source_files = 'HBSwiftKit/HTTP/Core/*.{swift,h,m,md}'
+            ss.source_files = 'HBSwiftKit/Network/Core/*.{swift,h,m,md}'
         end
         
         http.subspec 'Utils' do |ss|
-            ss.source_files = 'HBSwiftKit/HTTP/Utils/*.swift'
+            ss.source_files = 'HBSwiftKit/Network/Utils/*.swift'
             ss.framework = "Foundation", "CoreTelephony"
         end
     end
@@ -85,30 +85,30 @@ Pod::Spec.new do |s|
     end
     
     # 子模块：Other
-    s.subspec 'Other' do |other|
+    s.subspec 'Utils' do |other|
         ['Toast-Swift', 'Kingfisher', 'CocoaLumberjack'].each do |dd|
             other.dependency dd
         end
         
         other.subspec 'AuthStatus' do |auth|
-            auth.source_files = 'HBSwiftKit/Other/AuthStatus'
+            auth.source_files = 'HBSwiftKit/Utils/AuthStatus'
             auth.dependency 'HBSwiftKit/Base/Core'
         end
         
-        other.subspec 'Utils' do |utils|
-            utils.source_files = 'HBSwiftKit/Other/Utils'
+        other.subspec 'Helpers' do |utils|
+            utils.source_files = 'HBSwiftKit/Utils/Helpers'
             utils.dependency 'Toast-Swift'
             utils.dependency 'Kingfisher'
             utils.dependency 'HBSwiftKit/Base/Core'
         end
         
         other.subspec 'LoggerManager' do |log|
-            log.source_files = 'HBSwiftKit/Other/LoggerManager'
+            log.source_files = 'HBSwiftKit/Utils/LoggerManager'
             log.dependency 'RxSwift'
             log.dependency 'CocoaLumberjack'
             log.dependency 'HBSwiftKit/Base/Core'
             log.dependency 'HBSwiftKit/Base/Extension'
-            log.dependency 'HBSwiftKit/Other/Utils'
+            log.dependency 'HBSwiftKit/Utils/Helpers'
         end
     end
     

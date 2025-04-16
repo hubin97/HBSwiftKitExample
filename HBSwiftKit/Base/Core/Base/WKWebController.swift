@@ -89,7 +89,7 @@ open class WKWebController: ViewController, WKWebScriptMsgHandleAble {
     
     fileprivate lazy var progressView: UIProgressView = {
         ///UIProgressView的高度设置无效, 且 iOS14高度还有变化
-        let _progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: self.wkWebView.frame.width, height: 1))
+        let _progressView = UIProgressView.init(frame: CGRect(x: 0, y: kNavBarAndSafeHeight, width: self.wkWebView.frame.width, height: 1))
         _progressView.progressViewStyle = .bar
         _progressView.tintColor = .systemBlue
         _progressView.backgroundColor = .lightGray
@@ -313,6 +313,15 @@ extension WKWebController: WKUIDelegate, WKNavigationDelegate {
     
     public func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         webView.reload()
+    }
+    
+    // FIXME: 有些链接可能尝试在新窗口打开(即"_blank")，需要特别处理：
+    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if navigationAction.targetFrame == nil {
+            // LogM.debug("开启新标签窗口")
+            webView.load(navigationAction.request)
+        }
+        return nil
     }
 }
 

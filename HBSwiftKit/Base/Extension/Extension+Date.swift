@@ -84,13 +84,14 @@ extension Extension_Date {
     /// - Parameter format: 格式: yyyy-MM-dd HH:mm:ss / yyyy-MM-dd ...
     /// - Returns: 字符串
     public func format(with format: String = "yyyy-MM-dd HH:mm:ss") -> String {
-        let dateFomatter = DateFormatter()
-        dateFomatter.dateFormat = format
-        dateFomatter.timeZone = TimeZone.autoupdatingCurrent
-        return dateFomatter.string(from: self)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        return dateFormatter.string(from: self)
     }
 
-    /// 转指定格式字符串 `(注意此方法不常用)`
+    /// 转指定格式字符串
     ///    “GMT”：格林威治标准时间
     ///    “Asia/Shanghai”：北京时间  东8区
     ///    “America/New_York”：纽约时间  西5区
@@ -101,10 +102,11 @@ extension Extension_Date {
     ///   - identifier: 指定时区标识,
     /// - Returns: String
     public func format(with format: String = "yyyy-MM-dd HH:mm:ss", identifier: String) -> String {
-        let dateFomatter = DateFormatter()
-        dateFomatter.timeZone = TimeZone.init(identifier: identifier)
-        dateFomatter.dateFormat = format
-        return dateFomatter.string(from: self)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.init(identifier: identifier)
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
     }
 }
 
