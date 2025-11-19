@@ -4,6 +4,9 @@
 [![License](https://img.shields.io/cocoapods/l/HBSwiftKit.svg?style=flat)](https://cocoapods.org/pods/HBSwiftKit)
 [![Platform](https://img.shields.io/cocoapods/p/HBSwiftKit.svg?style=flat)](https://cocoapods.org/pods/HBSwiftKit)
 
+⚠️ **注意**  
+本项目已不再维护或可能已经过期。请使用新的 [`AppStart`](https://github.com/hubin97/AppStart) 库以获得最新功能和支持。
+
 ## 示例
 
 要运行示例项目，请先克隆 repo，然后从示例目录运行“pod install”。

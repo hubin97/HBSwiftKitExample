@@ -4,6 +4,9 @@
 [![License](https://img.shields.io/cocoapods/l/HBSwiftKit.svg?style=flat)](https://cocoapods.org/pods/HBSwiftKit)
 [![Platform](https://img.shields.io/cocoapods/p/HBSwiftKit.svg?style=flat)](https://cocoapods.org/pods/HBSwiftKit)
 
+⚠️ **Notice**  
+This project is no longer maintained and may be outdated. Please use the new [`AppStart`](https://github.com/hubin97/AppStart) library for the latest features and support.
+
 中文文档: [README_CN.md](./README_CN.md)
 
 ## Example
